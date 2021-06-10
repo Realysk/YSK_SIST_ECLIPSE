@@ -1,8 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"
-    import="javaexp.z01_vo.Food"
-    
-    %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" import="javaexp.z01_vo.Food" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +24,6 @@ java
 데이터베이스
 jsp
 springframework
-
-
 
  --%>
 <body>
