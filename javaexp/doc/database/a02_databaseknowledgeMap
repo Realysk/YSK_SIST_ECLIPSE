@@ -1,0 +1,88 @@
+# Database 처리 실무 프로세스
+	
+	1. 요구사항 정의서 작성 후 여러 사람이 공유하고 영구적으로 관리할 데이터에 대한 식별속성을 만들고 속성의 그룹 단위를 만들어 테이블을 구성한다.
+		ex) 로그인 ==> 회원관리 ==> 회원이 등록할 정보 ==> 회원에 들어갈 속성 ==> 속성을 함께 가지고 있을 테이블 구성
+			속성 : 아이디, 패스워드, 이름, 주소, 이메일, 포인트, 권한
+			이들을 묶어서 사용자라는 member 테이블 안에 구성할 수 있다.
+		= 관련 자료 검토, Excel 검토
+		= 고객과 대화
+	
+	2. 속성과 이들 그룹 단위로 테이블을 만들고 적절한 데이터 유형(데이터 타입에 따라 테이블을 생성한다.)
+		ex)
+			create table member(
+				id varchar2(50),
+				-- id라는 이름으로 50개의 문자가 가변적으로 들어갈 수 있게 속성
+				pass varchar2(20),
+				name varchar2(50),
+				address carchar2(500),
+				email varchar2(100),
+				civilecode char(13),
+				-- 13의 고정형문자 주민등록번호, 학번
+				point number,
+				-- 숫자 데이터
+				auth varchar2(50)
+			);
+	
+	3. erd를 통해 테이블과 테이블의 연관관계를 설정하고 (테이블 설계 - 속성, 연관관계설정)
+		(테이블 설계-속성, 연관관계설정)
+		SQL로 Join 처리(subquery 포함)
+		
+	4. 화면별로 필요한 SQL 사용
+		1) 조회
+		2) 등록
+		3) 수정
+		4) 삭제
+		
+	5. 프로그램에서 DAO로 데이터베이스 연결 객체를 처리하여 DB 서버에서 데이터를 가져오게 한 후 화면단에 출력한다.
+		1) 화면을 통해 입력된 값
+		2) 서버에서 만들 데이터를 객체형태로 화면에 출력 처리
+
+
+	
+# Database knowledgeMap
+	
+	1. Database의 개론
+	
+	2. SQL(기본 조회 처리)
+		1) select 리스트 부분
+			연산자 처리
+		2) where 조건문
+		3) 함수
+			단일 함수 : 문자, 숫자, 날짜, 기타 기능 함수
+			그룹 함수 : 그룹 함수
+		4) 테이블과 테이블의 join 관계
+			- join문
+			- subquery
+			
+	3. SQL(DML(데이터의 조작), DDL(정의), DCL(제어))
+		CRUD(Create, Read, Update, Delete)
+		1) insert
+		2) update
+		3) delete
+			==> 트랜잭션 제어 rollback, commit
+		4) create table 테이블 {}
+		5) 테이블 구조 수정/삭제
+		6) 여러가지 객체 sequence, trigger, commit
+		7) 제약조건 : primary key(not null, uniquery), foreign key, not null, unique, check
+	
+	4. SQL(사용자 권한 부여 및 회수)
+		1) grant
+		2) revoke
+		3) 
+	
+	5. PL / SQL
+		프로그래밍으로 SQL을 사용
+		
+	6. DB 설계
+		
+		
+# DB 과제
+	1. 수업시간 : 응용 SQL 위주
+	2. 조별과제
+		1) DB 설계
+			- 테이블 도출
+			- 관계 도출
+			- 기타 객체 도출 [요구사항분석, java 모듈 구현]
+		2) 계정 생성 및 권한 부여
+		3) 화면별 SQL 도출 [화면구현시]
+		4) JSP가 끝난 후에는 프로그래밍으로 DB 연동 SQL 처리
