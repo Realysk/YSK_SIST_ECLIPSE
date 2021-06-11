@@ -2,43 +2,48 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>a04_js_basic</title>
 </head>
 <body>
 
 </body>
 <script type="text/javascript">
 
-	// 1. js 변수 선언 : type의 선언부터 처리가 되지 않는다.
-	// 	  할당하는 순간 type이 설정된다.
-	// 2. js 데이터 유형의 종류
-	var num01 = 25;
-	// 1) 출력 1
-	document.write("출력 : " + num01);
-	document.write("<h2>출력 : " + num01 + "</h2>");
-	var msg = prompt("인사말을 입력하세요!!","여기에");
-	document.write("<h3>출력 할 인사말 : " + msg + "</h3>");
+	/*
+	 1. js 변수 선언 : type의 선언부터 처리가 되지 않는다. 할당하는 순간 type이 설정된다.
+	 2. js 데이터 유형의 종류
+		  - 숫자, 문자열형, boolean형, 함수형, 객체형
+	*/
 	
-	// ex1) 과일명을 입력하고, 해당 과일을 출력하세요.
+	//var num01 = 25;
+	// 1) 출력 1
+	//document.write("출력 : " + num01);
+	//document.write("<h2>출력 : " + num01 + "</h2>");
+	//var msg = prompt("인사말을 입력하세요!!","여기에");
+	//document.write("<h3>출력 할 인사말 : " + msg + "</h3>");
+	
+	document.write("========================================================");
+	
+	document.write("<h2>" + "ex1) 과일명을 입력하고, 해당 과일을 출력하세요." + "</h2>");
 	
 	var fruit = prompt("과일명 : ","과일명을 입력하세요.");
 	document.write("<h3> 입력한 과일명 : " + fruit + "</h3>");
 	
-	// ex2) 학생 이름, 국어, 영어, 수학 점수를 임력하여 화면에 평균까지 출력하세요.
-	
+	document.write("<h2>" + "ex2) 학생 이름, 국어, 영어, 수학 점수를 입력하여 화면에 평균까지 출력하세요." + "</h2>");
+	// parseInt() : 정수 숫자형 변환 Number()
 	var stuName = prompt("학생 이름 :","학생 이름을 입력하세요.");
 	document.write("<h3> 입력한 학생 이름 : " + stuName + "</h3>");
-	var kor = prompt("국어 점수 :","국어 점수를 입력하세요.");
+	var kor = parseInt(prompt("국어 점수 :","국어 점수를 입력하세요."));
 	document.write("<h3> 입력한 국어 점수 : " + kor + "</h3>");
-	var eng = prompt("영어 점수 :","영어 점수를 입력하세요.");
+	var eng = parseInt(prompt("영어 점수 :","영어 점수를 입력하세요."));
 	document.write("<h3> 입력한 영어 점수 : " + eng + "</h3>");
-	var math = prompt("수학 점수 :","수학 점수를 입력하세요.");
+	var math = parseInt(prompt("수학 점수 :","수학 점수를 입력하세요."));
 	document.write("<h3> 입력한 수학 점수 : " + math + "</h3>");
 	var tot = kor+eng+math;
-	var avg = kor+eng+math/3;
-	document.write("<h2> 학생 이름 : " + stuName + "</h2>");
+	var avg = (kor+eng+math)/3;
+	document.write("<h3> 학생 이름 : " + stuName + "</h3>");
 	document.write("<h3> 총 점수 : " + tot + "</h3>");
-	document.write("<h3> 평균 : " + avg + "</h3>");
+	document.write("<h3> 평균 점수 : " + avg + "</h3>");
 	
 </script>
 </html>

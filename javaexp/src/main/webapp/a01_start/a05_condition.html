@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>a05_condition</title>
+</head>
+<body>
+	<table width = "200" border></table>
+	<div border></div>
+</body>
+<script>
+	
+	/*
+	# 반복문
+		1. 위에 body안에 있는 태그를 객체로 지정하는 부분.
+	*/
+	
+	var tab = document.querySelector("table");
+	var show = "";
+	for(var cnt=1; cnt<=10; cnt++) {
+		// table안에 들어 갈 tr : table row
+		// table안에 들어 갈 td : table data (coloum)
+		show += "<tr><td>" + cnt + "</td><tr>";
+	}
+	// .innerHTML : 태그로 추가 처리.
+	tab.innerHTML = show;
+		
+	// ex) 위 div를 지정하고, h1 카운트번호 (show += "<h1>" + cnt + "</h1>";) 출력
+	
+	var div = document.querySelector("div");
+	show = "";
+	for(var cnt=1; cnt<=10; cnt++) {
+		show += "<h1>" + cnt + "</h1>";
+	}
+	div.innerHTML = show;
+	
+	
+</script>
+</html>

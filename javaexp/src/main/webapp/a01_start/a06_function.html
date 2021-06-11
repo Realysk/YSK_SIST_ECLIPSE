@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>a06_function</title>
+<script type="text/javascript">
+	function call(obj) {
+		alert("클릭하셨군요!!");
+		// 해당 h2 객체의 속성으로 배경 색상을 변경 처리.
+		obj.style.backgroundColor="yellow";
+	}
+</script>
+</head>
+<body>
+	<!-- 주석문 / this : 현재 객체 h2를 전체를 넘긴다.  -->
+	<h2 onclick="call(this)"> 클릭해보실래요?? </h2>
+</body>
+</html>

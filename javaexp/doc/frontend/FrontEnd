@@ -64,3 +64,13 @@
 			- 주석 처리
 			- 출력 형식 : alert, document.write, console.log("");
 			- 입력 형식 : prompt, confirm
+			- 기타 프로그램 기초 : 연산자 종류
+			- 형 변환
+		3) 조건 / 반복문
+			- if, for
+			- switch
+			- 삼항연산자
+		4) 함수 처리
+			- function 함수명() {
+				함수 호출 처리
+			}
