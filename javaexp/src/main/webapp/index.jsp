@@ -12,6 +12,7 @@
 	// java + html ==> 최종적으로 html 파일을 만들어 client(브라우저) Stream을 이용하여 전달한다.
 	Food f = new Food("사과",2000,"청과물가게");
 %>
+
 <%--
 화면단(front end)
 html/css
