@@ -1,0 +1,7 @@
+# FrontEnd
+	1. 웹에서 client 파트의 프로그램을 처리하는 것을 말한다.
+	2. 순서
+		1) 환경 설정
+			- 웹 encoding 처리
+			- 웹 서버 연동 화면 출력
+		2) 전체적인 knowledgeMap 정리
