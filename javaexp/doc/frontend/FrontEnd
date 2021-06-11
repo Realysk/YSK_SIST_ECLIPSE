@@ -17,9 +17,50 @@
 			- 타이틀 h1~h6
 			- 문단 paragraph
 			- Text 꾸미기 태그 : 진하게, 강조, 삭제, 추가, 위/아래첨자
-			- 블럭 태그 : 태그가 줄 바꿈 포함
-			- 인라인 태그 : 줄 바꿈 없이 한 라인으로 명령 처리
-		
+			- 블럭 태그 : 태그가 줄 바꿈 포함 (h1, div)
+			- 인라인 태그 : 줄 바꿈 없이 한 라인으로 명령 처리 (span, img)
+			- 이미지 처리 : img
+			- List 처리 : <ul><li>, <ol><li>
+			- Table : 화면에 출력 할 2차원의 데이터를 표현할 때 주로 사용된다.
+					  타이틀, 내용을 효과적으로 정렬해서 처리한다.
+			- Link : 외부 문서나 내부 문서에 연결하여 처리한다.
+					 <a href = "">
+					- Download 처리
+			- 화면 구분 처리
+				div
+				frame
+				iframe
+				위에 hyperlink와 연동하여 메뉴별 페이지 이동을 처리한다.
+			- HTML5 Semantic 태그 처리
+			- Form 하위의 여러 요소 객체를 사용.
+				<input type = "text"> 데이터를 입력해서 서버에 전송할 때 주로 활용된다.
+					
 	4. CSS
-		
+		1) 선언 방법
+			- inline
+			- head 부분에 선언
+				선택자{속성1:속성값1; 속성2:속성값2....}
+		2) 선택자 selector
+			- body 안에 선언된 태그들을 기본적으로 선택해서 속성으로 색상, 굵기, 크기, 이벤트등을 처리.
+			- #아이디속성{}, .클래스속성{}, 기본태그{}
+		3) 여러가지 속성들
+			- margin : 여백
+			- color : 글자색
+			- text-XXX : 텍스트 관련 속성
+			- font-XXX : 문자체에 대한 속성
+			- box관련 속성 : margin, border, padding, contents
+			- css3 속성 : border-radius
+			- background-XXX : 배경 관련 속성
+			- 줄 바꿈 관련 속성 : display - block, inline, inline, inline-block
+			- 위치 관련 속성 : position
+			- visibility
+			- overflow
+			
 	5. Java Script
+		1) javascript의 선언과 로딩 되는 위치
+		2) 기본 문법
+			- 변수 선언 규칙
+			- 데이터 할당
+			- 주석 처리
+			- 출력 형식 : alert, document.write, console.log("");
+			- 입력 형식 : prompt, confirm
