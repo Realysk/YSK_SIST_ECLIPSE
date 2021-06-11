@@ -1,7 +1,25 @@
 # FrontEnd
+
 	1. 웹에서 client 파트의 프로그램을 처리하는 것을 말한다.
+	
 	2. 순서
 		1) 환경 설정
 			- 웹 encoding 처리
 			- 웹 서버 연동 화면 출력
 		2) 전체적인 knowledgeMap 정리
+	
+	3. HTML
+		1) .html의 구성요소
+			- html 태그
+			- css
+			- javascript
+		2) HTML 기본
+			- 타이틀 h1~h6
+			- 문단 paragraph
+			- Text 꾸미기 태그 : 진하게, 강조, 삭제, 추가, 위/아래첨자
+			- 블럭 태그 : 태그가 줄 바꿈 포함
+			- 인라인 태그 : 줄 바꿈 없이 한 라인으로 명령 처리
+		
+	4. CSS
+		
+	5. Java Script
