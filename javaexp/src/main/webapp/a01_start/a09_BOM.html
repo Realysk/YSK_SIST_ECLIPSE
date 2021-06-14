@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>a09_BOM</title>
+<script type="text/javascript">
+	// 전역변수 선언
+	var win = null;
+	function openWindow() {
+		// win : 윈도우 객체 할당
+		win = window.open("","","width=300, height=300");
+		win.document.write("<h2> 창문이 열림!! </h2>")
+	}
+	function goLeft() {
+		// win에 기능 메서드 처리.
+		// win.moveBy(x, y) : x,y 축으로 이동
+		win.moveBy(0, -20); // 왼쪽으로 이동
+	}
+	function goRight() {
+		// win.moveBy(x, y) : x,y 축으로 이동
+		win.moveBy(0, 20); // 오른쪽으로 이동
+	}
+	
+	// ex1) 로딩 윈도우를 통해서 창이 100/100 정도 크기가 로딩 되고 내용으로 Bus1 h3로 표시, 위/아래로 클릭 시, 아래 위로 이동 처리하세요.
+	// 전역변수로 선언
+	var Bus1;
+	var cnt = 1;
+	function goBus() {
+		// 전역변수 할당
+		Bus1 = window.open("","","width=100, height=100");
+		// cnt는 호출할 때마다 변수를 증가 처리.
+		Bus1.document.write("<h3> Bus1" + cnt + "</h3>");
+		cnt++;
+	}
+	function goFront() {
+		// 전역변수에 내용의 속성을 변경 처리.
+		Bus1.moveBy(0, -10);
+	}
+	function goBack() {
+		Bus1.moveBy(0, 10);
+	}
+	
+</script>
+</head>
+<body>
+	<h2 onclick="openWindow()"> 창문을 열어다오! </h2>
+	<button onclick="goLeft()"> ← </button>
+	<button onclick="goRight()"> → </button>
+	
+	<h2 onclick="goBus()"> 로딩 윈도우 </h2>
+	<button onclick="goFront()"> ↑ </button>
+	<button onclick="goBack()"> ↓ </button>
+</body>
+</html>

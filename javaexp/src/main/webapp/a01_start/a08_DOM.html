@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>a08_DOM</title>
+</head>
+<body>
+	<!-- changeH2 선언된 기능메서드 this를 통해서 h2 정보 모두 다 매개변수를 통해서 전달한다.
+		 onclick = "함수명" : 해당 객체를 클릭 시, 정의된 함수를 호출 처리 -->
+	<h2 onclick="changeH2(this)"> 안녕하세요. </h2>
+	<!--
+		함수명(this) : 이 객체가 가지고 있는 모든 정보(속성)을 
+	 -->
+	<h3 onclick="changeH3(this)"> 사과 </h3>
+</body>
+<script type="text/javascript">
+	
+	// body에 있는 내용을 DOM을 인식하기 위해서는 객체가 선언된 후에 호출해야 한다.
+	var h2Obj = document.querySelector("h2");
+	// 객체.innerHTML : 해당 <h2>입력할내용</h2> 입력할 내용 부분을 변경
+	h2Obj.innerHTML = "Hello!";
+	function changeH2(obj) {
+		alert("클릭되었습니다!");
+		obj.innerHTML = "변신은 무죄!!";
+	}
+	
+	// ex1) h3에 사과를 표시, 하단에 DOM 객체로 "사과(초기)"로 변경 클릭 시 바나나로 변경하여 출력하세요.
+	
+	var h3Obj = document.querySelector("h3");
+	h3Obj.innerHTML = "사과(초기)";
+	function changeH3(obj1) {
+		// obj : 객체를 받았을 때 지역변수
+		alert("클릭되었습니다!");
+		obj1.innerHTML = "바나나";
+		obj1.style.backgroundColor = "yellow";
+		obj1.style.color = "blue";
+		obj1.align = "center";
+	}
+	
+</script>
+</html>

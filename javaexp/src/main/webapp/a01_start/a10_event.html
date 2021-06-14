@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>a10_event</title>
+</head>
+<body>
+	<h2> 마우스 오버 했을 때 </h2>
+</body>
+<script type="text/javascript">
+	// 1. 대상 객체 지정
+	var h2Obj = document.querySelector("h2");
+	// 2. 이벤트 속성 지정 (이벤트 속성에 정의된 이벤트 함수를 지정 처리)
+	// onmouseover : 마우스를 해당 객체에 커서를 위치 시켰을 때 발생하는 이벤트
+	// 객체.이벤트명 = 선언 된 이벤트 핸들러 함수;
+	h2Obj.onmouseover=change1;
+	h2Obj.onmouseout=change2;
+	// 3. 함수 선언 : 해당 이벤트가 발생하면 수행 할 함수를 정의
+	function change1() {
+		this.style.backgroundColor="pink";
+	}
+	function change2() {
+		this.style.backgroundColor="yellow";
+	}
+	
+	// h2Obj.onmouseover(); 이벤트 수행
+</script>
+</html>

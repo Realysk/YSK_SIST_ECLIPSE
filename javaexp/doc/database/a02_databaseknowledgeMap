@@ -43,7 +43,7 @@
 	
 	1. Database의 개론
 	
-	2. SQL(기본 조회 처리)
+	2. SQL(기본 조회 처리 - DQL)
 		1) select 리스트 부분
 			연산자 처리
 		2) where 조건문
@@ -51,29 +51,110 @@
 			단일 함수 : 문자, 숫자, 날짜, 기타 기능 함수
 			그룹 함수 : 그룹 함수
 		4) 테이블과 테이블의 join 관계
-			- join문
+			- join문 : 여러 테이블과 join을 처리하는 형식
+				select 테이블1.컬럼...., 테이블2.컬럼....
+				from 테이블1 alias1, 테이블2 alisa2, ...
+				where 테이블.컬럼 = 테이블2.컬럼
 			- subquery
+				select 컬럼, ... (select max(컬럼) from 테이블)...
+				from (select 컬럼 from 테이블 ) a,
+					 (select 컬럼 from 테이블 ) b,
+					 ...
+				where 조건 in ( select min(컬럼) from 테이블명)
+					and ...
+					
+		# 기본 구문 형식
+		select 컬럼
+		from 테이블명
+		where 조건명
+		group by 그룹할컬럼
+		having 그룹함수로 조건 처리
+		order by 컬럼 [desc];
 			
 	3. SQL(DML(데이터의 조작), DDL(정의), DCL(제어))
 		CRUD(Create, Read, Update, Delete)
 		1) insert
+			insert 테이블명(컬럼명1, 컬럼명2...)
+				values(데이터1, 데이터2...);
 		2) update
+			update 테이블명
+				set 변경할컬럼1 = 변경할데이터,
+				set 변경할컬럼2 = 변경할데이터,
+				..
+				..
+				where 조건문;
+				ex)
+					update emp
+						set ename = '홍길동',
+							deptno = 20
+						where empno = 7780;
+			
 		3) delete
-			==> 트랜잭션 제어 rollback, commit
-		4) create table 테이블 {}
+			데이터를 row(행)단위로 삭제 처리.
+			delete
+			from 테이블명
+			where 조건;
+			ex)
+			delete
+			from emp
+			where empno = 7999;
+			
+			==> insert, update, delete 구문을 처리한 후에는 트랜잭션 제어 rollback(복구, 수행 명령 취소), commit(확정)을 처리한다.
+				트랜잭션 제어 (세션처리)
+					client1 => DB 서버 <= client2
+				ex) client1이 데이터 입력한 내용은 접속한 client2에 초기에는 반영이 되지 않는다.
+					client1이 입력 후, commit을 처리했을 때 모든 입력한 내용을 확인할 수 있다.
+					이것을 트랜잭션 제어라고 하면, 이것을 통해서 데이터의 안정성을 유지할 수 있다.
+				ex) 신입이 보통 delete
+							 from 테이블
+							 where .. (X) 생략하면 모두 삭제 (주의!)
+			
+		4) create table 테이블 {} *
+			create table 테이블 {
+				컬럼명1 데이터유형 제약조건,
+				컬럼명2 데이터유형 제약조건,
+				컬럼명3 데이터유형 제약조건,
+				...
+			}
+			
 		5) 테이블 구조 수정/삭제
-		6) 여러가지 객체 sequence, trigger, commit
+			alter 테이블명
+				add 추가할 컬럼 데이터유형
+				modify ..
+				rename ..
+			
+		6) 여러가지 객체 sequence, index, trigger, role,
+			ex) create sequence emp_seq
+					start with 시작할데이터
+					minvalue 최소값
+					maxvalue 최대값
+					increment by 증가값;
+			
 		7) 제약조건 : primary key(not null, uniquery), foreign key, not null, unique, check
+			데이터의 입력이나 수정시, 해당 제약조건에 맞지 않으면 에러를 발생하게 하여 데이터의 무결성을 유지하게 할 수 있다.
 	
 	4. SQL(사용자 권한 부여 및 회수)
-		1) grant
-		2) revoke
-		3) 
+		계정을 만들고, 해당 계정에 따라서 권한 부여를 처리하는 것을 말한다.
+		
+		1) grant : 권한을 부여
+		2) revoke : 권한을 회수
+		3) role : 특정한 권한을 모아서 role을 지정하여 처리
 	
 	5. PL / SQL
 		프로그래밍으로 SQL을 사용
 		
 	6. DB 설계
+		스키마 도출 : 속성 처리
+		테이블 관계 설정 : 두 개 이상의 테이블을 구성하여 테이블 나누어 관계를 설정 처리.
+		ex) 사원 정보 테이블에서 부서명이 변경되었을 때 부서 테이블을 나누는 것이 효율적일까? 통합된 테이블이 효율적일까?
+		SELECT *
+		FROM emp;
+		SELECT *
+		FROM dept;
+		-- 부서정보가 사원테이블에 통합된 경우에 부서명이 변경한다고 가정하면 어떻게 될까?
+		SELECT a.*, b.dname, b.loc
+		FROM emp a, dept b
+		WHERE a.deptno = b.deptno;
 		
 		
 # DB 과제

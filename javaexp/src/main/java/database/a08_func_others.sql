@@ -124,6 +124,9 @@ SELECT * FROM emp;
  				 when 논리|산술|관계 then 처리할 데이터
  				 else 기타 처리할 데이터
  			end
+ 			! 주의
+ 			case when은 앞에서 선언한 조건식을 제외한 조건을 처리한다.
+ 			
  		2) switch case문 형태
  			case [컬럼명]
  				when 데이터1 then 처리할 데이터
@@ -180,7 +183,9 @@ FROM emp;
 
 SELECT ename 사원명, empno 사원번호, sal 급여,
 	CASE WHEN sal>=5000 THEN 'A 등급'
-		 WHEN sal>=4000 THEN 'B 등급' -- case when 앞에 있는 조건을 제외시킨다. 
+		 WHEN sal>=4000 THEN 'B 등급'
+		 -- case when 앞에 있는 조건을 제외시킨다.
+		 -- when sal >= 4000 and sal < 5000을 포함하고 있다.
 		 WHEN sal>=3000 THEN 'C 등급' 
 		 WHEN sal>=2000 THEN 'D 등급' 
 		 WHEN sal>=1000 THEN 'E 등급'

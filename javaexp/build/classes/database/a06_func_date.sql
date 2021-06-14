@@ -16,7 +16,7 @@ SELECT sysdate "현재날짜/시간",
 	sysdate + 1 "내일 24시간날짜",
 	sysdate - 1 "전날 24시간날짜",
 	sysdate +(8/24) "현재로부터 8시간",
-	sysdate +(30/24/60) "현재부터 30분 이후"
+	sysdate +(30/60/24) "현재부터 30분 이후"
 FROM dual;
 
 -- ex1) 사원명, 입사일, 입사후 120일(인턴기간), 입사 8시간전, 근무일수 출력. (sysdate)
@@ -29,10 +29,11 @@ FROM emp;
 /*
  # 날짜 함수
  	1. sysdate : 오라클에서 서버시스템의 현재 날짜와 시간
- 	2. months_between(날짜1, 날짜2) : 날짜 사이의 개월을 계산
+ 	2. months_between(날짜1, 날짜2) : 날짜 사이의 개월을 월 단위로 계산
  		기준 단위가 1 ==> 1월
  		1개월 => 1, 15일 => 0.5	1월을 기준 일/시/분/초 단위로 소숫점으로 계산이 된다.
  	3. 소숫점이하에 대한 처리는 trunc, floor를 이용해서 절삭 처리를 해준다.
+ 		1.5개월을 개월차로 ceil, 개월수는 trunc, floor
 */
 
 SELECT ename, hiredate, sysdate,
