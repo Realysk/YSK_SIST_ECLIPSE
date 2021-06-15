@@ -161,11 +161,10 @@ AND sal > 2000;
 -- 전체가 연결을 만들어 하나의 테이블로 사용할 수 있다.
 -- 1. select로 선택해서 보여주고자 하는 컬럼 출력할 수 있고,
 -- 2. where 조건을 통해서 조회 조건을 만들 수 있다.
--- 3. 여러가지 함수나 group함수를 활용할 수 있다. 
+-- 3. 여러가지 함수나 group함수를 활용할 수 있다.
 
-SELECT dname, decode(MOD(empno,2)), ename
-		CASE WHEN decode(MOD(empno,2))/2 = 0 THEN '청팀'
-		ELSE '백팀'
-		END '팀'
-FROM emp e, dept d
-WHERE e.deptno = d.deptno;
+-- # 테이블1 natural join 테이블2
+--	 테이블1과 테이블2의 공통 컬럼을 자동으로 join 시켜서 처리해주는 oracle에서 지원하는 코드이다.
+-- 	 SQL : ANSI 방식 SQL 표준 + 각 DB 서버마다 지원하는 SQL
+SELECT *
+FROM emp NATURAL JOIN dept;
