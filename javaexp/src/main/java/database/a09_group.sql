@@ -109,3 +109,23 @@ SELECT to_char(hiredate,'Q')"분기", max(sal) "최대급여",
 FROM emp
 GROUP BY to_char(hiredate,'Q')
 ORDER BY to_char(hiredate,'Q');
+
+-- group 함수의 조건을 처리할 때는 having을 활용해서 having 그룹함수의 조건으로 처리한다.
+SELECT to_char(hiredate,'Q')"분기", max(sal) "최대급여",
+		min(sal) "최저급여"
+FROM emp
+GROUP BY to_char(hiredate,'Q')
+HAVING max(sal) >= 2000;
+
+-- ex1) 입사월별 최고연봉자가 1000이상인 경우만 출력하세요.
+SELECT job, count(job)
+FROM EMP e
+GROUP BY JOB
+HAVING count(job) >= 3;
+
+-- ex2) 직책별 인원이 3명 이상인 직책과 인원을 출력하세요.
+SELECT TO_CHAR(hiredate, 'MM'), max(sal) "최대 급여"
+FROM EMP
+GROUP BY TO_CHAR(HIREDATE, 'MM')
+HAVING max(sal) >= 1000
+ORDER BY TO_CHAR(HIREDATE,'MM');
