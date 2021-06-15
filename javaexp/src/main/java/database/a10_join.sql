@@ -84,6 +84,88 @@ AND to_number(to_char(hiredate,'Q')) >= 3; -- 3,4 하반기에 입사한 사람 
 
 -- ex1) 부서이름별 최근에 입사한 사람의 입사일을 출력하세요. (부서이름, 최근입사일)
 -- 		hint) 최근입사 max(hiredate)
+SELECT max(hiredate) "최근", min(hiredate) "최초"
+FROM emp;
+
+SELECT deptno, max(hiredate) "부서별 최근 입사일"
+FROM emp
+GROUP BY deptno;
+
+SELECT *
+FROM emp e, dept d
+WHERE e.deptno = d.deptno;
+-- 두 개의 테이블을 join 관계 안에서 group 처리를 했다.
+SELECT dname, max(hiredate)
+FROM emp e, dept d
+WHERE e.deptno = d.deptno
+GROUP BY dname;
+-- ==> 부서위치별(loc), 최초 입사한 사람의 입사일을 출력
+SELECT loc, min(hiredate)
+FROM emp e, dept d
+WHERE e.deptno = d.deptno
+GROUP BY loc;
+
 -- ex2) 전체 평균 연봉을 확인하고 평균 연봉 이상을 상급, 미만은 하급으로 나누어 사원명 연봉 연봉구분을 부서번호가 10,20인 경우를 출력하세요.
+-- 		전체 평균 연봉 avg(sal) 확인
+SELECT avg(sal)
+FROM emp;
+
+/*
+ case when 조건1 then 데이터1
+ 	  when 조건2 then 데이터2
+ 	  else 데이터3
+ end
+ */
+
+SELECT dname, ename, sal,
+		CASE WHEN sal>=2077 THEN '상급'
+		ELSE '하급'
+		END "구분"
+FROM emp e, dept d
+WHERE e.deptno = d.deptno
+AND e.deptno IN (10,20);
+
+SELECT avg(sal)
+FROM emp;
+-- sal >= (SELECT avg(sal) FROM emp)
+SELECT dname, ename, sal,
+		CASE WHEN sal >= (SELECT avg(sal) FROM emp) THEN '상급'
+		ELSE '하급'
+		END "구분"
+FROM emp e, dept d
+WHERE e.deptno = d.deptno
+AND e.deptno IN (10,20);
+SELECT * FROM emp;
+
+-- ex) 부서이름, 팀(청/백), 이름을 출력하되 연봉이 3000미만일 때
+-- 		팀(청/백) : 사원번호 홀수일 때 청팀, 짝수일 때 백팀으로 처리.
+-- 		mod(empno,2), decode() : 중첩함수
+SELECT *
+FROM emp e, dept d;
+-- emp 12 dept 4 => 12x4=48
 SELECT *
 FROM emp;
+SELECT *
+FROM dept
+WHERE deptno = 20;
+SELECT ename, e.deptno, dname, loc
+FROM emp e, dept d
+WHERE e.deptno = d.deptno;
+-- emp 테이블의 별칭 e로 설정하면 emp을 지칭한다.
+-- dept 테이블의 별칭 d로 설정하면 dept을 지칭한다.
+-- where emp.deptno = dept.deptno : emp 테이블의 deptno와 dept 테이블의 deptno를 연동해서 두 테이블의 정보를 다 확인하기 위하여 사용한다.
+SELECT ename, dname, sal
+FROM emp e, dept d
+WHERE e.deptno = d.deptno
+AND sal > 2000;
+-- 전체가 연결을 만들어 하나의 테이블로 사용할 수 있다.
+-- 1. select로 선택해서 보여주고자 하는 컬럼 출력할 수 있고,
+-- 2. where 조건을 통해서 조회 조건을 만들 수 있다.
+-- 3. 여러가지 함수나 group함수를 활용할 수 있다. 
+
+SELECT dname, decode(MOD(empno,2)), ename
+		CASE WHEN decode(MOD(empno,2))/2 = 0 THEN '청팀'
+		ELSE '백팀'
+		END '팀'
+FROM emp e, dept d
+WHERE e.deptno = d.deptno;
