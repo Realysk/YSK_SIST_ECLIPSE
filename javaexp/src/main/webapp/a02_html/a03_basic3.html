@@ -6,13 +6,30 @@
 </head>
 <body>
 	<h2> 반가워요! </h2>
+	<h3> 사과 </h3>
 </body>
 <script type="text/javascript">
 	// ex) DOM 객체로 중앙 정렬, Glad meet you!!
 	
-		var h2Obj01 = document.querySelector("h2");
-		h2Obj01.innerHTML = "Glad meet you!!";
-		h2Obj01.align = "center";
+		var h2Obj = document.querySelector("h2");
+		h2Obj.innerHTML = "Glad meet you!!";
+		h2Obj.align = "center";
+		// h2Obj.이벤트명 = function() { 익명함수로 지정. };
+		// 해당 객체가 이벤트가 처리될 때, 익명 함수에서 정의된 내용이 수행된다.
+		h2Obj.onclick = function() {
+			// this : 현재 클릭한 객체
+			this.align = "right";
+		};
+		
+	// ex) h3로 과일명을 입력하고 중앙 정렬 후 클릭 시, 과일명 변경 왼쪽 정렬 처리.
+		
+		var h3Obj = document.querySelector("h3");
+		h3Obj.align = "center";
+		h3Obj.onclick = function() {
+			h3Obj.innerHTML = "바나나";
+			h3Obj.style.backgroundColor = "yellow";
+			this.align = "left";
+		};
 		
 </script>
 </html>
