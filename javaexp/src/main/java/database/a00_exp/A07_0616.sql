@@ -29,24 +29,55 @@
 	
 	3. 전체 내용을 그룹함수로 처리하는 부분과 특정 컬럼의 데이터를 기준으로 그룹함수를 처리할 때 코드의 차이점을 예제로 기술하세요.		
 	
-		특정 컬럼의 데이터를 기준으로 그룹함수를 처리하는 함수를 GROUP BY라 한다.
+		1) 전체 내용을 그룹함수로 처리 : 특정한 컬럼의 데이터를 기준으로 하지 않고 테이블 내에 특정한 컬럼의 전체 데이터의 기준으로 함수 처리를 한다.
 		
-		*/
-			-- 부서별 평균 급여
-			SELECT deptno, avg(sal)
+			SELECT count(*), sum(sal)
+			FROM emp;
+			count(*) : emp 테이블의 전체 카운터 갯수
+			sum(컬럼명) : emp 테이블의 특정한 컬럼의 전체 총계
+		
+			*/
+				SELECT count(*), sum(sal)
+				FROM emp;
+			/*
+	
+		2). 특정 컬럼의 데이터를 기준 : 특정 컬럼명의 데이터를 기준으로 데이터를 그룹으로 나누어서 처리하는 것을 말한다.
+		
+			SELECT deptno, sum(sal)
 			FROM emp
 			GROUP BY deptno;
-			SELECT * FROM emp;
-		/*
-	
+			부서번호 데이터 종류별로 급여의 합계를 처리하여 출력한다.
+			
+			*/
+				SELECT deptno, sal
+				FROM emp
+				ORDER BY deptno;
+				SELECT deptno, sum(sal)
+				FROM emp
+				GROUP BY deptno
+				ORDER BY deptno;
+			/*
+		
 	4. 입사월별 인원 수를 출력하세요. (입사월 인원)
 	
 		*/
 			SELECT TO_CHAR(hiredate, 'MM')
+			FROM EMP;
+			SELECT TO_CHAR(hiredate, 'MM') "입사월", count(*)
 			FROM EMP
-			GROUP BY TO_CHAR(HIREDATE, 'MM')
-			HAVING max(sal) >= 1000
-			ORDER BY TO_CHAR(HIREDATE,'MM');
+			GROUP BY to_char(hiredate,'MM')
+			ORDER BY 입사월;
+		
+			-- ex1) 사원번호별 짝수/홀수의 건수를 출력.
+				SELECT decode(mod(empno, 2),1,'홀수','짝수') "구분", count(*)
+				FROM EMP
+				GROUP BY mod(empno, 2);
+				
+			-- ex2) 입사 분기별 건수를 출력.
+				SELECT to_char(hiredate,'Q') "분기", count(*)
+				FROM emp
+				GROUP BY to_char(hiredate,'Q')
+				ORDER BY 분기;
 		/*
 	
 	5. 직책(job)별 최고 급여자가	2000 이상인 경우를 출력하세요. (직책, 최고급여)			
@@ -63,8 +94,8 @@
 	7. 급여가 2000~4000사이의 사원의 번호, 이름, 부서명을 출력하세요.
 	
 		*/
-			SELECT empno, ename, dname, sal
-			FROM EMP
+			SELECT empno, ename, sal
+			FROM EMP;
 			
 		/*
 	
