@@ -90,24 +90,42 @@
 		/*
 	
 	6. join 테이블의 연결이 없는 카티시안 join과 equi join의 차이점을 기술하세요.
+	
+		카티시안 join : 테이블간의 공통 컬럼 연결 없이 조회 처리한다.
+					  테이블 건수가 테이블건수X테이블건수로 나타난다.
+		equa join : 테이블 간의 공통 컬럼으로 연결하여 해당 내용을 조회 처리된다.
+					데이터 건수는 두 테이블 간의 데이터의 연결된 것을 기준으로 나타난다.
+					
+			*/
+				SELECT count(*)
+				FROM emp, dept;
+				SELECT count(*)
+				FROM emp e, dept d
+				WHERE e.deptno = d.deptno;
+			/*
 		
 	7. 급여가 2000~4000사이의 사원의 번호, 이름, 부서명을 출력하세요.
 	
 		*/
-			SELECT empno, ename, sal
-			FROM EMP;
-			
+			SELECT empno, ename, dname
+			FROM emp e, dept d
+			WHERE e.deptno = d.deptno
+			AND sal BETWEEN 2000 AND 4000;
 		/*
 	
 	8. non equi join의 정의를 기술하세요.
 	
-		-  join하는 두 개의 테이블의 값이 동일하지 않고, 범위로써 join하는 경우를 말한다.
+		- 두 개 테이블의 데이터를 배교하여 = (비교연산자)가 아닌 범위나 다른 형태로 데이터를 비교하여 join 하는 것을 말한다.
+		ex) 급여 등급 테이블과 사원 테이블의 급여를 between로 비교하는 것이 예시로 들 수 있다.
 	
 	9. salgrade의 1,2등급에 해당하는 사원 정보를 출력하세요.
 	
 		*/
-			SELECT *
-			FROM salgrade;
+		SELECT * FROM salgrade;
+			SELECT e.*, grade
+			FROM emp e, salgrade s
+			WHERE sal BETWEEN losal AND hisal
+			AND grade IN (1,2);
 		/*
 	 
 */

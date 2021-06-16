@@ -6,6 +6,10 @@
 </head>
 <body>
 	<h2> 마우스 오버 했을 때 </h2>
+	<!-- 태그 이벤트속성 = "처리할함수(매개값)" -->
+	<h3 onclick = "callHandler(this)"> 인라인 이벤트 처리 </h3>
+	<h4 onclick = "callExp1(this)"> hello </h4>
+	<h5 onclick = "callExp2(this)"> RED </h5>
 </body>
 <script type="text/javascript">
 	// 1. 대상 객체 지정
@@ -22,7 +26,26 @@
 	function change2() {
 		this.style.backgroundColor="yellow";
 	}
-	
 	// h2Obj.onmouseover(); 이벤트 수행
+	function callHandler(obj) {
+		// 받은 매개값을 통해 배경 색상을 변경 처리
+		obj.style.backgroundColor="yellow";
+	}
+	
+	/*
+	ex1) h4를 클릭 했을 때, hello => '안녕하세요' 변경 (인라인 속성 처리)
+	*/
+		function callExp1(obj) {
+		alert("짜잔!");
+		obj.innerHTML = "안녕하세요!";
+	}
+	/*
+	ex2) h5 클릭 시, 배경 색상 변경 : DOM 객체 선언과 객체 이벤트 속성 할당 처리
+	*/
+		function callExp2(obj) {
+		obj.style.backgroundColor="red";
+	}
+			
+	
 </script>
 </html>
