@@ -11,14 +11,33 @@ FROM emp e, salgrade s
 WHERE sal BETWEEN losal AND hisal;
 
 -- ex1) 4등급에 해당하는 사원들의 정보를 출력하세요.
-
+SELECT e.*, s.GRADE 
+FROM emp e, salgrade s
+WHERE sal BETWEEN LOsAL AND hisal
+AND grade=4;
 
 -- ex2) SMITH의 급여와 등급을 출력하세요.
-
+SELECT ENAME, SAL, GRADE
+FROM emp e, salgrade s
+WHERE sal BETWEEN LOsAL AND hisal
+AND ename = 'SMITH';
 
 -- ex3) job이 SALESMAN의 급여와 등급을 출력하세요.
+SELECT ENAME, JOB, SAL, GRADE
+FROM emp e, salgrade s
+WHERE sal BETWEEN LOsAL AND hisal
+AND JOB = 'SALESMAN';
 
+-- ex) 부서별 최고급여와 그 등급을 출력하세요.
+SELECT DEPTNO, MSAL, GRADE
+FROM (SELECT deptno, MAX(SAL) MSAL
+	  FROM EMP e 
+      GROUP BY deptno), SALGRADE S
+WHERE MSAL  BETWEEN LOsAL AND hisal;
 
+SELECT deptno, MAX(SAL) MSAL
+	  FROM EMP e 
+      GROUP BY deptno;
 SELECT DISTINCT deptno
 FROM emp;
 SELECT *
