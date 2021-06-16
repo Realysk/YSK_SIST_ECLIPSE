@@ -2,81 +2,125 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> 0615 정리문제 </title>
+<title>Insert title here</title>
 <script type="text/javascript">
-document.write("<h3>" + "1. HTML의 body에 있는 h2에 시작합니다! 라는 문자열을 js로 처리하고자 한다. 코드를 기술하세요." + "</h3>");
-document.write("<h2>" + "시작합니다!" + "</h2>" + "<br>");
-document.write("<h3>" + "2. js의 5가지 데이터 유형을 간단한 기본 예제와 함께 기술하세요." + "</h3>");
-// 1. 숫자형 데이터(정수/실수)
-var num01 = 25;
-// typeof() : 해당 데이터가 어떤 유형인지를 나타내는 내장 함수
-console.log(typeof(num01) + " : " + num01);
-document.write(typeof(num01) + " : " + num01 + "<br>");
-// F12
-
-// 2. 문자열 데이터
-var str = "홍길동";
-var str2 = '홍길동';
-console.log(typeof(str) + " : " + str);
-document.write(typeof(str2) + " : " + str2 + "<br>");
-
-// 3. 함수형 데이터
-var plus = function(num01, num02) {
-	console.log("입력 값 : " + num01 + ", 입력 값 2 : " + num02);
-	return num01 + num02;
-}
-console.log(typeof(plus) + "함수 호출 결과 : " + plus(25,30));
-document.write(typeof(plus) + "함수 호출 결과 : " + plus(25,30) + "<br>");
-
-// 4. boolean 데이터
-var isPass = num01 >= 30;
-console.log(typeof(isPass) + "함수 호출 결과 : " + isPass);
-document.write(typeof(isPass) + "함수 호출 결과 : " + isPass + "<br>");
-
-// 5. object 데이터
-// {속성 : "속성값", 속성 : function(){}, 속성 : [25,30,40]}
-var person = {name : "홍길동", age : 25, loc : "서울 신림동"};
-var arry = ["사과","바나나","딸기"];
-document.write(typeof(person) + " : " + typeof(arry) + "<br>");
-console.log(person);
-console.log(person.name); // person객체의 이름
-console.log(arry);
-document.write("<br>")
-
-document.write("<h3>" + "3. js의 객체 생성 방법 2가지를 기술하세요." + "</h3>");
-document.write("<h2>" + "DOM & BOM" + "</h2>" + "<br>");
-
-document.write("<h3>" + "4. [1단계] h3으로 red라고 되어있는 문자를 클릭 시, 배경색상이 red로 변경이 되게 하세요." + "</h3>");
-
-var h3Obj = document.querySelector("h3");
-h3Obj.innerHTML = "red";
-function changeH3(obj1) {
-	// obj : 객체를 받았을 때 지역변수
-	alert("클릭되었습니다!");
-	obj1.innerHTML = "red";
-	obj1.style.backgroundColor = "red";
-	obj1.align = "center";
-}
-
-document.write("<h3>" + "	[2단계] 해당 내용을 클릭할 때마다 무지개 색상 7가지로 글자와 배경색상이 변경되게 하세요." + "</h3>");
-document.write("<h3>" + "	hint) var colors = ['red', 'orange'....]; obj.style.backgroundColor = 'red';" + "</h3>");
-document.write("<br>")
-document.write("<h3>" + "5. DOM과 BOM의 차이점을 기술하세요." + "</h3>");
-document.write("<h2>" + "DOM : 이벤트가 실행되면 창 안에서 발생" + "</h2>");
-document.write("<h2>" + "BOM : 이벤트가 실행되면 새로운 창이 나타남" + "</h2>" + "<br>");
-
+	function chColor1(Obj){
+		var color = Obj.innerHTML;
+		Obj.style.backgroundColor= color;
+	}
+	// 클릭시마다, index가 변경할 수 있게 함수 외부에
+	// 전역변수로 idx선언..
+	var idx=0;
+	function chColor2(Obj){
+		// 무지개 색상을 배열로 선언.
+		var colors  = ['red', 'orange','yellow',
+				'green','blue','navy','purple'];
+		// 레이블과 색상을 변경하게 처리..
+		// %7를 통해서 01234560123456이 반복되게 처리..
+		Obj.innerHTML = colors[idx%7]
+		Obj.style.backgroundColor= colors[idx++%7];
+	}
 </script>
-<!--
-		
-	6. js에서 이벤트 처리를 3가지 구성요소와 코드를 통한 처리 방법을 기술하세요.
-	
-	-->
-		
-	<!--
-	
- -->
 </head>
 <body>
-<h3 onclick="changeH3(this)"> red </h3>
+	<h2></h2>
+	<h3 onclick="chColor1(this)">red</h3>
+	<h3 onclick="chColor2(this)">무지개</h3>
+	<h4>이벤트 처리</h4>
 </body>
+<script type="text/javascript">
+/*
+1. html의 body에 있는 h2에 시작합니다! 라는 문자열을
+    js로 처리하고자 한다. 코드를 기술하세요.*/
+    var h2Obj = document.querySelector("h2");
+    h2Obj.innerHTML = "h2 시작입니다.";
+	document.querySelector("h2").innerHTML = "h2 시작입니다!";
+//2. js의 5가지 데이터 유형을 간단한 기본 예제와 함께 기술하세요.
+	// js에서 사용되는 데이터 유형
+	// 1. 숫자형 데이터(정수/실수)
+	var num01 = 25;
+	// typeof() : 해당 데이터가 어떤 유형인지를 나타내는 내장 함수.
+	console.log(typeof(num01)+":"+num01);
+	document.write(typeof(num01)+":"+num01+"<br>");
+	// F12
+	// 2. 문자열 데이터
+	var str = "홍길동";
+	var str2 = '홍길동';
+	console.log(typeof(str)+":"+str);
+	document.write(typeof(str2)+":"+str2+"<br>");
+	// 3. 함수형 데이터
+	var plus = function(num01, num02){
+		console.log("입력값1:"+num01+", 입력값2:"+num02);
+		return num01+num02;
+	}
+	console.log(typeof(plus)+":함수호출 결과:"+plus(25,30));
+	document.write(typeof(plus)+":함수호출 결과:"+plus(25,30)+"<br>");
+	// 4. boolean 데이터
+	var isPass = num01>=30;
+	console.log(typeof(isPass)+":"+isPass);
+	document.write(typeof(isPass)+":"+isPass+"<br>");
+	// 5. object 데이터
+	// {속성:"속성값",속성:function(){},속성:[25,30,40]}
+	var person = {name:"홍길동",age:25, loc:"서울신림동"};
+	var arry =["사과","바나나","딸기"];
+	document.write(typeof(person)+":"+typeof(arry)+"<br>");
+	
+//3. js의 객체 생성방법 2가지는 기술하세요.
+   // 1) json형 객체 선언
+   var product = 
+   	{name:"사과",price:3000,cnt:3,
+		show:function(){
+   			console.log("물건명:"+this.name);
+   			console.log("가격:"+this.price);
+   			console.log("갯수:"+this.cnt);
+   		}		
+	};
+   product.show();
+   // 2) 생성자형 객체 선언.
+   function Person(name, age, loc){
+	   this.name = name; 
+	   // js에는 필드를 반드시 this를 선언하여야 한다.
+	   this.age = age;
+	   this.loc = loc;
+	   this.show = function(){
+			document.write("<h2>생성자형객체</h2>");
+			document.write("<h3>이름:"+this.name+"</h3>");
+			document.write("<h3>나이:"+this.age+"</h3>");
+			document.write("<h3>사는 곳:"+this.loc+"</h>");
+	   }
+   }
+   var p01 = new Person("홍길동",25,"서울 신림동");
+   p01.show();   
+/*
+4. [1단계]h3로 red라고 되어있는 문자를 클릭시, 배경색상이 red로 변경이
+    되게 하세요.
+   [2단계] 해당 내용을 클릭시마다 무지개 색상 7가지로 글자와 배경색상이
+    변경되게 하세요.   
+    hint var colors  = ['red', 'orange'.....];
+         obj.style.backgroundColor='red';
+*/         
+//5. BOM과 DOM의 차이점을 기술하세요.
+//   BOM(Browser Object Model)로 띄워진 브라우저 창 자체를 
+//   	말하는 것으로 해당 객체의 속성을 활용하여 동적 처리를 한다.
+//   DOM(Document Object Model)로 띄워진 브라우저 화면을 
+//      구성하는 요소들을 객체화하여 동적인 처리를 하는 것을 말한다.
+//6. js에서 이벤트 처리의 3가지 구성요소와 코드를 통한 
+//   처리방법을 기술하세요.  
+//   이벤트 대상 객체, 이벤트처리시 수행할 이벤트 핸들러 함수,
+//   이벤트
+	// 1. 대상 객체
+	var h4Obj = document.querySelector("h4");
+	// 2. 핸들러 함수 : 이벤트가 발생했을 때, 처리할 내용 함수 선언
+	function handler01(){
+		this.innerHTML = "## 이벤트 처리 완료 ##";
+		this.style.backgroundColor="yellow";
+	}
+	// 3. 이벤트 속성에 핸들러 할당
+	h4Obj.onclick = handler01;
+	// # 해당 h4를 클릭시, h4Obj.onclick(); 수행처리되어
+	//   정의된 이벤트 핸들러 함수가 호출된다.
+	
+
+
+</script>
 </html>
