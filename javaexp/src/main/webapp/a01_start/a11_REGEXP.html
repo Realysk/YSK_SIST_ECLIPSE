@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>a11_REGEXP</title>
+</head>
+<body>
+	ID : <input type="text" id="ID01" value="입력할내용" /><br>
+	<input type="button" onclick="ckValid()" value="유효성 check"/>
+</body>
+<script type="text/javascript">
+	function ckValid() {
+		// alert("유효성 체크합니다!");
+		// 위에 선언에 input창에 입력된 ID의 값의 가져오기
+		// DOM의 속성이 ID일 때 #아이디명으로 선택하여 가져올 수 있다.
+		
+		// var idObj = document.querySelector("#ID01");
+		// 해당 idObj의 속성 value를 통해서 입력한 값을 가져올 수 있다.
+		// alert("입력된 ID : " + idObj.value);
+		// var inputData = /himan/; // 정규표현식 check를 위해 처리
+		// alert(inputData);
+		// var compareData = 'himan goodman higirl';
+		// 해당 문자열이 포함되는지 여부를 .test() 메서드를 통해서 확인한다.
+		// true/false
+		// alert( inputData.test(compareData) );
+		/*
+		// ctrl+s
+		var regExp = /z/;
+		var str = 'Javascript jQuery Ajax';
+		var output = regExp.test(str);
+		alert(output);
+		*/
+		
+		/*
+		# replace() : 정규표현식 기호에 의해서 변경을 처리해주는 부분
+			1. 정규표현식 기호
+				$& : 일치하는 문자열을 찾아서 해당 문자로 변경 처리
+			2. /정규표현식/ 옵션
+				1) g : 전역 비교를 수행 (global)
+				2) i : 대소문자 가리지 않고 비교 (ignore case)
+		*/
+		var regExp = /a/gi;
+		var str2 = 'Javascript JQuery Ajax';
+		alert( str2.replace(regExp, '+$&+') );
+	}
+</script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>a12_ecma6</title>
+<script type="text/javascript">
+	// ecma6 : 2015년도 발표하고 2017년부터 전세계에 javascript 표준방식으로 적용 되어가고 있는 javascript 버전 중 하나이다.
+	var num01 = 25;
+	// 1. js의 var 변수 선언은 전역변수와 지역변수에 대한 구분의 문제가 발생하고 있다. 전역변수/지역변수를 구분하여 사용하지 못하고 있다.
+	// 2. js에서 지역변수와 전역변수의 구분을 위한 나타난 변수 선언 방식이 let변수를 통해서 처리하고 있다.
+	function call1() {
+		// 전역변수가 있더라도 지역변수에 각각의 변수를 사용하고 있는 것을 변수에 사용하고 있다.
+		var num01 = 30;
+		console.log(num01);
+	}
+	call1();
+	console.log(num01);
+	let num02 = 30;
+	function call2() {
+		let num02 = 40;
+		console.log(num02);
+	}
+	call2();
+	console.log(num02);
+	var hello = "first hello";
+	var hello = "second hello";
+	console.log(hello);
+	let hello1 = "first hello";
+	let hello1 = "second hello";
+	console.log(hello1);
+	// es6에서 var보다 let을 사용해서 좀 더 명확한 코드를 만들어 내는 것을 권장합니다.
+</script>
+</head>
+<body>
+
+</body>
+</html>
