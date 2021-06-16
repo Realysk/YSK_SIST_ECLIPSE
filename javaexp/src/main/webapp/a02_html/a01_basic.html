@@ -25,8 +25,13 @@
 		속성값 : center / 화면상 문자를 중앙 처리하여 준다. -->
 <!-- 요소 속성 = "속성값" -->
 <img src="img01.jpg">
-<!--
-ex1) a02_basic2.html로 파일을 만들고, 타이틀과 과일명 3개와 이미지를 왼쪽 오른쪽 중앙으로 정렬시켜 출력하세요. 
- -->
+<script type="text/javascript">
+	var h1Obj01 = document.querySelector("h1");
+	// 객체 선택하고 해당 객체의 내용 부분 변경 처리
+	// <h2> Hello (변경) </h2>
+	h1Obj01.innerHTML = "Hello!!(변경)";
+	// <h1 align="center">
+	h1Obj01.align = "center";
+</script>
 </body>
 </html>
