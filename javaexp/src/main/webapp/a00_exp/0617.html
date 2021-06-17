@@ -8,17 +8,16 @@
 	<h2> 반갑습니다! </h2>
 	<h3 align = "right"> 가운데로 이동하고 싶어요! </h3>
 	<h1> 반가워요! </h1>
-	<h4> </h4> <!-- 다수로 있을 때는 배열로 선언해서 가져와야 된다. -->
-	<h4> </h4> <!-- var h4Arry = document.querySelectorAll("h4") -->
-	<h4> </h4>
-	<h4> </h4>
-	<h5 align = "center" onclick="chColor1(this)"> RED </h5>
-	<h5 align = "center" onclick="chColor1(this)"> ORANGE </h5>
-	<h5 align = "center" onclick="chColor1(this)"> YELLOW </h5>
-	<h5 align = "center" onclick="chColor1(this)"> GREEN </h5>
-	<h5 align = "center" onclick="chColor1(this)"> BLUE </h5>
-	<h5 align = "center" onclick="chColor1(this)"> NAVY </h5>
-	<h5 align = "center" onclick="chColor1(this)"> PURPLE </h5>
+	<h4 align="right"> LEFT </h4>
+	<h4 align="center"> RIGHT </h4>
+	<h4> CENTER </h4>
+	<h5> RED </h5>
+	<h5> ORANGE </h5>
+	<h5> YELLOW </h5>
+	<h5> GREEN </h5>
+	<h5> BLUE </h5>
+	<h5> NAVY </h5>
+	<h5> PURPLE </h5>
 </body>
 <script type="text/javascript">
 	/*
@@ -79,25 +78,43 @@
 		
 		*/
 			// 배열이므로 해당 내용은 index 0부터 시작하여 접근하여 처리한다.
-			var h4Arry = document.querySelectorAll("h4");
-			h4Arry[0].innerHTML = "사과";
-			h4Arry[1].innerHTML = "바나나";
-			h4Arry[2].innerHTML = "딸기";
-			h4Arry[3].innerHTML = "오렌지";
+			// var h4Arry = document.querySelectorAll("h4");
+			// h4Arry[0].innerHTML = "사과";
+			// h4Arry[1].innerHTML = "바나나";
+			// h4Arry[2].innerHTML = "딸기";
+			// h4Arry[3].innerHTML = "오렌지";
 		/*
 	
 	6. h5 7개를 출력하고 해당 내용을 클릭시, 각각의 색상을 배경색으로 출력하세요.
 	
 		*/
 			var h5Arry = document.querySelectorAll("h5");
-			var colors  = ['red', 'orange','yellow',
-				'green','blue','navy','purple'];
-			h5Arry.onclick = function chColor1() {
-				this.innerHTML = colors[idx%7]
-				this.style.backgroundColor= colors[idx++%7];
+			console.log("크기 : " + h5Arry.length);
+			for(var idx=0; idx<h5Arry.length; idx++) {
+				h5Arry[idx].onclick=function() {
+					var color = this.innerHTML; // title로 있는 색상으로 가져올 수 있다.
+					this.style.backgroundColor = color;
+					this.align = "center";
+				};
 			}
-			
-		/*	
+		/*
+		
+	ex) h4 3개를 출력하고 center, right, left 레이블이 있는 것을 3개 출력하고
+		해당 내용을 클릭 시, 정렬이 레이블 내용을 변경되게 처리하세요.
+		
+		*/
+			var h4Arry = document.querySelectorAll("h4");
+			// for(인덱스의 시작인 0 ~ 인덱스의 마지막 : 크기 -1)
+			// 4개명 0,1,2,3 index 처리
+			for(var idx=0; idx<h4Arry.length; idx++) {
+				h4Arry[idx].onclick = function() {
+					// this : 클릭한 대상객체
+					var align = this.innerText;
+					// 내용의 text만 가져오기. 타이틀로 된 정렬 내용 가져오기
+					this.align = align;	
+				}
+			}
+		/*
 	
 	*/
 

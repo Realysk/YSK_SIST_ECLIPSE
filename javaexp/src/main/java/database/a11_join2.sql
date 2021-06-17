@@ -65,3 +65,12 @@ FROM dept;
  		WHERE		table1.column(+) = table2.column
  			또는 ; 	table1.column = table2.column(+)
  */
+
+SELECT DISTINCT deptno
+FROM emp;
+SELECT *
+FROM dept;
+SELECT e.ename, e.deptno, d.deptno, dname
+FROM emp e, dept d
+WHERE e.deptno = d.deptno;
+-- 이와 같이 dept에는 있으나 emp에 할당되지 않아 보이지 않는 데이터도 join 현황에서 확인하고자 할 때 out join을 활용한다.
