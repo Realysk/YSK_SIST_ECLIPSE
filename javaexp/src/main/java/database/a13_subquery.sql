@@ -121,7 +121,59 @@ FROM emp
 WHERE (deptno, sal) IN (
 	SELECT deptno, max(sal)
 	FROM emp
-	GROUP BY deptno);
+	GROUP BY deptno)
+ORDER BY deptno;
 
 -- ex1) 4~6월에 입사한 사원의 직책과 같은 사람들을 출력하세요.
 -- ex2) 연봉이 2000~3000 사이의 사원정보의 부서번호화 같은 사람들을 출력하세요.
+
+
+SELECT * FROM emp;
+
+-- ex1) 부서별 최근 입사자의 정보를 부서번호로 정렬하여 출력하세요.
+SELECT *
+FROM emp
+WHERE (ename, hiredate) IN (
+	SELECT deptno, max(hiredate)
+	FROM emp
+	GROUP BY deptno)
+ORDER BY deptno;
+
+-- ex2) 직책별 최저 연봉자의 정보를 연봉으로 정렬하여 출력하세요.
+SELECT *
+FROM emp
+WHERE (job, sal) IN (
+	SELECT job, min(sal)
+	FROM emp
+	GROUP BY job)
+ORDER BY sal;
+
+-- ex3) 분기별 최고 연봉자의 정보를 분기로 정렬하여 출력하세요.
+SELECT to_char(hiredate, 'Q') "분기", a.*
+FROM emp a
+WHERE (to_char(hiredate, 'Q'), sal) IN (
+	SELECT to_char(hiredate, 'Q'), max(sal)
+	FROM emp
+	GROUP BY to_char(hiredate, 'Q'))
+ORDER BY 분기;
+-- order by 컬럼명을 통해 데이터 정렬 기준을 설정하여 데이터를 확인할 때, 보다 효과적으로 내림차순 오름차순으로 처리결과를 볼 수 있다.
+
+/*
+ # exists(서버쿼리), not exists(서버쿼리)
+ 	1. 서버쿼리에서 검색된 결과가 하나라도 존재하거나 존재하지 않을 때, 메인 쿼리의 조건을 참/거짓을 처리해준다.
+ 	
+ */
+-- comm이 null이 아닌 데이터가 존재할 때, 조회를 처리
+SELECT *
+FROM emp
+WHERE exists(
+	SELECT *
+	FROM emp
+	WHERE comm = 2422);
+
+SELECT *
+FROM emp
+WHERE NOT exists(
+	SELECT *
+	FROM emp
+	WHERE comm = 2422);
