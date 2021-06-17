@@ -58,7 +58,7 @@ FROM dept;
  			조건 : 지도 학생을 한 명도 배정받지 못한 교수 이름도 반드시 함께 출력
  	3. (+) 기호를 사용한 OUTER JOIN
  		WHERE 절의 join 조건에서 OUTER JOIN 연산자인 '(+)' 기호 사용
- 		join 조건문에서 null이 출력 되는 테이블의 컬럼에 (+) 기호 추가
+ 		join 조건문에서 **null이 출력 되는 테이블의 컬럼에 (+) 기호 추가
  	4. 기본 구문
  		SELECT		table.column, table2.column
  		FROM		table1, table2
@@ -73,4 +73,20 @@ FROM dept;
 SELECT e.ename, e.deptno, d.deptno, dname
 FROM emp e, dept d
 WHERE e.deptno(+) = d.deptno;
--- 이와 같이 dept에는 있으나 emp에 할당되지 않아 보이지 않는 데이터도 join 현황에서 확인하고자 할 때 out join을 활용한다.
+-- 이와 같이 dept에는 있으나 emp에 할당되지 않아 보이지 않는 데이터도 join 현황에서 확인하고자 할 때 outer join을 활용한다.
+
+-- ex1) 사원테이블과 부서테이블을 outer join하여 아래와 같이 출력하세요.
+-- 		사원명 부서명 : 사원명이 할당되지 않았을 때 nvl을 이용해 할당된 사원없음이라고 표시하세요.
+SELECT nvl(ename, '사원없음'), dname
+FROM emp e, dept d
+WHERE e.deptno(+) = d.deptno;
+
+-- ex2) 부서별 인원수를 표시하되 부서에 할당된 인원이 없으면 0으로 표기
+-- 		부서명 인원수
+--		hint) count(해당컬럼명시)
+-- count(e.deptno) : e.deptno가 해당 컬럼에 null을 제외한 데이터를 count하여 처리한다.
+-- 그러므로, outer join에 의해서 할당이 되지 않는 데이터는 0으로 처리되어 그룹함수의 적용 결과를 볼 수 있다.
+SELECT dname, count(e.deptno)
+FROM emp e, dept d
+WHERE e.deptno(+) = d.deptno
+GROUP BY dname;
