@@ -34,5 +34,49 @@ WHERE e.mgr = m.empno; -- 테이블 내의 두 개의 연관 관계 컬럼을 jo
 
 -- ex) 연봉이 @@@인 사원 @@@의 관리자 @@의 연봉은 @@@입니다. (self join 활용)
 SELECT '연봉이 ' || e.sal ||' 인 사원 ' || e.ename || ' 의 관리자 ' || e.mgr || ' 의 연봉은 ' || m.sal || '입니다.' msg
-FROM emp e, emp s
-WHERE e.mgr = e.sal;
+FROM emp e, emp m
+WHERE e.mgr = m.empno;
+
+/*
+ ex) 위 계층 관계의 테이블을 이해 했으면 아래와 같은 하나의 테이블 내의 계층 관계가 있는 데이터를 처리해보세요.
+ 	
+ 	1. famliy 테이블 만들기
+ 	NO(번호) POS(역할) NAME(이름) PARNO(부모번호)
+ 	1		할아버지	 홍말순	   0
+ 	2		아버지	 홍판서	   1
+ 	3		큰아들	 홍진희	   2
+ 	4		작은아들	 홍길동	   3
+ 	sample 데이터를 3개 이상 입력해보세요.
+ 	
+ 	*/
+		CREATE TABLE famliy (
+			NO number,
+			pos varchar2(50),
+			name varchar2(50),
+			parno number
+		);
+	/*
+ 	
+ 	2. 데이터 입력
+ 	
+ 	*/
+		INSERT INTO famliy VALUES (1, '할아버지', '홍말순', 0);
+		-- 최상위 계층
+		INSERT INTO famliy VALUES (2, '아버지', '홍판서', 1);
+		-- NO와 parno의 연관관계를 설정하여 데이터를 입력한다.
+		INSERT INTO famliy VALUES (3, '큰 아들', '홍진희', 2);
+		INSERT INTO famliy VALUES (4, '작은 아들', '홍길동', 2);
+		SELECT NO "번호", pos "역할", name "이름", parno "부모번호"
+		FROM famliy;
+	/*
+	
+ 	3. SQL 이용해서 @@@의 부모의 이름은 @@@입니다. 출력
+ 	
+ 	*/
+		SELECT a.name || '의 부모의 이름은 ' || b.name || '입니다.' show
+		FROM famliy a, famliy b
+		WHERE a.parno = b.NO;
+	/*
+ */
+
+
