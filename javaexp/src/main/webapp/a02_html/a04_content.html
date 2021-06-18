@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a04_content </title>
+<script type="text/javascript">
+/*
+
+ */
+
+
+</script>
+</head>
+<body>
+<!--
+p : paragraph 문단을 나누는 처리를 해준다.
+단락별로 문자를 사용할 때 활용한다.
+hr : horizontal line 수평선을 그어준다.
+br : 줄 바꿈 처리한다.
+-->
+<h2> 문단1 </h2>
+<hr>
+<p>
+HTML 문서도 본문을 여러 단락으로 나눌 수 있다. <br>
+CSS 스타일을 사용하면<br>
+단락 단위로 내어 쓰기와 들여 쓰기가 가능하다.</p>
+<h2> 문단2 </h2>
+<hr>
+<p>
+여러 개의 빈 칸은 하나로 취급되며,
+엔터 키 역시 하나의 빈 칸으로 처리된다.
+</p>
+
+<!--
+ex) 위 h2, p, hr, br을 활용하여
+	java란?
+	html란?
+	jsp란?
+	위키백과사전에서 검색하여 화면에 출력하세요.
+-->
+<h2 id="javaTitle"> * JAVA * </h2>
+<hr>
+<p id="javaContent">
+자바(Java, 문화어: 쟈바)에는 여러 가지 뜻이 있다. <br>
+자바 (Java) - 객체 지향 프로그래밍 언어 <br>
+자바서버 페이지 (JSP, JavaServer Pages) - HTML 문서에 자바 코드를 삽입하여 동적 웹 페이지를 생성하는 프로그래밍 언어 <br>
+자바 애플릿 (Java Applet) - 자바 바이트코드 형태로 배포되는 애플릿 <br>
+자바 라이브러리 (Java Library) - 다양한 패키지를 Zip 으로 묶어 .jar 로 변환한 파일 <br>
+</p>
+<h2> * HTML * </h2>
+<hr>
+<p>
+하이퍼텍스트 마크업 언어(HyperText Markup Language, HTML, 문화어: 초본문표식달기언어, 하이퍼본문표식달기언어)는 웹 페이지를 위한 지배적인 마크업 언어다. <br>
+또한, HTML은 제목, 단락, 목록 등과 같은 본문을 위한 구조적 의미를 나타내는 것뿐만 아니라 링크, 인용과 그 밖의 항목으로 구조적 문서를 만들 수 있는 방법을 제공한다. <br>
+그리고 이미지와 객체를 내장하고 대화형 양식을 생성하는 데 사용될 수 있다. <br>
+HTML은 웹 페이지 콘텐츠 안의 꺾쇠 괄호에 둘러싸인 "태그"로 되어있는 HTML 요소 형태로 작성한다. <br>
+HTML은 웹 브라우저와 같은 HTML 처리 장치의 행동에 영향을 주는 자바스크립트와 본문과 그 밖의 항목의 외관과 배치를 정의하는 CSS 같은 스크립트를 포함하거나 불러올 수 있다. <br>
+HTML과 CSS 표준의 공동 책임자인 W3C는 명확하고 표상적인 마크업을 위하여 CSS의 사용을 권장한다. <br>
+</p>
+<h2> * JSP * </h2>
+<hr>
+<p>
+자바 서버 페이지(영어: JavaServer Pages[1], JSP)는 HTML내에 자바 코드를 삽입하여 웹 서버에서 동적으로 웹 페이지를 생성하여 웹 브라우저에 돌려주는 서버 사이드 스크립트 언어이다. <br>
+Java EE 스펙 중 일부로 웹 애플리케이션 서버에서 동작한다. <br>
+자바 서버 페이지는 실행시에는 자바 서블릿으로 변환된 후 실행되므로 서블릿과 거의 유사하다고 볼 수 있다. <br>
+하지만, 서블릿과는 달리 HTML 표준에 따라 작성되므로 웹 디자인하기에 편리하다. <br>
+1999년 썬 마이크로시스템즈에 의해 배포되었으며 이와 비슷한 구조로 PHP, ASP, ASP.NET 등이 있다. <br>
+아파치 스트럿츠나 자카르타 프로젝트의 JSTL 등의 JSP 태그 라이브러리를 사용하는 경우에는 자바 코딩없이 태그만으로 간략히 기술이 가능하므로 생산성을 높일 수 있다. <br>
+</p>
+</body>
+<script type="text/javascript">
+/*
+ 
+ */
+// 태그의 속성인 id는 #아이디명으로 DOM객체를 접근할 수 있다.
+var jTObj = document.querySelector("#javaTitle");
+jTObj.onclick = function() {
+	// 자신의 배경색상을 변경
+	this.style.backgroundColor="pink";
+	// 선택객체 선언
+	var jCObj = document.querySelector("#javaContent");
+	// += : 문자열을 추가하고 줄 바꿈 처리
+	// = : 문자열을 해당 내용으로 변경 처리
+	jCObj.innerHTML += "안녕하세요!!<br>";
+}
+
+</script>
+</html>

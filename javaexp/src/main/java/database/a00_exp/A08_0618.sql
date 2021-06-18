@@ -135,18 +135,38 @@
 			-- ex) 입사분기별 최고급여 테이블과 사원테이블을 join관계하여 해당 입사분기별 사원정보를 출력하세요.
 			SELECT *
 			FROM (
-				SELECT to_char(hiredate,'Q'), max(sal)
+				SELECT to_char(hiredate,'Q') div, max(sal) sal 
 				FROM emp
 				GROUP BY to_char(hiredate,'Q')) a, emp b
-			WHERE a.max(sal) = b.max(sal)
-			AND a.to_char(hiredate,'Q') = b.to_char(hiredate,'Q');
+			WHERE a.div = to_char(hiredate,'Q')
+			AND a.sal = b.sal
+			ORDER BY div;
+		
+			SELECT *
+			FROM (
+				SELECT to_char(hiredate,'Q') div, max(sal) sal 
+				FROM emp
+				GROUP BY to_char(hiredate,'Q')) a, emp b
+			WHERE a.sal = b.sal;
+			-- 분기별 최고급여가 같은 경우 (1분기, 4분기가 같은 경우)
+			-- 위와 같은 경우에 1분기뿐만 아니라 4분기 데이터도 같이 로딩이 된다.
+			-- 검색을 1분기와 4분기별로 추가하여 where 조건을 하는 경우에도 문제가 발생을 한다.
 		/*	
 	
 	9. emp테이블에서 컬럼job과 join할 테이블을 jobs라고 만들고 직책명 권한 직책등급으로 설정하여 처리하세요.
    	   데이터는 사원 대리 과장 차장 부장 입력하여 outer join되게 한 후 out join 결과 출력하세요.
    	   
  		*/
-	
-		/*  	   
+			SELECT ename, job
+			FROM emp;
+		
+			CREATE TABLE jobs
+			AS SELECT DISTINCT job,
+						'권한		' auth,
+						'		' grade
+			FROM emp;
+		
+			SELECT * FROM jobs;
+		/*
    	   
  */
