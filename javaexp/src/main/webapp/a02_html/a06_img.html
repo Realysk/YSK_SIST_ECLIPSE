@@ -35,17 +35,52 @@
  	 100 150	 100 200	크기로
  	 바나나 엘비스 타이틀로 출력하세요.
   -->
-  <h3> 바나나 </h3>
-  <img src="media/banana.png" width="100" height="150"/>
-   <h3> 엘비스 </h3>
-  <img src="media/Elvis.png" width="100" height="200"/>
-  
+ <h3> 바나나 </h3>
+ <input id="lgBtn" type="button" value="커져라"/>
+ <input id="smBtn" type="button" value="작아져라"/>
+ <input id="chBtn" type="button" value="변해라"/><br>
+ <img id="bananaImg" src="media/banana.png" width="100" height="150"/>
+ <h3> 엘비스 </h3>
+  <input id="lgBtn2" type="button" value="커져라"/>
+ <input id="smBtn2" type="button" value="작아져라"/>
+ <input id="chBtn2" type="button" value="변해라"/><br>
+ <img id="elvisImg" src="media/Elvis.png" width="100" height="200"/>
 </body>
 <script type="text/javascript">
 /*
  
  */
-
+ var lgBtn = document.querySelector("#lgBtn");
+ lgBtn.onclick = function() {
+	 var bananaImg = document.querySelector("#bananaImg");
+	 // alert(bananaImg.width);
+	 // 객체.속성 += 증가
+	 bananaImg.width += 20;
+	 bananaImg.height += 20;
+ };
+ 
+ // ex) 버튼 두개를 추가해서 클릭을 통해서 엘비스가 커지고 작아지게 하세요.
+ var lgBtn2 = document.querySelector("#lgBtn2");
+ lgBtn2.onclick = function() {
+	 var elvisImg = document.querySelector("#elvisImg");
+	 elvisImg.width += 20;
+	 elvisImg.height += 20; 
+ };
+ var smBtn2 = document.querySelector("#smBtn2");
+ smBtn2.onclick = function() {
+	 var elvisImg = document.querySelector("#elvisImg");
+	 elvisImg.width -= 20;
+	 elvisImg.height -= 20; 
+ };
+ var chBtn2 = document.querySelector("#chBtn2");
+ var chImg = true;
+ chBtn2.onclick = function() {
+	 // 이미지 변경 처리
+	 // 삼항연산자 boolean? true일 때 할당 내용 : false일 때 할당 내용
+	 elvisImg.src="media/" + (chImg? "Elvis1.jpg":"Elvis.png");
+	 // ! : not연산자. true => false, false => true
+	 chImg=!chImg;
+ };
 
 </script>
 </html>
