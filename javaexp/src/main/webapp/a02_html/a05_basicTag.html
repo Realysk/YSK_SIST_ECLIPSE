@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a05_basicTag </title>
+<script type="text/javascript">
+/*
+
+ */
+
+
+</script>
+</head>
+<body>
+<!--
+# 태그의 종류에 따른 분류 : 줄 바꿈 포함 여부에 따라
+	1. block 태그
+		해당 태그와 함께 줄 바꿈 처리가 일어나는 태그를 말한다.
+		p, h1~h6, div(구역지정), ul/li
+	2. inline 태그
+		텍스트 꾸미기 관련 태그로 줄 바꿈 처리가 일어나지 않는 태그를 말한다.
+		a, img, sapn
+ -->
+ <div id="div01">
+	구역 태그입니다. (block 태그)
+ </div>
+  <div id="div02">
+  	<h2> 안녕 </h2>
+	<p> 구역 태그입니다. (block 태그) </p>
+ </div>
+ <ul>
+ 	<li> 리스트입니다. (block 태그) </li>
+ 	<li> 리스트입니다. (block 태그) </li>
+ 	<li> 리스트입니다. (block 태그) </li>
+ </ul>
+ <h3> inline 태그 </h3>
+ <a href=""> 링크 </a>
+ <img src="img01.jpg" width="30" height="30"/>
+ <span> 인라인 태그입니다. (span) </span>
+ <div id="div03">
+ 	회원명 : <input type="text" id="member"/>
+ 	<h2 id="newMember"> 회원 추가 </h2>
+ </div>
+ <div id="div04">
+ 	<h2 id="like"> 회원 추가 </h2>
+ </div>
+
+</body>
+<script type="text/javascript">
+var div01 = document.querySelector("#div01");
+div01.onclick = function() {
+	this.innerHTML += "<h2> block 태그 추가 </h2>";
+}
+var div02 = document.querySelector("#div02");
+div02.onclick = function() {
+	this.innerHTML += "<span> inline 태그 추가 </span>";
+}
+
+// ex1) 회원 추가 => 클릭 시, h3로 임의의 회원이름이 아래로 등록.
+// block 태그를 이용한 추가
+var newMember = document.querySelector("#newMember");
+newMember.onclick = function() {
+	// 회원명 : <input type="text" id="member"/>
+	var nameObj = document.querySelector("#member");
+	document.querySelector("#div03").innerHTML += "<h3>" + nameObj.value + "</h3>";
+	nameObj.value = "";
+	nameObj.focus();
+}
+// ex2) 좋아요 => 클릭 시, ★가 옆으로 하나씩 추가되게 처리하세요.
+// inline 태그를 이용한 추가
+var like = document.querySelector("#like");
+like.onclick = function() {
+	document.querySelector("#div04").innerHTML.innerHTML += "<span> ★ </span>";
+};
+
+</script>
+</html>

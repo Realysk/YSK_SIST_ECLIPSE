@@ -47,9 +47,9 @@ ex) 위 h2, p, hr, br을 활용하여
 자바 애플릿 (Java Applet) - 자바 바이트코드 형태로 배포되는 애플릿 <br>
 자바 라이브러리 (Java Library) - 다양한 패키지를 Zip 으로 묶어 .jar 로 변환한 파일 <br>
 </p>
-<h2> * HTML * </h2>
+<h2 id="htmlTitle"> * HTML * </h2>
 <hr>
-<p>
+<p id="htmlContent">
 하이퍼텍스트 마크업 언어(HyperText Markup Language, HTML, 문화어: 초본문표식달기언어, 하이퍼본문표식달기언어)는 웹 페이지를 위한 지배적인 마크업 언어다. <br>
 또한, HTML은 제목, 단락, 목록 등과 같은 본문을 위한 구조적 의미를 나타내는 것뿐만 아니라 링크, 인용과 그 밖의 항목으로 구조적 문서를 만들 수 있는 방법을 제공한다. <br>
 그리고 이미지와 객체를 내장하고 대화형 양식을 생성하는 데 사용될 수 있다. <br>
@@ -76,7 +76,7 @@ Java EE 스펙 중 일부로 웹 애플리케이션 서버에서 동작한다. <
 var jTObj = document.querySelector("#javaTitle");
 jTObj.onclick = function() {
 	// 자신의 배경색상을 변경
-	this.style.backgroundColor="pink";
+	this.style.backgroundColor = "pink";
 	// 선택객체 선언
 	var jCObj = document.querySelector("#javaContent");
 	// += : 문자열을 추가하고 줄 바꿈 처리
@@ -84,5 +84,12 @@ jTObj.onclick = function() {
 	jCObj.innerHTML += "안녕하세요!!<br>";
 }
 
+// ex) HTML 클릭 시 배경색상 변경 및 내용 추가하여 '즐거운 오후입니다.' 출력 처리.
+var hTObj = document.querySelector("#htmlTitle");
+hTObj.onclick = function() {
+	this.style.backgroundColor = "green";
+	var hCObj = document.querySelector("#htmlContent");
+	hCObj.innerHTML += "즐거운 오후입니다.<br>";
+}
 </script>
 </html>
