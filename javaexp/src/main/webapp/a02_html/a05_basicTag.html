@@ -36,13 +36,14 @@
  <h3> inline 태그 </h3>
  <a href=""> 링크 </a>
  <img src="img01.jpg" width="30" height="30"/>
- <span> 인라인 태그입니다. (span) </span>
+ <span> 인라인 태그입니다. (span) </span><br><br>
+ 
+ 회원명 : <input type="text" id="member"/>
+ <h2 id="userAdd"> 회원 추가 </h2>
  <div id="div03">
- 	회원명 : <input type="text" id="member"/>
- 	<h2 id="newMember"> 회원 추가 </h2>
  </div>
+ <h2 id="like"> 좋아요 </h2>
  <div id="div04">
- 	<h2 id="like"> 회원 추가 </h2>
  </div>
 
 </body>
@@ -58,20 +59,23 @@ div02.onclick = function() {
 
 // ex1) 회원 추가 => 클릭 시, h3로 임의의 회원이름이 아래로 등록.
 // block 태그를 이용한 추가
-var newMember = document.querySelector("#newMember");
-newMember.onclick = function() {
+var add = document.querySelector("#userAdd");
+add.onclick = function() {
 	// 회원명 : <input type="text" id="member"/>
 	var nameObj = document.querySelector("#member");
+	// nameObj의 value값을 h3로 block으로 추가.
 	document.querySelector("#div03").innerHTML += "<h3>" + nameObj.value + "</h3>";
+	// 입력을 한 후에는 초기화
 	nameObj.value = "";
+	// 입력을 손쉽게 하기 위해 focus 처리
 	nameObj.focus();
 }
 // ex2) 좋아요 => 클릭 시, ★가 옆으로 하나씩 추가되게 처리하세요.
-// inline 태그를 이용한 추가
-var like = document.querySelector("#like");
-like.onclick = function() {
-	document.querySelector("#div04").innerHTML.innerHTML += "<span> ★ </span>";
-};
+var getStar = document.querySelector("#like");
+//inline 태그를 이용한 추가
+getStar.onclick = function() {
+	document.querySelector("#div04").innerHTML += "<span> ★ </span>";
+}
 
 </script>
 </html>
