@@ -57,6 +57,24 @@
 		/*	
 	
 	7. 분기별로 입사한 사람의 최고 연봉자들의 정보를 분기기준으로 정렬하여 출력하세요.
+		# subquery
+			1) 단일 결과 데이터 처리 : 비교연산자 (=, >=, >, <, <=, !=)
+				subquery가 하나의 결과값이 나올 때 처리한다.
+					select *
+					from 테이블명
+					where 컬럼 = (subquery);
+			2) 다중 결과 데이터 처리 : in, exists, any, all
+				결과 값이 하나 이상일 때 해당 다중 결과를 기준으로 데이터를 처리할 때 활용 된다.
+				(1) 1개의 열을 기준으로 결과가 나올 때
+					select *
+					from 테이블명
+					where 컬럼 in (subquery);
+					in의 경우는 해당 컬럼의 데이터를 or로 연결해서 처리할 때 활용 된다.
+				(2) 2개 이상의 열을 기준으로 결과가 나올 때
+					select *
+					from 테이블명
+					where (컬럼1, 컬럼2, ...) in (select 컬럼1, 컬럼2, ...) from ..);
+					컬럼1데이터와 컬럼2데이터가 and로 같이 나올 때를 기준으로 데이터를 로딩한다.
 	
 		*/
 			SELECT to_char(hiredate, 'Q') 분기, max(sal)
@@ -71,16 +89,60 @@
 				FROM emp
 				GROUP BY to_char(hiredate, 'Q'))
 			ORDER BY 분기;
-		/*	
+			-- 분기별로 최대값을 기준으로 해당 데이터를 검색처리 한다.
+			SELECT *
+			FROM emp;
+			
+			-- ex1) 직책별 최저연봉에 해당하는 사원 정보를 subquery로 출력하세요.
+				SELECT *
+				FROM emp
+				WHERE (job, sal) IN (
+					SELECT job, min(sal)
+					FROM emp
+					GROUP BY job);
+			
+			-- ex2) empno를 짝/홀수로 나눠 짝수/홀수별로 최고연봉자의 사원 정보를 출력하세요.
+				SELECT empno, mod(empno,2), decode(mod(empno,2),0, '짝수','홀수') div, sal
+				FROM emp
+				ORDER BY div;
+			
+				SELECT decode(mod(empno,2),0, '짝수','홀수') 구분자, max(sal)
+				FROM emp
+				GROUP BY decode(mod(empno,2),0, '짝수','홀수');
+			
+				SELECT decode(MOD(empno,2),0,'짝','홀') div, e.*
+				FROM emp e
+				WHERE (mod(empno,2), sal) IN (
+					SELECT mod(empno,2), max(sal)
+					FROM emp
+					GROUP BY mod(empno,2));
+				SELECT * FROM emp;
+			-- group by란 특정 컬럼의 데이터를 그룹으로 나누는 것을 말한다.
+		/*
 	
 	8. 직책별 최근 입사자 테이블, 사원테이블을 조인하여 사원 정보를 출력하세요. (테이블 subquery 활용)
 	
 		*/
-	
+			SELECT *
+			FROM (
+				SELECT job, max(hiredate) hiredate
+				FROM emp
+				GROUP BY job) a, emp b
+			WHERE a.job = b.job
+			AND a.hiredate = b.hiredate;
+		
+			SELECT * FROM emp;
+			-- ex) 입사분기별 최고급여 테이블과 사원테이블을 join관계하여 해당 입사분기별 사원정보를 출력하세요.
+			SELECT *
+			FROM (
+				SELECT to_char(hiredate,'Q'), max(sal)
+				FROM emp
+				GROUP BY to_char(hiredate,'Q')) a, emp b
+			WHERE a.max(sal) = b.max(sal)
+			AND a.to_char(hiredate,'Q') = b.to_char(hiredate,'Q');
 		/*	
 	
-	9. emp테이블에서 컬럼job과 join할 테이블을 jobs라고 만들고 
-   	   직책명 권한 직책등급으로 설정하여 처리하세요.
+	9. emp테이블에서 컬럼job과 join할 테이블을 jobs라고 만들고 직책명 권한 직책등급으로 설정하여 처리하세요.
    	   데이터는 사원 대리 과장 차장 부장 입력하여 outer join되게 한 후 out join 결과 출력하세요.
    	   
  		*/
