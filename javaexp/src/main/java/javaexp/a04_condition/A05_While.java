@@ -72,6 +72,7 @@ public class A05_While {
 				break;
 			}
 		}
+		
 		System.out.println("# 입력한 금액의 총 내역 #");
 		System.out.println(pay + " 원");
 	}
