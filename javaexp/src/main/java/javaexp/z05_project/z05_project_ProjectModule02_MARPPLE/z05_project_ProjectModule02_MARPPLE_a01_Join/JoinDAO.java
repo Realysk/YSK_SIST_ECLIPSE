@@ -5,13 +5,6 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class JoinDAO {
-/*
-// select * 
-// from product
-// where name like '%'||'물건명'||'%'
-//  and price between 가격의최소 and 가격의최대; 
-==> java 객체로 할당 전달..
- */
 	
 	// 입력값에 의해서 처리한 ArrayList리턴해준다.
 	public ArrayList<JoinDTO> joinList(JoinDTO jo){

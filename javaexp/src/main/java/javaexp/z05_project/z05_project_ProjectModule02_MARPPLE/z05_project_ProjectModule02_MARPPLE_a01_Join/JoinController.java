@@ -15,16 +15,11 @@ public class JoinController {
 		System.out.println("ID(EMAIL) : " + j.getID());
 		System.out.println("PW : " + j.getPW());
 		System.out.println("이름 : " + j.getName() + "\n");
-		/*
-		  Controller => Service => Dao (DB 처리)
- 					<=		  <=
-		 */
-		
+
 		// view단에 넘겨 줄 데이터 key, object
 		d.addAttribute("jlist", service.joinList(j));
 		// 화면단에 대한 호출
 		return "회원가입_정보.jsp";
-//		return "경로/@@@.jsp";
 	}
 
 }
