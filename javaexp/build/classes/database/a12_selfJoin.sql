@@ -27,6 +27,7 @@ FROM emp;
 SELECT e.empno, e.ename, e.mgr, m.empno, m.ename
 FROM emp e, emp m
 WHERE e.mgr = m.empno;
+-- 사원테이블의 mgr은 관리자의 사원번호인데 이것을 empno와 연관관계를 가지고 내부 join을 통해 확인할 수 있다.
 
 SELECT '사원번호가 '|| e.empno ||'인 '|| e.ename ||' 의 관리자번호는 '|| e.mgr ||' 이고, 관리자의 이름은 '|| m.ename || ' 이다.' msg 
 FROM emp e, emp m

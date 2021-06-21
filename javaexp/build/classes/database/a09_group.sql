@@ -18,6 +18,12 @@ ORDER BY deptno, sal;
  		where 조건
  		group by 그룹할컬럼
  		having 그룹함수의조건;
+ 		특정 컬럼의 데이터를 그룹별로 함수에 의해 처리하는 것을 말한다.
+ 		부서별로 사원의 최대 급여, deptno(부서), 최대급여 max(sal)
+ 		그룹할 컬럼은 부서이고, 부서별로 급여를 확인하여 최대급여를 뽑아내는 것을 말한다.
+ 			ex) select deptno, max(sal)
+ 				from emp
+ 				group by deptno;
  	4. 그룹함수의 종류
  		count() : 행의 갯수
  		max() : null을 제외한 모든 행의 최대값
@@ -26,7 +32,11 @@ ORDER BY deptno, sal;
  		avg() : null을 제외한 모든 행의 평균값
  		stddev() : null을 제외한 모든 행의 표준편차
  		variance() : null을 제외한 모든 행의 분산
- 		
+ 		1) 테이블 단위로 해당 컬럼의 전체 데이터를 그룹처리할 때는 group by 없이 그룹 함수를 사용한다.
+ 			ex) 사원 테이블의 최대 연봉, 사원데이터 건수
+ 				select count(*), max(sal)
+ 				from emp;
+ 				 		
  	5. count 함수
  		1) 테이블에서 조건을 만족하는 행의 갯수를 반환하는 함수
  		2) 기본 형식

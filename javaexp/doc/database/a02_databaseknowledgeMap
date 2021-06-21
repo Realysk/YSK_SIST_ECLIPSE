@@ -1,6 +1,14 @@
 # Database 처리 실무 프로세스
 	
 	1. 요구사항 정의서 작성 후 여러 사람이 공유하고 영구적으로 관리할 데이터에 대한 식별속성을 만들고 속성의 그룹 단위를 만들어 테이블을 구성한다.
+		1) 처리 단계
+			- 요구사항 정의서
+			- 영구적 데이터 / 임시 데이터 식별
+				속성 도출 및 속성을 그룹화하여 테이블 구성
+			- 테이블 간의 연관 관계 설정 (관계 데이터 모델링) - exerd(erd 모델링 도구/틀)
+			- SQL 작성.
+			- 프로그래밍 적용 처리.
+						
 		ex) 로그인 ==> 회원관리 ==> 회원이 등록할 정보 ==> 회원에 들어갈 속성 ==> 속성을 함께 가지고 있을 테이블 구성
 			속성 : 아이디, 패스워드, 이름, 주소, 이메일, 포인트, 권한
 			이들을 묶어서 사용자라는 member 테이블 안에 구성할 수 있다.
@@ -28,10 +36,10 @@
 		SQL로 Join 처리(subquery 포함)
 		
 	4. 화면별로 필요한 SQL 사용
-		1) 조회
-		2) 등록
-		3) 수정
-		4) 삭제
+		1) 조회 (DQL)
+		2) 등록 (DML)
+		3) 수정 (DML)
+		4) 삭제 (DML)
 		
 	5. 프로그램에서 DAO로 데이터베이스 연결 객체를 처리하여 DB 서버에서 데이터를 가져오게 한 후 화면단에 출력한다.
 		1) 화면을 통해 입력된 값
@@ -63,7 +71,7 @@
 				where 조건 in ( select min(컬럼) from 테이블명)
 					and ...
 					
-		# 기본 구문 형식
+		# 기본 구문 형식 (DQL)
 		select 컬럼
 		from 테이블명
 		where 조건명
@@ -71,9 +79,10 @@
 		having 그룹함수로 조건 처리
 		order by 컬럼 [desc];
 			
-	3. SQL(DML(데이터의 조작), DDL(정의), DCL(제어))
+	3. SQL (DML(데이터의 조작), DDL(정의), DCL(제어))
 		CRUD(Create, Read, Update, Delete)
 		1) insert
+			insert 테이블명 values(데이터1, 데이터2....);
 			insert 테이블명(컬럼명1, 컬럼명2...)
 				values(데이터1, 데이터2...);
 		2) update
@@ -84,13 +93,15 @@
 				..
 				where 조건문;
 				ex)
-					update emp
-						set ename = '홍길동',
-							deptno = 20
-						where empno = 7780;
+				update emp
+				set ename = '홍길동',
+					deptno = 20
+				where empno = 7780;
 			
 		3) delete
 			데이터를 row(행)단위로 삭제 처리.
+				cf) 특정 cloumn만 삭제할 수는 없다.
+					=> update 테이블 set 컬럼 = null;
 			delete
 			from 테이블명
 			where 조건;
@@ -129,9 +140,12 @@
 					minvalue 최소값
 					maxvalue 최대값
 					increment by 증가값;
+			# 데이터 유형
+				숫자형 number(n,p), 고정문자(char), 가변문자(varchar2)
+				날짜형 date
 			
-		7) 제약조건 : primary key(not null, uniquery), foreign key, not null, unique, check
-			데이터의 입력이나 수정시, 해당 제약조건에 맞지 않으면 에러를 발생하게 하여 데이터의 무결성을 유지하게 할 수 있다.
+			# 제약 조건 : primary key(not null, uniquery), foreign key, not null, unique, check
+				데이터의 입력이나 수정시, 해당 제약조건에 맞지 않으면 에러를 발생하게 하여 데이터의 무결성을 유지하게 할 수 있다.
 	
 	4. SQL(사용자 권한 부여 및 회수)
 		계정을 만들고, 해당 계정에 따라서 권한 부여를 처리하는 것을 말한다.

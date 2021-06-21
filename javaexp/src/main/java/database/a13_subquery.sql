@@ -124,6 +124,13 @@ WHERE (deptno, sal) IN (
 	GROUP BY deptno)
 ORDER BY deptno;
 
+/*
+ 위의 그룹이 다중으로 설정되었기 때문에 원하는 결과 값을 가져올 수 없다.
+ SELECT empno, ename, deptno, max(sal) (X)
+ FROM emp
+ GROUP BY empno, ename, deptno;
+ */
+
 -- ex1) 4~6월에 입사한 사원의 직책과 같은 사람들을 출력하세요.
 -- ex2) 연봉이 2000~3000 사이의 사원정보의 부서번호화 같은 사람들을 출력하세요.
 
@@ -161,9 +168,10 @@ ORDER BY 분기;
 /*
  # exists(서버쿼리), not exists(서버쿼리)
  	1. 서버쿼리에서 검색된 결과가 하나라도 존재하거나 존재하지 않을 때, 메인 쿼리의 조건을 참/거짓을 처리해준다.
- 	
+ 	2. subquery의 데이터의 조회 된 결과가 있기만 하면 아무런 연관관계 없이 main query의 데이터를 수행 처리 해준다.
  */
 -- comm이 null이 아닌 데이터가 존재할 때, 조회를 처리
+
 SELECT *
 FROM emp
 WHERE exists(
