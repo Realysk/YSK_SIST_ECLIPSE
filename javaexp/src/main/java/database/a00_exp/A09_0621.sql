@@ -82,26 +82,64 @@
 			FROM EMP e, DEPT d
 			WHERE e.deptno = d.deptno;
 		-- 분기별 최고 급여자와 부서정보와 join된 사원테이블을 join관계를 설정하여 부서정보를 출력해야 한다.
-				
+			SELECT d.*
+			FROM (
+				-- 분기별 최고 급여자 => 부서정보를 출력하세요.
+				-- 분기별 최고 급여자 => 사원정보 => 부서정보
+				-- 1) 분기별 최고 급여자 => 사원정보 : 분기정보, 급여정보 join
+				-- 2) 사원정보와 부서정보 : 부서번호로 join
+				SELECT to_char(hiredate,'Q') q, max(sal) msal
+				FROM emp
+				GROUP BY to_char(hiredate,'Q')
+				HAVING max(sal) >= 2000) a, emp e, dept d
+			WHERE a.q = to_char(e.hiredate,'Q') -- 사원정보에서 분기정보를 join
+			AND a.msal = e.sal					-- 사원정보에 급여정보를 join
+			AND e.deptno = d.deptno;			-- 사원정보와 부서정보를 join
 		
 	/*	
 	
 	12. 급여가 2000~3000사이의 부서명, 사원명, 급여를 출력하세요.
 	
 	*/
-		
+		SELECT dname, ename, sal
+		FROM emp e, dept d
+		WHERE e.deptno = d.deptno
+		AND sal BETWEEN 2000 AND 3000;
 	/*	
 	
 	13. subquery 종류를 기본 예제를 통해서 기술하세요.
 	
 	*/
-		
+		-- 1) where 조건 결과를 통한 subquery
+		--	  단일 데이터 subquery
+			SELECT *
+			FROM emp
+			WHERE sal = (SELECT max(sal) FROM emp);
+		--	  다중 데이터 subquery
+			SELECT *
+			FROM emp
+			WHERE (deptno, sal) IN (
+				SELECT deptno, max(sal)
+				FROM emp
+				GROUP BY deptno);
+		-- 2) 테이블 subquery
+			SELECT *
+			FROM (SELECT * FROM emp WHERE sal >= 3000) e,
+			(SELECT * FROM dept WHERE deptno = 10) d
+			WHERE e.deptno = d.deptno;
+		-- 3) select subquery
+			SELECT (SELECT max(sal) FROM emp WHERE deptno=a.deptno) "소속부서 최고급여", a.*
+			FROM emp a;
 	/*	
 	
 	14. 2등급에 해당하는 사원들의 정보를 출력하세요.
 
 	*/
-		
+		-- non equi join
+			SELECT g.grade, e.*
+			FROM emp e, salgrade g
+			WHERE e.sal BETWEEN losal AND hisal
+			AND g.grade = '2';
 	/*
 
  */

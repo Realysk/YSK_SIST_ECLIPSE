@@ -16,32 +16,39 @@
 						
 		1) .html의 구성요소
 			- html 태그
-			- css
-			- javascript
+			- css : html에 상단에 포함하거나, .css 파일로 외부파일로 저장한 후, 호출하여 처리한다.
+			- javascript : .js파일로 외부파일 호출 처리. head, body 중간에 제일 하단에 <script>코드로 처리한다.
 			
 		2) HTML 기본
 			- 타이틀 h1~h6
 			- 문단 paragraph
 			- Text 꾸미기 태그 : 진하게, 강조, 삭제, 추가, 위/아래첨자
+				<b><del>..<insert>...
 			- 블럭 태그 : 태그가 줄 바꿈 포함 (h1, div)
 			- 인라인 태그 : 줄 바꿈 없이 한 라인으로 명령 처리 (span, img)
-			- 이미지 처리 : img
+			- 이미지 처리 : img src(이미지의 파일명), width(넓이), height(높이)
 			- List 처리 : <ul><li>, <ol><li>
 			- Table : 화면에 출력 할 2차원의 데이터를 표현할 때 주로 사용된다.
 					  타이틀, 내용을 효과적으로 정렬해서 처리한다.
+					<table>
+						<tr><th> 테이블의 타이틀 <th></tr>
+						<tr><td> 데이터 <td></tr>
+					</table>
 			- Link : 외부 문서나 내부 문서에 연결하여 처리한다.
 					 <a href = ""> : 특정한 메뉴나 기능을 클릭 시, 해당 페이지로 이동 처리.
 					- Download 처리
 			- 화면 구분 처리
 				div
 				frame
-				iframe
+				iframe : 외부/내부 페이지를 호출하여 사용할 때 활용된다.
 				위에 hyperlink와 연동하여 메뉴별 페이지 이동을 처리한다.
 				HTML5 Semantic 태그 처리 : 화면구분
 			- Form 하위의 여러 요소 객체를 사용.
 				<input type = "text"> 데이터를 입력해서 서버에 전송할 때 주로 활용된다.
 				<input type = "checkbox"> check 멀티 선택
 				<input type = "radio"> check 단일 선택
+				<input type = "submit"> 서버에 전송할 때, 사용되는 버튼
+				<input type = "button"> 기본 화면에서 출력할 버튼
 				<select> 콤보로 선택할 때.
 				<textarea> 여러 라인으로 데이터 입력 시.
 					
@@ -50,11 +57,21 @@
 		CSS3 동적인 처리 가능하고 3D 모양의 기능 처리.
 		1) 선언 방법
 			- inline
+				해당 태그에만 바로 적용 처리
+				<태그 style="속성:속성값...."/>
+				ex) <h2 style="background-color:yellow"/>
 			- head 부분에 선언
+				body에 있는 해당 선택자의 모든 내용에 선언된 내용으로 적용.
 				선택자{속성1:속성값1; 속성2:속성값2....}
+				ex) h2{background-color:yellow;}
 		2) 선택자 selector
 			- body 안에 선언된 태그들을 기본적으로 선택해서 속성으로 색상, 굵기, 크기, 이벤트등을 처리.
-			- #아이디속성{}, .클래스속성{}, 기본태그{}
+			- #아이디속성{}, .클래스속성{}, 기본태그{속성:속성값;}
+				<h3 class="cls01"/>
+				<h3 class="cls01"/>
+				ex) .cls01{color:blue;}
+				<h4 id="id01"/> 해당화면에 유일식별자..
+				ex) #id01{border:1px solid red;}
 			- [속성 = 속성값]{}
 			- :{} - 가상선택자
 		3) 여러가지 속성들
@@ -76,7 +93,9 @@
 	
 		1) javascript의 선언과 로딩 되는 위치
 		2) 기본 문법
-			- 변수 선언 규칙
+			- 변수 선언 규칙 : 데이터 유형이 초기에 선언되지 않는다.
+				var var01 = 25; // 데이터를 할당하는 순간 해당 변수의 데이터 유형이 결정된다.
+				// js의 데이터 유형 : 숫자형, 문자열형, boolean, 함수형, 객체형(배열포함)
 			- 데이터 할당
 			- 주석 처리
 			- 출력 형식 : alert, document.write, console.log("");
@@ -94,6 +113,8 @@
 				}
 			- 변수형 함수
 				var 함수명 = function(){};
+			- 내장 함수
+				setInterval, setTimeout : 반복적인 데이터 기능 처리
 		5) 객체
 			- 생성자형 객체
 				function 객체명() {
