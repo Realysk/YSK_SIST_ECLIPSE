@@ -4,17 +4,21 @@
 <meta charset="EUC-KR">
 <title>a09_BOM</title>
 <script type="text/javascript">
+	// BOM은 DOM의 상위 포함 객체이다.
 	// 전역변수 선언
 	var win = null;
 	function openWindow() {
 		// win : 윈도우 객체 할당
 		win = window.open("","","width=300, height=300");
-		win.document.write("<h2> 창문이 열림!! </h2>")
+		win.document.write("<h2> 창문이 열림!! </h2>");
 	}
 	function goLeft() {
 		// win에 기능 메서드 처리.
 		// win.moveBy(x, y) : x,y 축으로 이동
 		win.moveBy(0, -20); // 왼쪽으로 이동
+		// By : 상대
+		// To : 절대
+		// win.moveTo(x,y) : x,y축의 절대 위치로 이동
 	}
 	function goRight() {
 		// win.moveBy(x, y) : x,y 축으로 이동

@@ -31,7 +31,9 @@
 	
 	document.write("<h2>" + "ex2) 학생 이름, 국어, 영어, 수학 점수를 입력하여 화면에 평균까지 출력하세요." + "</h2>");
 	// parseInt() : 정수 숫자형 변환 Number()
+	// 함수1(함수2())
 	var stuName = prompt("학생 이름 :","학생 이름을 입력하세요.");
+	// 국어점수를 입력 받아(문자열), 숫자로 변환 처리
 	document.write("<h3> 입력한 학생 이름 : " + stuName + "</h3>");
 	var kor = parseInt(prompt("국어 점수 :","국어 점수를 입력하세요."));
 	document.write("<h3> 입력한 국어 점수 : " + kor + "</h3>");
@@ -39,6 +41,18 @@
 	document.write("<h3> 입력한 영어 점수 : " + eng + "</h3>");
 	var math = parseInt(prompt("수학 점수 :","수학 점수를 입력하세요."));
 	document.write("<h3> 입력한 수학 점수 : " + math + "</h3>");
+	/*
+	# JS에서 자동 형 변환 처리.
+		1) + : 문자열 연결이 우선순위이기 때문에 '1'+'23' => '123'
+			Number('1') + Number('23') => 24
+			parseInt('1') + parseInt('23') => 24
+			나머지는 다 자동 형 변환 되어 연산 처리해준다.
+			'23' - '3' => 20
+			"5" * "6" => 30
+			"4" / "2" => 2
+		2) 함수로 연산 처리
+			eval("25 + 5") => 30
+	*/
 	var tot = kor+eng+math;
 	var avg = (kor+eng+math)/3;
 	document.write("<h3> 학생 이름 : " + stuName + "</h3>");
