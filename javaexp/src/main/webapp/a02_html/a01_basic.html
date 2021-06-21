@@ -25,11 +25,24 @@
 		속성값 : center / 화면상 문자를 중앙 처리하여 준다. -->
 <!-- 요소 속성 = "속성값" -->
 <img src="img01.jpg">
+
+<div id="div01">
+</div>
+<div id="div02">
+</div>
+
 <script type="text/javascript">
+	var div01 = document.querySelector("#div01");
+	div01.innerHTML = "<h2> 안녕하세요. </h2>";
+	var div02 = document.querySelector("#div02");
+	div02.innerText = "<h2> 안녕하세요. </h2>";
+	
 	var h1Obj01 = document.querySelector("h1");
 	// 객체 선택하고 해당 객체의 내용 부분 변경 처리
 	// <h2> Hello (변경) </h2>
 	h1Obj01.innerHTML = "Hello!!(변경)";
+	// .innerHTML : 포함된 태그 렌더링
+	// .innerText : 포함된 태그 그대로 출력
 	// <h1 align="center">
 	h1Obj01.align = "center";
 </script>
