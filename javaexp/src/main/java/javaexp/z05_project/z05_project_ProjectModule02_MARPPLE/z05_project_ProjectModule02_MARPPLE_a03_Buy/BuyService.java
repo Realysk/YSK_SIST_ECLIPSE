@@ -16,7 +16,7 @@ public class BuyService {
 		System.out.println("CartDAO에 전송 할 장바구니 데이터 5 (상품 총 가격) : " + buy.getTot1());
 		System.out.println("CartDAO에 전송 할 장바구니 데이터 6 (배송비) : " + buy.getDelivery());
 		System.out.println("CartDAO에 전송 할 장바구니 데이터 7 (총 가격) : " + buy.getTot2());
-		System.out.println("CartDAO에서 받을 장바구니 데이터 크기 : " + bdao.buyList(buy).size() + "\n");
+//		System.out.println("CartDAO에서 받을 장바구니 데이터 크기 : " + bdao.buyList(buy).size() + "\n");
 		return bdao.buyList(buy);
    }
 

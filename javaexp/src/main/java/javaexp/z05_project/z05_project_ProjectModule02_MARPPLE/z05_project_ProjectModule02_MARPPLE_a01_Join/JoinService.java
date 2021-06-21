@@ -14,7 +14,7 @@ public class JoinService {
 		System.out.println("JoinDAO에 전송 할 회원 정보 데이터 2 (ID) : " + jo.getID());
 		System.out.println("JoinDAO에 전송 할 회원 정보 데이터 3 (PW) : " + jo.getPW());
 		System.out.println("JoinDAO에 전송 할 회원 정보 데이터 4 (이름) : " + jo.getName() + "\n");
-		System.out.println("JoinDAO에서 받을 회원 정보 데이터 크기 : " + jdao.joinList(jo).size() + "\n");
+//		System.out.println("JoinDAO에서 받을 회원 정보 데이터 크기 : " + jdao.joinList(jo).size() + "\n");
 		return jdao.joinList(jo);
 
 	}
