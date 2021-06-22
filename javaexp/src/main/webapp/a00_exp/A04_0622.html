@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title> A04_0622 </title>
 <script type="text/javascript">
 /*
 
@@ -12,11 +12,63 @@
 </script>
 </head>
 <body>
-
+	<table id="tab01" width="200" height="200" border>
+		<tr><td>1</td><td>2</td></tr>
+		<tr><td>3</td><td>4</td></tr>
+	</table>
+	
+	<input type="button" value="컬럼 추가" id="addCol"/>
+	<input type="button" value="행 추가" id="addRow"/>
 </body>
 <script type="text/javascript">
+
 /*
- 
+ # 0621 정리문제 #
+	1. 테이블의 기본 속성과 tr, td의 의미를 기술하세요.
+		- table : 데이터를 2차원 형식으로 출력 처리할 때 사용 된다.
+		- 구성 요소
+			1) 속성 : width, height, border, align
+			2) 하위 요소
+				- tr (table row) : 행 단위 데이터 처리
+				- td (table data) : 행 안에 있는 열로 실제 데이터 처리
+				- thead
+				- tbody
+				- tfoot
+	
+	2. 2X2 테이블을 만들고, 각 td를 클릭시, 연결되어 있는 과일명 4가지 중에 하나를 출력 하세요.
+		1) 테이블 하위에 있는 td 선택자
+	
+		*/
+			// #tab01 td가 다수일 때는 document.querySelectorAll를 통해 배열로 선택해준다.
+			var tds01 = document.querySelectorAll("#tab01 td");
+			// tds01.length : 배열의 갯수를 반복문을 통해서 수행 처리.
+			for(var idx=0; idx<tds01.length; idx++) {
+				
+			}
+		/*
+	
+	3. innerHTML과 innerText의 차이를 기본 예제를 통하여 기술하세요.
+	
+		*/
+			var h3Obj = document.querySelector("h3");
+			h3Obj.onclick = function() {
+			this.innerHTML = "클릭하면 '3번 문제' 대신 이 문장으로 변경";
+			this.innerText = "클릭하면 '3번 문제' 대신 이 문장이 그대로 추가 됨";
+			};
+		/*
+	
+	4. setInterval 함수의 사용 방법을 기술하세요.
+		- setInterval (반복함수, 1/1000)
+	
+	5. 숫자형 문자열을 숫자로 변경하는 js 함수를 기술하세요.
+	
+	
+	
+	6. 1X1테이블에서 [컬럼추가][행추가] 클릭시, 처리되게 하세요 [응용]
+    - table 선택 및 innerHTML을 활용하여 html로 tr td로 테이블 구성을 만드세요.
+    
+    
+    
  */
 
 
