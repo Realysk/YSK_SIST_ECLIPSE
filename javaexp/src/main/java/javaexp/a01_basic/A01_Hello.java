@@ -16,7 +16,7 @@ public class A01_Hello {
 	 			java A01_Hello 통해서 실행이 된다.
 	 			// ps) 실행을 하는데 현재 source가 실행되지 않고 과고의 소스로 실행이 되면 현재 소스가 새로운 소스로 컴파일이 되지 않은 상황이기 때문에
 	 			 		1) 에러가 있는지 점검
-	 			 		2) build 하위에 class 파일이 현재 시간으로 저장되어 있는지 확인한다.
+	 			 		2) build 하위에 class 파일이 현재 시간으로 저장되어 있는지 확인한다..
 	 */
 
 	public static void main(String[] args) {
