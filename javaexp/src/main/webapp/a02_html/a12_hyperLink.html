@@ -12,7 +12,30 @@
 </script>
 </head>
 <body>
-
+<!--
+# hyperlink 만들기
+	1. hyperlink란 다른 html페이지와 연결하여
+		1) 현재 서버에 있는 html페이지의 특정 위치로 이동할 수 있을 뿐만 아니라
+			ex) a href = "a01_start.html" 현재 폴더에 있는 특정 페이지로 이동
+		2) 외부 서버에 있는 페이지로 이동을 가능하게 한다.
+			ex) a href = "http://www.naver.com" 네이버
+		3) 이미지로 링크 a href = "" img
+	2. 기본 형식
+		a href = "이동할페이지" target = "페이지가 출력할 이름"
+-->
+<h3> 링크 만들기 </h3>
+<hr>
+포털 사이트
+<!-- ul/li 구성되어 리스트 처리할 때, 활용된다. -->
+<ul><!-- 외부 페이지로 이동 처리. -->
+	<li> <a href="http://www.naver.com"> 네이버 </a></li>
+	<li> <a href="http://www.daum.net"> 다음 </a></li>
+</ul>
+신문 사이트
+<ul><!-- 이미지로 외부 사이트 연결. -->
+	<li><a href="http://www.etnews.com"><img src="media/iconetnews.png" alt="전자신문"></a></li>
+	<li><a href="http://www.chosun.com"><img src="media/iconchosun.png" alt="조선일보"></a></li>
+</ul>
 </body>
 <script type="text/javascript">
 /*
