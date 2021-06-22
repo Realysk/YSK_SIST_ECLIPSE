@@ -36,10 +36,48 @@
 	<li><a href="http://www.etnews.com"><img src="media/iconetnews.png" alt="전자신문"></a></li>
 	<li><a href="http://www.chosun.com"><img src="media/iconchosun.png" alt="조선일보"></a></li>
 </ul>
+내부 사이트
+<ul>
+	<li><a href="a01_basic.html"> 첫 페이지로 이동 </a></li>
+	<li><a href="javascript:call('홍길동')"> js 함수 호출 </a></li>
+	<li><a href="javascript:go()"> js 함수로 페이지 이동 </a></li>
+</ul>
+
+<table border>
+	<tr><th>외부페이지 이동1</th><td><a href="http://lms1.sist.co.kr/">쌍용교육센터</a></td></tr>
+	<tr><th>외부페이지 이동2</th><td><a href="https://www.gmarket.co.kr/">G마켓</a></td></tr>
+	<tr><th>내부페이지 이동1</th><td onclick="go2()">내부페이지 이동1</td></tr>
+	<tr><th>js내부페이지 이동2</th><td><a href="javascript:go3()">js내부페이지 이동2</a></td></tr>
+</table>
+
 </body>
 <script type="text/javascript">
+	function call(str) {
+		alert("js 함수 호출 : " + str);
+	}
+	
+	function go2() {
+		alert("내부페이지 이동1");
+		location.href="a06_img.html";
+	}
+	
+	function go3() {
+		alert("js내부페이지 이동2");
+		location.href="a04_content.html";
+	}
+	
+	function go() {
+		alert("a08_table로 이동");
+		location.href="a08_table.html";
+	}
 /*
+ ex)
  
+ 테이블을 만들고 테이블 안에.. 해당 내용 클릭 시,
+ 	외부페이지 이동1 	| 아는 포털사이트1 이동
+ 	외부페이지 이동2 	| 아는 포털사이트2 이동
+ 	내부페이지 이동1	| a06_img.html
+ 	js내부페이지 이동2 | a04_content.html
  */
 
 
