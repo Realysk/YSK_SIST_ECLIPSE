@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a09_tableAction </title>
+<script type="text/javascript">
+/*
+
+ */
+
+
+</script>
+</head>
+<body>
+	<h2 id="h2Obj"> h2를 추가하세요 (click) </h2>
+	<div id="div01">  </div>
+	
+	<h3 id="h3Obj"> h3를 추가해주세요 | img를 추가해주세요 </h3>
+	<img src='img01.jpg' width='100' height='100'>
+	<div id="div02">
+	</div>
+	<!-- show += "<img src='img01.jpg' width='100' height='100'>" -->
+</body>
+<script type="text/javascript">
+/*
+ 
+ */
+	var h2Obj = document.querySelector("#h2Obj");
+	var div01 = document.querySelector("#div01");
+	var cnt=1;
+	h2Obj.onclick=function() {
+		// div01에 있는 내용을 가져와서 show에 할당.
+		var show = "";
+		// 클릭할 때, cnt 증가 되고 증가된 횟수만큼 반복은 h2코드를 만들어서 다시 div01에 할당하여 처리한다.
+		for(var count=1; count<=cnt; count++) {
+			show += "<h2> ## 안녕하세요 [" + count + "] </h2>";	
+		}
+		console.log(show);
+		// 최종적으로 div01에 할당.
+		div01.innerHTML=show;
+		cnt++;
+	};
+
+	var h3Obj = document.querySelector("#h3Obj");
+	var div02 = document.querySelector("#div02");
+	var cnt2=1;
+	h3Obj.onclick=function() {
+		var show2 = div02.innerHTML;
+		show2 += "<h3> h3를 추가해주세요 [" + cnt2 + "] </h3>";
+		show2 += "<img src='img01.jpg' width='100' height='100'/>";
+		console.log(show2);
+		div02.innerHTML=show2;
+		cnt2++;
+	};
+
+</script>
+</html>

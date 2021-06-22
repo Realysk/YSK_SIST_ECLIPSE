@@ -103,16 +103,37 @@
     		var addRow = document.querySelector("#addRow");
     		var tab03 = document.querySelector("#tab03");
     		var colCnt = 1;
-    		addCol.onclick=function() {
+    		addCol.onclick = function() {
     			console.log(colCnt)
     			colCnt++;
     			// colCnt의 갯수에 따라서 <td>1</td>가 증가하면 td가 변경되어 보인다.
     			// 1. 반복되지 않는 부분 <tr></tr>
     			// 2. 반복되는 부분은 <td>1</td>는 colCnt에 따라서 증가 된다.
-    			tab03.innerHTML="<tr><td>1</td></tr>";
-    			tab03.innerHTML="<tr><td>1</td><td>2</td></tr>";
-    			tab03.innerHTML="<tr><td>1</td><td>2</td><td>3</td></tr>";
+    			// tab03.innerHTML="<tr><td>1</td></tr>";
+    			// tab03.innerHTML="<tr><td>1</td><td>2</td></tr>";
+    			// tab03.innerHTML="<tr><td>1</td><td>2</td><td>3</td></tr>";
+    			var show = "<tr>";
+    			for(var cnt=1; cnt<=colCnt; cnt++) {
+    				show += "<td>" + cnt + "</td>";
+    			}
+    			show += "</tr>";
+    			tab03.innerHTML=show;
     		};
+    		// 행 단위로 추가되게 처리.
+    		// tab03.innerHTML="<tr><td>1</td></tr>";
+    		// tab03.innerHTML="<tr><td>1</td><tr><td>2</td></tr>";
+    		// tab03.innerHTML="<tr><td>1</td><tr><td>2</td><tr><td>3</td></tr>";
+    		var rowCnt = 1;
+    		addRow.onclick = function() {
+    			console.log(colCnt)
+    			rowCnt++;
+    			// @@ X 1 : 열은 1이고, 행이 클릭할 때마다 증가되게 처리.
+    			var show = "";
+    			for(var cnt=1; cnt<=rowCnt; cnt++) {
+    				show += "<tr><td>" + cnt + "</td></tr>";
+    			}
+    			tab03.innerHTML=show;
+    		}
     	/*
     
     

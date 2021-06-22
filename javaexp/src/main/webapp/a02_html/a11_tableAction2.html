@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a11_tableAction2 </title>
+<script type="text/javascript">
+/*
+
+ */
+
+
+</script>
+</head>
+<body>
+	<h2> 사과 </h2>
+	<table border></table>
+</body>
+<script type="text/javascript">
+/*
+ ex) '사과구매' 클릭 시, 구매한 물건 출력 3X3에 채워지게 처리.
+ 	 사과1	사과2	사과3
+ 	 사과4	사과5	사과6
+ 	 사과7	사과8	사과9
+ */
+ 
+	var h2Obj = document.querySelector("h2");
+	var tab01 = document.querySelector("table");
+	var clickCnt=1;
+	h2Obj.onclick=function() {
+		var show = "";
+		for(var cnt=1; cnt<=clickCnt; cnt++) {
+			if(cnt%3==1) {
+				show += "<tr>";
+			}
+			show += "<td><h3> 사과 [" + clickCnt + "] </h3>";
+			show += "<img src='apple.jpg' width='100' height='100'/></td>";
+			if(cnt%3==0) {
+				show += "</tr>";
+			}
+		}
+		console.log(show);
+		clickCnt++;
+		tab01.innerHTML = show;
+	};
+
+</script>
+</html>
