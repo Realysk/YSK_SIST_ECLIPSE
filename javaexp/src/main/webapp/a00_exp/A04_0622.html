@@ -22,8 +22,8 @@
 	</table>
 	
 	<!-- addCol addRow tab03 -->
-	<input type="button" value="컬럼 추가" id="addCol"/>
-	<input type="button" value="행 추가" id="addRow"/>
+	<input type="button" value="컬럼추가" id="addCol"/>
+	<input type="button" value="행추가" id="addRow"/>
 	<table id="tab03" width="300" height="300" border>
 		<tr><td>1</td></tr>
 	</table>
@@ -102,35 +102,32 @@
     		var addCol = document.querySelector("#addCol");
     		var addRow = document.querySelector("#addRow");
     		var tab03 = document.querySelector("#tab03");
-    		var colCnt = 1;
+    		var colCnt = 1; // 열의 갯수
+    		var rowCnt = 1; // 행의 갯수
+    		
     		addCol.onclick = function() {
-    			console.log(colCnt)
     			colCnt++;
-    			// colCnt의 갯수에 따라서 <td>1</td>가 증가하면 td가 변경되어 보인다.
-    			// 1. 반복되지 않는 부분 <tr></tr>
-    			// 2. 반복되는 부분은 <td>1</td>는 colCnt에 따라서 증가 된다.
-    			// tab03.innerHTML="<tr><td>1</td></tr>";
-    			// tab03.innerHTML="<tr><td>1</td><td>2</td></tr>";
-    			// tab03.innerHTML="<tr><td>1</td><td>2</td><td>3</td></tr>";
-    			var show = "<tr>";
-    			for(var cnt=1; cnt<=colCnt; cnt++) {
-    				show += "<td>" + cnt + "</td>";
-    			}
-    			show += "</tr>";
-    			tab03.innerHTML=show;
+    			createTab(rowCnt, colCnt);
+    			cnt++;
     		};
-    		// 행 단위로 추가되게 처리.
-    		// tab03.innerHTML="<tr><td>1</td></tr>";
-    		// tab03.innerHTML="<tr><td>1</td><tr><td>2</td></tr>";
-    		// tab03.innerHTML="<tr><td>1</td><tr><td>2</td><tr><td>3</td></tr>";
-    		var rowCnt = 1;
     		addRow.onclick = function() {
-    			console.log(colCnt)
     			rowCnt++;
-    			// @@ X 1 : 열은 1이고, 행이 클릭할 때마다 증가되게 처리.
+    			createTab(rowCnt, colCnt);
+    			cnt++;
+    		}
+    		
+    		// 위에 행렬 단위로 테이블 구성하는 공통함수 선언.
+    		function createTab(row, col) {
+    			console.log(row + " : " + col);
     			var show = "";
-    			for(var cnt=1; cnt<=rowCnt; cnt++) {
-    				show += "<tr><td>" + cnt + "</td></tr>";
+    			var cnt = 1; // 번호
+    			for(var rcnt=1; rcnt<=row; rcnt++) {
+    				show += "<tr>";
+        			// 열단위 데이터 처리
+        			for(var ccnt=1; ccnt<=col; ccnt++) {
+        				show += "<td>" + (cnt++) + "</td>";
+        			}
+        			show += "</tr>";
     			}
     			tab03.innerHTML=show;
     		}
