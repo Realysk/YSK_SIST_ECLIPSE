@@ -25,11 +25,11 @@ SELECT comm, ename, hiredate FROM emp02;
 SELECT * FROM emp02;
 UPDATE emp02
 	SET comm = 1000
-	WHERE comm = NULL;
+	WHERE comm IS NULL; -- 컬럼명 IS NULL, 컬럼명 IS NOT NULL
 
 -- ex2) emp02에서 1/4분기에 입사한 사원정보는 현재 날짜로 수정하세요.
 SELECT to_char(hiredate,'Q') 분기, hiredate, ename FROM emp02;
 SELECT * FROM emp02;
 UPDATE emp02
 	SET hiredate = SYSDATE
-	WHERE to_char(hiredate,'Q') = 1;
+	WHERE to_char(hiredate,'Q') = '1';
