@@ -136,3 +136,75 @@ INSERT INTO emp10(job, sal)
 SELECT job, max(sal)
 FROM emp
 GROUP BY job;
+
+/*
+ # 하나의 SQL로 여러 테이블 입력 처리.
+ 	1. 서버Query의 결과 집합을 조건없이 여러 테이블에 동시에 입력
+ 	2. 형식
+ 		insert all | first : all(전체), first(첫번째 데이터)
+ 		into 테이블1 values(컬럼명1, 컬럼명2 ...)
+ 		into 테이블2 values(컬럼명1, 컬럼명2 ...)
+ 		into 테이블3 values(컬럼명1, 컬럼명2 ...)
+ 		서버 쿼리;
+ */
+
+CREATE TABLE emp06 AS SELECT * FROM emp WHERE 1=0;
+CREATE TABLE emp07 AS SELECT * FROM emp WHERE 1=0;
+CREATE TABLE emp08 AS SELECT * FROM emp WHERE 1=0;
+SELECT * FROM emp06;
+SELECT * FROM emp07;
+SELECT * FROM emp08;
+INSERT ALL
+INTO emp06(empno, ename, sal) values(empno, ename, sal)
+INTO emp07(empno, ename, sal) values(empno, ename, sal)
+INTO emp08(empno, ename, sal) values(empno, ename, sal)
+SELECT empno, ename, sal
+FROM emp
+WHERE deptno = 10;
+
+-- ex) emp09, emp11, emp12 emp의 구조 복사
+-- sal가 2000~4000사이의 emp의 ename, sal, hiredate를 입력.
+CREATE TABLE emp09 AS SELECT * FROM emp WHERE 1=0;
+CREATE TABLE emp11 AS SELECT * FROM emp WHERE 1=0;
+CREATE TABLE emp12 AS SELECT * FROM emp WHERE 1=0;
+SELECT * FROM emp09;
+SELECT * FROM emp11;
+SELECT * FROM emp12;
+INSERT ALL
+INTO emp09(ename, sal, hiredate) values(ename, sal, hiredate)
+INTO emp11(ename, sal, hiredate) values(ename, sal, hiredate)
+INTO emp12(ename, sal, hiredate) values(ename, sal, hiredate)
+SELECT ename, sal, hiredate
+FROM emp
+WHERE sal BETWEEN 2000 AND 4000;
+
+-- ex) emp13, emp14, emp15 부서번호, 최근입사일1, 최초입사일로 구조만 복사한 테이블을 만들고 emp의 부서별, 최근입사일, 최초입사일 데이터를 입력하세요.
+DROP TABLE emp13;
+DROP TABLE emp14;
+DROP TABLE emp15;
+
+CREATE TABLE emp13
+AS SELECT deptno, max(hiredate) mdate, min(hiredate) idate
+FROM emp
+GROUP BY deptno HAVING 1=0;
+
+CREATE TABLE emp14
+AS SELECT deptno, max(hiredate) mdate, min(hiredate) idate
+FROM emp
+GROUP BY deptno HAVING 1=0;
+
+CREATE TABLE emp15
+AS SELECT deptno, max(hiredate) mdate, min(hiredate) idate
+FROM emp
+GROUP BY deptno HAVING 1=0;
+
+INSERT ALL
+INTO emp13 values(deptno, mdate, idate)
+INTO emp14 values(deptno, mdate, idate)
+INTO emp15 values(deptno, mdate, idate)
+SELECT deptno, max(hiredate) mdate, min(hiredate) idate
+FROM emp
+GROUP BY deptno;
+SELECT * FROM emp13;
+SELECT * FROM emp14;
+SELECT * FROM emp15;
