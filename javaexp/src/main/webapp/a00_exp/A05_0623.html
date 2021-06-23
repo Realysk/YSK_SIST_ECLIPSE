@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title> A05_0623 </title>
+<script type="text/javascript">
+/*
+
+ */
+
+
+</script>
+</head>
+<body>
+
+	<h2> 2X2 </h2>
+	<table id="tab01" width="300" height="300" border>
+		<tr><td> 1열 </td><td> 2열 </td></tr>
+		<tr><td> 1열 </td><td> 2열 </td></tr>
+	</table>
+	
+	<table border>
+	<tr><th>외부페이지 이동</th><td><a href="http://lms1.sist.co.kr/">쌍용교육센터</a></td></tr>
+	<tr><th>내부페이지 이동</th><td onclick="go2()">내부페이지 이동1</td></tr>
+	<tr><th>js내부페이지 이동</th><td><a href="javascript:go3()">js내부페이지 이동2</a></td></tr>
+	</table>
+	
+	<a href="a01_basic.html" target="frame01"> 초기페이지 </a>
+
+</body>
+<script type="text/javascript">
+/*
+ # 0623 정리문제 #
+ 	1. 초기 <table></table>화면에 구성된 내용을 2X2테이블로 javascript 코드로
+    	만들어 보세요.
+    	
+    2. hyperlink의 기본 속성에 대하여 기술하세요.
+    	- <a href = "이동할페이지" target = "페이지가 출력할 이름"></a>
+    
+    3. a 태그를 이용해서, 외부페이지, 내부페이지, javascript 함수호출예제를 코드로 만드세요.
+	
+		*/
+			function go2() {
+				alert("내부페이지 이동");
+				location.href="a06_img.html";
+			}
+		
+			function go3() {
+				alert("js내부페이지 이동");
+				location.href="a04_content.html";
+			}
+		/*  
+    
+    4. a 태그와 iframe의 링크연동을 기본예제를 통하여 설명하세요.
+ 	
+		*/
+			
+		/*
+    
+    5. 물건명 [  ] 가격 [   ][등록] - 해당 버튼을 클릭시 마다 테이블에 물건이 추가 등록되게 처리.
+    	번호  물건명 가격
+    	1    @@    @@
+    	
+    	*/
+    		
+    	/*
+    	
+ */
+
+</script>
+</html>
