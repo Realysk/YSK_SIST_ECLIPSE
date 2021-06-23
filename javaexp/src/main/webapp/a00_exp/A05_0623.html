@@ -8,34 +8,37 @@
 
  */
 
-
+	function call() {
+		alert("함수호출");
+	}
 </script>
 </head>
 <body>
-
-	<h2> 2X2 </h2>
-	<table id="tab01" width="300" height="300" border>
-		<tr><td> 1열 </td><td> 2열 </td></tr>
-		<tr><td> 1열 </td><td> 2열 </td></tr>
-	</table>
-	
-	<table border>
-	<tr><th>외부페이지 이동</th><td><a href="http://lms1.sist.co.kr/">쌍용교육센터</a></td></tr>
-	<tr><th>내부페이지 이동</th><td onclick="go2()">내부페이지 이동1</td></tr>
-	<tr><th>js내부페이지 이동</th><td><a href="javascript:go3()">js내부페이지 이동2</a></td></tr>
-	</table>
-	
-	<a href="a01_basic.html" target="frame01"> 초기페이지 </a>
-
+	<table></table>
+	외부페이지 <a href="http://www.naver.com"> 네이버 </a></br>
+	<!-- ../ : 상위 폴더로 이동 처리 -->
+	내부페이지 <a href="../../a02_html/a01_basic.html"> 내부페이지 이동 (상대경로) </a></br>
+	js함수호출 <a href="javascript:call()"> 함수호출 </a></br>
 </body>
 <script type="text/javascript">
 /*
  # 0623 정리문제 #
- 	1. 초기 <table></table>화면에 구성된 내용을 2X2테이블로 javascript 코드로
-    	만들어 보세요.
+ 	1. 초기 <table></table>화면에 구성된 내용을 2X2테이블로 javascript 코드로 만들어 보세요.
+ 		- 화면에 있는 js에 의해서 DOM로 선언하여 여러가지 함수와 이벤트를 통해서 동적인 속성과 내용변경을 할 수 있다.
+    	
+    	*/
+    		var tab = document.querySelector("table");
+ 			tab.border="1";
+ 			tab.width="200";
+ 			tab.height="200";
+ 			tab.align="center";
+ 			var show = "<tr><td>1</td><td>2</td></tr>";
+ 			show += "<tr><td>3</td><td>4</td></tr>";
+ 			tab.innerHTML = show;
+    	/*
     	
     2. hyperlink의 기본 속성에 대하여 기술하세요.
-    	- <a href = "이동할페이지" target = "페이지가 출력할 이름"></a>
+    	- <a href = "이동할 내-외부 페이지 / js함수" target = "top/_parent/프레임명"> 링크할 키워드 </a>
     
     3. a 태그를 이용해서, 외부페이지, 내부페이지, javascript 함수호출예제를 코드로 만드세요.
 	
@@ -52,10 +55,8 @@
 		/*  
     
     4. a 태그와 iframe의 링크연동을 기본예제를 통하여 설명하세요.
- 	
-		*/
-			
-		/*
+    	<a href="a01_basic.html" target="frame01"> 초기페이지 </a>
+		<iframe name="frame01" src="a14_iframe1.html" width="200" height="150"></iframe>
     
     5. 물건명 [  ] 가격 [   ][등록] - 해당 버튼을 클릭시 마다 테이블에 물건이 추가 등록되게 처리.
     	번호  물건명 가격
