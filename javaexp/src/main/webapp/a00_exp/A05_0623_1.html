@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title> A05_0623_1 </title>
+<script type="text/javascript">
+/*
+
+ */
+
+
+</script>
+</head>
+<body>
+	ID : <input type="text" name="userID"/>
+	<input type="button" id="regBtn" value="등록"/><br>
+	<table width="500" border>
+		<tr><th>ID</th></tr>
+	</table>
+</body>
+<script type="text/javascript">
+/*
+ 회원 ID : [  ]
+ 회원명 : [  ]
+    [등록]
+ 번호 아이디 회원명
+ */
+ 	var userID = document.querySelector("[name=userID]");
+	var regBtn = document.querySelector("#regBtn");
+	var table = document.querySelector("table");
+	regBtn.onclick=function() {
+		var useridVal = userID.value;
+		console.log("ID : " + useridVal);
+		console.log("회원 정보 : " + table.innerHTML);
+		table.innerHTML += "<tr><td>" + useridVal + "</td></tr>";
+	}
+
+/*
+컴퓨터부품 : [ ]
+	[등록]
+	부품리스트
+	  @@@
+	  @@
+ */
+
+
+</script>
+</html>

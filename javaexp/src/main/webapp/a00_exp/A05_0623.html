@@ -3,6 +3,11 @@
 <head>
 <meta charset="EUC-KR">
 <title> A05_0623 </title>
+<style type="text/css">
+	/* td의 정렬을 중앙으로 처리 속성:속성값 */
+	
+	td{text-align:center;}
+</style>
 <script type="text/javascript">
 /*
 
@@ -19,6 +24,21 @@
 	<!-- ../ : 상위 폴더로 이동 처리 -->
 	내부페이지 <a href="../../a02_html/a01_basic.html"> 내부페이지 이동 (상대경로) </a></br>
 	js함수호출 <a href="javascript:call()"> 함수호출 </a></br>
+	<!-- a href="이동할페이지" target="지정한프레임의이름"
+		 iframe name="프레임이름"
+	-->
+	<a href="A01_0615.html" target="frame01"> [6/15] </a>
+	<a href="A02_0617.html" target="frame01"> [6/17] </a>
+	<a href="A03_0621.html" target="frame01"> [6/21] </a><br>
+	<iframe name="frame01" src="A05_0623.html" width="600" height="400"></iframe><br>
+	<br>
+	물건명 : <input type="text" id="pname"/>
+	가격 : <input type="text" id="price"/>
+	<input type="button" id="regBtn" value="등록"/><br>
+	<table width="500" border>
+		<tr><th>번호</th><th>물건명</th><th>가격</th></tr>
+	</table>
+	
 </body>
 <script type="text/javascript">
 /*
@@ -55,15 +75,26 @@
 		/*  
     
     4. a 태그와 iframe의 링크연동을 기본예제를 통하여 설명하세요.
-    	<a href="a01_basic.html" target="frame01"> 초기페이지 </a>
-		<iframe name="frame01" src="a14_iframe1.html" width="200" height="150"></iframe>
     
     5. 물건명 [  ] 가격 [   ][등록] - 해당 버튼을 클릭시 마다 테이블에 물건이 추가 등록되게 처리.
     	번호  물건명 가격
     	1    @@    @@
     	
     	*/
-    		
+    		var pname = document.querySelector("#pname");
+			// [속성=속성값]으로 선택할 수 있다.
+			var price = document.querySelector("[name=price]");
+			var regBtn = document.querySelector("#regBtn");
+			var table = document.querySelector("table");
+			var cnt=1;
+			regBtn.onclick=function() {
+				var pnameVal = pname.value; // form하위 입력 객체는 .value 입력한 값을 가져올 수 있다.
+				var priceVal = price.value;
+				console.log("물건명 : " + pnameVal);
+				console.log("가격 : " + priceVal);
+				console.log("테이블 출력 내용 : " + table.innerHTML);
+				table.innerHTML += "<tr><td>" + (cnt++) + "</td><td>" + pnameVal + "</td><td>" + priceVal + "</td></tr>";
+			}
     	/*
     	
  */
