@@ -17,6 +17,12 @@
 	<table width="500" border>
 		<tr><th>ID</th></tr>
 	</table>
+	<br>
+	컴퓨터부품 : <input type="text" name="com"/>
+	<input type="button" id="regBtn2" value="등록"/><br>
+	<table name="table2" width="500" border>
+		<tr><th>부품리스트</th></tr>
+	</table>
 </body>
 <script type="text/javascript">
 /*
@@ -37,11 +43,20 @@
 
 /*
 컴퓨터부품 : [ ]
-	[등록]
-	부품리스트
-	  @@@
-	  @@
+  [등록]
+ 부품리스트
+   @@@
+   @@
  */
+	var com = document.querySelector("[name=com]");
+	var regBtn2 = document.querySelector("#regBtn2");
+	var table2 = document.querySelector("[name=table2]");
+	regBtn2.onclick=function() {
+		var comList = com.value;
+		console.log("부품 : " + comList);
+		console.log("부품 정보 : " + table2.innerHTML);
+		table2.innerHTML += "<tr><td>" + comList + "</td></tr>";
+	}
 
 
 </script>
