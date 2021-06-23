@@ -23,3 +23,67 @@
  			insert into 테이블명(컬럼1, 컬럼2..) values(데이터1, 데이터2);
  			insert into 테이블명 values(테이블 구조 순서에 따른 데이터1, 데이터2);
  */
+
+/*
+ # 복사테이블 만들기
+ 	create table 테이블명
+ 	as select * from 테이블명;
+ 	제약조건을 제외한 구조와 데이터를 모두 복사하여 새로운 테이블 생성
+ 	create table 테이블명
+ 	as select * from 테이블명 where 1=0;
+ 	제약조건을 제외한 구조만 복사하여 새로운 테이블 생성
+ 	create table 테이블명
+ 	as select 컬럼1, 컬럼2, 컬럼3 from 테이블
+ 	해당 테이블에 특정 컬럼만 지정해서 새로운 테이블 생성
+ */
+CREATE TABLE emp03
+AS SELECT * FROM emp;
+SELECT * FROM emp03;
+CREATE TABLE emp04
+AS SELECT * FROM emp WHERE 1=0;
+SELECT * FROM emp04;
+CREATE TABLE emp05
+AS SELECT ename, job, sal, deptno FROM emp;
+SELECT * FROM emp05;
+
+/*
+ # 날짜 데이터 처리
+ 	1. sysdate : 현재 날짜/시간으로 date타입 컬럼에 현재 날짜/시간 입력한다.
+ 	2. to_date('문자열데이터','문자열데이터의 입력형식') : 문자열 데이터를 지정된 입력 양식에 맞게 data타입 컬럼에 날짜/시간 입력
+ 		ex) to_date('2021/06/23','YYYY/MM/DD')
+ */
+
+-- 1. 전체 데이터 입력
+INSERT INTO emp04 values(1000,'홍길동','사원',9999,sysdate,3000,1000,10);
+SELECT * FROM emp04;
+COMMIT;
+-- 2. 특정 컬럼에 데이터 입력
+-- 		insert into 테이블명(컬럼명1, 컬럼명2...) values(데이터1, 데이터2..)
+INSERT INTO emp04(empno, ename, sal, hiredate) VALUES (1001, '마길동', 4000, to_date('2000/06/06', 'YYYY/MM/DD'));
+SELECT * FROM emp04;
+
+-- ex) 부서정보 테이블의 복사테이블을 만들고, 전체 데이터 입력과 특정 컬럼(부서번호와 부서명) 지정 데이터 입력을 처리하세요.
+CREATE TABLE dept01
+AS SELECT * FROM dept;
+INSERT INTO dept01 values(50,'SALES2','LONDON');
+INSERT INTO dept01(deptno, dname) values(60,'SALES3');
+SELECT * FROM dept01;
+
+/*
+ 3. null 데이터 처리
+ 	1) 명시적으로 null을 선언해서 데이터 처리.
+ 	2) 컬럼 지정시 해당 null을 선언할 컬럼을 지정하지 않음.
+ */
+
+INSERT INTO dept01 values(51,NULL,'LONDON');
+INSERT INTO dept01(deptno, loc) values(52, '서울 강남');
+SELECT * FROM dept01;
+
+-- ex) 사원정보와 부서정보를 혼합 테이블 emp_dept를 복사테이블로 만들고, null을 이용해서 입력한 데이터와 컬럼을 통해 자동 null 처리된 데이터를 입력하세요.
+CREATE TABLE emp_dept
+AS SELECT *
+FROM emp (
+	AS SELECT *
+	FROM dept) a, dept d;
+SELECT a.emp = d.dept
+FROM emp_dept;
