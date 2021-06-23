@@ -67,6 +67,40 @@ SELECT *
 FROM (
 	SELECT deptno, ename, empno, sal
 	FROM emp
-	WHERE sal BETWEEN 3000 AND 4000) a,
-	dept b
+	WHERE sal BETWEEN 3000 AND 4000) a, dept b
 WHERE a.deptno = b.deptno;
+
+SELECT *
+FROM emp;
+-- # 테이블 subquery 연습예제
+-- 1. 연봉이 3000이상인 사원정보 테이블1, 부서테이블2 join하여 사원명, 연봉, 부서명, 부서위치 출력.
+SELECT ename, sal, dname, loc
+FROM (
+	SELECT *
+	FROM emp
+	WHERE sal >= 3000) e, dept d
+WHERE e.deptno = d.deptno;
+
+-- 2. 부서별 최근입사자 테이블1, 사원테이블2, 부서테이블3 join하여 부서명 사원명 입사일
+-- 공통 컬럼 일때는 반드시 테이블 alias 이름을 설정한다.
+-- 개별 컬럼 일때는 alias를 생략 가능하다.
+-- 테이블간의 join은 공통 컬럼을 파악하여 해당 컬럼간의 join을 처리한다.
+SELECT dname, ename, b.hiredate
+FROM (
+	SELECT deptno, max(hiredate) hiredate
+	FROM emp
+	GROUP BY deptno) a, emp b, dept d
+WHERE a.deptno = b.deptno
+AND a.hiredate = b.hiredate
+AND b.deptno = d.deptno;
+
+-- 3. 분기별 최고급여자 테이블1, 사원테이블2
+-- 		분기   사원명    급여
+SELECT part, ename, b.sal
+FROM (
+	SELECT to_char(hiredate,'Q') part, max(sal) sal
+	FROM emp
+	GROUP BY to_char(hiredate,'Q')) a, emp b
+WHERE a.part = to_char(b.hiredate,'Q')
+AND a.sal = b.sal
+ORDER BY part;
