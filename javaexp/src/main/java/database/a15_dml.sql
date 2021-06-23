@@ -22,6 +22,14 @@
  		1) 기본 구문
  			insert into 테이블명(컬럼1, 컬럼2..) values(데이터1, 데이터2);
  			insert into 테이블명 values(테이블 구조 순서에 따른 데이터1, 데이터2);
+ 	4. 다중 행 입력
+ 		1) 데이터를 하나의 테이블에 여러 행을 한 번에 입력하는 query를 말한다.
+ 		2) 형식
+ 			- insert 명령문에서 서버Query로 다른 테이블에서 조회해와서 입력 처리.
+ 			- insert 명령문에 의해 한 번에 여러 행을 동시에 입력.
+ 			- 기타 형식
+ 				insert all
+ 				first insert
  */
 
 /*
@@ -81,9 +89,50 @@ SELECT * FROM dept01;
 
 -- ex) 사원정보와 부서정보를 혼합 테이블 emp_dept를 복사테이블로 만들고, null을 이용해서 입력한 데이터와 컬럼을 통해 자동 null 처리된 데이터를 입력하세요.
 CREATE TABLE emp_dept
-AS SELECT *
-FROM emp (
-	AS SELECT *
-	FROM dept) a, dept d;
-SELECT a.emp = d.dept
-FROM emp_dept;
+AS SELECT e.*, dname, loc
+FROM emp e, dept d
+WHERE e.deptno = d.deptno;
+SELECT * FROM emp_dept;
+INSERT INTO emp_dept values(7999, '홍길동', '사원', 7782, sysdate, 1000, NULL, 60, '인사팀', '강남');
+INSERT INTO emp_dept(empno, ename, deptno, dname) values(7888, '마길동', 70, '방배동');
+SELECT * FROM emp_dept;
+
+-- ex) 부서별 최고, 최저, 평균급여로 복사테이블(emp_statics)을 만들고 null 명시 및 컬럼 지정 null 처리하세요.
+CREATE TABLE emp_statics
+AS SELECT deptno, max(sal) msal, min(sal) isal, avg(sal) asal
+FROM emp
+GROUP BY deptno;
+SELECT * FROM emp_statics;
+INSERT INTO emp_statics values(40, NULL, 1000, NULL);
+INSERT INTO emp_statics(deptno, asal) values(50, 3000.27);
+
+SELECT * FROM dept;
+-- 1. 전체 컬럼 입력
+-- insert into 테이블명
+-- subquery
+-- 2. 지정된 컬럼 입력
+-- insert into 테이블명(컬럼1, 컬럼2...)
+-- 해당 컬럼의 갯수와 type에 맞는 subquery
+SELECT * FROM emp01;
+INSERT INTO emp01
+SELECT * FROM emp
+WHERE sal BETWEEN 3000 AND 5000;
+INSERT INTO emp01(deptno, hiredate)
+SELECT deptno, max(hiredate)
+FROM emp
+GROUP BY deptno;
+SELECT * FROM emp01;
+
+-- ex1) emp의 구조만 복사된 emp10 복사테이블을 만들고 emp테이블에서 부서번호가 10인 데이터를 subquery로 emp10에 입력하세요.
+CREATE TABLE emp10
+AS SELECT * FROM emp WHERE 1=0;
+SELECT * FROM emp10;
+INSERT INTO emp10
+SELECT * FROM emp
+WHERE deptno = 10;
+
+-- ex2) emp 테이블에서 직책별 최고급여자를 emp10 테이블에 입력하세요.
+INSERT INTO emp10(job, sal)
+SELECT job, max(sal)
+FROM emp
+GROUP BY job;
