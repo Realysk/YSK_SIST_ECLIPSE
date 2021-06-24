@@ -6,15 +6,25 @@
 <style type="text/css">
 /*
  # CSS 선언
- 	1. 선택자 : js에서 사용하는 아이디, 태그, 클래스, [속성=속성값], 속성과 속성값으로 적용할 내용을 상단에
+ 	1. 선택자 : js에서 사용하는 아이디, 태그, 클래스, [속성=속성값], 속성과 속성값으로 적용할 내용을 상단에 선언.
+ 		- .클래스명 {속성:속성값}
  	2. 속성과 속성값 : 선택자에 의해서 지정된 태그는 속성과 속성값에 의해서 적용이 된다.
  		- margin : 여백
  		- padding : 글자/내용과 border와 사이
+ 			ex) html, body {margin:10px; padding:10px; border:10px solid red;}
  		- height : 높이
  		- width : 넓이
  		- background-color : 배경 색상
  		- float : 순서 정렬을 해당 방향으로 처리
+ 		- clear : 위에 순서 정렬 float의 설정을 취소 처리 하는 옵션
 */
+
+html, body {margin:0px; padding:0px; height:100%;}
+.header {width:100%; height:15%; background:yellow;}
+.nav {width:15%; height:70%; background:orange; float:left;}
+.section {width:70%; height:70%; float:left; background:olivedrab;}
+.aside {width:15%; height:70%; float:left; background:orange;}
+.footer {width:100%; height:15%; clear:both; background:plum;}
 
 </style>
 
@@ -44,10 +54,10 @@
 </script>
 </head>
 <body>
-	<header class="header"> 헤더부분 </header>
-	<nav class="nav"> 메뉴이동처리 (navigation) </nav>
-	<section class="section"> section 부분 처리(문서 장/절) </section>
-	<aside class="aside"> aside(본문에서 약간 벗어난 노트나 팁) </aside>
+	<header class="header"> 헤더 부분 </header>
+	<nav class="nav"> 메뉴 이동 처리 (navigation) </nav>
+	<section class="section"> section 부분 처리 (문서 장/절) </section>
+	<aside class="aside"> aside (본문에서 약간 벗어난 노트나 팁) </aside>
 	<footer class="footer"> 꼬리말 영역 </footer>
 </body>
 <script type="text/javascript">
