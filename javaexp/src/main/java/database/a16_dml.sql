@@ -75,3 +75,23 @@ WHERE empno = 7499;
 SELECT * FROM emp03;
 
 -- ex) 1사분기 최고급여를 사원명 ALLEN의 급여로 변경하세요.
+SELECT max(sal)
+FROM emp03
+WHERE to_char(hiredate,'Q') = '1';
+-- cf)
+SELECT to_char(hiredate,'Q'), max(sal)
+FROM emp03
+GROUP BY to_char(hiredate,'Q')
+HAVING max(sal) >= 2000;
+-- having 그룹함수를 조회 조건으로 할 때 활용된다.
+
+SELECT ename, sal
+FROM emp03
+WHERE ename = 'ALLEN';
+UPDATE emp03
+	SET sal = (
+		SELECT max(sal)
+		FROM emp03
+		WHERE to_char(hiredate,'Q')='1')
+WHERE ename = 'ALLEN';
+SELECT * FROM emp;
