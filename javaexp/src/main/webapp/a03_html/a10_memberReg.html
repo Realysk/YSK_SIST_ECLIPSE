@@ -14,33 +14,131 @@
       	[회원가입] [다시입력]
  */
  
-	// 중복 함수
+	// 중복 함수 (유효성 체크)
 	function ckDupl() {
-		alert("함수 호출");
+		// alert("함수 호출");
 		// 입력된 id 확인
 		var idVal = document.querySelector("[name=id]").value;
-		alert("입력한 ID : " + idVal);
-		// 임의로 DB에 himan이 있다고 가능할 때
-		if(idVal == "himan") {
-			alert("등록된 ID가 있습니다.");
+		// alert("입력한 ID : " + idVal);
+		// 글자 수에 대한 check
+		// idVal.length : 글자 수 확인
+		/*
+			var len = idVal.length;
+			if(len>=8 && len<=16) {
+				// 유효
+			} else {
+				alert("아이디는 8~16자로 설정합니다.");
+			}
+		*/
+		if(idVal != "") {
+			// 임의로 DB에 himan이 있다고 가능할 때
+			if(idVal == "himan") {
+				alert("등록된 ID가 있습니다.");
+			} else {
+				alert("해당 ID는 등록 가능합니다.");
+			}
 		} else {
-			alert("해당 ID는 등록 가능합니다.");
+			alert("ID를 입력하세요.");
 		}
 	}
+	
+	// 중복 함수 (유효성 체크)
+	function ckPass() {
+		// name=pass와 name=passfrm의 값을 비교하여 동일여부를 조건으로 나타낸다.
+		// 입력한 값을 확인..
+		var passVal = document.querySelector("[name=pass]").value;
+		var passfrmVal = document.querySelector("[name=passfrm]").value;
+		if(passVal != "") {
+			if(passVal == passfrmVal) {
+				alert("PW가 일치합니다.");
+			} else {
+				alert("PW가 일치하지 않습니다, 다시 입력해 주세요.");
+			}
+		} else {
+			alert("PW를 입력하세요.");
+		}
+	}
+	
+	function emailCk() {
+		alert("이메일 선택");
+		// 1. 첫 번째 email 내용
+		
+		// 2. 두 번째 email 내용
+		
+		// 3. 선택한 email
+	}
+	
 </script>
 </head>
 <body>
-	<h1 align="center"> 회원가입 </h1>
+	<h1 align="center"> # 회원 가입 # </h1>
 	<form> <!-- form으로 전체 내용을 감싸면 하위에 있는 모든 요소객체의 입력값을 전송할 수 있다. -->
 	<!-- width : 전체 화면에서 해당 테이블의 비율을 설정할 수 있다. -->
 		<table width="100%" border>
 			<!-- 2개의 열을 확보한 상황에서 th부분에 대하여 넓이를 30% 확보 처리 (테이블 전체에서 30%를 의미한다.) -->
+			
 			<tr>
-				<th width="30%"> ID </th>
+				<th width="20%"> ID </th>
 					<td>
 						<input type="text" name="id"/>
 						<input type="button" onclick="ckDupl()" value="중복확인"/>
 						<!-- 서버에 있는 데이터에 ID가 있는지 여부를 확인할 때 쓰인다. -->
+					</td>
+			</tr>
+			
+			<!--
+				ex) 이전에 입력한 비밀번호와 비밀번호 확인 내용이 동일한지 여부를 확인
+					function ckPass() {
+						// name=pass와 name=passfrm의 값을 비교하여 동일여부를 조건으로 나타낸다.
+						var passVal = document.querySelector("[name=pass]");
+					}
+			 -->
+			<tr>
+				<th> PW </th>
+					<td>
+						<input type="password" name="pass"/>
+					</td>
+			</tr>
+			
+			<tr>
+				<th> PW 확인 </th>
+					<td>
+						<input type="password" name="passfrm"/>
+						<input type="button" onclick="ckPass()" value="동일여부확인"/>
+					</td>
+			</tr>
+			
+			<tr>
+				<th> 이름 </th>
+					<td>
+						<input type="text" name="name"/>
+					</td>
+			</tr>
+			
+			<tr>
+				<th> 성별 </th>
+				<!-- radio의 경우 default로 checked으로 처리 가능하다. -->
+					<td>
+						<input type="radio" name="gender" value="남자" checked/> 남자
+						<input type="radio" name="gender" value="여자"/> 여자
+					</td>
+			</tr>
+			
+			<tr>
+				<th> 이메일 </th>
+					<td>
+						<input type="text" name="email1"/> @
+						<input type="text" name="email2"/>
+						<!-- 
+							select를 변경했을 때 호출할 함수 지정.
+							onchange="함수()"
+						-->
+						<select onchange="emailCk()">
+							<option> 직접 입력 </option>
+							<option> naver.com </option>
+							<option> daum.net </option>
+							<option> gmail.com </option>
+						</select>
 					</td>
 			</tr>
 		</table>
