@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a08_login </title>
+<script type="text/javascript">
+/*
+	ex) form 태그와 요소태그를 활용하여 아래와 같은 내용을 처리하세요.
+    	로그인
+    	ID:[    ]          결과
+    	패스워드:[   ]  ==>  로그인 아이디:@@@ 로그인 패스워드:@@
+      	[로그인]
+      	
+    # 테이블 안에 넣을 것
+      	회원가입
+      	아이디 [   ] [중복확인]
+      	패스워드 [   ]
+      	성별 ()남자 ()여자
+      	휴대폰 ()SKT ()KT ()LGU+ ()알뜰폰 [010/011/070]-[   ]-[   ]
+      	[회원가입] [다시입력]
+ */
+
+
+</script>
+</head>
+<body>
+	<h3 align="center"> 로그인 </h3>
+	<form action="a09_result.jsp">
+		<table align="center" border>
+			<tr>
+				<th> ID </th>
+					<td>
+						<input type="text" name="id"/>
+					</td>
+			</tr>
+			
+			<tr>
+				<th> PW </th>
+					<td>
+						<input type="password" name="pass"/>
+					</td>
+			</tr>
+			<!--
+				td colspan = "2" : col을 span(확대하다) td를 합치는 처리를 한다.
+				style="text-align:center" : inline으로 정렬을 중앙 정렬 처리. 
+			 -->
+			 <tr>
+			 	<td colspan="2" style="text-align:center">
+			 		<input type="submit" value="로그인">
+			 	</td>
+			 </tr>
+		</table>
+	
+	</form>
+</body>
+<script type="text/javascript">
+/*
+ 
+ */
+
+
+</script>
+</html>
