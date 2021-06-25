@@ -4,12 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> a04_receive </title>
+<title> A06_loginReceive </title>
 </head>
 <body>
-	<h1> 등록 데이터 </h1>
-	<h2> 이름 : ${param.name} </h2>
-	<h2> 나이 : ${param.age} </h2>
-	<h2> 지역 : ${param.loc} </h2> 
+	<h1> 로그인 결과 </h1>
+	<h2> ID : ${param.id} </h2>
+	<h2> PASSWORD : ${param.pass} </h2>
 </body>
 </html>
