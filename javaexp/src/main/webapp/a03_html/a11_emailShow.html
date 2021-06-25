@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a11_emailShow </title>
+<script type="text/javascript">
+/*
+ex) [    ] @ [    ] [메일 선택] => 선택시 바로 밑에 출력 처리
+ */
+	function inputEmail(obj) {
+		var email01 = document.querySelector("[name=email01]");
+		var email02 = document.querySelector("[name=email02]");
+		if(email02.value != "직접 입력")
+			email02.value = obj.value;
+		var h3 = document.querySelector("h3");
+		h3.innerText = email01.value + "@" + email02.value;
+	}
+
+</script>
+</head>
+<body>
+	<input type="text" name="email01"/> @
+	<input type="text" name="email02"/>
+	<select onchange="inputEmail(this)">
+		<option> 직접 입력 </option>
+		<option> naver.com </option>
+		<option> gmail.com </option>
+		<option> daum.net </option>
+	</select>
+	<h3></h3>
+</body>
+<script type="text/javascript">
+/*
+ 
+ */
+
+
+</script>
+</html>

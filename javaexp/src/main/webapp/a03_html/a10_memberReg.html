@@ -59,13 +59,25 @@
 		}
 	}
 	
-	function emailCk() {
-		alert("이메일 선택");
-		// 1. 첫 번째 email 내용
-		
-		// 2. 두 번째 email 내용
-		
+	function emailCk(obj) {
+		// alert("이메일 선택 : " + obj.value);
+		// 1. 첫 번째 email1 내용
+		var email1Val = document.querySelector("[name=email1]").value;
+		// 2. 두 번째 email2 내용
+		var email2Obj = document.querySelector("[name=email2]");
+		// 선택한 메일 서버주소를 email2의 value 값에 할당
+		if(obj.value != "직접 입력")
+			email2Obj.value = obj.value;
 		// 3. 선택한 email
+		// span인 form하위의 요소객체가 아니라 출력내용은 innerText를 활용한다.
+		// 그래서 위에 입력하고 선택한 최종 메일주소를 해당 내용으로 출력한다.
+		document.querySelector("#showMail").innerText = "입력한 Email : " + email1Val + "@" + email2Obj.value;
+	}
+	
+	function callAddress() {
+		window.open("","","width=300,height=300");
+		win.moveTo(400,400);
+		win.document.write("<h3>주소선택</h3>");
 	}
 	
 </script>
@@ -132,13 +144,47 @@
 						<!-- 
 							select를 변경했을 때 호출할 함수 지정.
 							onchange="함수()"
+							함수(this) : 이벤트가 처리된 객체 자체를 함수의 매개변수로 전달한다.
 						-->
-						<select onchange="emailCk()">
+						<select onchange="emailCk(this)">
 							<option> 직접 입력 </option>
 							<option> naver.com </option>
 							<option> daum.net </option>
 							<option> gmail.com </option>
 						</select>
+						<span id="showMail">  </span>
+					</td>
+			</tr>
+			
+			<tr>
+				<th> 주소 </th>
+					<td>
+						<input type="text" name="address"/>
+						<input type="button" value="주소 찾기" onclick="callAddress()"/>
+					</td>
+			</tr>
+			
+			<tr>
+				<th> 상세 주소 </th>
+					<td>
+						<input type="text" name="detail_addr"/>
+					</td>
+			</tr>
+			
+			<tr>
+				<th> 휴대폰 </th>
+				<!-- radio의 경우 default로 checked으로 처리 가능하다. -->
+					<td>
+						<input type="radio" name="phone" value="SKT" checked/> SKT
+						<input type="radio" name="phone" value="KT"/> KT
+						<input type="radio" name="phone" value="LGU"/> LGU+ <br>
+						<select name="phone1">
+							<option> 010 </option>
+							<option> 070 </option>
+							<option> 011 </option>
+						</select>
+						<input type="text" name="phone2"/>-
+						<input type="text" name="phone3"/>
 					</td>
 			</tr>
 		</table>
