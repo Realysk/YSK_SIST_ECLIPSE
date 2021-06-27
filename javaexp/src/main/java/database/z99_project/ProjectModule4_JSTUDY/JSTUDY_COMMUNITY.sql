@@ -77,9 +77,17 @@ INSERT INTO JSCOM_SEARCH VALUES ('서울 노원구', 6);
 SELECT jsLoc "검색 지역", writeNum "게시물 번호"
 FROM JSCOM_SEARCH;
 
+-- 각 게시판 DB와 검색 내역 DB의 공통으로 적용한 컬럼 : 게시물 번호 (writeNum)
+
 -- SQL (연관 관계 필수 - join)
--- 작성자가 'byeman'인 사용자의 게시물 정보 출력
+-- 작성자가 'byeman'인 사용자의 자유 게시판 게시물 정보 출력
 SELECT *
 FROM JSCOM_FREE jf, JSCOM_SEARCH js
 WHERE jf.writeNum=js.writeNum
+AND writer = 'byeman';
+
+-- 작성자가 'byeman'인 사용자의 질문 답변 게시판 게시물 정보 출력
+SELECT *
+FROM JSCOM_QNA jq, JSCOM_SEARCH js
+WHERE jq.writeNum=js.writeNum
 AND writer = 'byeman';
