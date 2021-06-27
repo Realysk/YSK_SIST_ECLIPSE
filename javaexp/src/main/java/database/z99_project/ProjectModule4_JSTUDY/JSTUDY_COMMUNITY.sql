@@ -73,6 +73,10 @@ INSERT INTO JSCOM_SEARCH VALUES ('서울 종로구', 3);
 INSERT INTO JSCOM_SEARCH VALUES ('서울 도봉구', 2);
 INSERT INTO JSCOM_SEARCH VALUES ('서울 강북구', 4);
 INSERT INTO JSCOM_SEARCH VALUES ('서울 노원구', 6);
+INSERT INTO JSCOM_SEARCH VALUES ('서울 광진구', 10);
+INSERT INTO JSCOM_SEARCH VALUES ('부산 진구', 9);
+INSERT INTO JSCOM_SEARCH VALUES ('경기도 의정부', 7);
+INSERT INTO JSCOM_SEARCH VALUES ('경기도 남양주', 8);
 
 SELECT jsLoc "검색 지역", writeNum "게시물 번호"
 FROM JSCOM_SEARCH;
@@ -80,14 +84,23 @@ FROM JSCOM_SEARCH;
 -- 각 게시판 DB와 검색 내역 DB의 공통으로 적용한 컬럼 : 게시물 번호 (writeNum)
 
 -- SQL (연관 관계 필수 - join)
+
 -- 작성자가 'byeman'인 사용자의 자유 게시판 게시물 정보 출력
-SELECT *
-FROM JSCOM_FREE jf, JSCOM_SEARCH js
-WHERE jf.writeNum=js.writeNum
+SELECT jf.*
+FROM JSCOM_FREE jf, JSCOM_SEARCH js2
+WHERE jf.writeNum=js2.writeNum
+AND writer = 'byeman';
+
+-- 작성자가 'byeman'인 사용자의 스터디 게시판 게시물 정보 출력
+SELECT js.*
+FROM JSCOM_STUDY js, JSCOM_SEARCH js2
+WHERE js.writeNum=js2.writeNum
 AND writer = 'byeman';
 
 -- 작성자가 'byeman'인 사용자의 질문 답변 게시판 게시물 정보 출력
-SELECT *
-FROM JSCOM_QNA jq, JSCOM_SEARCH js
-WHERE jq.writeNum=js.writeNum
+SELECT jq.*
+FROM JSCOM_QNA jq, JSCOM_SEARCH js2
+WHERE jq.writeNum=js2.writeNum
 AND writer = 'byeman';
+
+-- 작성자가 'byeman'인 사용자의 모든 게시판 게시물 정보 출력
