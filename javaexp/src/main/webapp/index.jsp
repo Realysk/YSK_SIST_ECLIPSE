@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title> index </title>
 <style type="text/css">
 	h3{background-color:blue; color:yellow;}
 </style>
