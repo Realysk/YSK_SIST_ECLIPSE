@@ -3,13 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <title> A06_0625 </title>
-<script type="text/javascript">
+<style type="text/css">
 /*
-	
+    5. 시멘틱 태그를 이용하여 아래와 같은 화면 구성을 css로 구현하세요
+    	해당 비율과 적절한 배경색으로 설정하세요. 
+    	iframe을 활용하여 왼쪽 메뉴클릭시, 메인메뉴가 변경되게 처리
+   		---------------------------
+   		타이틀 상하 10%
+   		---------------------------
+   		상단 메뉴 상하 10%
+   		---------------------------
+   		왼쪽메뉴| 
+   		왼쪽메뉴| 
+  		왼쪽메뉴|메인메뉴 70% (상하/좌우 모두)
+   		30%   |           
+  		왼쪽메뉴|           
+  		왼쪽메뉴|
+   		---------------------------
+   		하단 메뉴 상하 10%	
  */
-
-
-</script>
+ 
+ html, body {margin:0px; padding:0px; height:100%; text-align:center;}
+ .header{width:100%; height:10%; background:yellow;} /* .클래스명 */
+ .nav1{width:100%; height:10%; background:pink;}
+ .nav2{width:30%; height:70%; float:left; background:yellow;}
+ .section{width:70%; height:70%; float:left; background:plum;}
+ .footer{width:100%; height:10%; float:left; clear:both; background:gray;}
+</style>
 </head>
 <body>
 <!-- 
@@ -57,14 +77,12 @@
     	패스워드:[   ]  ==>  로그인 아이디:@@@ 로그인 패스워드:@@
       	[로그인]
  	
-    -->
     	<form action="A06_loginReceive.jsp">
  		<h2> 로그인 </h2>
  		ID : <input type="text" name="id"/><br>
  		PASSWORD : <input type="password" name="pass"/><br>
  		<input type="submit" value="로그인"/>
  		</form>
-    <!--	
     	
     5. 시멘틱 태그를 이용하여 아래와 같은 화면 구성을 css로 구현하세요
     	해당 비율과 적절한 배경색으로 설정하세요. 
@@ -84,7 +102,19 @@
    		하단 메뉴 상하 10%
    		
    		-->
-   			
+   			<header class="header"> 헤더 (제목) </header>
+   			<nav class="nav1"> 상단 메뉴 </nav>
+   			<nav class="nav2"> 좌측 메뉴
+   				<ul>
+   					<li><a href="a0625_sub1.html" target="frame01"> 로그인 </a></li>
+   					<li><a href="a0625_sub2.html" target="frame01"> 물품 </a></li>
+   					<li><a href="a0625_sub3.html" target="frame01"> 관리자 </a></li>
+   				</ul>
+   			</nav>
+   			<section class="section">
+   				<iframe name="frame01" src="a0625_sub1.html" width="100%" height="100%"></iframe>
+   			</section>
+   			<footer class="footer"> 하단 메뉴 </footer>
    		<!--
  -->
 </body>

@@ -7,10 +7,8 @@
 /*
 
  */
-function ansChk() {
-	var ansVal = document.querySelector("[name=answer]").value;
-}
 
+ 
 </script>
 </head>
 <body>
@@ -22,14 +20,31 @@ function ansChk() {
  			- type이 check일 경우 중복 선택이 가능하다.
  		관심사 : <input type="radio" name="hobby/><br>
 			- type이 radio일 경우 단일 선택으로만 가능하다.
+			
+		-->
+			<h2 onclick="ckshow01()"> 취미 </h2>
+			<input type="checkbox" name="hobby" value="독서"/> 독서
+			<input type="checkbox" name="hobby" value="여행"/> 여행
+			<input type="checkbox" name="hobby" value="음악"/> 음악
+			<input type="checkbox" name="hobby" value="운동"/> 운동
+			<input type="checkbox" name="hobby" value="게임"/> 게임 <br>
+			<h2 onclick="ckshow02()"> 지역 </h2>
+			<input type="radio" name="loc" value="서울/경기"/> 서울/경기
+			<input type="radio" name="loc" value="제주"/> 제주
+			<input type="radio" name="loc" value="경상"/> 경상
+			<input type="radio" name="loc" value="전라"/> 전라
+			<input type="radio" name="loc" value="충청"/> 충청
+			<input type="radio" name="loc" value="강원"/> 강원 <br>
+		<!--
 			 		
  	2. 다음 화면을 통해 결과를 출력하세요.
  		[임의의 수] * [임의의 수] = [입력할 수]
  		[정답 여부]
  	
  		-->
+ 			<h2> 계산 </h2>
  			<form>
- 				[임의의 수 : 5] * [임의의 수 : 4] = [입력할 수 : <input type="text" name="answer"/>]
+ 				[5] * [4] = [입력할 수 : <input type="text" name="answer"/>]
  				<input type="button" onclick="ansChk()" value="정답 여부">
  			</form>
  		<!--
@@ -48,7 +63,22 @@ function ansChk() {
 /*
 
  */
-
+ function ckshow01() {
+	// checkbox는 여러 개를 선택할 수 있는 다중 객체이므로 속성을 hobby로 처리한다.
+	var hobby = document.querySelectorAll("[name=hobby]");
+	console.log("# 선택된 값 확인 #");
+	console.log(hobby);
+	// hobby.length : 배열 객체의 갯수
+	for(var idx=0; idx<hobby.length; idx++) {
+		// hobby[idx].checked : 해당 배열 안에 checked 여부
+		// hobby[idx].value : 해당 배열 안에 value 할당 내용
+		console.log(idx + " : " + hobby[idx].checked + " : " + hobby[idx].value)
+	}
+}
+ 
+ function ansChk() {
+		var ansVal = document.querySelector("[name=answer]").value;
+	}
 
 </script>
 </html>
