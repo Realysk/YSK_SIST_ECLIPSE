@@ -103,5 +103,35 @@ SELECT * FROM emp03;
  		1) delete 명령문은 테이블에 저장된 데이터 삭제를 위한 조작어이다.
  		2) where절을 생략하면 테이블의 모든 행을 삭제한다.
  	2. 기본 형식
- 		delete from 테이블명
+ 		delete
+ 		from 테이블명
+ 		where 조건명
  */
+
+CREATE TABLE emp19
+AS SELECT * FROM emp;
+SELECT * FROM emp19;
+
+-- 이름이 'SMITH'인 데이터를 삭제 처리.
+DELETE FROM emp19
+WHERE ename = 'SMITH';
+
+-- ex1) job이 'SALESMAN'인 데이터를 삭제 하세요.
+DELETE FROM emp19
+WHERE job = 'SALESMAN';
+
+-- ex2) sal이 1000~2000 사이인 데이터를 삭제 하세요.
+DELETE FROM emp19
+WHERE sal BETWEEN 1000 AND 2000;
+
+-- ex3) 12월에 입사한 사원을 삭제 하세요.
+DELETE FROM emp19
+WHERE to_char(hiredate,'MM') = '12';
+
+-- ex4) 부서별 최고 급여자들을 삭제 하세요.
+DELETE
+FROM emp19
+WHERE (deptno, sal) IN (
+	SELECT deptno, max(sal)
+	FROM emp19
+	GROUP BY deptno);
