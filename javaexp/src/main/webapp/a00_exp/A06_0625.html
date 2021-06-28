@@ -25,22 +25,31 @@
  	
  	2. 시맨틱 태그나 div를 이용하여 화면전체를 배치 구성할 때, 사용되는 css 주요 속성과 속성값에 대하여 기술하세요.
  	
-		margin : 여백
- 		padding : 글자/내용과 border와 사이
- 			ex) html, body {margin:10px; padding:10px; border:10px solid red;}
- 		height : 높이
- 		width : 넓이
- 		background-color : 배경 색상
- 		float : 순서 정렬을 해당 방향으로 처리
- 		clear : 위에 순서 정렬 float의 설정을 취소 처리 하는 옵션
+ 		<style>
+ 			선택자{속성:속성명;}	선택자: 태그명, 태그명[속성=속성값], [속성=속성값]
+ 									 #아이디명, 	  .클래스명
+			화면 구성시 주로 사용되는 속성
+			margin : 여백
+ 			padding : 글자/내용과 border와 사이
+ 				ex) html, body {margin:10px; padding:10px; border:10px solid red;}
+ 			width : 넓이
+ 			height : 높이
+ 			background-color : 배경 색상
+ 			float : 순서 정렬을 해당 방향으로 처리 (속성값 : left, right)
+ 			clear : 위에 순서 정렬 float의 설정을 취소 하는 옵션 (clear : both;)
+ 			text-align : 글자의 정렬 처리 (속성값 : left, right, center)
  	
  	3. form 태그의 action 속성의 의미와, input type에서 submit는 어떤 역할을 하는지 기술하세요.
+ 	
+ 		action 속성 : form 태그의 하위에 있는 요소객체들 가운데, 속성 name 속성값이 있는 경우에 지정된 서버에 있는 페이지로 데이터를 전송할 때 사용된다.
  	
 		<form action "gopage.jsp"> => HTML에서 각종 정보를 입력한 뒤 submit를 누르면 해당 jsp파일로 이동
 			<input name="name" value="꿀단지"/>
 			<input name="age" value="24"/>
-			<input name="submit" value="전송"/>
+			<input type="submit" value="전송"/>
 		</form>
+		?gopage.jsp?name=꿀단지&age=24 형식의 query문으로 서버에 지정한 데이터를 전송한다.
+		<<gopage.jsp>>에서는 ${param.name} ${param.age} 형식의 jsp코드로 받을 수 있다.
  	
  	4. form 태그와 요소태그를 활용하여 아래와 같은 내용을 처리하세요.
     	로그인
