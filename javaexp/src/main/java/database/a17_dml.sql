@@ -11,6 +11,33 @@
  				update set : 수정 처리
  			when not matched then
  				inset values : 등록 처리
+ 			# 두 개의 테이블 비교 처리
+ 				MERGE INTO emp21 s -- 수정/입력 대상이 되는 테이블은 emp21
+				USING emp20 t -- emp21을 변경/입력을 위해서 조건을 처리할 테이블 emp20
+				ON (s.empno = t.empno)
+				WHEN MATCHED THEN -- emp21과 emp20 컬럼에 empno가 동일한 경우
+					UPDATE SET s.ename = t.ename, -- s 즉, emp21의 특정 컬럼을 수정
+			  				   s.job = t.job,
+			   				   s.sal = t.sal
+				WHEN NOT MATCHED THEN
+					INSERT (empno, ename, sal, deptno)
+					VALUES (t.empno, t.ename, t.sal, t.deptno);
+					-- t 즉 emp20의 특정 컬럼을 emp21의 특정에 입력 처리
+				SELECT * FROM emp21;
+			# 가상 테이블 (dual)로 외부에서 입력된 데이터가 있을 때는 update 처리, 없을 때는 insert 처리.
+				// 사원 정보를 입력할 때 key인 empno가 있을 때는 나머지 정보는 수정 처리, 없을 때는 입력 처리.
+				MERGE INTO emp36 s
+				USING dual
+				ON (s.empno = 8001) -- 외부에서 form으로 데이터를 입력한 경우
+				WHEN MATCHED THEN
+					UPDATE SET s.ename = '마길동',
+							   s.job = '사원'
+							   s.sal = 5000
+							   s.deptno = 10
+				WHEN NOT MATCHED THEN
+					INSERT (empno, ename, job, sal, deptno)
+					VALUES (8001, '마길동', '사원', 5000, 10);
+
  */
 
 CREATE TABLE emp20
@@ -85,4 +112,32 @@ WHEN MATCHED THEN
 WHEN NOT MATCHED THEN
 	INSERT (empno, ename, job, hiredate, sal, deptno)
 	VALUES (o.empno, o.ename, o.job, sysdate, o.sal, o.deptno);
+SELECT * FROM emp23;
+
+MERGE INTO emp23 s
+USING dual
+ON (s.empno = 8001) -- 외부에서 form으로 데이터를 입력한 경우
+WHEN MATCHED THEN
+	UPDATE SET s.ename = '마길동',
+		   	   s.job = '사원',
+		       s.sal = 5000,
+		       s.deptno = 10
+WHEN NOT MATCHED THEN
+	INSERT (empno, ename, job, sal, deptno)
+	VALUES (8001, '마길동', '사원', 5000, 10);
+SELECT * FROM emp23;
+
+-- ex) 변경/입력 대상 테이블은 emp23이고 데이터 9001, 마길동, 신입, 현재일입력, 3500, 30을 입력/수정 하세요. (입력과 수정된 내용을 확인해주세요.)
+MERGE INTO emp23 s
+USING dual
+ON (s.empno = 9001)
+WHEN MATCHED THEN
+	UPDATE SET s.ename = '마길동',
+		   	   s.job = '신입',
+		       s.hiredate = sysdate,
+		       s.sal = 3500,
+		       s.deptno = 30
+WHEN NOT MATCHED THEN
+	INSERT (empno, ename, job, hiredate, sal, deptno)
+	VALUES (9001, '마길동', '신입', sysdate , 3500, 30);
 SELECT * FROM emp23;
