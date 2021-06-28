@@ -63,8 +63,8 @@ FROM JSCOM_QNA;
 -- JSTUDY 커뮤니티 : 검색 내역
 
 CREATE TABLE JSCOM_SEARCH (
-	jsLoc varchar2(300), -- 주요 키워드
-	writeNum number -- 검색 지역
+	jsLoc varchar2(300), -- 검색 지역
+	writeNum number -- 게시물 번호
 );
 
 INSERT INTO JSCOM_SEARCH VALUES ('서울 중랑구', 1);
