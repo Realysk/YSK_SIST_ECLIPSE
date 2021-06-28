@@ -11,6 +11,6 @@
 	<h1> 등록 데이터 </h1>
 	<h2> 이름 : ${param.name} </h2>
 	<h2> 나이 : ${param.age} </h2>
-	<h2> 지역 : ${param.loc} </h2> 
+	<h2> 지역 : ${param.loc} </h2>
 </body>
 </html>
