@@ -95,3 +95,13 @@ UPDATE emp03
 		WHERE to_char(hiredate,'Q')='1')
 WHERE ename = 'ALLEN';
 SELECT * FROM emp;
+
+SELECT * FROM emp03;
+/*
+ # 데이터 삭제
+ 	1. 개요
+ 		1) delete 명령문은 테이블에 저장된 데이터 삭제를 위한 조작어이다.
+ 		2) where절을 생략하면 테이블의 모든 행을 삭제한다.
+ 	2. 기본 형식
+ 		delete from 테이블명
+ */
