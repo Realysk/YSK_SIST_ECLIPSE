@@ -3,13 +3,13 @@
 <head>
 <meta charset="EUC-KR">
 <title> A07_0628 </title>
-<script type="text/javascript">
+<style type="text/css">
 /*
 
  */
 
  
-</script>
+</style>
 </head>
 <body>
 <!-- 
@@ -22,19 +22,27 @@
 			- type이 radio일 경우 단일 선택으로만 가능하다.
 			
 		-->
-			<h2 onclick="ckshow01()"> 취미 </h2>
+		<!--
+			A07_0628.html?hobby=독서&hobby=음악&loc=충청 전송 시,
+			checkbox인 경우 동일한 이름으로 여러가지 데이터가 전송을 하지만
+			radio인 경우 checked된 단일 값만 전송이 된다.
+		-->
+		<form>
+			<h2 onclick="ckshow01()"> 취미 (선택내용 확인) </h2>
 			<input type="checkbox" name="hobby" value="독서"/> 독서
 			<input type="checkbox" name="hobby" value="여행"/> 여행
 			<input type="checkbox" name="hobby" value="음악"/> 음악
 			<input type="checkbox" name="hobby" value="운동"/> 운동
 			<input type="checkbox" name="hobby" value="게임"/> 게임 <br>
-			<h2 onclick="ckshow02()"> 지역 </h2>
+			<h2 onclick="ckshow02()"> 지역 (선택내용 확인) </h2>
 			<input type="radio" name="loc" value="서울/경기"/> 서울/경기
 			<input type="radio" name="loc" value="제주"/> 제주
 			<input type="radio" name="loc" value="경상"/> 경상
 			<input type="radio" name="loc" value="전라"/> 전라
 			<input type="radio" name="loc" value="충청"/> 충청
 			<input type="radio" name="loc" value="강원"/> 강원 <br>
+			<input type="submit"/>
+		</form>
 		<!--
 			 		
  	2. 다음 화면을 통해 결과를 출력하세요.
@@ -42,11 +50,14 @@
  		[정답 여부]
  	
  		-->
- 			<h2> 계산 </h2>
- 			<form>
- 				[5] * [4] = [입력할 수 : <input type="text" name="answer"/>]
- 				<input type="button" onclick="ansChk()" value="정답 여부">
- 			</form>
+ 		<form>
+ 		 	<h2> 구구단 </h2>
+ 		 	<input type="text" name="num01" size="1" style="text-align:center;"/> X 
+ 		 	<input type="text" name="num02" size="1" style="text-align:center;"/> = 
+ 		 	<input type="text" name="result" size="2" style="text-align:center;"/>
+ 		 	<input type="button" id="resultCfm" value="결과 확인"/>
+ 		 	<!-- 결과 확인 버튼 클릭 시, 정답 여부 alert로 출력 -->
+ 		</form>
  		<!--
  	
  	3. 회의 등록 여부를 확인하는 프로그램을 작성하세요.
@@ -63,22 +74,62 @@
 /*
 
  */
- function ckshow01() {
-	// checkbox는 여러 개를 선택할 수 있는 다중 객체이므로 속성을 hobby로 처리한다.
-	var hobby = document.querySelectorAll("[name=hobby]");
-	console.log("# 선택된 값 확인 #");
-	console.log(hobby);
-	// hobby.length : 배열 객체의 갯수
-	for(var idx=0; idx<hobby.length; idx++) {
-		// hobby[idx].checked : 해당 배열 안에 checked 여부
-		// hobby[idx].value : 해당 배열 안에 value 할당 내용
-		console.log(idx + " : " + hobby[idx].checked + " : " + hobby[idx].value)
+	function ckshow01() {
+		// checkbox는 여러 개를 선택할 수 있는 다중 객체이므로 속성을 hobby로 처리한다.
+		var hobby = document.querySelectorAll("[name=hobby]");
+		console.log("# 선택된 값 확인 #");
+		console.log(hobby);
+		// hobby.length : 배열 객체의 갯수
+		for(var idx=0; idx<hobby.length; idx++) {
+			// hobby[idx].checked : 해당 배열 안에 checked 여부
+			// hobby[idx].value : 해당 배열 안에 value 할당 내용
+			console.log(idx + " : " + hobby[idx].checked + " : " + hobby[idx].value)
+		}
 	}
-}
- 
- function ansChk() {
-		var ansVal = document.querySelector("[name=answer]").value;
+	
+	function ckshow02() {
+		var loc = document.querySelectorAll("[name=loc]");
+		for(var idx=0; idx<loc.length; idx++) {
+			console.log(idx + " : " + loc[idx].checked + " : " + loc[idx].value)
+			}
 	}
-
+	
+	// 랜덤 구구단 함수
+	
+	// 첫 번째 임의의 수
+	var num01Obj = document.querySelector("[name=num01]");
+	num01Obj.value = parseInt(Math.random()*8+2);
+	// 2~9 랜덤 처리, parseInt() 문자열을 정수형으로 변환, 실수 정수로 변환.
+	// Math.floor(Math.random()*8+2);
+	
+	// 두 번째 임의의 수
+	var num02Obj = document.querySelector("[name=num02]");
+	num02Obj.value = parseInt(Math.random()*9+1);
+	
+	// 두 임의의 수의 곱
+	var resultObj = document.querySelector("[name=result]");
+	resultObj.value = (num01Obj.value * num02Obj.value);
+	
+	var resultCfm = document.querySelector("#resultCfm");
+	// 결과 확인 버튼 클릭했을 때
+	resultCfm.onclick = function() {
+		console.log("첫 번째 수 : " + num01Obj.value);
+		console.log("두 번째 수 : " + num02Obj.value);
+		console.log("입력 수 : " + resultObj.value);
+		// correct 정답
+		// num01Obj.value을 함수로 적용 처리 - parseInt(num01Obj.value)
+		var corReply = parseInt(num01Obj.value) * parseInt(num01Obj.value);
+		// js에는 + 이외에 연산자는 자동 형 변환이 된다.
+		var corReply = num01Obj.value * num02Obj.value;
+		console.log("정답 : " + corReply);
+		// js에서는 비교연산자(==)도 자동 형 변환이 일어나 숫자형 문자열과 숫자가 동일할 때 true가 된다.
+		// js에서 데이터 유형과 데이터 값을 둘 다 비교해서 확인할 때 비교연산자 ===를 사용한다.
+	    if(resultObj.value == corReply) {
+	    	alert("정답입니다!");
+	    } else {
+	        alert("오답입니다.");
+	    }
+	}
+	
 </script>
 </html>
