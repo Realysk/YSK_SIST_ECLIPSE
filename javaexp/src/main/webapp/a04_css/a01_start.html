@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a01_start </title>
+<style type="text/css">
+/*
+ # CSS 선택자
+ 	0. 선택자 : body안에 지정된 선택자로 선택되어 CSS속성을 적용하게 한다.
+ 		ex) 태그명, id명, class명
+ 	1. 전체 선택자 : *
+ 	2. 특정 태그 선택자 태그명{속성:속성값;}
+ 	3. 아이디 선택자 : #아이디명{속성:속성값;}
+ 		페이지에서 1개만 식별하여 선택할 때 주로 사용된다.
+ 	4. 클래스 선택자 : .클래스명{속성:속성값;}
+ 	5. 속성 선택자 : 태그[속성:속성값]{스타일속성:적용할값;}
+ 		ex) <input type="password"/>
+ 			<input name="name01"/>
+ 			<select name="name01"/>
+ 			
+ 			input[type=password]{color:yellow;}
+ 			[name=name01]{background-color:orange;}
+ 	6. 후손 선택자
+ 		- 상위 계층[공백한칸]하위 계층 : 계층 레벨에 관계 없이 해당 상위 계층을 태그로 가진 하위 계층에 적용할
+ 			#tab01 td{color:red;}
+ 			id 값이 tab01로 된 태그 하위에 td에 대한 글자 색상으로 빨강으로 처리
+ 		- 상위 계층 > 하위 계층 : 부모계층관계가 있는 하위요소 객체에 대한 CSS 속성값
+ 			CSS 속성선언
+ 			div > h1 {background-color:yellow;}
+ 			div태그 바로 밑에 있는 h1을 포함하는 요소 객체는 모두 배경색상을 노랑으로 처리.
+ */
+ *{color:blue;}
+h2{text-align:center;}
+#ch01{border:1px solid navy;}
+[name=name01]{background-color:orange;}
+
+</style>
+</head>
+<body>
+	<h2> 안녕하세요. </h2>
+	<p> 반갑습니다. </p>
+	<p id="ch01"> 반갑습니다. </p>
+	<p> 반갑습니다. </p>
+	<p> 반갑습니다. </p>
+	<input name="name01"/>
+<!--
+ 다음 화면의 요소 객체와 주요 속성을 활용하여 화면 구현하세요.
+ a02_exp.html
+ 	1. 주요 태그 : body, h3, hr(선긋기), span
+ 	2. css 속성
+ 		background-color, color, border:굵기, 형태(solid), 색상;
+ 		font-size : 글자의 크기;
+ -->
+</body>
+<script type="text/javascript">
+/*
+ 
+ */
+
+
+</script>
+</html>

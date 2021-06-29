@@ -29,28 +29,32 @@ SELECT
 FROM dual;
 
 -- ex1) 시작 번호가 1001이고 마지막 번호가 9999인 시퀀스를 만들고 실행을 해보세요.
+DROP SEQUENCE seq_02;
 CREATE SEQUENCE seq_02
 	INCREMENT BY 1
 	START WITH 1001
 	MINVALUE 1001
 	MAXVALUE 9999;
-SELECT seq_02.nextval, seq_02.currval
-FROM dual;
 
+SELECT seq_02.nextval
+FROM dual;
+-- drop sequence 시퀀스명; 해당 시퀀스의 삭제
 -- ex2) 시작 번호가 8888이고 마지막 번호가 1000이고 카운트다운되는 시퀀스를 생성해보세요.
+DROP SEQUENCE seq_03;
 CREATE SEQUENCE seq_03
-	INCREMENT BY 1
+	INCREMENT BY -1
 	START WITH 8888
 	MINVALUE 1000
 	MAXVALUE 8888;
-SELECT seq_03.nextval, seq_03.currval
+SELECT seq_03.nextval
 FROM dual;
 
 -- ex3) 시작 번호가 1이고 마지막 번호가 50인 시퀀스가 5씩 증가되는 시퀀스를 생성해보세요.
+DROP SEQUENCE seq_04;
 CREATE SEQUENCE seq_04
 	INCREMENT BY 5
 	START WITH 1
 	MINVALUE 1
 	MAXVALUE 50;
-SELECT seq_04.nextval, seq_04.currval
+SELECT seq_04.nextval
 FROM dual;
