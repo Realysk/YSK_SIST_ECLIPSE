@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a07_hirach </title>
+<style type="text/css">
+/*
+ 계층 레벨 상관없이 선택자 처리
+ 	1. ul 태그 밑에 strong 태그가 있으면 색상 처리
+ */
+	
+	ul strong {color:dodgerblue;}
+/*
+ # 계층 구조를 상하위 반드시 지켜야 처리되는 경우
+ 	1. div 바로 밑에 div가 있고 바로 밑에 strong이 있을 때 (부모>자식)
+*/
+	div > div > strong {background-color:yellow;}
+</style>
+</head>
+<body>
+	<h3> Web Programming </h3>
+	<hr>
+	<div>
+		<div> 2학기 <strong> 학습 내용 </strong>입니다. </div>
+		<ul id="list">
+			<li><span> HTML5 </span></li>
+			<li><strong> CSS </strong></li>
+			<li> JAVASCRIPT </li>
+		</ul>
+		<div class="warning"> 60점 이하는 F </div>
+	</div>
+</body>
+<script type="text/javascript">
+/*
+ 
+ */
+
+
+</script>
+</html>
