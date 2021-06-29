@@ -13,3 +13,44 @@
  			cycle | nocycle -- 반복 여부 설정
  			cache n | nocache -- 속도 개선을 위해 메모리 캐쉬 시퀀스 수
  */
+CREATE SEQUENCE seq_01
+	INCREMENT BY 1
+	START WITH 1
+	MINVALUE 1
+	MAXVALUE 999999;
+/*
+ 	5. 선언된 sequence 사용
+ 		1) 시퀀스명.nextval : 현재 시퀀스 번호를 출력하면서 다음 시퀀스 넘버링
+ 		2) 시퀀스명.currval : 현재 시퀀스 번호를 출력
+ */
+SELECT 
+	   seq_01.nextval
+	   -- ,seq_01.currval
+FROM dual;
+
+-- ex1) 시작 번호가 1001이고 마지막 번호가 9999인 시퀀스를 만들고 실행을 해보세요.
+CREATE SEQUENCE seq_02
+	INCREMENT BY 1
+	START WITH 1001
+	MINVALUE 1001
+	MAXVALUE 9999;
+SELECT seq_02.nextval, seq_02.currval
+FROM dual;
+
+-- ex2) 시작 번호가 8888이고 마지막 번호가 1000이고 카운트다운되는 시퀀스를 생성해보세요.
+CREATE SEQUENCE seq_03
+	INCREMENT BY 1
+	START WITH 8888
+	MINVALUE 1000
+	MAXVALUE 8888;
+SELECT seq_03.nextval, seq_03.currval
+FROM dual;
+
+-- ex3) 시작 번호가 1이고 마지막 번호가 50인 시퀀스가 5씩 증가되는 시퀀스를 생성해보세요.
+CREATE SEQUENCE seq_04
+	INCREMENT BY 5
+	START WITH 1
+	MINVALUE 1
+	MAXVALUE 50;
+SELECT seq_04.nextval, seq_04.currval
+FROM dual;
