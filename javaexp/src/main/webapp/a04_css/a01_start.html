@@ -29,10 +29,11 @@
  			div > h1 {background-color:yellow;}
  			div태그 바로 밑에 있는 h1을 포함하는 요소 객체는 모두 배경색상을 노랑으로 처리.
  */
- *{color:blue;}
-h2{text-align:center;}
-#ch01{border:1px solid navy;}
-[name=name01]{background-color:orange;}
+	*{color:blue;}
+	h2{text-align:center;}
+	#ch01{border:1px solid navy;}
+	[name=name01]{background-color:orange;}
+	#tab01 td{color:orange;}
 
 </style>
 </head>
@@ -43,6 +44,26 @@ h2{text-align:center;}
 	<p> 반갑습니다. </p>
 	<p> 반갑습니다. </p>
 	<input name="name01"/>
+	<!--
+		table tbody tr td
+		특정 태그가 게층과 레벨 하위에만 있을 때, 선택자로 선택할 때,
+		#tab01 td : 상위는 id값이 tab01 이것의 하위에 레벨 길이 상관 없이 td가 있으면 
+			td에 적용할 내용
+		p>h2 : 상위 p로 둔 h2를 적용할 때 활용된다.
+	 -->
+	<div>
+		<h2> 반가워요1 </h2>
+		<p>
+			<h2> 반갑습니다2 </h2>
+		</p>	
+	</div>
+	
+	<table id="tab01" border>
+		<tr><th> 목록 </th></tr>
+		<tr><td> 사과 </td></tr>
+		<tr><td> 바나나 </td></tr>
+		<tr><td> 딸기 </td></tr>
+	</table>
 <!--
  다음 화면의 요소 객체와 주요 속성을 활용하여 화면 구현하세요.
  a02_exp.html
