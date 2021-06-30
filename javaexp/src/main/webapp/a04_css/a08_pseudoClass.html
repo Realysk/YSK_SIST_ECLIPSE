@@ -72,29 +72,78 @@
  -->
 	<div>
 		<h2> 취미 </h2>
-			<input type="checkbox" name="hobby"/><span> 독서 </span>
-			<input type="checkbox" name="hobby"/><span> 운동 </span>
-			<input type="checkbox" name="hobby"/><span> 낚시 </span>
-			<input type="checkbox" name="hobby"/><span> 수영 </span>
-			<input type="checkbox" name="hobby"/><span> 등산 </span>
-			<input type="checkbox" name="hobby"/><span> 기타 </span>
+			<input type="checkbox" name="hobby" value="독서"/><span> 독서 </span>
+			<input type="checkbox" name="hobby" value="운동"/><span> 운동 </span>
+			<input type="checkbox" name="hobby" value="낚시"/><span> 낚시 </span>
+			<input type="checkbox" name="hobby" value="수영"/><span> 수영 </span>
+			<input type="checkbox" name="hobby" value="등산"/><span> 등산 </span>
+			<input type="checkbox" name="hobby" value="기타"/><span> 기타 </span>
 		<h2> 성별 </h2>
-			<input type="radio" name="gender"/><span> 남성 </span>
-			<input type="radio" name="gender"/><span> 여성 </span>
+			<input type="radio" name="gender" value="남성"/><span> 남성 </span>
+			<input type="radio" name="gender" value="여성"/><span> 여성 </span>
 	</div>
 	<div id="show">
-	
+		
 	</div>
 
 </body>
 <script type="text/javascript">
-// 1. 대상 객체 ? checkbox radio 객체를 다중으로 선택 DOM 선언.
-var etTgtObj = document.querySelectorAll("div input[type=checkbox], div input[type=radio]");
-console.log("이벤트 대상객체의 갯수 : " + etTgtObj.length);
+/*
+	1. 대상 객체 ?
+		ex) checkbox radio 객체를 다중으로 선택 DOM 선언.
+			js에서 사용되는 querySelector, querySelectorAll은 css의 선택자와 동일한 처리를 할 수 있다.
+			document.querySelector("선택자1, 선택자2");
+			document.querySelectorAll("선택자1, 선택자2");
+*/
+	var etTgtObj = document.querySelectorAll("div input[type=checkbox], div input[type=radio]");
+	var divShow = document.querySelector("#show");
+	console.log("이벤트 대상 객체의 갯수 : " + etTgtObj.length);
+	
+/*
+	2. 이벤트 처리
+		ex) 배열을 이벤트 처리 시 수행되어야 할 내용
+			for(var idx=0; idx<etTgtObj.length; idx++)
+			객체.onclick=function(){}
+			check나 radio를 클릭 시 '클릭되었습니다.' 출력
+*/
 
-// 2. 이벤트 처리
-// 1) 이벤트 처리시 선택 된 객체 지정.
-// 2) 해당 객체의 label 내용 가져오기.
-// 3) 출력 객체의 label 내용 처리.
+	for(var idx=0; idx<etTgtObj.length; idx++) {
+//		var show = "";
+		etTgtObj[idx].onclick=function() {
+//			1 단계 처리
+		/* 
+			console.log("클릭 된 value : " + this.value);
+			console.log("checked 여부 : " + this.checked);
+			// ?? show 변수 누적
+		// 출력 할 대상 객체에 show 할당.
+		// check가 된 경우에서 누적해서
+		if(this.checked) {
+			show += this.value + ",";
+		}
+		*/
+		// 2단계 처리
+		var show = "";
+		// 출력할 div에 할당 처리.
+		
+//		1) 이벤트 처리시 선택 된 객체 지정.
+//		2) 해당 객체의 label 내용 가져오기.
+		// check 된 요소 객체의 옆에 있는 span 객체 DOM으로 가져오기?
+		var target = document.querySelectorAll("div input[type=checkbox]:checked+span, div input[type=radio]:checked+span");
+//		3) 출력 객체의 label 내용 처리.
+		// for문을 반복하면서 show에 중복으로 할당 하기
+		for(var jdx=0; jdx<target.length; jdx++) {
+			show += target[jdx].innerText + ",";
+		}
+		divShow.innerText = show;
+	}
+}
+
+/*
+		1) 이벤트 처리시 선택 된 객체 지정.
+		2) 해당 객체의 label 내용 가져오기.
+		3) 출력 객체의 label 내용 처리.
+ */
+
+
 </script>
 </html>
