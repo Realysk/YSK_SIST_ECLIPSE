@@ -4,29 +4,59 @@
 <meta charset="UTF-8">
 <title> a01_domStart </title>
 <style type="text/css">
-/*
- # DOM
- 	1. 화면 body에 있는 모든 태그를 선택자 형식으로 객체로 JS에 사용하는 것을 말한다.
- 	2. DOM 객체 활용 단계
- 		1) DOM 메모리 로딩에 대한 이해
- 		2) DOM 객체 호출 방법
- 		3) DOM 객체의 여러가지 속성
- 			- 기본 출력 innerHTML, innerText
- 			- form 요소객체 하위 : value
- 			- css 스타일 속성 지정 : .style
- 		4) DOM 객체와 이벤트 처리
- 			- 이벤트 처리 프로세스
- 			- 이벤트 속성설정 형식
- 				- 함수
- 				- inline 익명함수 설정
- 		5) 여러가지 DOM 객체 선택자를 통한 화면 처리.
- 	3. DOM 메모리 로딩에 대한 이해
- 		1) body안에 있는 태그(요소)를 객체화하여 js에서 동적인 처리를 가능케 한다.
- 		2) DOM 객체로 인식 하려면 body 부분이 다 로딩 된 상황에서 js를 호출하거나 함수를 호출해야 한다.
- */
-
 </style>
 <script type="text/javascript">
+/*
+# DOM
+	1. 화면 body에 있는 모든 태그를 선택자 형식으로 객체로 JS에 사용하는 것을 말한다.
+	2. DOM 객체 활용 단계
+		1) DOM 메모리 로딩에 대한 이해
+		2) DOM 객체 호출 방법
+		3) DOM 객체의 여러가지 속성
+			- 기본 출력 innerHTML, innerText
+			- form 요소객체 하위 : value
+			- css 스타일 속성 지정 : .style
+		4) DOM 객체와 이벤트 처리
+			- 이벤트 처리 프로세스
+			- 이벤트 속성설정 형식
+				- 함수
+				- inline 익명함수 설정
+		5) 여러가지 DOM 객체 선택자를 통한 화면 처리.
+	3. DOM 메모리 로딩에 대한 이해
+		1) body안에 있는 태그(요소)를 객체화하여 js에서 동적인 처리를 가능케 한다.
+		2) DOM 객체로 인식 하려면 body 부분이 다 로딩 된 상황에서 js를 호출하거나 함수를 호출해야 한다.
+		3) 메모리 로딩은 순서로 로딩 된다.
+			- 하단 부분에 호출
+			- 정의된 함수를 호출
+			- 함수는 앞으로 '이 함수를 호출한다면'이라는 가정이 붙어서 처리 된다.
+			
+	4. DOM 객체 호출 방법
+		0) 모든 DOM 객체로 호출한다.
+			document.querySelector("선택자");
+		1) 기본 선택자 형식 : css 선택자와 동일
+			- 기본태그로 선택이 가능 : document.querySelector("선택자");
+				h1 => document.querySelector("h1");
+				table => document.querySelector("table");
+			- 아이디로 선택이 가능 : document.querySelector("#아이디명");
+				h1 id="ch01" => document.querySelector("#ch01");
+				td id="ch02" => document.querySelector("#ch02");
+				input id="ch03" => document.querySelector("#ch03");
+			- 클래스로 선택이 가능 : document.querySelector(".클래스명");
+				h2 class="cls01" => document.querySelector(".cls01");
+				input class="cls02" => document.querySelector(".cls02");
+			- 기타 확장형식
+				태그[속성=속성값] ex) <input name="num01"/>
+							   	   var num01Obj = document.querySelector("input[name=num01]");
+				[속성=속성값]
+				선택자1, 선택자2
+					var hArry = document.querySelectorAll("h1, h2");
+				상위 > 하위
+				상위 하위
+				input:checked
+				input:focus
+					ex) var focusObj => document.querySelector("input:focus");
+		2) 단일/다중
+*/
 	
 	// var h2Obj = document.querySelector("h2");
 	// h2Obj.align="center";
@@ -37,11 +67,27 @@
 		var h3Obj = document.querySelector("h3");
 		h3Obj.align="center";
 	}
+	
+	function call2() {
+		alert("함수 호출!");
+		var h5Obj = document.querySelector("h5");
+		h5Obj.align="center";
+	}
+	
+	function call3(obj) {
+		obj.align="center";
+	}
+	
 </script>
 </head>
 <body>
 	<h2 align="right"> 안녕!! </h2>
 	<h3 onclick="call()"> 안녕!! (정의된 함수 호출) </h3>
+	<h4> DOM 즉시 처리 </h4>
+	<h5 onclick="call2()"> 함수 호출로 DOM 처리 </h5>
+	<h6 align="left" onclick="call3(this)"> 함수 호출로 DOM (객체 전달) 처리 </h6>
+	<!-- 클릭 한 객체 전체를 매개 변수로 전달 -->
+	<h1> 익명함수 호출 </h1>
 </body>
 <script type="text/javascript">
 /*
@@ -51,6 +97,17 @@
 	console.log(h2Obj);
 	// 객체.속성 = "속성값";
 	h2Obj.align = "center";
+	
+	// ex) h4, h5 선언 후 h4는 하단에서 DOM 호출 및 정렬 오른쪽 처리, h5는 클릭 함수 호출 및 정렬 중앙 처리.
+	var h4Obj = document.querySelector("h4");
+	h4Obj.align = "right";
+	console.log(h4Obj);
+	
+	var h1Obj = document.querySelector("h1");
+	// h1Obj.onclick = call; // 정의 된 함수 호출
+	h1Obj.onclick = function() { // 이름 없는 함수인 익명 함수로 매핑해서 처리할 수 있다.
+		this.align="center";
+	};
 
 </script>
 </html>

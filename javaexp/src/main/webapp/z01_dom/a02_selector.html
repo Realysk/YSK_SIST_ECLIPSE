@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a02_selector </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+<!--
+ex) 기본 선택자 태그, 아이디, 클래스로 속성을 선언하고 하단에 해당 객체를 DOM 객체를 호출하여 속성을 변경하세요. 
+ -->
+<h1> 기본 태그 </h1>
+<h2 id="id"> #id </h2>
+<h3 class="class"> .class </h3>
+</body>
+<script type="text/javascript">
+	
+	var h1Obj = document.querySelector("h1");
+	h1Obj.align = "center";
+	
+	var h2Obj = document.querySelector("#id");
+	h2Obj.align = "center";
+	
+	var h3Obj = document.querySelector(".class");
+	h3Obj.align = "center";
+	
+</script>
+</html>
