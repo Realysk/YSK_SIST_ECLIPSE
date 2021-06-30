@@ -15,9 +15,10 @@
 <!--
 ex) 기본 선택자 태그, 아이디, 클래스로 속성을 선언하고 하단에 해당 객체를 DOM 객체를 호출하여 속성을 변경하세요. 
  -->
-<h1> 기본 태그 </h1>
-<h2 id="id"> #id </h2>
-<h3 class="class"> .class </h3>
+	<h1> 기본 태그 </h1>
+	<h2 id="id"> #id </h2>
+	<h3 class="class"> .class </h3>
+	<input type="text" name="num01"/>
 </body>
 <script type="text/javascript">
 	
@@ -28,7 +29,11 @@ ex) 기본 선택자 태그, 아이디, 클래스로 속성을 선언하고 하�
 	h2Obj.align = "center";
 	
 	var h3Obj = document.querySelector(".class");
+	h3Obj.style.backgroundColor="yellow";
 	h3Obj.align = "center";
+	
+	var num01Obj = document.querySelector("input[name=num01]");
+	num01Obj.value="25";
 	
 </script>
 </html>
