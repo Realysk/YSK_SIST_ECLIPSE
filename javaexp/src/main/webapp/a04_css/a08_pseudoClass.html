@@ -14,16 +14,35 @@
  			:active - 사용자가 마우스를 클릭한 태그 선택
  			:hover - 사용자가 마우스 커서를 올린 태그 선택
  	# 상태 선택자
- 
- 
+ 		1. 상태의 변경에 따른 css 처리 변경
+ 		2. 기본 코드
+ 			:checked - 해당 선택자가 checked가 되었을 때, 처리할 내용에 대한 부분을 의미
+ 				주로 type="radio|checkbox"를 사용할 때 활용된다.
+ 			:focus - 해당 선택자에 focus를 위치시켰을 때 처리된다.
+ 				form 하위의 입력 요소 객체를 사용할 때 쓰인다.
+ 			:enabled - 해당 선택자의 요소 객체가 활성화 되었을 때 처리할 css 속성
+ 				설정 시 활용된다.
+ 			:disabled - 해당 선택자의 요소 객체가 비활성화 되었을 때 처리할 css 속성
+ 				설정 시 활용된다.
  
  	# 구조 선택자
+ 	
  */
 	h2:active{background-color:orange;}
 	h3:hover{color:blue;}
 	
 	tr:hover{background-color:blue; color:white;}
 	td:active{background-color:blue; color:white; font-size:25px;}
+	
+	/*
+	 input 요소 객체의 type 속성이 checkbox인 경우에 check가 된 경우,
+	 + 요소 객체 (바로 옆에 있는 객체일 때, 해당 요소 객체의 속성 설정.)
+	 */
+	input[type=checkbox]:checked+span{background-color:pink;}
+	
+	/* 요소1, 요소2{속성:속성값;} */
+	div input[type=checkbox]:checked+span,
+	div input[type=radio]:checked+span{background-color:yellow;}
 
 </style>
 </head>
@@ -41,12 +60,41 @@
 		<tr><td> 오렌지 </td><td> 4000 </td><td> 4 </td></tr>
 		<tr><td> 바나나 </td><td> 3000 </td><td> 3 </td></tr>
 	</table>
+	
+	<input type="checkbox"/><span> 선택1 </span>
+	<input type="checkbox"/><span> 선택2 </span>
+	<input type="checkbox"/><span> 선택3 </span>
+
+<!--
+ ex) type을 checkbox|radio를 설정 하고 좋아하는 취미와 성별을 선택했을 때 해당 내용을 글자색상과 배경색상을 변경하고,
+ js를 통해서 선택된 내용을 하단 div에 출력하세요.
+ hint) document.querySelector("선택자"), .innerText나 .innerHTML 활용.
+ -->
+	<div>
+		<h2> 취미 </h2>
+			<input type="checkbox" name="hobby"/><span> 독서 </span>
+			<input type="checkbox" name="hobby"/><span> 운동 </span>
+			<input type="checkbox" name="hobby"/><span> 낚시 </span>
+			<input type="checkbox" name="hobby"/><span> 수영 </span>
+			<input type="checkbox" name="hobby"/><span> 등산 </span>
+			<input type="checkbox" name="hobby"/><span> 기타 </span>
+		<h2> 성별 </h2>
+			<input type="radio" name="gender"/><span> 남성 </span>
+			<input type="radio" name="gender"/><span> 여성 </span>
+	</div>
+	<div id="show">
+	
+	</div>
+
 </body>
 <script type="text/javascript">
-/*
- 
- */
+// 1. 대상 객체 ? checkbox radio 객체를 다중으로 선택 DOM 선언.
+var etTgtObj = document.querySelectorAll("div input[type=checkbox], div input[type=radio]");
+console.log("이벤트 대상객체의 갯수 : " + etTgtObj.length);
 
-
+// 2. 이벤트 처리
+// 1) 이벤트 처리시 선택 된 객체 지정.
+// 2) 해당 객체의 label 내용 가져오기.
+// 3) 출력 객체의 label 내용 처리.
 </script>
 </html>
