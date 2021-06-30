@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a01_domStart </title>
+<style type="text/css">
+/*
+ # DOM
+ 	1. 화면 body에 있는 모든 태그를 선택자 형식으로 객체로 JS에 사용하는 것을 말한다.
+ 	2. DOM 객체 활용 단계
+ 		1) DOM 메모리 로딩에 대한 이해
+ 		2) DOM 객체 호출 방법
+ 		3) DOM 객체의 여러가지 속성
+ 			- 기본 출력 innerHTML, innerText
+ 			- form 요소객체 하위 : value
+ 			- css 스타일 속성 지정 : .style
+ 		4) DOM 객체와 이벤트 처리
+ 			- 이벤트 처리 프로세스
+ 			- 이벤트 속성설정 형식
+ 				- 함수
+ 				- inline 익명함수 설정
+ 		5) 여러가지 DOM 객체 선택자를 통한 화면 처리.
+ 	3. DOM 메모리 로딩에 대한 이해
+ 		1) body안에 있는 태그(요소)를 객체화하여 js에서 동적인 처리를 가능케 한다.
+ 		2) DOM 객체로 인식 하려면 body 부분이 다 로딩 된 상황에서 js를 호출하거나 함수를 호출해야 한다.
+ */
+
+</style>
+<script type="text/javascript">
+	
+	// var h2Obj = document.querySelector("h2");
+	// h2Obj.align="center";
+	// console.log(h2Obj);
+	// 함수 선언은 만약(추후)에 함수를 호출하면 처리할 내용
+	function call() {
+		alert("함수 호출");
+		var h3Obj = document.querySelector("h3");
+		h3Obj.align="center";
+	}
+</script>
+</head>
+<body>
+	<h2 align="right"> 안녕!! </h2>
+	<h3 onclick="call()"> 안녕!! (정의된 함수 호출) </h3>
+</body>
+<script type="text/javascript">
+/*
+ 
+ */
+	var h2Obj = document.querySelector("h2");
+	console.log(h2Obj);
+	// 객체.속성 = "속성값";
+	h2Obj.align = "center";
+
+</script>
+</html>

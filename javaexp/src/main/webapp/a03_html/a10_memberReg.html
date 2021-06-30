@@ -91,13 +91,12 @@
 		<table width="100%" border>
 			<!-- 2개의 열을 확보한 상황에서 th부분에 대하여 넓이를 30% 확보 처리 (테이블 전체에서 30%를 의미한다.) -->
 			
-			<tr>
-				<th width="10%"> ID </th>
-					<td>
-						<input type="text" name="id"/>
-						<input type="button" onclick="ckDupl()" value="중복확인"/>
-						<!-- 서버에 있는 데이터에 ID가 있는지 여부를 확인할 때 쓰인다. -->
-					</td>
+			<tr><th width="10%"> ID </th>
+				<td>
+					<input type="text" name="id"/>
+					<input type="button" onclick="ckDupl()" value="중복확인"/>
+					<!-- 서버에 있는 데이터에 ID가 있는지 여부를 확인할 때 쓰인다. -->
+				</td>
 			</tr>
 			
 			<!--
@@ -107,103 +106,92 @@
 						var passVal = document.querySelector("[name=pass]");
 					}
 			 -->
-			<tr>
-				<th> PW </th>
-					<td>
-						<input type="password" name="pass"/>
-					</td>
+			<tr><th> PW </th>
+				<td>
+					<input type="password" name="pass"/>
+				</td>
 			</tr>
 			
-			<tr>
-				<th> PW 확인 </th>
-					<td>
-						<input type="password" name="passfrm"/>
-						<input type="button" onclick="ckPass()" value="동일여부확인"/>
-					</td>
+			<tr><th> PW 확인 </th>
+				<td>
+					<input type="password" name="passfrm"/>
+					<input type="button" onclick="ckPass()" value="동일여부확인"/>
+				</td>
 			</tr>
 			
-			<tr>
-				<th> 이름 </th>
-					<td>
-						<input type="text" name="name"/>
-					</td>
+			<tr><th> 이름 </th>
+				<td>
+					<input type="text" name="name"/>
+				</td>
 			</tr>
 			
-			<tr>
-				<th> 성별 </th>
+			<tr><th> 성별 </th>
 				<!-- radio의 경우 default로 checked으로 처리 가능하다. -->
-					<td>
-						<input type="radio" name="gender" value="남자" checked/> 남자
-						<input type="radio" name="gender" value="여자"/> 여자
-					</td>
+				<td>
+					<input type="radio" name="gender" value="남자" checked/> 남자
+					<input type="radio" name="gender" value="여자"/> 여자
+				</td>
 			</tr>
 			
-			<tr>
-				<th> 이메일 </th>
-					<td>
-						<input type="text" name="email1"/> @
-						<input type="text" name="email2"/>
-						<!-- 
-							select를 변경했을 때 호출할 함수 지정.
-							onchange="함수()"
-							함수(this) : 이벤트가 처리된 객체 자체를 함수의 매개변수로 전달한다.
-						-->
-						<select onchange="emailCk(this)">
-							<option> 직접 입력 </option>
-							<option> naver.com </option>
-							<option> daum.net </option>
-							<option> gmail.com </option>
-						</select>
-						<span id="showMail">  </span>
-					</td>
+			<tr><th> 이메일 </th>
+				<td>
+					<input type="text" name="email1"/> @
+					<input type="text" name="email2"/>
+					<!-- 
+						select를 변경했을 때 호출할 함수 지정.
+						onchange="함수()"
+						함수(this) : 이벤트가 처리된 객체 자체를 함수의 매개변수로 전달한다.
+					-->
+					<select onchange="emailCk(this)">
+						<option> 직접 입력 </option>
+						<option> naver.com </option>
+						<option> daum.net </option>
+						<option> gmail.com </option>
+					</select>
+					<span id="showMail">  </span>
+				</td>
 			</tr>
 			
-			<tr>
-				<th> 주소 </th>
-					<td>
-						<input type="text" name="address"/>
-						<input type="button" value="주소 찾기" onclick="callAddress()"/>
-					</td>
+			<tr><th> 주소 </th>
+				<td>
+					<input type="text" name="address"/>
+					<input type="button" value="주소 찾기" onclick="callAddress()"/>
+				</td>
 			</tr>
 			
-			<tr>
-				<th> 상세 주소 </th>
-					<td>
-						<input type="text" name="detail_addr"/>
-					</td>
+			<tr><th> 상세 주소 </th>
+				<td>
+					<input type="text" name="detail_addr"/>
+				</td>
 			</tr>
 			
-			<tr>
-				<th> 휴대폰 </th>
-				<!-- radio의 경우 default로 checked으로 처리 가능하다. -->
-					<td>
-						<input type="radio" name="phone" value="SKT" checked/> SKT
-						<input type="radio" name="phone" value="KT"/> KT
-						<input type="radio" name="phone" value="LGU"/> LGU+ <br>
-						<select name="phone1">
-							<option> 010 </option>
-							<option> 070 </option>
-							<option> 011 </option>
-						</select>
-						<input type="text" name="phone2"/>-
-						<input type="text" name="phone3"/>
-					</td>
+			<tr><th> 휴대폰 </th>
+			<!-- radio의 경우 default로 checked으로 처리 가능하다. -->
+				<td>
+					<input type="radio" name="phone" value="SKT" checked/> SKT
+					<input type="radio" name="phone" value="KT"/> KT
+					<input type="radio" name="phone" value="LGU"/> LGU+ <br>
+					<select name="phone1">
+						<option> 010 </option>
+						<option> 070 </option>
+						<option> 011 </option>
+					</select>
+					<input type="text" name="phone2"/>-
+					<input type="text" name="phone3"/>
+				</td>
 			</tr>
-			<tr>
-				<th> 관심사 </th>
-					<td>
+			<tr><th> 관심사 </th>
+				<td>
 						
-					</td>
+				</td>
 			</tr>
 			
-			<tr>
-				<th> 자기 소개 </th>
-					<td>
-						<textarea cols="50" rows="5"></textarea>
-					</td>
+			<tr><th> 자기 소개 </th>
+				<td>
+					<textarea cols="50" rows="5"></textarea>
+				</td>
 			</tr>
-			<tr>
-				<td colspan="2" style="text-align:center;">
+			<tr><td colspan="2" style="text-align:center;">
 					<input type="submit" value="가입하기"/>
 					<input type="reset" value="다시입력"/>
 				</td>
