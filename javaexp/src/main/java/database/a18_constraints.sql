@@ -12,20 +12,30 @@
  		3) 제약조건을 활성화, 비활성화할 수 있는 융통성이 있다.
  	4. 무결성 제약조건의 종류
  		1) not null : 열이 null을 포함할 수 없음.
- 		2) unique key : 테이블의 모든 행에서 고유한 값을 갖는 열 또는 열조합
+ 		2) unique key : 테이블의 모든 행에서 고유한 값을 갖는 열 또는 열조합을 지정해야 한다.
+ 			ex) 학번, 주민번호, 사원번호를 중복되지 않아야 한다.
+ 			ps) null은 입력이 가능하고, 여러가지 null은 중복이 가능
  		3) primary key : 해당 컬럼 값은 반드시 존재해야 하며 유일해야 한다. (not null과 unique가 결합된 형태)
+ 						 주로 테이블에서 식별해야할 컬럼 즉 key를 설정할 때 사용된다.
+ 			ex) emp테이블의 empno, dept테이블의 deptno
  		4) foreign key : 한 열과 참조된 테이블의 열간에 외래 키 관계를 설정하고 시행
  			ex) 사원의 테이블의 부서번호는 반드시 부서테이블에 있는 부서번호이어야 한다.
  		5) check : 해당 컬럼에 저장 가능한 데이터 값의 범위나 조건을 지정처리.
  			ex) student 테이블의 학년을 1,2,3,4만 데이터로 넣을 수 있다.
  	5. 설정 형식
  		1) 컬럼명 데이터 타입 constraint 제약조건명 제약조건.
+ 			제약조건명 : 테이블명_컬럼명_제약조건종류
  		2) primary key 지정
  			ex) create table student (
  					stuno number constraint student_stuno_pk primary key);
  			제약조건 이름 : 테이블명_컬럼명_제약조건종류
  				제약조건종류 : pk, uq, nn, fk
+ 		PS) SYS.ALL_CONSTRAINTS : DB 시스템에 있는 제약정보의 메타 테이블
  */
+SELECT * FROM SYS.ALL_CONSTRAINTS;
+SELECT * FROM SYS.ALL_CONSTRAINTS
+WHERE table_name LIKE 'EMP%';
+
 
 -- not null
 CREATE TABLE student01(

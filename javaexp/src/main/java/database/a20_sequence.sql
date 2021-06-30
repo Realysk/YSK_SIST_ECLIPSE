@@ -12,6 +12,8 @@
  			minvalue 최소값 | nominvalue
  			cycle | nocycle -- 반복 여부 설정
  			cache n | nocache -- 속도 개선을 위해 메모리 캐쉬 시퀀스 수
+ 	ps) drop table 테이블명;
+ 		drop sequence 시퀀스명;
  */
 CREATE SEQUENCE seq_01
 	INCREMENT BY 1
