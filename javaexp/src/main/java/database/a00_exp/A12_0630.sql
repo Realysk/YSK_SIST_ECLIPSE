@@ -75,6 +75,7 @@
 				dno NUMBER PRIMARY KEY,
 				dname varchar2(50),
 				loc varchar2(100));
+			SELECT * FROM department;
 			
 			CREATE TABLE student08(
 				sno NUMBER PRIMARY KEY,
@@ -82,6 +83,7 @@
 				grade NUMBER CHECK(grade BETWEEN 1 AND 4),
 				citynum char(13) UNIQUE,
 				dno NUMBER REFERENCES department(dno));
+			SELECT * FROM student08;
 		/*
 	
 	3. 시퀀스를 9999~1001 범위로 작성하세요.

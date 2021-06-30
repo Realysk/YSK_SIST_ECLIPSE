@@ -5,20 +5,42 @@
 <title> a08_pseudoClass </title>
 <style type="text/css">
 /*
- # 반응 선택자
- 	1. 사용자의 반응으로 생성되는 특정한 상태를 선택하는 것
- 	2. 사용자가 특정 태그위에 마우스 커서를 올리면 hover상태
- 	3. 특정 태그를 마우스 클릭하면 active 상태
- 	4. 기본 코드
- 		:active - 사용자가 마우스를 클릭한 태그 선택
- 		:hover - 사용자가 마우스 커서를 올린 태그 선택
+ @@ 가상 선택자 @@
+ 	# 반응 선택자
+ 		1. 사용자의 반응으로 생성되는 특정한 상태를 선택하는 것
+ 		2. 사용자가 특정 태그위에 마우스 커서를 올리면 hover상태
+ 		3. 특정 태그를 마우스 클릭하면 active 상태
+ 		4. 기본 코드
+ 			:active - 사용자가 마우스를 클릭한 태그 선택
+ 			:hover - 사용자가 마우스 커서를 올린 태그 선택
+ 	# 상태 선택자
+ 
+ 
+ 
+ 	# 구조 선택자
  */
-
+	h2:active{background-color:orange;}
+	h3:hover{color:blue;}
+	
+	tr:hover{background-color:blue; color:white;}
+	td:active{background-color:blue; color:white; font-size:25px;}
 
 </style>
 </head>
 <body>
-
+	<h2> 안녕하세요! 반갑습니다! (active) </h2>
+	<h3> 오늘도 좋은 날입니다. (hover) </h3>
+	
+<!--
+ ex) table로 물건정보 리스트를 한 후 tr 부분은 hover로 처리하고,
+ td 부분은 active로 배경 색상과 글자색상/글자크기를 변경 하여 출력 되게 하세요. 
+ -->	
+	<table border>
+		<tr><th> 물건명 </th><th> 가격 </th><th> 수량 </th></tr>
+		<tr><td> 사과 </td><td> 2000 </td><td> 2 </td></tr>
+		<tr><td> 오렌지 </td><td> 4000 </td><td> 4 </td></tr>
+		<tr><td> 바나나 </td><td> 3000 </td><td> 3 </td></tr>
+	</table>
 </body>
 <script type="text/javascript">
 /*
