@@ -92,3 +92,57 @@ CREATE INDEX idx_emp36_ename_dname
 ON emp36(ename, dname);
 SELECT * FROM user_ind_columns
 WHERE table_name='EMP36';
+
+/*
+ # descending index
+ 	1. 컬럼별로 정렬 순서를 별도로 지정하여 결합 index를 생성하기 위한 방법을 말한다.
+ 	2. 형식
+ 		create index 인덱스명 on 테이블명(컬럼명1 desc, 컬럼2 asc);
+ */
+CREATE TABLE emp37
+AS SELECT * FROM emp;
+CREATE INDEX idx_emp37_deptno_ename
+ON emp37(deptno DESC, ename ASC);
+-- desc로 index를 하면 정렬의 우선순위로 먼저 데이터를 찾아준다.
+SELECT * FROM user_ind_columns
+WHERE table_name='EMP37';
+
+-- ex) emp38을 deptno와 empno를 없애고 만들되 ename, job을 역순위로 해서 index를 만드세요.
+-- 두 개의 컬럼을 제외한 테이블 생성 : deptno와 empno를 없애고
+CREATE TABLE emp38
+AS SELECT ename, job, mgr, hiredate, sal, comm 
+FROM emp;
+SELECT * FROM emp38;
+-- ename과 job을 역순으로 index 생성
+CREATE INDEX idx_emp38_ename_job
+ON emp38(ename DESC, job DESC);
+-- 데이터 딕셔너리에서 확인
+SELECT * FROM user_ind_columns
+WHERE table_name='EMP38';
+
+/*
+ # 함수 기반 index
+ 	1. 컬럼에 대한 연산이나 함수의 계산 결과를 index로 생성하는 것을 말한다.
+ 	2. 함수 기반 index는 insert, update시에 새로운 값을 index에 추가한다.
+ 	3. 기본 형식
+ 		create index 인덱스명 on 테이블(함수(컬럼));
+ */
+CREATE TABLE emp39
+AS SELECT * FROM emp;
+CREATE INDEX uppcase_idx ON emp39(lower(ename));
+SELECT * FROM emp39
+WHERE lower(ename) = 'KING';
+SELECT * FROM user_ind_columns
+WHERE table_name='EMP39';
+
+-- ex) emp40 테이블을 만들고 문자열로 검색되는 모든 컬럼을 upper()함수가 적용 된 함수기반 index로 만드세요.
+CREATE TABLE emp40
+AS SELECT * FROM emp;
+CREATE INDEX uppercase_idx2 ON emp40(upper(ename));
+CREATE INDEX uppercase_idx2 ON emp40(upper(job));
+SELECT * FROM emp40
+WHERE upper(ename)='SMITH';
+SELECT * FROM emp40
+WHERE upper(job)='SALESMAN';
+SELECT * FROM user_ind_columns
+WHERE table_name='EMP40';
