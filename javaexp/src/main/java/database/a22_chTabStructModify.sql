@@ -44,8 +44,6 @@ ALTER TABLE emp32
 MODIFY ename NUMBER(30);
 ALTER TABLE emp32
 MODIFY job NUMBER(30);
-ALTER TABLE emp32
-MODIFY comm NUMBER(30);
 -- 숫자형 -> 문자형
 ALTER TABLE emp32
 MODIFY empno varchar(30);
@@ -55,6 +53,8 @@ ALTER TABLE emp32
 MODIFY hiredate varchar(30);
 ALTER TABLE emp32
 MODIFY sal varchar(30);
+ALTER TABLE emp32
+MODIFY comm varchar(30);
 ALTER TABLE emp32
 MODIFY deptno varchar(30);
 
@@ -75,4 +75,58 @@ ALTER TABLE emp33
 MODIFY ename varchar2(10);
 ALTER TABLE emp33
 MODIFY ename varchar2(5);
--- 
+
+-- ex) emp33의 테이블의 문자형에 데이터를 50으로 변경 후 각 문자형 데이터를 최대 크기를 확인한 후 해당 데이터로 변경하세요.
+-- 데이터 유형 크기 변경
+ALTER TABLE emp33
+MODIFY ename varchar(50);
+ALTER TABLE emp33
+MODIFY job varchar(50);
+-- 데이터 크기 확인 : 6, 9
+SELECT max(LENGTH(ename)), max(LENGTH(job))
+FROM emp33;
+-- 데이터 크기 변경 : 6, 9
+ALTER TABLE emp33
+MODIFY ename varchar2(6);
+ALTER TABLE emp33
+MODIFY ename varchar2(9);
+SELECT * FROM emp33;
+
+-- 2. 데이터가 있을 때 다른 유형의 데이터 type 변경은 불가능하다.
+ALTER TABLE emp33
+MODIFY empno varchar2(10);
+-- column to be modified must be empty to change datatype
+/*
+ # 제한 경우에 데이터 타입을 변경 할 경우
+ 	1. 변경 할 type으로 함수를 통해서 변하는 컬럼을 복사 테이블을 통해서 만든다.
+ 	2. 변경 한 type을 컬럼을 update를 통해서 null 처리한다.
+ 	3. 컬럼의 type을 변경한다.
+ 	4. 복사 테이블의 데이터를 통해서 현재 데이터를 입력 처리한다.
+ */
+SELECT * FROM emp33;
+-- hiredate : date => varchar2로 변경 처리
+CREATE TABLE hiredate_cpy
+AS SELECT empno, to_char(hiredate,'YYYY/MM/DD') hiredate -- 함수를 통해서 문자열로 변경
+FROM emp33;
+SELECT * FROM hiredate_cpy;
+UPDATE emp33
+	SET hiredate = NULL;
+SELECT * FROM emp33;
+ALTER TABLE emp33
+MODIFY hiredate varchar2(10);
+UPDATE emp33 a
+	SET hiredate = (
+		SELECT hiredate
+		FROM hiredate_cpy b
+		WHERE a.empno = b.empno);
+-- ex) emp33을 기준으로 mgr 숫자형을 문자형으로 변경하되 복사 테이블을 만들고 mgr null까지 진행하세요.
+SELECT * FROM emp33;
+-- 데이터 유형 변경 시 반드시 해당 테이블의 식별 키와 함께 복사테이블을 만들되 해당 유형으로 변경하여 테이블을 만든다.
+CREATE TABLE mgr_cpy
+AS SELECT empno, to_char(mgr) mgr FROM emp33;
+SELECT * FROM mgr_cpy;
+-- 해당 테이블의 컬럼을 null로 수정 처리
+UPDATE emp33 SET mgr = NULL;
+-- 데이터 유형을 변경
+ALTER TABLE emp33 MODIFY mgr varchar2(10);
+-- 수정 시 해당 테이블과 변경 할 테이블의 key를 조건으로 변경 처리
