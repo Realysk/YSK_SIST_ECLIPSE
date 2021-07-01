@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> A09_0701 </title>
+<style type="text/css">
+/*
+
+ */
+	h1:active{background-color:orange;}
+	h1:hover{color:blue;}
+	
+	div input[type=checkbox]:checked+span,
+	div input[type=radio]:checked+span{background-color:yellow;}
+	input[type=text]:focus{background-color:orange;}
+	/* input[type=checkbox]:checked{} checked를 한 checkbox에 대한 속성 */
+	/* 선택자1+선택자2 : 계층적으로 형제 관계에 선택자1을 바로 앞에 둔 선택자2에 대한 속성을 설정*/
+	input[type=checkbox]:checked+span{background-color:yellow;}
+</style>
+<script type="text/javascript">
+	function call() {
+		alert("함수 호출");
+		var h3Obj = document.querySelector("h3");
+		h3Obj.align="center";
+	}
+
+	function call2() {
+		alert("함수 호출!");
+		var h5Obj = document.querySelector("h5");
+		h5Obj.align="center";
+	}
+
+	function call3(obj) {
+		obj.align="center";
+	}
+</script>
+</head>
+<body>
+<!--
+	3. 가상선택자 중에 반응 선택자를 기술하고 h1을 기준으로 기본예제 작성하기
+		
+		선택자:active{} - 클릭했을 때 처리할 css 속성/속성값
+ 		선택자:hover{} - 마우스 커서를 오버했을 때 처리할 css 속성/속성값
+	
+	-->
+		<h1> 반응 선택자 (active, hover) </h1>
+	<!--
+	
+	4. 가상선택자 중에 상태 선택자를 input 객체를 활용하여 check와 focus를 처리하는 예제 만들기
+		
+		:checked - 해당 선택자가 checked가 되었을 때, 처리할 내용에 대한 부분을 의미. 주로 type="radio|checkbox"를 사용할 때 활용된다.			
+ 		:focus - 해당 선택자에 focus를 위치시켰을 때 처리된다. form 하위의 입력 요소 객체를 사용할 때 쓰인다.
+ 		:enabled - 해당 선택자의 요소 객체가 활성화 되었을 때 처리할 css 속성, 설정 시 활용된다.
+ 		:disabled - 해당 선택자의 요소 객체가 비활성화 되었을 때 처리할 css 속성, 설정 시 활용된다.
+	
+	-->
+		아이디 : <input type="text"/><br>
+		<div>
+			<h2> 취미 </h2>
+				<input type="checkbox" name="hobby" value="독서"/><span> 독서 </span>
+				<input type="checkbox" name="hobby" value="운동"/><span> 운동 </span>
+				<input type="checkbox" name="hobby" value="낚시"/><span> 낚시 </span>
+		</div>		
+	<!--	
+	
+	5. DOM객체의 메모리 로딩 순서와 함수처리 형식 3가지를 클릭이벤트 예제로 기술하기 
+		1) html은 코드 순차적으로 메모리에 로딩이 된다.
+		2) body안에 있는 태그들을 해당 내용이 순차적으로 실행 된 경우에 로딩이 된다.
+		3) body 마지막에 script를 선언해서 dom 객체를 호출하면 해당 메모리에 로딩 된 상황이기 때문에 처리가 가능하다.
+		4) 함수의 선언은 현재 메모리를 로딩한 상태를 기준으로 하는 것이 아니라, 앞으로 메모리를 로딩될 것을 예상해서 선언한다.
+		   선언 후, 클릭 이벤트를 통해서 처리할 수 있다.
+		
+	-->
+		<h2 align="right"> 안녕!! </h2>
+		<h3 onclick="call()"> 안녕!! (정의된 함수 호출) </h3>
+		<h4> DOM 즉시 처리 </h4>
+		<h5 onclick="call2()"> 함수 호출로 DOM 처리 </h5>
+		<h6 align="left" onclick="call3(this)"> 함수 호출로 DOM (객체 전달) 처리 </h6>
+		<!-- 클릭 한 객체 전체를 매개 변수로 전달 -->
+		<h1> 익명함수 호출 </h1>		
+	<!--
+	
+ -->
+</body>
+<script type="text/javascript">
+/*
+ 
+ */
+	var h2Obj = document.querySelector("h2");
+	console.log(h2Obj);
+	// 객체.속성 = "속성값";
+	h2Obj.align = "center";
+	
+	// ex) h4, h5 선언 후 h4는 하단에서 DOM 호출 및 정렬 오른쪽 처리, h5는 클릭 함수 호출 및 정렬 중앙 처리.
+	var h4Obj = document.querySelector("h4");
+	h4Obj.align = "right";
+	console.log(h4Obj);
+	
+	var h1Obj = document.querySelector("h1");
+	// h1Obj.onclick = call; // 정의 된 함수 호출
+	h1Obj.onclick = function() { // 이름 없는 함수인 익명 함수로 매핑해서 처리할 수 있다.
+		this.align="center";
+	};
+
+</script>
+</html>
