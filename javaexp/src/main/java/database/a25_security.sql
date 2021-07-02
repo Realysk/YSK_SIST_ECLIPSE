@@ -61,12 +61,32 @@ GRANT CREATE SESSION TO himan;
  		alter user 사용자명 quota unlimited on users; -- 사용자가 사용 할 tablespace의 용량 지정.
  		
  # 특정한 사용자가 테이블을 사용 하기 위하여
+ 
+ 	1. 계정 생성과 함께 접속, 자원 사용 권한 설정
+ 		GRANT 권한1, 권한2, 권한3 ... TO 사용자 IDENTIFIED BY 계정명;
+ 		ex) GRANT CONNECT,RESOURCE,UNLIMITED TABLESPACE TO SCOTT IDENTIFIED BY tiger;
+	2. 생략 가능
+		ALTER USER SCOTT DEFAULT TABLESPACE USERS;
+		ALTER USER SCOTT TEMPORARY TABLESPACE TEMP;
+ 
  	0. dba권한이 있는 권한자로 접속 후
  	1. 계정 생성 : create user 사용자명 identified by 비밀번호
  	2. 접속할 수 있는 권한 부여 : grant create session to 사용자명;
  	3. 자원(테이블 등 여러 객체)을 사용할 수 있는 권한 : grant resource to 사용자명;
  	4. 해당 사용자가 사용 할 물리적 공간(tablespace) 설정 : alter user 사용자명 default tablespace 테이블스페이스명
  	5. 사용자가 물리적 공간을 사용 할 용량 설정 : alter user 사용자명 quota 용량 on 테이블스페이스명;
+ */
+
+GRANT CONNECT,RESOURCE,UNLIMITED TABLESPACE TO himan2 IDENTIFIED BY 9999;
+
+/*
+ # oracle 서버 접속
+ 	1. 서버에서 계정의 생성
+ 	2. 서버 vs 클라이언트 접속
+ 		1) 서버는 식별되는 ip/port/sid 계정/비밀번호
+ 			cmd- ipconfig - (학원에서 설정하면 학원에서만 됨) 서버 ip 주소 : (강사님 자리 IP) 211.63.89.68 (내 자리 IP : 211.63.89.81)/1521/xe scott/tiger
+ 		2) 클라이언트는 서버에 있는 위 정보를 기준으로 DB 서버에 접속을 한다.
+ 		3) 서버 pc의 방화벽 풀기
  */
 
 CREATE USER goodman IDENTIFIED BY 8888;
