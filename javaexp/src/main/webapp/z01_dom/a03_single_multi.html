@@ -19,6 +19,28 @@
 	<h3 class="cls01"> 클래스 중 하나뿐/첫번째 </h3>
 	<h3 class="cls01"> 클래스 중 하나뿐/첫번째 </h3>
 	<h3 class="cls01"> 클래스 중 하나뿐/첫번째 </h3>
+	<h4> 모두 다 적용 </h4>
+	<h4> 모두 다 적용 </h4>
+	<h4> 모두 다 적용 </h4>
+	<h4> 모두 다 적용 </h4>
+	<h5> 특정 클래스 다 적용 </h5>
+	<h5 class="cls02"> 특정 클래스 다 적용 </h5>
+	<h5 class="cls02"> 특정 클래스 다 적용 </h5>
+	<input type="text" class="cls02"/><br>
+	<input type="text"/><br>
+	<input type="text" class="cls02"/>
+	<table id="tab01" width="70%" border>
+		<tr id="ex1"><th> 물건명 </th><th> 가격 </th></tr>
+		<tr><td> 사과 </td><td class="ex11"> 3000 </td></tr>
+		<tr><td> 딸기 </td><td class="ex11"> 6000 </td></tr>
+		<tr><td> 바나나 </td><td class="ex11"> 4000 </td></tr>
+	</table>
+	<table id="tab02" width="70%" border>
+		<tr id="ex1"><th> 물건명 </th><th> 가격 </th></tr>
+		<tr><td> 사과 </td><td class="ex11"> 3000 </td></tr>
+		<tr><td> 딸기 </td><td class="ex11"> 6000 </td></tr>
+		<tr><td> 바나나 </td><td class="ex11"> 4000 </td></tr>
+	</table>
 </body>
 <script type="text/javascript">
 /*
@@ -32,6 +54,41 @@
 	h2Obj.style.backgroundColor="pink";
 	ch01.style.backgroundColor="pink";
 	cls01.style.backgroundColor="pink";
+	// document.querySelectorAll는 배열로 선언디 된다.
+	var h4Arry = document.querySelectorAll("h4");
+	var cls02Arry = document.querySelectorAll(".cls02");
+	// 반복문을 활용한다. for(var idx=0; idx<배열객체.length; idx++)
+	for(var idx=0; idx<h4Arry.length; idx++) {
+		h4Arry[idx].style.color="blue";
+	}
+	for(var idx=0; idx<cls02Arry.length; idx++) {
+		cls02Arry[idx].style.backgroundColor="yellow";
+	}
+
+/*
+ ex) 1번째 테이블을 만들고 tr에 id를 설정한 경우 td 태그, td 클래스 설정으로 단일 객체를 호출하고
+	 2번째 테이블에 tr태그와 td클래스 설정으로 여러개의 객체를 호출하여 배경색상과 글자색상이 처리되게 하세요.
+ */
+ 	var ex1Obj = document.querySelector("#tab01 #ex1");
+ 	ex1Obj.style.backgroundColor="navy";
+ 	ex1Obj.style.color="yellow";
+ 	var tdObj = document.querySelector("#tab01 td");
+ 	tdObj.style.fontSize="30px";
+ 	var ex11Obj = document.querySelector("#tab01 td.ex11");
+ 	ex11Obj.style.textAlign="right";
+ 	
+ 	// 상위 하위객체
+	var ex1Arry = document.querySelectorAll("#tab02 td");
+	for(var idx=0; idx<ex1Arry.length; idx++) {
+		ex1Arry[idx].style.fontSize="30px";
+	}
+	
+	// 상위 하위객체.속성클래스
+	var ex11Arry = document.querySelectorAll("#tab02 td.ex11");
+	for(var idx=0; idx<ex11Arry.length; idx++) {
+		ex11Arry[idx].style.textAlign="right";
+	}
+	
 
 </script>
 </html>

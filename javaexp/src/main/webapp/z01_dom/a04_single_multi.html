@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title> a04_single_multi </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+	<h1 id="id01"> 안녕하세요 </h1> <!-- 아이디 설정 -->
+	<h2> 안녕하세요(단일) </h2> <!-- 태그 (단일) -->
+	<h2> 안녕하세요(단일) </h2> <!-- 태그 (단일) -->
+	<h3 class="cls01"> 안녕하세요(클래스 단일) </h3> <!-- 클래스 설정 (단일) -->
+	<h3> 안녕하세요(클래스 단일) </h3>
+	<h3 class="cls01"> 안녕하세요(클래스 단일) </h3> <!-- 클래스 설정 (단일) -->
+	<h4> 반가워요 (태그 다중) </h4>
+	<h4> 반가워요 (태그 다중) </h4>
+	<h4> 반가워요 (태그 다중) </h4>
+	<h5 class="cls02"> hello(클래스 다중) </h5> <!-- 클래스 설정(다중) -->
+	<h5> hello(클래스 다중) </h5>
+	<h5 class="cls02"> hello(클래스 다중) </h5> <!-- 클래스 설정(다중) -->
+	<h5> hello(클래스 다중) </h5>
+</body>
+<script type="text/javascript">
+/*
+ ex) h1~h3 
+ 		아이디, 태그, 클래스를 단일로 호출하여 배경색상을 설정하세요.
+ 	 h4~h5
+ 	 	태그와 클래스를 다중으로 호출하여 글자색상을 변경하세요.
+ */
+ 		// h1~h3 아이디, 태그, 클래스를 단일로 호출하여 배경색상
+		var id01 = document.querySelector("#id01");	
+ 		var h2Obj = document.querySelector("h2");
+ 		var cls01 = document.querySelector(".cls01");
+ 		id01.style.backgroundColor="red";
+ 		h2Obj.style.backgroundColor="green";
+ 		cls01.style.backgroundColor="blue";
+ 		 		
+ 		// h4,h5 태그와 클래스를 다중으로 호출하여 글자색상
+ 		var h4Arry = document.querySelectorAll("h4");
+ 		var cls02Arry = document.querySelectorAll(".cls02");
+ 		for(var idx=0; idx<h4Arry.length; idx++) {
+ 			h4Arry[idx].style.color="navy";
+ 		}
+ 		for(var idx=0; idx<cls02Arry.length; idx++) {
+ 			cls02Arry[idx].style.color="blue";
+ 		}
+
+
+</script>
+</html>
