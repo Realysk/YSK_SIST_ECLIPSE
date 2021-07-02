@@ -3,12 +3,11 @@
 -- JSTUDY 커뮤니티 : 자유 게시판
 
 CREATE TABLE JSCOM_FREE (
-	writeNum number, -- 게시물 번호
-	writeTitle varchar2(300), -- 게시물 제목
-	writer varchar2(100), -- 게시물 작성자
-	writeDate date, -- 게시물 작성일자
-	writeCont varchar2(300) -- 게시물 내용
-);
+	writeNum number(10) PRIMARY KEY, -- 게시물 번호
+	writeTitle varchar2(300) CONSTRAINT JSCOM_FREE_writeNum_nn NOT NULL, -- 게시물 제목
+	writer varchar2(100) CONSTRAINT JSCOM_FREE_writer_nn NOT NULL, -- 게시물 작성자
+	writeDate date CONSTRAINT JSCOM_FREE_writeDate_nn NOT NULL, -- 게시물 작성일자
+	writeCont varchar2(300) CONSTRAINT JSCOM_FREE_writeCont_nn NOT NULL); -- 게시물 내용
 
 INSERT INTO JSCOM_FREE VALUES (6, '반갑습니다!', '홍시', sysdate ,'홈페이지 제작 처음입니다!');
 INSERT INTO JSCOM_FREE VALUES (5, '너무 좋은 사이트네요ㅎㅎ', 'himan', TO_DATE('2021-06-26 07:12:36','YYYY-MM-DD HH:MI:SS'), '저는 현직 개발자입니다!');
@@ -20,15 +19,15 @@ INSERT INTO JSCOM_FREE VALUES (1, '안녕하세요!', '홍길동', TO_DATE('2021
 SELECT writeNum "No", writeTitle "제목", writer "작성자", writeDate "작성 일자", writeCont "내용"
 FROM JSCOM_FREE;
 
+
 -- JSTUDY 커뮤니티 : 스터디
 
 CREATE TABLE JSCOM_STUDY (
-	writeNum number, -- 게시물 번호
-	writeTitle varchar2(300), -- 게시물 제목
-	writer varchar2(100), -- 게시물 작성자
-	writeDate date, -- 게시물 작성일자
-	writeCont varchar2(300) -- 게시물 내용
-);
+	writeNum number(10) PRIMARY KEY, -- 게시물 번호
+	writeTitle varchar2(300) CONSTRAINT JSCOM_STUDY_writeNum_nn NOT NULL, -- 게시물 제목
+	writer varchar2(100) CONSTRAINT JSCOM_STUDY_writer_nn NOT NULL, -- 게시물 작성자
+	writeDate date CONSTRAINT JSCOM_STUDY_writeDate_nn NOT NULL, -- 게시물 작성일자
+	writeCont varchar2(300) CONSTRAINT JSCOM_STUDY_writeCont_nn NOT NULL); -- 게시물 내용
 
 INSERT INTO JSCOM_STUDY VALUES (6, 'SPRING이란?', '봄이왔네요', sysdate, '봄입니다...');
 INSERT INTO JSCOM_STUDY VALUES (5, 'JSP 1강입니다', 'jsp일타강사', TO_DATE('2021-06-27 01:07:46','YYYY-MM-DD HH:MI:SS'), 'JSP 1강입니다');
@@ -43,12 +42,11 @@ FROM JSCOM_STUDY;
 -- JSTUDY 커뮤니티 : 질문 답변
 
 CREATE TABLE JSCOM_QNA (
-	writeNum number, -- 게시물 번호
-	writeTitle varchar2(300), -- 게시물 제목
-	writer varchar2(100), -- 게시물 작성자
-	writeDate date, -- 게시물 작성일자
-	writeCont varchar2(300) -- 게시물 내용
-);
+	writeNum number(10) PRIMARY KEY, -- 게시물 번호
+	writeTitle varchar2(300) CONSTRAINT JSCOM_QNA_writeNum_nn NOT NULL, -- 게시물 제목
+	writer varchar2(100) CONSTRAINT JSCOM_QNA_writer_nn NOT NULL, -- 게시물 작성자
+	writeDate date CONSTRAINT JSCOM_QNA_writeDate_nn NOT NULL, -- 게시물 작성일자
+	writeCont varchar2(300) CONSTRAINT JSCOM_QNA_writeCont_nn NOT NULL); -- 게시물 내용
 
 INSERT INTO JSCOM_QNA VALUES (6, '호환성 질문이요', '쉽지않네요', sysdate, '맥이랑 호환성 좋나요?');
 INSERT INTO JSCOM_QNA VALUES (5, '질문', '마길자', TO_DATE('2021-06-27 04:42:27','YYYY-MM-DD HH:MI:SS'), '안녕하세요~');
@@ -60,11 +58,25 @@ INSERT INTO JSCOM_QNA VALUES (1, '뭐하는 사이트에요?', '여긴어디지'
 SELECT writeNum "No", writeTitle "제목", writer "작성자", writeDate "작성 일자", writeCont "내용"
 FROM JSCOM_QNA;
 
+-- 게시물 번호 sequence
+
+DROP SEQUENCE JSCOM_SEQ;
+CREATE SEQUENCE JSCOM_SEQ
+	INCREMENT BY 1
+	START WITH 1
+	MINVALUE 1
+	MAXVALUE 999999;
+
+SELECT JSCOM_SEQ.nextval "게시물 번호"
+FROM JSCOM_FREE;
+
+-- join 예정
+
 -- JSTUDY 커뮤니티 : 검색 내역
 
 CREATE TABLE JSCOM_SEARCH (
 	jsLoc varchar2(300), -- 검색 지역
-	writeNum number -- 게시물 번호
+	writeNum number(10) PRIMARY KEY -- 게시물 번호
 );
 
 INSERT INTO JSCOM_SEARCH VALUES ('서울 중랑구', 1);
@@ -86,19 +98,19 @@ FROM JSCOM_SEARCH;
 -- SQL (연관 관계 필수 - join)
 
 -- 작성자가 'byeman'인 사용자의 자유 게시판 게시물 정보 출력
-SELECT jf.*
+SELECT jf.*, jsLoc
 FROM JSCOM_FREE jf, JSCOM_SEARCH js2
 WHERE jf.writeNum=js2.writeNum
 AND writer = 'byeman';
 
 -- 작성자가 'byeman'인 사용자의 스터디 게시판 게시물 정보 출력
-SELECT js.*
+SELECT js.*, jsLoc
 FROM JSCOM_STUDY js, JSCOM_SEARCH js2
 WHERE js.writeNum=js2.writeNum
 AND writer = 'byeman';
 
 -- 작성자가 'byeman'인 사용자의 질문 답변 게시판 게시물 정보 출력
-SELECT jq.*
+SELECT jq.*, jsLoc
 FROM JSCOM_QNA jq, JSCOM_SEARCH js2
 WHERE jq.writeNum=js2.writeNum
 AND writer = 'byeman';
