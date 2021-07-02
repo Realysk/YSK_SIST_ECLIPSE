@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title> a03_single_multi </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+	<h2> 안녕(태그가 하나뿐/첫번째..) </h2>
+	<h2> 안녕(태그가 하나뿐/첫번째.) </h2>
+	<h2> 안녕(태그가 하나뿐/첫번째.) </h2>
+	<h3 id="ch01"> 반갑습니다(아이디) </h3>
+	<h3 class="cls01"> 클래스 중 하나뿐/첫번째 </h3>
+	<h3 class="cls01"> 클래스 중 하나뿐/첫번째 </h3>
+	<h3 class="cls01"> 클래스 중 하나뿐/첫번째 </h3>
+</body>
+<script type="text/javascript">
+/*
+	2) 단일/다중
+		- body 기준은 하나의 태그 또는 태그 중 첫번째, .클래스 중에서 첫번째인 것, #아이디명으로 호출하여 사용할 것은 단일 호출 DOM 객체인 document.querySelector("선택자"); 로 처리한다.
+		- 여러 개의 태그, 어러 개의 class 속성의 DOM객체를 선택하여 사용하는 것은 document.quertSelectorAll("선택자");로 호출하여 사용할 수 있다.
+ */
+	var h2Obj = document.querySelector("h2");
+	var ch01 = document.querySelector("#ch01");
+	var cls01 = document.querySelector(".cls01");
+	h2Obj.style.backgroundColor="pink";
+	ch01.style.backgroundColor="pink";
+	cls01.style.backgroundColor="pink";
+
+</script>
+</html>

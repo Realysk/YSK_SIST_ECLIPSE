@@ -84,9 +84,18 @@ GRANT CONNECT,RESOURCE,UNLIMITED TABLESPACE TO himan2 IDENTIFIED BY 9999;
  	1. 서버에서 계정의 생성
  	2. 서버 vs 클라이언트 접속
  		1) 서버는 식별되는 ip/port/sid 계정/비밀번호
- 			cmd- ipconfig - (학원에서 설정하면 학원에서만 됨) 서버 ip 주소 : (강사님 자리 IP) 211.63.89.68 (내 자리 IP : 211.63.89.81)/1521/xe scott/tiger
+ 			 (학원에서 설정하면 학원에서만 됨)
+ 			 cmd- ipconfig - 서버 ip 주소 : (강사님 자리 IP) 211.63.89.68 (내 자리 IP : 211.63.89.81) / 1521 / xe scott / tiger
  		2) 클라이언트는 서버에 있는 위 정보를 기준으로 DB 서버에 접속을 한다.
  		3) 서버 pc의 방화벽 풀기
+ DB 서버 가장 좋은 방법
+	1. 고정 ip 임대
+	2. 학원 pc, 집에 pc 연동하여 서버로 설정. 임대한 고정 ip와 연동
+	3. 해당 server pc
+		1) visual svn 설치 (소스 공유)
+		2) webserver tomcat (eclipse에서 설정)
+		3) db server xe 설치
+	4. 외부에서 고정 ip로 어느 곳에서나 접속하여 개발을 할 수 있다.
  */
 
 CREATE USER goodman IDENTIFIED BY 8888;
