@@ -12,7 +12,8 @@
 		comStudy : 스터디
 		comQna : 질문 답변
 		comQuiz : Quiz
-		comWrite : 글쓰기
+		comWrite : 글 쓰기
+		recieveWrite.jsp : 글 등록
 		comCheck : 게시물 조회
 		
 고객센터 페이지

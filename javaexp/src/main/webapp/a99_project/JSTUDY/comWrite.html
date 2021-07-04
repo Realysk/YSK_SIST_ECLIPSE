@@ -2,17 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> JSTUDY : 글쓰기 </title>
+<title> J-STUDY 커뮤니티 : 글쓰기 </title>
 <style type="text/css">
-/*
-
- */
-
 
 </style>
 </head>
 <body>
-	<form name="게시물 글쓰기" action="recieveWrite.jsp" method="post" enctype="multipart/form-data">
+	<form name="게시물 글쓰기" action="recieveWrite.jsp">
+	<!-- <form name="게시물 글쓰기" action="recieveWrite.jsp" method="post" enctype="multipart/form-data">  -->
 		<table align="center" width="400px">
 			<tr>
 				<td width="100" name="cMain" class="comMenu"><a href="comIndex.html"> 메인 </a></td>
@@ -25,24 +22,24 @@
 		<h2 align="center"> JSTUDY 커뮤니티 : 글쓰기 </h2>
 		<table align="center" width="700" height="300" border>
 			<tr>
-				<td><textarea style="margin: 0px; width: 786px; height: 26px;"> 제목을 입력하세요. </textarea></td>
+				<td><input type="text" name="headline" value="게시물 제목" style="margin: 0px; width: 786px; height: 26px;"/></td>
 			</tr>
 			<tr>
 				<td align="center">
 					<span><img width="17px" height="17px" src="https://img.icons8.com/ios-glyphs/30/000000/image-file.png"/></span>
-					<input type="file" name="imageUpload" accept="image/*" multiple/>	
+					<input type="file" name="imageUpload" value="이미지 업로드" accept="image/*" multiple/>	
 					<span><img width="17px" height="17px" src="https://img.icons8.com/ios-glyphs/15/000000/document--v2.png"/></span>
-					<input type="file" name="fjleUpload" accept="file/*" multiple/>			
+					<input type="file" name="fjleUpload" value="파일 업로드" accept="file/*" multiple/>			
 				</td>
 			</tr>	
 			<tr>
-				<td><textarea style="margin: 0px; width: 785px; height: 504px;"> 내용을 입력하세요. </textarea></td>
+				<td><input type="text" name="contents" value="게시물 내용" style="margin: 0px; width: 785px; height: 504px;"/></td>
 			</tr>
 		<br>
 		</table>
 		<table align="right" width="600px">
 		<tr>
-			<td><input type="submit" width="100px" value="등록"/></td>
+			<td><input type="submit" value="등록"/></td>
 		</tr>
 		</table>
 	</form>
