@@ -1,6 +1,19 @@
 
+메인 페이지
+	Main : 메인 페이지
+	mainIndex : 메인 페이지 내의 내용
 
-JStudy 메인페이지입니다
-
-Main : 메인페이지
-index : 메인페이지 내의 내용부분 
+강의 페이지
+	lecIndex : 강의목록 페이지 내의 내용
+	
+커뮤니티 페이지
+	comIndex : 커뮤니티 페이지 내의 내용
+		comFree : 자유 게시판
+		comStudy : 스터디
+		comQna : 질문 답변
+		comQuiz : Quiz
+		comWrite : 글쓰기
+		comCheck : 게시물 조회
+		
+고객센터 페이지
+	helpIndex : 고객센터 페이지 내의 내용

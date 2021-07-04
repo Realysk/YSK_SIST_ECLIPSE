@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSTUDY : 스터디</title>
+<style type="text/css">
+	html, body {font-family:'Black Han Sans', sans-serif; margin:0px; padding:0px; height:100%;}
+	[name=ifr] {background:white;}
+	.comMenu {text-align:center;}
+	.comMenu:hover {background:yellow; text-align:center;}
+ 	.comTab {text-align:center;} /* 게시판 - 텍스트 중앙 정렬 */
+	#title:hover {color:purple;} /* 게시판 제목란에만 purple로 hover 적용 */
+</style>
+</head>
+<body align="center">
+<!-- HTML 적용 -->
+<!-- target='_blank' : 새 창으로 열기 -->
+	<h2> J-STUDY : 스터디 </h2>
+	<form name="게시물 조회" action="comCheck.html" method="post" enctype="multipart/form-data">
+		<div>
+			<table align="center" width="400px">
+				<tr>
+					<td width="100" name="cMain" class="comMenu"><a href="comIndex.html"> 메인 </a></td>
+					<td width="100" name="cFree" class="comMenu"><a href="comFree.html"> 자유 </a></td>
+					<td width="100" name="cStudy" class="comMenu"><a href="comStudy.html"> 스터디 </a></td>
+					<td width="100" name="cQna" class="comMenu"><a href="comQna.html"> 질문 답변 </a></td>
+					<td width="100" name="cQuiz" class="comMenu"><a href="comQuiz.html"> QUIZ </a></td>
+				</tr>
+			</table>
+			<table align="center" class="comTab">
+				<h3> [스터디] 최신 글 </h3>
+				<tr>
+					<th> No. </th><th> 제목 </th><th> 작성자 </th><th> 작성일 </th>
+				</tr>
+				<tr><td> 2 </td><td id="title"> JAVA 1강 </td><td> 일타강사 </td><td> 2021.06.28 19:15:17 </td></tr>
+			</table>
+			<hr>
+			<table align="center" class="comTab">
+				<h3> [통합] 전체 글 </h3>
+				<tr>
+					<th> No. </th><th> 제목 </th><th> 작성자 </th><th> 작성일 </th>
+				</tr>
+				<tr><td> 5 </td><td id="title"> 반갑습니다. </td><td> 익명 </td><td> 2021.06.30 13:04:34 </td></tr>
+				<tr><td> 4 </td><td id="title"> 질문입니다! </td><td> 초보에요 </td><td> 2021.06.29 15:12:46 </td></tr>
+				<tr><td> 3 </td><td id="title"> 여기는 뭐하는 곳이죠? </td><td> byeman </td><td> 2021.06.29 07:34:22 </td></tr>
+				<tr><td> 2 </td><td id="title"> JAVA 1강 </td><td> 일타강사 </td><td> 2021.06.28 19:15:17 </td></tr>
+				<tr><td> 1 </td><td id="title"> 안녕하세요! </td><td> 홍길동 </td><td> 2021.06.28 17:04:34 </td></tr>
+			</table><br>
+		</div>
+	</form>
+	
+	<form name="게시물 글쓰기" action="comWrite.html" method="post" enctype="multipart/form-data">
+		<a href="comuWrite.html"><input type="submit" id="writeBtn" value="글쓰기"/></a>
+	</form>
+</body>
+<script type="text/javascript">
+/*
+ JS 함수 적용
+*/
+</script>
+</html>
