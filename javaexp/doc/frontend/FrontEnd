@@ -83,9 +83,11 @@
 			- css3 속성 : border-radius
 			- background-XXX : 배경 관련 속성
 			- 줄 바꿈 관련 속성 : display - block, inline, inline, inline-block
-			- 위치 관련 속성 : position
-			- visibility
-			- overflow
+			- 위치 관련 속성 : position, top, bottom, left, right
+				상대/절대 위치로 특정한 요소 객체를 화면에서 처리될 때 활용 된다.
+			- visibility : 화면에서 특정한 경우에 보이게 하거나 보이지 않게 처리할 때 활용 된다.
+				visible|hiddens
+			- overflow : css나 기본 내용으로 범위를 지정 했는데 해당 범위를 넘었을 때 auto, hidden
 			
 	5. Java Script
 		위에 html을 통해서 선언 된 화면의 구성 요소들에 함수나 객체화를 통해서 동적인 처리(event)를 하고자 한다.
@@ -171,14 +173,20 @@
 		8) 이벤트 처리
 			- 대상 객체 : DOM 지정
 			- 이벤트 함수 선언 : 이벤트를 통해서 수행 할 내용을 함수로 정의 하는 것을 말한다.
-			- 이벤트 처리 : 이벤트 즉 클릭, 마우스 오버, 마우스 아웃, Key 입력
+			- 이벤트 처리 : 이벤트 즉 클릭, 마우스 오버, 마우스 아웃, Key 입력 (자판기의 특정 키를 입력 시 이벤트 처리)
+				ex) DOM 객체.onkeyup=function() {
+					// 특정한 요소 객체 안에서 입력을 했을 때
+					// event.keyCode : 고유의 key의 코드값을 가져와서 어떤 키가 입력 되었는지 변수로 할당되어있어 특정 키를 눌렀을 때 처리할 내용을 기술할 수 있다.
+				}
 			
 			사람 (대상객체)
 			속성 듣기 (이벤트)
 			듣고 나서 처리한 내용 (이벤트핸들러함수)
-			function call(){}
+			
+			function call() {}
 			<h2 onclick="call()"> 클릭 </h2>
 			
+			<h1> 클릭(DOM)익명함수이벤트 </h1>
 			var h1Obj = document.querySelector("h1");
 			h1Obj.onclick = function() {
 				// 익명함수에 의해서 처리될 내용 기술

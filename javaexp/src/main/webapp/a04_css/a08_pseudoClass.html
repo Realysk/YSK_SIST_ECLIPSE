@@ -102,6 +102,31 @@
 </body>
 <script type="text/javascript">
 /*
+ # js에서의 선택자와 속성 처리.
+ 	1. js에서 DOM객체는 초기 선언으로 선택자와 속성을 선언할 수 있다.
+ 	2. DOM객체는 event에 의해 동적으로 다른 DOM의 속성을 변경함으로 동적인 처리를 할 수 있다.
+ 	3. 선택자는 단일이냐 다중이냐에 따라 아래와 같이 객체를 선택할 수 있고 css와 동일한 선택자 형식을 이용하여 특정한 요소 객체를 지정할 수 있다.
+ 		var obj = document.querySelector("css선택자"); // 단일 객체
+ 		var array = document.querySelectorAll("css선택자"); // 다중 객체
+ 		obj.속성 = "속성값"; // 태그의 기본 속성을 변경할 때 활용 된다.
+ 			ex) <input name="속성값" : name, value
+ 				<h2 : align
+ 				<img : src, width, height, alt 등등
+ 				<table : align, width, height
+ 		obj.style.속성 = "속성값"; // 태그의 inline css 속성을 변경할 때 활용 된다.
+ 			ex) <h2 style="background-color:yellow;"
+ 				obj.style.backgroundColor="yellow";
+ 		배열인 경우 for(var idx=0; idx<array.length; idx++) {
+ 			array[idx].속성
+ 			array[idx].style.속성
+ 		}
+ 	4. dom의 출력 속성
+ 		1) .innerHTML
+ 		2) .innerText
+ 		3) .value
+ */
+
+/*
 	1. 대상 객체 ?
 		ex) checkbox radio 객체를 다중으로 선택 DOM 선언.
 			js에서 사용되는 querySelector, querySelectorAll은 css의 선택자와 동일한 처리를 할 수 있다.
