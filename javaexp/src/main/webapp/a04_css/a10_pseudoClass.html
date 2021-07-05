@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title> a10_pseudoClass </title>
+<style type="text/css">
+/*
+ # 구조 선택자
+ 	1. 구조에 따라 특정한 위치에 속하는 태그를 선택할 수 있는 선택자를 말한다.
+ 	2. 주요 키워드
+ 		child : 같은 부모를 둔 형제 객체를 지칭할 때 사용되는 접미어이다.
+ 		nth- : 순서를 지정하는 부분으로 위 접미어와 합성하여 같은 부모를 둔 특정한 위치에 있는 요소 객체를 선택할 때 사용된다.
+ 			ex) nth-child(1)
+ 				nth-child(반복할횟수n1 + n2) (n1개 단위로 n2번째) : 같은 부모를 둔 반복할 횟수로 해당 css 선언할 때 사용된다.
+ */
+
+	/* td:nth-child(1) {background-color:yellow;} */
+	tr:nth-child(4n+4) {background-color:pink;}
+	
+/*
+		1) 첫 번째와 마지막에 대한 선택
+			last-child : 마지막 요소를 선택
+			first-child : 첫 번째 요소를 선택
+*/
+
+	h2:last-child, h2:first-child {color:orange; background-color:purple}
+	
+/*
+ ex1) div 하위에 h2 6개씩 넣고 h2의 두 번째 글자색상을 노란색, h2의 3개씩 단위로 배경색상이 파란색이 되게 처리하세요.
+*/
+	div>h2:nth-child(2) {color:yellow;}
+	div>h2:nth-child(3n) {background-color:blue;}
+	
+/*
+ ex2) 테이블의 td의 첫 번째를 클릭하면 배경색이 변하고 글자 내용이 '클릭되었습니다'로 출력되게 처리하세요.
+*/
+	#id01:first-child {background-color:pink;}
+
+</style>
+</head>
+<body>
+	<table width="70%" border>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+	</table>
+	<table width="70%" border>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+		<tr><td> 번호 </td><td> 물건명 </td><td> 가격 </td></tr>
+	</table>
+	
+	<!-- ex1 -->
+	<div>
+		<h2> 예제문제용 </h2>
+		<h2> 예제문제용 </h2>
+		<h2> 예제문제용 </h2>
+		<h2> 예제문제용 </h2>
+		<h2> 예제문제용 </h2>
+		<h2> 예제문제용 </h2>
+	</div>
+	<div>
+		<h2> 예제문제용 </h2>
+		<h2> 예제문제용 </h2>
+		<h2> 예제문제용 </h2>
+		<h2> 예제문제용 </h2>
+		<h2> 예제문제용 </h2>
+		<h2> 예제문제용 </h2>
+	</div>
+	
+	<!-- ex2 -->
+	<table width="70%" border>
+		<tr><td id="id01" onclick="id01()"> 예제문제용2 </td></tr>
+		<tr><td> 예제문제용2 </td></tr>
+		<tr><td> 예제문제용2 </td></tr>
+		<tr><td> 예제문제용2 </td></tr>
+		<tr><td> 예제문제용2 </td></tr>
+		<tr><td> 예제문제용2 </td></tr>
+	</table>
+	<table width="70%" border>
+		<tr><td id="id01" onclick="id01()"> 예제문제용2 </td></tr>
+		<tr><td> 예제문제용2 </td></tr>
+		<tr><td> 예제문제용2 </td></tr>
+		<tr><td> 예제문제용2 </td></tr>
+		<tr><td> 예제문제용2 </td></tr>
+		<tr><td> 예제문제용2 </td></tr>
+	</table>
+</body>
+<script type="text/javascript">
+/*
+ex2) 테이블의 td의 첫 번째를 클릭하면 배경색이 변하고 글자 내용이 '클릭되었습니다'로 출력되게 처리하세요.
+*/
+	function id01() {
+		var id01Obj = document.querySelector("#id01:first-child");
+		id01Obj.innerText("클릭되었습니다");
+	}
+
+</script>
+</html>
