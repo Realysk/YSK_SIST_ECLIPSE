@@ -10,6 +10,7 @@
 	.comMenu:hover {background:yellow; text-align:center;}
  	.comTab {text-align:center;} /* 게시판 - 텍스트 중앙 정렬 */
 	#title:hover {color:purple;} /* 게시판 제목란에만 purple로 hover 적용 */
+	td {text-align:center;}
 </style>
 </head>
 <body align="center">
@@ -46,6 +47,7 @@
 				<tr><td> 1 </td><td id="title"> 안녕하세요! </td><td> 홍길동 </td><td> 2021.06.28 17:04:34 </td></tr>
 			</table><br>
 		</div>
+		<iframe name="cfr" src="comCheck.html" width="80%" height="500"></iframe>
 	</form>
 	
 	<form name="게시물 글쓰기" action="comWrite.html" method="post" enctype="multipart/form-data">	
@@ -53,8 +55,8 @@
 	</form>
 </body>
 <script type="text/javascript">
-/*
- JS 함수 적용
-*/
+	function comCheck() {
+		cfr.location.href = 'comCheck.html';
+	}
 </script>
 </html>

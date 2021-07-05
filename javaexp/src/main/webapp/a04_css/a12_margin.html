@@ -26,9 +26,14 @@
 </body>
 <script type="text/javascript">
 /*
-
+ ex) 두 번째 div에 왼쪽 여백을 50px로 처리되게 하세요. (JS)
  */
-
-
+ 	var divArry = document.querySelectorAll("div");
+ 	divArry[1].style.marginLeft="50px";
+ 	var divObj = document.querySelector("div:nth-child(2)");
+ 	divObj.style.backgroundColor="green";
+ 	divObj.style.marginLeft="50px";
+ 
+ 
 </script>
 </html>
