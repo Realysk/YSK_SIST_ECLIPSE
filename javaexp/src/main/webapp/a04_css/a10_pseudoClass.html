@@ -34,7 +34,12 @@
 /*
  ex2) 테이블의 td의 첫 번째를 클릭하면 배경색이 변하고 글자 내용이 '클릭되었습니다'로 출력되게 처리하세요.
 */
-	#id01:first-child {background-color:pink;}
+	td:first-child {background-color:pink;}
+	
+/*
+ ex3) table 3X3 테이블을 만들고 첫 번째와 마지막 td의 배경 색상을 노란색으로 하고 클릭했을 때 중앙정렬하면서 ★로 표시
+ */
+	#id02Arry:last-child, #id02Arry:first-child {background-color:yellow;}
 
 </style>
 </head>
@@ -76,7 +81,7 @@
 	
 	<!-- ex2 -->
 	<table width="70%" border>
-		<tr><td id="id01" onclick="id01()"> 예제문제용2 </td></tr>
+		<tr><td id="id01Arry"> 예제문제용2 </td></tr>
 		<tr><td> 예제문제용2 </td></tr>
 		<tr><td> 예제문제용2 </td></tr>
 		<tr><td> 예제문제용2 </td></tr>
@@ -84,22 +89,53 @@
 		<tr><td> 예제문제용2 </td></tr>
 	</table>
 	<table width="70%" border>
-		<tr><td id="id01" onclick="id01()"> 예제문제용2 </td></tr>
+		<tr><td> 예제문제용2 </td></tr>
 		<tr><td> 예제문제용2 </td></tr>
 		<tr><td> 예제문제용2 </td></tr>
 		<tr><td> 예제문제용2 </td></tr>
 		<tr><td> 예제문제용2 </td></tr>
 		<tr><td> 예제문제용2 </td></tr>
 	</table>
+	
+	<!-- ex3 -->
+	<table width="70%" border>
+		<tr><td id="id02Arry"> 예제3 </td><td> 예제3 </td><td id="id02Arry"> 예제3 </td></tr>
+		<tr><td id="id02Arry"> 예제3 </td><td> 예제3 </td><td id="id02Arry"> 예제3 </td></tr>
+		<tr><td id="id02Arry"> 예제3 </td><td> 예제3 </td><td id="id02Arry"> 예제3 </td></tr>
+	</table>
 </body>
 <script type="text/javascript">
 /*
 ex2) 테이블의 td의 첫 번째를 클릭하면 배경색이 변하고 글자 내용이 '클릭되었습니다'로 출력되게 처리하세요.
 */
-	function id01() {
-		var id01Obj = document.querySelector("#id01:first-child");
-		id01Obj.innerText("클릭되었습니다");
+	
+	var id01Arry = document.querySelectorAll("td:first-child");
+	console.log("크기 : " + id01Arry.length);
+	for(var idx=0; idx<id01Arry.length; idx++) {
+		id01Arry[idx].innerText = "클릭하세요";
+		id01Arry[idx].onclick=function() {
+			this.style.backgroundColor="yellow";
+			this.innerText = "클릭되었습니다"
+		}
 	}
+
+/*
+ ex3) table 3X3 테이블을 만들고 첫 번째와 마지막 td의 배경 색상을 노란색으로 하고 클릭했을 때 중앙 정렬하면서 ★로 표시
+ 
+ 1. 에러 처리 (f12)
+ 2. 태그의 기본 속성, css 속성, js의 속성 처리
+ 3. 배열 index에 대한 이해, for문과의 관계이해
+ */
+ 
+ 	var id02Arry = document.querySelectorAll("#id02Arry:last-child, #id02Arry:first-child");
+ 	console.log("크기 : " + id02Arry.length);
+ 	for(var idx=0; idx<id02Arry.length; idx++) {
+ 		id02Arry.style.backgroundColor = "yellow";
+ 		id02Arry[idx].onclick = function() {
+ 			this.style.align = "center";
+ 			this.innerText = "★"
+ 		}
+ 	}
 
 </script>
 </html>

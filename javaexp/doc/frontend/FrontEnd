@@ -214,3 +214,28 @@
 					split(정규표현식) : 문자열을 잘라 배열 패턴으로 처리
 			- 구글 맵 API 활용하기
 			- 브라우저 저장소 Cookie
+			
+# DOM 객체 활용
+	1. body 특정 태그 선언하고
+	2. 해당 태그를 객체로 호출
+		1) 1개?
+		2) 여러개?
+	3. body의 태그들 기본 속성들이 무엇인지
+		js에서 호출하는 방법
+		align
+		width
+		# 출력 기본 형식의 차이
+			innerText
+			innerHTML
+	4. body의 style 속성들이 무엇인지와 js에서 호출하는 방법
+		style.backgroundColor
+		style.color
+		style.textAlign
+	5. 배열과 for문과의 관계와 기본 형식
+		1) index란 무엇인지
+		2) 배열.length
+	6. 이벤트 처리
+		1) 이벤트의 대상
+		2) 이벤트 종류
+		3) 이벤트 핸들러
+	7. css의 여러가지 선택자를 통한 처리

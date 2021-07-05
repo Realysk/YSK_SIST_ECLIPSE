@@ -8,15 +8,15 @@
 	lecIndex.html : 강의목록 페이지 내의 내용
 	
 커뮤니티 페이지
-	Community.html : 커뮤니티 페이지
-		comIndex.html : 커뮤니티 페이지 내의 내용
-			comFree.html : 자유 게시판
-			comStudy.html : 스터디
-			comQna.html : 질문 답변
-			comQuiz.html : Quiz
-			comWrite.html : 글 쓰기
-			recieveWrite.jsp : 게시물 등록 데이터
-			comCheck.html : 게시물 조회
+	comIndex.html : 커뮤니티 페이지 내의 내용
+		comFree.html : 자유 게시판
+		comStudy.html : 스터디
+		comQna.html : 질문 답변
+		comQuiz.html : Quiz
+		recieveQuiz.jsp : Quiz 등록 데이터
+		comWrite.html : 글 쓰기
+		recieveWrite.jsp : 게시물 등록 데이터
+		comCheck.html : 게시물 조회
 		
 고객센터 페이지
 	helpIndex.html : 고객센터 페이지 내의 내용

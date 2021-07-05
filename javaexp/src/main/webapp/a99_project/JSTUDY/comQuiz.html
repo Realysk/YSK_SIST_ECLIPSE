@@ -16,7 +16,7 @@
 <!-- HTML 적용 -->
 <!-- target='_blank' : 새 창으로 열기 -->
 	<h2> J-STUDY 커뮤니티 : QUIZ </h2>
-	<form>
+	<form action="recieveQuiz.jsp">
 		<div>
 			<table align="center" width="400px">
 				<tr>
@@ -27,8 +27,12 @@
 					<td width="100" name="cQuiz" class="comMenu"><a href="comQuiz.html"> QUIZ </a></td>
 				</tr>
 			</table>
-			<table class="comTab" border>
-
+			<hr>
+			<table width="50%" align="center" border>
+				<tr><th><h1> ▶ J-STUDY QUIZ ◀ </h1></th></tr>
+				<tr><td><h2> 다음 문제를 보고 정답을 입력하세요! </h2></td></tr>
+				<tr><td><input name="quest" value="JAVA에서 가져 온 퀴즈 문제 출력" style="width:50%; font-size:30px;" readonly/></td></tr>
+				<tr><td><input type="text" name="usrAns" value="정답을 입력하세요!"/><input type="submit" name="answer" value="정답"/></td></tr>
 			</table>
 		</div>
 	</form>

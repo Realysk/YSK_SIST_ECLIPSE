@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> J-STUDY 커뮤니티 </title>
+<style type="text/css">
+
+html, body {
+	font-family: 'Black Han Sans', sans-serif;
+	margin:0px; padding:0px;
+	height:100%;
+}
+
+.header{
+	width:100%; height:15%; 
+}
+.nav{
+	width:30%; height:70%; float:left;
+	text-align:center; font-size:25pt;
+	background:orange;
+}
+.section {
+	width:70%; height:70%; float:left;
+	background:olivedrab;
+}
+.footer {
+	width:100%; height:15%; clear:both;
+	background: plum;
+}
+
+.category {
+	width:150px; height:30px;
+}
+
+.search {
+	color:purple;
+}
+
+[name=ifr]{
+	background:white;
+}
+
+.mainMenu{
+	text-align:center;
+}
+
+.mainMenu:hover{
+	background:black;
+	color:white;
+	text-align:center;
+}
+
+</style>
+<script type="text/javascript">
+
+
+
+</script>
+</head>
+<body>
+<!-- <img src="jstudy2.png" value="MainLogo">  -->
+	<header class="header"> 
+		 <table width="1000px" height="10%" align="center">
+			<tr align="center"><td><h1> J-STUDY </h1></td>
+			<td>
+				<table width="400px">
+					<tr>
+						<td width="100" name="mHome" onclick="home()" class="mainMenu"> 메인 </td>
+						<td width="100" name="mClass" onclick="lecture()" class="mainMenu"> 강의 </td>
+						<td width="100" name="mCom" onclick="community()" class="mainMenu"> 커뮤니티 </td>
+						<td width="100" name="mHelp" onclick="help()" class="mainMenu"> 고객센터 </td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<input type="text" value="강의명 입력" class="search" width="20px"> 
+				<input type="button" value="검색" class="search" width="30px">
+			</td>
+			<td>
+				<input type="button" value="장바구니">
+				<input type="button" value="로그인" name="btnlogin">
+			</td>
+		</table>
+
+	</header>
+	<nav class="nav"> MENU </nav>
+	<section class="section" align="center"> <br>
+		<iframe name="ifr" src="mainIndex.html" width="90%" height="90%">
+		
+		</iframe>
+	</section>
+	<footer class="footer" style="text-align:center; font-size:15px;">
+		<h4> 쌍용 교육센터 - 2조 </h4>
+		<hr>
+		<h5> 김지은, 김다은, 유혜진, 유성근, 이덕재 </h5>
+	</footer>
+
+</body>
+<script type="text/javascript">
+
+
+// 카테고리 객체
+var btnHome = document.querySelector("[name=btnhome]");
+var btnClass = document.querySelector("[name=btnclass]");
+var btnCom = document.querySelector("[name=btncom]");
+var btnHelp = document.querySelector("[name=btnhelp]");
+
+// 로그인 버튼
+var btnLogin = document.querySelector("[name=btnlogin]");
+
+// 메인 페이지 내의 내용
+function home() {
+	ifr.location.href = 'mainIndex.html';
+}
+
+// 강의목록 페이지 내의 내용
+function lecture() {
+	ifr.location.href = 'lecIndex.html';
+}
+
+// 커뮤니티 페이지 내의 내용
+function community() {
+	ifr.location.href = 'comIndex.html';
+}
+
+// 고객센터 페이지 내의 내용
+function help() {
+	ifr.location.href = 'helpIndex.html';
+}
+
+// 로그인 화면으로 이동
+btnLogin.onclick = function() {
+	ifr.location.href = 'login.html';
+	
+}
+
+</script>
+</html>
