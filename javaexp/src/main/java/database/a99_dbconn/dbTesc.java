@@ -11,8 +11,8 @@ public class dbTesc {
 			
 			 
 			//2] drivermanager 클래스의 getConnection() 메소드로 오라클에 연결 시도 
-//			String url = "jdbc:oracle:thin:@110.93.182.83:1521:xe"; // 학원 고정IP  
-			String url = "jdbc:oracle:thin:@localhost:1521:xe"; // 개인 DB
+			String url = "jdbc:oracle:thin:@110.93.182.83:1521:xe"; // 학원 고정IP  
+//			String url = "jdbc:oracle:thin:@localhost:1521:xe"; // 개인 DB
         	String user = "system";       
         	String password = "1111";
         	Connection conn = DriverManager.getConnection(url, user, password);  //외부자원 예외 발생 
