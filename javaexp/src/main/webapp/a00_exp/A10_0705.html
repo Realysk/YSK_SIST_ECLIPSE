@@ -13,26 +13,12 @@
 		2. DOM객체의 다중 설정과 단일 설정 처리를 테이블 tr, td 기준으로 처리하여 출력하세요.
 		
 		-->
-		<table width="200" height="50" border>
-			<tr>
-				<td> 단일 </td>
-			</tr>
-			<tr id="tr1">
-				<td id="td1"> 다중1 </td>
-			</tr>
-			<tr>
-				<td> 다중2 </td>
-			</tr>
-			<tr id="tr1">
-				<td id="td1"> 다중3 </td>
-			</tr>
-			<tr>
-				<td> 다중4 </td>
-			</tr>
-			<tr id="tr1">
-				<td id="td1"> 다중5 </td>
-			</tr>
-		</table>	
+			<table width="70%" border>
+				<tr><th> 물건명 </th></tr>
+				<tr><td> 사과 </td></tr>
+				<tr><td> 바나나 </td></tr>
+				<tr><td> 딸기 </td></tr>
+			</table>	
 		<!--
 		
 		3. css의 후손 선택자 선언방식 2가지를 기술하세요.
@@ -65,20 +51,16 @@
 	 -->
 </body>
 <script type="text/javascript">
-
-	var trObj = document.querySelector("tr");
-	trObj.style.backgroundColor = "yellow";
 	
-	var tr1 = document.querySelectorAll("#tr1");
-		for(var idx=0; idx<tr1.length; idx++) {
-			tr1[idx].style.backgroundColor = "blue";		
-		}
-
-	var td1 = document.querySelectorAll("#td1");
-		for(var idx=0; idx<td1.length; idx++) {
-			td1[idx].style.backgroundColor = "black";
-			td1[idx].style.color = "white";
-		}
+	var tdObj = document.querySelector("td"); // 단일 td의 첫 번째 데이터
+	// 글자크기 변경
+	tdObj.style.fontSize="30px";
+	
+	var tdArry = document.querySelectorAll("td"); // 다중의 td 전체 배열
+	for(var idx=0; idx<tdArry.length; idx++) {
+		tdArry[idx].align="center";
+		tdArry[idx].style.backgroundColor="yellow";
+	}
 	
 </script>
 </html>
