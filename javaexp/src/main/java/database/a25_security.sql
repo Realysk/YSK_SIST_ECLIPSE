@@ -11,6 +11,8 @@
  		5) backup any table : 테이블 백업 권한
  		6) create session : 데이터베이스에 접속할 수 있는 권한
  		7) create table/view/sequence/procedure : 데이터베이스의 객체들을 생성하는 권한. 
+ 		8) resource : 여러 객체들을 생성/사용 가능한 권한
+ 		9) dba : 관리자 권한으로 계정 생성 후 권한을 부여할 수 있음.
  */
 
 /*
@@ -88,6 +90,8 @@ GRANT CONNECT,RESOURCE,UNLIMITED TABLESPACE TO himan2 IDENTIFIED BY 9999;
  			 cmd- ipconfig - 서버 ip 주소 : (강사님 자리 IP) 211.63.89.68 (내 자리 IP : 211.63.89.81) / 1521 / xe scott / tiger
  		2) 클라이언트는 서버에 있는 위 정보를 기준으로 DB 서버에 접속을 한다.
  		3) 서버 pc의 방화벽 풀기
+ 			inbounce : 1521 port 열어줌.
+ 			outbounce : 1521 port 열어줌.
  DB 서버 가장 좋은 방법
 	1. 고정 ip 임대
 	2. 학원 pc, 집에 pc 연동하여 서버로 설정. 임대한 고정 ip와 연동

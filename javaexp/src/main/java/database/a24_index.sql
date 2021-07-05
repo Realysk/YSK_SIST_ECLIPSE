@@ -51,6 +51,7 @@ WHERE table_name = 'EMP34';
  		1) 기본 형식
  			create unique index 인덱스명
  			on 테이블(컬럼명)
+ 	3. 제약 조건 가운데 primary key는 자동으로 index도 함께 생성이 된다.
  */
 CREATE TABLE dept02
 AS SELECT * FROM dept;

@@ -9,14 +9,25 @@
  	1. style 태그를 통해서 전체 내용 적용
  	2. 각 태그마다 inline으로 css 속성 적용
  		<태그명 style="속성:속성값;"
+ 	3. css 속성 선언의 우선 순위
+ 		- 동일한 선택자에 다른 속성을 중복으로 선언할 때
+ 			1) 태그 옆에 바로 속성으로 처리 된 inline css 선언
+ 				<input style="속성:속성값;">
+ 			2) 상단 style
+ 				라인상 가장 마지막에 선언된 속성:속성값;
  */
 	h1{color:yellow;}
 	p{color:red;}
 	/* 공통되는 부분은 상단에 설정한다. */
+	
+	h1{color:green;}
 
 </style>
 </head>
-<body>	
+<body>
+	<h1> 안녕1 </h1>
+	<h1 style="color:navy;"> 안녕2 </h1>
+
 	<h1 style="background-color:navy"> 안녕하세요. </h1>
 	<h1 style="background-color:blue"> 안녕하세요. </h1>
 	<h1 style="background-color:green"> 안녕하세요. </h1>
