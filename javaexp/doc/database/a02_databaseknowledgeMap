@@ -47,7 +47,7 @@
 
 
 	
-# Database knowledgeMap
+# Database knowledgeMap - 엑스마인드맵 (xmindmap)
 	
 	1. Database의 개론
 	
@@ -57,7 +57,17 @@
 		2) where 조건문
 		3) 함수
 			단일 함수 : 문자, 숫자, 날짜, 기타 기능 함수
-			그룹 함수 : 그룹 함수
+			그룹 함수 : 그룹 함수 max, min
+				목적 : 데이터의 그룹변로 처리를 하는 목적
+					ex) 부서번호별 최고급여, 직책별 최저급여, 월별 평균급여
+						그룹되는 컬럼이 없으면 해당 테이블의 전체 데이터를 기준으로 가져온다.
+					select max(sal), min(sal), max(hiredate)
+					from emp; -- 해당 테이블의 전체 데이터 기준으로 함수 적용
+					select to_char(hiredate, 'MM'), max(sal)
+					from emp
+					group by to_char(hiredate,'MM)
+					having max(sal)>2000; -- 그룹함수를 기준으로 조건데이터 처리할 때 having을 활용
+					ex) 그룹 함수를 이용한 subquery (where, update)...
 		4) 테이블과 테이블의 join 관계
 			- join문 : 여러 테이블과 join을 처리하는 형식
 				select 테이블1.컬럼...., 테이블2.컬럼....
@@ -69,7 +79,8 @@
 					 (select 컬럼 from 테이블 ) b,
 					 ...
 				where 조건 in ( select min(컬럼) from 테이블명)
-					and ...
+					and (열1, 열2...) in (select 다중 열1, 다중 열2)
+					and (열1, 열2...) = (select 단일 행)
 					
 		# 기본 구문 형식 (DQL)
 		select 컬럼
@@ -80,7 +91,7 @@
 		order by 컬럼 [desc];
 			
 	3. SQL (DML(데이터의 조작), DDL(정의), DCL(제어))
-		CRUD(Create, Read, Update, Delete)
+		CRUD(Create, Read, Update, Delete), merge
 		1) insert
 			insert 테이블명 values(데이터1, 데이터2....);
 			insert 테이블명(컬럼명1, 컬럼명2...)
@@ -97,6 +108,9 @@
 				set ename = '홍길동',
 					deptno = 20
 				where empno = 7780;
+				# subquery 활용
+					update 테이블명 a
+						set 컬럼1 in (select ... from 테이블 b where a.키 = b.키)
 			
 		3) delete
 			데이터를 row(행)단위로 삭제 처리.
@@ -132,9 +146,9 @@
 			alter 테이블명
 				add 추가할 컬럼 데이터유형
 				modify ..
-				rename ..
+				rename column 컬럼명 @@@ ..
 			
-		6) 여러가지 객체 sequence, index, trigger, role,
+		6) 여러가지 객체 sequence, index, view, trigger, role,
 			ex) create sequence emp_seq
 					start with 시작할데이터
 					minvalue 최소값
@@ -147,10 +161,9 @@
 			# 제약 조건 : primary key(not null, uniquery), foreign key, not null, unique, check
 				데이터의 입력이나 수정시, 해당 제약조건에 맞지 않으면 에러를 발생하게 하여 데이터의 무결성을 유지하게 할 수 있다.
 	
-	4. SQL(사용자 권한 부여 및 회수)
-		계정을 만들고, 해당 계정에 따라서 권한 부여를 처리하는 것을 말한다.
+	4. SQL(사용자 권한 부여 및 회수) - 계정을 만들고 해당 계정에 따라서 권한 부여를 처리하는 것을 말한다.
 		
-		1) grant : 권한을 부여
+		1) grant : 권한을 부여		ex) grant 권한 to 계정;
 		2) revoke : 권한을 회수
 		3) role : 특정한 권한을 모아서 role을 지정하여 처리
 	
@@ -161,14 +174,17 @@
 		스키마 도출 : 속성 처리
 		테이블 관계 설정 : 두 개 이상의 테이블을 구성하여 테이블 나누어 관계를 설정 처리.
 		ex) 사원 정보 테이블에서 부서명이 변경되었을 때 부서 테이블을 나누는 것이 효율적일까? 통합된 테이블이 효율적일까?
-		SELECT *
-		FROM emp;
-		SELECT *
-		FROM dept;
-		-- 부서정보가 사원테이블에 통합된 경우에 부서명이 변경한다고 가정하면 어떻게 될까?
-		SELECT a.*, b.dname, b.loc
-		FROM emp a, dept b
-		WHERE a.deptno = b.deptno;
+		
+	7. 집합 데이터 처리
+		union, union all, minus, intersection
+		ex) 조회 sql1 union 조회 sql2 : 두 조회 구문의 중복을 뺀 통합 결과 출력 (집합의 합)
+		
+	8. 계층적 SQL
+		oracle DB에서 지원하는 계층적 SQL 처리
+		start with
+		prior
+		siblings
+		ex) 무한 레벨의 답변형 게시판에서 활용
 		
 		
 # DB 과제

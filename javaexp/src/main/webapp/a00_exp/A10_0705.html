@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title> A10_0705 </title>
+<style type="text/css">
+
+
+</style>
+</head>
+<body>
+	<!--
+		2. DOM객체의 다중 설정과 단일 설정 처리를 테이블 tr, td 기준으로 처리하여 출력하세요.
+		
+		-->
+		<table width="200" height="50" border>
+			<tr>
+				<td> 단일 </td>
+			</tr>
+			<tr id="tr1">
+				<td id="td1"> 다중1 </td>
+			</tr>
+			<tr>
+				<td> 다중2 </td>
+			</tr>
+			<tr id="tr1">
+				<td id="td1"> 다중3 </td>
+			</tr>
+			<tr>
+				<td> 다중4 </td>
+			</tr>
+			<tr id="tr1">
+				<td id="td1"> 다중5 </td>
+			</tr>
+		</table>	
+		<!--
+		
+		3. css의 후손 선택자 선언방식 2가지를 기술하세요.
+		
+		-->
+			
+		<!--		
+		
+		4. 선택자 중 h4중에서 class cls01로 설정하고자 한다. 해당 내용을 처리하세요.
+		
+		-->
+			
+		<!--		
+		
+		5. 가상 선택자 3가지 유형을 기술하세요.	
+		
+			- 반응 선택자
+			 	:active - 사용자가 마우스를 클릭한 태그 선택
+ 				:hover - 사용자가 마우스 커서를 올린 태그 선택
+			- 상태 선택자
+				:checked - 해당 선택자가 checked가 되었을 때, 처리할 내용에 대한 부분을 의미, 주로 type="radio|checkbox"를 사용할 때 활용된다.
+ 				:focus - 해당 선택자에 focus를 위치시켰을 때 처리된다form 하위의 입력 요소 객체를 사용할 때 쓰인다.
+ 				:enabled - 해당 선택자의 요소 객체가 활성화 되었을 때 처리할 css 속성 설정 시 활용된다.
+ 				:disabled - 해당 선택자의 요소 객체가 비활성화 되었을 때 처리할 css 속성 설정 시 활용된다.
+ 			- 구조 선택자
+		-->
+			
+		<!--	
+		
+	 -->
+</body>
+<script type="text/javascript">
+
+	var trObj = document.querySelector("tr");
+	trObj.style.backgroundColor = "yellow";
+	
+	var tr1 = document.querySelectorAll("#tr1");
+		for(var idx=1; idx<tr1.length; idx++) {
+			tr1[idx].style.backgroundColor = "blue";		
+		}
+
+	var td1 = document.querySelectorAll("#td1");
+		for(var idx=1; idx<td1.length; idx++) {
+			td1[idx].style.backgroundColor = "black";
+			td1[idx].style.color = "white";
+		}
+	
+</script>
+</html>

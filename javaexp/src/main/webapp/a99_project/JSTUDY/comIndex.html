@@ -14,7 +14,7 @@
 </head>
 <body align="center">
 	<h2> J-STUDY 커뮤니티 : 메인 </h2>
-	<form name="게시물 조회" action="comCheck.html" method="post" enctype="multipart/form-data">
+	<form name="게시물조회" id="comCheck" action="comCheck.html" method="post" enctype="multipart/form-data">
 		<div>
 			<table align="center" width="400px">
 				<tr>
@@ -37,6 +37,9 @@
 				<tr><td> 1 </td><td id="title"> 안녕하세요! </td><td> 홍길동 </td><td> 2021.06.28 17:04:34 </td></tr>
 			</table><br>
 		</div>
+		<iframe name="cfr" src="comCheck.html" width="90%" height="500">
+		
+		</iframe>
 	</form>
 			
 	<form name="게시물 글쓰기" action="comWrite.html" method="post" enctype="multipart/form-data">
@@ -45,7 +48,10 @@
 
 </body>
 <script type="text/javascript">
-
+	function comCheck() {
+		cfr.location.href = 'comCheck.html';
+	}
+		
 
 </script>
 </html>
