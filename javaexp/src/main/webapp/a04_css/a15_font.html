@@ -36,24 +36,68 @@
  		ex) h2 {italic bold 20px 궁서체;}
  */
 	body {font-family:"Times New Roman", Serif; font-size:Large;}
-	h3 {font:italic bold 40px consolas, sans-serif;}
+	h2 {font:italic bold 40px consolas, sans-serif;}
+	
+	h3 {font-weight:200; font-family:고딕체; font-size:20px;}
 
 </style>
 </head>
 <body>
-	<h3> Consolas font </h3>
+	<h2> Consolas font </h2>
 	<hr>
 	<p style="font-weight:900"> font-weight 900 </p>
 	<p style="font-weight:100"> font-weight 100 </p>
 	<p style="font-style:italic"> Italic Style </p>
 	<p style="font-style:oblique"> Oblique Style </p>
 	<p> 현재 크기의 <span style="font-size:1.5em"> 1.5배 </span> 크기로 </p>
+	<!--
+		ex) 안녕하세요 - h3 글자 굵기, 글씨체, 글자 크기, 기본 css 설정 [1단계]
+			select 글씨체 변경 : 선택시 해당 내용을 위 h3를 변경 처리 [2단계 JS]
+			select 글자 크기 변경,
+			select 글자 스타일 변경,
+	 -->
+	 <h3 id="id01"> 안녕하세요 </h3>
+	 <select onchange="chFamily(this)">
+	 	<option> 글씨체 변경 </option>
+	 	<option> 굴림체 </option>
+	 	<option> 궁서체 </option>
+	 	<option> 맑은 고딕 </option>
+	 </select>
+	 <select onchange="chStyle(this)">
+	 	<option> 스타일 변경 </option>
+	 	<option> normal </option>
+	 	<option> italic </option>
+	 	<option> oblique </option>
+	 </select>
+	 <select onchange="chSize(this)">
+	 	<option> 사이즈 변경 </option>
+	 	<option> 20px </option>
+	 	<option> 30px </option>
+	 	<option> 40px </option>
+	 	<option> 50px </option>
+	 	<option> 60px </option>
+	 	<option> 70px </option>
+	 	<option> 80px </option>
+	 	<option> 90px </option>
+	 	<option> 100px </option>
+	 </select>
 </body>
 <script type="text/javascript">
-/*
 
- */
-
+	var h3Obj = document.querySelector("h3");
+	function chFamily(obj) {
+		// style 변경 처리 obj.value 활용
+		// select에서 전달된 내용을 value 속성으로 올수 있으니 h3의 속성을 변경할 수 있다.
+		h3Obj.style.fontFamily=obj.value;
+	}
+	
+	var id01 = document.querySelector("#id01");
+	function chSize(obj) {
+		id01.style.fontSize=obj.value;
+	}
+	function chStyle(obj) {
+		id01.style.fontStyle=obj.value;
+	}
 
 </script>
 </html>
