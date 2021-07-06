@@ -33,15 +33,31 @@
 				<tr><th><h1> ▶ J-STUDY QUIZ ◀ </h1></th></tr>
 				<tr><td><h2> 다음 문제를 보고 정답을 입력하세요! </h2></td></tr>
 				<tr><td><input name="quest" value="JAVA에서 가져 온 퀴즈 문제 출력" style="width:50%; font-size:30px;" readonly/></td></tr>
-				<tr><td><input type="text" name="usrAns" value="정답을 입력하세요!"/><input type="submit" name="answer" value="정답"/></td></tr>
+				<tr><td><input type="text" name="usrAns" value="정답을 입력하세요!"/>
+						<input type="button" onclick="ckQuiz()" value="유효성체크"/>
+						<input type="submit" name="answer" onclick="ckQuiz()" value="정답"/></td>
+				</tr>
 			</table>
 		</div>
 	</form>
 </body>
 <script type="text/javascript">
-/*
- JS 함수 적용
-*/
+
+// 퀴즈 입력 정보 유효성 체크
+function ckQuiz() {
+	var usrAnsVal = document.querySelector("[name=usrAns]").value;
+	var submit = document.querySelector("[name=answer]").value;
+	// 정답이 '쌍용'으로 설정되있을 때
+	if(usrAnsVal == "쌍용") {
+		alert("정답입니다!");
+		submit.location.href='recieveQuiz.jsp';
+	} else if(usrAnsVal == "") {
+		alert("정답을 입력하세요.");
+	} else {
+		alert("오답입니다..");
+	}
+}
+	
 </script>
 </html>
 

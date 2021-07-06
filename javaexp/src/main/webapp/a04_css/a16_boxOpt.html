@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title> a16_boxOpt </title>
+<style type="text/css">
+/*
+ # css 박스 모델
+ 	1. html 태그는 사각형 박스로 다루어진다.
+ 		1) 각 html 태그 요소를 하나의 박스로 다룬다.
+ 		2) 박스의 크기, 배경 색, 여백, 옆 박스와의 거리 등 속성으로 제어가 가능하다.
+ 	2. 박스의 구성요소
+ 		1) 컨텐츠 : html 태그의 텍스트나 이미지가 출력되는 부분
+ 		2) 패딩 (padding) : 컨텐츠를 직접 둘러싸고 있는 내부 여백
+ 		3) 테두리 (border) : 패딩 외부의 테두리로서 직선이나 점선 혹은 이미지로 테두리를 그릴 수 있음
+ 		4) 여백 (margin) : 박스의 맨 바깥 영역으로 테두리 바깥의 공간으로 인접한 아래위 아웃 태그와 박스와의 거리
+ 		5) 기타 : width, height, background-color
+ 	3. 주요 속성의 구성 (접미어)
+ 		XXX-접미어1-접미어2
+ 		1) top, bottom, left, right
+ 			ex) padding-top, margin-top, border-top-width
+ 		2) border 관련 접미어 (위 옵션에 추가적으로 붙는다) : width(굵기), style(선형태), color(색상)
+ 			ex) border-top-width, border-left-style, border-bottom-color, border-width, border-style, border-color
+ 			border : 굵기 형태 색상;
+ */
+
+	div{width:200px; height:100px; background-color:yellow;
+		border:1px solid green; padding:10px; margin:20px;}
+		
+	#div01 {width:100px; height:200px; background-color:orange; 
+		border:2px solid purple; padding:5px; margin:10px;}
+
+</style>
+</head>
+<body>
+	<div> 안녕하세요 </div>
+	<!--
+	ex) div 아이디로 div01로 설정하고 넓이 100px, 높이 200px, 배경색상 orange, 테두리, padding 간격, margin 간격을 설정하여 출력하세요. (css)
+		해당 내용 클릭 시 넓이와 높이를 변경, padding을 증가 처리 (js) 
+	 -->
+	 <div id="div01" onclick="chBox(this)"> 첫번째 </div>
+	 <!--
+	 여러가지 테두리 속성 
+	  -->
+	<hr>
+		<p style="border:3px solid blue"> 3픽셀 solid </p>
+		<p style="border:3px none blue"> 3픽셀 none </p>
+		<p style="border:3px hidden blue"> 3픽셀 hidden </p>
+		<p style="border:3px dotted blue"> 3픽셀 dotted </p>
+		<p style="border:3px dashed blue"> 3픽셀 dashed </p>
+		<p style="border:3px double blue"> 3픽셀 double </p>
+		<p style="border:15px groove yellow"> 15픽셀 groove </p>
+		<p style="border:15px ridge yellow"> 15픽셀 ridge </p>
+		<p style="border:15px inset yellow"> 15픽셀 inset </p>
+		<p style="border:15px outset yellow"> 15픽셀 outset </p>
+</body>
+<script type="text/javascript">
+
+	var paddSize = 20;
+	function chBox(obj) {
+		// obj.style.속성=속성값; 변경 처리
+		obj.style.width="200px";
+		obj.style.height="100px";
+		paddSize += 10;
+		obj.style.padding = paddSize + "px";
+	}
+
+</script>
+</html>
