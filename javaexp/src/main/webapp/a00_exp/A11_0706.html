@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title> A11_0706 </title>
+<style type="text/css">
+/*
+ # 0706 정리 문제 #
+    1. 구조선택자의 종류와 내용에 대해 기술하세요.
+    
+       child : 같은 부모를 둔 형제 객체를 지칭할 때 사용되는 접미어이다.
+       nth- : 순서를 지정하는 부분으로 위 접미어와 합성하여 같은 부모를 둔 특정한 위치에 있는 요소 객체를 선택할 때 사용된다.
+          ex) nth-child(1)
+             nth-child(반복할횟수n1 + n2) (n1개 단위로 n2번째) : 같은 부모를 둔 반복할 횟수로 해당 css 선언할 때 사용된다.
+             first-child (첫번째만 적용), last-child (마지막만 적용)
+    
+    2. 4X4 테이블에 tr부분에 짝수/홀수번째 배경색상을 지정하고 td부분을 3개 단위로 첫번째에 글자색상을 지정하세요.
+    
+        */
+          tr:nth-child(2n) {background-color:yellow;}
+          td:nth-child(2n+3) {color:orange;}
+          td {text-align:center;}
+       /*   
+    
+    3. 3X3 테이블을 짝수번째 배경색상을 pink로 하고(css) 1~9까지 글자를 입력하고(js)
+       해당 내용 중 클릭하면 배경색상이 노란색으로 변경(js), 임의의 번호를 클릭하면 빙고라고 출력되고 배경색상을 변경하세요.(js)
+    
+        */
+          #tab01 td:nth-child(2n) {background-color:pink}
+       /*   
+    
+    4. text-XXXX : 정렬 및 들여쓰기 사선 관련 속성과 속성값을 기술하세요.
+    
+       1) text-indent : 들여쓰기 속성 (길이 및 %)
+       2) text-align : left | right | center | justify - 정렬 옵션
+       3) text-decoration : none | underline | overline | line-throght - 텍스트 선 긋기 (선 없애기 포함)
+    
+    5. h2를 출력하고 기능 버튼을 위에 속성으로 선언하고 클릭할 때마다 속성이 변경되게 처리하세요.
+    
+        */
+          
+       /*   
+    
+ */
+
+
+</style>
+</head>
+<body>
+   
+   <!-- ex2 -->
+   <table width="50%" border>
+      <tr><td> 물건명 </td><td> 가격 </td><td> 수량 </td><td> 총계 </td></tr>
+      <tr><td> 사과 </td><td> 2000 </td><td> 1 </td><td> 2000 </td></tr>
+      <tr><td> 바나나 </td><td> 4000 </td><td> 2 </td><td> 8000 </td></tr>
+      <tr><td> 딸기 </td><td> 5000 </td><td> 3 </td><td> 15000 </td></tr>
+   </table>
+   
+   <!-- ex3 -->
+      <table width="50%" border>
+      <col width="33%">
+      <col width="33%">
+      <col width="33%">
+      <tr><td id="tab01">  </td><td id="tab01">  </td><td id="tab01">  </td></tr>
+      <tr><td id="tab01">  </td><td id="tab01">  </td><td id="tab01">  </td></tr>
+      <tr><td id="tab01">  </td><td id="tab01">  </td><td id="tab01">  </td></tr>
+   </table>
+   
+   <!-- ex5 -->
+   <p> 안녕하세요! 반갑습니다! 좋은 날이네요! </p>
+   <input type="button" onclick="func01()" value="들여쓰기"/>
+   <input type="button" onclick="func01()" value="중앙정렬"/>
+   <input type="button" onclick="func01()" value="언더라인"/>
+
+</body>
+<script type="text/javascript">
+
+   var tab01Arry = document.querySelectorAll("#tab01");
+   // 정수형 변환 (Math.floor())
+   // Math.random()*임의의 경우의 수
+   // 0.0 <= Math.random() < 1.0
+   var ranIdx = Math.floor(Math.random()*tab01Arry.length);
+   console.log("크기 : " + tab01Arry.length);
+   for(var idx=0; idx<tab01Arry.length; idx++) {
+      console.log(idx + " : " + tab01Arry[idx].innerText);
+      tab01Arry[idx].innerText = idx+1;
+      if(idx==ranIdx) {
+    	tab01Arry[idx].onclick=function() {
+    	this.style.backgroundColor="navy";
+    	this.style.color="yellow";
+    	this.innerText="BINGO";
+    		}
+      } else {
+    	tab01Arry[idx].onclick=function() {
+    	this.style.backgroundColor="yellow";
+      }
+   }
+}
+   
+   function func01() {
+	   var btns = document.querySelectorAll("[type=button]");
+	   var h2Obj = document.querySelector("p");
+	   btns[0].onclick=function() {
+		   h2Obj.style.textIndent="20%";
+	   }
+	   btns[1].onclick=function() {
+		   h2Obj.style.textAlign="center";
+	   }
+	   btns[2].onclick=function() {
+		   h2Obj.style.textDecoration="underline";
+	   }
+   }
+
+</script>
+</html>

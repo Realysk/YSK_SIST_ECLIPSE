@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title> a15_font </title>
+<style type="text/css">
+/*
+ # CSS의 단위
+ 	1. 크기 단위
+ 		%: 기본 크기에 대하여 백분율로 표기할 때 사용
+ 			기본 크기:100% / 1.5배 150%
+ 		em: 해당 기본 크기에서 상대적 크기로
+ 			1.5em : 1.5배 크기 설정
+ 			2.0em : 2배 크기 설정
+ 		px: 픽셀 단위로 절대적 크기를 설정
+ 		--------------------------------------
+ 		cm, mm
+ 		in : 인치, 1in = 2.54cm = 96px
+ 		pt:포인트 1pt = 1in의 1/72
+ 		
+ # font 제어 속성
+ 	1. font-family
+ 		serif 형 : 끌부분에 각진 표시가 있는 모양
+ 		Sans-Serif 형 : serif 없는 서체
+ 		monospace 형 : 글자 폭이 동일 한 유형
+ 		궁서체, 맑은 고딕, Arial, Times New Roman
+ 		ex) font-family:Arial, "Times New Roman", Serif;
+ 	2. font-size : 폰트의 크기
+ 		ex) font-size : 40px;
+ 	3. font-style :
+ 		ex) font-style:italic; 기울임체 설정
+ 	4. font-weight : 폰트의 굵기
+ 		ex) font-weight:300; font-weight:bold;
+ 	5. font로 위에 나열된 속성을 한번에 지정도 가능하다.
+ 		선택자 {font:font-style font-weight font-size font-family}
+ 		ex) h2 {italic bold 20px 궁서체;}
+ */
+	body {font-family:"Times New Roman", Serif; font-size:Large;}
+	h3 {font:italic bold 40px consolas, sans-serif;}
+
+</style>
+</head>
+<body>
+	<h3> Consolas font </h3>
+	<hr>
+	<p style="font-weight:900"> font-weight 900 </p>
+	<p style="font-weight:100"> font-weight 100 </p>
+	<p style="font-style:italic"> Italic Style </p>
+	<p style="font-style:oblique"> Oblique Style </p>
+	<p> 현재 크기의 <span style="font-size:1.5em"> 1.5배 </span> 크기로 </p>
+</body>
+<script type="text/javascript">
+/*
+
+ */
+
+
+</script>
+</html>

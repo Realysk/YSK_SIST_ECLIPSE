@@ -5,11 +5,20 @@
 <title> J-STUDY 커뮤니티 : 글쓰기 </title>
 <style type="text/css">
 
+	html, body {font-family:'Black Han Sans', sans-serif; margin:0px; padding:0px; height:100%;}
+	[name=ifr] {background:white;}
+	.comMenu {text-align:center;}
+	.comMenu:hover {background:yellow; text-align:center;}
+ 	.comTab {text-align:center;} /* 게시판 - 텍스트 중앙 정렬 */
+	#title:hover {color:purple;} /* 게시판 제목란에만 purple로 hover 적용 */
+	td {text-align:center;}
+
 </style>
 </head>
 <body>
 	<form name="게시물 글쓰기" action="recieveWrite.jsp">
 	<!-- <form name="게시물 글쓰기" action="recieveWrite.jsp" method="post" enctype="multipart/form-data">  -->
+	<h2 align="center"> JSTUDY 커뮤니티 : 글쓰기 </h2>
 		<table align="center" width="400px">
 			<tr>
 				<td width="100" name="cMain" class="comMenu"><a href="comIndex.html"> 메인 </a></td>
@@ -19,10 +28,9 @@
 				<td width="100" name="cQuiz" class="comMenu"><a href="comQuiz.html"> QUIZ </a></td>
 			</tr>
 		</table>
-		<h2 align="center"> JSTUDY 커뮤니티 : 글쓰기 </h2>
 		<table align="center" width="700" height="300" border>
 			<tr>
-				<td><input type="text" name="headline" id="headCk" value="게시물 제목" style="margin: 0px; width: 786px; height: 26px;"/></td>
+				<td><input type="text" name="headline" value="게시물 제목" style="margin: 0px; width: 786px; height: 26px;"/></td>
 			</tr>
 			<tr>
 				<td align="center">
@@ -33,18 +41,39 @@
 				</td>
 			</tr>	
 			<tr>
-				<td><input type="text" name="contents" id="contCk" value="게시물 내용" style="margin: 0px; width: 785px; height: 504px;"/></td>
+				<td><input type="text" name="contents" value="게시물 내용" style="margin: 0px; width: 785px; height: 504px;"/></td>
 			</tr>
 		<br>
 		</table>
 		<table align="right" width="600px">
-		<tr>
-			<td><input type="submit" value="등록"/></td>
-		</tr>
+		<tr><td><input type="button" onclick="ckWrite()" value="유효성체크"/></td></tr>
+		<tr><td><input type="submit" onclick="ckWrite()" name="submit" value="등록"/></td></tr>
 		</table>
 	</form>
 </body>
 <script type="text/javascript">
+	
+	// 게시물 정보 유효성 체크
+	function ckWrite() {
+		var headVal = document.querySelector("[name=headline]").value;
+		var contVal = document.querySelector("[name=contents]").value;
+		var submit = document.querySelector("[name=submit]").value;
+		var len = headVal.length;
+		var len2 = contVal.length;
+			if(len>=3) {
+				// 유효
+				alert("제목 입력 조건에 충족됩니다.");
+			} else {
+				alert("제목은 최소 3자부터 입력 가능합니다.");
+			}
+			if(len2>=10) {
+				// 유효
+				alert("내용 입력 조건에 충족됩니다.");
+			} else {
+				alert("내용은 최소 10자부터 입력 가능합니다.");
+			}
+			submit.location.href='recieveWrite.jsp';
+	}
 
 </script>
 </html>
