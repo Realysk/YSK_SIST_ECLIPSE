@@ -21,6 +21,17 @@
 			from (inline view)
  			where 조건
  	4. 뷰의 한계
+ 		1. 단순 뷰
+ 			하나의 테이블로 생성
+ 			그룹 함수의 사용이 가능
+ 			distinct 사용이 가능
+ 			dml 사용 가능
+ 		2. 복합 뷰
+ 			여러 개의 테이블로 생성
+ 			그룹 함수의 사용이 불가능
+ 			distinct 사용이 가능
+ 			dml 사용 불가능
+ 		
  		1) 제한적 사용 : 무결성 제약조건, 표현식, group by 유무에 따라 DML명령문은 제한적으로 사용된다.
  		2) 수행 불가능 : distinct , 그룹함수, group by, start with, connect by, rownum은 포함할 수 없다.
  	5. 뷰 생성 기본
