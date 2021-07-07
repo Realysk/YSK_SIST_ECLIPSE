@@ -77,8 +77,6 @@ public class A01_Dao {
 				setCon();
 				
 				// 2. SQL 문자열로 할당
-				// int empno, String ename, String job, int mgr, Date hiredate, double sal,
-				// double comm, int deptno
 				String sql = "SELECT empno, ename, job, mgr, hiredate, sal, comm, deptno \r\n"
 						+ "FROM emp02";
 				
