@@ -1,7 +1,6 @@
 package javaexp.z99_database;
 
 import java.sql.*;
-import java.sql.Connection;
 import java.util.ArrayList;
 
 import javaexp.z01_vo.Emp;
@@ -167,12 +166,62 @@ public class A01_Dao {
 		 WHERE deptno=10
 		 처리하는 기능 메서드를 추가 하세요.
 		 */
+		// 조건을 받아서 데이터 처리
+		public ArrayList<Emp> emplist2(int deptno) {
+			
+			ArrayList<Emp> list = new ArrayList<Emp>();
+			// 1. 연결 처리
+				try {
+					setCon();
+					
+					// 2. 부서 정보 받아 sql 선언
+					String sql = "SELECT deptno, empno, ename, job, sal\r\n"
+							+ "FROM emp02\r\n"
+							+ "WHERE deptno = " + deptno;
+					
+					/*
+					 ex) 문자열을 받으면 ''
+					 	WHERE ename='CLARK';
+					 */
+					/*
+					String name = "CLARK";
+					String sql2 = "SELECT deptno, empno, ename, job, sal\r\n"
+							+ "FROM emp02\r\n"
+							+ "WHERE ename = '" + name + "' ";
+					*/
+					
+					// 3. Statement
+					stmt = con.createStatement();
+					
+					// 4. ResultSet
+					rs = stmt.executeQuery(sql);
+					
+					//		1) while()
+					while(rs.next()) {
+						System.out.print(rs.getInt(1)+"\t");
+						System.out.print(rs.getInt(2)+"\t");
+						System.out.print(rs.getString(3)+"\t");
+						System.out.print(rs.getString(4)+"\t");
+						System.out.print(rs.getDouble(5)+"\n");
+					}
+					
+					// 5. 자원 해제
+					rs.close(); stmt.close(); con.close();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			return list;
+		}
 		
 		
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		A01_Dao dao = new A01_Dao();
-		dao.getEmpList();
+//		dao.getEmpList();
+		dao.emplist2(30);
 	}
 }

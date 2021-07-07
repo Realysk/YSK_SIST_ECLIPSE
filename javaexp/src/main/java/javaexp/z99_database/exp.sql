@@ -13,4 +13,4 @@ FROM dept;
 
 SELECT deptno, empno, ename, job, sal
 FROM emp02
-WHERE deptno=10;
+WHERE ename='CLARK';
