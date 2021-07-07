@@ -1,13 +1,8 @@
 package javaexp.z99_database;
 
-import java.beans.Statement;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.sql.Connection;
 import java.util.ArrayList;
-
-import com.sun.jdi.connect.spi.Connection;
 
 import javaexp.z01_vo.Emp;
 
@@ -47,7 +42,7 @@ public class A01_Dao {
 	// 2. 서버와 대화를 하는 객체
 		private Statement stmt;
 		private PreparedStatement pstmt;
-	// 3. 결과값을 받는 객체
+	// 3. 결과 값을 받는 객체
 		private ResultSet rs;
 		
 		// 공통기능 메서드 (연결처리하는 기능메서드)
@@ -62,9 +57,7 @@ public class A01_Dao {
 			// 2. 특정 서버 접속
 			// 1) 서버 정보
 			String info = "jdbc:oracle:thin:@localhost:1521:xe"; // 개인 DB
-//			String info = "jdbc:oracle:thin:@110.93.182.83:1521:xe"; // 학원 고정IP
-			java.sql.Connection con = DriverManager.getConnection(info,"scott","tiger"); // 개인 DB 로그인 정보
-//			java.sql.Connection con = DriverManager.getConnection(info,"system","1111"); // 학원 DB 로그인 정보
+			con = DriverManager.getConnection(info,"scott","tiger"); // 개인 DB 로그인 정보
 			System.out.println("접속 성공!");
 		}
 		
@@ -79,7 +72,56 @@ public class A01_Dao {
 		public ArrayList<Emp> getEmpList() {
 			ArrayList<Emp> emplist = new ArrayList<Emp>();
 			
-			
+			// 1. 연결 공통 메서드 호출 [예외처리 block]
+			try {
+				setCon();
+				
+				// 2. SQL 문자열로 할당
+				String sql = "SELECT *\r\n"
+						+ "FROM emp02";
+				
+				// 3. Statement 객체 생성
+				//		1) setCon();를 통해서 만들어진 Connection 객체의 기능 메서드를 통해서 Statement 객체 생성
+				stmt = con.createStatement();
+				
+				// 4. ResultSet 객체 생성
+				//		1) Statement가 지원하는 기능 메서드 executeQuery에 매개변수로 SQL을 입력하고
+				//		2) 그 수행의 결과 값으로 ResultSet 객체가 생성이 된다.
+				rs = stmt.executeQuery(sql);
+				//		3) ResultSet의 next() : 행 단위로 이동하는 해당 다음 행의 데이터 유무를 true/false로 return한다.
+				
+				// DB에서 정보 불러오기 (주석 해제하면 됨)
+				/*
+				System.out.println(rs.next());
+				//		4) ResultSet의 getXXX("컬럼명")
+				//		   모든 컬럼은 데이터 유형(XXX)에 따라 데이터를 가져올 수 있다.
+				//		   정수형일 경우 getInt(), 실수형 getDouble(), 문자열 getString()
+				//		   일단, 어떤 유형이든 상관없이 getString()은 다 지원을 한다.
+				//		   getString("컬럼명") : next() 이동한 행의 해당 컬럼에 데이터를 가져온다.
+				System.out.println(rs.getString("job")); // 첫번째 행의 column job
+				
+				System.out.println(rs.next());
+				System.out.println(rs.getString("ename")); // 두번쨰 행의 column ename
+				
+				// ex) 3번째 행의 부서번호와 5번째 행의 입사일, 8번째 행의 급여를 출력하세요.
+				rs.next();
+				System.out.println("3번째 행의 부서번호 : " + rs.getString("deptno"));
+				rs.next();
+				rs.next();
+				System.out.println("5번째 행의 입사일 : " + rs.getString("hiredate"));
+				*/
+				
+				// 첫 번째 행의 사원 번호, 세 번째 행의 급여, 다섯 번째 핸의 관리자 번호를 출력하세요.
+				
+				// 5. 자원 해제
+//				rs.close(); stmt.close(); con.close();
+				
+				// 6. 예외처리를 통한 기타 예외처리
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return emplist;
 		}
 		
@@ -91,11 +133,6 @@ public class A01_Dao {
 		// TODO Auto-generated method stub
 		
 		A01_Dao dao = new A01_Dao();
-		try {
-			dao.setCon();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+		dao.getEmpList();
 	}
 }
