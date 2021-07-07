@@ -1,0 +1,45 @@
+# JAVA를 통해 DB 서버 접속 및 데이터 처리
+	1. DAO 작성
+		0) 공통 기능 필드 선언
+			- Connection (연결 객체)
+			- Statement, PreparedStatement (대화 객체)
+			- ResultSet (결과를 받는 객체 - select)
+			
+		1) 연결 모듈 (공통 메서드)
+			- jdbc 드라이버 메모리 로딩
+			- 주요 접속 정보와 함께 Connection 객체 생성
+			
+		2) 조회 리스트 메서드
+			- 위에 선언한 공통 연결 메서드 호출 (Connection 생성)
+			- SQL 작성
+			- Connection로부터 Statement 객체 생성
+			- SQL을 Statement에 의해 실행 => ResultSet 객체
+			- ResultSet 객체를 통해 결과 내용 확인
+			- ResultSet를 while next(), getXXX(컬럼명)을 통해서 
+			  최종적으로 return할 ArrayList<VO> 객체 데이터 할당
+			- 자원 해제 : 생성 된 객체들에 대한 자원을 해제, 
+				ResultSet => Statement => Connection 순
+			- 예외 처리의 내용을 구체화 처리
+				- 혹, 남아 있는 객체들 메모리 해제
+				- DML의 경우 rollback 처리
+	
+	2. 기능 메서드 처리 순서
+		1) SQL 작성/실행
+		2) 위 SQL의 결과에 해당하는 VO를 생성해서 필드의 이름과 조회 된 컬럼의 데이터 유형과 이름을 동일하게 한다.
+		3) 기능 메서드 추가
+		4) main() 메서드를 통해서 해당 최종 결과 값을 확인
+			- DAO 객체 생성
+			- 참조변수.기능메서드();
+			
+/*
+CREATE TABLE "SCOTT"."EMP02" 
+   (	"EMPNO" NUMBER(4,0), 
+	"ENAME" VARCHAR2(50), 
+	"JOB" VARCHAR2(50), 
+	"MGR" NUMBER(4,0), 
+	"HIREDATE" DATE, 
+	"SAL" NUMBER(7,2), 
+	"COMM" NUMBER(7,2), 
+	"DEPTNO" NUMBER(2,0)
+   ) 
+*/
