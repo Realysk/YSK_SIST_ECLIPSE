@@ -11,6 +11,7 @@ import com.sun.jdi.connect.spi.Connection;
 public class A01_Dao {
 	
 	/*
+	 Controller - Service - Dao
 	 # JAVA를 통해 데이터베이스 처리
 	 	1. DAO(Database Access Object)
 	 		1) 생각해봅시다.
@@ -57,11 +58,15 @@ public class A01_Dao {
 			}
 			// 2. 특정 서버 접속
 			// 1) 서버 정보
-			String info = "jdbc:oracle:thin:@localhost:1521:xe";
-			java.sql.Connection con = DriverManager.getConnection(info,"scott","tiger");
+			String info = "jdbc:oracle:thin:@localhost:1521:xe"; // 개인 DB
+//			String info = "jdbc:oracle:thin:@110.93.182.83:1521:xe"; // 학원 고정IP
+			java.sql.Connection con = DriverManager.getConnection(info,"scott","tiger"); // 개인 DB 로그인 정보
+//			java.sql.Connection con = DriverManager.getConnection(info,"system","1111"); // 학원 DB 로그인 정보
 			System.out.println("접속 성공!");
 		}
-
+		
+		
+		
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
