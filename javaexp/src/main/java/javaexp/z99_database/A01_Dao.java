@@ -130,6 +130,7 @@ public class A01_Dao {
 					System.out.println(rs.getDouble("sal"));
 				}
 				*/
+				
 				// ex) 부서번호, 사원번호, 사원명을 데이터 유형에 맞게 출력하세요.
 				int rowCnt2 = 1;
 				System.out.println("번호\t부서번호\t사원번호\t사원명\t직책\t관리자번호\t입사일\t급여\tcomm\t부서번호");
@@ -238,6 +239,6 @@ public class A01_Dao {
 		A01_Dao dao = new A01_Dao();
 		
 		ArrayList<Emp> emplist = dao.getEmpList();
-//		dao.emplist2(30);
+//		dao.emplist2(10);
 	}
 }
