@@ -91,6 +91,7 @@ public class A01_Dao {
 				//		3) ResultSet의 next() : 행 단위로 이동하는 해당 다음 행의 데이터 유무를 true/false로 return한다.
 				
 				// DB에서 정보 불러오기 (주석 해제하면 됨)
+				
 				/*
 				System.out.println(rs.next());
 				//		4) ResultSet의 getXXX("컬럼명")
@@ -105,13 +106,21 @@ public class A01_Dao {
 				
 				// ex) 3번째 행의 부서번호와 5번째 행의 입사일, 8번째 행의 급여를 출력하세요.
 				rs.next();
-				System.out.println("3번째 행의 부서번호 : " + rs.getString("deptno"));
+				System.out.println("세 번째 행의 부서번호 : " + rs.getString("deptno"));
 				rs.next();
 				rs.next();
-				System.out.println("5번째 행의 입사일 : " + rs.getString("hiredate"));
+				System.out.println("다섯 번째 행의 입사일 : " + rs.getString("hiredate"));
 				*/
+				// ex) 첫 번째 행의 사원 번호, 세 번째 행의 급여, 다섯 번째 핸의 관리자 번호를 출력하세요.
+				rs.next();
+				System.out.println("첫 번쨰 행의 사원 번호 : " + rs.getString("empno"));
+				rs.next();
+				rs.next();
+				System.out.println("세 번쨰 행의 급여 : " + rs.getString("sal"));
+				rs.next();
+				rs.next();
+				System.out.println("다섯 번쨰 행의 관리자 번호 : " + rs.getString("mgr"));
 				
-				// 첫 번째 행의 사원 번호, 세 번째 행의 급여, 다섯 번째 핸의 관리자 번호를 출력하세요.
 				
 				// 5. 자원 해제
 //				rs.close(); stmt.close(); con.close();
@@ -124,10 +133,7 @@ public class A01_Dao {
 			}
 			return emplist;
 		}
-		
-		// ex) 조회문 select * from dept를 위한 A02_DeptDao.java를 만들고
-		// 		공통 연결 메서드와 기능 메서드 (부서정보 조회) 틀을 만드세요.
-		
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
