@@ -9,3 +9,8 @@ AND job LIKE '%A%';
 -- ex1)
 SELECT *
 FROM dept;
+
+
+SELECT deptno, empno, ename, job, sal
+FROM emp02
+WHERE deptno=10;

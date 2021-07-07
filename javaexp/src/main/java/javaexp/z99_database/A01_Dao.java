@@ -77,7 +77,7 @@ public class A01_Dao {
 				setCon();
 				
 				// 2. SQL 문자열로 할당
-				String sql = "SELECT *\r\n"
+				String sql = "SELECT ename, job \r\n"
 						+ "FROM emp02";
 				
 				// 3. Statement 객체 생성
@@ -110,31 +110,65 @@ public class A01_Dao {
 				rs.next();
 				rs.next();
 				System.out.println("다섯 번째 행의 입사일 : " + rs.getString("hiredate"));
-				*/
+				
 				// ex) 첫 번째 행의 사원 번호, 세 번째 행의 급여, 다섯 번째 핸의 관리자 번호를 출력하세요.
 				rs.next();
-				System.out.println("첫 번쨰 행의 사원 번호 : " + rs.getString("empno"));
+				System.out.println("첫 번쨰 행의 사원 번호 : " + rs.getInt("empno"));
 				rs.next();
 				rs.next();
-				System.out.println("세 번쨰 행의 급여 : " + rs.getString("sal"));
+				System.out.println("세 번쨰 행의 급여 : " + rs.getDouble("sal"));
 				rs.next();
 				rs.next();
-				System.out.println("다섯 번쨰 행의 관리자 번호 : " + rs.getString("mgr"));
+				System.out.println("다섯 번쨰 행의 관리자 번호 : " + rs.getInt("mgr"));
+								
+				int rowCnt=1;
+				// rs.next() : 다음 행의 데이터가 있는지 여부를 boolean으로 return하기 때문에 While 안에 넣으면 데이터가 있는 행까지 반복해준다.
+				while(rs.next()) {
+					System.out.print(rowCnt++ + "번째 행 : ");
+					System.out.println(rs.getDouble("sal"));
+				}
+				*/
+				// ex) 부서번호, 사원번호, 사원명을 데이터 유형에 맞게 출력하세요.
+				int rowCnt2 = 1;
+				System.out.println("번호\t부서번호\t사원번호\t사원명");
+				// rs.getInt("컬럼명")
+				// select ename, job
+				// rs.getInt(1) 출력하는 컬럼을 1부터 시작하는 순서로 컬럼명 대신에 사용할 수 있다.
+				while(rs.next()) {
+					System.out.print(rowCnt2++ + "\t");
+					// select ename, job
+					// rs.getString("ename"), rs.getString("job)
+					System.out.print(rs.getInt(1) + "\t");
+					System.out.print(rs.getString(2) + "\n");
+					
+					System.out.print(rs.getString(3) + "\t");
+					System.out.print(rs.getInt(4) + "\t");
+					System.out.print(rs.getDate(5) + "\t");
+					System.out.print(rs.getDouble(6) + "\t");
+					System.out.print(rs.getDouble(7) + "\t");
+					System.out.print(rs.getInt(8) + "\n");
+				}
 				
-				
-				// 5. 자원 해제
-//				rs.close(); stmt.close(); con.close();
+				// 5. 자원 해제 : 생성 된 역순으로 자원을 해제해준다.
+				rs.close(); stmt.close(); con.close();
 				
 				// 6. 예외처리를 통한 기타 예외처리
-				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return emplist;
 		}
-
-
+		
+		// ex) 기능 메서드 추가
+		/*
+		 SELECT deptno, empno, ename, job, sal
+		 FROM emp02
+		 WHERE deptno=10
+		 처리하는 기능 메서드를 추가 하세요.
+		 */
+		
+		
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
