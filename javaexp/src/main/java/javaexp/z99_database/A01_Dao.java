@@ -77,7 +77,9 @@ public class A01_Dao {
 				setCon();
 				
 				// 2. SQL 문자열로 할당
-				String sql = "SELECT ename, job \r\n"
+				// int empno, String ename, String job, int mgr, Date hiredate, double sal,
+				// double comm, int deptno
+				String sql = "SELECT empno, ename, job, mgr, hiredate, sal, comm, deptno \r\n"
 						+ "FROM emp02";
 				
 				// 3. Statement 객체 생성
@@ -130,7 +132,7 @@ public class A01_Dao {
 				*/
 				// ex) 부서번호, 사원번호, 사원명을 데이터 유형에 맞게 출력하세요.
 				int rowCnt2 = 1;
-				System.out.println("번호\t부서번호\t사원번호\t사원명");
+				System.out.println("번호\t부서번호\t사원번호\t사원명\t직책\t관리자번호\t입사일\t급여\tcomm\t부서번호");
 				// rs.getInt("컬럼명")
 				// select ename, job
 				// rs.getInt(1) 출력하는 컬럼을 1부터 시작하는 순서로 컬럼명 대신에 사용할 수 있다.
@@ -139,7 +141,7 @@ public class A01_Dao {
 					// select ename, job
 					// rs.getString("ename"), rs.getString("job")
 					System.out.print(rs.getInt(1) + "\t");
-					System.out.print(rs.getString(2) + "\n");
+					System.out.print(rs.getString(2) + "\t");
 					System.out.print(rs.getString(3) + "\t");
 					System.out.print(rs.getInt(4) + "\t");
 					System.out.print(rs.getDate(5) + "\t");
@@ -235,8 +237,7 @@ public class A01_Dao {
 		
 		A01_Dao dao = new A01_Dao();
 		
-//		ArrayList<Emp> emplist = dao.getEmpList();
-		dao.getEmpList();
+		ArrayList<Emp> emplist = dao.getEmpList();
 //		dao.emplist2(30);
 	}
 }
