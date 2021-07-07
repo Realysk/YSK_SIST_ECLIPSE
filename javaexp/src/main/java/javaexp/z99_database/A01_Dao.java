@@ -2,6 +2,7 @@ package javaexp.z99_database;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javaexp.z01_vo.Emp;
 
@@ -136,17 +137,29 @@ public class A01_Dao {
 				while(rs.next()) {
 					System.out.print(rowCnt2++ + "\t");
 					// select ename, job
-					// rs.getString("ename"), rs.getString("job)
+					// rs.getString("ename"), rs.getString("job")
 					System.out.print(rs.getInt(1) + "\t");
 					System.out.print(rs.getString(2) + "\n");
-					
 					System.out.print(rs.getString(3) + "\t");
 					System.out.print(rs.getInt(4) + "\t");
 					System.out.print(rs.getDate(5) + "\t");
 					System.out.print(rs.getDouble(6) + "\t");
 					System.out.print(rs.getDouble(7) + "\t");
 					System.out.print(rs.getInt(8) + "\n");
-				}
+					// int empno, String ename, String job, int mgr, Date hiredate, double sal,
+					// double comm, int deptno
+					emplist.add(new Emp(
+								rs.getInt("empno"),
+								rs.getString("ename"),
+								rs.getString("job"),
+								rs.getInt("mgr"),
+								rs.getDate("hiredate"),
+								rs.getDouble("sal"),
+								rs.getDouble("comm"),
+								rs.getInt("deptno")
+							));
+					}
+					System.out.println("ArrayList의 데이터 수량 : " + emplist.size());
 				
 				// 5. 자원 해제 : 생성 된 역순으로 자원을 해제해준다.
 				rs.close(); stmt.close(); con.close();
@@ -221,7 +234,9 @@ public class A01_Dao {
 		// TODO Auto-generated method stub
 		
 		A01_Dao dao = new A01_Dao();
-//		dao.getEmpList();
-		dao.emplist2(30);
+		
+//		ArrayList<Emp> emplist = dao.getEmpList();
+		dao.getEmpList();
+//		dao.emplist2(30);
 	}
 }

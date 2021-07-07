@@ -31,15 +31,59 @@
 			- DAO 객체 생성
 			- 참조변수.기능메서드();
 			
-/*
-CREATE TABLE "SCOTT"."EMP02" 
-   (	"EMPNO" NUMBER(4,0), 
-	"ENAME" VARCHAR2(50), 
-	"JOB" VARCHAR2(50), 
-	"MGR" NUMBER(4,0), 
-	"HIREDATE" DATE, 
-	"SAL" NUMBER(7,2), 
-	"COMM" NUMBER(7,2), 
-	"DEPTNO" NUMBER(2,0)
-   ) 
-*/
+		/*
+		CREATE TABLE "SCOTT"."EMP02" 
+   			("EMPNO" NUMBER(4,0), 
+			"ENAME" VARCHAR2(50), 
+			"JOB" VARCHAR2(50), 
+			"MGR" NUMBER(4,0), 
+			"HIREDATE" DATE, 
+			"SAL" NUMBER(7,2), 
+			"COMM" NUMBER(7,2), 
+			"DEPTNO" NUMBER(2,0)
+		   ) 
+		*/
+
+	3. ResultSet 객체 => VO 객체 형태로 만들기
+		1) 기능 메서드를 통해서 최종적으로 return할 VO 객체를 통해서 화면단에서 효과적으로 처리할 수 있다.
+			- 기능 메서드의 return 객체는 VO 객체이어야 한다.
+		2) 종류
+			- 다중의 ArrayList<VO> 객체 : select를 통해서 여러 행을 가져올 때
+			- 단일 VO 객체 : select를 통해서 단일 행을 가져올 때
+			- 단일 변수
+				boolean
+				숫자형
+				문자열형
+
+			SELECT * FROM emp; -- 여러 행을 사용하는 데이터 ArrayList<VO>
+				=> while(rs.next())
+					
+			SELECT sum(sal), avg(sal), count(*)
+			FROM emp; -- 단일 행의 결과 값을 받은 데이터 VO
+				=> if(rs.next())
+			
+			SELECT count(*) -- 단일 행의 단일 변수 (숫자)
+			FROM emp;
+				=> rs.next(); int cnt = rs.getInt(1);
+				
+			SELECT ename -- 단일 행의 단일 변수 (문자)
+			FROM emp
+			WHERE sal = (SELECT max(sal) FROM emp);
+				=> rs.next(); String ename = rs.getString(1);
+				
+			SELECT * -- rs.next()로 boolean을 return할 수 있다.
+			FROM emp
+			WHERE empno = 7780; -- key를 입력하여 있는지 여부만 확인할 때
+				1) row 단위로 컬럼에 있는 데이터 가져오는 경우
+					if(rs.next()) rs.getInt()
+				2) 데이터 있는지 여부만 가져오는 경우
+					boolean hasData = rs.next();
+		
+		3) 유형별 VO 객체 처리
+			- 여러 행에 대한 ArrayList<VO>형 처리
+				- VO 생성
+				- ArrayList<VO> 객체 상단에 선언
+				- while(rs.next) {
+					list.add(new VO객체생성자(rs.getString(1),......));
+				}
+				- 메서드 최하단에 ArrayList형 데이터가 return 처리된다.
