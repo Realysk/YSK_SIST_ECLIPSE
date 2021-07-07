@@ -9,6 +9,9 @@ import javaexp.z01_vo.Dept;
 
 public class A02_DeptDao {
 	
+	// ex) 조회문 select * from dept를 위한 A02_DeptDao.java를 만들고
+	// 		공통 연결 메서드와 기능 메서드 (부서정보 조회) 틀을 만드세요.
+	
 	private Connection con;
 	private Statement stmt;
 	private ResultSet rs;
