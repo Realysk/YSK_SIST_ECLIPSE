@@ -125,5 +125,7 @@ public class A03_DaoSch {
 		}
 
 	}
+	
+	 // ex) A04_DaoSch.java 부분 데이터 처리 및 main()에서 데이터 확인
 
 }
