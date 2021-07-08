@@ -122,7 +122,7 @@ public class A02_DeptDao {
 		try {
 			setCon();
 			con.setAutoCommit(false);
-			String sql = "INSERT INTO dept02 VALUES(emp_seq_01.nextval,?,?,?,sysdate,?,?,?)";
+			String sql = "INSERT INTO dept02 VALUES(?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, ins.getDeptno());
@@ -183,6 +183,15 @@ public class A02_DeptDao {
 		
 	}
 
+	// 1. SQL : DB와 대화문
+		// 2. VO : 결과를 받을 JAVA 객체
+		// 3. 메서드 아웃라인 : 입력 값, return 값 데이터
+		// 4. 접속 공통 메서드 : 기본 예외처리
+		// 5. Statement
+		// 6. ResultSet = rs.next(), rs.getXXX()
+		// 7. 자원 해제
+		
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A02_DeptDao dao = new A02_DeptDao();
@@ -193,14 +202,23 @@ public class A02_DeptDao {
 //			e.printStackTrace();
 //		}
 		
-		Dept d = dao.getDept(10);
-		if(d != null) {
+//		Dept d = dao.getDept(10);
+//		if(d != null) {
+//			System.out.print(d.getDeptno() + "\t");
+//			System.out.print(d.getDname() + "\t");
+//			System.out.print(d.getLoc() + "\n");
+//		} else {
+//			System.out.println("데이터가 없습니다.");
+//		}
+		
+		dao.insertDept(new Dept(12, "총무", "강남"));
+		/*
+		for(Dept d:dao.getDeptList()) {
 			System.out.print(d.getDeptno() + "\t");
 			System.out.print(d.getDname() + "\t");
 			System.out.print(d.getLoc() + "\n");
-		} else {
-			System.out.println("데이터가 없습니다.");
 		}
+		*/
 	}
 
 }
