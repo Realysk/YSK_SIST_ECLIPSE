@@ -14,10 +14,11 @@ public class A02_DeptDao {
 	
 	private Connection con;
 	private Statement stmt;
+	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	// 공통 기능 메서드 setConn() 선언
-	public void setConn() throws SQLException {
+	// 공통 기능 메서드 setCon() 선언
+	public void setCon() throws SQLException {
 		// 1. jdbc 드라이버 메모리 로딩
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -37,15 +38,98 @@ public class A02_DeptDao {
 		ArrayList<Dept> dlist = new ArrayList<Dept>();
 		return dlist;
 	}
+	
+	// 1. SQL : DB와 대화문
+	// 2. VO : 결과를 받을 JAVA 객체
+	// 3. 메서드 아웃라인 : 입력 값, return 값 데이터
+	// 4. 접속 공통 메서드 : 기본 예외처리
+	// 5. Statement
+	// 6. ResultSet = rs.next(), rs.getXXX()
+	// 7. 자원 해제
+	
+	public Dept getDept(int deptno) {
+		
+		Dept d = null;
+		
+		try {
+			setCon();
+			String sql = "SELECT *\r\n"
+					+ "FROM dept\r\n"
+					+ "WHERE deptno = " + deptno;
+//			System.out.println("SQL : " + sql);
+			
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				d = new Dept(
+						rs.getInt("deptno"),
+						rs.getString("dname"),
+						rs.getString("loc")
+					);
+			}
+			
+			rs.close(); stmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+			System.out.println("SQL 예외 : " + e.getMessage());
+			
+		} catch(Exception e) {
+			
+			System.out.println("일반 예외 : " + e.getMessage());
+			
+		} finally {
+			
+			if(rs != null) { try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(stmt != null) { try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(pstmt != null) { try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(con != null) { try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			
+		}
+		
+		return d;
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A02_DeptDao dao = new A02_DeptDao();
-		try {
-			dao.setConn();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//		try {
+//			dao.setConn();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		Dept d = dao.getDept(10);
+		if(d != null) {
+			System.out.print(d.getDeptno() + "\t");
+			System.out.print(d.getDname() + "\t");
+			System.out.print(d.getLoc() + "\n");
+		} else {
+			System.out.println("데이터가 없습니다.");
 		}
 	}
 

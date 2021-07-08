@@ -89,3 +89,12 @@ FROM emp e, dept d
 WHERE e.deptno = d.deptno
 AND ename LIKE '%'||'A'||'%'
 AND dname LIKE '%'||'A'||'%';
+
+SELECT *
+FROM emp02
+WHERE empno=7369;
+
+-- ex) A02_DeptDao.java에 부서번호를 통해서 검색되게 기능 메서드를 구현하세요.
+SELECT *
+FROM dept
+WHERE deptno = 10;
