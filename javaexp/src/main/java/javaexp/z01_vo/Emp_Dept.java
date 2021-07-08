@@ -2,7 +2,7 @@ package javaexp.z01_vo;
 
 import java.util.Date;
 
-public class Emp {
+public class Emp_Dept {
 	private int empno;
 	private String ename;
 	private String job;
@@ -11,19 +11,16 @@ public class Emp {
 	private double sal;
 	private double comm;
 	private int deptno;
+	private String dname;
+	private String loc;
 	
-	public Emp() {
+	public Emp_Dept() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Emp(String ename, String job) {
-		super();
-		this.ename = ename;
-		this.job = job;
-	}
-
-	public Emp(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno) {
+	public Emp_Dept(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno,
+			String dname, String loc) {
 		super();
 		this.empno = empno;
 		this.ename = ename;
@@ -33,6 +30,14 @@ public class Emp {
 		this.sal = sal;
 		this.comm = comm;
 		this.deptno = deptno;
+		this.dname = dname;
+		this.loc = loc;
+	}
+
+	public Emp_Dept(String ename, String dname) {
+		super();
+		this.ename = ename;
+		this.dname = dname;
 	}
 
 	public int getEmpno() {
@@ -98,4 +103,21 @@ public class Emp {
 	public void setDeptno(int deptno) {
 		this.deptno = deptno;
 	}
+
+	public String getDname() {
+		return dname;
+	}
+
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+
+	public String getLoc() {
+		return loc;
+	}
+
+	public void setLoc(String loc) {
+		this.loc = loc;
+	}
+
 }

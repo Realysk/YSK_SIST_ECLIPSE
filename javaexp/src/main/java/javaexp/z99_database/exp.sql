@@ -6,7 +6,7 @@ FROM emp02
 WHERE ename LIKE '%A%'
 AND job LIKE '%A%';
 
--- ex1)
+-- A01_Dao ex1)
 SELECT *
 FROM dept;
 ----------
@@ -80,5 +80,12 @@ AND job LIKE '%'||'MAN'||'%';
 SELECT *
 FROM emp01
 WHERE ename LIKE '%'||'A'||'%'
-AND job LIKE '%'||'C'||'%'
-;
+AND job LIKE '%'||'C'||'%';
+
+
+-- ex) A04_DaoSch.java로 sql을 출력까지 작성하세요.
+SELECT *
+FROM emp e, dept d
+WHERE e.deptno = d.deptno
+AND ename LIKE '%'||'A'||'%'
+AND dname LIKE '%'||'A'||'%';
