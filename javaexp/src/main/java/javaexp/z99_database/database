@@ -144,3 +144,63 @@
 			
 			
 			- 날짜형일 때
+			
+# PreparedStatement 객체
+	1. 동적 SQL(문자열조합) 구문의 보안적 필요성과 처리 속도에 대한 이슈로 만들어진 객체이다.
+	
+	2. 보안적 필요성
+		select *
+		from emp
+		where empno = 데이터입력
+		사원번호 : [    ] [검색]
+		
+		select *
+		from member
+		where id = 'himan'
+		and pw = '7777';
+		
+		select *
+		from member
+		where id = ''or '1'='1'
+		and pw = ''or '1'='1';
+		
+			로그인
+		ID : ['or '1'='1]
+		PW : ['or '1'='1]
+			[로그인]
+		입력창에 문자열로 위와 같이 입력하면 sql을 만들어서 처리하면 인증을 할 수 있는 것을 볼 수 있다.
+		이것을 SQL Injection이라고 한다.
+	
+	3. 속도 이슈
+		오라클 서버는 SQL을 실행하면 컴파일 과정을 거쳐서 수행 해준다.
+		동일한 sql이 다시 실행 요청이 들어오면 이전에 했던 컴파일 과정을 거치지 않고 바로 수행 해준다.
+		
+		1) 동적 SQL
+			select *
+			from emp
+			where empno = 7780;
+			
+			select *
+			from emp
+			where empno = 7781; -- 다른 SQL을 전달하여 변경할 때마다 SQL을 수행한다.
+			
+		2) PreparedStatement SQL
+			select *
+			from emp
+			where empno = ?;
+			
+			select *
+			from emp
+			where empno = ?; -- 동일한 SQL로 인식하여 컴파일 과정 없이 바로 수행
+			매개변수로 ?에 해당하는 데이터를 넘겨준다.
+			속도가 향상
+			
+	4. 기본 형식
+		1) 기본 SQL 작성 입력할 데이터를 ?로 변경 처리
+			select *
+			from emp
+			where empno = ?
+		
+		2) PreparedStatement 객체 할당. 수행 처리
+		
+		3) pstmt.set데이터유형(순서, 실제데이터);

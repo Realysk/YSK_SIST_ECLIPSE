@@ -98,3 +98,12 @@ WHERE empno=7369;
 SELECT *
 FROM dept
 WHERE deptno = 10;
+
+/*
+ ex) A05_PreparedDao.java에서 기능 메서드 추가하여
+ 	 PreparedStatement를 활용하여 위 SQL을 처리하세요.
+SELECT *
+FROM emp01
+WHERE ename LIKE '%'||?||'%'
+AND job LIKE '%'||?||'%';
+ */
