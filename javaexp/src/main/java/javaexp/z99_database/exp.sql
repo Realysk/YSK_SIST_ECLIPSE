@@ -9,7 +9,7 @@ AND job LIKE '%A%';
 -- ex1)
 SELECT *
 FROM dept;
-
+----------
 
 SELECT deptno, empno, ename, job, sal
 FROM emp02
@@ -29,3 +29,56 @@ WHERE sal = (SELECT max(sal) FROM emp);
 SELECT * -- rs.next()로 boolean을 return할 수 있다.
 FROM emp
 WHERE empno = 7780; -- key를 입력하여 있는지 여부만 확인할 때
+
+SELECT *
+FROM emp; -- 숫자형 데이터 조회
+
+
+-- 사원 번호로 검색
+SELECT *
+FROM emp
+WHERE empno = 7369;
+/*
+ # 프로그래밍에서는 위 내용을 sql로 만들어서 처리
+   매개변수로 넘겨오는 숫자변수
+   public ArrayList<Emp> getEmpno(int empno) {
+   String sql = "SELECT *
+   				 FROM emp
+   				 WHERE empno = " + empno};
+ */
+
+-- 문자열 데이터 조회
+SELECT *
+FROM emp
+WHERE ename = 'ALLEN';
+/*
+   public ArrayList<Emp> getEmpno(String ename) {
+   String sql = "SELECT *
+   				 FROM emp
+   				 WHERE ename = '" + ename + "' "};
+ */
+
+-- 키워드 검색
+SELECT *
+FROM emp
+WHERE ename LIKE '%'||'A'||'%'
+AND job LIKE '%'||'MAN'||'%';
+/*
+   public ArrayList<Emp> schEmp(String ename, String job) {
+   String sql = "SELECT *
+   				 FROM emp
+   				 	WHERE WHERE ename LIKE '%'||'" + ename + "'||'%'
+					AND job LIKE '%'||'" + job + "'||'%' "};
+					
+   public ArrayList<Emp> schEmp(Emp sch) {
+   String sql = "SELECT *
+   				 FROM emp
+   				 	WHERE WHERE ename LIKE '%'||'" + sch.getEname() + "'||'%'
+					AND job LIKE '%'||'" + sch.getJob() + "'||'%' "};
+ */
+
+SELECT *
+FROM emp01
+WHERE ename LIKE '%'||'A'||'%'
+AND job LIKE '%'||'C'||'%'
+;

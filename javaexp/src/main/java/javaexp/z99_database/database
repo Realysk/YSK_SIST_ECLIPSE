@@ -88,3 +88,59 @@
 					list.add(new VO객체생성자(rs.getString(1),......));
 				}
 				- 메서드 최하단에 ArrayList형 데이터가 return 처리된다.
+				
+	4. DB Server에 데이터를 전달하여 결과를 받는 내용
+		0) 서버에서 사용하는 sql을 받은 데이터와 문자열 조합으로 전달하면 된다.
+		1) where 조건문이 있을 때
+			- 숫자형일 때
+			
+				SELECT *
+				FROM emp; -- 숫자형 데이터 조회
+				-- 사원 번호로 검색
+				SELECT *
+				FROM emp
+				WHERE empno = 7369;
+				/*
+				 # 프로그래밍에서는 위 내용을 sql로 만들어서 처리
+   					매개변수로 넘겨오는 숫자변수
+   					public ArrayList<Emp> getEmpno(int empno) {
+   					String sql = "SELECT *
+   				 				  FROM emp
+   				 					WHERE empno = " + empno};
+ 				*/
+			
+			
+			- 문자형일 때
+			
+			-- 문자열 데이터 조회
+				SELECT *
+				FROM emp
+				WHERE ename = 'ALLEN';
+				/*
+					public ArrayList<Emp> getEmpno(String ename) {
+					String sql = "SELECT *
+						   		 FROM emp
+						   			WHERE ename = '" + ename + "' "};
+				*/
+
+			-- 키워드 검색
+				SELECT *
+				FROM emp
+				WHERE ename LIKE '%'||'A'||'%'
+				AND job LIKE '%'||'MAN'||'%';
+				/*
+				   public ArrayList<Emp> schEmp(String ename, String job) {
+				   String sql = "SELECT *
+				   				 FROM emp
+				   				 	WHERE WHERE ename LIKE '%'||'" + ename + "'||'%'
+									AND job LIKE '%'||'" + job + "'||'%' "};
+									
+				   public ArrayList<Emp> schEmp(Emp sch) {
+				   String sql = "SELECT *
+				   				 FROM emp
+				   				 	WHERE WHERE ename LIKE '%'||'" + sch.getEname() + "'||'%'
+									AND job LIKE '%'||'" + sch.getJob() + "'||'%' "};
+				 */
+			
+			
+			- 날짜형일 때
