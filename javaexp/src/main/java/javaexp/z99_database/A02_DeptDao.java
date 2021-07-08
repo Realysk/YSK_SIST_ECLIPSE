@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import javaexp.z01_vo.Dept;
+import javaexp.z01_vo.Emp;
 
 
 public class A02_DeptDao {
@@ -111,6 +112,75 @@ public class A02_DeptDao {
 		}
 		
 		return d;
+	}
+	
+	// ex) A02_DeptDao.java에서 부서정보를 등록하고 조회하세요.
+	//		dept02 테이블 생성
+	
+	public void insertDept(Dept ins) {
+		
+		try {
+			setCon();
+			con.setAutoCommit(false);
+			String sql = "INSERT INTO dept02 VALUES(emp_seq_01.nextval,?,?,?,sysdate,?,?,?)";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, ins.getDeptno());
+			pstmt.setString(2, ins.getDname());
+			pstmt.setString(3, ins.getLoc());
+			
+			pstmt.executeUpdate();
+			con.commit();
+			
+			pstmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+			System.out.println("SQL 예외 : " + e.getMessage());
+			
+			try {
+				// 입력 중간 문제 발생, rollback 처리
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		} catch(Exception e) {
+			
+			System.out.println("일반 예외 : " + e.getMessage());
+			
+		} finally {
+			
+			if(rs != null) { try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(stmt != null) { try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(pstmt != null) { try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(con != null) { try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			
+		}
+		
 	}
 
 	public static void main(String[] args) {

@@ -107,3 +107,21 @@ FROM emp01
 WHERE ename LIKE '%'||?||'%'
 AND job LIKE '%'||?||'%';
  */
+
+DELETE FROM emp02 WHERE empno IS NULL;
+SELECT * FROM emp02 ORDER BY empno DESC;
+INSERT INTO emp02 VALUES(emp_seq_01.nextval,'홍길동' ,'사원' ,7902 ,sysdate ,3500 ,1000 ,10);
+
+/*
+ INSERT INTO emp02 VALUES(emp_seq_01.nextval,?,?,?,sysdate,?,?,?)
+ */
+
+CREATE SEQUENCE emp_seq_01
+START WITH 7935
+INCREMENT BY 1
+MAXVALUE 9999
+MINVALUE 1000
+CYCLE;
+
+
+CREATE TABLE dept02

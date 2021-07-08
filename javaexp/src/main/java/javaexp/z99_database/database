@@ -204,3 +204,28 @@
 		2) PreparedStatement 객체 할당. 수행 처리
 		
 		3) pstmt.set데이터유형(순서, 실제데이터);
+		
+	5. DML (insert, update, delete) 처리
+		1) 기능 메서드 선언
+			public void insertEmp(Emp ins)
+		
+		2) 연결 공통 메서드 호출
+		
+		3) con.setAutocommit(false);
+			자동 autocommit 발생 방지
+		
+		4) SQL 선언
+			insert into emp02 values(emp_seq.nextVal,?,?,sysdate,?,?,?);
+			
+		5) preparedStatement 처리
+			pstmt.setXXXX(1, 데이터);
+			pstmt.setXXXX(2, 데이터);
+			pstmt.setXXXX(3, 데이터);
+		
+		6) executeUpdate()
+		
+		7) con.commit();
+		
+		8) 자원 해제
+		
+		9) 예외 처리 - rollback();
