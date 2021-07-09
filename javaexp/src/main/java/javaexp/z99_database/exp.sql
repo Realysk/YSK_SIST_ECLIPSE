@@ -128,3 +128,5 @@ AS SELECT * FROM dept;
 INSERT INTO dept02 VALUES(11,'회계','서울');
 SELECT * FROM dept02;
 -- INSERT INTO dept02 VALUES(?,?,?);
+
+--
