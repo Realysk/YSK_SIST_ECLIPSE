@@ -3,6 +3,7 @@ package javaexp.a00_exp;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
+import javaexp.a00_exp.z01_vo.Member;
 
 public class A20_Database {
 	
@@ -209,7 +210,7 @@ public class A20_Database {
 			7) 자원 해제
 			8) 예외 처리 SQLException 에서 con.rollback();
 		
-		4. 회원 테이블 member를 만들고 id, pass를 받아 로그인 처리하는 프로그램을 PreparedStatement 형식으로 만들어 보세요.
+		4. 회원 테이블 member02를 만들고 id, pass를 받아 로그인 처리하는 프로그램을 PreparedStatement 형식으로 만들어 보세요.
 		
 			1) 회원 테이블 만들기, 데이터 입력 member (회원번호, 아이디, 패스워드, 회원명, 권한, 포인트, 등록일)
 			2) SQL 작성 및 확인 insert into member values(...);
@@ -219,7 +220,73 @@ public class A20_Database {
 			6) ...
 		
 			*/
+				// 필드 선언
+				private Connection con;
+				private PreparedStatement pstmt;
+				private ResultSet rs;
 				
+				// 공통 메서드
+				public void setCon() throws SQLException {
+					try {
+						Class.forName("oracle.jdbc.driver.OracleDriver");
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					String info = "jdbc:oracle:thin:@localhost:1521:XE";
+					con = DriverManager.getConnection(info,"scott","tiger");
+					System.out.println("Database On");
+				}
+				
+//				public boolean login(Member m) {
+//					
+//					boolean hasMember = false;
+//					
+//					try {
+//						setCon();
+//						con.setAutoCommit(false);
+//						String sql = "SELECT * FROM member02 WHERE id = ? AND pass = ?";
+//						
+//						pstmt = con.prepareStatement(sql);
+//						pstmt.setString(1, m.getId());
+//						pstmt.setString(2, m.getPass());						
+//						rs = pstmt.executeQuery();
+//						hasMember = rs.next();
+//						con.commit();
+//						pstmt.close(); con.close();
+//						
+//					} catch (SQLException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					} catch (Exception e) {
+//						System.out.println(e.getMessage());
+//					} finally {
+//						if(rs!=null)
+//							try {
+//								rs.close();
+//							} catch (SQLException e) {
+//								// TODO Auto-generated catch block
+//								e.printStackTrace();
+//							}
+//						if(pstmt!=null)
+//							try {
+//								pstmt.close();
+//							} catch (SQLException e) {
+//								// TODO Auto-generated catch block
+//								e.printStackTrace();
+//							}
+//						if(con!=null)
+//							try {
+//								con.close();
+//							} catch (SQLException e) {
+//								// TODO Auto-generated catch block
+//								e.printStackTrace();
+//							}
+//					}
+//					
+//					return hasMember;
+//				}
 			/*		
 		
 	*/
@@ -229,7 +296,10 @@ public class A20_Database {
 		
 		// 위에서 설정이 다 되면 main() 메서드에서 해당 객체를 호출시킨다.
 		A20_Database dao = new A20_Database();
-//		dao.생성자();
+//		Member m = dao.login("himan", "7777");
+//		if(m != null)
+//			System.out.println(m.getName());
+//		System.out.println("회원 등록 여부 : " + dao.login(new Member("higirl1", "8888")));
 
 	}
 

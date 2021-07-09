@@ -496,6 +496,111 @@ public class A05_PreparedDao {
 		
 	}
 
+	/*
+		1) 기능 메서드 선언
+			public void insertEmp(Emp ins)
+		
+		2) 연결 공통 메서드 호출
+		
+		3) con.setAutocommit(false);
+			자동 autocommit 발생 방지
+		
+		4) SQL 선언
+			insert into emp02 values(emp_seq.nextVal,?,?,sysdate,?,?,?);
+			
+		5) preparedStatement 처리
+			pstmt.setXXXX(1, 데이터);
+			pstmt.setXXXX(2, 데이터);
+			pstmt.setXXXX(3, 데이터);
+		
+		6) executeUpdate()
+		
+		7) con.commit();
+		
+		8) 자원 해제
+		
+		9) 예외 처리 - rollback();	 
+	 */
+	
+	public void updateEmp(Emp upt) {
+		
+			try {
+				setCon();
+				con.setAutoCommit(false);
+				String sql = "UPDATE emp02\r\n"
+						+ "	SET ename = ?\r\n"
+						+ "		job = ?,\r\n"
+						+ "		mgr = ?,\r\n"
+						+ "		hiredate = to_date(?,'YYYY/MM/DD'),\r\n"
+						+ "		sal = ?,\r\n"
+						+ "		comm = comm + ?,\r\n"
+						+ "		deptno = ?\r\n"
+						+ "WHERE empno = ?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, upt.getEname());
+				pstmt.setString(2, upt.getJob());
+				pstmt.setInt(3, upt.getMgr());
+				pstmt.setString(4, upt.getHiredateS());
+				pstmt.setDouble(5, upt.getSal());
+				pstmt.setDouble(6, upt.getComm());
+				pstmt.setInt(7, upt.getDeptno());
+				pstmt.setInt(8, upt.getEmpno());
+				
+				pstmt.executeUpdate();
+				con.commit();
+				
+				pstmt.close(); con.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				
+				e.printStackTrace();
+				System.out.println("SQL 예외 : " + e.getMessage());
+				
+				try {
+					// 입력 중간 문제 발생, rollback 처리
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			} catch(Exception e) {
+				
+				System.out.println("일반 예외 : " + e.getMessage());
+				
+			} finally {
+				
+				if(rs != null) { try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} }
+				if(stmt != null) { try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} }
+				if(pstmt != null) { try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} }
+				if(con != null) { try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} }
+				
+			}
+		
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -516,7 +621,20 @@ public class A05_PreparedDao {
 		
 		*/
 		
-		dao.insertEmp(new Emp(0,"김미나","과장",7780,null,6000,1000,10));
+//		dao.insertEmp(new Emp(0,"김미나","과장",7780,"",6000,1000,10));
+		
+		/*
+		UPDATE emp02
+			SET ename = ename ||'(승진)',
+				job = '차장',
+				mgr = 7780,
+				hiredate = to_date('2021/01/01','YYYY/MM/DD'),
+				sal = sal + 1000,
+				comm = comm + 300,
+				deptno = 20
+		WHERE empno = 7936;
+		 */
+		dao.updateEmp(new Emp(7937, "김소현(수정)", "대리", 7780, "2021/07/09", 5000, 1000, 10));
 		
 		for(Emp e:dao.getPreparedEmpList(new Emp("",""))) {
 			System.out.print(e.getEmpno()+"\t");
@@ -527,6 +645,8 @@ public class A05_PreparedDao {
 		
 		// ex) A02_DeptDao.java에서 부서정보를 등록하고 조회하세요.
 		//		dept05 테이블 생성
+		
+		// ex) Member 테이블을 mno 기준으로 수정하세요.
 		
 	}
 }

@@ -129,4 +129,71 @@ INSERT INTO dept02 VALUES(11,'회계','서울');
 SELECT * FROM dept02;
 -- INSERT INTO dept02 VALUES(?,?,?);
 
---
+/*
+ 1) 회원 테이블 만들기, 데이터 입력 member (회원번호, 아이디, 패스워드, 회원명, 권한, 포인트, 등록일)
+ 2) SQL 작성 및 확인 insert into member values(...);
+ */
+CREATE TABLE member02(
+	mno number PRIMARY KEY,
+	id varchar2(30),
+	pass varchar2(20),
+	name varchar2(50),
+	auth varchar2(20),
+	point NUMBER,
+	regdte date
+);
+
+CREATE SEQUENCE member_seq
+	START WITH 1000
+	MINVALUE 1000
+	MAXVALUE 9999;
+SELECT member_seq.nextval FROM dual;
+INSERT INTO member02 VALUES (member_seq.nextval, 'himan','7777','홍길동','admin',1000,sysdate);
+INSERT INTO member02 VALUES (member_seq.nextval, 'higirl','9999','김리나','admin',2000,sysdate);
+SELECT * FROM MEMBER02;
+UPDATE member02
+	SET id = 'goodgirl',
+		pass = '8888',
+		name = '이미나',
+		auth = 'normal',
+		point = 2000,
+		regdte = to_date('2021/07/01','YYYY/MM/DD')
+WHERE mno = 1003;
+
+UPDATE member02
+	SET id = ?,
+		pass = ?,
+		name = ?,
+		auth = ?,
+		point = ?,
+		regdte = to_date(?,'YYYY/MM/DD')
+WHERE mno = ?
+
+-- SELECT * FROM member02 WHERE id = ? AND pass = ?;
+
+/*
+ # 수정 처리
+ 	1. 수정 구문 emp02
+ */
+SELECT * FROM emp02 ORDER BY empno DESC;
+UPDATE emp02
+	SET ename = ename ||'(승진)',
+		job = '차장',
+		mgr = 7780,
+		hiredate = to_date('2021/01/01','YYYY/MM/DD'),
+		sal = sal + 1000,
+		comm = comm + 300,
+		deptno = 20
+WHERE empno = 7936;
+
+UPDATE emp02
+	SET ename = ?
+		job = ?,
+		mgr = ?,
+		hiredate = to_date(?,'YYYY/MM/DD'),
+		sal = ?,
+		comm = comm + ?,
+		deptno = ?
+WHERE empno = ?
+	
+-- ex) Member02 테이블을 mno 기준으로 수정하세요.
