@@ -40,7 +40,7 @@
 	<button type="button" onclick="repeatX()"> X축 이미지 반복 </button>
 	<button type="button" onclick="repeatY()"> Y축 이미지 반복 </button>
 	<button type="button" onclick="repeatU()"> 배경 이미지 확대 </button>
-	<button type="button" onclick="repeatD()"> 배경 이미지 축소  </button>
+	<button type="button" onclick="repeatD()"> 배경 이미지 축소 </button>
 	<!-- 위 기능 버튼에 맞게 배경 이미지 처리 -->
 	<hr>
 	<div> SpongeBob is an over-optimistic sponge that annoys other characters. </div>
@@ -55,12 +55,24 @@
 		console.log(divObj.style.backgroundRepeat);
 	}
 	
+	function repeatY() {
+		alert("Y축 반복");
+		divObj.style.backgroundRepeat = "repeat-y";
+		console.log(divObj.style.backgroundRepeat);
+	}
+	
 	var xSize = 100;
 	var ySize = 100;
 	
-	function larger() {
+	function repeatU() {
 		xSize += 10;
 		ySize += 10;
+		divObj.style.backgroundSize = xSize + "px " + ySize + "px";
+	}
+	
+	function repeatD() {
+		xSize -= 10;
+		ySize -= 10;
 		divObj.style.backgroundSize = xSize + "px " + ySize + "px";
 	}
 
