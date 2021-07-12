@@ -34,9 +34,10 @@ public class A02_DeptDao {
 		System.out.println("접속 성공");
 	}
 	
-	// 조회 기능 메서드 선언
+	// 조회 기능 메서드 선언 (아웃라인 구성해야함)
 	public ArrayList<Dept> getDeptList() {
 		ArrayList<Dept> dlist = new ArrayList<Dept>();
+
 		return dlist;
 	}
 	
@@ -55,7 +56,7 @@ public class A02_DeptDao {
 		try {
 			setCon();
 			String sql = "SELECT *\r\n"
-					+ "FROM dept\r\n"
+					+ "FROM dept02\r\n"
 					+ "WHERE deptno = " + deptno;
 //			System.out.println("SQL : " + sql);
 			
@@ -182,8 +183,76 @@ public class A02_DeptDao {
 		}
 		
 	}
+	
+	// ex) A02_DeptDao.java 기존 소스를 활용하여 부서번호로 부서정보를 삭제하세요.
+	
+	public void deleteDept(int deptno) {
+		
+		try {
+			setCon();
+			con.setAutoCommit(false);
+			
+			String sql = "DELETE FROM dept02\r\n"
+					+ "WHERE deptno = ?";
+			
+			pstmt.setInt(1, deptno);
+			
+			pstmt.executeUpdate();
+			
+			con.commit();
+			
+			pstmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+			System.out.println("SQL 예외 : " + e.getMessage());
+			
+			try {
+				// 입력 중간 문제 발생, rollback 처리
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		} catch(Exception e) {
+			
+			System.out.println("일반 예외 : " + e.getMessage());
+			
+		} finally {
+			
+			if(rs != null) { try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(stmt != null) { try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(pstmt != null) { try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(con != null) { try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			
+		}
+		
+	}	
 
-	// 1. SQL : DB와 대화문
+		// 1. SQL : DB와 대화문
 		// 2. VO : 결과를 받을 JAVA 객체
 		// 3. 메서드 아웃라인 : 입력 값, return 값 데이터
 		// 4. 접속 공통 메서드 : 기본 예외처리
@@ -211,14 +280,16 @@ public class A02_DeptDao {
 //			System.out.println("데이터가 없습니다.");
 //		}
 		
-		dao.insertDept(new Dept(12, "총무", "강남"));
-		/*
+//		dao.insertDept(new Dept(12, "총무", "강남"));
+		
+//		dao.deleteDept(0);
+		
 		for(Dept d:dao.getDeptList()) {
 			System.out.print(d.getDeptno() + "\t");
 			System.out.print(d.getDname() + "\t");
 			System.out.print(d.getLoc() + "\n");
 		}
-		*/
+		
 	}
 
 }

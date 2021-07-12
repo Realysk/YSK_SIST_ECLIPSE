@@ -197,3 +197,39 @@ UPDATE emp02
 WHERE empno = ?
 	
 -- ex) Member02 테이블을 mno 기준으로 수정하세요.
+
+-- ex) Product 테이블 생성
+CREATE TABLE Product02 (
+	pno char(7),
+	name varchar2(50),
+	price number,
+	cnt number
+);
+CREATE SEQUENCE prod_seq
+	START WITH 1000
+	MINVALUE 1000
+	MAXVALUE 9999;
+INSERT INTO product02 VALUES('PRO'||prod_seq.nextval, '사과',2000,300);
+INSERT INTO product02 VALUES('PRO'||prod_seq.nextval, '바나나',4500,500);
+INSERT INTO product02 VALUES('PRO'||prod_seq.nextval, '딸기',12000,200);
+INSERT INTO product02 VALUES('PRO'||prod_seq.nextval, '수박',15000,500);
+-- INSERT INTO product02 VALUES('PRO'||prod_seq.nextval,?,?,?);
+SELECT *
+FROM product02
+WHERE name LIKE '%'||''||'%'
+AND price BETWEEN 0 AND 999999;
+/*
+SELECT *
+FROM product02
+AND price BETWEEN ? AND ?;
+UPDATE product02
+	SET name = ?,
+		price = ?,
+		cnt = ?
+	WHERE pno = ?;
+*/
+UPDATE product02
+	SET name = '딸기(특)',
+		price = 15000,
+		cnt = cnt+100
+	WHERE pno = 'PRO1002';

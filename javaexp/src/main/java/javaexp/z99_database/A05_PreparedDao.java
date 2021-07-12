@@ -600,6 +600,70 @@ public class A05_PreparedDao {
 			}
 		
 	}
+	
+	public void deleteEmp(int empno) {
+		
+		try {
+			setCon();
+			con.setAutoCommit(false);
+			String sql = "DELETE FROM emp02\r\n"
+					+ "WHERE empno = ?";
+			
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, empno);
+			pstmt.executeUpdate();
+			con.commit();
+			pstmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+			System.out.println("SQL 예외 : " + e.getMessage());
+			
+			try {
+				// 입력 중간 문제 발생, rollback 처리
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		} catch(Exception e) {
+			
+			System.out.println("일반 예외 : " + e.getMessage());
+			
+		} finally {
+			
+			if(rs != null) { try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(stmt != null) { try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(pstmt != null) { try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			if(con != null) { try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} }
+			
+		}
+	
+}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -634,7 +698,10 @@ public class A05_PreparedDao {
 				deptno = 20
 		WHERE empno = 7936;
 		 */
+		
 		dao.updateEmp(new Emp(7937, "김소현(수정)", "대리", 7780, "2021/07/09", 5000, 1000, 10));
+		
+//		dao.deleteEmp(7935);
 		
 		for(Emp e:dao.getPreparedEmpList(new Emp("",""))) {
 			System.out.print(e.getEmpno()+"\t");

@@ -31,9 +31,17 @@
 			- Table : 화면에 출력 할 2차원의 데이터를 표현할 때 주로 사용된다.
 					  타이틀, 내용을 효과적으로 정렬해서 처리한다.
 					<table>
+						<col width=""> 컬럼 폭 설정. %, px
 						<tr><th> 테이블의 타이틀 <th></tr>
 						<tr><td> 데이터 <td></tr>
 					</table>
+					align, width, height, border
+					td 속성
+					colspan = "합칠 열의 갯수"
+					rowspan = "합칠 행의 햇수"
+					정렬 처리 inline style
+						<tr/td style="text-align:center"
+					
 			- Link : 외부 문서나 내부 문서에 연결하여 처리한다.
 					 <a href = ""> : 특정한 메뉴나 기능을 클릭 시, 해당 페이지로 이동 처리.
 					- Download 처리
