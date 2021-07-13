@@ -92,5 +92,42 @@
  
  	document.write("<a href='#'> 링크 처리 </a><br>");
  	document.write("<h3 onclick=\"alert('안녕')\"></h3>");
+ 	
+ /*
+ # 데이터의 입력 처리
+ 	1. confirm("출력문자열"); : 확인 시 true / 취소 시 false값 return
+ 	2. prompt("출력문자열","입력초기값"); : 확인 시 입력 된 값 return, 취소 시 문자열 'null' return
+ */
+ 
+ 	var isReg = confirm("등록하시겠습니까?");
+ 	if(isReg) {
+ 		document.write("<h3> 등록 되었습니다! </h3>");
+ 	} else {
+ 		document.write("<h3> 등록/취소 되었습니다! </h3>"); 		
+ 	}
+ 	
+ 	var name = prompt("이름을 입력하세요.","이름 입력");
+ 	console.log("취소 시 : " + name);
+ 	console.log("취소 시 : " + typeof(name));
+ 	if(name != null) {
+ 		document.write(`<h3> 이름 : ${name} </h3>`); 			
+ 	} else {
+ 		document.write(`<h3> 이름을 등록 하지 않았습니다. </h3>`);
+ 	}
+ 
+ // ex) 물건명/가격/갯수를 입력하고 화면에 '출력하시겠습니까?' => 웹 화면에 출력 (취소 시 console.log에 출력)
+ 
+ 	var pname = prompt("물건명 입력");
+ 	var price = prompt("가격 입력");
+ 	var cnt = prompt("수량 입력");
+// 	var isPrint = confirm("화면에 출력하시겠습니까?");
+	if(confirm("화면에 출력하시겠습니까?")) {
+		document.write(`<h4> 물건명 : ${pname != 'null'? pname : '입력안됨'}</h4>`);
+		document.write(`<h4> 가격 : ${price != 'null'? price : '입력안됨'}</h4>`);
+		document.write(`<h4> 수량 : ${cnt != 'null'? cnt : '입력안됨'}</h4>`);
+	} else {
+		console.log(pname, price, cnt);
+	}
+ 	
 </script>
 </html>

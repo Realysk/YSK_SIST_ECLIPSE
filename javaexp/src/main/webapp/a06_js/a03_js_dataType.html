@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a03_js_dataType </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+/*
+ # JS의 데이터 유형
+ 	1. 함수로 확인 : typeof(변수명)
+ 	2. 문자열 (String) : var strVar = '홍길동';
+ 	3. 숫자형 (number) : var numVar = 25;
+ 	4. 논리형 (boolean) : var isOver = numVar >= 70;
+ 	5. 함수형 (function) : var funVar = function(){};
+ 	6. 객체형 (object) : var objVar = {name:'홍길동'};
+ 					   	var arrVar = [7000,8000,9000];
+ */
+ 		
+ 	var strVar = '홍길동';
+ 	var numVar = 25;
+ 	var isOver = numVar >= 70;
+ 	var funVar = function() {return '함수결과값';};
+ 	var objVar = {name:'홍길동'};
+ 	var arrVar = [7000,8000,9000];
+ 
+ 	document.write(`<h2> 데이터 : ${strVar}, 데이터유형 : ${typeof(strVar)} </h2>`);
+ 	document.write(`<h2> 데이터 : ${numVar}, 데이터유형 : ${typeof(numVar)} </h2>`);
+ 	document.write(`<h2> 데이터 : ${isOver}, 데이터유형 : ${typeof(isOver)} </h2>`);
+ 	document.write(`<h2> 데이터 : ${funVar}, 데이터유형 : ${typeof(funVar)} </h2>`);
+ 	document.write(`<h2> 데이터 : ${funVar()}, 데이터유형 : ${typeof(funVar)} </h2>`);
+ 	document.write(`<h2> 데이터 : ${objVar}, 데이터유형 : ${typeof(objVar)} </h2>`);
+ 	document.write(`<h2> 데이터 : ${arrVar}, 데이터유형 : ${typeof(arrVar)} </h2>`);
+ 	
+ 	// ex) 물건명과 가격을 변수로 선언하고 이것이 2000이 넘는 여부와 이 가격의 10% 할인 된 금액을 return하는 함수, 이러한 물건명, 가격, 2000 여부와 저장하는 객체를 선언하세요.
+ 	
+ 	/*
+ 	document.write("<hr>");
+ 	
+ 	var pname = "사과";
+ 	var price = 3000;
+ 	var isPrice = price >= 2000;
+ 	var prodFun = function() {return price*0.9;};
+ 	
+ 	document.write(`<h2> 물건명 : ${pname}, 데이터 유형 : ${typeof(pname)} </h2>`);
+ 	document.write(`<h2> 가격 : ${price}, 데이터 유형 : ${typeof(price)} </h2>`);
+ 	document.write(`<h2> 가격 초과 여부 (해당 물건이 2000원이 넘는가?) : ${isPrice}, 데이터 유형 : ${typeof(isPrice)} </h2>`);
+ 	document.write(`<h2> 데이터 저장 : ${prodFun}, 데이터 유형 : ${typeof(prodFun)} </h2>`);
+ 	document.write(`<h2> 10% 할인 된 가격 : ${prodFun()}원, 데이터 유형 : ${typeof(prodFun)} </h2>`);
+ 	
+ 	var arrProd = [pname, price, isPrice, prodFun()];
+ 	
+ 	document.write(`<h2> 주문 정보 : ${arrProd}, 데이터유형 : ${typeof(arrProd)} </h2>`);
+ 	console.log("물건명 : " + pname);
+ 	console.log("가격 : " + price);
+ 	console.log("가격 초과 여부 (2000원) : " + isPrice);
+ 	console.log("10% 할인 된 금액 : " + prodFun());
+ 	console.log("주문 정보 : " + arrProd);
+ 	*/
+ 	
+ 	var pname = "사과";
+ 	var price = 3000;
+ 	var isOver = price >= 2000;
+ 	var fun01 = function(price) {
+ 		return price-(price*0.1);
+ 	};
+ 	
+ 	console.log("10% 할인 된 금액 : " + fun01(price));
+ 	
+ 	var obj01 = {
+ 			pname : "바나나",
+ 			price : 4500,
+ 			isOver:false, // this. 현재 객체가 가지고 있는 맴버를 호출할 시 반드시 선언
+ 			fun01:function(price) {
+ 				return price-(price*0.1);
+ 			}
+ 	};
+ 	
+ 	console.log("# 객체 활용 #");
+ 	console.log("물건명 : " + obj01.pname);
+ 	obj01.isOver = obj01.price>=2000;
+ 	console.log("가격 : " + obj01.price);
+ 	console.log("2000 이상 초과 여부 : " + obj01.isOver);
+ 	console.log("10% 할인 된 금액 : " + obj01.fun01(obj01.price));
+ 	
+ 	// ex) 컴퓨터(com) 객체의 속성으로 제조사, 가격, 제조사가 삼성인지 여부, 구매 잔액 처리 함수:입력값-구매 입금, 리턴 값-입금 된 금액-컴퓨터 가격 객체 선언과 화면에 출력 처리
+ 	
+	var comObj = {
+ 			madeCom:"삼성",
+ 			priceCom:1500000,
+ 			isSamsung:false, // 변수 내부에서는 할당 불가능
+ 			funMoney:function(inmoney) {
+ 				return inmoney - this.priceCom;
+ 			}
+ 	};
+ 	document.write("제조사 : " + comObj.madeCom + "<br>");
+ 	document.write("가격 : " + comObj.priceCom + "<br>");
+ 	// 외부에서 호출하여 비교연산자 할당 처리
+ 	comObj.isSamsung = comObj.madeCom == "삼성";
+ 	document.write("제조사 여부 : " + comObj.isSamsung + "<br>");
+ 	document.write("구매 잔액 확인 : " + comObj.funMoney(2000000) + "<br>");
+
+ 	
+</script>
+</html>
