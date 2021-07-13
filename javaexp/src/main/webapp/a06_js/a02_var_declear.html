@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a02_var_declear </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+/*
+			*/
+				var name="김길동"; // var, name, "김길동" - 표현식	
+			/*
+		키워드 : 프로그램 내장 명령어를 말하는 것으로 식별자를 사용할 수 없다. (var, break, if, for, ....)
+		식별자 : 변수에 이름을 붙일 때 사용하는 단어
+		
+	1. 변수명, 함수명, 객체명, 참조변수명
+		ex) var age=25; var call=function(){}; function plus(){};
+			var person={}; function Woman(){}; var w1 = new Woman();
+	
+	2. 식별자 선언 규칙
+		1) 키워드 사용 금지
+			ex) var if = 25; (X)
+		2) 숫자로 시작하면 안된다.
+			ex) var 10num;(X), var 15age;(X),
+				var num01;(O), var name05;(O)
+		3) 특수문자는 $, _만 허용된다.
+			ex) var #name;(X), var $name;(O), var num_01;(O)
+				변수명으로 연산자 내용도 사용하지 못한다. var num-good; (X)
+		4) 중간에 공백문자는 허용하지 않는다.
+			ex) var num good;(X)
+	
+	3. 출력
+		1) alert, confirm, prompt
+			*/
+				// alert("경고장 출력");
+			/*
+		2) document.write("html태그");
+			*/
+				document.write("<h1> 화면에 출력합니다. </h1>");
+				var name="홍길동";
+				document.write(`$<h1>${name} 화면에 출력합니다.</h1>`);		
+			/*
+		3) console.log() : f12로 bug를 찾을 때 활용된다.
+			*/
+				console.log("버그를 찾을 때 출력");			
+			/*
+
+ */
+ 
+// ex) ecam6에서 활용하는 '(아포스트로피)와 ${변수명}을 활용해서 화면에 1~10까지 누적 된 변수를 h3로 출력하세요.
+	
+	var tot = 0;
+	for(var cnt=1; cnt<=10; cnt++) {
+		tot += cnt;
+		document.write(`<h3> 번호 : ${cnt} - 합산 ${tot} </h3>`);
+	}
+
+/*
+ # JS의 ''(홋따옴표) ""(쌍따옴표)의 활용
+ 	1. JS에서는 '',"" 구분 없이 문자열 데이터를 사용할 때 활용 된다.
+ 	2. 두 개의 형태의 문자열을 변수나 함수의 매개변수로 구분할 때 주로 활용된다.
+ 		1) 포함 관계로 구분하여 사용할 수 있지만
+ 		2) 겹쳐서 사용은 에러가 발생한다.
+ */
+ 
+ 	document.write("<h2 align='center'> 안녕 </h2>");
+ 	document.write("<h2 onclick='call()'> 클릭하세요. </h2>");
+ 	function call() {
+ 		alert('이벤트 호출');
+ 	}
+ 	console.log('This is "String" ');
+ 	console.log("This is 'String' ");
+//	console.log("This is 'String" '); 포함 관계가 아닌 겹쳐서의 사용은 에러가 발생한다.
+ 	
+/*
+ 	3. 홋따옴표, 쌍따옴표를 같이 활용할 때 \(역슬래쉬)를 활용한다.
+ */
+ 
+ 	console.log("This is \"String\" ");
+ 	console.log('This is \'String\' ');
+	
+ // ex) document.write()를 활용하여 "",''을 같이 활용하는 예제 간단하게 만들어 보세요.
+ 
+ 	document.write("<a href='#'> 링크 처리 </a><br>");
+ 	document.write("<h3 onclick=\"alert('안녕')\"></h3>");
+</script>
+</html>
