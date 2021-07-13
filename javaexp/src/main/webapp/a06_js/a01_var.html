@@ -53,12 +53,14 @@
 
  	// ex) 변수 num01, num02를 지정하고 할당한 후 사칙연산 내용과 결과를 console로 출력하세요.
  	
- 	var num01 = 10;
- 	var num02 = 20;
- 	var tot = num01 + num02;
- 	console.log("num01 : " + num01);
- 	console.log("num02 : " + num02);
- 	console.log("num01 + num02 = " + tot);
+ 	var num01 = 25;
+ 	var num02 = 5;
+ 	console.log(num01 + " + " + num02 + " = " + (num01+num02));
+ 	console.log(num01 + " - " + num02 + " = " + (num01-num02));
+ 	console.log(num01 + " * " + num02 + " = " + (num01*num02));
+ 	// ~ ' es6(2015) 이후 지원되는 브라우저에서만
+ 	// ${변수명}
+ 	console.log('${num01} / ${num02} = ${num01/num02}');
 
 </script>
 </html>
