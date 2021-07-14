@@ -82,7 +82,9 @@
  			isOver:false, // this. 현재 객체가 가지고 있는 맴버를 호출할 시 반드시 선언
  			fun01:function(price) {
  				return price-(price*0.1);
- 			}
+ 			},
+ 			innerObj:{title:"JS 기초", price:32000}, // 객체 안에 객체 선언
+ 			arry01:[3000,4000,'안녕',true] // 객체 안에 배열 선언, JS에서는 다른 유형의 데이터를 하나의 배열에 선언이 가능하다.
  	};
  	
  	console.log("# 객체 활용 #");
@@ -91,6 +93,8 @@
  	console.log("가격 : " + obj01.price);
  	console.log("2000 이상 초과 여부 : " + obj01.isOver);
  	console.log("10% 할인 된 금액 : " + obj01.fun01(obj01.price));
+ 	console.log("객체 안에 객체 : " + obj01.innerObj.title);
+ 	console.log("객체 안에 배열 : " + obj01.arry01[0]);
  	
  	// ex) 컴퓨터(com) 객체의 속성으로 제조사, 가격, 제조사가 삼성인지 여부, 구매 잔액 처리 함수:입력값-구매 입금, 리턴 값-입금 된 금액-컴퓨터 가격 객체 선언과 화면에 출력 처리
  	

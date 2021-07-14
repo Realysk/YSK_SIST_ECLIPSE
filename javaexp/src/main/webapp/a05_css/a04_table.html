@@ -2,105 +2,108 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> a04_table </title>
-<style type="text/css">
-/*
- # CSS로 표 꾸미기
- 	1. table 속성
- 		border : 테이블 전체 테두리에 대한 옵션 설정 굵기, style, 색상 지정 가능.
- 		border-collapse : collapse;
- 			테이블에 종속 된 td, th의 중복적인 테두리를 합치는 옵션
- 	2. td, th 속성
- 		border : 각 셀에 대한 이중 border에 대한 옵션을 설정 할 수 있다.
- 		text-align : 정렬에 대한 처리
- 		padding : 글자와 border의 사이 간격
- 		height/width : 너비 및 높이 설정
- */
+<title>Insert title here</title>
+<style>
+/*  
+#  css 로 표꾸미기..
+	1. table 속성
+		border : 테이블 전체 테두리에 대한 옵션 설정 굵기, style, 색상을 지정할 수 있다.
+		border-collapse : collapse; 
+			테이블에 종속된 td, th의 중복적인 테두리를 합치는 옵션..
+	2. td, th 속성
+		border : 각 셀에 대한 이중 border에 대한 옵션을 설정할 수 있다.
+		text-align : 정렬에 대한 처리
+		padding: 글자와 border의 사이 간격 설정.
+		height/width : 넓이와 폭에 대한 설정
+	3. 화면 처리 시
+		행 별로 짝수행에 대한 색상 처리
+			ex) tr:nth-child(2n){background-color:aliceblue;}
+			ex) tr:nth-child(even){background-color:aliceblue;}
+		행 별로 마우스 오버 시 해당 행에 대한 처리
+			ex) tr:hover{color:yellow, font-size:15px;}
 
-	table {width:"70%"; border:1px solid blue; border-collapse:collapse;}
-	td, th {border:1px dotted red;}
-	#line1 {border:3px double red;}
-	#line2 {border:1px solid red;}
-	#line3 {border:3px double red;}
+*/
+
+</style>
+<script>
+
+</script>
+<style>
+
+	#tab01 table{width:70%;border:1px solid blue;border-collapse:collapse;}
+	#tab01 td, #tab01 th{border:1px dotted red;}
 	
-	#tab02 {border:1px solid green; border-collapse:collapse;}
-	#tab02 td, #tab02 th {border:1px solid pink;}
-	#tab02 th {border-bottom-style:double;}
-	th, td {padding:10px;}
-	thead, tfoot {height:50px;}
-	td {text-align:right;}
-	#tab01.shwTxt {text-align:center;}
-
+   	#tab02 {border:1px solid green; border-collapse:collapse;}
+   	#tab02 td, #tab02 th{border:1px solid pink;}
+   	#tab02 th{border-bottom-style:double;}
+   	#tab01  th,#tab01  td{padding:10px;}
+   	#tab01  thead,#tab01  tfoot{height:50px;}
+ 	#tab01 td{text-align:right;}
+ 	#tab01.shwTxt{text-align:center}
+ 	
 </style>
 </head>
 <body>
-	<h3> 1학기 성적 </h3>
+	<h3>1학기 성적</h3>
 	<hr>
-	<table width="70%">
+	<table id="tab01">
 		<thead>
-			<tr><th> 이름 </th><th> HTML </th><th> CSS </th></tr>
+			<tr><th>이름</th><th>HTML</th><th>CSS</th></tr>
 		</thead>
 		<tfoot>
-			<tr><th> 합 </th><th> 310 </th><th> 249 </th></tr>
-		</tfoot>
+			<tr><th>합</th><th>310</th><th>249</th></tr>
+		</tfoot>	
 		<tbody>
-			<tr><td class="shwTxt"> 황기태 </td><td> 80 </td><td> 70 </td></tr>
-			<tr><td class="shwTxt"> 이재문 </td><td> 95 </td><td> 99 </td></tr>
-			<tr><td class="shwTxt"> 이병은 </td><td> 85 </td><td> 90 </td></tr>
-			<tr><td class="shwTxt"> 김남윤 </td><td> 50 </td><td> 40 </td></tr>
+			<tr><td class="shwTxt">황기태</td><td>80</td><td>70</td></tr>
+			<tr><td class="shwTxt">이재문</td><td>95</td><td>99</td></tr>	
+			<tr><td class="shwTxt">이병은</td><td>85</td><td>90</td></tr>
+			<tr><td class="shwTxt">김남윤</td><td>50</td><td>40</td></tr>
 		</tbody>
-	</table><br>
-
-	<!--
-		ex) 테이블을 하단에 추가하고 이름, 국어, 영어, 수학 점수를 출력하되
-		상단 테이블과 하단에 데이터와 구분하는 이중라인을 나타내고
-		테이블 선과 th,td 선에 대한 색상을 다르게 처리하세요.
-	-->
+	</table>   
 	
-	<table id="tab02">
-		<thead>
-			<tr><th> 이름 </th><th> 국어 </th><th> 영어 </th><th> 수학 </th></tr>
-		</thead>
-		<tbody>
-			<tr><td> 홍길동 </td><td> 100 </td><td> 70 </td><td> 60 </td></tr>
-			<tr><td> 마길동 </td><td> 80 </td><td> 80 </td><td> 90 </td></tr>
-			<tr><td> 최길동 </td><td> 60 </td><td> 90 </td><td> 100 </td></tr>
-		</tbody>
-		<tfoot>
-			<tr><th> 합 </th><th> 240 </th><th> 240 </th><th> 250 </th></tr>
-		</tfoot>
-	</table>
-	
-	<!--
-		ex) css 속성을 활용하여 td를 클릭 시 중앙 정렬, 배경 색상 노란색, width, height를 변경하세요. 
+	<!-- 
+	 ex) 테이블을 하단에 추가하고, 이름 국어 영어 수학 점수를 출력하되
+	 	상단 타이블과 하단에 데이터와 구분하는 이중라인을 나타내고, 테이블 선과
+	 	th, td 선에 대한 색상을 다르게 처리 하세요.. 2조.
 	 -->
-	 
-	<table id="tab03" width="70%" border>
-		<thead>
-			<tr><th> 이름 </th><th> 국어 </th><th> 영어 </th><th> 수학 </th></tr>
-		</thead>
-		<tbody>
-			<tr><td> 홍길동 </td><td> 100 </td><td> 70 </td><td> 60 </td></tr>
-			<tr><td> 마길동 </td><td> 80 </td><td> 80 </td><td> 90 </td></tr>
-			<tr><td> 최길동 </td><td> 60 </td><td> 90 </td><td> 100 </td></tr>
-		</tbody>
-		<tfoot>
-			<tr><th> 합 </th><th> 240 </th><th> 240 </th><th> 250 </th></tr>
-		</tfoot>
-	</table>	 
-
+	   
+	   <table id="tab02">
+	      <thead>
+	         <tr><th>이름</th><th>국어</th><th>영어</th><th>수학</th></tr>
+	      </thead>
+	      <tbody>
+	         <tr><td>황기태</td><td>80</td><td>70</td><td>76</td></tr>
+	         <tr><td>이재문</td><td>85</td><td>75</td><td>65</td></tr>
+	         <tr><td>이병은</td><td>90</td><td>82</td><td>84</td></tr>
+	         <tr><td>김남윤</td><td>95</td><td>88</td><td>92</td></tr>
+	      </tbody>
+	   </table>
+	    <table id="tab03" width="70%" border>
+	      <thead>
+	         <tr><th>이름</th><th>국어</th><th>영어</th><th>수학</th></tr>
+	      </thead>
+	      <tbody>
+	         <tr><td>황기태</td><td>80</td><td>70</td><td>76</td></tr>
+	         <tr><td>이재문</td><td>85</td><td>75</td><td>65</td></tr>
+	         <tr><td>이병은</td><td>90</td><td>82</td><td>84</td></tr>
+	         <tr><td>김남윤</td><td>95</td><td>88</td><td>92</td></tr>
+	      </tbody>
+	   </table>
+	 <!-- 
+	 ex) css 속성을 활용하여 td를 클릭시, 중앙정렬, 배경색상 노랑색, width, height를
+	 	변경처리하세요.. 3조..
+	  -->
 </body>
-<script type="text/javascript">
-
+<script>
 	var tds = document.querySelectorAll("#tab03 td");
-	for(var idx=0; idx<tds.length; idx++) {
-		tds[idx].onclick=function() {
+	for(var idx=0;idx<tds.length;idx++){
+		tds[idx].onclick=function(){
 			this.style.textAlign="center";
 			this.style.backgroundColor="yellow";
 			this.style.width="100px";
 			this.style.height="50px";
+			
 		};
 	}
-
 </script>
 </html>

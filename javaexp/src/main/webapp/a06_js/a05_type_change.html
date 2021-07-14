@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a05_type_change </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+/*
+ # JS에서 형 변환 처리
+ 	1. 문자열과 숫자형 데이터를 자동 형 변환을 많이 지원하고 있다.
+ 		+ 이 외에는 대부분 사칙 연산자, 비교 연산자, 논리 연산자 지원을 하고 있다.
+ 		if('25'>='30') { // 숫자형으로 자동 형 변환 되어 처리 된다.
+ 		}
+ 		
+ 	2. 형 변환 처리 지원 함수와 객체
+ 		1) Number("25"), Number("25.7") => 정수형, 실수형 둘 다 지원한다.
+ 		2) parseInt("25.7") => 정수형으로 변환하여 숫자를 return한다.
+ 			25
+ 		3) parseFloat("25.5") => 실수형 데이터 숫자 return
+ 			25.5
+ 		# Number()는 뒤에 숫자 이외에 문자가 있으면 에러가 발생 하지만 parseInt(), parseFloat()는 숫자로 시작만 하면 앞에 숫자를 추출하고 형 변환을 해준다.
+ */
+ 	
+ 	var num01Str = "25";
+ 	var num02Str = "5";
+ 	var num03Str = "3000원";
+ 	var num04Str = "75.5KG";
+ 	document.write(`<h2> 함수 활용하지 않음 : ${num01Str+num02Str} </h2>`);
+ 	document.write(`<h2> Number 객체1 : ${Number(num01Str)+Number(num02Str)} </h2>`);
+ 	document.write(`<h2> Number 객체2 (문자열 포함) : ${Number(num03Str)+Number(num04Str)} </h2>`);
+ 	document.write(`<h2> parseInt 객체 (문자열 포함) : ${parseInt(num03Str)+parseInt(num04Str)} </h2>`);
+ 	document.write(`<h2> parseFloat 객체 (문자열 포함) : ${parseFloat(num03Str)+parseFloat(num04Str)} </h2>`);
+ 	
+ 	// ex1) 물건명1 가격, 물건명2 가격을 prompt로 입력 받아 위 함수를 이용해서 합으로 출력하세요.
+ 	
+ 		var prodPrice1 = Number(prompt("1번쨰 물건 가격을 입력하세요.","0"));
+ 		var prodPrice2 = Number(prompt("2번쨰 물건 가격을 입력하세요.","0"));
+ 		
+ 		document.write(`<h3> 물건1 가격 : ${prodPrice1} </h3>`);
+ 		document.write(`<h3> 물건2 가격 : ${prodPrice2} </h3>`);
+ 		document.write(`<h3> 합산 : ${prodPrice1+prodPrice2} </h3>`);
+ 	
+ 	// ex2) 사람1의 키, 사람2의 키를 prompt로 입력 받아 위 함수를 이용해서 단위와 함께 합으로 출력하세요.
+
+ 	 	var p01Height = prompt("1번쨰 사람의 키 입력 (단위)","0cm");
+ 	 	var p02Height = prompt("2번쨰 사람의 키 입력 (단위)","0cm");
+ 		
+ 		document.write(`<h3> 사람1의 키 : ${p01Height} </h3>`);
+ 		document.write(`<h3> 사람2의 키 : ${p02Height} </h3>`);
+ 		document.write(`<h3> 합산 키 : ${parseFlaot(p02Height) + parseFloat(p02Height)} cm </h3>`);
+
+</script>
+</html>

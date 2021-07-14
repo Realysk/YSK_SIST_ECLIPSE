@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a06_condition </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+/*
+ # JS의 프로세스 처리
+ 	1. if(조건1 boolean) {
+ 		조건1이 true일 때 처리할 내용
+ 	} else if(조건2 boolean) {
+ 		조건1이 아니고 조건2일 때 처리할 내용
+ 	} else {
+ 		조건이 false일 때 처리할 내용
+ 		위 조건1,2가 아닌 경우 처리할 내용
+ 	}
+ 	
+ 	2. switch(데이터1) {
+ 		case 데이터1 특정한 데이터인 경우:
+ 			처리할 프로세스 break;
+ 		case 데이터1 특정한 데이터인 경우:
+ 			처리할 프로세스 break;
+ 		case 데이터1 특정한 데이터인 경우:
+ 			처리할 프로세스 break;
+ 		default : 위에 case에 해당 하지 않는 경우;
+ 	}
+ 	
+ 	3. 반복문
+ 		while(반복조건) {}
+ 		do {} while(반복조건); 일단 한번 실행하고 반복 처리할 내용
+ 		for(초기값; 반복조건; 증감연산자;) {}
+ 		for(단위데이터:배열) {} (X) js에서는 지원하지 않는다.
+ 		for(단위속성 in 객체/배열) {
+ 			단위 속성
+ 			객체[속성]
+ 			배열[index]
+ 		}
+ */
+ 
+ 	/*
+ 	// 변수 선언
+ 	var score = Number(prompt('학점을 입력하세요.','0.0'));
+ 	// 조건문
+ 	if (4.0 <= score && score <= 4.5) {
+ 		alert('A 등급 입니다.');
+ 	} else {
+ 		alert('A 등급이 아닙니다.');
+ 	}
+ 	*/
+ 	
+ 	// ex) 위에서 숫자형을 입력하지 않는 경우에 대한 예외 처리를 하여 출력 하세요.
+ 	
+	 // 변수 선언
+ 	var score = Number(prompt('학점을 입력하세요.','0.0'));
+ 	console.log("입력 데이터 : " + score);
+ 	console.log("입력 데이터 : " + typeof(score));
+ 	// 조건문
+ 	if (4.0 <= score && score <= 4.5) {
+ 		console.log('A 등급 입니다.');
+ 	} else {
+ 		// 0 미만이거나 4.5 초과
+ 		if(score < 0 || score > 4.5) {
+ 			console.log("입력 범위 초과 (입력 범위 0.0 ~ 4.5)");
+ 		} else {
+ 			// 함수 isNaN(데이터) : 숫자형인지 여부를 확인
+ 			// Is not a number? : 숫자형이 아닐 때 true
+ 			console.log("isNaN(score) : " + isNaN(score));
+ 			if( isNaN(score) ) {
+ 				console.log("숫자형을 입력하세요.")	
+ 			} else {
+ 	 			console.log("A 등급이 아닙니다.");				
+ 			}
+ 		}
+ 	}
+
+</script>
+</html>

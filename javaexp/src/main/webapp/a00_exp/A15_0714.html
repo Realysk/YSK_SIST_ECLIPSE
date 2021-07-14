@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> A15_0714 </title>
+<style type="text/css">
+/*
+
+ */
+
+	
+
+</style>
+</head>
+<body>
+
+	<table class="tab01">
+		<tr><th> 번호 </th><th> 물건명 </th></tr>
+		<tr><td> 1 </td><td> 수박 </td></tr>
+		<tr><td> 2 </td><td> 딸기 </td></tr>
+		<tr><td> 3 </td><td> 참외 </td></tr>
+		<tr><td> 4 </td><td> 사과 </td></tr>
+		<tr><td> 5 </td><td> 자몽 </td></tr>
+		<tr><td> 6 </td><td> 배 </td></tr>
+	</table>
+
+</body>
+<script type="text/javascript">
+/* 
+ # 0714 정리 문제
+	 1. 테이블관련 css 속성을 table 속성과 td,th 속성을 나누어 속성값과 함께 기술하세요.
+	 
+	 	1) table 속성
+ 			border : 테이블 전체 테두리에 대한 옵션 설정 굵기, style, 색상 지정 가능.
+ 			border-collapse : collapse;
+ 				테이블에 종속 된 td, th의 중복적인 테두리를 합치는 옵션
+ 		2) td, th 속성
+	 		border : 각 셀에 대한 이중 border에 대한 옵션을 설정 할 수 있다.
+	 		text-align : 정렬에 대한 처리
+	 		padding : 글자와 border의 사이 간격
+	 		height/width : 너비 및 높이 설정		 
+	 
+	 2. 장바구니 현황을 나타나는 데이터를 table로 나타내되 아래의 화면 기능을 포함하세요.
+	    1) 테이블은 중앙에 전체화면 대비 70%, 전체 선은 1라인으로 출력
+	    2) 타이틀은 하단이 이중선, 배경색상과 글자색상 지정
+	    3) 짝수 선언에 연한 배경색상 처리
+	    4) 마우스 오버된 행에는 배경색상과 글자색상, 글자 크기를 다르게 표현처리
+	 
+	    
+	    
+	    3. confirm, prompt과 while문을 활용하여 '물건을 계속 입력 하시겠습니까?' 물건명 입력을 변수로 받아서 취소를 클릭 시까지 입력받은 후 아래와 같이 출력하세요.
+		    no  물건
+		    1   @@@
+		    2   @@@
+	 
+	    	*/
+				/*
+	    		document.write(`<h5> no 물건명 </h5>`);
+	    		var count = 1;
+	    		while(confirm("물건을 계속 입력하시겠습니까?")) {
+	    			var product = prompt("물건명을 입력하세요.");
+	    			if(product != 'null') {
+	    				document.write(`<h5>${count} : ${product}</h5>`);
+	    			}
+	    			count++;
+	    		}
+	    		*/
+	    		
+	    		do {
+	    			// do while은 일단 1번 진행하고 반복 조건을 체크하여 진행한다.
+	    			var product = prompt("물건명을 입력하세요.");
+	    			// prompt에 취소를 클릭 시 문자열로 'null'로 처리 된다.
+	    			if(product != 'null') {
+    				document.write(`<h5>${count} : ${product}</h5>`);
+    				}
+    				count++;
+	    		} while (confirm("물건을 계속 입력하시겠습니까?"));
+	    	/*
+	    
+	    4. js의 데이터 유형 5가지를 간단한 예제와 함께 기술하세요.
+	    
+		 	1) 함수로 확인 : typeof(변수명)
+		 	2) 문자열 (String) : var strVar = '홍길동';
+		 	3) 숫자형 (number) : var numVar = 25;
+		 	4) 논리형 (boolean) : var isOver = numVar >= 70;
+		 	5) 함수형 (function) : var funVar = function(){};
+		 	6) 객체형 (object) : var objVar = {name:'홍길동'};
+		 	7) 객체형 (object-array) : var arrVar = [7000,8000,9000];
+		 	
+		 	*/
+			 	var strVar = '홍길동';
+			 	var numVar = 25;
+			 	var isOver = numVar >= 70;
+			 	var funVar = function() {return '함수결과값';};
+			 	var objVar = {name:'홍길동'};
+			 	var arrVar = [7000,8000,9000];
+			 
+			 	document.write(`<h2> 데이터 : ${strVar}, 데이터유형 : ${typeof(strVar)} </h2>`);
+			 	document.write(`<h2> 데이터 : ${numVar}, 데이터유형 : ${typeof(numVar)} </h2>`);
+			 	document.write(`<h2> 데이터 : ${isOver}, 데이터유형 : ${typeof(isOver)} </h2>`);
+			 	document.write(`<h2> 데이터 : ${funVar}, 데이터유형 : ${typeof(funVar)} </h2>`);
+			 	document.write(`<h2> 데이터 : ${funVar()}, 데이터유형 : ${typeof(funVar)} </h2>`);
+			 	document.write(`<h2> 데이터 : ${objVar}, 데이터유형 : ${typeof(objVar)} </h2>`);
+			 	document.write(`<h2> 데이터 : ${arrVar}, 데이터유형 : ${typeof(arrVar)} </h2>`);		 		
+		 	/*
+	    
+	    
+ */
+
+
+</script>
+</html>

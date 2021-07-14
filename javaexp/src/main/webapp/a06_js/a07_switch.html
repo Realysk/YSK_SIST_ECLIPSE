@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a07_switch </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+	/*
+	// 변수 선언
+	var input = Number(prompt('숫자를 입력하세요.','0'));
+	// 조건문
+	// input % 2 값을 가지고 case에 위에 값에 따라서 처리 하는 구문
+	switch (input % 2) {
+		case 0:
+			console.log('짝수입니다.');
+			break;
+		case 1:
+			console.log('홀수입니다.');
+			break;
+		default:
+			console.log('숫자가 아닙니다.');
+			break;
+	}
+	*/
+	
+	// ex) 4지 선다 문제 정답을 입력하세요.
+	// switch case 문을 활용하여 3번일 때는 '정답입니다.' 그 외에는 '오답입니다.'
+	
+	var answer = Number(prompt('정답을 입력하세요.', '정답 입력'));
+	
+	switch (answer) {
+		case 1:
+		case 2:
+		case 4:
+			console.log('오답입니다.');
+			console.log('입력 답안 : ' + answer);
+			break;
+		case 3:
+			console.log('정답입니다!');
+			console.log('입력 답안 : ' + answer);
+			break;
+		default:
+			if(isNaN(answer)) {
+				console.log('숫자형 데이터를 입력하세요.');	
+			} else {
+				console.log('입력 범위는 1~4번 입니다.');				
+			}
+	}
+
+</script>
+</html>
