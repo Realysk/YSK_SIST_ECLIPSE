@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a08_for </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+	<h2> 회원 정보 </h2>
+	<table id="tab" border>
+	</table>
+	
+	<h2> 물건 정보 </h2>
+	<table id="tab2" border>
+	</table>
+	
+	<div id="showRainbow">
+	</div>
+	
+</body>
+<script type="text/javascript">
+/*
+ # JS에서의 반복문
+ 	1. while(조건) {}, do {} while(조건);
+ 	   for(초기; 반복조건; 증감연산자;) {}
+ 	   JAVA와 동일
+ 	
+ 	2. 배열과 객체 관계에서 반복문 처리
+ 		1) 객체의 데이터 선언과 for문의 활용
+ 			for(var pro in 객체명) {
+ 				pro : 객체의 속성 문자열로 설정되어 가져온다.
+ 				객체명[pro] : 객체의 속성
+ 			}
+ */
+
+	var p01 = {name:"홍길동", age:25, loc:"서울신림동"};
+ 	// JS는 추가 속성을 아래의 두 가지 형식으로 처리할 수 있다.
+ 	// 1) 객체명.속성명 = 속성값;
+ 	p01.isMale = true;
+ 	// 2) 객체명['속성명'] = 속성값;
+ 	p01['isStudent'] = true;
+ 
+	var tabObj = document.querySelector("#tab");
+	var show = "<tr><th>속성</th><th>속성값</th></tr>";
+	for(var pro in p01) {
+		console.log(pro + " : " + p01[pro]);
+		show += "<tr><td>" + pro + "</td><td>" + p01[pro] + "</td></tr>";
+	}
+	tabObj.innerHTML = show;
+	
+	// ex) 물건의 속성을 json 형식으로 초기 선언하고 추가 속성을 위와 같이 두가지 형태로 속성을 지정 할당하고 for문을 통해서 console.log에 출력하세요.
+	
+	var tab2Obj = document.querySelector("#tab2");
+	var show = "<tr><th> 항목 </th><th> 내용 </th></tr>";
+	var prod = {name:"사과"};
+	prod.price=2000;
+	prod['cnt']=3
+	for(var pro in prod) {
+		console.log(pro + " : " + prod[pro]);
+		show += "<tr><td>" + pro + "</td><td>" + prod[pro] + "</td></tr>";
+	}
+	tab2Obj.innerHTML = show;
+	
+	// ex) <div id="showRainbow"> 객체로 h3 7가지의 무지개의 배경색상과 글자색상을 지정하여 출력하세요.
+	//	   <h3 style="background-color:@@@; color:@@@">@@</h3>
+	//	   1) 객체 생성 : 배경색 글자색
+	var color = {red:'yellow', orange:'navy', yellow:'black', green:'orange', blue:'white', navy:'pink', purple:'red'};
+	//	   2) 반복문에 의해서 출력
+	var divObj = document.querySelector("#showRainbow");
+	var show = "";
+	for(var pro in color) {
+		show += '<h3 align="center"; style="background-color : ' + pro + '; color : ' + color[pro] + '">' + pro + '</h3>';
+		console.log(pro + " : " + color[pro]);
+	}
+	console.log(show);
+	divObj.innerHTML = show;
+	 		
+</script>
+</html>

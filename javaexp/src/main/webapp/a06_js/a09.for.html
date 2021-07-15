@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a09_for </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+	<table id="tab" border></table>
+
+</body>
+<script type="text/javascript">
+/*
+ # 배열과 for문
+ 	1. JS의 배열
+ 		var 배열명 = [데이터1, 데이터2, 데이터3, ....];
+ 		데이터 유형이 다르더라도 같은 배열에 할당할 수 있다.
+ */
+	var array = [3000, 20.27, '안녕',
+				{name:'사과', price:3000},
+				function() {return '함수리턴';}];
+ 	console.log(array[0]);
+ 	console.log(array[1]);
+ 	console.log(array[2]);
+ 	console.log(array[3] + " : " + array[3].name + ", " + array[3].price);
+ 	console.log(array[4] + " : " + array[4]());
+ 	
+ 	var arry = [3000,4000,5000];
+ 	arry[3] = 7000;
+ 	arry['4'] = 9000; // for in 구문에서 처리되는 형태
+ 	for(var idx in arry) {
+ 		console.log(idx + " : " + typeof(idx) + " : " + arry[idx]);
+ 	}
+ 	
+ 	// ex) 배열로 물건명 3개를 선언하고 for in 구문을 이용해서 화면 테이블에 출력하세요.
+ 	//	   번호   물건명
+ 	//		1	  @@@
+ 	//		2	  @@@
+ 	//		3	  @@@
+ 	
+ 	var prods = ["사과", "바나나", "딸기"];
+ 	var tab = document.querySelector("#tab");
+ 	var show = "<tr><th>번호</th><th>물건명</th></tr>";
+ 	for(var idx in prods) {
+ 		show += "<tr><td>" + (Number(idx)+1) + "</td><td>" + prods[idx] + "</td></tr>";
+ 	}
+ 	tab.innerHTML = show;
+
+</script>
+</html>

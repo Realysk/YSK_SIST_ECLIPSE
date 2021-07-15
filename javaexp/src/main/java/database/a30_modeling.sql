@@ -118,3 +118,21 @@ INSERT INTO movie_person VALUES ('안성기','고래사냥');
 INSERT INTO movie_person VALUES ('김수철','고래사냥');
 SELECT * FROM movie;
 SELECT * FROM movie_person;
+
+-- ex) 게시판에 글 번호와 상위 글번호를 테이블로 설정해보세요.
+--	   게시판 컬럼 : 글 번호, 상위글 번호, 제목, 내용, 작성자, 등록일, 조회수
+--	   (ERD 설계 후 테이블 생성 및 데이터 입력)
+CREATE TABLE board(
+	NO number,
+	refno number,
+	title varchar2(200),
+	content varchar2(200),
+	writer varchar2(100),
+	readcnt number,
+	regdte date
+);
+INSERT INTO board VALUES(1000,0,'글작성','','홍길동',0,sysdate);
+INSERT INTO board VALUES(1001,1000,'RE:답글작성','','신길동',0,sysdate);
+INSERT INTO board VALUES(1002,1001,'RE:RE:답글작성','','마길동',0,sysdate);
+INSERT INTO board VALUES(1003,1000,'RE:답글작성(2)','','하길동',0,sysdate);
+SELECT * FROM board;
