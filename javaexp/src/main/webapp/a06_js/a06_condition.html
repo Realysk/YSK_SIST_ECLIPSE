@@ -26,6 +26,15 @@
  		위 조건1,2가 아닌 경우 처리할 내용
  	}
  	
+ 	ex)
+ 	if(point>=90) {
+ 		
+ 	} else if(point>=80) { // 90이상 제외하고 80이상이기 때문에 if(point<90 && point>=80)
+ 		
+ 	} else if(point>=70) {
+ 		
+ 	}
+ 	
  	2. switch(데이터1) {
  		case 데이터1 특정한 데이터인 경우:
  			처리할 프로세스 break;
@@ -45,6 +54,18 @@
  			단위 속성
  			객체[속성]
  			배열[index]
+ 		}
+ 		
+ 		ex)
+ 		var p01 = {name:"홍길동", price:3000, cnt:5};
+ 		for(var pro in p01) {
+ 			pro : name, price, cnt
+ 			p01[pro] : "홍길동", 3000, 5
+ 		}
+ 		var arry = {3000,4000,5000}
+ 		for(var idx in arry) {
+ 			idx : '0', '1', '2'
+ 			arry[idx] : 3000, 4000, 5000
  		}
  */
  
