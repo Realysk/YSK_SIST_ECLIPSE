@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> A17_0716 </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+	<!-- 3번 문제 -->
+	부서정보 : <select id="dept" onchange="call(this)"></select><br>
+	선택한 부서 코드 값 : <span></span>
+	
+	<!-- 4번 문제 -->
+	<table id="tab01" border>  </table>
+	<table id="tab02" border>  </table>
+
+</body>
+<script type="text/javascript">
+/*
+ # 0716 정리 문제
+	 1. js에서 객체 속성 및 할당 형식, 3가지를 예제로 기술하세요.
+	 
+		1) var 객체명 = {속성:속성값};
+		 	*/
+	 			var p01 = {name:"홍길동"};
+	 		/*
+	 	2) 객체명.속성명 = 속성값;
+		 	*/
+				p01.age = 25;
+			/*	 	
+	 	3) 객체명['속성명'] = 속성값;
+		 	*/
+				p01['loc'] = '서울';
+			/*
+	 	
+	 2. js의 객체와 배열을 활용한 for in 구문 형식을 기술하세요.
+	 
+		for(var pro in 객체명) {
+				pro : 객체의 속성을 문자열로 설정해 가져온다.
+				객체명[pro] : 객체의 속성
+			}
+			
+			*/
+				// 1. 일반 객체를 통하여 처리하기
+				for(var pro in p01) {
+					// pro : 속성, p01[pro] : 속성값
+					console.log(pro + " : " + p01[pro]);
+				}
+			
+				// 2. 배열을 통해 처리
+				var arry = [1000,3000,5000];
+				for(var idx in arry) {
+					// idx : 배열의 index, arry[idx] : 배열의 값
+					console.log(idx + " : " + arry[idx]);
+				}
+			/*
+	 
+	 3. 화면에 선언된 select로 된 부서코드와 부서명을 key/value 형식의 json 객체로 데이터로 할당해보세요.
+	    부서: [select]
+	 
+	 	*/
+	 		var dept = {"10":"인사","20":"재무","30":"회계"};
+			var deptSel = document.querySelector("#dept");
+			var show = "";
+			
+			for(var pro in dept) {
+				show += `<option value='${pro}'> ${dept[pro]} </option>`;
+			}
+			deptSel.innerHTML = show;
+			
+			function call(obj) {
+				document.querySelector("span").innerText = obj.value;
+			}
+	 	/*
+	 
+	 4. 아래와 같은 테이블에 데이터를 json 형식의 데이터로 할당 처리해 보세요.
+	    1단계:
+	        no  이름 국어 영어 수학
+	        1   ##  @@  ##  ##	        
+		 */
+	 		var tab01 = document.querySelector("#tab01");
+	 		var tab02 = document.querySelector("#tab02");
+	 		var stu01 = {name:'홍길동', kor:70, eng:80, math:90};
+	 		var students = 
+	 			[
+	 				{name:'홍길동', kor:70, eng:80, math:90},
+	 				{name:'김길동', kor:85, eng:83, math:92}
+	 			];
+	 		students[2] = {name:'마길동', kor:88, eng:85, math:90};
+	 		
+	 		var show1 = "";
+	 		/*
+		 		no  이름 국어 영어 수학
+		        1   ##  @@  ##  ##
+	 		*/
+ 			show1 += `<tr><th> no </th><th> 이름 </th><th> 국어 </th><th> 영어 </th><th> 수학 </th></tr>`;
+ 			show1 += `<tr><td> 1 </td>`;
+	 		// 1. 객체의 데이터 for문
+	 		for(var prop in stu01) {
+	 			console.log(prop + " : " + stu01[prop]);
+	 			show1 += `<td> ${ stu01[prop] } </td>`;
+	 		}
+	 		show += "</tr>";
+	 		tab01.innerHTML = show1;
+		 /*   
+	     
+		 2단계:
+	        no  이름 국어 영어 수학
+	        1   ##  @@  ##  ##
+	        2   ##  @@  ##  ##
+	        3   ##  @@  ##  ##
+	        
+		    [{},{},{}...] : 배열 안에 들어간 객체들
+		    students[0]은 배열 안에 있는 첫 번째 객체 : {name:'홍길동', kor:70, eng:80, math:90}
+		    배열 안에 있는 첫 번째 객체 안에 있는 속성 name을 접근 : students[0].name
+		    배열 안에 있는 첫 번째 객체 안에 있는 속성 kor을 접근 : students[0].kor
+		    students[1]은 배열 안에 있는 첫 번째 객체 : {name:'김길동', kor:85, eng:83, math:92}
+	        
+	    */
+	   		var show2 = "<tr><th> no </th><th> 이름 </th><th> 국어 </th><th> 영어 </th><th> 수학 </th></tr>";
+		    for (var idx in students) {
+		    		// console.log(Number(idx)+1 + ", " + students[idx].name + ", " + students[idx].kor + ", " + students[idx].eng + ", " + students[idx].math);
+		    		var std = students[idx]; // 각 index의 객체를 std라는 이름으로 할당
+		    		show2 += "<tr><td>" + (Number(idx)+1) + "</td>";
+		    		for(var pro in std) { // 반복문 안에 반복문으로 객체 단위의 속성으로 접근한다.
+		    			show2 += "<td>" + std[pro] + "</td>";
+		    		}
+		    		show2 += "</tr>"
+		    		// console.log(show2);
+		    	}
+		    	tab02.innerHTML = show2;
+	    /*
+ */
+
+
+</script>
+</html>

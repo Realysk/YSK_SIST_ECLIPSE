@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a14_innerFunction </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+	<h2 onclick="clickCnt(this)"> 클릭하세요. </h2>
+
+	<!-- 상품 입력 : <input type="text" name="pname"/> -->
+	
+	상품 : <input type="text" name="pname"/>
+	수량 : <input type="text" name="pcnt"/>
+
+</body>
+<script type="text/javascript">
+/*
+ # 내장 함수
+ 	1. setTimeout(함수, 1/1000초시간) : 해당 시간 초과 후 정의 된 함수가 수행 처리하는 내장 함수이다.
+ 	2. 메모리의 해제
+ 		var 변수명 = setTimeout();
+ 		clearTimeout(변수명);
+ */
+
+/*
+ 	var cnt = 1;
+ 	function clickCnt(obj) {
+ 		obj.innerText = "클릭 횟수 : " + (++cnt);
+ 	}
+ 	
+ 	if(confirm("게임을 시작합니다!!")) {
+ 		var time = setTimeout(function() {
+ 			alert("3초가 지났습니다. 총 클릭한 갯수 : " + cnt);
+ 			clearTimeout(time); // 자원 해제
+ 		}, 3000);
+ 	}
+*/
+ 	
+ // ex) '구매할 상품을 입력하세요. (10초 이내)' -> 10초 후 -> 입력한 상품은 @@@ 입니다.
+ // 	(hint - 물건명<input type="text" name="pname"/>)
+ //		1) 10초가 지났습니다.
+ //		2) <input type="text" name="pname"/>
+ //		   var pnameVal = document.querySelector("[name=pname]").value;
+ 
+ /*
+ 	if(confirm("상품을 입력하세요. (10초 이내)")) {
+ 		var time2 = setTimeout(function() {
+ 			var pnameVal = document.querySelector("[name=pname]").value;
+ 			alert("10초가 지났습니다. 입력한 상품 : " + pnameVal);
+ 			clearTimeout(time2);
+ 		}, 10000);
+ 	}
+ */
+ 	
+ // ex) 물건 가격과 갯수를 입력하고, 5초가 지나면 총계를 출력하세요. [개인 과제]
+ 	
+ 	if(confirm("상품을 입력하세요. (5초 이내)")) {
+ 		var time3 = setTimeout(function() {
+ 			var pnameVal = document.querySelector("[name=pname]").value;
+ 			var pcntVal = document.querySelector("[name=pcnt]").value;
+ 			alert("5초가 지났습니다. 입력한 상품 : " + pnameVal + ", 입력한 수량 : " + pcntVal);
+ 			clearTimeout(time3);
+ 		}, 5000);
+ 	} 	
+ 		
+ 
+</script>
+</html>

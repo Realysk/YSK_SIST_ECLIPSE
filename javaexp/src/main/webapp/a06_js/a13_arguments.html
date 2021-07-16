@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a13_arguments </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+	<h2 onclick="sumAll('사과')"> 매개 변수 1개 </h2>
+	<h2 onclick="sumAll('사과','바나나')"> 매개 변수 2개 </h2>
+	<h2 onclick="sumAll(3000,2000,3)"> 매개 변수 3개 </h2>
+	
+	<h3 onclick="show('바나나')"> 구매물건 </h3>
+	<h3 onclick="show('바나나',5000)"> 구매물건, 가격 </h3>
+	<h3 onclick="show('바나나',5000,3)"> 구매물건, 가격, 수량 </h3>
+
+</body>
+<script type="text/javascript">
+/*
+ # Arguments
+ 	1. JS에서 매개변수값을 배열로 받아서 처리하는 기능 배열 객체이다.
+ 	2. 선언될 때 매개변수를 할당한 변수를 선언하지 않더라도 arguments로 해당 매개변수를 배열로 받아서 처리할 수 있다.
+ */
+
+	function sumAll() {
+		console.log("매개변수 값 : " + arguments.length);
+		
+		for(var idx=0; idx<arguments.length; idx++) {
+			console.log(arguments[idx]);
+		}
+	}
+	
+ // ex) h3 3개 선언 후 1번째는 구매물건, 2번째는 구매물건 및 가격, 3번째는 구매물건 및 가격과 수량을 매개변수로 넘겨 클릭 시 출력되게 하세요.
+ 
+ 	function show() {
+		for(var idx=0; idx<arguments.length; idx++) {
+			console.log(arguments[idx]);
+		} 
+ 	}
+
+</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a15_setInterval </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+	<div id="show"></div>
+	
+	<h2 id="cntDn"></h2>
+
+</body>
+<script type="text/javascript">
+/*
+ # setInrterval (반복적으로 수행할 함수, 반복적인 시간 1/1000);
+ */
+/*
+ 	var showObj = document.querySelector("#show");
+ 	var intID = setInterval(function() {
+ 			var toDay = new Date(); // 현재 날짜 객체
+ 			showObj.innerHTML += "<h3>" + toDay.toLocaleString() + "</h3>";
+ 	},1000); // 1초마다 현재 시간을 출력
+ 	
+ 	var setID = setTimeout(function() {
+ 		alert("종료");
+ 		clearInterval(intID);
+ 		clearTimeout(setID);
+ 	},10000);
+ 	// 10초 후에 clearInterval(intID); 반복을 중단 처리
+ 	// clearTimeout(setID); timeout 메모리 중단 처리
+ */
+ 
+ // ex) 카운트 다운 10~0 발사!! alert로 처리
+ 	
+ 	var cntDn = document.querySelector("#cntDn");
+ 	var cnt = 10;
+ 	var intID2 = setInterval(function() {
+ 		cntDn.innerText = "카운트 다운 : " + cnt;
+ 		cnt--;
+ 		if(cnt<0) {
+ 			alert("로켓 발사!!");
+ 			clearInterval(intID2);
+ 		}
+ 	},1000);
+ 	
+</script>
+</html>

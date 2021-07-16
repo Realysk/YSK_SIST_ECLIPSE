@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a16_eval </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+	실행할 자바 스크립트 코드 <br>
+	<textarea col="20" row="5"></textarea>
+	<input type="button" value="실행"/>
+
+</body>
+<script type="text/javascript">
+/*
+ # eval 내장 함수
+ 	1. eval("문자열코드") : 매개변수로 된 문자열 코드를 실행 코드로 변환하여 실행 처리
+ */
+
+ 	var willExe = "";
+ 	willExe += "var num01 = 10;";
+ 	willExe += "alert (num01)";
+ 	console.log(willExe);
+ 	// 문자열 코드가 실행 처리 된다. 4조
+ 	eval(willExe);
+
+</script>
+</html>

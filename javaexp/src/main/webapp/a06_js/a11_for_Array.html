@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a11_for_Array </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+	
+	<table id="tab01" border></table>
+	
+</body>
+<script type="text/javascript">
+/*
+ # 행 단위 배열 처리
+ ex) 배열 데이터 홍길동, 김길동, 신길동을 선언하고 아래와 같은 형식을 출력하세요.
+ 
+ 	no 	이름		아이디		권한
+ 	1  홍길동		himan		관리자
+ 	2  김길동		goodman		사용자
+ 	3  신길동		badman		관리자
+ */
+ 
+ 	var arry = [{name:"홍길동", id:"himan", auth:"admin"},
+ 				{name:"김길동", id:"goodman", auth:"user"},
+ 				{name:"신길동", id:"badman", auth:"admin"}];
+ 	// 속성 추가
+ 	var show ="<tr><th> no </th><th> 이름 </th><th> 아이디 </th><th> 권한 </th></tr>";
+ 	// 타이틀 추가
+ 	for(var idx in arry) {
+ 		show += `<tr><td> ${Number(idx)+1} </td>`;
+ 		var mem = arry[idx]; // 단위 객체로 할당
+ 		for(var pro in mem) { // 속성 in 객체
+ 			show += `<td>${mem[pro]}</td>`;
+ 		}
+ 		show += `</tr>`;
+ 		// 속성 추가
+ 	}
+ 	
+ 	var tab1Obj = document.querySelector("#tab01");
+ 	tab1Obj.innerHTML = show;
+
+
+</script>
+</html>
