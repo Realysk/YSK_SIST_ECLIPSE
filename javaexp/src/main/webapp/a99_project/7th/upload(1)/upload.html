@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 사이트명 : 업로드 </title>
+<link rel="stylesheet" type="text/css" href="css/upload.css">
+</head>
+<body>
+	<form action="upload_index.html" method="post" enctype="multipart/form-data">
+	   	<div class="container">
+	        <div class="image-upload" id="image-upload">
+	        	<div class="button">
+	            	<label for="chooseFile">
+	            		<img src="https://img.icons8.com/material/96/000000/image-file--v1.png"/>
+	                </label>
+	                <label for="chooseFile">
+						<img src="https://img.icons8.com/ios-glyphs/90/000000/music--v1.png"/>                    
+	                </label>
+	                <label for="chooseFile">
+	                    <img src="https://img.icons8.com/material-rounded/96/000000/video.png"/>
+	                </label>	
+					<a href="upload_index.html">
+						<input type="file" id="chooseFile" name="chooseFile" accept=".gif, .jpg, .jpeg, .png, .mp3, .wav, .mp4" onchange="loadFile(this)">
+					</a>
+	            </div>
+	
+	            <div class="fileContainer">
+	                <div class="fileInput">
+	                    <p id="fileName"> FILE NAME : </p>
+	                </div>
+	                <div class="buttonContainer">
+	                    <div class="submitButton" id="submitButton"> UPLOAD </div>
+	                </div>
+	                
+	            </div>
+	            
+	            <h5> * 업로드 가능 확장자 </h5>
+	        	<h5> 사진 : .jpg, .png, .gif, .jpeg </h5>
+	       		<h5> 음악 : .mp3, .wav </h5> 
+	       		<h5> 영상 : .mp4 </h5>
+	        </div>        
+	        <div class="image-show" id="image-show"></div>
+	    </div>
+	</form>
+</body>
+    <script src="js/upload_index.js"></script>
+</html>
