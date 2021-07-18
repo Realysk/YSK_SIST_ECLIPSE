@@ -22,7 +22,7 @@ public class FileDAO {
 		return instance;
 	}
 	
-	//DB연결
+	// DB 연결
 	public void getConnection() throws ClassNotFoundException, IOException, SQLException {
 		InputStream in = (this.getClass().getResourceAsStream("../../../../db.properties"));
 		Properties p = new Properties();
@@ -36,14 +36,14 @@ public class FileDAO {
 		con = DriverManager.getConnection(url, id, pw);
 	}
 	
-	//DB연결 종료
+	// DB 연결 종료
 	public void close() throws SQLException {
 		if(rs!=null) rs.close();
 		if(psmt!=null) psmt.close();
 		if(con!=null) con.close();
 	}
 	
-	//파일업로드
+	// 파일 업로드
 	public int uploadFile(String author, String title, String file) throws SQLException, ClassNotFoundException, IOException {
 		getConnection();
 		

@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
 <style type="text/css">
@@ -18,19 +18,19 @@ table, td {
 	
 	<table>
 		<tr>
-			<td>¹øÈ£</td>
+			<td>ë²ˆí˜¸</td>
 			<td>${requestScope.vo.num}</td>
 		</tr>
 		<tr>
-			<td>Á¦¸ñ</td>
+			<td>ì œëª©</td>
 			<td>${requestScope.vo.title}</td>
 		</tr>
 		<tr>
-			<td>ÀÛ°¡</td>
+			<td>ì‘ê°€</td>
 			<td>${requestScope.vo.author}</td>
 		</tr>
 		<tr>
-			<td>µî·ÏÀÏ</td>
+			<td>ë“±ë¡ì¼</td>
 			<td>${requestScope.vo.day}</td>
 		</tr>
 		<tr>

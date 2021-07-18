@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.Model.FileDAO;
-import com.Model.FileVO;
+import javaexp.com.Model.FileDAO;
+import javaexp.com.Model.FileVO;
 
 @WebServlet("/selectService")
 public class selectService extends HttpServlet {

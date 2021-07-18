@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import com.Model.FileDAO;
+import javaexp.com.Model.FileDAO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -27,7 +27,7 @@ public class UploadService extends HttpServlet {
 		System.out.println("절대경로 >> " + saveDir);
 
 		int maxSize = 3 * 1024 * 1024; // 3MB
-		String encoding = "euc-kr";
+		String encoding = "UTF-8";
 
 		// saveDir: 경로
 		// maxSize: 크기제한 설정
