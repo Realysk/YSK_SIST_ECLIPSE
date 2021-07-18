@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css"> 
+
+/* 공통 부분 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+html, body {
+	font-family: 'Nanum Gothic', sans-serif;
+	margin:0px; padding:0px;
+	height:100%;
+}
+
+.header{
+	font-family: 'Nanum Gothic', sans-serif;
+	width:100%; height:15%; 
+	background:skyblue;
+}
+
+.footer {
+	font-family: 'Nanum Gothic', sans-serif;
+	width:100%; height:15%; clear:both;
+	text-align:center;
+	color:skyblue;
+}
+
+/* 헤더의 로그인, 회원가입 */
+.member {
+	float:right;
+	margin-right:30px;
+	margin-top:10px;
+}
+
+.aMember {
+	text-decoration:none;
+	color:white;
+}
+
+/* 설정 부분 - 내용 */
+.section {
+	width:100%; float:left;
+	text-align:center;
+}
+
+/* 내용부분 2부분으로 나눠 출력*/
+.part1 {
+	width:30%;
+	float:left;
+}
+
+.part2 {
+	width:70%;
+	float:right;
+}
+
+/* 왼쪽 사용자 정보 부분 */
+#wInfo {
+	width:300px;
+	border-right:2px solid #C8C8C8;
+	border-collapse:collapse;
+	margin:20px auto;
+	text-align:left;
+}
+
+#wInfo tr>td {
+	width:150px;
+	margin:10px auto;
+}
+
+.infoCenter {
+	width:150px;
+	height:60px;
+	margin-left:50px;
+
+}
+
+#btnFollow {
+	border:1px solid skyblue;
+	border-radius:10px 10px 10px 10px;
+	background:#FFFFFF;
+	color:skyblue;
+	width:120px;
+	padding:10px;
+}
+
+#btnFollow:active {
+	border:none;
+	border-radius:10px 10px 10px 10px;
+	background:#6799FF;
+	color:white;
+	padding:10px;
+}
+
+#wImg {
+	width:100px;
+	height:100px;
+}
+
+.infoTitle {
+	width:150px;
+	height:30px;
+	margin:0 auto;
+}
+
+.infoHr {
+	width:230px;
+	margin-left:0px;
+	margin-top:0px;
+	border:1px solid #C8C8C8;
+}
+
+.wInfoContent {
+	width:200px;
+	height:80px;
+	margin-top:0px;
+	padding:0;
+}
+
+/* 오른쪽 목록부분 */
+#wCategory {
+	border-bottom:1px solid #C8C8C8;
+	float:left;
+	height:30px;
+	margin-top:20px;
+}
+
+.wCg {
+	height:30px; line-height:30px;
+	padding:5px 20px;
+	text-align:center;
+	color:skyblue;
+	
+}
+
+.wCg:hover {
+	background:skyblue;
+	color:white;
+}
+
+
+
+/* 아래 제작자 */
+wTeam {
+	font-size:10px;
+	margin-top:20px;
+	padding:20px;
+}
+
+</style>
+</head>
+<body>	
+	<header class="header"> 
+		<div class="member">
+			<span><a href="#" class="aMember">로그인</a></span>
+			<span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+			<span><a href="#"  class="aMember">회원가입</a></span>
+		</div>
+		
+	</header>
+	<section class="section">
+		<div class="part1">
+			<table id="wInfo">
+				<tr><td><h3>작가명</h3></td><td rowspan="3" id="wImg">사진</td></tr>
+				<tr><td class="infoTitle">작가아이디</td></tr>
+				<tr><td class="infoTitle">팔로워 수</td></tr>
+				<tr><td class="infoCenter" colspan="2"><input type="button" id="btnFollow" value="팔로우 추가"></td></tr>
+				<tr><td class="infoTitle" colspan="2"><h3>활동분야</h3></td></tr>
+				<tr><td colspan="2"><hr class="infoHr"></td></tr>
+				<tr><td class="wInfoContent" colspan="2">내용</td></tr>
+				<tr><td class="infoTitle" colspan="2"><h3>작가소개</h3></td></tr>
+				<tr><td colspan="2"><hr class="infoHr"></td></tr>
+				<tr><td class="wInfoContent" colspan="2">소개</td></tr>
+			</table>
+		</div>
+		<div class="part2">
+			<div id="wCategory"> 
+				<span class="wCg">작품</span>
+				<span class="wCg">시리즈</span>
+			</div>
+		</div>
+	</section>
+	<footer class="footer">
+		<div class="wTeam">
+			<p> 쌍용 교육센터 - 2조 </p>
+			<p> 김지은, 김다은, 유혜진, 유성근, 이덕재 </p>
+		</div>
+	</footer>
+</body>
+<script type="text/javascript">
+
+/*
+
+*/
+
+</script>
+</html>

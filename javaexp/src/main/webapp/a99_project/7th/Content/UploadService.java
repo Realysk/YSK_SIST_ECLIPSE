@@ -27,14 +27,16 @@ public class UploadService extends HttpServlet {
 		System.out.println("절대경로 >> " + saveDir);
 
 		int maxSize = 3 * 1024 * 1024; // 3MB
-		String encoding = "UTF-8";
+		String encoding = "euc-kr";
 
 		// saveDir: 경로
 		// maxSize: 크기제한 설정
 		// encoding: 인코딩타입 설정
 		// new DefaultFileRenamePolicy(): 동일한 이름일 경우 자동으로 (1),(2)..붙게 해줌
 
-		boolean isMulti = ServletFileUpload.isMultipartContent(request);// boolean타입. ??????
+		// boolean isMulti = ServletFileUpload.isMultipartContent(request);// boolean타입. ??????
+		boolean isMulti = ServletFileUpload.isMultipartContent((jakarta.servlet.http.HttpServletRequest) request);
+		
 		if (isMulti) {
 			MultipartRequest multi = new MultipartRequest(request, saveDir, maxSize, encoding,
 					new DefaultFileRenamePolicy());
