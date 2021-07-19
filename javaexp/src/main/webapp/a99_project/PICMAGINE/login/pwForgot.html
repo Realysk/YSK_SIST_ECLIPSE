@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title> PICMAGINE : LOGIN </title>
+	<title> PICMAGINE : PW 찾기 </title>
 	<link href="login.css" rel="stylesheet" type="text/css" />
 <style>
 
@@ -100,16 +100,6 @@
 			    text-align: center;
 			    padding-top: 60px;
 			}
-			
-			#idForgot:hover {
-				background-color:blue;
-				color:yellow;
-			}
-			
-			#pwForgot:hover {
-				background-color:blue;
-				color:yellow;
-			}			
 
 </style>
 </head>
@@ -117,44 +107,25 @@
 	<div class="main-wrap">
 		<header>
 		<div style="text-align : center; padding-top: 60px;">
-			<img style="width:100%" src="image/logo.png" alt="picmagine">
+			<img style="width:100%" onclick="login(this)" src="image/logo.png" alt="picmagine">
 		</div>
 		</header>
 		
 		<div align="center">
-			<h5> 상상하는 모든 것들이 한 곳에! <h5>
-			<h4> PicMagine에 오신 것을 환영합니다! </h4>
+			<h3> PW 찾기 <h3>
 		</div>
 		
-		<form action="recieveLogin.jsp" method="post">
-			<div class="input-box">
-				<input id="username" type="text" name="username" placeholder="아이디">
-				<label for="username"> ID </label>
-			</div>
-			
-			<div class="input-box">
-				<input id="pw" type="password" name="password" placeholder="패스워드">
-				<label for="pw"> PW </label>
-			</div>
-			
-			<span align="right">
-				<div id="Forgot">
-					<a id="idForgot" href="idForgot.html"> ID </a> / <a id="pwForgot" href="pwForgot.html"> PW </a> 찾기
-				</div>
-			</span>
-				<input type="checkbox" name="saveLogin"/> 아이디 저장
-				<input type="checkbox" name="autoLogin"/> 자동 로그인
-				<input type="submit" value="로그인" style="margin-top: 30px;">
+		<form action="IDSearch.jsp" method="post">
+
 		</form>
-				<input type="button" value="회원가입" id="join" onclick="join(this)" style="margin-top: 3px;">
 		
 	</div>
 
 </body>
 <script type="text/javascript">
 	
-	function join(obj) {
-		this.location.href = 'join.html';
+	function login(obj) {
+		this.location.href = 'login.html';
 	}
 
 </script>
