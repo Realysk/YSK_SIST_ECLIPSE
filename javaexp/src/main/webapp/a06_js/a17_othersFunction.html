@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a17_otherFunction </title>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+	<h2 onclick="show()"> 학생 정보 출력 (클릭) </h2>
+	<table id="tab" width="70%" border></table>
+
+</body>
+<script type="text/javascript">
+/*
+ # 기타 내장 함수
+ 	1. isFinite() : 무한대 에러에 대한 여부 확인 1/0
+ 		Infinity : 무한대 처리 여부 ex) NaN, isNaN()
+ 	2. 배열.forEach(function(매개변수1, 매개변수2, 매개변수3) {
+ 			매개변수1 : 배열의 단위데이터,
+ 			매개변수2 : 배열의 index,
+ 			매개변수3 : 배열 전체
+ 		})
+ */
+
+	var num01 = 1/0;
+ 		console.log(num01 + " : " + isFinite(num01));
+ 		if(isFinite(num01)) {
+ 			console.log("num01은 무한대 데이터");
+ 		} else {
+ 			console.log("일반 데이터");
+ 		}
+ 		var pArray = [{name:"홍길동",age:25},
+ 					  {name:"김길동",age:27},
+ 					  {name:"신길동",age:29}];
+ 		pArray.forEach(function(person, id, arry) {
+ 			// person : 단위데이터
+ 			// idx : 숫자형 index
+ 			console.log(idx + " : " + person.name + "," + person.age);
+ 			console.log(arry);
+ 		});
+ 		
+ 		// ex) 객체형 배열로 학생 성적(이름, 국어, 영어, 수학) 3명을 선언하고 forEach 테이블의 innerHTML을 활용해서 출력하세요.
+
+ 		
+ 		function show() {
+ 			var tabObj = document.querySelector("tab");
+ 			var sArray = [
+				{name:"홍길동",kor:80,eng:90,math:100}, 				
+				{name:"김길동",kor:70,eng:60,math:70}, 				
+				{name:"신길동",kor:90,eng:40,math:60}				
+ 			];
+ 			/*
+ 			// 출력할 table 안에 tr/td
+ 			var show = "";
+ 			// for (*index in 배열) for(var *단위데이터 of 배열)
+ 			sArray.forEach(function(stud, idx) {
+ 				if(idx==0) {
+ 	 				show += "<tr>";
+ 					for(var pro in stud) show += "<th>" + pro + "</th>";
+ 					show += "<tr>";
+ 				}
+ 				show += "<tr>";
+ 				for(var pro in stud) {
+ 					show += "<td>" + stud[pro] + "</td>";
+ 				}
+ 				show += "</tr>";
+ 			});
+ 			tabObj.innerHTML = show;
+ 			*/
+
+ 		
+ 		show = "<tr><th>번호</th><th>이름</th><th>국어</th><th>영어</th><th>수학</th></tr>";
+ 		sArray.forEach(function(stud, idx) {
+ 			show += `<tr><th>${idx+1}</th><td>${stud.name}</td>
+ 					<td>${stud.kor}</td><td>${stud.eng}</td><td>${stud.math}</td></tr>`;
+ 		});
+ 		tabObj.innerHTML = show;
+ 		
+ 		
+ 		}
+ 		
+</script>
+</html>

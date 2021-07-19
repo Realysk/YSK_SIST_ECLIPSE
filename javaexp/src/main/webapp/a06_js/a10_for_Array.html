@@ -30,6 +30,7 @@
  		var show = "<tr><th> 번호 </th><th> 회원명 </th><th> 아이디 </th><th> 패스워드 </th><th> 권한 </th><th> 포인트 </th></tr>"; // 타이틀 추가
  		var idx = '0';
  		// .innerHTML 활용 및 for in 구문 출력
+ 		// (Number(idx)+1) for in 구문에서는 idx가 데이터 유형이 String이기에 형 변환을 해주어야 한다.
  		show += "<tr><td>" + (Number(idx)+1) + "</td>";
  		for(var pro in member) {
  			show += "<td>" + member[pro] + "</td>";
