@@ -16,10 +16,8 @@
 		int maxSize = 1024 * 1024 * 100; // 최대 용량 100MB 제한
 		String encoding = "UTF-8";
 		MultipartRequest multipartRequest
-			= new MultipartRequest(request, directory, maxSize, encoding ,new DefaultFileRenamePolicy());
-		/*MultipartRequest multipartRequest
-		= new MultipartRequest(request, directory, maxSize, encoding,
-				new DefaultFileRenamePolicy());*/
+			= new MultipartRequest(request, directory, maxSize, encoding,
+					new DefaultFileRenamePolicy());
 		
 		String fileName = multipartRequest.getOriginalFileName("file");
 		String fileRealName = multipartRequest.getFilesystemName("file");
