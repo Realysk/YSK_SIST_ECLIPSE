@@ -161,3 +161,25 @@ CREATE TABLE registerlesson002 (
 );
 
 SELECT * FROM registerlesson002;
+
+
+CREATE TABLE productex (
+	pcode number, -- 제품번호
+	pname varchar2(100), -- 제품명
+	rcnt number(30), -- 재고수량
+	ordernum char(5), -- 주문번호
+	isexport char(1), -- 수출여부
+	memnum number, -- 고객번호
+	busnum number, -- 사업자번호
+	priority number, -- 우선순위
+	ordercnt number -- 주문수량
+);
+
+INSERT INTO productex VALUES(1001, '모니터', 1990, 'AB345', 'X', 4520, 398201, 1, 150);
+INSERT INTO productex VALUES(1001, '모니터', 1990, 'AD347', 'X', 2341, NULL, 3, 600);
+INSERT INTO productex VALUES(1007, '마우스', 9702, 'CA210', 'X', 3280, 200212, 8, 1200);
+INSERT INTO productex VALUES(1007, '마우스', 9702, 'AB345', 'X', 4520, 398201, 1, 300);
+INSERT INTO productex VALUES(1007, '마우스', 9702, 'CB230', 'X', 2341, 563892, 3, 6900);
+INSERT INTO productex VALUES(1201, '스피커', 2108, 'CB231', 'Y', 8320, NULL, 2, 80);
+
+SELECT * FROM productex;
