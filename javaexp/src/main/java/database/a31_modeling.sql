@@ -84,3 +84,48 @@ INSERT INTO normalform1 VALUES('orange', 'E004', 'N', 'silver', 0.05);
  		ex) 이름, 출생지, 주소 === 주민번호 만드는 함수 => 주민번호
  			이름, 출생지, 주소는 주민번호에 종속성을 갖고 있다.
  */
+
+-- ex) 해당 ERD 설계 후 SQL로 테이블을 만들고 데이터를 넣어주세요.
+
+-- 주문목록 테이블 : 제 2 정규화 완료
+
+/*
+ DROP TABLE productex_0;
+CREATE TABLE productex_0 (
+	pcode number, -- 제품번호
+	pname varchar2(100), -- 제품명
+	rcnt number(30), -- 재고수량
+	ordernum char(5), -- 주문번호
+	isexport char(1), -- 수출여부
+	memnum number, -- 고객번호
+	busnum number, -- 사업자번호
+	priority number, -- 우선순위
+	ordercnt number -- 주문수량
+);
+ */
+DROP TABLE ordermenu;
+CREATE TABLE ordermenu
+AS SELECT pcode, ordernum, ordercnt
+FROM productex_0;
+
+SELECT * FROM ordermenu;
+
+-- 주문 테이블 : 제 2 정규화 완료
+
+DROP TABLE order_table;
+CREATE TABLE order_table
+AS SELECT ordernum, isexport, memnum, busnum, priority
+FROM productex_0;
+
+SELECT * FROM order_table;
+
+-- ex) 제 2 정규화
+SELECT * FROM normalform1;
+CREATE TABLE normalform2_event
+AS SELECT cus_id, event_no, is_checked
+FROM normalform1;
+CREATE TABLE normalform2_custom
+AS SELECT DISTINCT cus_id, grade, discount
+FROM normalform1;
+SELECT * FROM normalform2_event;
+SELECT * FROM normalform2_custom;
