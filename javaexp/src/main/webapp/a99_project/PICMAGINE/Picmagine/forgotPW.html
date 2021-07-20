@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title> PICMAGINE : JOIN </title>
-	<link href="login.css" rel="stylesheet" type="text/css" />
+<title> PICMAGINE : PW 찾기 </title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <style>
 
 			@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
@@ -89,7 +89,7 @@
             }
 			.main-wrap {
 			    width: 330px;
-			    height: 80%;
+			    height: 90%;
 			    background: var(--main-background-color);
 			    margin-left: 37%;
 			    padding: 35px 40px 40px 40px;
@@ -112,31 +112,16 @@
 		</header>
 		
 		<div align="center">
-			<h3> 회원가입 <h3>
+			<h3> PW 찾기 <h3>
 		</div>
 		
-		<form action="recieveJoin.jsp" method="post"> <!-- 회원정보 등록 페이지 이동 -->
-			<div class="input-box">
-				<input id="name" type="text" name="name" placeholder="이름">
-				<label for="name"> 이름 </label>
-			</div>
-			
+		<form action="searchPW.jsp" method="post"> <!-- PW 찾기 결과 페이지 이동 -->
+		
 			<div class="input-box">
 				<input id="username" type="text" name="username" placeholder="아이디">
 				<label for="username"> ID </label>
-				<input type="button" value="중복 확인" style="margin-top: 0px; padding-top: 0px;">
 			</div>
-			
-			<div class="input-box">
-				<input id="pw" type="password" name="password" placeholder="패스워드">
-				<label for="pw"> PW </label>
-			</div>
-			
-			<div class="input-box">
-				<input id="pwChk" type="password" name="passwordChk" placeholder="패스워드 확인">
-				<label for="pwChk"> PW Confirm </label>
-			</div>
-			
+
 			<div class="input-box">
 				<input type="text" name="phone" id="phone" maxlength="13" placeholder="핸드폰"/>
 				<label for="phone"> Tel </label>
@@ -147,22 +132,11 @@
 				<label for="email"> Email </label>
 			</div>
 			
-			<div class="input-box">
-				<textarea style="margin: 0px 8.03977px 0px 0px; width: 303px; height: 106px;" readonly>
-					개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의
-				</textarea>
-				<span style="font-size:10px;">
-					개인정보 취급 방침에 동의하십니까?
-					<input type="radio" name="agree"/> 동의
-					<input type="radio" name="disagree"/> 미동의
-				</span>
-			</div>
-			
-			<div align="center" class="input-box">
-				<input type="button" value="회원가입" style="margin-top: 0px;padding-top: 0px;width: 100px;">
+			<div align="center" class="input-box" style="margin-top: 50px;">
+				<input type="button" value="PW 찾기" style="margin-top: 0px;padding-top: 0px;width: 100px;">
 				<input type="button" value="취소" onclick="login()" style="margin-top: 0px;padding-top: 0px;width: 100px;">
 			</div>
-			
+
 		</form>
 		
 	</div>
@@ -172,41 +146,8 @@
 	
 	// 로그인 페이지 이동
 	function login(obj) {
-			this.location.href = 'login.html';
+		this.location.href = 'login.html';
 	}
-	
-	// ID 중복 함수 (유효성 체크)
-	function ckDupl() {
-		var idVal = document.querySelector("[name=username]").value;
-		if(idVal != "") {
-			// goodjob이 DB에 있으면 중복으로 판단
-			if(idVal == "goodjob") {
-				alert("등록된 ID가 있습니다.");
-			} else {
-				alert("해당 ID는 등록 가능합니다.");
-			}
-		} else {
-			alert("ID를 입력하세요.");
-		}
-	}
-	
-	// PW 일치 여부
-	$(function() {
-		$('#pw').keyup(function() {
-			$('#chkNotice').html('');
-		});
-		
-		$('#pwChk').keyup(function() {
-			
-			if($('#pw').val() != $('#pwChk').val()) {
-				$('#chkNotice').html('PW가 일치하지 않습니다.<br>');
-				$('#chkNotice').attr('color', '#f82a2aa3');
-			} else {
-				$('#chkNotice').html('PW가 일치합니다.<br>');
-				$('#chkNotice').attr('color', '#199894b3');
-			}
-		});
-	});
 	
 	// 휴대폰 번호 자동 하이픈
 	var autoHypenPhone = function(str){

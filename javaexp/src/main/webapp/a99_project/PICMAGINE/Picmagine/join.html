@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> PICMAGINE : JOIN </title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<style>
+
+			@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+			
+			html, body {
+				font-family: 'Nanum Gothic', sans-serif;
+				margin:0px; padding:0px;
+				height:100%;
+			}
+
+           header{
+                display:flex;
+                justify-content: center;
+            }
+            form{
+                padding:10px;
+            }
+            .input-box{
+                position:relative;
+                margin:10px 0;
+            }
+            .input-box > input{
+                background:transparent;
+                border:none;
+                border-bottom: solid 1px #ccc;
+                padding:20px 0px 5px 0px;
+                font-size:14pt;
+                width:100%;
+            }
+            input::placeholder{
+                color:transparent;
+            }
+            input:placeholder-shown + label{
+                color:#aaa;
+                font-size:14pt;
+                top:15px;
+
+            }
+            input:focus + label, label{
+                color:#8aa1a1;
+                font-size:10pt;
+                pointer-events: none;
+                position: absolute;
+                left:0px;
+                top:0px;
+                transition: all 0.2s ease ;
+                -webkit-transition: all 0.2s ease;
+                -moz-transition: all 0.2s ease;
+                -o-transition: all 0.2s ease;
+            }
+
+            input:focus, input:not(:placeholder-shown){
+                border-bottom: solid 1px #8aa1a1;
+                outline:none;
+            }
+            
+           input[type=button]{
+                background-color: #8aa1a1;
+                border:none;
+                color:white;
+                border-radius: 5px;
+                width:100%;
+                height:35px;
+                font-size: 14pt;
+                margin-top:100px;
+            }
+            
+            input[type=submit]{
+                background-color: #8aa1a1;
+                border:none;
+                color:white;
+                border-radius: 5px;
+                width:100%;
+                height:35px;
+                font-size: 14pt;
+                margin-top:100px;
+            }
+            #forgot{
+                text-align: right;
+                font-size:12pt;
+                color:rgb(164, 164, 164);
+                margin:10px 0px;
+            }
+			.main-wrap {
+			    width: 330px;
+			    height: 90%;
+			    background: var(--main-background-color);
+			    margin-left: 37%;
+			    padding: 35px 40px 40px 40px;
+			    box-shadow: 0px 1px 10px rgb(160 160 160 / 30%);
+			}
+	
+			element.style {
+			    text-align: center;
+			    padding-top: 60px;
+			}
+
+</style>
+</head>
+<body>
+	<div class="main-wrap" style="margin-top: 60px;">
+		<header>
+		<div style="text-align : center; padding-top: 60px;">
+			<img style="width:100%" src="image/logo.png" alt="picmagine">
+		</div>
+		</header>
+		
+		<div align="center">
+			<h3> 회원가입 <h3>
+		</div>
+		
+		<form name="joinForm" action="recieveJoin.jsp" method="post"> <!-- 회원정보 등록 페이지 이동 -->
+			<div class="input-box">
+				<input id="name" type="text" name="name" minlength="2" maxlength="5" placeholder="이름"/>
+				<label for="name" id="nameChk"> 이름 (2-5자) </label>
+			</div>
+			
+			<div class="input-box">
+				<input id="username" type="text" name="username" placeholder="아이디"/>
+				<label for="username" id="idChk"> ID </label>
+				<div class="idMsg"></div>
+				<input type="button" value="중복 확인" onclick="ckDupl()" style="margin-top: 0px; padding-top: 0px;"/>
+			</div>
+			
+			<div class="input-box">
+				<input type="password" id="userPw" name="userPw" placeholder="비밀번호"/>
+				<label for="userPw"> PW </label>
+				<div class="pwMsg"></div>
+			</div>
+			
+			<div class="input-box">
+				<input type="password" id="userPwChk" name="userPwChk" placeholder="비밀번호 확인"/>
+				<label for="userPwChk" id="chkNoitce"> PW Confirm </label>
+			</div>
+			
+			<div class="input-box">
+				<input type="text" name="phone" id="phone" maxlength="13" placeholder="핸드폰"/>
+				<label for="phone"> Tel </label>
+			</div>
+			
+			<div class="input-box">
+				<input id="email" type="text" name="email" placeholder="이메일"/>
+				<label for="email" id="emailChk"> Email </label>
+			</div>
+			
+			<div class="input-box">
+				<textarea style="resize:none; margin: 0px 8.03977px 0px 0px; width: 303px; height: 106px;" readonly>
+					개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의개인정보취급방침동의
+				</textarea>
+				<span style="font-size:10px;">
+					개인정보 취급 방침에 동의하십니까?
+					<input type="radio" name="agree" checked/> 동의
+					<input type="radio" name="agree"/> 미동의
+				</span>
+			</div>
+			
+			<div align="center" class="input-box">
+				<input type="button" value="회원가입" onclick="formChk(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;"/>
+				<input type="button" value="취소" onclick="login(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;"/>
+			</div>
+			
+		</form>
+		
+	</div>
+
+</body>
+<script type="text/javascript">
+	
+	var idReg = /^[a-zA-Z0-9]{6,12}$/;
+	var pwReg = /^[a-zA-Z0-9]{6,14}$/;
+	var name = document.querySelector("[name=name]");
+	var id = document.querySelector("[name=username]");
+	var idChk = document.querySelector("#idChk");
+	var idMsg = document.querySelector(".idMsg");
+	var pw = document.querySelector("[name=userPw]");
+	var pwMsg = document.querySelector(".pwMsg");
+	var pwChk = document.querySelector("[name=userPwChk]");
+	var pwChkMsg = document.querySelector("#chkNoitce");
+	var email = document.querySelector("#email");
+	var emailChk = document.querySelector("#emailChk");
+
+	/*
+	// 이름 길이 제한
+	name.onkeyup = function() {
+		var namelen = name.length;
+		if(namelen < 1 || namelen > 6) {
+			nameChk.style.backgroundColor="white";
+			nameChk.style.color="red";	
+		} else {
+			nameChk.style.backgroundColor="skyblue";
+			nameChk.style.color="white";
+		}
+	}
+	*/
+	
+	// ID 정규식 표현 활용 형식 지정
+	id.onkeyup = function() {
+		if(!idReg.test(id.value)) {
+			idMsg.innerText = "* ID는 영문자 및 숫자를 포함하여 6-12자로 입력하세요. *";
+			idMsg.style.color="red";
+			idMsg.style.fontSize="12px";
+		} else {
+			idMsg.innerText = "";
+			return true;
+		}
+	}
+	
+	// ID 유효성 체크
+	function ckDupl() {
+		var idVal = document.querySelector("[name=username]").value;
+		
+		if(idVal != "") {
+			if(!idReg.test(id.value)) {
+				alert("ID 형식에 맞지 않습니다. (ID 형식 : 영문자 및 숫자 포함하여 6-12자)");
+			} else {
+				// goodjob이 DB에 있으면 중복으로 판단
+				if(idVal == "goodjob") {
+					alert("등록된 ID가 있습니다.");
+				} else {
+					alert("해당 ID는 등록 가능합니다.");
+					idChk.style.backgroundColor="skyblue";
+					idChk.style.color="white";
+				}
+			}
+		} else {
+			alert("ID를 입력하세요.");
+		}
+	}
+	
+	// PW 유효성 체크
+	pw.onkeyup = function() {
+		if(!pwReg.test(pw.value)){
+			pwMsg.innerText = "* PW는 6-14자로 입력하세요. *";
+			pwMsg.style.color="red";
+			pwMsg.style.fontSize="12px";
+		} else {
+			pwMsg.innerText="";
+		}
+	}
+	
+	pwChk.onkeyup = function() {
+		if(pwChk.value!=pw.value) {
+			pwChkMsg.style.backgroundColor="white";
+			pwChkMsg.style.color="red";
+			//pwChkMsg.style.fontSize="12px";
+		} else {
+			pwChkMsg.style.backgroundColor="skyblue";
+			pwChkMsg.style.color="white";
+			//pwChkMsg.style.fontSize="12px";
+		}
+	}
+	
+	// 휴대폰 번호 자동 하이픈
+	var autoHypenPhone = function(str) {
+	      str = str.replace(/[^0-9]/g, '');
+	      var tmp = '';
+	      if( str.length < 4) {
+	          return str;
+	      } else if(str.length < 7) {
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3);
+	          return tmp;
+	      } else if(str.length < 11) {
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 3);
+	          tmp += '-';
+	          tmp += str.substr(6);
+	          return tmp;
+	      } else {              
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 4);
+	          tmp += '-';
+	          tmp += str.substr(7);
+	          return tmp;
+	      }
+	      
+	      return str;
+	}
+		
+	var phoneNum = document.getElementById('phone');
+	
+	phoneNum.onkeyup = function(){
+	  console.log(this.value);
+	  this.value = autoHypenPhone( this.value );
+	}
+	
+	/*
+	// 이메일 유효성 체크
+	email.onkeyup = function () {
+		//alert(document.getElementById("email").value);
+
+		var exptext = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		if(exptext.test(email) == false) {
+			// 이메일 형식이 알파벳+숫자 @ 알파벳+숫자.알파벳+숫자 형식이 아닐 경우
+			emailChk.style.color="red";
+			emailChk.style.fontSize="12px";
+			
+			return false;
+			
+		} else if(exptext.test(email) == true) {
+			emailChk.style.backgroundColor="skyblue";
+			emailChk.style.color="white";
+			
+			return true;
+			
+		} else {
+			console.log ("이메일 형식이 올바르지 않습니다.");			
+		}
+			
+	}
+	*/
+	
+	function formChk(obj){
+		
+		if(name.value == "") {
+			alert("이름을 입력하세요.");
+			name.focus();
+			return false;
+		}
+		if(id.value == "") {
+			alert("아이디를 입력하세요.");
+			id.focus();
+			return false;
+		} 
+		if(pw.value == "") {
+			alert("비밀번호를 입력하세요.");
+			pw.focus();
+			return false;
+		} 
+		if(pwChk.value == "") {
+			alert("비밀번호 확인란을 입력하세요.");
+			pwChk.focus();
+			return false;
+		} else {
+			alert(username.value + " 님의 회원가입이 완료되었습니다!");
+			document.joinForm.submit();
+    		this.location.href='logined_AUT_main.html';
+		}
+	}
+	
+	// '취소' 버튼 클릭 시 로그인 페이지 이동
+	function login(obj) {
+		this.location.href = 'login.html';
+	}
+
+</script>
+</html>

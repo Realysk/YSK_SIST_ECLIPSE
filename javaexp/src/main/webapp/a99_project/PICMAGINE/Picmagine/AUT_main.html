@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title> PICMAGINE </title>
 <style type="text/css"> 
 
 /* 공통 부분 */
@@ -37,6 +37,39 @@ html, body {
 .aMember {
 	text-decoration:none;
 	color:white;
+}
+
+.loginMenu {
+	text-align:right;
+}
+
+/* 네비바 */
+ #topMenu{
+ 	height: 30px;
+ 	width: 1980px;
+ }
+ #topMenu ul li { 
+  	 list-style: none;           
+     color: white;               
+     background-color: skyblue;  
+     float: left;                
+     line-height: 30px;          
+     vertical-align: middle;    
+     text-align: center;         
+ }
+ #topMenu .menuLink {                              
+      text-decoration:none;                     
+      color: white;                              
+      display: block;                            
+      width: 150px;                              
+      font-size: 12px;                          
+      font-weight: bold;                         
+      font-family: "Nanum Gothic", Dotum, Arial; 
+ }
+
+ #topMenu .menuLink:hover {           
+       color: skyblue;                   
+       background-color: #4d4d4d;    
 }
 
 /* 설정 부분 - 내용 */
@@ -153,13 +186,28 @@ wTeam {
 </head>
 <body>	
 	<header class="header"> 
-		<div class="member">
-			<span><a href="#" class="aMember">로그인</a></span>
-			<span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-			<span><a href="#"  class="aMember">회원가입</a></span>
-		</div>
-		
+		<nav id="topMenu"> 
+          <ul>
+  				<li><a class="menuLink" href="#">HOME</a></li>
+                <li><a class="menuLink" href="#">배경화면</a></li>
+                <li><a class="menuLink" href="#">자연</a></li>
+                <li><a class="menuLink" href="#">비즈니스</a></li>
+                <li><a class="menuLink" href="#">여행</a></li>
+                <li><a class="menuLink" href="#">음식</a></li>
+                <li><a class="menuLink" href="#">사이트 소개</a></li>
+				<li><a class="menuLink" href="login.html">로그인</a></li>
+				<li><a class="menuLink" href="join.html">회원가입</a></li>
+          </ul>
+  		</nav>
+  			<!-- 
+			<div class="member">
+				<span><a href="#" class="aMember">로그인</a></span>
+				<span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+				<span><a href="#" class="aMember">회원가입</a></span>
+			</div>
+			 -->  			
 	</header>
+
 	<section class="section">
 		<div class="part1">
 			<table id="wInfo">
@@ -180,6 +228,9 @@ wTeam {
 				<span class="wCg">작품</span>
 				<span class="wCg">시리즈</span>
 			</div>
+			<div id="wContent">
+				<table></table>
+			</div>
 		</div>
 	</section>
 	<footer class="footer">
@@ -192,6 +243,11 @@ wTeam {
 <script type="text/javascript">
 
 /*
+
+작품 리스트 출력
+DB에서 내용을 가져와서 table의 내용을 채우는걸로 하면 좋겠는데..
+그럼 아이프레임을 사용해서 .jsp 파일을 나타내는걸로 ㅎㅎ 
+그리고 아이프레임은 내용의 길이에 맞춰서 
 
 */
 

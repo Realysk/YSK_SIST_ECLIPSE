@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title> PICMAGINE : LOGIN </title>
-	<link href="login.css" rel="stylesheet" type="text/css" />
+<title> PICMAGINE : LOGIN </title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <style>
 
 		@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
@@ -97,7 +97,7 @@
             
 			.main-wrap {
 			    width: 330px;
-			    height: 80%;
+			    height: 90%;
 			    background: var(--main-background-color);
 			    margin-left: 37%;
 			    padding: 35px 40px 40px 40px;
@@ -133,15 +133,15 @@
 			<h4> PicMagine에 오신 것을 환영합니다! </h4>
 		</div>
 			
-		<form action="logined_AUT_main.html" method="post"> <!-- 경로 : 로그인이 된 상태로 메인 이동 -->
+		<form name="loginForm" action="recieveLogin.jsp" method="post"> <!-- 경로 : 로그인이 된 상태로 메인 이동 -->
 			<div class="input-box">
 				<input id="username" type="text" name="username" placeholder="아이디">
 				<label for="username"> ID </label>
 			</div>
 			
 			<div class="input-box">
-				<input id="pw" type="password" name="password" placeholder="패스워드">
-				<label for="pw"> PW </label>
+				<input id="userPw" type="password" name="userPw" placeholder="패스워드">
+				<label for="userPw"> PW </label>
 			</div>
 				
 			<span align="right">
@@ -151,7 +151,7 @@
 			</span>
 				<input type="checkbox" name="saveLogin"> 아이디 저장
 				<input type="checkbox" name="autoLogin"> 자동 로그인
-				<input type="submit" value="로그인" style="margin-top: 30px;">
+				<input type="button" onclick="formChk(this)" value="로그인" style="margin-top: 30px;">
 		</form>
 				<input type="button" value="회원가입" id="join" onclick="join(this)" style="margin-top: 3px;">
 	</div>
@@ -159,8 +159,43 @@
 </body>
 <script type="text/javascript">
 	
+	// 회원가입 페이지 이동
 	function join(obj) {
 		this.location.href = 'join.html';
+	}
+	
+	/*
+	// 로그인 승인 시 '로그인 상태'의 메인 페이지 이동
+	function goMain(obj) {
+		this.location.href = 'logined_AUT_main.html';
+	}
+	*/
+	
+	var id = document.querySelector("[name=username]");
+	var pw = document.querySelector("[name=userPw]");
+	
+	// 로그인 여부
+	function formChk(obj) {
+
+		if(username.value=="") {
+			alert("아이디를 입력하세요");
+			id.focus();
+			return false;
+			
+		} 
+		
+		if(userPw.value=="") {
+			alert("비밀번호를 입력하세요");
+			pw.focus();
+			
+			return false;
+			
+		} else {
+			
+			alert(username.value+" 님 로그인 되었습니다!");
+			document.loginForm.submit();
+    		this.location.href='logined_AUT_main.html';
+		}
 	}
 
 </script>
