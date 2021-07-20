@@ -136,6 +136,10 @@
 				<label for="pwChk"> PW Confirm </label>
 			</div>
 			<div class="input-box">
+				<input type="text" name="phone" class="phone" maxlength="13" placeholder="핸드폰"/>
+				<label for="phone"> Tel ('-' 포함) </label>
+			</div>
+			<div class="input-box">
 				<input id="email" type="text" name="email" placeholder="이메일">
 				<label for="email"> Email </label>
 			</div>
@@ -160,9 +164,26 @@
 </body>
 <script type="text/javascript">
 	
+	// 로그인 페이지 이동
 	function login(obj) {
 			this.location.href = 'login.html';
 	}
+	
+	// 휴대폰 번호 유효성 체크
+	$('.phone').keydown(function(event) {
+		var key = event.charCode || event.keyCode || 0;
+		$text = $(this);
+		if(key !== 8 && key !== 9) {
+			if ($text.val().length === 3) {
+				$text.val($text.val() + '-');
+			}
+			if ($text.val().length === 8) {
+				$text.val($text.val() + '-');
+			}
+		}
+		
+		return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+	});
 
 </script>
 </html>
