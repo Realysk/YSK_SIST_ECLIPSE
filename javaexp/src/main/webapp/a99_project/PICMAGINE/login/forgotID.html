@@ -107,7 +107,7 @@
 	<div class="main-wrap">
 		<header>
 		<div style="text-align : center; padding-top: 60px;">
-			<img style="width:100%" onclick="login(this)" src="image/logo.png" alt="picmagine">
+			<img style="width:100%" src="image/logo.png" alt="picmagine">
 		</div>
 		</header>
 		
@@ -115,7 +115,27 @@
 			<h3> ID 찾기 <h3>
 		</div>
 		
-		<form action="IDSearch.jsp" method="post">
+		<form action="searchID.jsp" method="post"> <!-- ID 찾기 결과 페이지 이동 -->
+
+			<div class="input-box">
+				<input id="name" type="text" name="name" placeholder="이름">
+				<label for="name"> 이름 </label>
+			</div>
+			
+			<div class="input-box">
+				<input type="text" name="phone" id="phone" maxlength="13" placeholder="핸드폰"/>
+				<label for="phone"> Tel </label>
+			</div>
+			
+			<div class="input-box">
+				<input id="email" type="text" name="email" placeholder="이메일">
+				<label for="email"> Email </label>
+			</div>
+			
+			<div align="center" class="input-box" style="margin-top: 50px;">
+				<input type="button" value="ID 찾기" style="margin-top: 0px;padding-top: 0px;width: 100px;">
+				<input type="button" value="취소" onclick="login()" style="margin-top: 0px;padding-top: 0px;width: 100px;">
+			</div>
 
 		</form>
 		
@@ -124,8 +144,46 @@
 </body>
 <script type="text/javascript">
 	
+	// 로그인 페이지 이동
 	function login(obj) {
 		this.location.href = 'login.html';
+	}
+	
+	// 휴대폰 번호 자동 하이픈
+	var autoHypenPhone = function(str){
+	      str = str.replace(/[^0-9]/g, '');
+	      var tmp = '';
+	      if( str.length < 4){
+	          return str;
+	      }else if(str.length < 7){
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3);
+	          return tmp;
+	      }else if(str.length < 11){
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 3);
+	          tmp += '-';
+	          tmp += str.substr(6);
+	          return tmp;
+	      }else{              
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 4);
+	          tmp += '-';
+	          tmp += str.substr(7);
+	          return tmp;
+	      }
+	  
+	      return str;
+	}
+	
+	var phoneNum = document.getElementById('phone');
+	
+	phoneNum.onkeyup = function(){
+	  console.log(this.value);
+	  this.value = autoHypenPhone( this.value ) ;  
 	}
 
 </script>

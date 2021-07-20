@@ -136,3 +136,28 @@ INSERT INTO board VALUES(1001,1000,'RE:답글작성','','신길동',0,sysdate);
 INSERT INTO board VALUES(1002,1001,'RE:RE:답글작성','','마길동',0,sysdate);
 INSERT INTO board VALUES(1003,1000,'RE:답글작성(2)','','하길동',0,sysdate);
 SELECT * FROM board;
+
+-- 식별자 관계
+CREATE TABLE student001 (
+	pcode char(8) PRIMARY KEY
+);
+
+CREATE TABLE registerlesson001 (
+	scode char(8),
+	pcode char(8) REFERENCES student001(pcode),
+	PRIMARY KEY(scode, pcode)
+);
+
+CREATE TABLE student002 (
+	pcode char(8) PRIMARY KEY
+);
+
+SELECT * FROM registerlesson001;
+
+-- 비 식별자 관계
+CREATE TABLE registerlesson002 (
+	scode char(8) PRIMARY KEY,
+	pcode char(8) REFERENCES student002(pcode)
+);
+
+SELECT * FROM registerlesson002;
