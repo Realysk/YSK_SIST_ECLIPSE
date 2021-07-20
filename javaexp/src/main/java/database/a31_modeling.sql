@@ -1,0 +1,86 @@
+DROP TABLE productex_0;
+CREATE TABLE productex_0 (
+	pcode number, -- 제품번호
+	pname varchar2(100), -- 제품명
+	rcnt number(30), -- 재고수량
+	ordernum char(5), -- 주문번호
+	isexport char(1), -- 수출여부
+	memnum number, -- 고객번호
+	busnum number, -- 사업자번호
+	priority number, -- 우선순위
+	ordercnt number -- 주문수량
+);
+
+INSERT INTO productex_0 VALUES(1001, '모니터', 1990, 'AB345', 'X', 4520, 398201, 1, 150);
+INSERT INTO productex_0 VALUES(1001, '모니터', 1990, 'AD347', 'X', 2341, NULL, 3, 600);
+INSERT INTO productex_0 VALUES(1007, '마우스', 9702, 'CA210', 'X', 3280, 200212, 8, 1200);
+INSERT INTO productex_0 VALUES(1007, '마우스', 9702, 'AB345', 'X', 4520, 398201, 1, 300);
+INSERT INTO productex_0 VALUES(1007, '마우스', 9702, 'CB230', 'X', 2341, 563892, 3, 6900);
+INSERT INTO productex_0 VALUES(1201, '스피커', 2108, 'CB231', 'Y', 8320, NULL, 2, 80);
+
+SELECT * FROM productex_0;
+
+CREATE TABLE normal_product_1
+AS SELECT DISTINCT pcode, pname, rcnt
+FROM productex_0
+ORDER BY pcode;
+SELECT * FROM normal_product_1;
+
+DROP TABLE normal_orderlist_1;
+CREATE TABLE normal_orderlist_1
+AS SELECT pcode, ordernum, isexport, memnum, busnum, priority, ordercnt
+FROM productex_0;
+
+SELECT * FROM normal_product_1;
+-- 중복 속성이 분리되었으므로 제품코드 식별자를 가지는 단일한 row가 구성되었다.
+SELECT * FROM normal_orderlist_1;
+-- 중복되어 발생하는 속성을 분리하여 별도의 테이블로 구성되었다.
+-- 제 1 정규화 : 복수의 속성값을 갖는 속성을 분리 처리
+
+CREATE TABLE normalform0(
+	cus_id varchar(30),
+	event_no varchar(100),
+	is_checked varchar(50),
+	grade varchar(30),
+	discount NUMBER
+);
+
+INSERT INTO normalform0 VALUES('apple', 'E001,E005,E010', 'Y,N,Y', 'gold', 0.5);
+INSERT INTO normalform0 VALUES('banana', 'E002', 'N,Y', 'vip', 0.2);
+INSERT INTO normalform0 VALUES('carot', 'E003,E007', 'Y,Y', 'gold', 0.1);
+INSERT INTO normalform0 VALUES('orange', 'E004', 'N', 'silver', 0.05);
+
+SELECT * FROM normalform0;
+
+-- ex) 위 테이블을 제 1정규화 과정을 거친 테이블로 만드세요.
+DROP TABLE normalform1;
+
+CREATE TABLE normalform1
+AS SELECT * FROM normalform0 WHERE 1=0;
+SELECT * FROM normalform1;
+
+INSERT INTO normalform1 VALUES('apple', 'E001', 'Y', 'gold', 0.5);
+INSERT INTO normalform1 VALUES('apple', 'E005', 'N', 'gold', 0.5);
+INSERT INTO normalform1 VALUES('apple', 'E010', 'Y', 'gold', 0.5);
+INSERT INTO normalform1 VALUES('banana', 'E002', 'N', 'vip', 0.2);
+INSERT INTO normalform1 VALUES('banana', 'E005', 'N', 'vip', 0.2);
+INSERT INTO normalform1 VALUES('carrot', 'E003', 'Y', 'gold', 0.1);
+INSERT INTO normalform1 VALUES('carrot', 'E007', 'Y', 'gold', 0.1);
+INSERT INTO normalform1 VALUES('orange', 'E004', 'N', 'silver', 0.05);
+
+/*
+ # 제 2 정규화
+ 	주 식별자에 종속되지 않는 속성의 분리, 부분 종속 속성을 분리한다.
+ 		1. 완전 함수 종속성
+ 		2. 부분 함수 종속성
+ 		
+ 		function plus(num01, num02) {
+ 			return num01 + num02;
+ 		}
+ 		
+ 		plus(25,30); 결과값은 55
+ 		25와 30은 55라는 데이터에 함수 종속성을 갖고 있다.
+ 		함수 종속성이라는 것은 결정자에 함수적으로 종속 관계를 갖고 있다는 것을 의미한다.
+ 		ex) 이름, 출생지, 주소 === 주민번호 만드는 함수 => 주민번호
+ 			이름, 출생지, 주소는 주민번호에 종속성을 갖고 있다.
+ */
