@@ -1,3 +1,28 @@
+-- 식별자 관계
+CREATE TABLE student001 (
+	pcode char(8) PRIMARY KEY
+);
+
+CREATE TABLE registerlesson001 (
+	scode char(8),
+	pcode char(8) REFERENCES student001(pcode),
+	PRIMARY KEY(scode, pcode)
+);
+
+CREATE TABLE student002 (
+	pcode char(8) PRIMARY KEY
+);
+
+SELECT * FROM registerlesson001;
+
+-- 비 식별자 관계
+CREATE TABLE registerlesson002 (
+	scode char(8) PRIMARY KEY,
+	pcode char(8) REFERENCES student002(pcode)
+);
+
+SELECT * FROM registerlesson002;
+
 DROP TABLE productex_0;
 CREATE TABLE productex_0 (
 	pcode number, -- 제품번호
@@ -30,7 +55,6 @@ DROP TABLE normal_orderlist_1;
 CREATE TABLE normal_orderlist_1
 AS SELECT pcode, ordernum, isexport, memnum, busnum, priority, ordercnt
 FROM productex_0;
-
 SELECT * FROM normal_product_1;
 -- 중복 속성이 분리되었으므로 제품코드 식별자를 가지는 단일한 row가 구성되었다.
 SELECT * FROM normal_orderlist_1;
@@ -118,6 +142,39 @@ AS SELECT ordernum, isexport, memnum, busnum, priority
 FROM productex_0;
 
 SELECT * FROM order_table;
+
+/*
+	 CREATE TABLE normalform0(
+		cus_id varchar(30),
+		event_no varchar(100),
+		is_checked varchar(50),
+		grade varchar(30),
+		discount NUMBER
+	);
+	
+	INSERT INTO normalform0 VALUES('apple', 'E001,E005,E010', 'Y,N,Y', 'gold', 0.5);
+	INSERT INTO normalform0 VALUES('banana', 'E002', 'N,Y', 'vip', 0.2);
+	INSERT INTO normalform0 VALUES('carot', 'E003,E007', 'Y,Y', 'gold', 0.1);
+	INSERT INTO normalform0 VALUES('orange', 'E004', 'N', 'silver', 0.05);
+	
+	SELECT * FROM normalform0;
+	
+	-- ex) 위 테이블을 제 1정규화 과정을 거친 테이블로 만드세요.
+	DROP TABLE normalform1;
+	
+	CREATE TABLE normalform1
+	AS SELECT * FROM normalform0 WHERE 1=0;
+	SELECT * FROM normalform1;
+	
+	INSERT INTO normalform1 VALUES('apple', 'E001', 'Y', 'gold', 0.5);
+	INSERT INTO normalform1 VALUES('apple', 'E005', 'N', 'gold', 0.5);
+	INSERT INTO normalform1 VALUES('apple', 'E010', 'Y', 'gold', 0.5);
+	INSERT INTO normalform1 VALUES('banana', 'E002', 'N', 'vip', 0.2);
+	INSERT INTO normalform1 VALUES('banana', 'E005', 'N', 'vip', 0.2);
+	INSERT INTO normalform1 VALUES('carrot', 'E003', 'Y', 'gold', 0.1);
+	INSERT INTO normalform1 VALUES('carrot', 'E007', 'Y', 'gold', 0.1);
+	INSERT INTO normalform1 VALUES('orange', 'E004', 'N', 'silver', 0.05);
+ */
 
 -- ex) 제 2 정규화
 SELECT * FROM normalform1;
