@@ -94,3 +94,31 @@ SELECT * FROM normal_exp03_1;
 CREATE TABLE normal_exp03_2
 AS SELECT DISTINCT grade, discount FROM normal_exp03;
 SELECT * FROM normal_exp03_2;
+
+-- ex) 위 테이블과 데이터를 제 3 정규화 처리하여 ERD와 SQL 코드를 처리하세요.
+
+/*
+ CREATE TABLE productex_0 (
+	pcode number, -- 제품번호
+	pname varchar2(100), -- 제품명
+	rcnt number(30), -- 재고수량
+	ordernum char(5), -- 주문번호
+	isexport char(1), -- 수출여부
+	memnum number, -- 고객번호
+	busnum number, -- 사업자번호
+	priority number, -- 우선순위
+	ordercnt number -- 주문수량
+);
+ */
+
+SELECT * FROM normal_orderlist_1;
+SELECT memnum, busnum, priority
+FROM productex_0;
+CREATE TABLE normal_order_1_3
+AS SELECT ordernum, memnum
+FROM normal_orderlist_1;
+CREATE TABLE normal_order_2_3
+AS SELECT DISTINCT memnum, busnum, priority
+FROM normal_orderlist_1;
+SELECT * FROM normal_order_1_3;
+SELECT * FROM normal_order_2_3;
