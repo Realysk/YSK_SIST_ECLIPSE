@@ -114,11 +114,66 @@ SELECT * FROM normal_exp03_2;
 SELECT * FROM normal_orderlist_1;
 SELECT memnum, busnum, priority
 FROM productex_0;
+
 CREATE TABLE normal_order_1_3
 AS SELECT ordernum, memnum
 FROM normal_orderlist_1;
+
 CREATE TABLE normal_order_2_3
 AS SELECT DISTINCT memnum, busnum, priority
 FROM normal_orderlist_1;
+6
 SELECT * FROM normal_order_1_3;
 SELECT * FROM normal_order_2_3;
+
+/*
+		 식별자 관계 : 참조하는 테이블의 키를 현재 테이블에 키로 같이 사용할 때
+		 	ex) 고객이 물건 하나의 주문을 사용할 때
+		 	컬럼을 최소로 사용할 수 있지만 테이블 간에 연관 관계가 많을 때 복합키를 많이 만들어야 되면 복잡성은 높아질 때가 많다.
+		 	
+		 비식별자 관계 : 참조하는 테이블의 키를 현재 테이블에 키로 사용하지 않을 때
+		 	ex) emp dept 관계
+		 	pk 컬럼을 따로 잡아 컬럼이 추가 되는 경향이 있지만 복잡성이 많은 테이블 연관 관계는 보다 효과적으로 테이블 관계를 정리할 수 있는 특징이 있다.
+ 	
+ 	10. 보이스/코드 정규형 (BCNF:Boyce/Codd Normal Form)
+ 		1) 필요성
+ 			하나의 릴레이션(테이블)에 여러 개의 후보키(사원 테이블에 주민번호, 복합 된 후보키)가 존재하는 경우 제 3 정규형까지 모두 만족해도 이상 현상이 발생할 수 있다.33
+ 	
+ */
+
+CREATE TABLE normalform3(
+	cus_id varchar2(50),
+	ilesson varchar2(50),
+	tech_id varchar2(50)
+);
+INSERT INTO normalform3 VALUES('apple', '영어회화', 'P001');
+INSERT INTO normalform3 VALUES('banana', '기초토익', 'P002');
+INSERT INTO normalform3 VALUES('carrot', '영어회화', 'P001');
+INSERT INTO normalform3 VALUES('carrot', '기초토익', 'P004');
+INSERT INTO normalform3 VALUES('orange', '영어회화', 'P003');
+INSERT INTO normalform3 VALUES('orange', '기초토익', 'P004');
+
+SELECT * FROM normalform3;
+
+-- ex) 보이스코드 정규화를 처리해서 제출하세요.
+CREATE TABLE normalform_boyce_1
+AS SELECT cus_id, ilesson 
+FROM normalform3;
+CREATE TABLE normalform_boyce_2
+AS SELECT DISTINCT tech_id, ilesson
+FROM normalform3
+ORDER BY tech_id;
+SELECT * FROM normalform_boyce_1;
+SELECT * FROM normalform_boyce_2;
+
+/*
+ 제 4 정규형 : 릴레이션(테이블)이 보이스/코드 정규형을 만족하면서 함수 종속이 아닌 다치 종속(MVD; Mulit Valued Dependency)을 제거하면 제 4 정규형에 속함.
+ 제 5 정규형 : 릴레이션(테이블)이 제 4 정규형을 만족하면서 후보키를 통하지 않는 join 종속 (JD; Join Dependency)을 제거하면 제 5 정규형에 속함
+ 
+ # 정규화 시 주의 사항
+ 	모든 릴레이션(테이블)이 제 5 정규형에 속해야만 바람직한 것은 아님.
+ 	일반적으로 제 3 정규형이나 보이스/코드 정규형에 속하도록 릴레이션(테이블)을 분해하여 데이터 중복을 줄이고 이상 현상을 해결하는 경우가 많음.
+ 	
+ *** 결국 정규화 규칙은 원자성이라는 개념에 의해 원인에 대한 분석으로 1~5 정규 및 보이스코드 정규를 처리하기에 식별자와 비식별자를 통해 효과적으로 이상현상(삽입/삭제/수정)
+ 	이 발생하지 않도록 테이블을 분해시켜가는 과정으로 진행하면 된다.
+ */
