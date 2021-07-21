@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> [LOGINED] PICMAGINE </title>
+<title> PICMAGINE </title>
 <style type="text/css"> 
 
 /* 공통 부분 */
@@ -49,20 +49,20 @@ html, body {
  	width: 1980px;
  }
  #topMenu ul li { 
-  	 list-style: none;           
+  	 list-style: none;   
      color: white;               
      background-color: skyblue;  
      float: left;                
-     line-height: 30px;          
+     line-height: 30px;
      vertical-align: middle;    
      text-align: center;         
  }
- #topMenu .menuLink {                              
-      text-decoration:none;                     
-      color: white;                              
-      display: block;                            
-      width: 150px;                              
-      font-size: 12px;                          
+ #topMenu .menuLink {
+      text-decoration:none;
+      color: white;
+      display: block;
+      width: 150px;
+      font-size: 12px;
       font-weight: bold;                         
       font-family: "Nanum Gothic", Dotum, Arial; 
  }
@@ -195,7 +195,8 @@ wTeam {
                 <li><a class="menuLink" href="#">여행</a></li>
                 <li><a class="menuLink" href="#">음식</a></li>
                 <li><a class="menuLink" href="#">사이트 소개</a></li>
-				<li><a class="menuLink" onclick="goMain()" href="AUT_main.html">로그아웃</a></li>
+				<li><a class="menuLink" href="login.html">로그인</a></li>
+				<li><a class="menuLink" href="join.html">회원가입</a></li>
           </ul>
   		</nav>
   			<!-- 
@@ -249,16 +250,6 @@ DB에서 내용을 가져와서 table의 내용을 채우는걸로 하면 좋겠
 그리고 아이프레임은 내용의 길이에 맞춰서 
 
 */
-
-	// '로그아웃' 클릭 시 메인페이지 이동
-	function goMain(obj) {
-		this.confirm("로그아웃을 진행하시겠습니까?");
-		if(this.confirm = true) {
-			this.location.href = 'AUT_main.html';
-		} else {
-			this.location.href = 'logined_AUT_main.html';
-		}
-	}
 
 </script>
 </html>

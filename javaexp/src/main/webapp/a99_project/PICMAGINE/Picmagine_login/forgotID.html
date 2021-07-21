@@ -104,7 +104,10 @@
 </style>
 </head>
 <body>
+
+	<!-- 로그인 / 회원가입 폼 -->
 	<div class="main-wrap" style="margin-top: 60px;">
+		<img onclick="login(this)" src="https://img.icons8.com/small/32/000000/delete-sign.png"/>
 		<header>
 		<div style="text-align : center; padding-top: 60px;">
 			<img style="width:100%" src="image/logo.png" alt="picmagine">
@@ -115,11 +118,11 @@
 			<h3> ID 찾기 <h3>
 		</div>
 		
-		<form action="searchID.jsp" method="post"> <!-- ID 찾기 결과 페이지 이동 -->
+		<form name="searchIDForm" action="searchID.jsp" method="post"> <!-- ID 찾기 결과 페이지 이동 -->
 
 			<div class="input-box">
-				<input id="name" type="text" name="name" placeholder="이름">
-				<label for="name"> 이름 </label>
+				<input id="name" type="text" name="name" onkeyup="checkCapsLock(event)" minlength="2" maxlength="5" placeholder="이름">
+				<label for="name"> 이름 (2-5자) </label>
 			</div>
 			
 			<div class="input-box">
@@ -128,13 +131,15 @@
 			</div>
 			
 			<div class="input-box">
-				<input id="email" type="text" name="email" placeholder="이메일">
+				<input id="email" type="text" name="email" onkeyup="checkCapsLock(event)" placeholder="이메일">
 				<label for="email"> Email </label>
 			</div>
 			
+			<div id="message"></div>
+			
 			<div align="center" class="input-box" style="margin-top: 50px;">
-				<input type="button" value="ID 찾기" style="margin-top: 0px;padding-top: 0px;width: 100px;">
-				<input type="button" value="취소" onclick="login()" style="margin-top: 0px;padding-top: 0px;width: 100px;">
+				<input type="button" value="ID 찾기" onclick="formChk(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;">
+				<input type="button" value="취소" onclick="login(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;">
 			</div>
 
 		</form>
@@ -143,6 +148,10 @@
 
 </body>
 <script type="text/javascript">
+
+	var name = document.querySelector("[name=name]");
+	var phone = document.querySelector("[name=phone]");
+	var email = document.querySelector("#email");
 	
 	// 로그인 페이지 이동
 	function login(obj) {
@@ -184,6 +193,56 @@
 	phoneNum.onkeyup = function(){
 	  console.log(this.value);
 	  this.value = autoHypenPhone( this.value ) ;  
+	}
+	
+	// CapsLock 여부
+	function checkCapsLock(event) {
+	  if (event.getModifierState("CapsLock")) {
+	    document.getElementById("message").innerText = "! Caps Lock이 켜져 있습니다.";
+	    document.getElementById("message").style.color = "blue";
+	  } else {
+	    document.getElementById("message").innerText = "";
+	  	}
+	}
+	
+	// ID 찾기 여부
+	function formChk(obj) {
+		
+		if(name.value=="") {
+			
+			// 이름 미 입력시
+			alert("이름을 입력하세요.");
+			name.focus();
+			
+			return false;
+			
+		} else if(phone.value=="") {
+			
+			// 휴대폰 번호 미 입력시
+			alert("휴대폰 번호를 입력하세요.");
+			phone.focus();
+			
+			return false;
+			
+		} else if(email.value=="") {
+			
+			// 이메일 미 입력시
+			alert("이메일을 입력하세요.");
+			email.focus();
+			
+			return false;
+			
+		} else {
+			
+			// 정보 입력 후 ID 찾기 완료시
+//			alert("ID 찾기가 완료되었습니다. || ID 조회 : " + id); // 실제 입력 데이터를 불러 올 떄 활용..?
+			alert("ID 찾기 완료|| ID 조회 : himan");
+//			var searchID = document.querySelector(".searchID").value;
+//			searchID.innerText = "ID 조회 : " + id; // 실제 입력 데이터를 불러 올 떄 활용..?
+//			searchID.innerText = "ID 조회 : himan";
+//			searchID.style.color="green";
+//			searchID.style.fontSize="20px";
+		}
 	}
 
 </script>

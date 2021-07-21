@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> PICMAGINE </title>
+<title> [LOGINED] PICMAGINE </title>
 <style type="text/css"> 
 
 /* 공통 부분 */
@@ -195,8 +195,7 @@ wTeam {
                 <li><a class="menuLink" href="#">여행</a></li>
                 <li><a class="menuLink" href="#">음식</a></li>
                 <li><a class="menuLink" href="#">사이트 소개</a></li>
-				<li><a class="menuLink" href="login.html">로그인</a></li>
-				<li><a class="menuLink" href="join.html">회원가입</a></li>
+				<li><a class="menuLink" href="#"><label class="menuLink" onclick="logout(this)">로그아웃 </label></a></li>
           </ul>
   		</nav>
   			<!-- 
@@ -250,6 +249,17 @@ DB에서 내용을 가져와서 table의 내용을 채우는걸로 하면 좋겠
 그리고 아이프레임은 내용의 길이에 맞춰서 
 
 */
+	
+	// 로그아웃 여부
+	function logout(obj) {
+		// '로그아웃' 클릭 시 메인페이지 이동
+		if(!confirm("로그아웃 하시겠습니까?")) {
+			this.location.href="logined_AUT_main.html"; // '아니오' 클릭 시 '로그인 상태'의 메인 페이지 이동
+		} else {
+			alert("로그아웃을 완료했습니다.");
+			this.location.href="AUT_main.html"; // '예' 클릭 시 '로그아웃 상태'의 메인 페이지 이동
+		}
+	}
 
 </script>
 </html>
