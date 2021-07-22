@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> PICMAGINE : ID 찾기 </title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<style>
+
+			@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+			
+			html, body {
+				font-family: 'Nanum Gothic', sans-serif;
+				margin:0px; padding:0px;
+				height:100%;
+			}
+
+           header{
+                display:flex;
+                justify-content: center;
+            }
+            form{
+                padding:10px;
+            }
+            .input-box{
+                position:relative;
+                margin:10px 0;
+            }
+            .input-box > input{
+                background:transparent;
+                border:none;
+                border-bottom: solid 1px #ccc;
+                padding:20px 0px 5px 0px;
+                font-size:14pt;
+                width:100%;
+            }
+            input::placeholder{
+                color:transparent;
+            }
+            input:placeholder-shown + label{
+                color:#aaa;
+                font-size:14pt;
+                top:15px;
+
+            }
+            input:focus + label, label{
+                color:#8aa1a1;
+                font-size:10pt;
+                pointer-events: none;
+                position: absolute;
+                left:0px;
+                top:0px;
+                transition: all 0.2s ease ;
+                -webkit-transition: all 0.2s ease;
+                -moz-transition: all 0.2s ease;
+                -o-transition: all 0.2s ease;
+            }
+
+            input:focus, input:not(:placeholder-shown){
+                border-bottom: solid 1px #8aa1a1;
+                outline:none;
+            }
+            
+           input[type=button]{
+                background-color: #8aa1a1;
+                border:none;
+                color:white;
+                border-radius: 5px;
+                width:100%;
+                height:35px;
+                font-size: 14pt;
+                margin-top:100px;
+            }
+            
+            input[type=submit]{
+                background-color: #8aa1a1;
+                border:none;
+                color:white;
+                border-radius: 5px;
+                width:100%;
+                height:35px;
+                font-size: 14pt;
+                margin-top:100px;
+            }
+            #forgot{
+                text-align: right;
+                font-size:12pt;
+                color:rgb(164, 164, 164);
+                margin:10px 0px;
+            }
+			.main-wrap {
+			    width: 330px;
+			    height: 90%;
+			    background: var(--main-background-color);
+			    margin-left: 37%;
+			    padding: 35px 40px 40px 40px;
+			    box-shadow: 0px 1px 10px rgb(160 160 160 / 30%);
+			}
+	
+			element.style {
+			    text-align: center;
+			    padding-top: 60px;
+			}
+
+</style>
+</head>
+<body>
+
+	<!-- 로그인 / 회원가입 폼 -->
+	<div class="main-wrap" style="margin-top: 60px;">
+		<img onclick="login(this)" src="https://img.icons8.com/small/32/000000/delete-sign.png"/>
+		<header>
+		<div style="text-align : center; padding-top: 60px;">
+			<img style="width:100%" src="image/logo.png" alt="picmagine">
+		</div>
+		</header>
+		
+		<div align="center">
+			<h3> ID 찾기 <h3>
+		</div>
+		
+		<form name="searchIDForm" action="searchID.jsp" method="post"> <!-- ID 찾기 결과 페이지 이동 -->
+
+			<div class="input-box">
+				<input id="name" type="text" name="name" onkeyup="checkCapsLock(event)" minlength="2" maxlength="5" placeholder="이름">
+				<label for="name"> 이름 (2-5자) </label>
+			</div>
+			
+			<div class="input-box">
+				<input type="text" name="phone" id="phone" maxlength="13" placeholder="핸드폰"/>
+				<label for="phone"> Tel </label>
+			</div>
+			
+			<div class="input-box">
+				<input id="email" type="text" name="email" onkeyup="checkCapsLock(event)" placeholder="이메일">
+				<label for="email"> Email </label>
+			</div>
+			
+			<div id="message"></div>
+			
+			<div align="center" class="input-box" style="margin-top: 50px;">
+				<input type="button" value="ID 찾기" onclick="formChk(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;">
+				<input type="button" value="취소" onclick="login(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;">
+			</div>
+
+		</form>
+		
+	</div>
+
+</body>
+<script type="text/javascript">
+
+	var name = document.querySelector("[name=name]");
+	var phone = document.querySelector("[name=phone]");
+	var email = document.querySelector("#email");
+	
+	// 로그인 페이지 이동
+	function login(obj) {
+		this.location.href = 'login.html';
+	}
+	
+	// 휴대폰 번호 자동 하이픈
+	var autoHypenPhone = function(str){
+	      str = str.replace(/[^0-9]/g, '');
+	      var tmp = '';
+	      if( str.length < 4){
+	          return str;
+	      }else if(str.length < 7){
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3);
+	          return tmp;
+	      }else if(str.length < 11){
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 3);
+	          tmp += '-';
+	          tmp += str.substr(6);
+	          return tmp;
+	      }else{              
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 4);
+	          tmp += '-';
+	          tmp += str.substr(7);
+	          return tmp;
+	      }
+	  
+	      return str;
+	}
+	
+	var phoneNum = document.getElementById('phone');
+	
+	phoneNum.onkeyup = function(){
+	  console.log(this.value);
+	  this.value = autoHypenPhone( this.value ) ;  
+	}
+	
+	// CapsLock 여부
+	function checkCapsLock(event) {
+	  if (event.getModifierState("CapsLock")) {
+	    document.getElementById("message").innerText = "! Caps Lock이 켜져 있습니다.";
+	    document.getElementById("message").style.color = "blue";
+	  } else {
+	    document.getElementById("message").innerText = "";
+	  	}
+	}
+	
+	// ID 찾기 여부
+	function formChk(obj) {
+		
+		if(name.value=="") {
+			
+			// 이름 미 입력시
+			alert("이름을 입력하세요.");
+			name.focus();
+			
+			return false;
+			
+		} else if(phone.value=="") {
+			
+			// 휴대폰 번호 미 입력시
+			alert("휴대폰 번호를 입력하세요.");
+			phone.focus();
+			
+			return false;
+			
+		} else if(email.value=="") {
+			
+			// 이메일 미 입력시
+			alert("이메일을 입력하세요.");
+			email.focus();
+			
+			return false;
+			
+		} else {
+			
+			// 정보 입력 후 ID 찾기 완료시
+//		alert("ID 찾기가 완료되었습니다. || ID 조회 : " + id); // 실제 입력 데이터를 불러 올 떄 활용..?
+		alert("ID 찾기 완료|| ID 조회 : yoosungkeun");
+//		var searchID = document.querySelector(".searchID").value;
+//		searchID.innerText = "ID 조회 : " + id; // 실제 입력 데이터를 불러 올 떄 활용..?
+//		searchID.innerText = "ID 조회 : himan";
+//		searchID.style.color="green";
+//		searchID.style.fontSize="20px";
+		}
+	}
+
+</script>
+</html>
