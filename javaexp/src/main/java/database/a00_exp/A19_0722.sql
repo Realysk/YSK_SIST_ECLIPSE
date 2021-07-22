@@ -15,12 +15,12 @@
 	 
 	 3. 제1정규화, 제2정규화, 제3정규화, 보이스코드 정규화의 개념을 기술하세요.
 	 
-	 	제 1 정규화 : 복수의 속성값을 갖는 속성을 분리 처리
-	 	제 2 정규화 : 주 식별자에 종속되지 않는 속성의 분리, 부분 종속 속성을 분리한다.
-	 	제 3 정규화 		]
-		 - 이행적 함수 종속성
-	 		릴레이션(테이블)을 구성하는 3개의 속성(컬럼) 집합 X, Y, Z에 대해 함수 종속 관계가 X -> Y, Y -> Z가 존재하면
-	 		논리적으로 X -> Z가 성립되는데 이 때 Z가 X에 이행적으로 함수 종속되었다고 함.
+		제 1 정규화 : 데이터가 원자성을 가지도록 처리. 복수의 속성값을 갖는 속성을 분리
+		제 2 정규화 : 주 식별자(Primary Key)에 종속적이지 않는 속성을 분리하는 것으로 완전함수종속성 이외에 부분함수종속적이나 종속적이지 않는 속성을 분리하는 것을 말한다.
+		제 3 정규화 : 속성이 종속적인 속성의 분리로 함수 종속에서 다시 함수 종속적인 속성의 분리로 이전(이행)함수종속을 분리하는 것을 말한다.
+		BCNF 정규화 : 다수의 주 식별자 분리
+		제 4 정규화 : 다가 종속 속성분리
+		제 5 정규화 : 결합 종속일 경우는 두 개 이상의 N개로 분리한다.
 	 
 	 4. 식별자와 비식별자의 차이를 ERD 구성을 하여 기술하세요.
 	 
@@ -41,21 +41,38 @@
 	     오길동   55    F		0	  59
 	 
 	 	*/
-			CREATE TABLE normal_studentexp1(
-				name varchar2(100), -- 학생명
-				record number, -- 점수
-				tier char(1), -- 등급
-				minrecord number, -- 최소
-				maxrecord number -- 최대
+			CREATE TABLE record( -- 점수
+				name varchar2(50), -- 학생명
+				point number -- 점수
 			);
 			
-			INSERT INTO normal_studentexp1 VALUES('홍길동', 90, 'A', 90, 100);
-			INSERT INTO normal_studentexp1 VALUES('김길동', 80, 'B', 80, 89);
-			INSERT INTO normal_studentexp1 VALUES('마길동', 80, 'B', 80, 89);
-			INSERT INTO normal_studentexp1 VALUES('신길동', 70, 'D', 70, 79);
-			INSERT INTO normal_studentexp1 VALUES('오길동', 55, 'F', 00, 59);
+			INSERT INTO record VALUES('홍길동',90);
+			INSERT INTO record VALUES('김길동',80);
+			INSERT INTO record VALUES('마길동',80);
+			INSERT INTO record VALUES('신길동',70);
+			INSERT INTO record VALUES('오길동',55);
+			
+			SELECT * FROM record;
 		
-			SELECT * FROM normal_studentexp1;
+		
+			CREATE TABLE ptgrade( -- 등급
+				grade char(1), -- 등급
+				minval number, -- 최소
+				maxval number -- 최대
+			);
+			
+			INSERT INTO ptgrade VALUES('A',90,100);
+			INSERT INTO ptgrade VALUES('B',80,89);
+			INSERT INTO ptgrade VALUES('C',70,79);
+			INSERT INTO ptgrade VALUES('D',60,69);
+			INSERT INTO ptgrade VALUES('F',0,59);
+		
+			SELECT * FROM ptgrade;
+		
+		
+			SELECT a.*, grade, minval, maxval
+			FROM RECORD a, ptgrade b
+			WHERE point BETWEEN minval AND maxval;
 		/*
 	 
 	 6. 3정규화가 끝난 릴레이션을 BCNF정규화를 처리하세요.(ERD 및 sql 테이블 구성)
@@ -65,6 +82,35 @@
 	     S003    T002       알고리즘개론
 	     S004    T001       컴퓨터공학
 	     
-		3
+		*/
+			CREATE TABLE bcnf_01(
+				stno char(4), -- 학생번호
+				thno char(4) -- 담당교수번호
+			);
+		
+			INSERT INTO bcnf_01 VALUES('S001','T001');
+			INSERT INTO bcnf_01 VALUES('S002','T001');
+			INSERT INTO bcnf_01 VALUES('S003','T002');
+			INSERT INTO bcnf_01 VALUES('S004','T001');
+		
+			SELECT * FROM bcnf_01;
+		
+		
+			CREATE TABLE bcnf_02(
+				thno char(4), -- 담당교수번호
+				subject varchar2(50) -- 과목명
+			);
+		
+			INSERT INTO bcnf_02 VALUES('T001','컴퓨터공학');
+			INSERT INTO bcnf_02 VALUES('T001','데이터베이스개론');
+			INSERT INTO bcnf_02 VALUES('T002','알고리즘개론');
+		
+			SELECT * FROM bcnf_02;
+		
+			-- 학생번호와 담당교수번호 join
+			SELECT a.*
+			FROM bcnf_01 a, bcnf_02 b
+			WHERE a.thno = b.thno;
+		/*
 	     
  */
