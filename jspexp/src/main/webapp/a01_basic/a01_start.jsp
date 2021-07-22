@@ -4,6 +4,7 @@
 	request.setCharacterEncoding("utf-8"); // 요청값에 대한 한글 encoding 처리
 	String path = request.getContextPath(); 
 	// 기준 경로 설정.\jspexp\src\main\webapp
+	// (개인 PC 기준) C:\Users\ysk23\AppData\Roaming\SPB_Data\git\YSK_SIST_ECLIPSE\jspexp\src\main\webapp
 %>    
 <!DOCTYPE html>
 <html>
