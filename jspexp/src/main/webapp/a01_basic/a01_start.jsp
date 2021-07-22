@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title> a01_start </title>
 <%--외부 css 설정 호출.. --%>
 <link rel="stylesheet" href="<%=path%>/a00_com/a00_com.css">
 <style>
