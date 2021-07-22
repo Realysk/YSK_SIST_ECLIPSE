@@ -74,7 +74,7 @@ html, body {
 /* 네비 : 메뉴 네비게이션 */
 #topMenu {
  	width:100%; height: 40px;
-	background-color: skyblue;
+	background-color: skyblue;  
 }
 
 #topMenuBlock {
@@ -203,18 +203,19 @@ li:nth-child(4) .album-cover {
 	<ul>
 		<li>
 			<div class="album-item">
-				<div class="album-cover"></div>
+				<div class="album-cover" onclick="artPage()"></div>
 				<div class="album-info">
 					<p class="album-title">바다</p>
 					<p class="album-explan">설명란</p>
 					<p class="album-tag">#여름 #커플 #소다</p>
 					<a href='여름.jpg' download='boxed-water-is-better-SNWwlwc6URE-unsplash.jpg'>이미지 다운로드</a>
+					<img>
 				</div>
 			</div>
 		</li>
 		<li>
 			<div class="album-item">
-				<div class="album-cover"></div>
+				<div class="album-cover" onclick="artPage()"></div>
 				<div class="album-info">
 					<p class="album-title">사진2</p>
 					<p class="album-explan">설명란</p>
@@ -225,7 +226,7 @@ li:nth-child(4) .album-cover {
 		</li>
 		<li>
 			<div class="album-item">
-				<div class="album-cover"></div>
+				<div class="album-cover" onclick="artPage()"></div>
 				<div class="album-info">
 					<p class="album-title">사진3</p>
 					<p class="album-explan">설명란</p>
@@ -236,7 +237,7 @@ li:nth-child(4) .album-cover {
 		</li>
 		<li>
 			<div class="album-item">
-				<div class="album-cover"></div>
+				<div class="album-cover" onclick="artPage()"></div>
 				<div class="album-info">
 					<p class="album-title">사진4</p>
 					<p class="album-explan">설명란</p>
@@ -252,7 +253,7 @@ li:nth-child(4) .album-cover {
 			<ul>
 		<li>
 			<div class="album-item">
-				<div class="album-cover"></div>
+				<div class="album-cover" onclick="artPage()"></div>
 				<div class="album-info">
 					<p class="album-title">사진1</p>
 					<p class="album-explan">설명란</p>
@@ -297,3 +298,19 @@ li:nth-child(4) .album-cover {
 	</ul>	
 	</details>
 </body>
+
+<script type="text/javascript">
+
+var divObj = document.querySelectorAll(".album-cover");
+
+for(var idx=0; idx<divObj.length;idx++) {
+	
+	divObj[idx].location.href = "art/상세페이지.html";
+}
+
+
+function artPage() {
+	
+	this.location.href = "art/상세페이지.html";
+}
+</script>
