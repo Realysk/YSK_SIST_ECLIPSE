@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="jspexp.z02_vo.Emp"
-	import="jspexp.z01_database.A05_PreparedDao"
+    import="jspexp.z02_vo.*"
+	import="jspexp.z01_database.*"
 	import="java.util.*"
 %>
 <%
