@@ -192,8 +192,9 @@
 	var pwMsg = document.querySelector(".pwMsg");
 	var pwChk = document.querySelector("[name=userPwChk]");
 	var pwChkMsg = document.querySelector("#chkNoitce");
-//	var email = document.querySelector("#email");
+	var email = document.querySelector("[name=email]");
 //	var emailChk = document.querySelector("#emailChk");
+	var phone = document.querySelector("[name=phone]");
 	var agree = document.querySelector("[name=agree]");
 	var agreement = document.querySelector(".agreement");
 
@@ -355,7 +356,7 @@
 		} else if(id.value == "") {
 			
 			// ID 미 입력시			
-			alert("아이디를 입력하세요.");
+			alert("ID를 입력하세요.");
 			id.focus();
 			
 			return false;
@@ -363,7 +364,7 @@
 		} else if(pw.value == "") {
 			
 			// PW 미 입력시			
-			alert("비밀번호를 입력하세요.");
+			alert("PW를 입력하세요.");
 			pw.focus();
 			
 			return false;
@@ -371,8 +372,24 @@
 		} else if(pwChk.value == "") {
 			
 			// PW Confirm 미 입력시			
-			alert("비밀번호 확인란을 입력하세요.");
+			alert("PW Confirm을 입력하세요.");
 			pwChk.focus();
+			
+			return false;
+			
+		} else if(phone.value == "") {
+			
+			// Tel 미 입력시			
+			alert("휴대폰 번호를 입력하세요.");
+			phone.focus();
+			
+			return false;
+			
+		} else if(email.value == "") {
+			
+			// Email 미 입력시			
+			alert("이메일을 입력하세요.");
+			email.focus();
 			
 			return false;
 			
@@ -381,7 +398,7 @@
 			// 정보 입력 후 회원가입 완료시
 			alert(username.value + " 님의 회원가입이 완료되었습니다!");
 			document.joinForm.submit();
-    		this.location.href='logined_AUT_main.html';
+    		this.location.href='login.html';
     		
 		}
 	}
