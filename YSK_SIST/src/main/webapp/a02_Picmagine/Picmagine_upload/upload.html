@@ -123,8 +123,8 @@
 	
 	<div class="main-wrap">
 	<img onclick="main(this)" src="https://img.icons8.com/small/32/000000/delete-sign.png"/>
-		<form name="uploadForm" action="uploaded.jsp" method="post">
-		<!-- <form name="uploadForm" action="../uploaded.jsp" method="post"> -->
+		<form name="uploadForm" action="uploaded.jsp" method="post" enctype="multipart/form-data">
+		<!-- <form name="uploadForm" action="../uploaded.jsp" method="post" enctype="multipart/form-data"> -->
 
 			<div class="input-box">
 				<input type="text" name="title" onkeyup="checkCapsLock(event)" placeholder="제목">
@@ -132,7 +132,7 @@
 			</div>
 			<div class="input-box">
 				<textarea type="text" name="contents" onkeyup="checkCapsLock(event)" style="resize:none; margin: 0px; width: 1305px; height: 467px;"></textarea>
-			    <input type='file' id='file' name='file' accept='image/*, video/*'/>
+			    <input type='file' id='file' name='file' accept='image/*, video/*' multiple/>
 			</div>
 			<div id="message"></div>
 			<div class="input-box">
