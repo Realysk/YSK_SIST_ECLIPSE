@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 메뉴 부분 -->
+<style type="text/css"> 
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+a {
+	text-decoration:none;
+	color:skyblue;
+	font-weight: bold;  
+}
+
+a:hover {
+	color:white;
+}
+
+/* 시멘틱 : CSS 적용부분 */
+html, body {
+	font-family: 'Nanum Gothic', sans-serif;
+	margin:0 auto; padding:0px;
+	height:100%;
+}
+
+.header{
+	font-family: 'Nanum Gothic', sans-serif;
+	width:100%; height:10%; 
+	background:skyblue;
+	margin:0px; padding:0px;
+}
+
+.footer {
+	font-family: 'Nanum Gothic', sans-serif;
+	width:100%; height:10%; clear:both;
+	text-align:center;
+	color:skyblue;
+}
+
+/* 헤더 : 사용자기능 */
+.wTitle {
+	float:left;
+	display:block;
+	margin-left:20%;
+	font-weight: bold;
+	color:RGB(253, 223, 225);
+}
+
+.wMempart {
+	font-family: "Nanum Gothic", Dotum, Arial; 
+	padding:10px; 
+	text-decoration:none;	
+	font-size: 12px;                          
+    font-weight: bold; 
+    color:white;	
+    
+}
+
+.wMempart:hover {
+    color: skyblue;                   
+    background-color: #4d4d4d;   
+    padding:10px;
+}
+
+#wMemSapn {
+	float:right;
+	margin-right:25%;
+}
+
+
+/* 네비 : 메뉴 네비게이션 */
+#topMenu {
+ 	width:100%; height: 30px;
+	background-color: skyblue;  
+}
+
+#topMenuBlock {
+	margin-left:10%;
+}
+ 
+ /*메뉴 전체 크기*/
+#topMenu ul li {  
+  	 list-style: none;           
+     color: white;               
+     background-color: skyblue;  
+     float: left;                
+     line-height: 30px;          
+     vertical-align: middle;    
+     text-align: center;         
+}
+ 
+#topMenu ul {
+  	margin:0px;
+}
+ 
+ 
+ /*메뉴 한 칸*/
+#topMenu .menuLink {                              
+    text-decoration:none;                     
+    color: white;                              
+    display: block;                            
+    width: 120px;                              
+    font-size: 12px;                          
+    font-weight: bold;                         
+    font-family: "Nanum Gothic", Dotum, Arial; 
+}
+
+
+#topMenu .menuLink:hover {           
+    color: skyblue;                   
+    background-color: #4d4d4d;    
+}
+
+/* 아래 : 제작자 */
+wTeam {
+	padding:20px;
+}
+
+</style>
+
+
+<!-- 작가홈 부분 -->
+<style type="text/css">
+
+/* 섹션 : HTML 내용 */
+.section {
+	width:70%; 
+	text-align:center;
+	margin:0 auto;
+}
+
+/* 내용부분 2부분으로 나눠 출력*/
+.part1 {
+	width:30%;
+	float:left;
+	margin:0 auto;
+}
+
+.part2 {
+	width:70%;
+	float:right;
+	margin:0 auto;
+}
+
+/* 내용 왼쪽 : 사용자 정보 부분 */
+/* 왼쪽 테이블 전체 속성 적용 */
+#wInfoTable {
+	width:300px;
+	border-right:2px solid #C8C8C8;
+	border-collapse:collapse;
+	margin:20px auto;
+	margin-left:20px;
+	text-align:left;
+}
+
+#wInfoTable tr>td {
+	width:200px;
+	margin:10px auto;
+}
+
+.infoCenter {
+	width:150px;
+	height:60px;
+	margin-left:50px;
+}
+
+/* 팔로우 버튼 */
+#btnFollow {
+	border:1px solid skyblue;
+	border-radius:10px 10px 10px 10px;
+	background:#FFFFFF;
+	color:skyblue;
+	width:120px;
+	padding:10px;
+}
+
+#btnFollow:active {
+	border:none;
+	border-radius:10px 10px 10px 10px;
+	background:#6799FF;
+	color:white;
+	padding:10px;
+}
+
+/* 작가 정보 */
+#wImg {
+	width:150px;
+	height:150px;
+}
+
+.infoTitle {
+	width:150px;
+	height:30px;
+	margin:0 auto;
+	font-size:13px;
+}
+
+.infoHr {
+	width:230px; 
+	margin-left:0px;
+	margin-top:0px;
+	border:1px solid #C8C8C8;
+}
+
+.wInfoContent {
+	width:200px;
+	height:80px;
+	margin-top:0px;
+	padding:0;
+	font-size:13px;
+}
+
+[name=contentFrame] {
+	border:2px solid blue;
+	margin-top:5%;
+	margin-bottom:10%;
+	margin-left:10%;
+	float:left;
+	width:550px;
+	height:650px;
+	border:none;
+}
+
+/* 내용 오른쪽 : 목록부분 */
+#wCategory {
+	border-bottom:1px solid #C8C8C8;
+	float:left;
+	height:30px;
+	margin-top:20px;
+	margin-left:5%;
+	display:inline;
+}
+
+.wCg {
+	height:30px; line-height:30px;
+	padding:5px 20px;
+	text-align:center;
+	color:skyblue;
+	display:inline;
+}
+
+.wCg:hover {
+	background:skyblue;
+	color:white;
+}
+
+</style>
+</head>
+<body>	
+	<header class="header"> 
+		<h2 class="wTitle"> Picmagine </h2>
+		<span id="wMemSapn">
+			<a class="wMempart" href="../login/login.html">로그인</a>
+			<a class="wMempart" href="../login/join.html">회원가입</a>
+		</span>
+	</header>
+	<nav id="topMenu"> 
+		<div id="topMenuBlock">
+			<ul>
+				<li><a class="menuLink" href="../main.html">HOME</a></li>
+				<li><a class="menuLink" href="#">배경화면</a></li>
+				<li><a class="menuLink" href="../wepage.html">사이트 소개</a></li>
+			</ul>
+		</div>
+  	</nav>
+	<section class="section">
+	<div id="sectionCenter">
+		<div class="part1">
+			<table id="wInfoTable">
+				<tr><td><h4>허브맛쿠키</h4></td><td rowspan="2" id="wImg"><img src="img01.png"></td></tr>
+				<tr><td class="infoTitle">herbCookie</td></tr>
+				<tr><td class="infoTitle"><b>팔로워 </b> 344 <b>팔로잉 </b> 150 </td></tr>
+				<tr>
+					<td class="infoCenter" colspan="2">
+						<input type="button" id="btnFollow" value="팔로우" onclick="Following()">
+					</td>
+				</tr>
+				<tr><td class="infoTitle" colspan="2"><h3>활동분야</h3></td></tr>
+				<tr><td colspan="2"><hr class="infoHr"></td></tr>
+				<tr><td class="wInfoContent" colspan="2">배경화면, 자연</td></tr>
+				<tr><td class="infoTitle" colspan="2"><h3>작가소개</h3></td></tr>
+				<tr><td colspan="2"><hr class="infoHr"></td></tr>
+				<tr><td class="wInfoContent" colspan="2">자연을 찍고 있습니다~</td></tr>
+			</table>
+		</div>
+		<div class="part2">
+			<div id="wCategory"> 
+				<span class="wCg"><a href="AUT02_objectList.html" target="contentFrame" onclick="wCgChange()" id="wACate1">작품</a></span>
+				<span class="wCg"><a href="AUT03_series.html" target="contentFrame" onclick="wCgChange()" id="wACate2">시리즈</a></span><br>
+			</div>
+			<div id="wContent">
+				<iframe name="contentFrame" src="AUT02_objectList2.html"></iframe>
+			</div>
+		</div>
+	</div>
+	</section>
+	<footer class="footer">
+		<div class="wTeam">
+			<h5> 쌍용 교육센터 - 2조 <br>
+			김지은, 김다은, 유혜진, 유성근, 이덕재 
+			</h5>
+		</div>
+	</footer>
+</body>
+<script type="text/javascript">
+
+// 팔로잉 버튼 눌렀을때 이벤트
+var followCount = 0; 
+
+function Following() {
+	var btnFollow = document.querySelector("#btnFollow");
+	
+	followCount++;
+	
+	if(followCount%2==1) {
+		alert("팔로우 되었습니다!");
+		btnFollow.value = "팔로잉";
+		btnFollow.style.background = "skyblue";
+		btnFollow.style.color = "white";
+	} else {
+		alert("팔로잉 되었습니다");
+		btnFollow.value = "팔로우";
+		btnFollow.style.background = "white";
+		btnFollow.style.color = "skyblue";
+		btnFollow.style.border = "1px solid skyblue";
+	}
+}
+
+// 카테고리 버튼을 눌렀을 때 
+var wACate1 = document.querySelector("#wACate1");
+var wACate2 = document.querySelector("#wACate2");
+function wCgChange() {
+	
+	if(wACate1.clicked()){
+		wACate1.style.backgroundColor = "skyblue";
+		console.log("작품 클릭");
+	} else if(wACate2.clicked()) {
+		console.log("시리즈 클릭");
+	}
+}
+
+</script>
+</html>
