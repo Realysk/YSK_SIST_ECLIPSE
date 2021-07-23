@@ -12,6 +12,7 @@ public class StudentDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	// DB 연결
 	public void setCon() throws SQLException {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -25,6 +26,7 @@ public class StudentDAO {
 		System.out.println("===== DATABASE에 연결되었습니다. =====");		
 	}
 	
+	// DB 조회 메서드
 	public ArrayList<Studentexp1> getStuList() {
 		ArrayList<Studentexp1> stulist = new ArrayList<Studentexp1>();
 		try {
@@ -94,6 +96,7 @@ public class StudentDAO {
 		StudentDAO dao = new StudentDAO();
 		ArrayList<Studentexp1> stulist = dao.getStuList();
 		
+		// 조회
 		for(Studentexp1 s:dao.getStuList()) {
 			System.out.print(s.getSno()+"\t");
 			System.out.print(s.getName()+"\t");

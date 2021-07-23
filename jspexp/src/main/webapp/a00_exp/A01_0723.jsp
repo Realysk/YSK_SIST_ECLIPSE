@@ -133,9 +133,9 @@
 						<td><%=s.getKor() %></td>
 						<td><%=s.getEng() %></td>
 						<td><%=s.getMath() %></td>
-					</tr>		
+					</tr>	
 					<% } %>
-				</table>	
+				</table>
 			<%--
  --%>
 </body>
