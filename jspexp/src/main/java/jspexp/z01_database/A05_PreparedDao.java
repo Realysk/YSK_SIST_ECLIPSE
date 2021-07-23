@@ -29,7 +29,7 @@ public class A05_PreparedDao {
 		con = DriverManager.getConnection(info,"scott","tiger");
 		System.out.println("접속 성공!!");		
 	}
-	public ArrayList<Emp> getEmpList(){
+	public ArrayList<Emp> getEmpList() {
 		ArrayList<Emp> emplist = new ArrayList<Emp>();
 		try {
 			setCon();
@@ -306,7 +306,7 @@ public class A05_PreparedDao {
 		}
 		return emp;
 	}
-	public ArrayList<Emp> getPreparedEmpList(Emp sch){
+	public ArrayList<Emp> getPreparedEmpList(Emp sch) {
 		ArrayList<Emp> emplist = new ArrayList<Emp>();
 		try {
 			setCon();
