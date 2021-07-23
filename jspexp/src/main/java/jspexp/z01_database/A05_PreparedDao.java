@@ -396,7 +396,7 @@ public class A05_PreparedDao {
 	8) 자원해제처리.		
 	9) 예외 처리 - rollback();	
 	 * */
-	public void insertEmp(Emp ins){
+	public void insertEmp(Emp ins) {
 		try {
 			setCon();
 			con.setAutoCommit(false);
@@ -652,15 +652,15 @@ public class A05_PreparedDao {
 			System.out.println("데이터가 없습니다.");
 		}
 		public Emp(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno) {
-UPDATE emp02
-	SET ename = ename||'(승진)',
-		job = '차장',
-		mgr = 7780,
-		hiredate = TO_date('2021/01/01','YYYY/MM/DD'),
-		sal = sal+1000,
-		comm = comm+300,
-		deptno = 20
-WHERE empno = 7937;			
+			UPDATE emp02
+				SET ename = ename||'(승진)',
+					job = '차장',
+					mgr = 7780,
+					hiredate = TO_date('2021/01/01','YYYY/MM/DD'),
+					sal = sal+1000,
+					comm = comm+300,
+					deptno = 20
+			WHERE empno = 7937;			
 		*/
 		//dao.insertEmp(new Emp(0,"김미나","과장",7780,"",6000,1000,10));
 		//dao.updateEmp(new Emp(7937,"김소현(수정)","대리",7780,"2021/07/09",5000,1000,10));

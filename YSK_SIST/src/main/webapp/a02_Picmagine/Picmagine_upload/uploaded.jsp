@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
 	import="java.util.*"
+	import="Project_SIST.Java.A05_Picmagine.upload.*"
 %>
 <%
 	request.setCharacterEncoding("utf-8");
@@ -25,40 +26,26 @@
 </script>
 </head>
 <body>
-
-	<%--
-		// 파일 업로드 관련 객체...
-		MultipartRequest multi = null;
-		String savePath = "/uploaded_file"; // 저장할 경로
-		int sizeLimit = 5 * 1024 * 1024; // 용량 제한 (5MB)
-		
-		try{ // req, request에서 오류..
-			multi = new MultipartRequest(req, savePath, sizeLimit, "UTF-8"); 
-			// 업로드
-			} catch (Exception e) {
-			e.printStackTrace();
-			// 예외처리
-			} 
-		
-		String gCategory1 = multi.getParameter("gCategory1");
-		String gName = multi.getParameter("gName");
-		String gContent = multi.getParameter("gContent");
-	--%>
+	
+	<%
+		UPLDAO dao = new UPLDAO();
+		ArrayList<UPLDTO> upllist = dao.getUplList();
+	%>
  
 	<h3></h3>
 	<table>
-		<tr><th> 제목 </th><th> 내용 </th><th> 첨부파일 </th><th> 태그 </th></tr>
+		<tr><th> 제목 </th><th> 내용 </th><th> 첨부파일 </th><th> 태그 </th><th> [스토리] 제목 </th><th> [스토리] 설명 </th><th> [스토리] 주제 </th></tr>
+		<%for(UPLDTO u:upllist) { %>
 		<tr>
-			<td>${param.title}</td>
-			<td>${param.contents}</td>
-			<td>${param.upload}</td>
-			<td>${param.tag}</td>
+			<td><%=u.getTitle() %></td>
+			<td><%=u.getContents() %></td>
+			<td><%=u.getPic_file() %></td>
+			<td><%=u.getTag() %></td>
+			<td><%=u.getStoryname() %></td>
+			<td><%=u.getStorycontents() %></td>
+			<td><%=u.getStroytitle() %></td>
 		</tr>
-		<%--
-		<tr><td><img src="./uploaded_file/<%=gCategory1 %>"></td></tr>
-		<tr><td><img src="./uploaded_file/<%=gName %>"></td></tr>
-		<tr><td><img src="./uploaded_file/<%=gContent %>"></td></tr>
-		 --%>
+		<% } %>
 	</table>
 
 </body>
