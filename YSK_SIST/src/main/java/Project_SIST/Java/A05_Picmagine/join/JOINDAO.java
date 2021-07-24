@@ -1,11 +1,10 @@
-package Project_SIST.Java.A05_Picmagine.upload;
-// Project_SIST.Java.A05_Picmagine.upload.UPLDTO
-import java.util.*;
+package Project_SIST.Java.A05_Picmagine.join;
 
 import java.sql.*;
+import java.util.*;
 
-public class UPLDAO {
-
+public class JOINDAO {
+	
 	Connection con;
 	PreparedStatement pstmt;
 	ResultSet rs;
@@ -24,35 +23,33 @@ public class UPLDAO {
 		System.out.println("\n===== DATABASE에 연결되었습니다. =====\n");		
 	}
 	
-	
-	// 게시물 조회 메서드
-	public ArrayList<UPLDTO> uploadList() {
+	// 회원정보 조회 메서드
+	public ArrayList<JOINDTO> memberList() {
 		
-		ArrayList<UPLDTO> upllist = new ArrayList<UPLDTO>();
+		ArrayList<JOINDTO> jolist = new ArrayList<JOINDTO>();
 		
 		try {
 			
 			setCon();
 			
-			String sql = "SELECT * FROM Picmagine_upload";
+			String sql = "SELECT * FROM Picmagine_join";
 			
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				UPLDTO u = new UPLDTO();
-				u.setTitle(rs.getString(1));
-				u.setContents(rs.getString(2));
-				u.setPic_file(rs.getString(3));
-				u.setTag(rs.getString(4));
-				u.setStoryname(rs.getString(5));
-				u.setStorycontents(rs.getString(6));
-				u.setStroytitle(rs.getString(7));
-				upllist.add(u);
+				JOINDTO j = new JOINDTO();
+				j.setMemcode(rs.getString(1));
+				j.setName(rs.getString(1));
+				j.setId(rs.getString(1));
+				j.setPw(rs.getString(1));
+				j.setTel(rs.getString(1));
+				j.setEmail(rs.getString(1));
+				jolist.add(j);
 			}
 						
-			System.out.println("등록 된 게시물 데이터 수 : " + upllist.size());
+			System.out.println("등록 된 회원 정보 수 : " + jolist.size());
 			
 //			rs.close(); pstmt.close(); con.close();
 			
@@ -89,28 +86,27 @@ public class UPLDAO {
 			}	
 			
 		}
-		return upllist;
+		return jolist;
 	}
-
-	// 게시물 등록 메서드
-	public void Uploaded(UPLDTO ins) {
+	
+	// 회원 등록 메서드
+	public void Joined(JOINDTO ins) {
 		try {
 			
 			setCon();
 			
 			con.setAutoCommit(false);
 			
-			String sql = "INSERT INTO Picmagine_upload VALUES(?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Picmagine_join VALUES(?, ?, ?, ?, ?, ?, ?)";
 			
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, ins.getTitle());
-			pstmt.setString(2, ins.getContents());
-			pstmt.setString(3, ins.getPic_file());
-			pstmt.setString(4, ins.getTag());
-			pstmt.setString(5, ins.getStoryname());
-			pstmt.setString(6, ins.getStorycontents());
-			pstmt.setString(7, ins.getStroytitle());
+			pstmt.setString(1, ins.getMemcode());
+			pstmt.setString(2, ins.getName());
+			pstmt.setString(3, ins.getId());
+			pstmt.setString(4, ins.getPw());
+			pstmt.setString(5, ins.getTel());
+			pstmt.setString(6, ins.getEmail());
 			
 			pstmt.executeUpdate();
 			
@@ -159,25 +155,24 @@ public class UPLDAO {
 			
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		UPLDAO dao = new UPLDAO();
-		ArrayList<UPLDTO> upllist = dao.uploadList();
+		JOINDAO jdao = new JOINDAO();
+		ArrayList<JOINDTO> jolist = jdao.memberList();
 		
 		// 등록
-//		dao.Uploaded(new UPLDTO());	
+//		jdao.Joined(new JOINDTO());
 		
 		// 조회
-		for(UPLDTO u:dao.uploadList()) {
-			System.out.print(u.getTitle() + "\t");
-			System.out.print(u.getContents() + "\t");
-			System.out.print(u.getPic_file() + "\t");
-			System.out.print(u.getTag() + "\t");
-			System.out.print(u.getStoryname() + "\t");
-			System.out.print(u.getStorycontents() + "\t");
-			System.out.print(u.getStroytitle() + "\n");
+		for(JOINDTO j:jdao.memberList()) {
+			System.out.println(j.getMemcode() + "\t"); 
+			System.out.println(j.getName() + "\t"); 
+			System.out.println(j.getId() + "\t"); 
+			System.out.println(j.getPw() + "\t"); 
+			System.out.println(j.getTel() + "\t"); 
+			System.out.println(j.getEmail() + "\n"); 
 		}
 
 	}

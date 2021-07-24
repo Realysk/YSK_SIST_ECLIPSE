@@ -115,12 +115,12 @@
 			  border-radius: 4px;
 			  color: white;
 			  cursor: pointer;
-			}
+			}	
 
 </style>
 </head>
 <body>
-	
+
 	<div class="main-wrap">
 	<img onclick="main(this)" src="https://img.icons8.com/small/32/000000/delete-sign.png"/>
 		<form name="uploadForm" action="uploaded.jsp" method="post" enctype="multipart/form-data">
@@ -142,14 +142,14 @@
 				<input type="button" onclick="formChk(this)" value="등록" style="margin-top: 30px;">
 				<input type="button" value="취소" id="cancel" onclick="main(this)" style="margin-top: 3px;">
 		</form>
-	</div>
+	</div>	
 
 </body>
 <script type="text/javascript">
 
 	// 페이지 이동
 	function main(obj) {
-//		this.location.href = '../logout_main.html'; // (로그인 상태) 메인 페이지 이동 (상대 경로)
+	//	this.location.href = '../logout_main.html'; // (로그인 상태) 메인 페이지 이동 (상대 경로)
 		this.location.href = 'logout_main.html'; // (로그인 상태) 메인 페이지 이동
 	}
 	
@@ -162,12 +162,12 @@
 	    document.getElementById("message").innerText = "";
 	  	}
 	}
-
+	
 	var title = document.querySelector("[name=title]");
 	var contents = document.querySelector("[name=contents]");
 	var file = document.querySelector("[name=file]");
 	var tag = document.querySelector("[name=tag]");
-
+	
 	// 게시물 등록 여부
 	function formChk(obj) {
 		
@@ -200,13 +200,12 @@
 				
 				alert("스토리 화면 이동을 취소합니다.");
 				document.uploadForm.submit();
-//	    		submit.location.href='../uploaded.jsp';
+	//    		submit.location.href='../uploaded.jsp';
 	    		submit.location.href='uploaded.jsp';
-
+	
 			}
 		}
 	}
-
 
 </script>
 </html>

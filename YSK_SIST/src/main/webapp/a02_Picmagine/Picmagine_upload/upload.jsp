@@ -1,11 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+	import="java.util.*"
+	import="java.sql.*"
+	import="Project_SIST.Java.A05_Picmagine.upload.*"
+%>
+<%
+//  [jspexp] 프로젝트에 사용
+//		import="jspexp.z02_vo.*" : VO import
+//		import="jspexp.z01_database.*" : DAO import 
+
+//  [YSK_SIST] 프로젝트에 사용
+//  	import="Project_SIST.Java.*" : VO, DAO import
+
+//  공통 사용
+//		import="java.util.*" : 내장 객체 import
+
+	request.setCharacterEncoding("utf-8");
+	String path = request.getContextPath(); 
+%>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title> PICMAGINE : STORY </title>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<title> PICMAGINE : UPLOAD </title>
+<!-- <link rel="stylesheet" href="<%=path%>/a00_com/a00_com.css"> -->
 <style type="text/css">
-
+	
 			@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 		
 			html, body {
@@ -115,64 +135,71 @@
 			  border-radius: 4px;
 			  color: white;
 			  cursor: pointer;
-			}
-
+			}	
+	
 </style>
 </head>
 <body>
 
-	
-	<div class="main-wrap" style="width: 700px; height: 600px; margin-left: 550px; margin-right: 600px;">
-	<img onclick="main(this)" src="https://img.icons8.com/small/32/000000/delete-sign.png">
+	<%
+		UPLDAO dao = new UPLDAO();
+		ArrayList<UPLDTO> u = dao.uploadList();
+
+		String title = request.getParameter("title");
+		String contents = request.getParameter("contents");
+		String pic_file = request.getParameter("pic_file");
+		String tag = request.getParameter("tag");
+		String storyname = request.getParameter("storyname");
+		String storycontents = request.getParameter("storycontents");
+		String storytitle = request.getParameter("storytitle");
+			
+		if(title == null) title = "";
+		if(contents == null) contents = "";
+		if(pic_file == null) pic_file = "";
+		if(tag == null) tag = "";
+		if(storyname == null) storyname = "";
+		if(storycontents == null) storycontents = "";
+		if(storytitle == null) storytitle = "";
+			
+		// 등록
+		dao.Uploaded(new UPLDTO());	
+	%>
+	 
+	<div class="main-wrap">
+	<img onclick="main(this)" src="https://img.icons8.com/small/32/000000/delete-sign.png"/>
 		<form name="uploadForm" action="uploaded.jsp" method="post" enctype="multipart/form-data">
 		<!-- <form name="uploadForm" action="../uploaded.jsp" method="post" enctype="multipart/form-data"> -->
+
 			<div class="input-box">
-				<input type="text" name="title" onkeyup="checkCapsLock(event)" placeholder="시리즈 제목">
-				<label for="title"> [시리즈] 제목 </label>
+				<input type="text" name="title" value="<%=title %>" onkeyup="checkCapsLock(event)" placeholder="제목">
+				<label for="title"> 제목 </label>
 			</div>
 			<div class="input-box">
-				<input type="text" name="contents" onkeyup="checkCapsLock(event)" placeholder="시리즈 내용">
-				<label for="tag"> [시리즈] 내용 </label>
-			</div>
-			<div class="input-box" align="center">
-				<select onchange="seriesTitle(this)">
-					<option> [시리즈] 주제 선택 </option>
-					<option value="추상"> 추상 </option>
-					<option value="자연"> 자연 </option>
-					<option value="가상"> 가상 </option>
-					<option value="배경"> 배경 </option>
-					<option value="사계"> 사계 </option>
-					<option value="일러스트"> 일러스트 </option>
-					<option value="팬아트"> 팬아트 </option>
-					<option value="여행"> 여행 </option>
-					<option value="세계"> 세계 </option>
-					<option value="국내"> 국내 </option>
-				</select>
-			</div>
-			<div class="input-box">
-				<h1 id="series" style="text-align:center;"> [시리즈] 주제를 선택하세요. </h1>
+				<textarea type="text" name="contents" value="<%=contents %>" onkeyup="checkCapsLock(event)" style="resize:none; margin: 0px; width: 1305px; height: 467px;"></textarea>
+			    <input type='file' id='file' name='file' value="<%=pic_file %>" accept='image/*, video/*' multiple/>
 			</div>
 			<div id="message"></div>
+			<div class="input-box">
+				<input type="text" name="tag" value="<%=tag %>" placeholder="태그"/>
+				<label for="tag"> 태그 </label>
+			</div>
 				<input type="button" onclick="formChk(this)" value="등록" style="margin-top: 30px;">
 				<input type="button" value="취소" id="cancel" onclick="main(this)" style="margin-top: 3px;">
 		</form>
-	</div>
-
-
+	</div>	 
+	 
 </body>
 <script type="text/javascript">
+	/*
+	window.onload=function(){
+		document.querySelector("h3").innerText="시작!!";
+	};
+	*/
 
 	// 페이지 이동
 	function main(obj) {
-	//	this.location.href = '../upload.jsp'; // 업로드 페이지 이동 (상대 경로)
-		this.location.href = 'upload.jsp'; // 업로드 페이지 이동
-	}
-	
-	// 시리즈 주제 선택시 표시
-	var series = document.querySelector("#series");
-
-	function seriesTitle(obj) {
-		series.innerText = obj.value;
+//		this.location.href = '../logout_main.html'; // (로그인 상태) 메인 페이지 이동 (상대 경로)
+		this.location.href = 'logout_main.html'; // (로그인 상태) 메인 페이지 이동
 	}
 	
 	// CapsLock 여부
@@ -184,9 +211,11 @@
 	    document.getElementById("message").innerText = "";
 	  	}
 	}
-	
+
 	var title = document.querySelector("[name=title]");
 	var contents = document.querySelector("[name=contents]");
+	var file = document.querySelector("[name=file]");
+	var tag = document.querySelector("[name=tag]");
 
 	// 게시물 등록 여부
 	function formChk(obj) {
@@ -194,7 +223,7 @@
 		if(title.value=="") {
 			
 			// 제목 미 입력시
-			alert("[시리즈] 제목을 입력하세요.");
+			alert("제목을 입력하세요.");
 			title.focus();
 			
 			return false;
@@ -202,20 +231,30 @@
 		} else if(contents.value=="") {
 			
 			// 내용 미 입력시
-			alert("[시리즈] 내용을 입력하세요.");
+			alert("내용을 입력하세요.");
 			contents.focus();
 			
 			return false;
 			
 		} else {
+			
+			var story = confirm("스토리를 추가하시겠습니까?");
+			
+			if(story == true) {
+				
+				alert("스토리 화면으로 이동합니다.");
+	    		this.location.href='story.html';
+	    		
+			} else {
+				
+				alert("스토리 화면 이동을 취소합니다.");
+				document.uploadForm.submit();
+//	    		submit.location.href='../uploaded.jsp';
+	    		submit.location.href='uploaded.jsp';
 
-			document.uploadForm.submit();
-    		submit.location.href='../uploaded.jsp';
-//    		submit.location.href='uploaded.jsp';			
-
+			}
 		}
-	}
-
-
+	}	
+	
 </script>
 </html>

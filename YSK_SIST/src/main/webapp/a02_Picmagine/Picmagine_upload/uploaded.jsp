@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
 	import="java.util.*"
-	import="Project_SIST.Java.A05_Picmagine.upload.*"
+	import="java.sql.*"
+	import="Project_SIST.Java.A05_Picmagine.upload.UPLDAO"
+	import="Project_SIST.Java.A05_Picmagine.upload.UPLDTO"
 %>
 <%
 	request.setCharacterEncoding("utf-8");
@@ -18,18 +20,16 @@
 </style>
 <script type="text/javascript">
 	window.onload=function(){
-		document.querySelector("h3").innerText="PICMAGINE : 업로드 완료";
+		document.querySelector("h3").innerText="PICMAGINE : 게시물 등록이 완료되었습니다!";
 	};
-	
-	uploadForm.encoding = "multipart/form-data";
-
 </script>
 </head>
 <body>
-	
+
 	<%
 		UPLDAO dao = new UPLDAO();
-		ArrayList<UPLDTO> upllist = dao.getUplList();
+		ArrayList<UPLDTO> upllist = dao.uploadList();
+		dao.Uploaded(new UPLDTO());
 	%>
  
 	<h3></h3>

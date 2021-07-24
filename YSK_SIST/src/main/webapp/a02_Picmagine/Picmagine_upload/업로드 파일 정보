@@ -1,6 +1,10 @@
-upload.html : 게시물 업로드
-story.html : 스토리 추가
+upload.jps : 게시물 업로드
+story.jsp : 스토리 추가
 	uploaded.jsp : 업로드 완료 시 게시물 형태로 나타나는 데이터
+	UPLController : 업로드 컨트롤러
+	UPLService : 업로드 서비스
+	UPLDAO : 업로드 DAO
+	UPLMain : 업로드 Main
 
 
 07.22 - 07.23
