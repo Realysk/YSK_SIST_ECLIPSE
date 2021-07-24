@@ -8,22 +8,29 @@
 
 -- 회원가입을 위한 테이블 생성
 DROP TABLE Picmagine_join;
-
 CREATE TABLE Picmagine_join (
-	memcode char(8), -- 회원 번호
+	memcode varchar2(6) PRIMARY KEY, -- 회원 번호
 	name varchar2(100), -- 이름
 	id varchar2(100), -- ID
 	pw varchar2(100), -- PW
 	tel varchar2(100), -- 휴대폰 번호
 	email varchar2(100) -- 이메일
 );
-INSERT INTO Picmagine_join VALUES('PM001', '홍길동', 'hong111', '1111', '010-1111-1111', 'hong111@gmail.com');
-INSERT INTO Picmagine_join VALUES('PM002', '김길동', 'Kkd222', '2222', '010-2222-1212', 'Kkd222@naver.com');
-INSERT INTO Picmagine_join VALUES('PM003', '고길동', 'gogo333', 'goodjob12', '010-9999-0911', 'gogo333@gmail.com');
-SELECT * FROM Picmagine_join;
--- SELECT * FROM Picmagine_join ORDER BY memcode DESC -- 조회
--- INSERT INTO Picmagine_join VALUES(?, ?, ?, ?, ?, ?, ?) -- 등록
--- SELECT * FROM Picmagine_join WHERE memcode = ? -- 검색
+DROP SEQUENCE pic_memcode;
+CREATE SEQUENCE pic_memcode
+	START WITH 1000
+	MINVALUE 1000
+	MAXVALUE 99999999;
+SELECT pic_memcode.nextval FROM dual;
+INSERT INTO Picmagine_join VALUES('PM' || pic_memcode.nextval, '홍길동', 'hong798', '1589', '010-1111-1111', 'hong111@gmail.com');
+INSERT INTO Picmagine_join VALUES('PM' || pic_memcode.nextval, '김길동', 'Kkd294', 'abcd5049', '010-2452-1393', 'Kkd222@naver.com');
+INSERT INTO Picmagine_join VALUES('PM' || pic_memcode.nextval, '고길동', 'gogo586', 'bngk954', '010-0508-9496', 'gogo333@gmail.com');
+SELECT * FROM Picmagine_join ORDER BY memcode DESC;
+-- SELECT * FROM Picmagine_join ORDER BY memcode DESC -- 회원 정보 조회
+-- INSERT INTO Picmagine_join VALUES('PM' || pic_memcode.nextval, ?, ?, ?, ?, ?) -- 회원 가입
+-- SELECT * FROM Picmagine_join WHERE memcode = ? -- 로그인 
+-- SELECT * FROM Picmagine_join WHERE id LIKE '%'||?||'%' ORDER BY memcode DESC -- ID 검색
+-- SELECT * FROM Picmagine_join WHERE pw LIKE '%'||?||'%' ORDER BY memcode DESC -- PW 검색
 
 -- 게시물 업로드를 위한 테이블 생성
 

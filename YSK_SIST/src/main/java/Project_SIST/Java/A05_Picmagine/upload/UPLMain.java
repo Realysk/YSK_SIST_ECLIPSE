@@ -14,25 +14,25 @@ public class UPLMain {
 //		uin.main(args);
 		
 		Scanner sc = new Scanner(System.in);
-		UPLDTO upldto = new UPLDTO();
+		UPLDTO udto = new UPLDTO();
 		
 		System.out.println("# Picmagine 게시물 업로드 #\n");
 		
 		System.out.print(" -> 제목 : ");
 		String title = sc.nextLine();
-		upldto.setTitle(title);
+		udto.setTitle(title);
 		
 		System.out.print(" -> 내용 : ");
 		String contents = sc.nextLine();
-		upldto.setContents(contents);
+		udto.setContents(contents);
 		
 		System.out.print(" -> 파일 첨부 : ");
 		String pic_file = sc.nextLine();
-		upldto.setPic_file(pic_file);
+		udto.setPic_file(pic_file);
 		
 		System.out.print(" -> 태그 : ");
 		String tag = sc.nextLine();
-		upldto.setTag(tag);
+		udto.setTag(tag);
 		
 		System.out.print("# 스토리를 추가 하시겠습니까? (Y/N) : ");
 		String story = sc.nextLine();
@@ -43,15 +43,15 @@ public class UPLMain {
 			
 			System.out.print(" -> 스토리 제목 : ");
 			String storyName = sc.nextLine();
-			upldto.setStoryname(storyName);
+			udto.setStoryname(storyName);
 			
 			System.out.print(" -> 스토리 설명 : ");
 			String storyContents = sc.nextLine();
-			upldto.setStorycontents(storyContents);
+			udto.setStorycontents(storyContents);
 			
 			System.out.print(" -> 스토리 주제 : ");
 			String storyTitle = sc.nextLine();
-			upldto.setStroytitle(storyTitle);
+			udto.setStroytitle(storyTitle);
 			
 			System.out.print("# 게시물 등록을 완료하시겠습니까? (Y/N) : ");
 			String upChk = sc.nextLine();
@@ -62,7 +62,7 @@ public class UPLMain {
 				
 				UPLController uplctrl = new UPLController();
 				System.out.println("\n# Program On #\n");
-				System.out.println(uplctrl.Uploaded(upldto, new Model()));
+				System.out.println(uplctrl.Uploaded(udto, new Model()));
 				
 			} else {
 				
@@ -77,7 +77,7 @@ public class UPLMain {
 			
 			UPLController uplctrl = new UPLController();
 			System.out.println("\n# Program On #\n");
-			System.out.println(uplctrl.Uploaded(upldto, new Model())); 
+			System.out.println(uplctrl.Uploaded(udto, new Model())); 
 		}
 
 	}

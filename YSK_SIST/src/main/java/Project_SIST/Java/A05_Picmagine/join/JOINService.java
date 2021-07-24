@@ -2,6 +2,8 @@ package Project_SIST.Java.A05_Picmagine.join;
 
 import java.util.ArrayList;
 
+import Project_SIST.Java.Model;
+
 public class JOINService {
 	
 	JOINDAO jdao = new JOINDAO();
@@ -12,15 +14,6 @@ public class JOINService {
 		return "===== Picmagine : 회원 가입 완료 =====";
 	}
 	
-/*
- 	private String memcode; // 회원 번호
-	private String name; // 이름
-	private String id; // ID
-	private String pw; // PW
-	private String tel; // Tel
-	private String email; // 이메일
- */	
-	
 	// 회원 정보 리스트
 	public String memberList() {
 		ArrayList<JOINDTO> jlist = jdao.memberList();
@@ -30,8 +23,10 @@ public class JOINService {
 			System.out.print(j.getId() + "\t");
 			System.out.print(j.getPw() + "\t");
 			System.out.print(j.getTel() + "\t");
-			System.out.print(j.getEmail() + "\t");
+			System.out.print(j.getEmail() + "\n");
 		}
-		return "회원정보 출력 완료";
+		return "회원 정보 출력 완료";
 	}
+	
+	// 회원 정보 검색
 }
