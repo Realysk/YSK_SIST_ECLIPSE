@@ -2,7 +2,7 @@ package Project_SIST.Java.A00_Sample;
 
 import java.util.ArrayList;
 
-import Project_SIST.Java.Z99_vo.Product;
+import Project_SIST.Java.VO.Product;
 
 public class XXXService {
 	XXXDao dao = new XXXDao();

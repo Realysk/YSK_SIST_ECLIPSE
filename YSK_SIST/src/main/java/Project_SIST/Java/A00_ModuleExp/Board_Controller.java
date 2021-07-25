@@ -1,12 +1,5 @@
 package Project_SIST.Java.A00_ModuleExp;
 
-//dao단는 실제객체로 작성해주세요.
-//데이터도 실제로 넣어 주시구요.. ^^
-//데이터가 들어간 리턴 객체..
-
-import java.util.Arrays;
-import java.util.List;
-
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpSession;
 //

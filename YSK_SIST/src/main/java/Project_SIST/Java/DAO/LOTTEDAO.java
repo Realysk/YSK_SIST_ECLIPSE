@@ -1,19 +1,20 @@
-package Project_SIST.Java.A01_Lotte;
+package Project_SIST.Java.DAO;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
+import Project_SIST.Java.VO.Member;
 
-public class MemberJoinDAO {
+
+public class LOTTEDAO {
  
     Scanner sc = new Scanner(System.in); 
     ArrayList<Member> members = new ArrayList<>();
     
     
     // 생성자로 초기 데이터 입력
-    public MemberJoinDAO() {
+    public LOTTEDAO() {
     	
         members.add(new Member("hong1", "1111", "홍길동", "010-7777-8888", 
         		"ssangyong@naver.com", "서울 특별시", "02-555-4468"));

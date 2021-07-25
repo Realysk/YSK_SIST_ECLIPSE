@@ -1,6 +1,6 @@
 package Project_SIST.Java.A00_Sample;
 
-import Project_SIST.Java.Z99_vo.Product;
+import Project_SIST.Java.VO.*;
 
 public class XXXController {
 /*

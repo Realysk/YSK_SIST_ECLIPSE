@@ -2,7 +2,7 @@ package Project_SIST.Java.A00_Sample;
 
 import java.util.ArrayList;
 
-import Project_SIST.Java.Z99_vo.Product;
+import Project_SIST.Java.VO.*;
 
 // DB서버에 접속해 데이터를 가져올 필요성있는 때 사용
 

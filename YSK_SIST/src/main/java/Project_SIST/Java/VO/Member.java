@@ -1,4 +1,4 @@
-package Project_SIST.Java.A01_Lotte;
+package Project_SIST.Java.VO;
 
 public class Member {
     private String ID;

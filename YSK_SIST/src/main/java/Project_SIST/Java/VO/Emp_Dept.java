@@ -1,4 +1,4 @@
-package Project_SIST.Java.Z99_vo;
+package Project_SIST.Java.VO;
 
 import java.util.Date;
 

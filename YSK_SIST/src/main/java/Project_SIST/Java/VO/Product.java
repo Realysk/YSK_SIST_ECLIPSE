@@ -1,4 +1,4 @@
-package Project_SIST.Java.Z99_vo;
+package Project_SIST.Java.VO;
 
 public class Product {
 	private String name;
