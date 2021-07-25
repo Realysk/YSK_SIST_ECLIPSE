@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> REALYSK's PAGE </title>
+<title> PICMAGINE : 회원가입 </title>
 <%-- <link rel="stylesheet" href="<%=path%>/a00_com/a00_com.css"> --%>
 <style>
 	
@@ -118,11 +118,18 @@
 <body>
 
 	<%
-	
-		JOINDAO dao = new JOINDAO();
-		dao.Joined(new JOINDTO());
+//		String name = "";
 		
-		
+		JOINDTO dto = new JOINDTO();
+//		dto.setName("TestName");		
+//		dto.setId("TestId");
+//		dto.setPw("Test1111");
+//		dto.setTel("010-2020-2021");
+//		dto.setEmail("");
+			
+		JOINDAO dao = new JOINDAO();		
+		// 실제 DB접근해서 Insert 하는부분	
+		dao.Joined(dto);
 	%>
 
 	<!-- 로그인 / 회원가입 폼 -->
@@ -139,10 +146,12 @@
 		</div>
 		
 		<form name="joinForm" action="joined.jsp" method="post"> <!-- 회원정보 등록 페이지 이동 -->
+			<!-- 
 			<div class="input-box">
-				<input id="name" type="text" name="name" value="<%= %>" onkeyup="checkCapsLock(event)" minlength="2" maxlength="5" placeholder="이름"/>
+				<input id="name" type="text" name="name" onkeyup="checkCapsLock(event)" minlength="2" maxlength="5" placeholder="이름"/>
 				<label for="name" id="nameChk"> 이름 (2-5자) </label>
 			</div>
+			 -->
 			
 			<div class="input-box">
 				<input id="username" type="text" name="username" onkeyup="checkCapsLock(event)" placeholder="아이디"/>
@@ -207,7 +216,7 @@
 
 	var idReg = /^[a-zA-Z0-9]{6,12}$/;
 	var pwReg = /^[a-zA-Z0-9]{6,14}$/;
-	var name = document.querySelector("[name=name]");
+//	var name = document.querySelector("[name=name]");
 	var id = document.querySelector("[name=username]");
 	var idChk = document.querySelector("#idChk");
 	var idMsg = document.querySelector(".idMsg");
@@ -400,6 +409,14 @@
 			
 			return false;
 			
+		} else if(pw.value != pwChk.value) {
+			
+			// PW와 PW Confirm이 일치하지 않을시
+			alert("PW와 PW Confirm이 서로 일치하지 않습니다. 다시 입력하세요.");
+			pw.focus();
+			
+			return false;
+
 		} else if(phone.value == "") {
 			
 			// Tel 미 입력시			
@@ -421,16 +438,17 @@
 			// 정보 입력 후 회원가입 완료시
 			alert(username.value + " 님의 회원가입이 완료되었습니다!");
 			document.joinForm.submit();
-    		this.location.href='login.html';
-//    		this.location.href='login.jsp';
+//			this.location.href='joined.jsp'; // [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 login.jsp로 이동)
+    		this.location.href='login.html'; // jsp로 이동 시 삭제예정
+//    		this.location.href='login.jsp'; // html -> jsp 백업 시 활성화
     		
 		}
 	}
 	
 	// '취소' 버튼 클릭 시 로그인 페이지 이동
 	function login(obj) {
-		this.location.href = 'login.html';
-//		this.location.href = 'login.html';
+		this.location.href = 'login.html'; // jsp로 이동 시 삭제예정
+//		this.location.href = 'login.jsp'; // html -> jsp 백업 시 활성화
 	}
 
 </script>

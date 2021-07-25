@@ -32,7 +32,7 @@ public class JOINDAO {
 			
 			setCon();
 			
-			String sql = "SELECT * FROM Picmagine_join ORDER BY memcode DESC";
+			String sql = "SELECT * FROM MEMBER ORDER BY memno DESC";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -40,12 +40,12 @@ public class JOINDAO {
 					
 			while(rs.next()) {
 				JOINDTO j = new JOINDTO();
-				j.setMemcode(rs.getString(1));
-				j.setName(rs.getString(2));
-				j.setId(rs.getString(3));
-				j.setPw(rs.getString(4));
-				j.setTel(rs.getString(5));
-				j.setEmail(rs.getString(6));
+				j.setMemno(rs.getString(1));
+				j.setMemid(rs.getString(2));
+				j.setMempw(rs.getString(3));
+				j.setMemtel(rs.getString(4));
+				j.setMememail(rs.getString(5));
+				j.setMemauth(rs.getString(6));
 				jlist.add(j);
 			}
 						
@@ -97,18 +97,18 @@ public class JOINDAO {
 			
 			con.setAutoCommit(false);
 			
-			String sql = "INSERT INTO Picmagine_join VALUES('PM' || pic_memcode.nextval, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO MEMBER VALUES('mb' || memno.nextval, ?, ?, ?, ?, ?)";
 			
 			pstmt = con.prepareStatement(sql);
 			
 			// '?' 갯수만큼 아래에 순서대로 할당
 			
 //			pstmt.setString(1, ins.getMemcode()); // 
-			pstmt.setString(1, ins.getName());
-			pstmt.setString(2, ins.getId());
-			pstmt.setString(3, ins.getPw());
-			pstmt.setString(4, ins.getTel());
-			pstmt.setString(5, ins.getEmail());
+			pstmt.setString(1, ins.getMemid());
+			pstmt.setString(2, ins.getMempw());
+			pstmt.setString(3, ins.getMemtel());
+			pstmt.setString(4, ins.getMememail());
+			pstmt.setString(5, ins.getMemauth());
 			
 			pstmt.executeUpdate();
 			
@@ -165,7 +165,7 @@ public class JOINDAO {
 			try {
 				setCon();
 
-				String sql = "SELECT * FROM Picmagine_join WHERE id LIKE '%'||'" + sch.getId() + "'||'%' ORDER BY memcode DESC";
+				String sql = "SELECT * FROM MEMBER WHERE memid LIKE '%'||'" + sch.getMemid() + "'||'%' ORDER BY memno DESC";
 				
 				pstmt = con.prepareStatement(sql);
 				
@@ -176,12 +176,12 @@ public class JOINDAO {
 				
 				while(rs.next()) {
 					schid.add(new JOINDTO(
-							rs.getString("memcode"),
-							rs.getString("name"),
-							rs.getString("id"),
-							rs.getString("pw"),
-							rs.getString("tel"),
-							rs.getString("email")
+							rs.getString("memno"),
+							rs.getString("memid"),
+							rs.getString("mempw"),
+							rs.getString("memtel"),
+							rs.getString("mememail"),
+							rs.getString("memauth")
 						));
 				}
 
@@ -223,12 +223,12 @@ public class JOINDAO {
 		return schid;
 	}
 	
-	public JOINDTO getschID(String id) {
+	public JOINDTO getschID(String memid) {
 		JOINDTO getid = null;
 		
 		try {
 			setCon();
-			String sql = "SELECT * FROM Picmagine_join WHERE id LIKE = " + id;
+			String sql = "SELECT * FROM MEMBER WHERE memid LIKE = " + memid;
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -236,12 +236,12 @@ public class JOINDAO {
 			
 			if(rs.next()) {
 				getid = new JOINDTO(
-							rs.getString("memcode"),
-							rs.getString("name"),
-							rs.getString("id"),
-							rs.getString("pw"),
-							rs.getString("tel"),
-							rs.getString("email")
+							rs.getString("memno"),
+							rs.getString("memid"),
+							rs.getString("mempw"),
+							rs.getString("memtel"),
+							rs.getString("mememail"),
+							rs.getString("memauth")
 						);
 			}
 			rs.close(); con.close(); pstmt.close();
@@ -282,129 +282,129 @@ public class JOINDAO {
 		return getid;
 	}
 
-	// ID 찾기
-		public ArrayList<JOINDTO> schPW(JOINDTO sch) {
-			
-			ArrayList<JOINDTO> schid = new ArrayList<JOINDTO>();
-				try {
-					setCon();
-	
-					String sql = "SELECT * FROM Picmagine_join WHERE pw LIKE '%'||'" + sch.getPw() + "'||'%' ORDER BY memcode DESC";
-					
-					pstmt = con.prepareStatement(sql);
-					
-					// 추후에 ? 갯수만큼 순서 1, 2, ... 할당 처리
-	//				pstmt.setString(1, "%" + id + "%");
-					
-					rs = pstmt.executeQuery(sql);
-					
-					while(rs.next()) {
-						schid.add(new JOINDTO(
-								rs.getString("memcode"),
-								rs.getString("name"),
-								rs.getString("id"),
-								rs.getString("pw"),
-								rs.getString("tel"),
-								rs.getString("email")
-							));
-					}
-	
-					rs.close(); pstmt.close(); con.close();
-					
+	// PW 찾기
+	public ArrayList<JOINDTO> schPW(JOINDTO sch) {
+		
+		ArrayList<JOINDTO> schid = new ArrayList<JOINDTO>();
+			try {
+				setCon();
+
+				String sql = "SELECT * FROM MEMBER WHERE mempw LIKE '%'||'" + sch.getMempw() + "'||'%' ORDER BY memno DESC";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				// 추후에 ? 갯수만큼 순서 1, 2, ... 할당 처리
+	//			pstmt.setString(1, "%" + id + "%");
+				
+				rs = pstmt.executeQuery(sql);
+				
+				while(rs.next()) {
+					schid.add(new JOINDTO(
+							rs.getString("memno"),
+							rs.getString("memid"),
+							rs.getString("mempw"),
+							rs.getString("memtel"),
+							rs.getString("mememail"),
+							rs.getString("memauth")
+						));
+				}
+
+				rs.close(); pstmt.close(); con.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				
+				e.printStackTrace();
+				System.out.println("SQL 예외 : " + e.getMessage());
+				
+			} catch(Exception e) {
+				
+				System.out.println("일반 예외 : " + e.getMessage());
+				
+			} finally {
+				
+				if(rs != null) { try {
+					rs.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					
 					e.printStackTrace();
-					System.out.println("SQL 예외 : " + e.getMessage());
+				} }
+				if(pstmt != null) { try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} }
+				if(con != null) { try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} }
+				
+			}
+
+		return schid;
+	}
+
+	public JOINDTO getschPW(String mempw) {
+			JOINDTO getid = null;
+			
+			try {
+				setCon();
+				String sql = "SELECT * FROM MEMBER WHERE mempw LIKE = " + mempw;
+				
+				pstmt = con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery(sql);
+				
+				if(rs.next()) {
+					getid = new JOINDTO(
+								rs.getString("memno"),
+								rs.getString("memid"),
+								rs.getString("mempw"),
+								rs.getString("memtel"),
+								rs.getString("mememail"),
+								rs.getString("memauth")
+							);
+				}
+				rs.close(); con.close(); pstmt.close();
 					
-				} catch(Exception e) {
-					
-					System.out.println("일반 예외 : " + e.getMessage());
-					
-				} finally {
-					
-					if(rs != null) { try {
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("SQL 예외 발생 : " + e.getMessage());
+			} catch(Exception e) {
+				System.out.println("일반 예외 발생 : " + e.getMessage());
+			}finally {
+				if(rs!=null) {
+					try {
 						rs.close();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					} }
-					if(pstmt != null) { try {
+					}
+				}	
+				if(pstmt!=null) {
+					try {
 						pstmt.close();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					} }
-					if(con != null) { try {
+					}
+				}			
+				if(con!=null) {
+					try {
 						con.close();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					} }
-					
-				}
-	
-			return schid;
-		}
-
-	public JOINDTO getschPW(String pw) {
-				JOINDTO getid = null;
-				
-				try {
-					setCon();
-					String sql = "SELECT * FROM Picmagine_join WHERE pw LIKE = " + pw;
-					
-					pstmt = con.prepareStatement(sql);
-					
-					rs = pstmt.executeQuery(sql);
-					
-					if(rs.next()) {
-						getid = new JOINDTO(
-									rs.getString("memcode"),
-									rs.getString("name"),
-									rs.getString("id"),
-									rs.getString("pw"),
-									rs.getString("tel"),
-									rs.getString("email")
-								);
 					}
-					rs.close(); con.close(); pstmt.close();
-					
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("SQL 예외 발생 : " + e.getMessage());
-				} catch(Exception e) {
-					System.out.println("일반 예외 발생 : " + e.getMessage());
-				}finally {
-					if(rs!=null) {
-						try {
-							rs.close();
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}	
-					if(pstmt!=null) {
-						try {
-							pstmt.close();
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}			
-					if(con!=null) {
-						try {
-							con.close();
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}	
-					
-				}
-				return getid;
+				}	
+				
 			}
+			return getid;
+		}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -413,7 +413,7 @@ public class JOINDAO {
 		ArrayList<JOINDTO> jlist = dao.memberList();
 				
 		// 등록
-//		dao.Joined(new JOINDTO("PM1004", "마길동", "makil1", "1020", "010-3948-0000", "makil@gmail.com"));
+//		dao.Joined(new JOINDTO("mb1005", "makil1", "1020", "010-3948-0000", "makil@gmail.com", "회원"));
 				
 //		// ID 찾기
 //		for(JOINDTO jo:dao.schID(new JOINDTO())) {
@@ -471,12 +471,12 @@ public class JOINDAO {
 		
 		// 조회
 		for(JOINDTO j:dao.memberList()) {
-			System.out.print(j.getMemcode() + "\t"); 
-			System.out.print(j.getName() + "\t"); 
-			System.out.print(j.getId() + "\t"); 
-			System.out.print(j.getPw() + "\t"); 
-			System.out.print(j.getTel() + "\t"); 
-			System.out.print(j.getEmail() + "\n"); 
+			System.out.print(j.getMemno() + "\t"); 
+			System.out.print(j.getMemid() + "\t"); 
+			System.out.print(j.getMempw() + "\t"); 
+			System.out.print(j.getMemtel() + "\t"); 
+			System.out.print(j.getMememail() + "\t"); 
+			System.out.print(j.getMemauth() + "\n"); 
 		}
 
 	}

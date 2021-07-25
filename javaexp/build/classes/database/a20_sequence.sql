@@ -26,8 +26,8 @@ CREATE SEQUENCE seq_01
  		2) 시퀀스명.currval : 현재 시퀀스 번호를 출력
  */
 SELECT 
-	   seq_01.nextval
-	   -- ,seq_01.currval
+		seq_01.nextval
+	   ,seq_01.currval
 FROM dual;
 
 -- ex1) 시작 번호가 1001이고 마지막 번호가 9999인 시퀀스를 만들고 실행을 해보세요.

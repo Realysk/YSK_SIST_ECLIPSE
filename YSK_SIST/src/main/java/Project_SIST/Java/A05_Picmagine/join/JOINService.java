@@ -18,12 +18,12 @@ public class JOINService {
 	public String memberList() {
 		ArrayList<JOINDTO> jlist = jdao.memberList();
 		for(JOINDTO j:jlist) {
-			System.out.print(j.getMemcode() + "\t");
-			System.out.print(j.getName() + "\t");
-			System.out.print(j.getId() + "\t");
-			System.out.print(j.getPw() + "\t");
-			System.out.print(j.getTel() + "\t");
-			System.out.print(j.getEmail() + "\n");
+			System.out.print(j.getMemno() + "\t");;
+			System.out.print(j.getMemid() + "\t");
+			System.out.print(j.getMempw() + "\t");
+			System.out.print(j.getMemtel() + "\t");
+			System.out.print(j.getMememail() + "\t");
+			System.out.print(j.getMemauth() + "\n");
 		}
 		return "회원 정보 출력 완료";
 	}

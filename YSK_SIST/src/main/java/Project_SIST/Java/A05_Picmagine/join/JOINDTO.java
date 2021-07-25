@@ -2,74 +2,88 @@ package Project_SIST.Java.A05_Picmagine.join;
 
 public class JOINDTO {
 	
-	private String memcode; // 회원 번호
-	private String name; // 이름
-	private String id; // ID
-	private String pw; // PW
-	private String tel; // Tel
-	private String email; // 이메일
+	private String memno; // 회원 번호
+	private String memid; // ID
+	private String mempw; // PW
+	private String memtel; // Tel
+	private String mememail; // 이메일
+	private String memauth = "회원"; // 사용 권한
 	
 	public JOINDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public JOINDTO(String memcode, String name, String id, String pw, String tel, String email) {
+	public JOINDTO(String memno, String memid, String mempw, String memtel, String mememail,
+			String memauth) {
 		super();
-		this.memcode = memcode;
-		this.name = name;
-		this.id = id;
-		this.pw = pw;
-		this.tel = tel;
-		this.email = email;
+		this.memno = memno;
+		this.memid = memid;
+		this.mempw = mempw;
+		this.memtel = memtel;
+		this.mememail = mememail;
+		this.memauth = memauth;
 	}
 
-	public String getMemcode() {
-		return memcode;
+	public String getMemno() {
+		return memno;
 	}
 
-	public void setMemcode(String memcode) {
-		this.memcode = memcode;
+	public void setMemno(String memno) {
+		this.memno = memno;
 	}
 
-	public String getName() {
-		return name;
+	public String getMemid() {
+		return memid;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMemid(String memid) {
+		this.memid = memid;
 	}
 
-	public String getId() {
-		return id;
+	public String getMempw() {
+		return mempw;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setMempw(String mempw) {
+		this.mempw = mempw;
 	}
 
-	public String getPw() {
-		return pw;
+	public String getMemtel() {
+		return memtel;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setMemtel(String memtel) {
+		this.memtel = memtel;
 	}
 
-	public String getTel() {
-		return tel;
+	public String getMememail() {
+		return mememail;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setMememail(String mememail) {
+		this.mememail = mememail;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMemauth() {
+		return memauth;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMemauth(String memauth) {
+		this.memauth = memauth;
 	}
+	
+	@Override
+    public String toString() {
+        
+		return 	"[회원정보 등록 완료]" +
+        		"\n" + " NO. " + memno + 
+        		"\n" + " ID : " + memid + 
+        		"\n" + " PW : " + mempw + 
+        		"\n" + " TEL : " + memtel + 
+        		"\n" + " EMAIL : " + mememail + 
+        		"\n" + " AUTH : " + memauth + "\n";
+    }
+
 
 }
