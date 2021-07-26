@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 
+import jspexp.z02_vo.Dept;
 import jspexp.z02_vo.Emp;
 
 
@@ -633,11 +633,83 @@ public class A05_PreparedDao {
 			
 		}
 	}
+	// 1. return 타입, 매개변수,
+	// 2. SQL 삽입
+	// 3. VO 데이터 처리
+	public ArrayList<Dept> getDeptList(Dept sch) {
+		ArrayList<Dept> deptlist = new ArrayList<Dept>();
+		try {
+			setCon();
+			String sql = " SELECT * \r\n"
+					+ " FROM dept\r\n"
+					+ " WHERE dname LIKE '%'||?||'%'\r\n"
+					+ " AND loc LIKE '%'||?||'%'";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sch.getDname());
+			pstmt.setString(2, sch.getLoc());
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				deptlist.add(new Dept(
+							rs.getInt("deptno"),
+							rs.getString("dname"),
+							rs.getString("loc")
+						));
+			}
+			System.out.println("ArrayList의 데이터 갯수:"+deptlist.size());
+			rs.close(); pstmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("SQL 예외 발생~~"+e.getMessage());
+		} catch(Exception e) {
+			System.out.println("일반예외 발생:"+e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			
+		}
+		return deptlist;
+	}
 	// ex) 조회문 select * from dept를 위한 A02_DeptDao.java를 만들고,
 	//     공통 연결메서드와 기능메서드(부서정보조회) 틀을 만드세요 1조
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A05_PreparedDao dao = new A05_PreparedDao();
+		
+		System.out.println("Dept 테스트 : " + dao.getDeptList(new Dept(0, "", "")).size());
 		
 		//ArrayList<Emp> elist = dao.getEmpList();
 		/*
@@ -664,14 +736,14 @@ public class A05_PreparedDao {
 		*/
 		//dao.insertEmp(new Emp(0,"김미나","과장",7780,"",6000,1000,10));
 		//dao.updateEmp(new Emp(7937,"김소현(수정)","대리",7780,"2021/07/09",5000,1000,10));
-		dao.deleteEmp(7935);
+//		dao.deleteEmp(7935);
 		
-		for(Emp e:dao.getPreparedEmpList(new Emp("",""))) {
-			System.out.print(e.getEmpno()+"\t");
-			System.out.print(e.getEname()+"\t");
-			System.out.print(e.getJob()+"\t");
-			System.out.print(e.getSal()+"\n");
-		}
+//		for(Emp e:dao.getPreparedEmpList(new Emp("",""))) {
+//			System.out.print(e.getEmpno()+"\t");
+//			System.out.print(e.getEname()+"\t");
+//			System.out.print(e.getJob()+"\t");
+//			System.out.print(e.getSal()+"\n");
+//		}
 // 
 		
 	}

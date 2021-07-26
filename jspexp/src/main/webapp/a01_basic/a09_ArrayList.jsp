@@ -39,6 +39,7 @@
 		list.add("CPU [i7 4.3 GHz]");
 		list.add("RAM [16G]");
 		list.add("HDD [SSD 512G]");
+		List<String> list2 = Arrays.asList("사과","바나나","딸기");
 	%>
 
 	<h3></h3>

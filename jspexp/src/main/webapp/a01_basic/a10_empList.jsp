@@ -76,4 +76,24 @@
 	</table>
 	
 </body>
+<%--
+# DB SQL을 통한 JSP 화면 처리
+	1. SQL 처리
+		SELECT * 
+		FROM emp02
+		WHERE ename LIKE '%'||'A'||'%'
+		AND job LIKE '%'||'A'||'%'
+	2. SQL의 단위를 할당할 VO 작성
+	3. DAO 기능 메서드 추가
+		0) 비슷한 유형 기능 메서드 copy
+		1) return할 유형 선언, VO, 매개변수
+		2) SQL 할당, return할 메서드 main()을 통해 test
+	4. JSP에서 VO, ArrayList, DAO 객체 import
+	5. DAO 객체 생성 return할 ArrayList 선언 및 할당
+	6. 화면구성
+		1) 기본 화면 구성 : form(검색), list 테이블 처리
+		2) 반복문 처리
+		3) 요청값 받아서 DAO단 요청값 전달
+			(검색)
+ --%>
 </html>
