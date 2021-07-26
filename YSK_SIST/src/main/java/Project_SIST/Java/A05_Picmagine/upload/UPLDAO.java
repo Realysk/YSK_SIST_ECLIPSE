@@ -34,7 +34,7 @@ public class UPLDAO {
 			
 			setCon();
 			
-			String sql = "SELECT * FROM Picmagine_upload";
+			String sql = "SELECT * FROM artworks ORDER BY artno DESC";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -42,13 +42,13 @@ public class UPLDAO {
 			
 			while(rs.next()) {
 				UPLDTO u = new UPLDTO();
-				u.setTitle(rs.getString(1));
-				u.setContents(rs.getString(2));
-				u.setPic_file(rs.getString(3));
-				u.setTag(rs.getString(4));
-				u.setStoryname(rs.getString(5));
-				u.setStorycontents(rs.getString(6));
-				u.setStroytitle(rs.getString(7));
+				u.setArtno(rs.getString(1));
+				u.setArtcategory(rs.getString(2));
+				u.setArtimgtitle(rs.getString(3));
+				u.setArttitle(rs.getString(4));
+				u.setArtcontent(rs.getString(5));
+				u.setArtdate(rs.getString(6));
+				u.setArtpicauth(rs.getString(7));
 				upllist.add(u);
 			}
 						
@@ -100,17 +100,15 @@ public class UPLDAO {
 			
 			con.setAutoCommit(false);
 			
-			String sql = "INSERT INTO Picmagine_upload VALUES(?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO artworks VALUES('wk'||artno.nextval, ?, ?, ?, ?, sysdate, ?)";
 			
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, ins.getTitle());
-			pstmt.setString(2, ins.getContents());
-			pstmt.setString(3, ins.getPic_file());
-			pstmt.setString(4, ins.getTag());
-			pstmt.setString(5, ins.getStoryname());
-			pstmt.setString(6, ins.getStorycontents());
-			pstmt.setString(7, ins.getStroytitle());
+			pstmt.setString(1, ins.getArtcategory());
+			pstmt.setString(2, ins.getArtimgtitle());
+			pstmt.setString(3, ins.getArttitle());
+			pstmt.setString(4, ins.getArtcontent());
+			pstmt.setString(5, ins.getArtpicauth());
 			
 			pstmt.executeUpdate();
 			
@@ -171,13 +169,13 @@ public class UPLDAO {
 		
 		// 조회
 		for(UPLDTO u:dao.uploadList()) {
-			System.out.print(u.getTitle() + "\t");
-			System.out.print(u.getContents() + "\t");
-			System.out.print(u.getPic_file() + "\t");
-			System.out.print(u.getTag() + "\t");
-			System.out.print(u.getStoryname() + "\t");
-			System.out.print(u.getStorycontents() + "\t");
-			System.out.print(u.getStroytitle() + "\n");
+			System.out.print(u.getArtno() + "\t");
+			System.out.print(u.getArtcategory() + "\t");
+			System.out.print(u.getArtimgtitle() + "\t");
+			System.out.print(u.getArttitle() + "\t");
+			System.out.print(u.getArtcontent() + "\t");
+			System.out.print(u.getArtdate() + "\t");
+			System.out.print(u.getArtpicauth() + "\n");
 		}
 
 	}

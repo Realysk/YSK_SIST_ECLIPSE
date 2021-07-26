@@ -1,5 +1,8 @@
 package Project_SIST.Java.A05_Picmagine.upload;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Scanner;
 
 import Project_SIST.Java.Model;
@@ -16,70 +19,35 @@ public class UPLMain {
 		Scanner sc = new Scanner(System.in);
 		UPLDTO udto = new UPLDTO();
 		
+		Calendar cal = Calendar.getInstance();
+		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:MI:SS"); // 작성일
+						
 		System.out.println("# Picmagine 게시물 업로드 #\n");
 		
+		System.out.print(" -> 카테고리 : ");
+		String artcategory = sc.nextLine();
+		udto.setArtcategory(artcategory);
+		
 		System.out.print(" -> 제목 : ");
-		String title = sc.nextLine();
-		udto.setTitle(title);
+		String arttitle = sc.nextLine();
+		udto.setArttitle(arttitle);
 		
 		System.out.print(" -> 내용 : ");
-		String contents = sc.nextLine();
-		udto.setContents(contents);
+		String artcontent = sc.nextLine();
+		udto.setArtcontent(artcontent);
 		
 		System.out.print(" -> 파일 첨부 : ");
-		String pic_file = sc.nextLine();
-		udto.setPic_file(pic_file);
+		String artimgtitle = sc.nextLine();
+		udto.setArtimgtitle(artimgtitle);
 		
-		System.out.print(" -> 태그 : ");
-		String tag = sc.nextLine();
-		udto.setTag(tag);
+		udto.setArtdate(dateFormat.format(cal.getTime()));
 		
-		System.out.print("# 스토리를 추가 하시겠습니까? (Y/N) : ");
-		String story = sc.nextLine();
+			
+		System.out.println("# 게시물 등록이 완료되었습니다! #");
 		
-		if(story.equals("Y")) {
-			
-			System.out.println("# Picmagine 게시물 업로드 : 스토리 추가 #\n");
-			
-			System.out.print(" -> 스토리 제목 : ");
-			String storyName = sc.nextLine();
-			udto.setStoryname(storyName);
-			
-			System.out.print(" -> 스토리 설명 : ");
-			String storyContents = sc.nextLine();
-			udto.setStorycontents(storyContents);
-			
-			System.out.print(" -> 스토리 주제 : ");
-			String storyTitle = sc.nextLine();
-			udto.setStroytitle(storyTitle);
-			
-			System.out.print("# 게시물 등록을 완료하시겠습니까? (Y/N) : ");
-			String upChk = sc.nextLine();
-			
-			if(upChk.equals("Y")) {
-				
-				System.out.println("# 게시물 등록이 완료되었습니다! #");
-				
-				UPLController uplctrl = new UPLController();
-				System.out.println("\n# Program On #\n");
-				System.out.println(uplctrl.Uploaded(udto, new Model()));
-				
-			} else {
-				
-				System.out.println("\n 등록이 취소되었습니다. 메인으로 이동합니다.");
-				uin.main(args);
-				
-			}
-			
-		} else {
-			
-			System.out.println("# 게시물 등록이 완료되었습니다! #");
-			
-			UPLController uplctrl = new UPLController();
-			System.out.println("\n# Program On #\n");
-			System.out.println(uplctrl.Uploaded(udto, new Model())); 
-		}
-
+		UPLController uplctrl = new UPLController();
+		System.out.println("\n# Program On #\n");
+		System.out.println(uplctrl.Uploaded(udto, new Model())); 
 	}
 
 }

@@ -37,6 +37,28 @@ SELECT * FROM MEMBER ORDER BY memno DESC;
 
 
 
+-- 작가 작품 업로드를 위한 테이블 생성
+DROP TABLE artworks;
+CREATE TABLE artworks (
+	artno varchar2(6) PRIMARY KEY, -- 작품 번호
+	artcategory varchar2(100), -- 카테고리
+	artimgtitle varchar2(100), -- 작품 이미지
+	arttitle varchar2(100), -- 작품 제목
+	artcontent varchar2(100), -- 작품 소개
+	artdate date, -- 업로드 시간
+	artpicauth varchar2(100) -- 저작권 권한
+);
+DROP SEQUENCE artno;
+CREATE SEQUENCE artno
+	START WITH 2001 
+	MINVALUE 2001
+	MAXVALUE 99999999;
+INSERT INTO artworks VALUES('wk'||artno.nextval, '배경화면', 'spring.jpg', '봄입니다!', '화사한 봄이에요~', TO_DATE('2021-07-24 06:12:36','YYYY-MM-DD HH:MI:SS'), '작가');
+INSERT INTO artworks VALUES('wk'||artno.nextval, '추상', 'summer.jpg', '여름입니다!', '무더운 여름입니다!', TO_DATE('2021-07-25 07:12:36','YYYY-MM-DD HH:MI:SS'), '작가');
+INSERT INTO artworks VALUES('wk'||artno.nextval, '사계', 'winter.jpg', '겨울을 그려봤어요~', '한번 구경하고 가세요!', sysdate, '작가');
+SELECT * FROM artworks ORDER BY artno DESC;
+-- SELECT * FROM artworks ORDER BY artno DESC -- 게시물 조회
+-- INSERT INTO artworks VALUES('wk'||artno.nextval, ?, ?, ?, ?, sysdate, ?) -- 게시물 업로드
 
 
 -- 작가 작품 업로드 전 시리즈를 위한 테이블 생성
@@ -56,38 +78,48 @@ INSERT INTO series VALUES('se'||serno.nextval, '가상', '가상의 배경', '�
 INSERT INTO series VALUES('se'||serno.nextval, '배경', '멋진 배경', '첫번째 컬렉션');
 INSERT INTO series VALUES('se'||serno.nextval, '일러스트', '직접 그린 여름', '시리즈에 담아둡니다~');
 SELECT * FROM series ORDER BY serno DESC;
-
-
--- 작가 작품 업로드를 위한 테이블 생성
-DROP TABLE artworks;
-CREATE TABLE artworks (
-	artno varchar2(6) PRIMARY KEY, -- 작품 번호
-	artcategory varchar2(100), -- 카테고리
-	artimgtitle varchar2(100), -- 작품 이미지
-	arttitle varchar2(100), -- 작품 제목
-	artcontent varchar2(100), -- 작품 소개
-	artdate date, -- 업로드 시간
-	artpicauth varchar2(100), -- 저작권 권한
-	serno varchar2(6) CONSTRAINT artworks_serno_fk REFERENCES series(serno) -- 시리즈 번호 (외래키)
-);
-DROP SEQUENCE artno;
-CREATE SEQUENCE artno
-	START WITH 2001
-	MINVALUE 2001
-	MAXVALUE 99999999;
-INSERT INTO artworks VALUES('wk'||artno.nextval, '배경화면', 'spring.jpg', '봄입니다!', '화사한 봄이에요~', TO_DATE('2021-07-24 06:12:36','YYYY-MM-DD HH:MI:SS'), '작가', 'se'||serno.nextval);
-INSERT INTO artworks VALUES('wk'||artno.nextval, '추상', 'summer.jpg', '여름입니다!', '무더운 여름입니다!', TO_DATE('2021-07-25 07:12:36','YYYY-MM-DD HH:MI:SS'), '작가', 'se'||serno.nextval);
-INSERT INTO artworks VALUES('wk'||artno.nextval, '사계', 'winter.jpg', '겨울을 그려봤어요~', '한번 구경하고 가세요!', sysdate, '작가', 'se'||serno.nextval);
-SELECT * FROM artworks ORDER BY artno DESC;
 -- SELECT * FROM series ORDER BY serno DESC -- 시리즈 정보 조회
--- INSERT INTO series VALUES('se' || serno.nextval, ?, ?, ?) -- 시리즈 등록
+-- INSERT INTO series VALUES(?, ?, ?, ?) -- 시리즈 등록
 
 
--- 한 테이블에 기본키 2개 지정
-DROP TABLE test1;
-CREATE TABLE test1 (
-	sno NUMBER,
-	ano NUMBER,
-	CONSTRAINT testpk PRIMARY KEY (sno, ano)
+
+
+
+
+
+-- 태그 등록을 위한 테이블
+DROP TABLE tag;
+CREATE TABLE tag(
+	tagno varchar2(6) PRIMARY KEY, -- 태그 번호
+	tagname varchar2(100) -- 태그명
 );
-SELECT * FROM test1;
+DROP SEQUENCE tagno;
+CREATE SEQUENCE tagno
+	START WITH 1001
+	MINVALUE 1001
+	MAXVALUE 99999999;
+INSERT INTO tag VALUES('tg'||tagno.nextval, '#제주도');
+INSERT INTO tag VALUES('tg'||tagno.nextval, '#사계절');
+INSERT INTO tag VALUES('tg'||tagno.nextval, '#비행기');
+SELECT * FROM tag ORDER BY tagno DESC;
+
+/*
+-- 업로드와 태그 테이블 join
+SELECT a.*, g.*
+FROM artworks a, tag g
+WHERE a.tagno = g.tagno
+ORDER BY tagno DESC;
+
+-- 업로드와 시리즈 테이블 join
+SELECT a.*, s.*
+FROM artworks a, series s
+WHERE a.serno = s.serno
+ORDER BY artno DESC;
+*/
+
+/*
+ SELECT a.*, s.*
+FROM artworks a, series s
+WHERE a.serno = s.serno
+ORDER BY artno DESC
+ */

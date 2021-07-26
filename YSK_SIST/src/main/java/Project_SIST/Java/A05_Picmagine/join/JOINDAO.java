@@ -84,7 +84,7 @@ public class JOINDAO {
 					e.printStackTrace();
 				}
 			}	
-			
+
 		}
 		return jlist;
 	}
@@ -100,10 +100,7 @@ public class JOINDAO {
 			String sql = "INSERT INTO MEMBER VALUES('mb' || memno.nextval, ?, ?, ?, ?, ?)";
 			
 			pstmt = con.prepareStatement(sql);
-			
-			// '?' 갯수만큼 아래에 순서대로 할당
-			
-//			pstmt.setString(1, ins.getMemcode()); // 
+			// '?' 갯수만큼 아래에 순서대로 할당			
 			pstmt.setString(1, ins.getMemid());
 			pstmt.setString(2, ins.getMempw());
 			pstmt.setString(3, ins.getMemtel());

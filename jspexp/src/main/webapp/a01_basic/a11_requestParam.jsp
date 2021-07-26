@@ -55,6 +55,7 @@
 					- a href="이동할페이지?요청key=요청값&요청key2=요청값2"
 					- javascript location
 					- form 객체 활용
+						요청 페이지와 요청 값을 form 객체의 action 속성과 form 하위 객체의 name="속성" value="속성값" 형식으로 submit 버튼으로 처리하는 것을 말한다.
 				3) 요청 값의 여러가지 데이터 유형 처리하기
 					- null
 					- 숫자형 변환
@@ -96,9 +97,9 @@
 			<tr><th> 입력한 물건명 : <%=prodname %> </th><th> 입력한 가격 : <%=price %> </th><th> 입력한 수량 : <%=pcnt %> </th><th> 입력한 구매자명 : <%=buyname %> </th></tr>
 			<tr>
 				<td><a href="a14_receive.jsp?prodname=사과"> 물건명 넘기기 </a></td>
-				<td><a href="a14_receive.jsp?prodname=사과&price=2000"> 물건명, 가격 넘기기 </a></td>
-				<td><a href="a14_receive.jsp?prodname=사과&price=2000&pcnt=4"> 물건명, 가격, 수량 넘기기 </a></td>
-				<td><a href="a14_recieve.jsp?prodname=사과&price=2000&pcnt=4&buyname=홍길동"> 물건명, 가격, 수량, 구매자명 넘기기 </a></td>
+				<td><a href="a14_receive.jsp?prodname=망고&price=2000"> 물건명, 가격 넘기기 </a></td>
+				<td><a href="a14_receive.jsp?prodname=배추&price=6000&pcnt=5"> 물건명, 가격, 수량 넘기기 </a></td>
+				<td><a href="a14_recieve.jsp?prodname=두리안&price=8000&pcnt=2&buyname=홍길동"> 물건명, 가격, 수량, 구매자명 넘기기 </a></td>
 			</tr>	
 		</table><br>
 		
