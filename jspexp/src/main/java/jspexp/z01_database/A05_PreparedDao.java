@@ -738,13 +738,13 @@ public class A05_PreparedDao {
 		//dao.updateEmp(new Emp(7937,"김소현(수정)","대리",7780,"2021/07/09",5000,1000,10));
 //		dao.deleteEmp(7935);
 		
-//		for(Emp e:dao.getPreparedEmpList(new Emp("",""))) {
-//			System.out.print(e.getEmpno()+"\t");
-//			System.out.print(e.getEname()+"\t");
-//			System.out.print(e.getJob()+"\t");
-//			System.out.print(e.getSal()+"\n");
-//		}
-// 
+		for(Emp e:dao.getPreparedEmpList(new Emp("",""))) {
+			System.out.print(e.getEmpno()+"\t");
+			System.out.print(e.getEname()+"\t");
+			System.out.print(e.getJob()+"\t");
+			System.out.print(e.getSal()+"\n");
+		}
+ 
 		
 	}
 

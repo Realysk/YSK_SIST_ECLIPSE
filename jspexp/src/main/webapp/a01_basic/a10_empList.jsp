@@ -18,8 +18,17 @@
 	
 </style>
 <script type="text/javascript">
+	// 전체 화면이 로딩될 때 시작할 JS 함수로 body 최하단에 JS를 선언한 효과 이벤트
 	window.onload=function(){
 		document.querySelector("h3").innerText="사원 정보";
+		
+		var empSchArry = document.querySelectorAll("[name=ename],[name=job]");
+		for(var idx=0; idx<empSchArry.length; idx++) {
+			empSchArry[idx].onkeyup=function() {
+				console.log(this.value + " : " + event.keyCode);
+			}
+		}
+		
 	};
 
 </script>
@@ -39,7 +48,8 @@
 		ArrayList<Emp> elist = dao.getPreparedEmpList(new Emp(ename, job));
 	%>	
 	
-	<form> <!-- 해당 키워드로 검색 -->
+	<form id="frm01"> <!-- 해당 키워드로 검색 -->
+	<%-- form 객체의 하위 내용을 enter를 입력했을 때 자동으로 요청값을 전송하는 것을 브라우저가 지원하는 경우가 종종 있다. --%>
 		<table>
 			<tr><th> 사원명 </th><td><input type="text" name="ename" value="<%=ename%>"/></td></tr>
 			<tr><th> 직책명 </th><td><input type="text" name="job" value="<%=job%>"/></td></tr>
@@ -80,9 +90,9 @@
 # DB SQL을 통한 JSP 화면 처리
 	1. SQL 처리
 		SELECT * 
-		FROM emp02
-		WHERE ename LIKE '%'||'A'||'%'
-		AND job LIKE '%'||'A'||'%'
+		FROM dept
+		WHERE dname LIKE '%'||'A'||'%'
+		AND loc LIKE '%'||'A'||'%'
 	2. SQL의 단위를 할당할 VO 작성
 	3. DAO 기능 메서드 추가
 		0) 비슷한 유형 기능 메서드 copy
@@ -96,4 +106,31 @@
 		3) 요청값 받아서 DAO단 요청값 전달
 			(검색)
  --%>
+ <%
+ 	// 1. 요청 값 받아오기
+ 	String dname = request.getParameter("dname");
+ 	String loc = request.getParameter("loc");
+ 	// 2. 초기 화면시 default값 설정
+ 	if(dname == null) dname = "";
+ 	if(loc == null) loc = "";
+ 	// 3. 데이터 처리 결과 받기
+ 	List<Dept> dlist = dao.getDeptList(new Dept(0,dname,loc));
+ %>
+ 	<form> <!-- 해당 키워드로 검색 -->
+		<table>
+			<tr><th> 부서명 </th><td><input type="text" name="dname" value="<%=dname%>"/></td></tr>
+			<tr><th> 부서위치 </th><td><input type="text" name="loc" value="<%=loc%>"/></td></tr>
+			<tr><td colspan="2"><td><input type="submit" value="검색"/></td></tr>
+		</table>
+	</form>
+	<table>
+		<tr><th> 부서번호 </th><th> 부서명 </th><th> 부서위치 </th></tr>
+		<%for(Dept d:dlist) { %>
+		<tr>
+			<td><%=d.getDeptno() %></td>
+			<td><%=d.getDname() %></td>
+			<td><%=d.getLoc() %></td>
+		</tr>		
+		<% } %>
+	</table>
 </html>

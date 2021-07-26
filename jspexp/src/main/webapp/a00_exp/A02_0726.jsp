@@ -17,7 +17,7 @@
 //		import="java.util.*" : 내장 객체 import
 //		import="java.sql.*" : DB 연동 객체 import
 
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("UTF-8");
 	String path = request.getContextPath(); 
 %>   
 <!DOCTYPE html>
@@ -33,10 +33,6 @@
 	window.onload=function(){
 		document.querySelector("h3").innerText="07.26 정리 문제";
 	};
-	
-	var prodname = ("사과", "바나나", "딸기") => "사과", "바나나", "딸기";
- 	var plus = (price01 + price02 + price03) => price01 + price02 + price03;
- 	console.log(prodname + plus(2000,4000,10000));
 
 </script>
 </head>
@@ -57,13 +53,31 @@
 		2. 화살표 함수를 활용하여, 물건명과 가격의 총합을 처리하는 함수를 만드세요.
 		
 			--%>
+			<script type="text/javascript">
+				
+				var prodCal = (pname, price, cnt) => price*cnt;
+				console.log("총합 : " + prodCal("사과", 3000, 2));
 			
+			</script>
 			<%--		
 		
 		3. js의 속성할당 방식 2가지를 기술하고, 구매정보를 화면에 출력하는 속성과 메서드를 처리하세요.
 		
 			--%>
+			<%--
+			객체.속성 = 데이터;
+			객체['속성'] = 데이터;
+			 --%>
+			 
+			<script type="text/javascript">
+				
+				var prod = {pname: '사과', price:3000, show:function() {
+					var h2 = document.querySelector("h2");
+					h2.innerHTML = "물건명 : " + this.pname + ", 가격 : " + this.price;
+				}};
+				prod.buyInfo();
 			
+			</script>
 			<%--		
 		
 		4. database의 함수 종속성 개념을 기술하세요.
@@ -71,7 +85,10 @@
 			--%>
 			<h4> [4] : [DB] 함수 종속성 </h4>
 			<table>
-				<tr><th> 함수 종속성 </th><td> 릴레이션(테이블)을 구성하는 3개의 속성(컬럼) 집합 X, Y, Z에 대해 함수 종속 관계가 X -> Y, Y -> Z가 존재하면 논리적으로 X -> Z가 성립되는데 이 때 Z가 X에 이행적으로 함수 종속되었다고 함. </td></tr>
+				<tr><th> 완전 함수 종속성 </th><td> 특정한 결정자에 종속되는 데이터에 대한 처리를 말한다. key 컬럼에 해당 컬럼에 종속될 때를 말한다. </td></tr>
+				<td colspan="2"> ============================================== 테이블 분리 필요 ============================================== </td>
+				<tr><th> 부분 함수 종속성 </th><td> 복합 키에 컬럼이 일부 종속 </td></tr>
+				<tr><th> 종속되지 않음 </th><td> 키와 상관 없는 컬럼 </td></tr>
 			</table>		
 			<%--				
 		
