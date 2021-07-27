@@ -63,7 +63,13 @@
 	 		cntS="0"; // 에러가 발생하지 않게 처리.
 	 	}
 	 	
+	 	int price = Integer.parseInt(priceS);
+	 	int cnt = Integer.parseInt(cntS);
 	 %>
+	 
+	 <%if(request.getParameter("price") != null) { %> <%-- 초기화면과 구분 --%>
+	 	<h2 align="center"><%=price*cnt%></h2>
+	 <% } %>
 	
 </body>
 </html>
