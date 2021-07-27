@@ -53,9 +53,22 @@
 				2) 다른 페이지에 요청 값 처리하기
 					형식
 					- a href="이동할페이지?요청key=요청값&요청key2=요청값2"
-					- javascript location
+					- javascript location = "이동할페이지?요청key=요청값&요청키2=요청값2
+					- javascript
+						함수 호출, form하위 요소입력
+							location.href="주소?요청키="+요청값;
+							window.open("주소?요청키="+요청값,"","");
 					- form 객체 활용
 						요청 페이지와 요청 값을 form 객체의 action 속성과 form 하위 객체의 name="속성" value="속성값" 형식으로 submit 버튼으로 처리하는 것을 말한다.
+						# location.href="요청페이지?요청키=요청값";
+							form 요소 객체의 속성과 하위에 객체들은 submit를 클릭하는 순간 위 내용을 처리해준다.
+								ex) location.href="gogo.jsp?name=홍길동&age=25";
+									<form action="gogo.jsp">
+										<input type="text" name="name" value="홍길동"/>		
+										<input type="text" name="age" value="25"/>
+										<input type="submit" value="전송"/>
+										<!-- submit 버튼을 클릭 시, js의 이벤트 함수 호출 필요 없이 위와 동일한 처리를 한다. -->
+									</form>		
 				3) 요청 값의 여러가지 데이터 유형 처리하기
 					- null
 					- 숫자형 변환

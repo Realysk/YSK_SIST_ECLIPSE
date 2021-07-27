@@ -78,8 +78,8 @@
 			<h4> [3] : location.href 로그인 처리 [1~4단계] </h4>
 			<h5> (1단계) '로그인' 버튼으로 요청 값 넘기기 </h5>
 			<h5> (2단계) 'himan/7777'로 인증 여부 (성공/실패) </h5>
-			<h5> (3단계) 다음 페이지 js에서 alert로 성공 여부에 따른 main/login페이지 이동 </h5>
-			<h5> (4단계) DAO 연동 후 인증 여부 및 3단계 페이지 이동 로직 </h5>
+			<h5> (3단계) DAO 연동 후 인증 여부 및 3단계 페이지 이동 로직 </h5>
+			<h5> (4단계) 다음 페이지 js에서 alert로 성공 여부에 따른 main/login페이지 이동 </h5>
 			<table>
 				<tr><th> ID </th><td><input type="text" name="id2"/></td></tr>
 				<tr><th> PW </th><td><input type="password" name="pw2"/></td></tr>
@@ -90,15 +90,6 @@
 				function login() {
 					var id2 = document.querySelector("[name=id2]").value;
 					var pw2 = document.querySelector("[name=pw2]").value;
-					
-					// 2단계
-/* 					if(id2=="himan" && pw2=="7777") {
-						alert("로그인 성공");
-						location.href="a15_js_receive.jsp?id2="+id2+"&pw2="+pw2;
-					} else {
-						alert("로그인 실패");
-						location.href="#"
-					} */
 					
 					location.href="a15_js_receive.jsp?id2="+id2+"&pw2="+pw2;
 				}

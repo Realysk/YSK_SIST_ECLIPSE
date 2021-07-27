@@ -6,9 +6,25 @@
  	4. 화면에서 호출 출력
  */
 
--- 회원가입을 위한 테이블 생성
+-- 맴버 테이블
 DROP TABLE MEMBER;
-CREATE TABLE MEMBER (
+CREATE TABLE MEMBER(
+	mno number PRIMARY KEY,
+	id varchar2(30),
+	pass varchar2(20),
+	name varchar2(50),
+	auth varchar2(20),
+	point NUMBER,
+	regdte date
+);
+INSERT INTO MEMBER VALUES(1001, 'himan', '7777', '홍길동', '관리자', 5000, sysdate);
+INSERT INTO MEMBER VALUES(1002, 'goodman', '1111', '김길동', '사용자', 1000, sysdate);
+INSERT INTO MEMBER VALUES(1003, 'badman', '1212', '마길동', '사용자', 2000, sysdate);
+SELECT * FROM MEMBER ORDER BY mno DESC;
+
+-- 회원가입을 위한 테이블 생성
+DROP TABLE pic_member;
+CREATE TABLE pic_member (
 	memno varchar2(6) PRIMARY KEY, -- 회원 번호
 	memid varchar2(100), -- ID
 	mempw varchar2(100), -- PW
@@ -21,15 +37,15 @@ CREATE SEQUENCE memno
 	START WITH 1001
 	MINVALUE 1000
 	MAXVALUE 99999999;
-INSERT INTO MEMBER VALUES('mb'||memno.nextval, 'hong798', 'hkd1589', '010-1111-1111', 'hong111@gmail.com', '회원');
-INSERT INTO MEMBER VALUES('mb'||memno.nextval, 'Kkd294', 'abcd5049', '010-2452-1393', 'Kkd222@naver.com', '회원');
-INSERT INTO MEMBER VALUES('mb'||memno.nextval, 'gogo586', 'bngk954', '010-0508-9496', 'gogo333@gmail.com', '회원');
-SELECT * FROM MEMBER ORDER BY memno DESC;
--- SELECT * FROM MEMBER ORDER BY memno DESC -- 회원 정보 조회
--- INSERT INTO MEMBER VALUES('mb' || memno.nextval, ?, ?, ?, ?, ?) -- 회원 가입
--- SELECT memno, memid, mempw FROM MEMBER WHERE memno = ? -- 로그인
--- SELECT * FROM MEMBER WHERE memid LIKE '%'||?||'%' ORDER BY memno DESC -- ID 검색
--- SELECT * FROM MEMBER WHERE mempw LIKE '%'||?||'%' ORDER BY memno DESC -- PW 검색
+INSERT INTO pic_member VALUES('mb'||memno.nextval, 'hong798', 'hkd1589', '010-1111-1111', 'hong111@gmail.com', '회원');
+INSERT INTO pic_member VALUES('mb'||memno.nextval, 'Kkd294', 'abcd5049', '010-2452-1393', 'Kkd222@naver.com', '회원');
+INSERT INTO pic_member VALUES('mb'||memno.nextval, 'gogo586', 'bngk954', '010-0508-9496', 'gogo333@gmail.com', '회원');
+SELECT * FROM pic_member ORDER BY memno DESC;
+-- SELECT * FROM pic_member ORDER BY memno DESC -- 회원 정보 조회
+-- INSERT INTO pic_member VALUES('mb' || memno.nextval, ?, ?, ?, ?, ?) -- 회원 가입
+-- SELECT memno, memid, mempw FROM pic_member WHERE memno = ? -- 로그인
+-- SELECT * FROM pic_member WHERE memid LIKE '%'||?||'%' ORDER BY memno DESC -- ID 검색
+-- SELECT * FROM pic_member WHERE mempw LIKE '%'||?||'%' ORDER BY memno DESC -- PW 검색
 
 
 

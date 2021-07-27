@@ -703,11 +703,79 @@ public class A05_PreparedDao {
 		}
 		return deptlist;
 	}
+	// 1. return 타입, 매개변수,
+	// 2. SQL 삽입
+	// 3. VO 데이터 처리
+	public boolean login(String id2, String pw2) {
+		boolean hasMember = false;
+		try {
+			setCon();
+			String sql = "SELECT * FROM MEMBER WHERE id=? AND pass=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id2);
+			pstmt.setString(2, pw2);
+			
+			rs = pstmt.executeQuery();
+			
+			hasMember = rs.next(); // 데이터가 있으면 true/false
+			
+			System.out.println("입력 값 ID :" + id2);
+			System.out.println("입력 값 PW :" + pw2);
+			System.out.println("등록 여부 :" + hasMember);
+			
+			rs.close(); pstmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("SQL 예외 발생~~"+e.getMessage());
+		} catch(Exception e) {
+			System.out.println("일반예외 발생:"+e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			
+		}
+		return hasMember;
+	}
 	// ex) 조회문 select * from dept를 위한 A02_DeptDao.java를 만들고,
 	//     공통 연결메서드와 기능메서드(부서정보조회) 틀을 만드세요 1조
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A05_PreparedDao dao = new A05_PreparedDao();
+		
+		dao.login("himan", "7777");
 		
 		System.out.println("Dept 테스트 : " + dao.getDeptList(new Dept(0, "", "")).size());
 		
