@@ -35,6 +35,7 @@
 </script>
 </head>
 <body>
+
 	<h3 align="center"></h3>
 <%
 	String num01S = request.getParameter("num01");

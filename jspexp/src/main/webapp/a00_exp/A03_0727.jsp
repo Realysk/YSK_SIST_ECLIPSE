@@ -81,20 +81,20 @@
 			<h5> (3단계) DAO 연동 후 인증 여부 및 3단계 페이지 이동 로직 </h5>
 			<h5> (4단계) 다음 페이지 js에서 alert로 성공 여부에 따른 main/login페이지 이동 </h5>
 			<table>
-				<tr><th> ID </th><td><input type="text" name="id2"/></td></tr>
-				<tr><th> PW </th><td><input type="password" name="pw2"/></td></tr>
+				<tr><th> ID </th><td><input type="text" name="id"/></td></tr>
+				<tr><th> PW </th><td><input type="password" name="pw"/></td></tr>
 				<tr><td colspan="2"><input type="button" value="로그인" onclick="login()"/></td></tr>
 			</table><br>
 			<script type="text/javascript">
 					// 1단계
 				function login() {
-					var id2 = document.querySelector("[name=id2]").value;
-					var pw2 = document.querySelector("[name=pw2]").value;
+					var id = document.querySelector("[name=id]").value;
+					var pw = document.querySelector("[name=pw]").value;
 					
-					location.href="a15_js_receive.jsp?id2="+id2+"&pw2="+pw2;
+					location.href="A03_0727_receive.jsp?id="+id+"&pw="+pw;
 				}
 			</script>
-		<%--		   
+		<%--
 		 
 	 --%>
 	

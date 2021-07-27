@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"
 	import="java.util.*"
 	import="java.sql.*"
+	import="jspexp.z02_vo.*"
+	import="jspexp.z01_database.*"
 %>
 <%
 //  [jspexp] 프로젝트에 사용
@@ -39,14 +41,17 @@
 	<h3></h3>	
 <%
 	String pname = request.getParameter("pname");
-	if(pname==null) pname=""; // 기본 ""로 처리하면 nullpointer 예외나 null 출력되는 경우를 방지할 수 있다.
+	if(pname==null) pname="";
 	String priceS = request.getParameter("priceS");
-	if(priceS==null) priceS="0"; // 기본 ""로 처리하면 nullpointer 예외나 null 출력되는 경우를 방지할 수 있다.
+	if(priceS==null) priceS="0";
 	String cntS = request.getParameter("cntS");
-	if(cntS==null) cntS="0"; // 기본 ""로 처리하면 nullpointer 예외나 null 출력되는 경우를 방지할 수 있다.
+	if(cntS==null) cntS="0";
 	int price = Integer.parseInt(priceS);
 	int cnt = Integer.parseInt(cntS);
-	int tot = price * cnt;
+	
+	// VO 객체에 할당 처리하기
+	Product prod = new Product(pname, price, cnt);
+	// DAO 연계하여 매개변수로 전달
 
 %>
 	
@@ -54,10 +59,10 @@
 	<table>
 		<tr><th> 물건명 </th><th> 가격 </th><th> 수량 </th><th> 총계 </th></tr>
 		<tr>
-			<td><%=pname%></td>
-			<td><%=price%></td>
-			<td><%=cnt%></td>
-			<td><%=tot%></td>
+			<td><%=prod.getName()%></td>
+			<td><%=prod.getPrice()%></td>
+			<td><%=prod.getCnt()%></td>
+			<td><%=prod.getPrice() * prod.getCnt()%></td>
 		</tr>
 	</table>
 	</form>
