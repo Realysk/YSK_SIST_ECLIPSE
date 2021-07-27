@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import Project_SIST.Java.Model;
 
-
 public class UPLMain {
 
 	public static void main(String[] args) {
