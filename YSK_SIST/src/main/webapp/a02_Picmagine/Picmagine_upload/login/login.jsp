@@ -168,9 +168,9 @@
 			</span>
 				<input type="checkbox" id="saveLogin"> 아이디 저장
 				<input type="checkbox" id="autoLogin"> 자동 로그인
-				<input type="submit" onclick="formChk(this)" value="로그인" style="margin-top: 30px;">
+				<input type="button" onclick="formChk(this)" value="로그인" style="margin-top: 30px;">
 		</form>
-				<input type="submit" value="회원가입" id="join" onclick="join(this)" style="margin-top: 3px;">
+				<input type="button" value="회원가입" id="join" onclick="join(this)" style="margin-top: 3px;">
 	</div>	
 	
 </body>
@@ -288,9 +288,10 @@
 			
 		} else {
 			
+//			alert(memid + "님 로그인 되었습니다!"); // 'objectHTMLInputelement 님 로그인 되었습니다!' 로 출력되서 일단 주석 처리..
 			document.loginForm.submit();
-    		location.href='../logined.jsp';
-    		//location.href='../logout_main.html';
+    		//location.href='../logined.jsp'; [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 ../logout_main.html로 이동)
+    		location.href='../logout_main.html';
 		}
 	}
 

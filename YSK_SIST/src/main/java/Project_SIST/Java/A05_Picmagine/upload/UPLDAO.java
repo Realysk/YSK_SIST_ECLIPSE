@@ -47,8 +47,9 @@ public class UPLDAO {
 				u.setArtimgtitle(rs.getString(3));
 				u.setArttitle(rs.getString(4));
 				u.setArtcontent(rs.getString(5));
-				u.setArtdate(rs.getString(6));
-				u.setArtpicauth(rs.getString(7));
+				u.setTag(rs.getString(6));
+				u.setArtdate(rs.getString(7));
+				u.setArtpicauth(rs.getString(8));
 				upllist.add(u);
 			}
 						
@@ -100,7 +101,7 @@ public class UPLDAO {
 			
 			con.setAutoCommit(false);
 			
-			String sql = "INSERT INTO artworks VALUES('wk'||artno.nextval, ?, ?, ?, ?, sysdate, ?)";
+			String sql = "INSERT INTO artworks VALUES('wk'||artno.nextval, ?, ?, ?, ?, ?, sysdate, ?)";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -108,7 +109,8 @@ public class UPLDAO {
 			pstmt.setString(2, ins.getArtimgtitle());
 			pstmt.setString(3, ins.getArttitle());
 			pstmt.setString(4, ins.getArtcontent());
-			pstmt.setString(5, ins.getArtpicauth());
+			pstmt.setString(5, ins.getTag());
+			pstmt.setString(6, ins.getArtpicauth());
 			
 			pstmt.executeUpdate();
 			
@@ -174,6 +176,7 @@ public class UPLDAO {
 			System.out.print(u.getArtimgtitle() + "\t");
 			System.out.print(u.getArttitle() + "\t");
 			System.out.print(u.getArtcontent() + "\t");
+			System.out.print(u.getTag() + "\t");
 			System.out.print(u.getArtdate() + "\t");
 			System.out.print(u.getArtpicauth() + "\n");
 		}

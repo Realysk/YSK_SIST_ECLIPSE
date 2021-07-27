@@ -7,6 +7,7 @@ public class UPLDTO {
 	private String artimgtitle; // 파일명 (작품 이미지)
 	private String arttitle; // 작품 제목
 	private String artcontent; // 작품 소개
+	private String tag; // 태그
 	private String artdate; // 업로드일
 	private String artpicauth = "작가"; // 저작권 권한
 	
@@ -15,7 +16,7 @@ public class UPLDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UPLDTO(String artno, String artcategory, String artimgtitle, String arttitle, String artcontent,
+	public UPLDTO(String artno, String artcategory, String artimgtitle, String arttitle, String artcontent, String tag,
 			String artdate, String artpicauth) {
 		super();
 		this.artno = artno;
@@ -23,6 +24,7 @@ public class UPLDTO {
 		this.artimgtitle = artimgtitle;
 		this.arttitle = arttitle;
 		this.artcontent = artcontent;
+		this.tag = tag;
 		this.artdate = artdate;
 		this.artpicauth = artpicauth;
 	}
@@ -65,6 +67,14 @@ public class UPLDTO {
 
 	public void setArtcontent(String artcontent) {
 		this.artcontent = artcontent;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 	public String getArtdate() {

@@ -20,13 +20,17 @@ public class UPLMain {
 		UPLDTO udto = new UPLDTO();
 		
 		Calendar cal = Calendar.getInstance();
-		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:MI:SS"); // 작성일
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); // 작성일
 						
 		System.out.println("# Picmagine 게시물 업로드 #\n");
 		
 		System.out.print(" -> 카테고리 : ");
 		String artcategory = sc.nextLine();
 		udto.setArtcategory(artcategory);
+		
+		System.out.print(" -> 파일 첨부 : ");
+		String artimgtitle = sc.nextLine();
+		udto.setArtimgtitle(artimgtitle);
 		
 		System.out.print(" -> 제목 : ");
 		String arttitle = sc.nextLine();
@@ -36,13 +40,12 @@ public class UPLMain {
 		String artcontent = sc.nextLine();
 		udto.setArtcontent(artcontent);
 		
-		System.out.print(" -> 파일 첨부 : ");
-		String artimgtitle = sc.nextLine();
-		udto.setArtimgtitle(artimgtitle);
+		System.out.print(" -> 태그 : ");
+		String tag = sc.nextLine();
+		udto.setTag(tag);
 		
 		udto.setArtdate(dateFormat.format(cal.getTime()));
 		
-			
 		System.out.println("# 게시물 등록이 완료되었습니다! #");
 		
 		UPLController uplctrl = new UPLController();

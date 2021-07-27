@@ -11,4 +11,5 @@ public class UPLController {
 		d.addAttribute("게시물 업로드", serv.Uploaded(u));
 		return "uploaded.jsp";
 	}
+	
 }

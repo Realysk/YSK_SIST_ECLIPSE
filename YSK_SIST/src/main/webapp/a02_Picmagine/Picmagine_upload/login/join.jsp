@@ -185,7 +185,7 @@
 			</div>
 			
 			<div align="center" class="input-box">
-				<input type="submit" value="회원가입" onclick="formChk(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;"/>
+				<input type="button" value="회원가입" onclick="formChk(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;"/>
 				<input type="button" value="취소" onclick="login(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;"/>
 			</div>
 			
@@ -420,7 +420,7 @@
 			// 정보 입력 후 회원가입 완료시
 			alert(memid.value + " 님의 회원가입이 완료되었습니다!");
 			document.joinForm.submit();
-//			location.href='joined.jsp'; // [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 login.jsp로 이동)
+//			submit.location.href='joined.jsp'; // [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 login.jsp로 이동)
     		location.href='login.jsp';
     		
 		}

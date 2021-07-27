@@ -27,6 +27,25 @@
 <body>
 
 	<%
+		String artno = request.getParameter("artno");
+		if(artno==null) artno = "";
+		String artcategory = request.getParameter("artcategory");
+		if(artcategory==null) artcategory = "";
+		String artimgtitle = request.getParameter("artimgtitle");
+		if(artimgtitle==null) artimgtitle = "";
+		String arttitle = request.getParameter("arttitle");
+		if(arttitle==null) arttitle = "";
+		String artcontent = request.getParameter("artcontent");
+		if(artcontent==null) artcontent = "";
+		String tag = request.getParameter("tag");
+		if(tag==null) tag = "";
+		String artdate = request.getParameter("artdate");
+		if(artdate==null) artdate = "";
+		String artpicauth = request.getParameter("artpicauth");
+		if(artpicauth==null) artpicauth = "";
+	
+		UPLDTO upload = new UPLDTO(artno, artcategory, arttitle, artcontent, artimgtitle, tag, artdate, artpicauth);
+		
 		UPLDAO dao = new UPLDAO();
 		ArrayList<UPLDTO> upllist = dao.uploadList();
 		dao.Uploaded(new UPLDTO());
@@ -34,16 +53,32 @@
  
 	<h3></h3>
 	<table>
-		<tr><th> 제목 </th><th> 내용 </th><th> 첨부파일 </th><th> 태그 </th><th> [스토리] 제목 </th><th> [스토리] 설명 </th><th> [스토리] 주제 </th></tr>
+		<h4 align="center"> * 게시물 등록 정보 * </h4>
+		<tr><th> NO. </th><th> CATEGORY </th><th> TITLE </th><th> CONTENTS </th><th> FILE </th><th> TAG </th><th> DATE </th><th> AUTH </th></tr>
+		<tr>
+			<td><%=upload.getArtno() %></td>
+			<td><%=upload.getArtcategory() %></td>
+			<td><%=upload.getArttitle() %></td>
+			<td><%=upload.getArtcontent() %></td>
+			<td><%=upload.getArtimgtitle() %></td>
+			<td><%=upload.getTag() %></td>
+			<td><%=upload.getArtdate() %></td>
+			<td><%=upload.getArtpicauth() %></td>
+		</tr>
+	</table><br>
+	<table>
+		<h4 align="center"> * 게시물 정보 리스트 * </h4>
+		<tr><th> NO. </th><th> CATEGORY </th><th> TITLE </th><th> CONTENTS </th><th> FILE </th><th> TAG </th><th> DATE </th><th> AUTH </th></tr>
 		<%for(UPLDTO u:upllist) { %>
 		<tr>
-			<td><%=u.getTitle() %></td>
-			<td><%=u.getContents() %></td>
-			<td><%=u.getPic_file() %></td>
+			<td><%=u.getArtno() %></td>
+			<td><%=u.getArtcategory() %></td>
+			<td><%=u.getArttitle() %></td>
+			<td><%=u.getArtcontent() %></td>
+			<td><%=u.getArtimgtitle() %></td>
 			<td><%=u.getTag() %></td>
-			<td><%=u.getStoryname() %></td>
-			<td><%=u.getStorycontents() %></td>
-			<td><%=u.getStroytitle() %></td>
+			<td><%=u.getArtdate() %></td>
+			<td><%=u.getArtpicauth() %></td>
 		</tr>
 		<% } %>
 	</table>

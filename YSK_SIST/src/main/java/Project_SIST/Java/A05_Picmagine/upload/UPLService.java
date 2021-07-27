@@ -21,6 +21,7 @@ public class UPLService {
 			System.out.print(u.getArtimgtitle() + "\t");
 			System.out.print(u.getArttitle() + "\t");
 			System.out.print(u.getArtcontent() + "\t");
+			System.out.print(u.getTag() + "\t");
 			System.out.print(u.getArtdate() + "\t");
 			System.out.print(u.getArtpicauth() + "\n");
 		}
