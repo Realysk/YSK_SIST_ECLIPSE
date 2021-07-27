@@ -71,8 +71,16 @@
 									</form>		
 				3) 요청 값의 여러가지 데이터 유형 처리하기
 					- null
-					- 숫자형 변환
-					- 객체형 할당 처리
+						ex) String name = request.getParameter("name");
+							if(name==null) name = "";
+					- 숫자형 변환 : 요청 값을 일단 문자열로만 받을 수 있기 때문에 숫자형일 경우 형 변환 필요 Integer.parseInt(), Double.parseDouble()
+						ex) String priceS = request.getParameter("price");
+							if(priceS==null) price = "0";
+							int price = Integer.parseInt(pirceS)s;
+					- 객체형 할당 처리 : DAO나 여러가지가 메서드에 데이너를 넘길 때 객체로 할당처리하여 매개변수로 전송할 때 사용된다.
+						ex) Product pod = new Product(name, price, cnt);
+							dao.insertProduct(pod);
+													
 	 --%>
 	 <%--
 	 1. 현재 페이지에 요청 값 처리하기
