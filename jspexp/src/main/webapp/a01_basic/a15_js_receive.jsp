@@ -79,7 +79,21 @@
 			<td><%=name %></td>
 			<td><%=auth %></td>
 		</tr>
-	</table>	
+	</table>
+	
+	<%
+		String id2 = request.getParameter("id2");
+		String pw2 = request.getParameter("pw2");
+	%>
+
+	<h4> [07.27] JS를 통해 넘겨온 회원 정보 [EX] </h4>
+	<table>
+		<tr><th> ID </th><th> PW </th></tr>
+		<tr>
+			<td><%=id2 %></td>
+			<td><%=pw2 %></td>
+		</tr>
+	</table>
 	
 </body>
 </html>

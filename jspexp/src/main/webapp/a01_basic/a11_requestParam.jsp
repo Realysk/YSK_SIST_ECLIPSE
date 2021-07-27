@@ -99,7 +99,7 @@
 				<td><a href="a14_receive.jsp?prodname=사과"> 물건명 넘기기 </a></td>
 				<td><a href="a14_receive.jsp?prodname=망고&price=2000"> 물건명, 가격 넘기기 </a></td>
 				<td><a href="a14_receive.jsp?prodname=배추&price=6000&pcnt=5"> 물건명, 가격, 수량 넘기기 </a></td>
-				<td><a href="a14_recieve.jsp?prodname=두리안&price=8000&pcnt=2&buyname=홍길동"> 물건명, 가격, 수량, 구매자명 넘기기 </a></td>
+				<td><a href="a14_receive.jsp?prodname=두리안&price=8000&pcnt=2&buyname=홍길동"> 물건명, 가격, 수량, 구매자명 넘기기 </a></td>
 			</tr>	
 		</table><br>
 		
