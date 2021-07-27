@@ -92,7 +92,7 @@
 					var pw = document.querySelector("[name=pw]").value;
 					
 					location.href="A03_0727_receive.jsp?id="+id+"&pw="+pw;
-				}
+				
 			</script>
 		<%--
 		 

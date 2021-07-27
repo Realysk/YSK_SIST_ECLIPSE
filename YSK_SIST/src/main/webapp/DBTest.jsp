@@ -90,7 +90,7 @@
 	</table>
 		
 	<table>
-	<h3 style="text-align:center;"></h3>
+	<h3></h3>
 		<tr><th></th></tr>
 		<tr><td></td></tr>
 	</table>	

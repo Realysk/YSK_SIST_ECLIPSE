@@ -37,7 +37,7 @@ CREATE SEQUENCE memno
 	START WITH 1001
 	MINVALUE 1000
 	MAXVALUE 99999999;
-INSERT INTO pic_member VALUES('mb'||memno.nextval, 'hong798', 'hkd1589', '010-1111-1111', 'hong111@gmail.com', '회원');
+INSERT INTO pic_member VALUES('mb'||memno.nextval, 'himan', '777777', '010-1111-1111', 'hong111@gmail.com', '회원');
 INSERT INTO pic_member VALUES('mb'||memno.nextval, 'Kkd294', 'abcd5049', '010-2452-1393', 'Kkd222@naver.com', '회원');
 INSERT INTO pic_member VALUES('mb'||memno.nextval, 'gogo586', 'bngk954', '010-0508-9496', 'gogo333@gmail.com', '회원');
 SELECT * FROM pic_member ORDER BY memno DESC;

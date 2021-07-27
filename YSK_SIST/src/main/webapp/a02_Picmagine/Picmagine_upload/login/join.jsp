@@ -117,21 +117,6 @@
 </head>
 <body>
 
-	<%
-//		String name = "";
-		
-		JOINDTO dto = new JOINDTO();
-//		dto.setName("TestName");		
-//		dto.setId("TestId");
-//		dto.setPw("Test1111");
-//		dto.setTel("010-2020-2021");
-//		dto.setEmail("");
-			
-		JOINDAO dao = new JOINDAO();		
-		// 실제 DB접근해서 Insert 하는부분	
-		dao.Joined(dto);
-	%>
-
 	<!-- 로그인 / 회원가입 폼 -->
 	<div class="main-wrap" style="margin-top: 60px;">
 		<img onclick="login(this)" src="https://img.icons8.com/small/32/000000/delete-sign.png"/>
@@ -145,7 +130,7 @@
 			<h3> 회원가입 <h3>
 		</div>
 		
-		<form name="joinForm" action="joined.jsp" method="post"> <!-- 회원정보 등록 페이지 이동 -->
+		<form name="joinForm" action="joined.jsp"> <!-- 회원정보 등록 페이지 이동 -->
 			<!-- 
 			<div class="input-box">
 				<input id="name" type="text" name="name" onkeyup="checkCapsLock(event)" minlength="2" maxlength="5" placeholder="이름"/>
@@ -154,14 +139,14 @@
 			 -->
 			
 			<div class="input-box">
-				<input id="username" type="text" name="username" onkeyup="checkCapsLock(event)" placeholder="아이디"/>
-				<label for="username" id="idChk"> ID </label>
+				<input id="memid" type="text" name="memid" onkeyup="checkCapsLock(event)" placeholder="아이디"/>
+				<label for="memid" id="idChk"> ID </label>
 				<div class="idMsg"></div>
 				<input type="button" value="중복 확인" onclick="ckDupl()" style="margin-top: 0px; padding-top: 0px;"/>
 			</div>
 			
 			<div class="input-box">
-				<input type="password" id="userPw" name="userPw" onkeyup="checkCapsLock(event)" placeholder="비밀번호"/>
+				<input type="password" id="mempw" name="mempw" onkeyup="checkCapsLock(event)" placeholder="비밀번호"/>
 				<label for="userPw"> PW </label>
 				<div class="pwMsg"></div>
 			</div>
@@ -172,13 +157,13 @@
 			</div>
 			
 			<div class="input-box">
-				<input type="text" name="phone" id="phone" maxlength="13" placeholder="핸드폰"/>
-				<label for="phone"> Tel </label>
+				<input type="text" name="memtel" id="memtel" maxlength="13" placeholder="핸드폰"/>
+				<label for="memtel"> Tel </label>
 			</div>
 			
 			<div class="input-box">
-				<input id="email" type="text" name="email" onkeyup="checkCapsLock(event)" placeholder="이메일"/>
-				<label for="email" id="emailChk"> Email </label>
+				<input id="mememail" type="text" name="mememail" onkeyup="checkCapsLock(event)" placeholder="이메일"/>
+				<label for="mememail" id="emailChk"> Email </label>
 				<div id="message"></div>
 			</div>
 			
@@ -200,7 +185,7 @@
 			</div>
 			
 			<div align="center" class="input-box">
-				<input type="button" value="회원가입" onclick="formChk(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;"/>
+				<input type="submit" value="회원가입" onclick="formChk(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;"/>
 				<input type="button" value="취소" onclick="login(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;"/>
 			</div>
 			
@@ -210,23 +195,20 @@
 	
 </body>
 <script type="text/javascript">
-//	window.onload=function(){
-//		document.querySelector("h3").innerText="시작!!";
-//	};
 
 	var idReg = /^[a-zA-Z0-9]{6,12}$/;
 	var pwReg = /^[a-zA-Z0-9]{6,14}$/;
 //	var name = document.querySelector("[name=name]");
-	var id = document.querySelector("[name=username]");
+	var id = document.querySelector("[name=memid]");
 	var idChk = document.querySelector("#idChk");
 	var idMsg = document.querySelector(".idMsg");
-	var pw = document.querySelector("[name=userPw]");
+	var pw = document.querySelector("[name=mempw]");
 	var pwMsg = document.querySelector(".pwMsg");
 	var pwChk = document.querySelector("[name=userPwChk]");
 	var pwChkMsg = document.querySelector("#chkNoitce");
-	var email = document.querySelector("[name=email]");
+	var email = document.querySelector("[name=mememail]");
 //	var emailChk = document.querySelector("#emailChk");
-	var phone = document.querySelector("[name=phone]");
+	var phone = document.querySelector("[name=memtel]");
 	var agree = document.querySelector("[name=agree]");
 	var agreement = document.querySelector(".agreement");
 
@@ -258,7 +240,7 @@
 	
 	// ID 유효성 체크
 	function ckDupl() {
-		var idVal = document.querySelector("[name=username]").value;
+		var idVal = document.querySelector("[name=memid]").value;
 		
 		if(idVal != "") {
 			if(!idReg.test(id.value)) {
@@ -331,7 +313,7 @@
 	      return str;
 	}
 		
-	var phoneNum = document.getElementById('phone');
+	var phoneNum = document.getElementById('memtel');
 	
 	phoneNum.onkeyup = function(){
 	  console.log(this.value);
@@ -427,7 +409,7 @@
 			
 		} else if(email.value == "") {
 			
-			// Email 미 입력시			
+			// Email 미 입력시
 			alert("이메일을 입력하세요.");
 			email.focus();
 			
@@ -436,19 +418,17 @@
 		} else {
 			
 			// 정보 입력 후 회원가입 완료시
-			alert(username.value + " 님의 회원가입이 완료되었습니다!");
+			alert(memid.value + " 님의 회원가입이 완료되었습니다!");
 			document.joinForm.submit();
-//			this.location.href='joined.jsp'; // [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 login.jsp로 이동)
-    		this.location.href='login.html'; // jsp로 이동 시 삭제예정
-//    		this.location.href='login.jsp'; // html -> jsp 백업 시 활성화
+//			location.href='joined.jsp'; // [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 login.jsp로 이동)
+    		location.href='login.jsp';
     		
 		}
 	}
 	
 	// '취소' 버튼 클릭 시 로그인 페이지 이동
 	function login(obj) {
-		this.location.href = 'login.html'; // jsp로 이동 시 삭제예정
-//		this.location.href = 'login.jsp'; // html -> jsp 백업 시 활성화
+		location.href = 'login.jsp';
 	}
 
 </script>

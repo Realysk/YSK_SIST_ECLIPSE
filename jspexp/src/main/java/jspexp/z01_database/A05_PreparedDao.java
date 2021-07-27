@@ -769,6 +769,7 @@ public class A05_PreparedDao {
 		}
 		return hasMember;
 	}
+	
 	// ex) 조회문 select * from dept를 위한 A02_DeptDao.java를 만들고,
 	//     공통 연결메서드와 기능메서드(부서정보조회) 틀을 만드세요 1조
 	public static void main(String[] args) {
