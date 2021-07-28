@@ -108,7 +108,7 @@
 		<%
 		} else {
 			int movNum = Integer.parseInt(movNumS);
-			int mPrice = Integer.parseInt(mPriceS);	
+			int mPrice = Integer.parseInt(mPriceS);
 		%>
 		<form id="frm01">
 		<table>
@@ -130,23 +130,42 @@
 	   
 	--%>
 		<%
-		String sum = request.getParameter("sum");
-		String minus = request.getParameter("minus");
-		String multi = request.getParameter("multi");
-		String divide = request.getParameter("divide");
-		String num01S = request.getParameter("num01S");
-		String num02S = request.getParameter("num02S");
+			String num01S = request.getParameter("num01");
+			String calS = request.getParameter("cal");
+			String num02S = request.getParameter("num02");
+			if(num01S==null) {
 		%>	
 		<h4> [5] 계산기 구현 - 1개 페이지 </h4>
-		<% if(sum == null) { %>	
-
-		<%
-		} else {
-
+		<form id="frm02">
+		<table>
+			<tr>
+				<td><input type="text" name="num01" value="0"/></td>
+				<td><select name="cal">
+						<option value="0"> + </option>
+						<option value="1"> - </option>
+						<option value="2"> * </option>
+						<option value="3"> / </option>
+					</select>
+				</td>
+				<td><input type="text" name="num02" value="0"/></td>
+				<td><input type="submit" value="연산"/></td>
+			</tr>
+		</table>
+		</form>
+		<% } else { 
+			int num01 = Integer.parseInt(num01S);
+			int num02 = Integer.parseInt(num02S);
+			int calIdx = Integer.parseInt(calS);
+			String cal[] = {"+", "-", "*", "/"};
+			int result[] = {num01+num02, num01-num02, num01*num02, num01/num02};
+			// calIdx에서 받은 index에 따른 연산 결과를 배열에 index로 선택하기 때문에 조건문이 필요 없다.
 		%>
-
-		<% } %>		
-	<%--	   
+		<h4> [5] 계산기 구현 - 계산 결과 </h4>
+		<table>
+			<tr><td> <%=num01 %> <%=cal[calIdx] %> <%=num02 %> = <%=result[calIdx] %> </td></tr>
+		</table>
+		<% } %>
+	<%--
 	   
  --%>
 	
