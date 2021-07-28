@@ -117,6 +117,20 @@
 </head>
 <body>
 
+	<%
+		JOINDAO dao = new JOINDAO();
+	
+		String memid = request.getParameter("memid");
+		String mempw = request.getParameter("mempw");
+		String memtel = request.getParameter("memtel");
+		String mememail = request.getParameter("mememail");
+		
+		if(memid == null) memid = ""; 
+		if(mempw == null) mempw = ""; 
+		if(memtel == null) memtel = ""; 
+		if(mememail == null) mememail = "";
+	%>
+
 	<!-- 로그인 / 회원가입 폼 -->
 	<div class="main-wrap" style="margin-top: 60px;">
 		<img onclick="login(this)" src="https://img.icons8.com/small/32/000000/delete-sign.png"/>
@@ -420,8 +434,8 @@
 			// 정보 입력 후 회원가입 완료시
 			alert(memid.value + " 님의 회원가입이 완료되었습니다!");
 			document.joinForm.submit();
-//			submit.location.href='joined.jsp'; // [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 login.jsp로 이동)
-    		location.href='login.jsp';
+			submit.location.href='joined.jsp'; // [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 login.jsp로 이동)
+//    		location.href='login.jsp';
     		
 		}
 	}

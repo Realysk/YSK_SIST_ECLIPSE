@@ -24,6 +24,14 @@ public class JOINDTO {
 		this.mememail = mememail;
 		this.memauth = memauth;
 	}
+	
+	public JOINDTO(String memid, String mempw, String memtel, String mememail) {
+		super();
+		this.memid = memid;
+		this.mempw = mempw;
+		this.memtel = memtel;
+		this.mememail = mememail;
+	}
 
 	public String getMemno() {
 		return memno;

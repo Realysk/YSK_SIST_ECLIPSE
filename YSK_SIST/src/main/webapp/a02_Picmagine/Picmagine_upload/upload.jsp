@@ -145,24 +145,22 @@
 		UPLDAO dao = new UPLDAO();
 		ArrayList<UPLDTO> u = dao.uploadList();
 
-		String title = request.getParameter("title");
-		String contents = request.getParameter("contents");
-		String pic_file = request.getParameter("pic_file");
+		String artcategory = request.getParameter("artcategory");
+		String arttitle = request.getParameter("arttitle");
+		String artcontent = request.getParameter("artcontent");
+		String artimgtitle = request.getParameter("artimgtitle");
 		String tag = request.getParameter("tag");
-		String storyname = request.getParameter("storyname");
-		String storycontents = request.getParameter("storycontents");
-		String storytitle = request.getParameter("storytitle");
 			
-		if(title == null) title = "";
-		if(contents == null) contents = "";
-		if(pic_file == null) pic_file = "";
+		if(artcategory == null) artcategory = "";
+		if(arttitle == null) arttitle = "";
+		if(artcontent == null) artcontent = "";
+		if(artimgtitle == null) artimgtitle = "";
 		if(tag == null) tag = "";
-		if(storyname == null) storyname = "";
-		if(storycontents == null) storycontents = "";
-		if(storytitle == null) storytitle = "";
+		
+		List<String> categorys = Arrays.asList("추상", "자연", "가상", "배경", "사계", "일러스트", "팬아트", "여행", "세계", "국내");
 			
 		// 등록
-		dao.Uploaded(new UPLDTO());	
+		// dao.Uploaded(new UPLDTO(artcategory, artimgtitle, arttitle, artcontent, tag));
 	%>
 	 
 	<div class="main-wrap">
@@ -170,22 +168,15 @@
 		<form name="uploadForm" action="uploaded.jsp" enctype="multipart/form-data">
 		<!-- <form name="uploadForm" action="../uploaded.jsp" method="post" enctype="multipart/form-data"> -->
 			<div class="input-box" align="center">
-				<select onchange="category(this)">
+				<select name="artcategory" onchange="category(this)">
 					<option> 카테고리 선택 </option>
-					<option value="추상"> 추상 </option>
-					<option value="자연"> 자연 </option>
-					<option value="가상"> 가상 </option>
-					<option value="배경"> 배경 </option>
-					<option value="사계"> 사계 </option>
-					<option value="일러스트"> 일러스트 </option>
-					<option value="팬아트"> 팬아트 </option>
-					<option value="여행"> 여행 </option>
-					<option value="세계"> 세계 </option>
-					<option value="국내"> 국내 </option>
+					<%for(String cat : categorys){ %>
+					<option ><%=cat %></option>
+					<% } %>
 				</select>
 			</div>
 			<div class="input-box">
-				<h1 id="artcategory" style="text-align:center;"> 카테고리를 선택하세요. </h1>
+				<!-- <h2 name="artcategory" style="text-align:center;"> 카테고리 선택 </h2> -->
 			</div>
 			<div class="input-box">
 				<input type="text" name="arttitle" onkeyup="checkCapsLock(event)" placeholder="제목">
@@ -220,11 +211,11 @@
 	}
 	
 	// 카테고리 선택시 표시
-	var artcategory = document.querySelector("#artcategory");
+/* 	var artcategory = document.querySelector("[name=artcategory]");
 
 	function category(obj) {
 		artcategory.innerText = obj.value;
-	}
+	} */
 	
 	// CapsLock 여부
 	function checkCapsLock(event) {
@@ -264,8 +255,8 @@
 			
 			alert("게시물 등록이 완료되었습니다!");
 			document.uploadForm.submit();
-			location.href='logout_main.html';
-//	   		submit.location.href='uploaded.jsp'; [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 logout_main.html로 이동)
+//			location.href='logout_main.html';
+	   		submit.location.href='uploaded.jsp'; // [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 logout_main.html로 이동)
 			
 		}
 	}	

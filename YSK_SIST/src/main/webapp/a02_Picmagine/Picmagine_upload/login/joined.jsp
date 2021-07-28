@@ -39,26 +39,26 @@
 		String mememail = request.getParameter("mememail");
 		if(mememail==null) mememail = "";
 		String memauth = request.getParameter("memauth");
-		if(memauth==null) memauth = "회원";
+		if(memauth==null) memauth = "";
 	
-		JOINDTO join = new JOINDTO(memno, memid, mempw, memtel, mememail, memauth);
-		// 기존 저장되있는 회원목록을 보여주기 위한 변수
 		JOINDAO dao = new JOINDAO();
-		ArrayList<JOINDTO> jlist = dao.memberList();						
-
+		JOINDTO dto = new JOINDTO();
+		dto = dao.Joined(new JOINDTO(memid, mempw, memtel, mememail));
+		// 기존 저장되있는 회원목록을 보여주기 위한 변수
+		ArrayList<JOINDTO> jlist = dao.memberList();
 	%>
  
 	<h3 align="center"></h3>
 	<table>
-		<h4 align="center"> * <%=join.getMemid() %> 님의 회원정보 등록 * </h4>
+		<h4 align="center"> * <%=dto.getMemid() %> 님의 회원정보 등록 * </h4>
 		<tr><th> NO. </th><th> ID </th><th> PW </th><th> TEL </th><th> EMAIL </th><th> AUTH </th></tr>
 		<tr>
-			<td><%=join.getMemno() %></td>
-			<td><%=join.getMemid() %></td>
-			<td><%=join.getMempw() %></td>
-			<td><%=join.getMemtel() %></td>
-			<td><%=join.getMememail() %></td>
-			<td><%=join.getMemauth() %></td>
+			<td><%=dto.getMemno() %></td>
+			<td><%=dto.getMemid() %></td>
+			<td><%=dto.getMempw() %></td>
+			<td><%=dto.getMemtel() %></td>
+			<td><%=dto.getMememail() %></td>
+			<td><%=dto.getMemauth() %></td>
 		</tr>
 	</table><br>
 	<table>

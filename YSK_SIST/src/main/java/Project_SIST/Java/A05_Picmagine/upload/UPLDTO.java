@@ -28,6 +28,17 @@ public class UPLDTO {
 		this.artdate = artdate;
 		this.artpicauth = artpicauth;
 	}
+	
+	
+	// JSP에서 입력받는 것들만 따로 분리
+	public UPLDTO(String artcategory, String artimgtitle, String arttitle, String artcontent, String tag) {
+		super();
+		this.artcategory = artcategory;
+		this.artimgtitle = artimgtitle;
+		this.arttitle = arttitle;
+		this.artcontent = artcontent;
+		this.tag = tag;
+	}
 
 	public String getArtno() {
 		return artno;

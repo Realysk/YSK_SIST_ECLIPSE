@@ -44,26 +44,27 @@
 		String artpicauth = request.getParameter("artpicauth");
 		if(artpicauth==null) artpicauth = "";
 	
-		UPLDTO upload = new UPLDTO(artno, artcategory, arttitle, artcontent, artimgtitle, tag, artdate, artpicauth);
-		
-		UPLDAO dao = new UPLDAO();
-		ArrayList<UPLDTO> upllist = dao.uploadList();
-		dao.Uploaded(new UPLDTO());
+//		UPLDTO upload = new UPLDTO(artno, artcategory, arttitle, artcontent, artimgtitle, tag, artdate, artpicauth);
+		UPLDAO dao = new UPLDAO(); // DAO 생성자 호출
+//		ArrayList<UPLDTO> upllist = dao.uploadList();
+		UPLDTO dto = new UPLDTO(); // VO 생성자 호출
+		dto = dao.Uploaded(new UPLDTO(artcategory, artimgtitle, arttitle, artcontent, tag)); // upload.jsp에서 입력 받는 값에 대해 할당
+		ArrayList<UPLDTO> upllist = dao.uploadList(); // 게시물 리스트 출력
 	%>
- 
+ 	
 	<h3></h3>
 	<table>
 		<h4 align="center"> * 게시물 등록 정보 * </h4>
 		<tr><th> NO. </th><th> CATEGORY </th><th> TITLE </th><th> CONTENTS </th><th> FILE </th><th> TAG </th><th> DATE </th><th> AUTH </th></tr>
 		<tr>
-			<td><%=upload.getArtno() %></td>
-			<td><%=upload.getArtcategory() %></td>
-			<td><%=upload.getArttitle() %></td>
-			<td><%=upload.getArtcontent() %></td>
-			<td><%=upload.getArtimgtitle() %></td>
-			<td><%=upload.getTag() %></td>
-			<td><%=upload.getArtdate() %></td>
-			<td><%=upload.getArtpicauth() %></td>
+			<td><%=dto.getArtno() %></td>
+			<td><%=dto.getArtcategory() %></td>
+			<td><%=dto.getArttitle() %></td>
+			<td><%=dto.getArtcontent() %></td>
+			<td><%=dto.getArtimgtitle() %></td>
+			<td><%=dto.getTag() %></td>
+			<td><%=dto.getArtdate() %></td>
+			<td><%=dto.getArtpicauth() %></td>
 		</tr>
 	</table><br>
 	<table>

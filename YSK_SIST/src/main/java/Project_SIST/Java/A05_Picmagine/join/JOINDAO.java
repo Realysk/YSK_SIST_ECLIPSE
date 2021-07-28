@@ -7,6 +7,7 @@ public class JOINDAO {
 	
 	Connection con;
 	PreparedStatement pstmt;
+	Statement stmt;
 	ResultSet rs;
 	
 	// DB 연결
@@ -90,14 +91,17 @@ public class JOINDAO {
 	}
 	
 	// 회원 등록 메서드
-	public void Joined(JOINDTO ins) {
+	public JOINDTO Joined(JOINDTO ins) {
+		
+		JOINDTO j = new JOINDTO();
+		
 		try {
 			
 			setCon();
 			
 			con.setAutoCommit(false);
 			
-			String sql = "INSERT INTO pic_member VALUES('mb' || memno.nextval, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO pic_member VALUES('mb' || memno.nextval, ?, ?, ?, ?, '회원')";
 			
 			pstmt = con.prepareStatement(sql);
 			// '?' 갯수만큼 아래에 순서대로 할당			
@@ -105,13 +109,33 @@ public class JOINDAO {
 			pstmt.setString(2, ins.getMempw());
 			pstmt.setString(3, ins.getMemtel());
 			pstmt.setString(4, ins.getMememail());
-			pstmt.setString(5, ins.getMemauth());
+//			pstmt.setString(5, ins.getMemauth());
 			
 			pstmt.executeUpdate();
 			
 			con.commit();
 			
-			pstmt.close(); con.close(); rs.close();
+			pstmt.close(); 
+			
+			// 위에서 회원 가입 완료 후 커밋 후에 회원 리스트까지 같이 출력
+			String sql2 = "SELECT * FROM pic_member ORDER BY memno DESC";
+			
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql2);
+					
+			if(rs.next()) {
+				j.setMemno(rs.getString(1));
+				j.setMemid(rs.getString(2));
+				j.setMempw(rs.getString(3));
+				j.setMemtel(rs.getString(4));
+				j.setMememail(rs.getString(5));
+				j.setMemauth(rs.getString(6));
+			}
+			
+//			System.out.println("번호확인" + j.getMemno());
+			
+			stmt.close(); pstmt.close(); con.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -153,6 +177,7 @@ public class JOINDAO {
 			}	
 			
 		}
+		return j;
 	}
 	
 	public boolean Logined(String memid, String mempw) {
@@ -469,7 +494,7 @@ public class JOINDAO {
 //		dao.Joined(new JOINDTO("mb1004", "makil1", "1020", "010-3948-0000", "makil@gmail.com", "회원"));
 		
 		// 로그인
-		dao.Logined("himan", "777777");
+//		dao.Logined("himan", "777777");
 				
 //		// ID 찾기
 //		for(JOINDTO jo:dao.schID(new JOINDTO())) {

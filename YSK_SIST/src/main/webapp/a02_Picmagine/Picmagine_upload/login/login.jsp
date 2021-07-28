@@ -136,6 +136,17 @@
 </head>
 <body>
 
+	<%
+		JOINDAO dao = new JOINDAO();
+		JOINDTO dto = new JOINDTO();
+	
+		String memid = request.getParameter("memid");
+		String mempw = request.getParameter("mempw");
+		
+		if(memid == null) memid = ""; 
+		if(mempw == null) mempw = ""; 
+	%>
+
 	<!-- 로그인 / 회원가입 폼 -->
 	<div class="main-wrap" style="margin-top: 60px;">
 	<img onclick="main(this)" src="https://img.icons8.com/small/32/000000/delete-sign.png"/>
@@ -290,7 +301,7 @@
 			
 //			alert(memid + "님 로그인 되었습니다!"); // 'objectHTMLInputelement 님 로그인 되었습니다!' 로 출력되서 일단 주석 처리..
 			document.loginForm.submit();
-    		//location.href='../logined.jsp'; [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 ../logout_main.html로 이동)
+//    		location.href='logined.jsp'; // [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 ../logout_main.html로 이동)
     		location.href='../logout_main.html';
 		}
 	}

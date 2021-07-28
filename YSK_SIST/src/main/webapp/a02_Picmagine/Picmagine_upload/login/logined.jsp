@@ -27,7 +27,10 @@
 	<%
 		String memid = request.getParameter("memid");
 		String mempw = request.getParameter("mempw");
+		
 		JOINDAO dao = new JOINDAO();
+		JOINDTO dto = new JOINDTO();
+		
 		boolean isSucc = dao.Logined(memid,mempw);
 	%>
 

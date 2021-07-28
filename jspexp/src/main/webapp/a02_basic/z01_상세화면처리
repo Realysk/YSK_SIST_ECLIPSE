@@ -1,0 +1,26 @@
+# 상세화면 처리
+	0. 주요 페이지
+		a29_empList.jsp (메인리스트 화면)
+		a30_empInsert.jsp (등록 화면)
+		a33_empDetail.jsp (상세 화면)
+		a34_empUptProc.jsp (수정 처리 프로세스)
+		a35_empDelProc.jsp (삭제 처리 프로세스)
+		
+	1. 주요 기능
+		메인화면에서 상세화면 이동
+		상세화면 데이터 확인 : key를 통한 데이터 확인
+		데이터변경 후 수정 처리 : 수정 버튼 클릭 시 수정 처리 프로세스
+		삭제 처리 : 삭제 버튼 클릭 시 삭제 처리 프로세스
+		
+	2. 메인화면에서 상세화면 이동
+		1) a29_empList.jsp (메인리스트 화면)에서 처리할 내용
+			a29_empList.jsp (메인리스트 화면)에 있는 특정 row(사원정보)를 클릭 시 상세화면으로 a31_empDetail.jsp?empno=사원번호로 해당 상세화면에 empno와 함께 요청한다.
+		2) a33_empDetail.jsp (상세 화면)에서 처리할 내용
+			- request.getParameter("empno")로 empno 번호를 가져온다.
+			- DAO에 public Emp getEmp(int empno) 기능 메서드로 select * from emp02 from empno=? 를 통해 단위 객체 Emp를 Vo로 가져온다.
+			- 상세 form화면 구성
+				사원번호 : [   ]	사원 : [   ]
+				직책 : [   ]		관리자번호 : [   ]
+				입사일 : [   ]	급여 : [   ]
+				보너스 : [   ]	부서번호 : [   ]
+			- DAO에서 받아온 EMP 객체는 <input type="text" name="empno" value="<%=emp.getEmpno()%>"/> 형식으로 할당한다.

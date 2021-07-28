@@ -69,3 +69,5 @@ AND loc LIKE '%'||'A'||'%'
 CREATE TABLE dept05
 AS SELECT * FROM dept;
 SELECT * FROM dept05;
+
+SELECT * FROM dept02;

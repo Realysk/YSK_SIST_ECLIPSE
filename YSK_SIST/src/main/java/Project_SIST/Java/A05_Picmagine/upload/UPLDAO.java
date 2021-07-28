@@ -8,6 +8,7 @@ public class UPLDAO {
 
 	Connection con;
 	PreparedStatement pstmt;
+	Statement stmt;
 	ResultSet rs;
 	
 	// DB 연결
@@ -52,6 +53,7 @@ public class UPLDAO {
 				u.setArtpicauth(rs.getString(8));
 				upllist.add(u);
 			}
+		
 						
 			System.out.println("등록 된 게시물 데이터 수 : " + upllist.size());
 			
@@ -94,14 +96,16 @@ public class UPLDAO {
 	}
 
 	// 게시물 등록 메서드
-	public void Uploaded(UPLDTO ins) {
+	public UPLDTO Uploaded(UPLDTO ins) {
+		UPLDTO u = new UPLDTO();
 		try {
 			
 			setCon();
 			
 			con.setAutoCommit(false);
 			
-			String sql = "INSERT INTO artworks VALUES('wk'||artno.nextval, ?, ?, ?, ?, ?, sysdate, ?)";
+			// auth = 작가로 처리
+			String sql = "INSERT INTO artworks VALUES('wk'||artno.nextval, ?, ?, ?, ?, ?, sysdate, '작가')";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -110,13 +114,38 @@ public class UPLDAO {
 			pstmt.setString(3, ins.getArttitle());
 			pstmt.setString(4, ins.getArtcontent());
 			pstmt.setString(5, ins.getTag());
-			pstmt.setString(6, ins.getArtpicauth());
+//			pstmt.setString(6, ins.getArtpicauth()); // 작가는 기본으로 주어지므로 주석 처리
 			
 			pstmt.executeUpdate();
 			
 			con.commit();
 			
-//			pstmt.close(); con.close();
+			pstmt.close();
+			
+			// 위에서 게시물 등록 후 커밋 후에 게시물 조회 리스트까지 같이 출력
+			String sql2 = "SELECT * FROM artworks ORDER BY artno DESC";
+			
+//			pstmt = con.prepareStatement(sql2);
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql2);
+			
+			if(rs.next()) {
+//				UPLDTO u = new UPLDTO();
+				u.setArtno(rs.getString(1));
+				u.setArtcategory(rs.getString(2));
+				u.setArtimgtitle(rs.getString(3));
+				u.setArttitle(rs.getString(4));
+				u.setArtcontent(rs.getString(5));
+				u.setTag(rs.getString(6));
+				u.setArtdate(rs.getString(7));
+				u.setArtpicauth(rs.getString(8));
+				// upllist.add(u);
+			} 
+			
+//			System.out.println("번호확인" + u.getArtno());
+			
+			stmt.close(); pstmt.close(); con.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -158,6 +187,7 @@ public class UPLDAO {
 			}	
 			
 		}
+		return u;
 	}
 	
 	public static void main(String[] args) {
@@ -167,7 +197,7 @@ public class UPLDAO {
 		ArrayList<UPLDTO> upllist = dao.uploadList();
 		
 		// 등록
-//		dao.Uploaded(new UPLDTO());	
+//		dao.Uploaded(new UPLDTO("", "", "", "", "", "", "", ""));
 		
 		// 조회
 		for(UPLDTO u:dao.uploadList()) {

@@ -7,7 +7,7 @@
  */
 
 -- 맴버 테이블
-DROP TABLE MEMBER;
+/*DROP TABLE MEMBER;
 CREATE TABLE MEMBER(
 	mno number PRIMARY KEY,
 	id varchar2(30),
@@ -20,7 +20,7 @@ CREATE TABLE MEMBER(
 INSERT INTO MEMBER VALUES(1001, 'himan', '7777', '홍길동', '관리자', 5000, sysdate);
 INSERT INTO MEMBER VALUES(1002, 'goodman', '1111', '김길동', '사용자', 1000, sysdate);
 INSERT INTO MEMBER VALUES(1003, 'badman', '1212', '마길동', '사용자', 2000, sysdate);
-SELECT * FROM MEMBER ORDER BY mno DESC;
+SELECT * FROM MEMBER ORDER BY mno DESC;*/
 
 -- 회원가입을 위한 테이블 생성
 DROP TABLE pic_member;
@@ -75,10 +75,10 @@ INSERT INTO artworks VALUES('wk'||artno.nextval, '추상', 'summer.jpg', '여름
 INSERT INTO artworks VALUES('wk'||artno.nextval, '사계', 'winter.jpg', '겨울을 그려봤어요~', '한번 구경하고 가세요!', '#그림', sysdate, '작가');
 SELECT * FROM artworks ORDER BY artno DESC;
 -- SELECT * FROM artworks ORDER BY artno DESC -- 게시물 조회
--- INSERT INTO artworks VALUES('wk'||artno.nextval, ?, ?, ?, ?, ?, sysdate, ?) -- 게시물 업로드
+-- INSERT INTO artworks VALUES('wk'||artno.nextval, ?, ?, ?, ?, ?, sysdate, '작가') -- 게시물 업로드
 
 
--- 작가 작품 업로드 전 시리즈를 위한 테이블 생성
+-- 작가 작품 업로드 전 시리즈를 위한 테이블 생성 (미완료)
 DROP TABLE series;
 CREATE TABLE series (
 	serno varchar2(6) PRIMARY KEY, -- 시리즈 번호
