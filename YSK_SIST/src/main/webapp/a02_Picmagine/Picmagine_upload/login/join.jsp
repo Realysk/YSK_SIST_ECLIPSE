@@ -139,11 +139,9 @@
 			<img style="width:100%" src="image/logo.png" alt="picmagine">
 		</div>
 		</header>
-		
 		<div align="center">
 			<h3> 회원가입 <h3>
 		</div>
-		
 		<form name="joinForm" action="joined.jsp"> <!-- 회원정보 등록 페이지 이동 -->
 			<!-- 
 			<div class="input-box">
@@ -151,36 +149,30 @@
 				<label for="name" id="nameChk"> 이름 (2-5자) </label>
 			</div>
 			 -->
-			
 			<div class="input-box">
 				<input id="memid" type="text" name="memid" onkeyup="checkCapsLock(event)" placeholder="아이디"/>
 				<label for="memid" id="idChk"> ID </label>
 				<div class="idMsg"></div>
 				<input type="button" value="중복 확인" onclick="ckDupl()" style="margin-top: 0px; padding-top: 0px;"/>
 			</div>
-			
 			<div class="input-box">
 				<input type="password" id="mempw" name="mempw" onkeyup="checkCapsLock(event)" placeholder="비밀번호"/>
 				<label for="userPw"> PW </label>
 				<div class="pwMsg"></div>
 			</div>
-			
 			<div class="input-box">
 				<input type="password" id="userPwChk" name="userPwChk" onkeyup="checkCapsLock(event)" placeholder="비밀번호 확인"/>
 				<label for="userPwChk" id="chkNoitce"> PW Confirm </label>
 			</div>
-			
 			<div class="input-box">
 				<input type="text" name="memtel" id="memtel" maxlength="13" placeholder="핸드폰"/>
 				<label for="memtel"> Tel </label>
 			</div>
-			
 			<div class="input-box">
 				<input id="mememail" type="text" name="mememail" onkeyup="checkCapsLock(event)" placeholder="이메일"/>
 				<label for="mememail" id="emailChk"> Email </label>
 				<div id="message"></div>
 			</div>
-			
 			<div class="input-box">
 				<textarea style="resize:none; margin: 0px 8.03977px 0px 0px; width: 303px; height: 106px;" readonly>
 					사이트가 취급하는 모든 개인정보는 관련법령에 근거하거나 정보주체의 동의에 의하여 수집ㆍ보유 및 처리되고 있습니다.
@@ -202,9 +194,7 @@
 				<input type="button" value="회원가입" onclick="formChk(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;"/>
 				<input type="button" value="취소" onclick="login(this)" style="margin-top: 0px;padding-top: 0px;width: 100px;"/>
 			</div>
-			
 		</form>
-		
 	</div>
 	
 </body>

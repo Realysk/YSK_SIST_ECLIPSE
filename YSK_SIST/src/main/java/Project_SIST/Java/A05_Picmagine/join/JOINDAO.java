@@ -101,7 +101,8 @@ public class JOINDAO {
 			
 			con.setAutoCommit(false);
 			
-			String sql = "INSERT INTO pic_member VALUES('mb' || memno.nextval, ?, ?, ?, ?, '회원')";
+			String sql = "INSERT INTO pic_member VALUES('mb' || memno.nextval,"
+					+ " ?, ?, ?, ?, '회원')";
 			
 			pstmt = con.prepareStatement(sql);
 			// '?' 갯수만큼 아래에 순서대로 할당			
@@ -132,8 +133,6 @@ public class JOINDAO {
 				j.setMememail(rs.getString(5));
 				j.setMemauth(rs.getString(6));
 			}
-			
-//			System.out.println("번호확인" + j.getMemno());
 			
 			stmt.close(); pstmt.close(); con.close();
 			

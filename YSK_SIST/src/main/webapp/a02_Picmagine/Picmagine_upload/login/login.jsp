@@ -161,7 +161,7 @@
 			<h4> PicMagine에 오신 것을 환영합니다! </h4>
 		</div>
 			
-		<form name="loginForm" action="logined.jsp" method="post"> <!-- 경로 : 로그인이 된 상태로 메인 이동 -->
+		<form name="loginForm" action="logined.jsp">
 			<div class="input-box">
 				<input id="memid" type="text" name="memid" onkeyup="checkCapsLock(event)" placeholder="아이디">
 				<label for="memid"> ID </label>
@@ -197,7 +197,7 @@
 		this.location.href = 'join.jsp';
 	}
 	
-	// 쿠키를 활용하여 체크박스로 ID 저장 (소스를 그대로 가져와서 변수만 변경)
+ 	// 쿠키를 활용하여 체크박스로 ID 저장 (소스를 그대로 가져와서 변수만 변경)
     $(document).ready(function() {
         var userInputId = getCookie("userInputId"); // 저장 된 쿠기값 가져오기
         $("input[name='memid']").val(userInputId); 
@@ -253,7 +253,7 @@
             cookieValue = cookieData.substring(start, end);
         }
         return unescape(cookieValue);
-    }
+    } */
 	
 	// 자동 로그인은 JSP를 활용해야 해서 현재로써는 구현이 안될 듯 합니다.
 	
@@ -262,7 +262,7 @@
 	function goMain(obj) {
 		this.location.href = 'logined_AUT_main.html';
 	}
-	*/
+
 	
 	// CapsLock 여부
 	function checkCapsLock(event) {
@@ -302,6 +302,7 @@
 //			alert(memid + "님 로그인 되었습니다!"); // 'objectHTMLInputelement 님 로그인 되었습니다!' 로 출력되서 일단 주석 처리..
 			document.loginForm.submit();
 //    		location.href='logined.jsp'; // [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 ../logout_main.html로 이동)
+    		// 시연하실때 위 링크는 활성화 하지 마셔용 ㅠㅠ 어디가 잘못되었는지 만져봐도 이 링크 활성화시키면 무조건 로그인이 안되네요. 
     		location.href='../logout_main.html';
 		}
 	}

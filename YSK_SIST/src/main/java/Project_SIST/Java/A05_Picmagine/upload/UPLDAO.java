@@ -105,7 +105,8 @@ public class UPLDAO {
 			con.setAutoCommit(false);
 			
 			// auth = 작가로 처리
-			String sql = "INSERT INTO artworks VALUES('wk'||artno.nextval, ?, ?, ?, ?, ?, sysdate, '작가')";
+			String sql = "INSERT INTO artworks VALUES('wk'||artno.nextval,"
+					+ " ?, ?, ?, ?, ?, sysdate, '작가')";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -114,7 +115,6 @@ public class UPLDAO {
 			pstmt.setString(3, ins.getArttitle());
 			pstmt.setString(4, ins.getArtcontent());
 			pstmt.setString(5, ins.getTag());
-//			pstmt.setString(6, ins.getArtpicauth()); // 작가는 기본으로 주어지므로 주석 처리
 			
 			pstmt.executeUpdate();
 			
@@ -141,9 +141,7 @@ public class UPLDAO {
 				u.setArtdate(rs.getString(7));
 				u.setArtpicauth(rs.getString(8));
 				// upllist.add(u);
-			} 
-			
-//			System.out.println("번호확인" + u.getArtno());
+			}
 			
 			stmt.close(); pstmt.close(); con.close();
 			

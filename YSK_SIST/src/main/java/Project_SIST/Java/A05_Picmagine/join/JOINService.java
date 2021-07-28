@@ -14,12 +14,6 @@ public class JOINService {
 		return "===== Picmagine : 회원 가입 완료 =====";
 	}
 	
-	// 로그인 완료
-//	public String Logined(JOINDTO l) {
-//		jdao.Logined(l);
-//		return "===== Picmagine : 회원 가입 완료 =====";
-//	}
-	
 	// 회원 정보 리스트
 	public String memberList() {
 		ArrayList<JOINDTO> jlist = jdao.memberList();

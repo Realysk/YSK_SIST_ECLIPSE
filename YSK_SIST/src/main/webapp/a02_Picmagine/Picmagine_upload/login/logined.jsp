@@ -53,7 +53,7 @@
 			 location.href="../logout_main.html";
 		} else {
 			alert("로그인 정보가 일치하지 않습니다. 다시 입력하세요.");
-			location.href="login.jsp";
+			//location.href="login.jsp";
 		}
 	</script>
 

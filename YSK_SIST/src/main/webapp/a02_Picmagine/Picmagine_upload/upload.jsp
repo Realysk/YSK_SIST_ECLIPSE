@@ -198,11 +198,11 @@
 	 
 </body>
 <script type="text/javascript">
-	/*
-	window.onload=function(){
-		document.querySelector("h3").innerText="시작!!";
-	};
-	*/
+	
+	var arttitle = document.querySelector("[name=arttitle]");
+	var artcontent = document.querySelector("[name=artcontent]");
+	var artimgtitle = document.querySelector("[name=artimgtitle]");
+	var tag = document.querySelector("[name=tag]");
 
 	// 페이지 이동
 	function main(obj) {
@@ -227,37 +227,26 @@
 	  	}
 	}
 
-	var arttitle = document.querySelector("[name=arttitle]");
-	var artcontent = document.querySelector("[name=artcontent]");
-	var artimgtitle = document.querySelector("[name=artimgtitle]");
-	var tag = document.querySelector("[name=tag]");
-
 	// 게시물 등록 여부
 	function formChk(obj) {
 		
 		if(arttitle.value=="") {
-			
 			// 제목 미 입력시
 			alert("제목을 입력하세요.");
 			arttitle.focus();
 			
 			return false;
-			
 		} else if(artcontent.value=="") {
-			
 			// 내용 미 입력시
 			alert("내용을 입력하세요.");
 			artcontent.focus();
 			
 			return false;
-			
 		} else {
-			
 			alert("게시물 등록이 완료되었습니다!");
 			document.uploadForm.submit();
 //			location.href='logout_main.html';
 	   		submit.location.href='uploaded.jsp'; // [관리자] 화면으로 임시 설정 (실제 사용자 화면에서는 logout_main.html로 이동)
-			
 		}
 	}	
 	
