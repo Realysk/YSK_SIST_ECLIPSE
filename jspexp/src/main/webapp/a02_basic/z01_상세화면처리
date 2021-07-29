@@ -28,6 +28,27 @@
 				입사일 : [   ]	급여 : [   ]
 				보너스 : [   ]	부서번호 : [   ]
 			- DAO에서 받아온 EMP 객체는 <input type="text" name="empno" value="<%=emp.getEmpno()%>"/> 형식으로 할당한다.
+		3) 수정 처리 프로세스
+			- a33_empDetail.jsp (상세 화면) => a34_empUptProc.jsp (수정 처리 프로세스)
+			- 수정기능 버튼 클릭 => 수정 함수 호출
+			- 수정 함수 내용
+				form의 action 속성을 a34_empUptProc.jsp (수정 처리 프로세스)로 처리되게 변경
+				document.querySelector("form").action="a34_empUptProc.jsp";
+				document.querySelector("form").submit();
+			- a34_empUptProc.jsp (수정 처리 프로세스)
+				요청 값을 받아서
+				String empnoS = request.getParameter("empno");
+				..
+				Emp upt new Emp(....);
+				DAO에 public void uptEmp(Emp upt){} 기능 메서드 선언.
+					SQL 확인 update emp02
+							set ename = ?,
+								job = ?,
+								..
+							where empno = ?
+				DAO 객체 생성과 dao.uptEmp(upt);
+				alert(수정완료)
+				location.href = "a33_empDetail.jsp?empno=<%=empnoS%>";
 			
 	# 연습 부서 처리
 	0. 주요 페이지
@@ -36,5 +57,7 @@
 		부서 정보 상세 (a36_deptDetail.jsp)
 		부서 정보 수정 (a37_deptUptProc.jsp)
 		부서 정보 삭제 (a38_deptDelProc.jsp)
-	1. 부서 정보 리스트 => 부서정보 상세 화면 이동 처리		
+	1. 부서 정보 리스트 => 부서정보 상세 화면 이동 처리
+	2. 부서 정보 상세 (a36_deptDetail.jsp) => 부서 정보 수정 (a37_deptUptProc.jsp)
+		ex) 부서정보에서 수정버튼을 만들고 수정버튼을 클릭 시 수정프로세스 화면에 deptno를 출력하세요.
 			

@@ -61,10 +61,19 @@
 		<tr><td colspan="2">
 			<input type="button" id="uptBtn" value="수정"/> <%-- 부서정보 상세 Dao 화면 처리 --%>
 			<input type="button" id="delBtn" value="삭제"/>
-			<input type="button" id="goMain" value="조회"/>
+			<input type="button" id="goMain" value="메인"/>
 		</td></tr>
 	</table>
 	</form>
-	
+	<script type="text/javascript">
+		var uptBtn = document.querySelector("#uptBtn");
+		uptBtn.onclick=function() {
+			if(confirm("수정 페이지로 이동합니다.")) {
+				var formObj = document.querySelector("form");
+				formObj.action="a34_empUptProc.jsp";
+				formObj.submit();
+			}
+		}
+	</script>
 </body>
 </html>

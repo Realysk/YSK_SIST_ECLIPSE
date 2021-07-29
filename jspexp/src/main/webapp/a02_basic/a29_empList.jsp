@@ -67,7 +67,7 @@
 		/*
 		 # 상세화면 처리
 		 	1. 행을 클릭 시 empno를 함수를 통해서 전달하고
-		 	2. 해당 함수는 location.href="상세화면?empno=받은empno"로 처리한다.
+		 	2. 해당 함수는 location.href="상세화면?empno=받은empno"로 처리한다.	 
 		*/
 		
 		function goDetail(empno) {

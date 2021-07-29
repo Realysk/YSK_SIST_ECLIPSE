@@ -57,10 +57,19 @@
 		<tr><td colspan="2">
 			<input type="button" id="uptBtn" value="수정"/>
 			<input type="button" id="delBtn" value="삭제"/>
-			<input type="button" id="goMain" value="조회"/>
+			<input type="button" id="goMain" value="메인"/>
 		</td></tr>
-	</table>	
-	</form>	
-	
+	</table>
+	</form>
+	<script type="text/javascript">
+		var uptBtn = document.querySelector("#uptBtn");
+		uptBtn.onclick=function() {
+			if(confirm("수정 페이지로 이동합니다.")) {
+				var formObj = document.querySelector("form");
+				formObj.action="a37_deptUptProc.jsp";
+				formObj.submit();
+			}
+		}
+	</script>
 </body>
 </html>
