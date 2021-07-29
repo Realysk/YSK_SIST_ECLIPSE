@@ -52,8 +52,8 @@
 	<form id="frm01" method="post">
 	<table>
 		<tr><th> 부서 번호 </th><td><input type="text" name="deptno" value="<%=dept.getDeptno()%>"/></td></tr>
-		<tr><th> 부서명 </th><td><input type="text" name="deptno" value="<%=dept.getDname()%>"/></td></tr>
-		<tr><th> 부서 위치 </th><td><input type="text" name="deptno" value="<%=dept.getLoc()%>"/></td></tr>
+		<tr><th> 부서명 </th><td><input type="text" name="dname" value="<%=dept.getDname()%>"/></td></tr>
+		<tr><th> 부서 위치 </th><td><input type="text" name="loc" value="<%=dept.getLoc()%>"/></td></tr>
 		<tr><td colspan="2">
 			<input type="button" id="uptBtn" value="수정"/>
 			<input type="button" id="delBtn" value="삭제"/>
@@ -64,7 +64,7 @@
 	<script type="text/javascript">
 		var uptBtn = document.querySelector("#uptBtn");
 		uptBtn.onclick=function() {
-			if(confirm("수정 페이지로 이동합니다.")) {
+			if(confirm("해당 내용으로 수정하시겠습니까?")) {
 				var formObj = document.querySelector("form");
 				formObj.action="a37_deptUptProc.jsp";
 				formObj.submit();

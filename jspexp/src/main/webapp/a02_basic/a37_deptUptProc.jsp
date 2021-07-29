@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"
 	import="java.util.*"
 	import="java.sql.*"
+	import="jspexp.z02_vo.*"
+	import="jspexp.z01_database.*"
 %>
 <%
 //  [jspexp] 프로젝트에 사용
@@ -38,9 +40,25 @@
 
 --%>
 <%
+	boolean isUpdate = false;
 	String deptnoS = request.getParameter("deptno");
+	if(deptnoS != null) {
+		String dname = request.getParameter("dname");
+		String loc = request.getParameter("loc");
+		
+		A05_PreparedDao dao = new A05_PreparedDao();
+		dao.updateDept(new Dept(Integer.parseInt(deptnoS), dname, loc));
+		isUpdate = true;
+	}
 %>
 <body>
+
+	<script type="text/javascript">
+		var isUpdate = <%=isUpdate%>;
+		alert("수정이 완료되었습니다.");
+		location.href="a36_deptDetail.jsp?deptno=<%=deptnoS%>";
+	</script>
+
 	<h3 align="center"></h3>
 	<h2> 수정 KEY : <%=deptnoS %></h2>
 	

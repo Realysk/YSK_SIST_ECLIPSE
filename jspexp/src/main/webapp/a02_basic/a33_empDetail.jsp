@@ -54,7 +54,7 @@
 		<tr><th> 사원 번호 </th><td><input type="text" name="empno" value="<%=emp.getEmpno()%>"/></td></tr>
 		<tr><th> 사원명 </th><td><input type="text" name="ename" value="<%=emp.getEname()%>"/></td></tr>
 		<tr><th> 관리자 번호 </th><td><input type="text" name="mgr" value="<%=emp.getMgr()%>"/></td></tr>
-		<tr><th> 입사일 </th><td><input type="text" name="hiredateS" value="<%=emp.getHiredate()%>"/></td></tr>
+		<tr><th> 입사일 </th><td><input type="text" name="hiredate" value="<%=emp.getHiredate()%>"/></td></tr>
 		<tr><th> 급여 </th><td><input type="text" name="sal" value="<%=emp.getSal()%>"/></td></tr>
 		<tr><th> 보너스 </th><td><input type="text" name="comm" value="<%=emp.getComm()%>"/></td></tr>
 		<tr><th> 부서 번호 </th><td><input type="text" name="deptno" value="<%=emp.getDeptno()%>"/></td></tr>
@@ -68,7 +68,7 @@
 	<script type="text/javascript">
 		var uptBtn = document.querySelector("#uptBtn");
 		uptBtn.onclick=function() {
-			if(confirm("수정 페이지로 이동합니다.")) {
+			if(confirm("해당 내용으로 수정하시겠습니까?")) {
 				var formObj = document.querySelector("form");
 				formObj.action="a34_empUptProc.jsp";
 				formObj.submit();
