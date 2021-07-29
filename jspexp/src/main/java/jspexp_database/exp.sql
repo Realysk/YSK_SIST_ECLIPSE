@@ -22,7 +22,6 @@ SELECT * FROM Studentexp1;
  	4. 화면에서 호출 출력
  */
 
-
 -- 0726 정리 문제 7번 문제
 DROP TABLE memberexp1;
 CREATE TABLE memberexp1(
