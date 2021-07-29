@@ -1,3 +1,19 @@
+-- 맴버 테이블
+DROP TABLE MEMBER;
+CREATE TABLE MEMBER(
+	id varchar2(30),
+	pass varchar2(20),
+	name varchar2(50),
+	auth varchar2(20),
+	point NUMBER
+);
+INSERT INTO MEMBER VALUES('himan', '7777', '홍길동', '관리자', 5000);
+INSERT INTO MEMBER VALUES('goodman', '1111', '김길동', '사용자', 1000);
+INSERT INTO MEMBER VALUES('badman', '1212', '마길동', '사용자', 2000);
+SELECT * FROM MEMBER;
+-- INSERT INTO MEMBER VALUES(?,?,?,?,?)
+
+
 CREATE TABLE Studentexp1(
 	sno number,
 	name varchar2(100),

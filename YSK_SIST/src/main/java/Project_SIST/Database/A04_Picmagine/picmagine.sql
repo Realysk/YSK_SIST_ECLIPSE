@@ -6,22 +6,6 @@
  	4. 화면에서 호출 출력
  */
 
--- 맴버 테이블
-/*DROP TABLE MEMBER;
-CREATE TABLE MEMBER(
-	mno number PRIMARY KEY,
-	id varchar2(30),
-	pass varchar2(20),
-	name varchar2(50),
-	auth varchar2(20),
-	point NUMBER,
-	regdte date
-);
-INSERT INTO MEMBER VALUES(1001, 'himan', '7777', '홍길동', '관리자', 5000, sysdate);
-INSERT INTO MEMBER VALUES(1002, 'goodman', '1111', '김길동', '사용자', 1000, sysdate);
-INSERT INTO MEMBER VALUES(1003, 'badman', '1212', '마길동', '사용자', 2000, sysdate);
-SELECT * FROM MEMBER ORDER BY mno DESC;*/
-
 -- 회원가입을 위한 테이블 생성
 DROP TABLE pic_member;
 CREATE TABLE pic_member (

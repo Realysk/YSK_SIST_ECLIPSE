@@ -3,7 +3,7 @@ package jspexp.z02_vo;
 public class Member {
 	
 	private String id;
-	private String pw;
+	private String pass;
 	private String name;
 	private String auth;
 	private int point;
@@ -13,10 +13,10 @@ public class Member {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(String id, String pw, String name, String auth, int point) {
+	public Member(String id, String pass, String name, String auth, int point) {
 		super();
 		this.id = id;
-		this.pw = pw;
+		this.pass = pass;
 		this.name = name;
 		this.auth = auth;
 		this.point = point;
@@ -30,12 +30,12 @@ public class Member {
 		this.id = id;
 	}
 
-	public String getPw() {
-		return pw;
+	public String getPass() {
+		return pass;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 	public String getName() {

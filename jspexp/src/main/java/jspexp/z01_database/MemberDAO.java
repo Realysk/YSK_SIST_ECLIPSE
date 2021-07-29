@@ -99,7 +99,7 @@ public class MemberDAO {
 		// 조회
 		for(Member m:dao.getMemList()) {
 			System.out.print(m.getId()+"\t");
-			System.out.print(m.getPw()+"\t");
+			System.out.print(m.getPass()+"\t");
 			System.out.print(m.getName()+"\t");
 			System.out.print(m.getAuth()+"\t");
 			System.out.print(m.getPoint()+"\n");
