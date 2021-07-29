@@ -63,6 +63,18 @@
 			alert("등록이 완료되었습니다.");
 			location.href="a30_empInsert.jsp";
 		}
+		
+		/*
+		 # 상세화면 처리
+		 	1. 행을 클릭 시 empno를 함수를 통해서 전달하고
+		 	2. 해당 함수는 location.href="상세화면?empno=받은empno"로 처리한다.
+		*/
+		
+		function goDetail(empno) {
+			alert(empno);
+			//location.href="a33_empDetail.jsp?empno="+empno;
+		}
+		
 	</script>
 
 	<h3 align="center"></h3>
@@ -85,7 +97,7 @@
 			<th>보너스</th><th>부서번호</th>
 		</tr>
 		<%for(Emp e:elist) { %>
-		<tr>
+		<tr ondblclick="goDetail(<%=e.getEmpno()%>)">
 			<td><%=e.getEmpno() %></td>
 			<td><%=e.getEname() %></td>
 			<td><%=e.getJob() %></td>
@@ -94,7 +106,7 @@
 			<td><%=e.getSal() %></td>
 			<td><%=e.getComm() %></td>
 			<td><%=e.getDeptno() %></td>
-		</tr>		
+		</tr>
 		<% } %>
 	</table>	
 	

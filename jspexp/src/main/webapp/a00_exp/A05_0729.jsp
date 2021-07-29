@@ -210,7 +210,51 @@
 	        [시험완료] ==>  @@ 점.
 	        
 	--%>
-		
+		<%
+			int point = 0;
+			String num01S = request.getParameter("num01_1");
+			for(int no=1; no<=10; no++) {
+				num01S = request.getParameter("num01_"+no);
+				String num02S = request.getParameter("num02_"+no);
+				String replyS = request.getParameter("reply_"+no);
+				
+				if(num01S != null) { // 초기 값이 아님
+					int num01 = Integer.parseInt(num01S);
+					int num02 = Integer.parseInt(num02S);
+					int reply = Integer.parseInt(replyS);
+					if(num01 * num02 == reply) {
+						point += 10;
+					}
+				}
+			}
+		%>
+		<%-- String names[] = request.getParameterValues("다수 name") - 동일한 name값이 여러개일 때 --%>
+		<form id="frm01" method="post">
+		<table>
+			<tr><th colspan="5"> 구구단 (POST) </th></tr>
+			<tr><th> 번호 </th><th colspan="3"> 문제 </th><th> 정답 </th></tr>
+			<%
+				for(int no=1; no<=10; no++) {
+				int ran01 = (int)(Math.random()*8+2);
+				int ran02 = (int)(Math.random()*9+1);
+				int corrpl = ran01*ran02;
+			%>
+			<tr>
+				<td><%=no %></td>
+				<td><input type="text" name="num01_<%=no %>" size="1" value="<%=ran01 %>" readonly/></td>
+				<td> X </td>
+				<td><input type="text" name="num02_<%=no %>" size="1" value="<%=ran02 %>" readonly/></td>
+					<%-- <input type="hidden" name="corrpl" value="<%=corrpl%>"/> --%>
+				<td><input type="text" name="reply_<%=no %>" size="2" value="0"/></td>
+			</tr>
+			<% } %>
+			<tr><td colspan="5"><input type="submit" value="시험완료"/></td></tr>
+			<%-- 클릭 시 요청 값으로 입력한 답과 정답을 전달하여야 정답 여부를 처리할 수 있다. --%>
+		</table><br><hr>
+		</form>
+		<%if(num01S != null) { %> <%-- 시험 완료 클릭 시 --%>
+		<h4 align="center"> 획득 점수 : <%=point %> </h4>
+		<% } %>	
 	<%--	        
 	        
 --%>
