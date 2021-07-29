@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import jspexp.z02_vo.Dept;
 import jspexp.z02_vo.Emp;
+import jspexp.z02_vo.Member;
 
 
 public class A05_PreparedDao {
@@ -703,6 +704,71 @@ public class A05_PreparedDao {
 		}
 		return deptlist;
 	}
+	
+	public ArrayList<Member> getMemberList(){
+		ArrayList<Member> memlist = new ArrayList<Member>();
+		try {
+			setCon();
+			String sql = "SELECT * \r\n"
+					+ "FROM member";
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				memlist.add(new Member(
+							rs.getString("id"),
+							rs.getString("pw"),
+							rs.getString("name"),
+							rs.getString("auth"),
+							rs.getInt("point")
+						));
+			}
+			System.out.println("ArrayList의 데이터 갯수:"+memlist.size());
+			rs.close(); stmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("SQL 예외 발생~~"+e.getMessage());
+		} catch(Exception e) {
+			System.out.println("일반예외 발생:"+e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			
+		}
+		return memlist;
+	}
+	
 	// 1. return 타입, 매개변수,
 	// 2. SQL 삽입
 	// 3. VO 데이터 처리
