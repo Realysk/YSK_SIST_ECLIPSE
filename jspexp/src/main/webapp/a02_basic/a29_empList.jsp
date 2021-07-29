@@ -60,7 +60,7 @@
 
 	<script type="text/javascript">
 		function regEmp() {
-			alert("등록이 완료되었습니다.");
+			alert("등록 페이지로 이동합니다.");
 			location.href="a30_empInsert.jsp";
 		}
 		
@@ -71,8 +71,8 @@
 		*/
 		
 		function goDetail(empno) {
-			alert(empno);
-			//location.href="a33_empDetail.jsp?empno="+empno;
+			alert(empno + "번 사원의 상세 화면으로 이동합니다.");
+			location.href="a33_empDetail.jsp?empno="+empno;
 		}
 		
 	</script>

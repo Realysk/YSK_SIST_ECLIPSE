@@ -65,10 +65,16 @@
 	<h3 align="center"></h3>
 	<script type="text/javascript">
 		function regDept() {
-			if(confirm("등록화면이동")) {
+			if(confirm("등록 페이지로 이동합니다.")) {
 				location.href="a32_deptInsert.jsp";
 			}
 		}
+		
+		function goDetail(deptno) {
+			alert(deptno + "번의 부서번호의 상세 화면으로 이동합니다.");
+			location.href="a36_deptDetail.jsp?deptno="+deptno;
+		}
+		
 	</script>
  	<form method="post"> <!-- 해당 키워드로 검색 -->
 		<table>
@@ -81,9 +87,9 @@
 		</table>
 	</form>
 	<table>
-		<tr><th> 부서번호 </th><th> 부서명 </th><th> 부서위치 </th></tr>
+		<tr><th> 부서번호 </th><th> 부서명 </th><th> 부서 위치 </th></tr>
 		<%for(Dept d:dlist) { %>
-		<tr>
+		<tr ondblclick="goDetail(<%=d.getDeptno()%>)">
 			<td><%=d.getDeptno() %></td>
 			<td><%=d.getDname() %></td>
 			<td><%=d.getLoc() %></td>

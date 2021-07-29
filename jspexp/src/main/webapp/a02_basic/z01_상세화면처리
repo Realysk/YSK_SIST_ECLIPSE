@@ -5,6 +5,10 @@
 		a33_empDetail.jsp (상세 화면)
 		a34_empUptProc.jsp (수정 처리 프로세스)
 		a35_empDelProc.jsp (삭제 처리 프로세스)
+		jspexp.z01_database.A05_PreparedDao
+			- 상세 조회 메서드 public Emp getEmp(int empno)
+			- 수정 처리 메서드 public void uptEmp(Emp upt)
+			- 삭제 처리 메서드 public void delEmp(int empno)
 		
 	1. 주요 기능
 		메인화면에서 상세화면 이동
@@ -24,3 +28,13 @@
 				입사일 : [   ]	급여 : [   ]
 				보너스 : [   ]	부서번호 : [   ]
 			- DAO에서 받아온 EMP 객체는 <input type="text" name="empno" value="<%=emp.getEmpno()%>"/> 형식으로 할당한다.
+			
+	# 연습 부서 처리
+	0. 주요 페이지
+		부서 정보 리스트 (a31_deptList.jsp)
+		부서 정보 등록 (a33_deptInsert.jsp)
+		부서 정보 상세 (a36_deptDetail.jsp)
+		부서 정보 수정 (a37_deptUptProc.jsp)
+		부서 정보 삭제 (a38_deptDelProc.jsp)
+	1. 부서 정보 리스트 => 부서정보 상세 화면 이동 처리		
+			

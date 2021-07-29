@@ -1083,6 +1083,80 @@ public class A05_PreparedDao {
 			
 		}
 	}
+	// emp 조회 ==> ArrayList<Emp> 담기 처리..
+	// # 기능 메서드 선언..
+	// 틀만들기
+	// 1) 최종 결과값에 대한 확인 ==> 객체를 return 처리 
+	// ==> 리턴유형, 실제리턴할 객체
+	// 2) 최종 결과를 위해 입력할 데이터 확인 ==> VO객체로 만들기|입력데이터 변수로 선언
+	// ---------------------------------------------------------------
+	// 내용추가.
+	// 3) 
+	// 단일 객체 처리..
+	// 1) 리턴값 단일 객체로 변경 (리턴유형, 객체변경);
+	// 2) sql 변경..
+	// 3) if(rs.next()) emp = new Emp(.....);
+	public Dept getDept(int deptno){
+		Dept dept=null;
+		try {
+			setCon();
+			String sql = "SELECT *\r\n"
+					+ "FROM dept02\r\n"
+					+ "WHERE deptno="+deptno;
+			stmt = con.createStatement();
+			rs= stmt.executeQuery(sql);
+			if(rs.next()) {
+				dept = new Dept(
+							rs.getInt("deptno"),
+							rs.getString("dname"),
+							rs.getString("loc")
+							);
+			}
+			rs.close(); stmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("SQL 예외 발생~~"+e.getMessage());
+		} catch(Exception e) {
+			System.out.println("일반예외 발생:"+e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			
+		}
+		return dept;
+	}
 	// ex) 조회문 select * from dept를 위한 A02_DeptDao.java를 만들고,
 	//     공통 연결메서드와 기능메서드(부서정보조회) 틀을 만드세요 1조
 	public static void main(String[] args) {
