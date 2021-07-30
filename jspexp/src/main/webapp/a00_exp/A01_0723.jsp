@@ -141,7 +141,7 @@
                <tr>
                   <td><input type="checkbox" name="ch" value="<%=m.getId()%>"/></td>
                   <td><input type="text" name="id" value="<%=m.getId()%>"/></td>
-                  <td><input type="text" name="pw" value="<%=m.getPw()%>"/></td>
+                  <td><input type="text" name="pw" value="<%=m.getPass()%>"/></td>
                   <td><input type="text" name="name" value="<%=m.getName()%>"/></td>
                   <td><input type="text" name="auth" value="<%=m.getAuth()%>"/></td>
                   <td><input type="text" name="point" value="<%=m.getPoint()%>"/></td>

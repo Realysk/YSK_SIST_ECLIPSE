@@ -117,7 +117,7 @@
                <tr><th> ID </th><th> PW </th><th> NAME </th><th> AUTH </th><th> POINT </th></tr>
                <tr>
                   <td><%=m.getId() %></td>
-                  <td><%=m.getPw() %></td>
+                  <td><%=m.getPass() %></td>
                   <td><%=m.getName() %></td>
                   <td><%=m.getAuth() %></td>
                   <td><%=m.getPoint() %></td>
