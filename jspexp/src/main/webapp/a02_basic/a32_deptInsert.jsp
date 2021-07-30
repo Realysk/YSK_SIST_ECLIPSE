@@ -41,15 +41,18 @@
 --%>
 <%
 	String deptnoS = request.getParameter("detpno");
-	String dname = request.getParameter("dname");
-	String loc = request.getParameter("loc");
+	String dname = request.getParameter("dname"); if(dname == null) dname="";
+	String loc = request.getParameter("loc"); if(loc == null) loc="";
 	boolean isInsert = false;
 	if(deptnoS!=null) {
+		Dept ins = new Dept(Integer.parseInt(deptnoS), dname, loc);
 		A05_PreparedDao dao = new A05_PreparedDao();
 		dao.insertDept(new Dept(Integer.parseInt(deptnoS),dname, loc));
-		
+		System.out.println("입력 할 부서 객체 : " + ins);
 		isInsert = true;		
 	}
+	
+	
 %>
 <body>
 	<script type="text/javascript">

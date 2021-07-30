@@ -18,7 +18,7 @@
 //		import="java.sql.*" : DB 연동 객체 import
 
 	request.setCharacterEncoding("utf-8");
-	String path = request.getContextPath(); 
+	String path = request.getContextPath();
 %>   
 <!DOCTYPE html>
 <html>

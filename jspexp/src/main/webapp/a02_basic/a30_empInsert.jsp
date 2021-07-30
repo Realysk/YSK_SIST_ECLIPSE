@@ -47,14 +47,13 @@
 <%
 	//요청값에 대한 처리
 	String ename = request.getParameter("ename");
-	String job = request.getParameter("job"); if(job==null)job="";
-	String mgrS = request.getParameter("mgr"); if(mgrS==null)mgrS="0";
-	String hiredate = request.getParameter("hiredate"); 
-		if(hiredate==null)hiredate="1970-01-01";
-	String salS = request.getParameter("sal"); if(salS==null)salS="0";
-	String commS = request.getParameter("comm"); if(commS==null)commS="0";
-	String deptnoS = request.getParameter("deptno"); if(deptnoS==null)deptnoS="0";
-	//DB 입력을 위한 VO객체 처리.
+	String job = request.getParameter("job"); if(job == null) job="";
+	String mgrS = request.getParameter("mgr"); if(mgrS == null) mgrS="0";
+	String hiredate = request.getParameter("hiredate"); if(hiredate == null) hiredate="1970-01-01";
+	String salS = request.getParameter("sal"); if(salS == null) salS="0";
+	String commS = request.getParameter("comm"); if(commS == null) commS="0";
+	String deptnoS = request.getParameter("deptno"); if(deptnoS == null) deptnoS="0";
+	// DB 입력을 위한 VO 객체 처리.
 	boolean isInsert=false;
 	if(ename!=null){ // 초기화면이 아니, 등록 버튼을 클릭시..
 		Emp ins = new Emp(0,ename, job, 
@@ -66,7 +65,7 @@
 				);
 		A05_PreparedDao dao = new A05_PreparedDao();
 		dao.insertEmp2(ins);
-		System.out.println("입력할사원객체:"+ins);
+		System.out.println("입력 할 사원 객체 : " + ins);
 		isInsert =true;
 	}
 
@@ -88,7 +87,7 @@
 	<script>
 		var isInsert = <%=isInsert%>;
 		if(isInsert){
-			if(confirm("등록이 되었습니다.\n메인화면으로 이동하시겠습니까?")){
+			if(confirm("등록이 완료되었습니다.\n메인화면으로 이동하시겠습니까?")){
 				location.href="a29_empList.jsp";
 			}
 		}

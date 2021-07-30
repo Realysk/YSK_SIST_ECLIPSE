@@ -77,7 +77,14 @@
 				var deptno = document.querySelector("[name=deptno]").value;
 				location.href="a38_deptDelProc.jsp?deptno="+deptno;
 			}
-		}		
+		}
+		
+		var goMain = document.querySelector("#goMain");
+		goMain.onclick=function() {
+			if(confirm("메인 화면으로 이동하시겠습니까?")) {
+				location.href="a31_deptList.jsp";
+			}
+		}
 		
 	</script>
 </body>
