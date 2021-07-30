@@ -70,6 +70,15 @@
 				formObj.submit();
 			}
 		}
+		
+		var delBtn = document.querySelector("#delBtn");
+		delBtn.onclick=function() {
+			if(confirm("해당 내용을 삭제하시겠습니까?ㄴ")) {
+				var deptno = document.querySelector("[name=deptno]").value;
+				location.href="a38_deptDelProc.jsp?deptno="+deptno;
+			}
+		}		
+		
 	</script>
 </body>
 </html>

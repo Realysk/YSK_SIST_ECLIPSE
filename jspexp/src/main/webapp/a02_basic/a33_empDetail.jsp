@@ -73,7 +73,16 @@
 				formObj.action="a34_empUptProc.jsp";
 				formObj.submit();
 			}
+		};
+		
+		var delBtn = document.querySelector("#delBtn");
+		delBtn.onclick=function() {
+			if(confirm("해당 내용을 삭제하시겠습니까?")) {
+				var empno = document.querySelector("[name=empno]").value;
+				location.href="a35_empDelProc.jsp?empno="+empno;
+			}
 		}
+		
 	</script>
 </body>
 </html>

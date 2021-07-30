@@ -1239,6 +1239,86 @@ public class A05_PreparedDao {
 			
 		}
 	}
+	/*
+	1) 기능 메서드 선언.
+		public void insertEmp(Emp ins)
+	2) 연결 공통 메서드 호출..
+	3) con.setAutocommit(false);
+		자동 autocommit 발생 방지..
+	4) sql 선언..
+		insert into emp02 values(emp_seq.nextval,?,?,sysdate,?,?,?);	
+	5) PreparedStatement 처리
+		pstmt.setXXXX(1, 데이터);	
+		pstmt.setXXXX(2, 데이터);	
+		pstmt.setXXXX(3, 데이터);
+	6) executeUpdate()
+	7) con.commit();
+	8) 자원해제처리.		
+	9) 예외 처리 - rollback();	
+	 * */
+	public void deleteDept(int deptno){
+		try {
+			setCon();
+			con.setAutoCommit(false);
+			String sql = "DELETE FROM dept02\r\n"
+					+ "WHERE deptno = ?";
+			pstmt = con.prepareStatement(sql);
+	
+			pstmt.setInt(1, deptno);
+			pstmt.executeUpdate();
+			con.commit();
+			pstmt.close(); con.close();
+		// ex) A02_DeptDao.java 기존 소스를 활용하여 부서번호로 부서정보를 
+		// 삭제하세요 [3조]
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("SQL 예외 발생~~"+e.getMessage());
+			try {
+				// 입력 중간 문제 발생, rollback처리..
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch(Exception e) {
+			System.out.println("일반예외 발생:"+e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			
+		}
+	}
 	// ex) 조회문 select * from dept를 위한 A02_DeptDao.java를 만들고,
 	//     공통 연결메서드와 기능메서드(부서정보조회) 틀을 만드세요 1조
 	public static void main(String[] args) {
