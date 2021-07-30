@@ -7,15 +7,15 @@
 %>
 <%
 //	[jspexp] 프로젝트에 사용
-//	import="jspexp.z02_vo.*" : VO import
-//	import="jspexp.z01_database.*" : DAO import 
+//		import="jspexp.z02_vo.*" : VO import
+//		import="jspexp.z01_database.*" : DAO import 
 
 //	[YSK_SIST] 프로젝트에 사용
-//	import="Project_SIST.Java.*" : VO, DAO import
+//		import="Project_SIST.Java.*" : VO, DAO import
 
 //	공통 사용
-//	import="java.util.*" : 내장 객체 import
-//	import="java.sql.*" : DB 연동 객체 import
+//		import="java.util.*" : 내장 객체 import
+//		import="java.sql.*" : DB 연동 객체 import
 
 	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath(); 
