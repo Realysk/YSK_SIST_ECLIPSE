@@ -40,11 +40,20 @@
 	3. 서버 클라이언트
 		클라이언트 =====(request)=====> 서버
 			   <=====(response)=====
+	4. 쿠키는 response 객체로 전달 받는다. 클라이언트(브라우저)에 저장.
+	5. 세션은 request 객체로 서버에 저장
 --%>
 <%
 	// 쿠키 설정
 	Cookie c1 = new Cookie("name", "himan");
 	response.addCookie(c1); // 서버에 클라이언트(브라우저)에 쿠키 값을 전달하여 저장. 처리.
+	Cookie c2 = new Cookie("age", "25");
+	response.addCookie(c2);
+	Cookie c3 = new Cookie("loc", "seoul");
+	response.addCookie(c3);
+	
+	// ex) a11_cookie.jsp를 통해 쿠키를 한글(X) pname, price, cnt로 저장
+	//	   a12_prodCookie.jsp를 통해 쿠키를 확인하세요.
 %>
 <body>
 	<h3 align="center"></h3>
