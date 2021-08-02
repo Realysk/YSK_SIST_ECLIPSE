@@ -29,25 +29,25 @@
 </style>
 <script type="text/javascript">
 	window.onload=function(){
-		document.querySelector("h3").innerText="forward 처리 할 페이지";
+		document.querySelector("h3").innerText="이동 된 페이지";
 	}
 </script>
 </head>
 <%-- 
- # jsp:forward
- 	1. 해당 페이지로 요청 값과 함께 이동 처리된다.
- 	2. request 요청 값은 함께 하여 이동 처리된다.
- 	3. 기본 형식
- 		<jsp:forward page="이동할페이지"/>
+# 
 
 --%>
 <%
-	// a05_forwardAction.jsp?name=홍길동 을 통해 요청 값도 함께 전송할 수 있다.
+	String name = request.getParameter("name");
 %>
 <body>
-	
 	<h3 align="center"></h3>
-	<jsp:forward page="a06_goPage01.jsp"></jsp:forward>
+	<form id="frm01" method="post">
+	<table class="listTable">
+		<tr><th> 요청 값 : </th><td><%=name %></td></tr>
+	</table>	
+	</form>
+
 	
 </body>
 </html>

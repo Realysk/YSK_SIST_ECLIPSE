@@ -29,25 +29,26 @@
 </style>
 <script type="text/javascript">
 	window.onload=function(){
-		document.querySelector("h3").innerText="forward 처리 할 페이지";
+		document.querySelector("h3").innerText="";
 	}
 </script>
 </head>
 <%-- 
- # jsp:forward
- 	1. 해당 페이지로 요청 값과 함께 이동 처리된다.
- 	2. request 요청 값은 함께 하여 이동 처리된다.
- 	3. 기본 형식
- 		<jsp:forward page="이동할페이지"/>
-
+# 서버와 클라이언트의 대화
+	1. 결과로 특정한 데이터를 클라이언트에 저장할 때 : Cookie
+	2. 결과로 특정한 데이터를 서버에 저장할 때 : Session
+	3. 서버 클라이언트
+		클라이언트 =====(request)=====> 서버
+			   <=====(response)=====
 --%>
 <%
-	// a05_forwardAction.jsp?name=홍길동 을 통해 요청 값도 함께 전송할 수 있다.
+	// 쿠키 설정
+	Cookie c1 = new Cookie("name", "himan");
+	response.addCookie(c1); // 서버에 클라이언트(브라우저)에 쿠키 값을 전달하여 저장. 처리.
 %>
 <body>
-	
 	<h3 align="center"></h3>
-	<jsp:forward page="a06_goPage01.jsp"></jsp:forward>
+	<a href="a10_showCookie.jsp"> 저장 된 쿠키 값 확인하러 가기 </a>	
 	
 </body>
 </html>

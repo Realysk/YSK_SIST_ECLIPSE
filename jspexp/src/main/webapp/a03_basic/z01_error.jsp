@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
 	import="java.util.*"
 	import="java.sql.*"
+	isErrorPage = "true"
 %>
 <%
 //  [jspexp] 프로젝트에 사용
@@ -29,25 +30,30 @@
 </style>
 <script type="text/javascript">
 	window.onload=function(){
-		document.querySelector("h3").innerText="forward 처리 할 페이지";
+		document.querySelector("h3").innerText="요청 시 에러가 발생했습니다.";
 	}
 </script>
 </head>
 <%-- 
- # jsp:forward
- 	1. 해당 페이지로 요청 값과 함께 이동 처리된다.
- 	2. request 요청 값은 함께 하여 이동 처리된다.
- 	3. 기본 형식
- 		<jsp:forward page="이동할페이지"/>
+# 에러 페이지 처리
+	1. 속성 선언
+		isErrorPage = "true"
+	2. exception를 참조로 하는 여러가지 메서드를 사용할 수 있음.
 
 --%>
 <%
-	// a05_forwardAction.jsp?name=홍길동 을 통해 요청 값도 함께 전송할 수 있다.
+
 %>
 <body>
-	
 	<h3 align="center"></h3>
-	<jsp:forward page="a06_goPage01.jsp"></jsp:forward>
+	<form id="frm01" method="post">
+	<table align="center" class="listTable">
+		<tr><th> Error Type </th><td> <%=exception.getClass().getName() %> </td></tr>
+		<tr><th> Error Message </th><td> <%=exception.getMessage() %> </td></tr>
+		<tr><th colspan="2"> 잠시 기다리면 담당자와 통화가 가능합니다. </th></tr>
+		<tr><th> 담당자 </th><td> 홍길동 대리 (010-7777-0000) </td></tr>
+	</table>	
+	</form>	
 	
 </body>
 </html>
