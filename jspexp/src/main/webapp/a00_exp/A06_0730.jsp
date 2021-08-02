@@ -41,7 +41,7 @@
 		<form id="frm01" method="post">
 		<table>
 			<tr><th colspan="2"> [1] 리스트 된 화면의 특정 KEY를 통해 상세 화면에 전송하는 JS 기술 </th></tr>
-			<tr><th> JS </th><td> location.href="요청KEY페이지명.jsp?변수명=<%="변수명"%>"; </td></tr>
+			<tr><th> JS </th><td> tr ondbclick="함수(key)" function 함수(key) { location.href="이동할페이지.jsp?key="key; } </td></tr>
 		</table><br><hr>
 		</form>		
 	<%--
@@ -54,10 +54,7 @@
 			<tr>
 				<th colspan="2"> [2] 상세 화면에서 받은 KEY를 요청 값을 이용하여 받았을 때 처리할 프로세스 </th>
 			</tr>
-				<tr><th> 1. </th><td> ~~ </td></tr>
-				<tr><th> 2. </th><td> ~~ </td></tr>
-				<tr><th> 3. </th><td> ~~ </td></tr>
-				<tr><th> 4. </th><td> ~~ </td></tr>
+				<tr><th> Process </th><td> String key = request.getParameter("key"); if(key!=null) { DAO dao = new DAO(); 상세단위객체 참조 = dao.getXXX(Integer.parseInt(key)); } </td></tr>
 		</table><br><hr>
 		</form>			
 	<%--	
@@ -70,10 +67,7 @@
 			<tr>
 				<th colspan="2"> [3] 요청 값 기준 DAO에 단일 데이터를 처리하여 form 하위 input에 할당하는 프로세스 </th>
 			</tr>
-				<tr><th> 1. </th><td> ~~ </td></tr>
-				<tr><th> 2. </th><td> ~~ </td></tr>
-				<tr><th> 3. </th><td> ~~ </td></tr>
-				<tr><th> 4. </th><td> ~~ </td></tr>
+				<tr><th> Process </th><td> input name="속성" value="참조.getXXX()"/ </td></tr>
 		</table><br><hr>
 		</form>			
 	<%--	
@@ -86,10 +80,9 @@
 			<tr>
 				<th colspan="2"> [4] 상세 화면을 특정 내용으로 변경 후 처리하는 프로세스 (파일명 기준) </th>
 			</tr>
-				<tr><th> 1. </th><td> ~~ </td></tr>
-				<tr><th> 2. </th><td> ~~ </td></tr>
-				<tr><th> 3. </th><td> ~~ </td></tr>
-				<tr><th> 4. </th><td> ~~ </td></tr>
+				<tr><th> 1. </th><td> 상세화면.jsp => 처리프로세스 (수정/삭제).jsp </td></tr>
+				<tr><th> 2. </th><td> 항목에서 form action="처리프로세스.jsp" submit() </td></tr>
+				<tr><th> 3. </th><td> request.getParameter("요청key"); DAO 객체에 필요하는 기능 메서드 처리. 요청 값을 받아 객체로 선언 및 할당. dao.기능메서드(요청 값); </td></tr>
 		</table><br><hr>
 		</form>			
 	<%--	
@@ -100,7 +93,7 @@
 		<form id="frm01" method="post">
 		<table>
 			<tr><th colspan="2"> [5] 회원리스트 화면에서 상세 화면 처리 및 수정 </th></tr>
-			<tr><th> 프로세스 </th><td>  </td></tr>
+			<tr><th> Process </th><td>  </td></tr>
 		</table><br><hr>
 		</form>			
 	<%--	

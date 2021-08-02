@@ -13,6 +13,22 @@ INSERT INTO MEMBER VALUES('badman', '1212', '마길동', '사용자', 2000);
 SELECT * FROM MEMBER;
 -- INSERT INTO MEMBER VALUES(?,?,?,?,?)
 
+UPDATE MEMBER
+	SET pass = '5555',
+		name = '김천사',
+		auth = '관리자',
+		point = 9999
+	WHERE id = 'goodman';
+/*
+UPDATE MEMBER
+	SET pass = ?,
+		name = ?,
+		auth = ?,
+		point = ?
+	WHERE id = ?
+DELETE FROM MEMBER WHERE ID = ? 
+ */
+
 
 CREATE TABLE Studentexp1(
 	sno number,

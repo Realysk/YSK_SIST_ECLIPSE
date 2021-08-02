@@ -59,7 +59,7 @@
 	<table>
 		<tr><th> ID </th><th> PW </th><th> NAME </th><th> AUTH </th><th> POINT </th></tr>
 		<%for(Member m:dao.getMemberList()) { %>
-			<tr>
+			<tr ondbclick="detail('<%=m.getId()%>')">
 				<td><%=m.getId() %></td>
 				<td><%=m.getPass() %></td>
 				<td><%=m.getName() %></td>
@@ -68,6 +68,10 @@
 			</tr>
 		<% } %>
 	</table>	
-	
+	<script type="text/javascript">
+		function detail(id) {
+			location.href="A06_0730_memberDetail.jsp?id="+id;
+		}
+	</script>
 </body>
 </html>
