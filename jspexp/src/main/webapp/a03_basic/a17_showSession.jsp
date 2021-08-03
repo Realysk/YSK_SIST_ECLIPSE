@@ -43,11 +43,20 @@
 --%>
 <%
 	// session에 mem이라는 이름으로 저장 처리
-	session.setAttribute("stu", new Student(1, "홍길동", 80, 80, 95));
+	Student s = (Student)session.getAttribute("stu");
 %>
 <body>
 
-	<h2 align="center" onclick="location.href='a17_showSession.jsp'"> 페이지 이동 </h2>
+	<form id="frm01" method="post">
+	<table class="listTable" align="center">
+		<tr><th colspan="2"> 세션 값 확인 (페이지 이동 후) </th></tr>
+		<tr><th> NO. </th><td><%=s.getSno() %></td></tr>
+		<tr><th> NAME </th><td><%=s.getName() %></td></tr>
+		<tr><th> KOR </th><td><%=s.getKor() %></td></tr>
+		<tr><th> MATH </th><td><%=s.getMath() %></td></tr>
+		<tr><th> ENG </th><td><%=s.getEng() %></td></tr>
+	</table>	
+	</form>
 	
 </body>
 </html>
