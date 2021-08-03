@@ -14,10 +14,12 @@ import jspexp.z02_vo.Member;
 
 
 public class A05_PreparedDao {
+	
 	private Connection con;
 	private Statement stmt;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+	
 	public void setCon() throws SQLException {
 		// 1. 드라이버 메모리 로딩..
 		try {
