@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a03_classCon </title>
+<script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+<script type="text/javascript">
+/*
+ # ecma6에 지원하는 클래스형 생성자
+ 	1. 기본 형식
+ 		class 클래스명 {
+			constructor(매개변수1, 매개변수2) {
+				// 클래스명 하위에 선언 없이 this.필드명으로 선언된다.
+				this.필드명 = 매개변수1;
+			}
+			메서드명() {
+				this.필드명 : 다른 생성자나 메서드에서 선언 된 필드를 사용할 수 있다.
+			}
+		}
+		var 참조변수 = new 클래스명(데이터1, 데이터2);
+		참조변수.메서드명();
+ */
+ 	class Person {
+		constructor(name, age, loc) {
+			this.name = name;
+			this.age = age;
+			this.loc = loc;
+		}
+		show() {
+			return "이름 : " + this.name + ", 나이 : " + this.age + ", 거주지 : " + this.loc; 
+		}
+ 	}
+ 	function makePerson() {
+ 		var p01 = new Person("홍길동", 25, "서울 신림동");
+ 		document.querySelector("h4").innerText = p01.show();
+ 	}
+ 	
+ 	class Product {
+ 		constructor(pname, price, cnt) {
+ 			this.pname = pname;
+ 			this.price = price;
+ 			this.cnt = cnt;
+ 		}
+ 		show() {
+			return "이름 : " + this.pname + ", 가격 : " + this.price + ", 수량 : " + this.cnt;  			
+ 		}
+ 	}
+ 	function makePerson() {
+ 		var p02 = new Product("사과", 3000, 4);
+ 		document.querySelector("h3").innerText = p02.show();
+ 	}
+
+</script>
+
+	<h2 onclick="makePerson()" align="center"> Person 객체 호출 </h2>
+	<h4 align="center"></h4>
+	
+	<h3 onclick="Product()" align="center"> Product 객체 호출 </h3>
+	<h3 align="center"></h3>
+
+</body>
+<script type="text/javascript">
+
+</script>
+</html>
