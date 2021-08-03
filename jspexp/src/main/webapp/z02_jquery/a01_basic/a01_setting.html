@@ -40,6 +40,23 @@
  	6. 기본 코드
  		$() : jquery 메서드
  		$("선택자") : CSS 선택자로 DOM 객체를 선택할 수 있다.
+ 		ex) $("tr:even").css("background-color", "pink");
+ 	7. 초기화면 호출
+ 		$(document).ready(함수);
+ 			1) 브라우저에 HTML 문서가 로드되어 준비 된 상태(ready)가 되었을 때
+ 			2) document 객체를 jquery 함수($())로 둘러 싼 후에 ready() 기능 메서드 호출
+ 			3) ready() : DOM이 로드되고 이미지가 로드되기 전에 호출되는 jquery가 지원하는 이벤트 핸들러
+ 			4) 함수 : 선언 된 함수를 함수명으로 호출할 수 있다. 또는, 익명 함수로 바로 선언할 수 있다.
+ 				# 함수 호출
+ 				function start() {
+ 					$("h1").text("시작");
+ 				}
+ 				$(document).ready(start);
+ 				# 익명 함수 호출
+ 				$(document).ready(function() {
+ 					익명함수 처리 내용
+ 					$("h2").text("익명함수 처리");
+ 				});
  -->
 
 
