@@ -110,7 +110,7 @@ DROP TABLE games_cart;
 CREATE TABLE games_cart (
 	ctnum varchar2(50) PRIMARY KEY, -- 장바구니 번호
 	mbnum CONSTRAINTS games_member_mbnum_fk REFERENCES games_member(mbnum), -- 회원 번호 (외래키)
-	pdnum CONSTRAINTS games_cart_pdnum_fk REFERENCES games_product(pdnum), -- 상품 번호 (외래키)
+	pdnum CONSTRAINTS games_wishlist_pdnum_fk REFERENCES games_product(pdnum), -- 상품 번호 (외래키)
 	ctdate DATE NOT NULL -- 저장일
 );
 DROP SEQUENCE ctnum_seq;
@@ -121,9 +121,9 @@ CREATE SEQUENCE ctnum_seq -- 장바구니 시퀀스
 	MAXVALUE 99999999;
 SELECT ctnum_seq.nextval FROM dual;
 SELECT ctnum_seq.currval FROM dual;
-INSERT INTO games_cart(ctnum, mbnum, pdnum, ctdate) VALUES(ctnum, mbnum, pdnum, ctdate) ('ct'||lpad(ctnum_seq.currval,4,0), 'mb'||lpad(mbnum_seq.currval,4,0), 'pd'||lpad(pdnum_seq.currval,4,0), sysdate);
-INSERT INTO games_cart(ctnum, mbnum, pdnum, ctdate) VALUES(ctnum, mbnum, pdnum, ctdate) ('ct'||lpad(ctnum_seq.currval,4,0), 'mb'||lpad(mbnum_seq.currval,4,0), 'pd'||lpad(pdnum_seq.currval,4,0), sysdate);
-INSERT INTO games_cart(ctnum, mbnum, pdnum, ctdate) VALUES(ctnum, mbnum, pdnum, ctdate) ('ct'||lpad(ctnum_seq.currval,4,0), 'mb'||lpad(mbnum_seq.currval,4,0), 'pd'||lpad(pdnum_seq.currval,4,0), sysdate);
+INSERT INTO games_cart(ctnum, mbnum, pdnum, ctdate) VALUES ('ct'||lpad(ctnum_seq.currval,4,0), 'mb'||lpad(mbnum_seq.currval,4,0), 'pd'||lpad(pdnum_seq.currval,4,0), sysdate);
+INSERT INTO games_cart(ctnum, mbnum, pdnum, ctdate) VALUES ('ct'||lpad(ctnum_seq.currval,4,0), 'mb'||lpad(mbnum_seq.currval,4,0), 'pd'||lpad(pdnum_seq.currval,4,0), sysdate);
+INSERT INTO games_cart(ctnum, mbnum, pdnum, ctdate) VALUES ('ct'||lpad(ctnum_seq.currval,4,0), 'mb'||lpad(mbnum_seq.currval,4,0), 'pd'||lpad(pdnum_seq.currval,4,0), sysdate);
 SELECT * FROM games_cart ORDER BY ctnum DESC;
 
 --=====================================================================================================================================================================================================================================================================================================
