@@ -46,7 +46,16 @@
 			var base = $("[name=base]").val(); // 타석의 값을 가져오기
 			var hitPt = $("[name=hitPt]").val(); // 안타의 값을 가져오기
 			// 타율을 처리하여 h3에 출력하되 소숫점 3자리로 표현하세요.
-			$("h3").text("타율 : ");
+			console.log("타석 : " + base);
+			console.log("안타 : " + hitPt);
+			console.log("타율 : " + (hitPt/base));
+			console.log("타율(자릿수 처리) : " + (hitPt/base).toFixed(3));
+			var avg = hitPt/base;
+			$("h3").text("타율 : " + avg.toFixed(3)); // .text() jquery에서 화면 출력 cf) .html() 태그 랜더링 처리
+			/*
+			.innerHTML => html 코드를 랜더링하여 출력 <h2> 안녕 => 글자를 크게 처리 => jquery에서 .html() 가져오거나 .html("할당할데이터")
+			.innerText => 데이터를 그대로 출력 <h2> 안녕 => <h2> 안녕 글자 그대로 출력 => jquery에서 .text()를 가져오거나, .text("할당할데이터")
+			*/
 		});
 	});
 
@@ -71,8 +80,9 @@
 		<tr><th> 타석 </th><td><input type="text" name="base" value="0"/></td></tr>
 		<tr><th> 안타 </th><td><input type="text" name="hitPt" value="0"/></td></tr>
 		<tr><td colspan="2" style="text-align:center"><input type="button" value="타율계산"/></td></tr>
-	</table>	
+	</table>
 	</form>
+	<h3 align="center"></h3>
 	
 </body>
 </html>

@@ -31,44 +31,42 @@
 </style>
 <script src="<%=path%>/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("h2").text("시작");
+	$(document).ready(function(){
+		//$("h2").text("선택자 연습1");
+		// jquery 이벤트   $("선택자").click(이벤트핸들러함수);
+		$("h2#exp01").click(function(){
+			// ex) div, span과  p태그하위에 클래스 myClass에 대하여 선택자를 지정하고,
+			//     해당 선택자에 대하여는 글자색상을 red로 처리하세요.. 4조
+			// $("선택자1, 선택자2 ....")
+			//alert("클릭");
+			$("div, span, p.myClass").css("color","red");
+		});
+		$("h2#exp02").click(function(){
+			// ex) class명이 topnav인 ul 바로밑(*) li의  border  3px double red로
+			//    처리하세요. 5조..
+			$("ul.topnav>li").css("border","2px double red");
+		});
 	});
-	// jquery 이벤트 $("h2").click(이벤트핸들러함수)
-	$("h2#exp01").click(function() {
-		// ex) div, span과 p태그 하위에 클래스 myClass에 대하여 선택자를 지정하고 해당 선택자에 대하여는 글자색상을 red로 처리하세요.
-		// $("선택자1, 선택자2....")
-		// alert("클릭");
-		$("div, span, p.myClass").css("color","red");
-	});
-	$("h2#exp02").click(function() {
-		$("div, span, p.myClass").css("color","red");
-	});
-	
-
 </script>
 </head>
-
 <body>
-
-	<h2 id="exp01" align="center"> 선택자연습1 </h2>
-	<div> div </div>
+	<h2 id="exp01" align="center">선택자연습1</h2>
+	<div>div</div>
 	<p class="myClass">p class="myClass"</p>
 	<p class="notMyClass">p class="notMyClass"</p>
 	<span>span</span>
-	
-	<h2 id="exp02" align="center"> 선택자연습2 </h2>
-	<ul class="tabnav">
-		<li> 아이템 1 </li>
-		<li> 아이템 2 
-			<ul>
-				<li> 중첩 아이템 1 </li>
-				<li> 중첩 아이템 2 </li>
-				<li> 중첩 아이템 3 </li>			
-			</ul>
-		</li>
-		<li> 아이템 3 </li>
-	</ul>
+	<h2 id="exp02" align="center">선택자연습2</h2>
+	<ul class="topnav">
+	  <li>아이템 1</li>
+	  <li>아이템 2
+	    <ul>
+	    <li>중첩 아이템 1</li>
+	    <li>중첩 아이템 2</li>
+	    <li>중첩 아이템 3</li>
+	    </ul>
+	  </li>
+	  <li>아이템 3</li>
+	</ul>	
 	
 </body>
 </html>

@@ -31,33 +31,23 @@
 </style>
 <script src="<%=path%>/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$("h2").text("시작");
 	});
-	function class01(){
-		// 클래스의 선택자는 .
-		$(".myClass").css("border","2px solid blue");
-	}
-	function class02(){
-		$(".otherClass").css("color","red");
-	}
-	function class03(){
-		// $(".클래스1.클래스2").css({"속성1":"속성1값","속성2":"속성2값"})
-		$(".myClass.otherClass").css({"color":"red","border":"2px solid blue"});
-	}
+
 </script>
 </head>
-<%--
-ex) 클릭시, myClass는 border  2px solid blue 속성 설정
-          otherClass는 글자 색상을 빨강색 속성 설정..  3조..
+<%-- 
+	// ex) a16_sessionExp.jsp 학생명, 국어, 영어, 수학 점수를 세션으로 설정.
+	//	   a17_showSession.jsp 저장 된 session을 호출하여 출력
 --%>
+<%
+	// session에 mem이라는 이름으로 저장 처리
+	
+%>
 <body>
-	<h2 align="center"></h2>
-	<h3 align="center" onclick="class01()">myClass 적용</h3>
-	<h3 align="center" onclick="class02()">other클래스 적용</h3>
-	<h3 align="center" onclick="class03()">myClass와 other클래스 적용</h3>
-	<div class="myClass">div class="notMe"</div>
-	<div class="otherClass">div class="otherClass"</div>
-	<span class="myClass otherClass">span class="myClass"</span>	
+
+	<h2 align="center" onclick="location.href='a17_showSession.jsp'"> 페이지 이동 </h2>
+	
 </body>
 </html>
