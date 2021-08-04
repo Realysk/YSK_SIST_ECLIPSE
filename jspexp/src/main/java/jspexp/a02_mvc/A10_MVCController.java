@@ -44,7 +44,7 @@ public class A10_MVCController extends HttpServlet {
 		if(isSuccess) {
 			request.setAttribute("result", "로그인 성공");
 		} else {
-			request.setAttribute("result", "로그인 실패");			
+			request.setAttribute("result", "로그인 실패");
 		}
 		// 3. JSP(View단 호출)
 		String page = "a04_basic\\a03_mvc.jsp"; // 이동할 JSP 화면 호출
