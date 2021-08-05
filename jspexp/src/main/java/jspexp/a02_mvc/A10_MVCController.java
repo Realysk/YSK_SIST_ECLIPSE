@@ -47,9 +47,14 @@ public class A10_MVCController extends HttpServlet {
 			request.setAttribute("result", "로그인 실패");
 		}
 		// 3. JSP(View단 호출)
-		String page = "a04_basic\\a03_mvc.jsp"; // 이동할 JSP 화면 호출
+		String page="a04_basic\\a03_mvc.jsp";// 이동할 jsp 화면 호출..
+		if(id==null) { // 요청값이 없을 때, 페이지..
+			page="a04_basic\\a03_login.jsp";
+		}
 		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request, response);
+		// 3. jsp(view단 호출)
+
 	}
 
 }

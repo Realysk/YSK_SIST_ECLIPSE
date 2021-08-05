@@ -42,8 +42,15 @@ public class A01_ServletStart extends HttpServlet {
 					RequestDispatcher rd = request.getRequestDispatcher("호출할 JSP 선언");
 					rd.forward();
 		 */
+		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<h2 align='center'> Hello Servlet </h2>");
+		out.print("<h2 align='center'> 안녕하세요 .(한글처리) </h2>");
+		String name="홍길동";
+		int num01 = 25;
+		int num02 = 25;
+		out.print("<h2 align='center'> " + name + ":" + (num01+num02) + " </h2>");
+		// ex) servlet A02_Servlet2.java serv02.do로 만들어 물건명, 가격, 수량은 JAVA 변수로 h3로 출력하세요.
 		
 	}
 
