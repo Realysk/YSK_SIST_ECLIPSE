@@ -15,10 +15,19 @@
 			- 로그인 화면 구현. 요청 값 전달.
 		2) 요청 값을 입력 후 요청 값을 controller 단에서 확인.
 			간단하게 요청 값에 따라서 분기되는 view단 구현. (a05_login.jsp // a06_main.jsp)
+		-----------------------------------------------------------------------------------
 		3) DAO단 추가 (A05_PreparedDao.java)
 			public Member login(String id, String pass);
 			SELECT * FROM MEMBER WHERE ID = ? AND PASS = ?
 		4) service단 추가 (a02_mvc.a01_service 패키지에 A11_LoginService.java 추가)
+			# MVC에서 controller => service => dao 호출 패턴
+				A11_LoginMVC <==> A13_LoginService <==> A05_PreparedDao
+				모델데이터로 mapping	 login2(id,pass)	  public Member login2(String id, String pass)			
+			
+			# View 단 호출
+				a05_login.jsp
+				a06_main.jsp
+				
 		5) controller에서 A11_LoginService 객체 생성
 			요청 값 id/pass를 통한 인증여부와 Member 객체 할당처리
 			session.setAttribute("mem",@@@);

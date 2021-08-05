@@ -47,15 +47,12 @@
 <body>
 
 	<h2 align="center"></h2>
-	<form id="frm01" method="post">
 	<table align="center" class="listTable">
-		<tr><th>사원명</th><td><input type="text" name="ename" value=""/></td></tr>
-		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
-	</table>	
-	</form>
-	<table align="center" class="listTable">
-		<tr><th></th><th></th><th></th></tr>
-		<tr><td></td><td></td><td></td></tr>
+		<tr><th> 물건명 </th><td> ${pname} </td></tr>
+		<tr><th> 가격 </th><td> ${price} </td></tr>
+		<tr><th> 수량 </th><td> ${cnt} </td></tr>
+		<tr><th> 총계 </th><td> ${price*cnt} </td></tr>
+		<tr><th> 할인 적용 총계 </th><td> ${tot} (${disratio}%) </td></tr>
 	</table>	
 	
 </body>

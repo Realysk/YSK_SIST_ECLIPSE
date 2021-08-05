@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import jspexp.z02_vo.Member;
 
 /**
  * Servlet implementation class A11_LoginMVC
@@ -15,12 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "login.do", urlPatterns = { "/login.do" })
 public class A11_LoginMVC extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private A13_LoginService service;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public A11_LoginMVC() {
         super();
+        service = new A13_LoginService();
         // TODO Auto-generated constructor stub
     }
 
@@ -32,17 +37,24 @@ public class A11_LoginMVC extends HttpServlet {
 		// 1. 요청 값 처리
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
+		String proc = request.getParameter("proc");
+		HttpSession session = request.getSession();
 		// 2. Model 처리
 		boolean isValid = false;
 		if(id != null && pass != null) {
+			Member m = service.login2(id, pass);
 			// 요청 값을 분기에 따른 처리
-			if(id.equals("himan") && pass.equals("7777")) {
+			if(m!=null) {
 				isValid = true;
 				request.setAttribute("msg", "로그인 성공");
-				request.setAttribute("id", id);
+				// session 값 처리
+				session.setAttribute("mem", m);
 			} else {
 				request.setAttribute("msg", "로그인 실패");
 			}
+		}
+		if(proc!=null && proc.equals("logout")) {
+			session.invalidate(); // 세션값을 삭제 처리한다.
 		}
 		// 3. 화면 호출
 		String page = "a04_basic\\a05_login.jsp";
