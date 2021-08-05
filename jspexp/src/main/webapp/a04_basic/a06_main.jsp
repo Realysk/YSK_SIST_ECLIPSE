@@ -32,8 +32,13 @@
 <script src="<%=path%>/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("h2").text("시작");
+		$("h2").text("메인화면");
 	});
+
+	var msg = "${msg}";
+	if(msg!="") {
+		alert(msg);
+	}
 
 </script>
 </head>
@@ -47,6 +52,7 @@
 <body>
 
 	<h2 align="center"></h2>
+	<h3 align="right">${id}님 로그인 중</h3>
 	<form id="frm01" method="post">
 	<table align="center" class="listTable">
 		<tr><th>사원명</th><td><input type="text" name="ename" value=""/></td></tr>

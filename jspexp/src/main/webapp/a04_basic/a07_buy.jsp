@@ -32,18 +32,13 @@
 <script src="<%=path%>/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("h2").text("로그인");
+		$("h2").text("구매 목록 입력");
 	});
-	
-	var msg = "${msg}";
-	if(msg!="") {
-		alert(msg);
-	}
 
 </script>
 </head>
 <%-- 
-# 
+# 구매물품 : [   ] 구매가격 : [   ] 구매수량 : [   ]
 
 --%>
 <%
@@ -53,11 +48,11 @@
 
 	<h2 align="center"></h2>
 	<form id="frm01" method="post">
-	<table align="center" class="listTable" width="50%">
-		<tr><th colspan="2"> 로그인 </th></tr>
-		<tr><th> ID </th><td><input type="text" name="id" value=""/></td></tr>
-		<tr><th> PW </th><td><input type="password" name="pass" value=""/></td></tr>
-		<tr><td colspan="2" style="text-align:center"><input type="submit" value="로그인"/></td></tr>
+	<table align="center" class="listTable">
+		<tr><th> 구매물품 </th><td><input type="text" name="pname" value=""/></td></tr>
+		<tr><th> 구매가격 </th><td><input type="text" name="price" value="0"/></td></tr>
+		<tr><th> 구매수량 </th><td><input type="text" name="cnt" value="0"/></td></tr>
+		<tr><td colspan="2"><input type="submit" value="구매"/></td></tr>
 	</table>	
 	</form>	
 	

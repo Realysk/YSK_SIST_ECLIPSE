@@ -32,13 +32,8 @@
 <script src="<%=path%>/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("h2").text("로그인");
+		$("h2").text("일반 고객 페이지");
 	});
-	
-	var msg = "${msg}";
-	if(msg!="") {
-		alert(msg);
-	}
 
 </script>
 </head>
@@ -53,13 +48,15 @@
 
 	<h2 align="center"></h2>
 	<form id="frm01" method="post">
-	<table align="center" class="listTable" width="50%">
-		<tr><th colspan="2"> 로그인 </th></tr>
-		<tr><th> ID </th><td><input type="text" name="id" value=""/></td></tr>
-		<tr><th> PW </th><td><input type="password" name="pass" value=""/></td></tr>
-		<tr><td colspan="2" style="text-align:center"><input type="submit" value="로그인"/></td></tr>
+	<table align="center" class="listTable">
+		<tr><th>사원명</th><td><input type="text" name="ename" value=""/></td></tr>
+		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
 	</table>	
-	</form>	
+	</form>
+	<table align="center" class="listTable">
+		<tr><th></th><th></th><th></th></tr>
+		<tr><td></td><td></td><td></td></tr>
+	</table>	
 	
 </body>
 </html>
