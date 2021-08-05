@@ -67,11 +67,13 @@
  		h2Arry[3].innerText = d_day3.toLocaleString();
  		
  		// ex) getXXXX()을 통해서 날짜 객체를 생성하여 현재 연도, 월, 일을 h4에 출력하세요.
-		var h4Arry = document.querySelectorAll("h4");
-	 	setInterval(function() {
-	 	 	var d_day4 = new Date();
-	 	 	h4Arry[0].innerText = d_day4.toLocaleString();
-	 	},1000);
+		var h4Obj = document.querySelector("h4");
+	 	var toDay = new Date();
+	 	// 오늘 이후로 7일 변경
+	 	// toDay.setDate(toDay.getDate()+7);
+	 	toDay.setDate(toDay.getDate());
+	 	var days = ["일", "월", "화", "수", "목", "금", "토"];
+	 	h4Obj.innerText = toDay.getFullYear() + "년 " + (toDay.getMonth()+1) + "월 " + toDay.getDate() + "일 " + days[toDay.getDay()] + "요일";
  		
 </script>
 </html>
