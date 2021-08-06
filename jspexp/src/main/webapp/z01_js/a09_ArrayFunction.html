@@ -17,7 +17,19 @@
 	<h2></h2>	
 	<h2></h2>	
 	<h2></h2>	
-	<h2></h2>	
+	<h2></h2>
+	
+	<table id="tab01" width="40%" style="text-align:center" border>
+		<col width="10%">
+	</table><br><hr>
+	<table id="tab02" width="40%" style="text-align:center" border><br>
+		<col width="10%">
+	</table>
+	
+	<h3></h3>
+	<h3></h3>
+	<h3></h3>
+	<h3></h3>
 
 </body>
 <script type="text/javascript">
@@ -30,6 +42,10 @@
  	
  	2. 배열명.map(function(단위객체) {
  			return 단위객체 <= 해당 데이터를 연산 및 문자열 처리로 새로운 배열 만듦. 
+ 		});
+ 	
+ 	3. 배열명.filter(function(단위객체, index, 배열전체) {
+ 			return boolean값; boolean값이 true인 데이터만 새로운 배열에 만들어진다.
  		});
  */
 
@@ -45,6 +61,53 @@
 		return Math.floor(point*0.8);
 	});
 	h2Arry[1].innerText = arry2;
+	
+	var points=[];
+	for(var cnt=1; cnt<=30; cnt++) {
+		var stud = {};
+		stud.kor = Math.floor(Math.random()*101);
+		stud.eng = Math.floor(Math.random()*101);
+		stud.math = Math.floor(Math.random()*101);
+		points.push(stud); // 0~100
+	}
+	// [{kor:@@, eng:@@, math:@@}, {kor:@@, eng:@@, math:@@}, {kor:@@, eng:@@, math:@@}]
+	var tab01 = document.querySelector("#tab01");
+	var show = "";
+	points.forEach(function(stud, index, arry) {
+		show += "<tr><td>" + (index+1) + "</td><td>" + stud.kor + "</td><td>" + stud.eng + "</td><td>" + stud.math + "</td></tr>";
+	});
+	tab01.innerHTML = show;
+	
+	h2Arry[2].innerText = points;
+	var newStuds = points.filter(function(stud, index, arry) {
+		return stud.kor >= 60;
+	});
 
+	var tab02 = document.querySelector("#tab02");
+	var show = "";
+	newStuds.forEach(function(stud, index, arry) {
+		show += "<tr><td>" + (index+1) + "</td><td>" + stud.kor + "</td><td>" + stud.eng + "</td><td>" + stud.math + "</td></tr>";
+	});
+	tab02.innerHTML = show;
+	console.log(newStuds);
+	// h2Arry[3].innerText = passpoints;
+	
+	// ex) 구매물건의 가격을 배열로 3개를 주어지고, 각각 15% 할인 된 금액을 출력하세요.
+	
+ 	var h3Arry = document.querySelectorAll("h3");
+	var exarry = [4000, 6000, 8000];
+	var show2 = "";
+	exarry.forEach(function(price, index, exarry) {
+		show2 += index + 1 + "번째 물건 가격 " + price + "원, ";
+	});
+	h3Arry[0].innerText = show2;
+	
+	var arry3 = exarry.map(function(price) {
+		return Math.floor(price*0.85);
+	});
+	h3Arry[1].innerText = arry3;
+
+	
+	
 </script>
 </html>
