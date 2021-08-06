@@ -17,6 +17,9 @@
 	<h2></h2>
 	<h2></h2>
 	<h2></h2>
+	<h3></h3>
+	<h3></h3>
+	<h3></h3>
 
 </body>
 <script type="text/javascript">
@@ -38,6 +41,14 @@
  	
 	// ex) 1~5 선호도 표시를 5명에게 조사한 결과내용을 h3으로 결과 내용 오름차순, 내림차순으로 출력하세요.
 	
-
+	var favs = [];
+	for(var cnt=1; cnt<=5; cnt++) {
+		favs.push(parseInt(Math.random()*5)+1);
+	}
+ 	var h3Arr = document.querySelectorAll("h3");
+ 	h3Arr[0].innerText = favs;
+ 	h3Arr[1].innerText = favs.sort(function(left, right){return left-right});
+ 	h3Arr[2].innerText = favs.sort(function(left, right){return right-left});
+	
 </script>
 </html>

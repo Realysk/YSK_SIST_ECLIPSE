@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a09_ArrayFunction </title>
+<script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+	<h2></h2>	
+	<h2></h2>	
+	<h2></h2>	
+	<h2></h2>	
+
+</body>
+<script type="text/javascript">
+/*
+ # 기타 배열 함수
+ 	1. 배열명.forEach(function(단위객체, index, 배열전체) {
+ 			매개변수로 단위객체, index, 배열 전체 데이터를 처리할 수 있다.
+ 		
+ 		});
+ 	
+ 	2. 배열명.map(function(단위객체) {
+ 			return 단위객체 <= 해당 데이터를 연산 및 문자열 처리로 새로운 배열 만듦. 
+ 		});
+ */
+
+ 	var h2Arry = document.querySelectorAll("h2");
+	var arry = [70, 80, 90];
+	var show = "";
+	arry.forEach(function(point, index, arry) {
+		show += index + 1 + "번 " + point + "점, ";
+	});
+	h2Arry[0].innerText = show;
+	
+	var arry2 = arry.map(function(point) {
+		return Math.floor(point*0.8);
+	});
+	h2Arry[1].innerText = arry2;
+
+</script>
+</html>

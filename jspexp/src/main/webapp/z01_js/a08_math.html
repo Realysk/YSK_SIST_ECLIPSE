@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> a08_math </title>
+<script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
+<style type="text/css">
+/*
+
+ */
+
+
+</style>
+</head>
+<body>
+
+	<h2></h2>
+	<h3></h3>
+	<h4></h4>
+
+</body>
+<script type="text/javascript">
+/*
+ # Math 객체
+ 	1. JAVA의 Static 메서드와 동일 바로 사용.
+ 	2. 종류
+ 		생성자 함수 사용하지 않는 객체
+ 		메서드
+ 		Math.abs(x) : 절대값
+ 		Math.acos(x)
+ 		Math.asin(x)
+ 		Math.atan(x)
+ 		Math.atan2(y, x)
+ 		* Math.ceil(x) : 올림
+ 		Math.cos(x)
+ 		Math.exp(x)
+ 		* Math.floor(x) : 내림 	ex) Math.floor(Math.random()*6+1); // 주사위 1~6
+ 		Math.log(x)
+ 		* Math.max(a,b,c,...,n) : 최대값
+ 		* Math.min(a,b,c,...,n) : 최소값
+ 		Math.pow(x, y)
+ 		* Math.random() : 랜덤 (0.0 ~ 1.0)
+ 		* Math.random(x) : 반올림
+ 		Math.sin(x)
+ 		Math.sqrt(x)
+ 		Math.tan(x)
+*/
+
+	// ex) 5명이 주사위를 던져서 각각의 주사위 점수를 h2에 출력하고 그중 가장 점수가 높은 점수 h3와 낮은 점수 h4를 출력하세요.
+	// Math.floor((Math.random)*경우의수+시작수)
+	// Math.floor((Math.random)*6+1)
+	//	
+	
+	var gMembers = [];
+	for(var cnt=1; cnt<=5; cnt++) {
+		gMembers.push(Math.floor(Math.random()*6+1));
+	}
+	var h2 = document.querySelector("h2");
+	var h3 = document.querySelector("h3");
+	var h4 = document.querySelector("h4");
+	h2.innerText = gMembers;
+	h3.innerText = "최대값 : " + Math.max(gMembers[0], gMembers[1], gMembers[2], gMembers[3], gMembers[4]);
+	h4.innerText = "최소값 : " + Math.min(gMembers[0], gMembers[1], gMembers[2], gMembers[3], gMembers[4]);
+	
+	
+</script>
+</html>
