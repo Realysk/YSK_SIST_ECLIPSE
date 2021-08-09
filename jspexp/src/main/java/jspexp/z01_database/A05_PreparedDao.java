@@ -196,16 +196,17 @@ public class A05_PreparedDao {
 		try {
 			setCon();
 			// 2. 부서 정보 받아 sql 선언.
-			String sql = "SELECT deptno, empno, ename, job, sal\r\n"
-					+ "	FROM emp02\r\n"
-					+ "	WHERE deptno="+deptno;
+			
+			 String sql = "SELECT deptno, empno, ename, job, sal\r\n" + "	FROM emp02\r\n"
+					 	+ "WHERE deptno="+deptno;
+			 
 			/*
 			ex) 문자열을 받으면, ''
 			 * WHERE ename='CLARK';
 			 * */
 			/*
 			String name = "CLARK";
-			String sql2 = "SELECT deptno, empno, ename, job, sal\r\n"
+			String sql = "SELECT deptno, empno, ename, job, sal\r\n"
 					+ "	FROM emp02\r\n"
 					+ "WHERE ename='"+name+"'"; 
 			*/
@@ -1618,6 +1619,8 @@ public class A05_PreparedDao {
 		dao.login("himan", "7777");
 		
 		System.out.println("Dept 테스트 : " + dao.getDeptList(new Dept(0, "", "")).size());
+		
+		dao.empList3(10);
 		
 		//ArrayList<Emp> elist = dao.getEmpList();
 		/*
