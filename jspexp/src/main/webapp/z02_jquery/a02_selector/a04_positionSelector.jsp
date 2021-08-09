@@ -33,7 +33,24 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("h2").text("시작");
-		$("h2").eq(1).("선택");
+		$("h2").eq(1).text("선택");
+		$("h2").first().css("color", "navy");
+		$("h2:even").css("background-color",'yellow');
+		// $("h2").length() : 해당 객체의 길이
+		var ranIdx = Math.floor(Math.random()*$("h2").length);
+		$("h2").eq(ranIdx).text("빙고");
+		
+		// ex) 3X3 테이블을 만들고 해당 셀에 1~9 번호를 입력 후 특정 임의의 부분에는 배경색상을 노란색으로 글자를 "빙고"로 출력하세요.
+		
+		var tds = $("#gTab td"); // JS로 DOM 객체로 지정 처리
+		console.log("크기 : " + tds.length);
+		var ranIdx = Math.floor(Math.random()*tds.length);
+		// td 객체에 번호를 설정 처리
+		for(var idx=0; idx<tds.length; idx++) {
+			$("#gTab td").eq(idx).text(idx+1);
+		}
+		$("#gTab td").eq(ranIdx).css("background-color", "yellow");
+		$("#gTab td").eq(ranIdx).text("빙고");
 	});
 
 </script>
@@ -62,14 +79,13 @@
 <body>
 
 	<h2 align="center"></h2>
-	<form id="frm01" method="post">
-	<table align="center" class="listTable">
-		<tr><th>사원명</th><td><input type="text" name="ename" value=""/></td></tr>
-		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
-	</table>	
-	</form>
-	<table align="center" class="listTable">
-		<tr><th></th><th></th><th></th></tr>
+	<h2 align="center"></h2>
+	<h2 align="center"></h2>
+
+	<table align="center" width="50%" id="gTab" style="text-align:center" class="listTable">
+		<col width="33%"><col width="33%"><col width="33%">
+		<tr><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td></tr>
 		<tr><td></td><td></td><td></td></tr>
 	</table>	
 	
