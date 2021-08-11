@@ -52,6 +52,22 @@
 			for(String prod:prods) {
 				System.out.println(prod);
 			}
+		3) form 요소객체의 특성에 따른 요청 값 전달.
+			<input type="text" name="요청이름1/>
+			<input type="text" name="요청이름1/>
+			<input type="text" name="요청이름1/>
+			# input type="text"인 경우는 name의 설정값이 1개일 때는 request.getParameter("단일요청");
+			# input type="text"인 경우는 name의 설정값이 다중일 때는 request.getParameter("다중요청");
+			
+			<input type="radio" name="요청이름1" value="값1"/>
+			<input type="radio" name="요청이름1" value="값2"/>
+			<input type="radio" name="요청이름1" value="값3"/>
+			# input type="radio"는 같은 name값으로는 checked가 한 개만 선택되어지기 때문에 여러 객체가 radio로 나열되어 있어 요청 값은 하나만 처리된다. 그러므로 request.getParameter("단일요청")을 활용한다.
+			
+			<input type="checkbox" name="요청이름1" value="값1"/>
+			<input type="checkbox" name="요청이름1" value="값2"/>
+			<input type="checkbox" name="요청이름1" value="값3"/>
+			# input type="checkbox" 동일한 요청 이름으로 여러 개의 데이터를 전송할 수 있는데 ***checked가 된 것만 요청 값의 배열로 전송이 된다. String[] cks = request.getParameterValues("다중요청");
 --%>
 <%
 
@@ -65,18 +81,30 @@
 		<tr><th>구매물건1</th><td><input type="text" name="pname" value=""/></td></tr>
 		<tr><th>구매물건2</th><td><input type="text" name="pname" value=""/></td></tr>
 		<tr><th>구매물건3</th><td><input type="text" name="pname" value=""/></td></tr>
+		<tr><th>단일선택1</th><td><input type="radio" name="kind" value="신제품"/>신제품</td></tr>
+		<tr><th>단일선택2</th><td><input type="radio" name="kind" value=중고/>중고</td></tr>
+		<tr><th>단일선택3</th><td><input type="radio" name="kind" value="전시제품"/>전시제품</td></tr>
+		<tr><th>다중선택1</th><td><input type="checkbox" name="calMsg" value="기본출력"/>계산서출력</td></tr>
+		<tr><th>다중선택2</th><td><input type="checkbox" name="calMsg" value="메일"/>계산서메일발송</td></tr>
+		<tr><th>다중선택3</th><td><input type="checkbox" name="calMsg" value="메시지"/>계산서메시지발송</td></tr>
 		<tr><td colspan="2"><input type="submit" value="구매"/></td></tr>
 	</table>	
 	</form>
 	<%
 		String buyer = request.getParameter("buyer");
+		String kind = request.getParameter("kind");
 		String pnames[] = request.getParameterValues("pname");
+		String calMsgs[] = request.getParameterValues("calMsg");
 	%>
 	<% if(buyer!=null) { %>
 	<table align="center" class="listTable">
 		<tr><th>구매자명</th><td><%=buyer %></td></tr>
+		<tr><th>물건구분</th><td><%=kind %></td></tr>
 		<% for(int idx=0; idx<pnames.length; idx++) { %>
 		<tr><th>구매물건 <%=idx+1 %></th><td><%=pnames[idx] %></td></tr>
+		<% } %>
+		<% for(int idx=0; idx<calMsgs.length; idx++) { %>
+		<tr><th>계산서처리 <%=idx+1 %></th><td><%=calMsgs[idx] %></td></tr>
 		<% } %>
 	</table>
 	<% } %>	
