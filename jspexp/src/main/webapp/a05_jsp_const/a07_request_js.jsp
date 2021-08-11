@@ -30,14 +30,8 @@
 	
 </style>
 <script src="<%=path%>/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("h2").text("시작");
-	});
-
-</script>
 </head>
-<%-- 
+<%--
 # 
 
 --%>
@@ -45,24 +39,53 @@
 
 %>
 <body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("h2").text("form js+jsp");
+		$("#regBtn").click(function() {
+			// 등록 처리 프로세스 표시
+			$("[name=proc]").val("insert");
+			$("form").submit();
+		});
+		$("#uptBtn").click(function() {
+			// 수정 처리 프로세스 표시
+			$("[name=proc]").val("update");
+			$("form").submit();
+		});
+		$("#delBtn").click(function() {
+			// 삭제 처리 프로세스 표시
+			$("[name=proc]").val("delete");
+			$("form").attr("action","<%=path%>/a05_jsp_const/a08_delete.jsp");
+			$("form").submit();
+		});
+		$("#mainBtn").click(function() {
+			// 메인 이동 처리 프로세스 표시
+			location.href = "<%=path%>/a05_jsp_const/a09_main.jsp";
+		});
+	});
+
+</script>
 
 	<h2 align="center"></h2>
 	<form id="frm01" method="post">
+		<input type="hidden" name="proc"/>
 	<table align="center" class="listTable">
 		<tr><th>사원명</th><td><input type="text" name="ename" value=""/></td></tr>
 		<tr><td colspan="2">
-			<input type="button" value="등록" id="regBtn"/>
-			<input type="button" value="수정" id="uptBtn"/>
-			<input type="button" value="삭제" id="delBtn"/>
-			<input type="button" value="메인" id="mainBtn"/>
+				<input type="button" value="등록" id="regBtn"/>
+				<input type="button" value="수정" id="uptBtn"/>
+				<input type="button" value="삭제" id="delBtn"/>
+				<input type="button" value="메인" id="mainBtn"/>
 			</td>
 		</tr>
-	</table>	
+	</table>
 	</form>
-	<table align="center" class="listTable">
-		<tr><th></th><th></th><th></th></tr>
-		<tr><td></td><td></td><td></td></tr>
-	</table>	
+	<%
+		String proc = request.getParameter("proc");
+		if(proc != null) {
+	%>
+		<h3 align="center">처리되는 프로세스 : <%=proc %></h3>
+	<% } %>
 	
 </body>
 </html>
