@@ -40,8 +40,10 @@
 <%-- 
 # 요청 값 처리 메서드
 	1. get/post 방식에 의해 전달해 온 요청 값을 처리하는 메서드들
+	
 	2. 요청 값 형식
 		페이지?key1=value1&key2=value2&key3=value3
+	
 	3. 지원 메서드
 		1) request.getParameter("요청key");
 			String value1 = request.getParameter("key1");
@@ -68,6 +70,32 @@
 			<input type="checkbox" name="요청이름1" value="값2"/>
 			<input type="checkbox" name="요청이름1" value="값3"/>
 			# input type="checkbox" 동일한 요청 이름으로 여러 개의 데이터를 전송할 수 있는데 ***checked가 된 것만 요청 값의 배열로 전송이 된다. String[] cks = request.getParameterValues("다중요청");
+			
+			<input type="hidden" name="proc"/>
+			# 요청 값으로 화면에는 보이지 않게 해야 하나, JS로 요청 값을 전송할 때 반드시 처리할 내용은 type="hidden"으로 하고 JS/JQuery에 의해 처리된다.
+			
+			cf) form 데이터 전송 관련 JS/JQuery 처리 부분
+				1) <input type="submit"/> : 해당 버튼을 클릭 시, form 하위 요소객체의 데이터를 전송해준다.
+				2) 전송 전 유효성 check를 하기 위한 데이터 처리
+					<input type="submit"/> => <input type="button" id="funBtn"/>
+					$("#funBtn").click(function() {
+						if($("[name=요청키]").val()=="") { // 공백에 대한 유효성 체크
+							return; // 전송 프로세스 중단
+						}
+						if($("[name=요청키]").val().length>8) { // 입력 할 데이터의 크기 유효성 체크
+							return; // 전송 프로세스 중단
+						}
+						// hidden 데이터 처리
+						$("[name=proc]").val("수정");
+						// form의 조건에 따른 요청 controller/jsp 페이지 처리
+						if($($("[name=proc]").val()=="수정") {
+							$("form").attr("action", "<%=path%>/calUpdate.do");
+						}
+						if($($("[name=proc]").val()=="삭제") {
+							$("form").attr("action", "<%=path%>/calDelete.do");
+						}
+						$("form").submit();
+					});
 --%>
 <%
 
@@ -107,7 +135,7 @@
 		<tr><th>계산서처리 <%=idx+1 %></th><td><%=calMsgs[idx] %></td></tr>
 		<% } %>
 	</table>
-	<% } %>	
+	<% } %>
 	
 </body>
 </html>
