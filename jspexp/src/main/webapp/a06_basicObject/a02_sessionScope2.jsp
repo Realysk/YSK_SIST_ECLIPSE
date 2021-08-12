@@ -30,23 +30,26 @@
 	
 </style>
 <script src="<%=path%>/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
+
+</head>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("h2").text("삭제가 완료되었습니다!");
+		$("h2").text("request 페이지");
 	});
 
 </script>
-</head>
-<%-- 
-# 
-
---%>
-<%
-
-%>
 <body>
 
-	<h2 align="center"></h2>	
+	<h2 align="center"></h2>
+	<form id="frm01" method="post">
+	<table align="center" class="listTable">
+		<tr><th>페이지범위</th><td><%=pageContext.getAttribute("pageVar") %></td></tr>
+		<tr><th>request범위</th><td><%=request.getAttribute("requestVar") %></td></tr>
+		<tr><th>페이지범위</th><td><input type="text" name="ename" value=""/></td></tr>
+		<tr><th>페이지범위</th><td><input type="text" name="ename" value=""/></td></tr>
+		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
+	</table>	
+	</form>
 	
 </body>
 </html>
