@@ -62,6 +62,12 @@
 		pageContext.setAttribute("pageVar", "홍길동(page)");
 	// 2. request Scope 데이터 처리 : request 처리까지 데이터를 가지고 있다.
 		request.setAttribute("requestVar", "김길동(request)");
+		RequestDispatcher rd = request.getRequestDispatcher("a02_sessionScope2.jsp");
+		rd.forward(request, response);
+	// 3. session scope 데이터 처리 : 같은 종류의 브라우저가 열려진 상황에서는 해당 페이지를 link나 location.href, 등으로 변경하더라도 데이터를 유지하는 것을 말한다. 즉, 서버와 클라이언트가 접속하고 있는 상황에서 데이터 유지.
+		session.setAttribute("sessionVar", "신길동(session)");
+	// 4. application scope 데이터 처리 : 브라우저의 종류와 접속과 상관없이 서버가 구동되어 있는 순간 데이터를 유지한다.
+		application.setAttribute("applicationVar", "마길동(application)");
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -71,14 +77,16 @@
 </script>
 <body>
 
-	<jsp:forward page="a02_sessionScope2.jsp"/> <%-- request, response 정보와 함께 페이지 이동 --%>
+		<jsp:forward page="a02_sessionScope2.jsp"/>
+
+	<%-- request, response 정보와 함께 페이지 이동 --%>
 	<h2 align="center"></h2>
 	<form id="frm01" method="post">
 	<table align="center" class="listTable">
 		<tr><th>페이지범위</th><td><%=pageContext.getAttribute("pageVar") %></td></tr>
 		<tr><th>request범위</th><td><%=request.getAttribute("requestVar") %></td></tr>
-		<tr><th>페이지범위</th><td><input type="text" name="ename" value=""/></td></tr>
-		<tr><th>페이지범위</th><td><input type="text" name="ename" value=""/></td></tr>
+		<tr><th>session범위</th><td><%=session.getAttribute("sessionVar") %></td></tr>
+		<tr><th>application범위</th><td><%=application.getAttribute("applicationVar") %></td></tr>
 		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
 	</table>	
 	</form>

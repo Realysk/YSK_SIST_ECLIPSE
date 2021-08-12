@@ -32,26 +32,39 @@
 <script src="<%=path%>/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
 
 </head>
+<%-- 
+# ex) request 범위로 데이터(물건명,가격,수량)를 설정해서 a04_requestPage.jsp에서 데이터를 확인할 수 있게 처리하세요.
+
+--%>
+<%
+	request.setAttribute("prod", new Product("사과",3000,2));
+
+%>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("h2").text("request 페이지");
+		$("h2").text("request 예제");
 	});
 
 </script>
 <body>
 
+	<jsp:forward page="a04_requestPage.jsp"/>
+	<%
+		/*
+		선택적으로
+	 	RequestDispatcher rd = request.getRequestDispatcher("a04_requestPage.jsp");
+		rd.forward(request, response);
+		*/
+	%>
 	<h2 align="center"></h2>
 	<form id="frm01" method="post">
 	<table align="center" class="listTable">
-		<tr><th>페이지범위</th><td><%=pageContext.getAttribute("pageVar") %></td></tr>
-		<tr><th>request범위</th><td><%=request.getAttribute("requestVar") %></td></tr>
-		<tr><th>session범위</th><td><%=session.getAttribute("sessionVar") %></td></tr>
-		<tr><th>application범위</th><td><%=application.getAttribute("applicationVar") %></td></tr>
+		<tr><th>물건명</th><td><%=request.getAttribute("pname") %></td></tr>
+		<tr><th>가격</th><td><%=request.getAttribute("price") %></td></tr>
+		<tr><th>수량</th><td><%=request.getAttribute("cnt") %></td></tr>
 		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
 	</table>	
 	</form>
-	
-	<h3 align="center" onclick="location.href='a02_sessionScope3.jsp'"> 세션범위로 이동 </h3>
 	
 </body>
 </html>

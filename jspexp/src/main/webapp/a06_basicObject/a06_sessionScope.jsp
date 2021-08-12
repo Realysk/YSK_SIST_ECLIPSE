@@ -32,26 +32,45 @@
 <script src="<%=path%>/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
 
 </head>
+<%-- 
+# 
+
+--%>
+<%
+	Member emp = (Member) session.getAttribute("emp");
+	Member admin = (Member) application.getAttribute("admin");
+%>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("h2").text("request 페이지");
+		$("h2").text("시작");
 	});
 
 </script>
 <body>
 
 	<h2 align="center"></h2>
-	<form id="frm01" method="post">
+	<%
+	if(emp!=null) {
+	%>
 	<table align="center" class="listTable">
-		<tr><th>페이지범위</th><td><%=pageContext.getAttribute("pageVar") %></td></tr>
-		<tr><th>request범위</th><td><%=request.getAttribute("requestVar") %></td></tr>
-		<tr><th>session범위</th><td><%=session.getAttribute("sessionVar") %></td></tr>
-		<tr><th>application범위</th><td><%=application.getAttribute("applicationVar") %></td></tr>
-		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
-	</table>	
-	</form>
-	
-	<h3 align="center" onclick="location.href='a02_sessionScope3.jsp'"> 세션범위로 이동 </h3>
+		<tr><th>ID</th><td><%=emp.getId() %></td></tr>
+		<tr><th>PW</th><td><%=emp.getPass() %></td></tr>
+		<tr><th>NAME</th><td><%=emp.getName() %></td></tr>
+		<tr><th>AUTH</th><td><%=emp.getAuth() %></td></tr>
+		<tr><th>POINT</th><td><%=emp.getPoint() %></td></tr>
+	</table>
+	<% } %>
+	<%
+	if(admin!=null) {
+	%>
+	<table align="center" class="listTable">
+		<tr><th>ID</th><td><%=admin.getId() %></td></tr>
+		<tr><th>PW</th><td><%=admin.getPass() %></td></tr>
+		<tr><th>NAME</th><td><%=admin.getName() %></td></tr>
+		<tr><th>AUTH</th><td><%=admin.getAuth() %></td></tr>
+		<tr><th>POINT</th><td><%=admin.getPoint() %></td></tr>
+	</table>
+	<% } %>	
 	
 </body>
 </html>

@@ -9,4 +9,30 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+  	<description> DATABASE IP </description>
+  	<param-name> DB_IP </param-name>
+  	<param-value> 127.0.0.1 </param-value>
+  </context-param>
+  <context-param>
+  	<description> DATABASE PORT </description>
+  	<param-name> DB_PORT </param-name>
+  	<param-value> 1521 </param-value>  
+  </context-param>
+  <context-param>
+  	<description> DATABASE SID </description>
+  	<param-name> DB_SID </param-name>
+  	<param-value> XE </param-value> 		  
+  </context-param>
+  <context-param>
+  	<description> DATABASE USERNAME </description>
+  	<param-name> DB_Username </param-name>
+  	<param-value> scott </param-value> 
+  </context-param>
+  <context-param>
+  	<description> DATABASE PASS </description>
+  	<param-name> DB_Pass </param-name>
+  	<param-value> tiger </param-value>    
+  </context-param>
+  
 </web-app>

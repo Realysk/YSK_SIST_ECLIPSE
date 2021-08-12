@@ -4,7 +4,8 @@
 	import="java.util.*"
 	import="jspexp.z01_database.*"
 	import="jspexp.z02_vo.*"
-%>
+	buffer="10kb"
+%> <%-- 페이지 지시자를 통해서 buffer 메모리 설정 --%>
 <%
 //  [jspexp] 프로젝트에 사용
 //		import="jspexp.z02_vo.*" : VO import
@@ -72,6 +73,9 @@
 <body>
 
 	<h2 align="center"></h2>
+	<h3 align="center">버퍼의 크기 : <%=out.getBufferSize() %></h3>
+	<h3 align="center">남은 버퍼의 크기 : <%=out.getRemaining() %></h3>
+	<h3 align="center">자동 flush : <%=out.isAutoFlush() %></h3>
 	<%--
 		ex) 요청값을 age를 설정하여 out.println()를 활용하여 age가 18이상이면 성년, 그 외에는 미성년을 출력하세요.
 	--%>

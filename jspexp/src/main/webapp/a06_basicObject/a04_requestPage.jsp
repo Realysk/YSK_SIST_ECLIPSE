@@ -32,26 +32,38 @@
 <script src="<%=path%>/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
 
 </head>
+<%-- 
+# ex) request 범위로 데이터(물건명,가격,수량)를 설정해서 a04_requestPage.jsp에서 데이터를 확인할 수 있게 처리하세요.
+
+--%>
+<%
+	Product prod = (Product) request.getAttribute("prod");
+%>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("h2").text("request 페이지");
+		$("h2").text("요청객체범위(request)");
 	});
 
 </script>
 <body>
 
 	<h2 align="center"></h2>
-	<form id="frm01" method="post">
+	<%
+	if(prod!=null) {
+	%>
 	<table align="center" class="listTable">
-		<tr><th>페이지범위</th><td><%=pageContext.getAttribute("pageVar") %></td></tr>
-		<tr><th>request범위</th><td><%=request.getAttribute("requestVar") %></td></tr>
-		<tr><th>session범위</th><td><%=session.getAttribute("sessionVar") %></td></tr>
-		<tr><th>application범위</th><td><%=application.getAttribute("applicationVar") %></td></tr>
-		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
-	</table>	
-	</form>
-	
-	<h3 align="center" onclick="location.href='a02_sessionScope3.jsp'"> 세션범위로 이동 </h3>
-	
+		<tr><th>물건명</th><td><%=prod.getName() %></td></tr>
+		<tr><th>가격</th><td><%=prod.getPrice() %></td></tr>
+		<tr><th>수량</th><td><%=prod.getCnt() %></td></tr>
+	</table>
+	<% } %>
+	<%-- el을 활용해서 이전 페이지에서 선언한 request.setAttribute("prod"...) 이름으로 property로 사용 가능하다. --%>
+	<table align="center" class="listTable">
+		<tr><th>물건명</th><td>${prod.name}</td></tr>
+		<tr><th>가격</th><td>${prod.price}</td></tr>
+		<tr><th>수량</th><td>${prod.cnt}</td></tr>
+	</table>
+
+		
 </body>
 </html>

@@ -34,7 +34,7 @@
 </head>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("h2").text("request 페이지");
+		$("h2").text("session 페이지");
 	});
 
 </script>
@@ -51,7 +51,7 @@
 	</table>	
 	</form>
 	
-	<h3 align="center" onclick="location.href='a02_sessionScope3.jsp'"> 세션범위로 이동 </h3>
+	<h3 align="center" onclick="location.href='a02_sessionScope.jsp'"> 메인범위로 이동 </h3>
 	
 </body>
 </html>
