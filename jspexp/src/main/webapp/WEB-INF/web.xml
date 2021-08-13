@@ -34,5 +34,15 @@
   	<param-name> DB_Pass </param-name>
   	<param-value> tiger </param-value>    
   </context-param>
+  <context-param>
+  	<description>이미지 경로</description>
+  	<param-name>IMG_PATH</param-name>
+  	<param-value>/z01_img/</param-value>
+  </context-param> 
+  <context-param>
+  	<description>파일 다운로드 경로</description>
+  	<param-name>DOWN_PATH</param-name>
+  	<param-value>/z03_download/</param-value>
+  </context-param>   
   
 </web-app>

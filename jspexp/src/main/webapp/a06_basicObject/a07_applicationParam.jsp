@@ -51,6 +51,13 @@
 	String info03 = application.getInitParameter("DB_SID");
 	String info04 = application.getInitParameter("DB_Username");
 	String info05 = application.getInitParameter("DB_Pass");
+	
+	Enumeration<String> initParams = application.getInitParameterNames();
+	/*
+	# Enumeration 객체의 기능 메서드
+		1. .hasMoreElements() : 다음 라인의 데이터가 있는지 여부 boolean
+		2. .nextElement() : 구성요소의 값을 가져온다. name값을 가져올 수 있다.
+	*/
 
 	// ex) DB의 port/sid/username/pass를 web.xml에 설정하고 화면에 출력하세요.
 %>
@@ -72,6 +79,14 @@
 		<tr><th> Pass </th><td><%=info05%></td></tr>
 	</table>	
 	</form>
+	<table align="center" class="listTable">
+		<tr><th> NAME </th><th> VALUE </th></tr>
+		<% while(initParams.hasMoreElements()) {
+			String name = initParams.nextElement();
+		%>
+		<tr><td><%=name %> </td><td><%=application.getInitParameter(name) %>
+		<% } %>
+	</table>
 
 </body>
 </html>
