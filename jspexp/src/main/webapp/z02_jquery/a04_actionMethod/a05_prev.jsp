@@ -33,13 +33,7 @@
 
 </head>
 <%-- 
-# 계층구조 관련 메서드
-	1. children("자식중선택자")
-	2. parents() : 상위계층 객체들
-	   parent() : 바로 상위 부모 객체
-	3. next() : 형제(같은 부모 요소객체를 같은 level에 있는 요소객체) 중에 다음 요소객체 지정
-	4. prev() : 형제(같은 부모 요소객체를 같은 level에 있는 요소객체) 중에 앞선 요소객체 지정
-	5. siblings() : 형제요소객체들 지정
+# 
 
 --%>
 <%
@@ -47,14 +41,9 @@
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("h2").text("계층 구조 요소객체들 (클릭)").click(function() {
-			$("p").parent().css("font-size", "30px");
-			$("p").parent(".selected").css("background", "yellow");
-			// 배열.each(function(단위객체, index){})
-			$("p").parents().each(function(el, idx) {
-				console.log(idx);
-				console.log(el);
-			});
+		$("h2").text("prev() 예제").click(function() {
+			$("p").prev(".selected").css("font-size", "30px");
+			$("p").prev().css("background", "yellow");
 		});
 	});
 
@@ -62,8 +51,14 @@
 <body>
 
 	<h2 align="center"></h2>
-	<div><p>홍길동</p></div>
-	<div class="selected"><p>이순신</p></div>
+	<div class="selected"><span>홍길동</span></div>
+	<p class="selected">이순신</p>
+	<p>유관순</p>
+	<p>유관순</p>
+	<span class="selected">강감찬</span>
+	<p>이성계</p>
+	<p>이성계</p>
+	<p>이성계</p>
 	
 </body>
 </html>
