@@ -43,6 +43,10 @@
   	<description>파일 다운로드 경로</description>
   	<param-name>DOWN_PATH</param-name>
   	<param-value>/z03_download/</param-value>
-  </context-param>   
+  </context-param>
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/a08_exception/a02_404.jsp</location>
+  </error-page>
   
 </web-app>
