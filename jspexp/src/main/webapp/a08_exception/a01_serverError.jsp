@@ -54,7 +54,8 @@
 	String[] names = new String[1];
 	names[1] = "안녕";
 %>
-	<%-- <%=s.toString() %> --%>
+	<%=s.toString() %>
+	<%--2/0 --%>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("h2").text("시작");
