@@ -34,42 +34,34 @@
 
 </head>
 <%-- 
-# 
+ex) a04_buyBook.jsp (구매할 도서 - 구매처리 - 쿠키에 담기) 도서명, 가격
+	a05_CartBook.jsp (현재 카트에 담기 도서)
 
 --%>
 <%
-
+	String bkName = request.getParameter("bkName");
+	String price = request.getParameter("price");
+	if(bkName != null) {
+		response.addCookie(new Cookie(bkName, price));
+		response.sendRedirect("a05_CartBook.jsp");
+	}
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("h2").text("쿠키만들기");
+		$("h2").text("도서 구매");
 	});
 
 </script>
 <body>
-<%
-	// a02_cookieMake.jsp : 쿠키 요청값 생성 페이지
-	// a03_showCookie.jsp : 쿠키 확인 페이지
-	// ex) 한글로 쿠키값을 설정하여 확인할수 있게 하세요.
-
-	String ckName = request.getParameter("ckName");
-	String ckValue = request.getParameter("ckValue");
-	if(ckName != null) {
-		Cookie c1 = new Cookie(URLEncoder.encode(ckName, "UTF-8"), URLEncoder.encode(ckValue, "UTF-8"));
-		response.addCookie(c1);
-		// response.sendRedirect("이동할페이지") : 서버단에서 페이지 이동 처리
-		response.sendRedirect("a03_showCookie.jsp");
-	}
-%>
 
 	<h2 align="center"></h2>
 	<form id="frm01" method="post">
 	<table align="center" class="listTable">
-		<tr><th>쿠키이름</th><td><input type="text" name="ckName" value=""/></td></tr>
-		<tr><th>쿠키값</th><td><input type="text" name="ckValue" value=""/></td></tr>
-		<tr><td colspan="2"><input type="submit" value="쿠키만들기"/></td></tr>
+		<tr><th>도서명</th><td><input type="text" name="bkName" value=""/></td></tr>
+		<tr><th>가격</th><td><input type="text" name="price" value=""/></td></tr>
+		<tr><td colspan="2"><input type="submit" value="장바구니"/></td></tr>
 	</table>	
-	</form>	
+	</form>
 	
 </body>
 </html>

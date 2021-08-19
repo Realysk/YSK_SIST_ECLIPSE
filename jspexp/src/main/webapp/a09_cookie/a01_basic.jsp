@@ -4,6 +4,7 @@
 	import="java.util.*"
 	import="jspexp.z01_database.*"
 	import="jspexp.z02_vo.*"
+	import="java.net.*"	
 %>
 <%
 //  [jspexp] 프로젝트에 사용
@@ -51,12 +52,25 @@
 			- 콤마, 새미콜롬, 공백 등의 문자는 포함할  수 없다.
 			- $로 시작할 수 없다.
 			=> encoding 처리를 해야 한다.
+		3) 쿠키의 encoding과 decoding 처리
+			한글과 같은 문자를 처리할 때 encoding으로 저장하고 decoding으로 불러와야 한다.
+			Encoding 처리 : URLEncoder.encoder("한글데이터", "UTF-8");
+			Decoding 처리 : URLDecoder.decoder("한글데이터", "UTF-8");
+	4. 쿠키값의 삭제
+		1) 쿠키값은 일단 서버와 클라이언트가 끊어지면 사라진다.
+			서버가 재기동 또는 클라이언트의 브라우저를 다 닫으면 서버와 연결이 끊어진다.
+		2) 클라이언트 프로그램으로 삭제할 수 있지만 JSP는 서버프로그램으로 삭제해야 하므로 해당 쿠키를 다시 클라이언트로 보내기 전에 유효시간을 0으로 설정하여 response 객체로 전달하여 삭제 브라우저의 저장 위치에서 삭제되게 한다.
+			ex) ck.setMaxAge(0);
+				response.addCookie(ck);
 
 --%>
 <%
 	// 1. 쿠키 생성하기
 	Cookie cookie = new Cookie("cookie01", "strawberryTaste");
+	cookie.setMaxAge(0);
 	response.addCookie(cookie);
+	Cookie cookie2 = new Cookie(URLEncoder.encode("과일", "UTF-8"), URLEncoder.encode("복숭아", "UTF-8"));
+	response.addCookie(cookie2);
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -77,7 +91,7 @@
 		<% if(cookies != null) { 
 			for(Cookie ck:cookies) {
 		%>
-		<tr><td><%=ck.getName() %></td><td><%=ck.getValue() %></td></tr>
+		<tr><td><%=URLDecoder.decode(ck.getName(), "UTF-8") %></td><td><%=URLDecoder.decode(ck.getValue(), "UTF-8") %></td></tr>
 		<% 
 				}
 			}
