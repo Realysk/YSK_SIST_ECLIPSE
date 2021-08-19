@@ -43,11 +43,18 @@
 			<error-page>
 				<error-code> 에러코드 </error-code>
 				<location> 에러 페이지 URI </location>
-
+			</error-page>
+		2) 예외 처리 클래스 관련 에러 지정
+			에러 클래스를 선언하여 해당 내용에 합당한 부분을 location으로 호출하여 처리할 수 있다.
+			<error-page>
 --%>
 <%
-
+	String s = null;
+	// ex) ArrayListIndexOutOfBoundsException을 web.xml과 에러페이지로 설정하고 처리하세요.
+	String[] names = new String[1];
+	names[1] = "안녕";
 %>
+	<%-- <%=s.toString() %> --%>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("h2").text("시작");
