@@ -2,9 +2,9 @@ package jspexp.z02_vo;
 
 public class Person {
 	
-	String name;
-	int age;
-	String loc;
+	private String name;
+	private int age;
+	private String loc;
 	
 	public Person() {
 		super();
