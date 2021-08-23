@@ -26,37 +26,20 @@
 # 
 
 --%>
+<%
 
+%>
 <script type="text/javascript">
+	var id="${id}";
+	if(id==""){
+		alert("세션이 종료되었습니다.\n다시 로그인");
+		location.href="a08_server_ckSession.jsp";
+	}
 	$(document).ready(function(){
-		$("h2").text("세션삭제");
+		$("h2").text("${id}님 로그인 중!!");
 	});
 </script>
 <body>
 	<h2 align="center"></h2>
-<%
-	// 1. 세션의 설정
-	session.setAttribute("num01", 25);
-	session.setAttribute("num02", 5);
-	session.setAttribute("num03", 10);
-%>
-
-	<table  align="center" class="listTable">
-	<tr><th>세션값1</th><td>${num01 }</td></tr>
-	<tr><th>세션값2</th><td>${num02 }</td></tr>
-<%
-	// 2. 세션의 삭제
-	session.removeAttribute("num02");
-	session.setMaxInactiveInterval(10); // 10초로 처리함..
-%>		
-	<tr><th>세션값2(세션값 삭제)</th><td>${num02 }</td></tr>
-	<tr><th id="ckSession">세션값3(세션값 삭제)</th><td>${num03 }</td></tr>
-	</table>	
-	
-<script type="text/javascript">
-	$("#ckSession").click(function(){
-		location.href="a03_show.jsp";
-	});
-</script>	
 </body>
 </html>
