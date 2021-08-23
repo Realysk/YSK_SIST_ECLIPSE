@@ -34,7 +34,7 @@
 </head>
 <%-- 
 # 정리문제
-	1. [jquery] filter()의 사용형식과 end()기능메서드의 의미를 기술하세요.
+	1. [jquery] filter()의 사용형식과 end()기능메서드의 의미를 기술하세요..
 	
 		기본 filter("선택자형식");
 		filter(function(idx, 요소객체) {return boolean값;});		
