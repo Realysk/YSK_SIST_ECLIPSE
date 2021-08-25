@@ -1,1 +1,3 @@
-물건명 : 사과 // 가격 : 3,000원 // 수량 : 5개
+<h4 align="center"> 물건명 : 사과 </h4>
+<h4 align="center"> 가격 : 3000 </h4>
+<h4 align="center"> 수량 : 5 </h4>

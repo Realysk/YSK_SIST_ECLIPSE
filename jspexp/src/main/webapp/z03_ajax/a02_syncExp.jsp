@@ -38,18 +38,11 @@
 --%>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("h2").text("물건정보 (Click)").click(function() {
-			// 1. 객체 생성
+		$("h2").text("동기 연습").click(function() {
 			var xhr = new XMLHttpRequest();
-			// alert("객체생성 : " + xhr);
-			// 2. 비동기 여부와 서버의 자원 요청
-			//		get 방식으로 서버에 있는 z01_data.txt 호출, 비동기 여부는 false로 동기 처리.
 			xhr.open("get","z02_data.txt", false);
-			// 3. 서버 전송
 			xhr.send();
-			// 4. 서버에 결과값 받기
-			var data = xhr.responseText;
-			$("h3").text("받은 데이터 : " + data);
+			$("div").html(xhr.responseText);
 		});
 	});
 	
@@ -59,7 +52,7 @@
 <body>
 
 	<h2 align="center"></h2>
-	<h3 align="center"></h3>
+	<div></div>
 	
 </body>
 </html>
