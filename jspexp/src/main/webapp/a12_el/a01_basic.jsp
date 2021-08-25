@@ -77,8 +77,6 @@
 	request.setAttribute("pname", "컴퓨터");
 	session.setAttribute("id", "himan");
 	application.setAttribute("serverInfo", "tomcat 9.0");
-	
-	
 %>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -89,8 +87,9 @@
 	<h2 align="center"></h2>
 	<h3 align="center">일반 변수</h3>
 	<%--
-	pageContext로 설정한 데이터는 pageScope.설정변수로 호출할 수 있다.
-	pageScope는 명확하게 구분해줄 필요성이 있을 때를 제외하고 생략 가능하다.
+	pageContext로 설정한 데이터는 
+	pageScope.설정변수로 호출할 수 있다.
+	pageScope는 명확하게 구분해줄 필요성이 있을 때를 제외하고 생략가능하다.
 	 --%>
 	<table  align="center" class="listTable">
 		<tr><th>${pageScope.name}</th><th>${price}</th><th>${cnt}</th></tr>
@@ -100,71 +99,8 @@
 			<th>${applicationScope.serverInfo}</th></tr>
 	</table>	
 	<%-- ex) session scope별로 도서명 도서가격 도서갯수 출판사로 선언하고, 해당 내용을 el로 호출하세요 
-			3조   전체(손들기)
+			3조   전체(손들기
 	 --%>
-	 <%
-	 	// p01이라는 이름으로 객체를 할당
-	 	request.setAttribute("p01", new Person("홍길동", 25, "서울신림동"));
-	 %>
-	 	${p01.setName('김유신')} ${p01.setAge(31)} <%-- el을 통한 변경이 가능하다. --%>
-	 	<h3 align="center"> 객체로 할당</h3>
-		<table align="center" class="listTable">
-			<tr><th>${p01.name}</th><th>${p01.age}</th><th>${p01.loc}</th></tr>
-		</table>
-		
-	<%-- ex2) session 범위로 객체로 물건명, 가격, 갯수를 할당하고 가격을 el로 인상 후 10% 출력하세요. --%>
 	
-	<%
-		session.setAttribute("p02", new Product("사과", 3000, 5));
-	%>
-		${p02.setPrice(p02.price*1.1)}
-	 	<h3 align="center"> 객체로 구매 정보 내용 확인 </h3>
-		<table align="center" class="listTable">
-			<tr><th>물건명</th><td>${p02.name}</td></tr>
-			<tr><th>가격</th><td>${p02.price}</td></tr>
-			<tr><th>수량</th><td>${p02.cnt}</td></tr>
-		</table>
-	<%
-		// 배열형 데이터 처리
-		request.setAttribute("array01", new String[]{"사과","바나나","딸기"});
-		// ArrayList형 데이터 처리
-		List<Product> list = new ArrayList<Product>();
-		list.add(new Product("사과", 3000, 2));
-		list.add(new Product("바나나", 4000, 3));
-		list.add(new Product("딸기", 12000, 5));
-		request.setAttribute("list", list);
-	%>
-	 	<h3 align="center"> 리스트형 배열 데이터 처리 </h3>
-		<table align="center" class="listTable">
-			<tr><th>array01</th><td>${array01[0]}, ${array01[1]}, ${array01[2]}</td></tr>
-			<tr><th>list</th><td>${list.get(0).getName()}</td></tr>
-			<tr><th>list</th><td>${list.get(1).getPrice()}</td></tr>
-			<tr><th>list</th><td>${list.get(2).getCnt()}</td></tr>
-		</table>
-		
-	<%-- ex3) 부서정보 ArrayList<Dept>로 할당하여 el로 호출하여 출력하세요. --%>
-	
-	<%
-		ArrayList<Dept> dlist = new ArrayList<Dept>();
-		dlist.add(new Dept(10, "si", "서울신림"));
-		dlist.add(new Dept(20, "기획", "서울신림"));
-		dlist.add(new Dept(30, "회계", "서울마포"));
-		dlist.add(new Dept(40, "개발", "서울강남"));
-		request.setAttribute("dlist", dlist);
-	%>
-		<table align="center" class="listTable">
-			<tr><th>부서번호</th><th>부서명</th><th>부서위치</th></tr>
-			<tr><td>${dlist.get(0).deptno}</td><td>${dlist.get(0).dname}</td><td>${dlist.get(0).loc}</td></tr>
-			<tr><td>${dlist.get(1).deptno}</td><td>${dlist.get(1).dname}</td><td>${dlist.get(1).loc}</td></tr>
-			<tr><td>${dlist.get(2).deptno}</td><td>${dlist.get(2).dname}</td><td>${dlist.get(2).loc}</td></tr>
-			<tr><td>${dlist.get(3).deptno}</td><td>${dlist.get(3).dname}</td><td>${dlist.get(3).loc}</td></tr>
-		</table>
-	<%--
-	요청값 처리
-		1. ${param.요청키}
-		2. ${paramValues.요청키}
-		?name=홍길동
-	 --%>
-	 	<h3 align="center"> 요청값에 대한 처리 : ${param.name} </h3>
 </body>
 </html>
