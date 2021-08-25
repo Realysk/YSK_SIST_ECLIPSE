@@ -23,11 +23,12 @@
 
 </head>
 <%-- 
-# 
-
+	emp => page 범위
+	empList => session 범위
+	누적되더라도 데이터가 다르게 객체를 생성하기에 데이터를 처리할 수 있다.
 --%>
 <%
-
+	pageContext.setAttribute("emp", new Emp());
 %>
 <script type="text/javascript">
 	$(document).ready(function(){
