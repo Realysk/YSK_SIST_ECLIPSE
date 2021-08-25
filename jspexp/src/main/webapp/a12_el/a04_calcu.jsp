@@ -5,6 +5,8 @@
 	import="jspexp.z01_database.*"
 	import="jspexp.z02_vo.*"
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 //  [jspexp] 프로젝트에 사용
 //		import="jspexp.z02_vo.*" : VO import
@@ -16,20 +18,19 @@
 //  공통 사용
 //		import="java.util.*" : 내장 객체 import
 //		import="java.sql.*" : DB 연동 객체 import
-
-	request.setCharacterEncoding("utf-8");
-	String path = request.getContextPath(); 
-%>   
+%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<fmt:requestEncoding value="utf-8"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title> REALYSK's PAGE </title>
-<link rel="stylesheet" href="<%=path%>/a00_com/a01_com.css">
+<link rel="stylesheet" href="${path}/a00_com/a01_com.css">
 <style>
 	
 </style>
-<script src="<%=path%>/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
+<script src="${path}/a00_com/jquery-3.6.0.js" type="text/javascript"></script>
 
 </head>
 <%-- 
@@ -56,6 +57,9 @@
 		요청 header ${header} ${headerValues}
 		쿠키 ${cookie}
 		초기 파라미터 ${initParam}
+		ex) String path = request.getContextPath();
+		=> el로 ${pageContext.requset.contextPath}
+		다음 시간 jstl의 변수 설정으로 <c:set var="path" value="${pageContext.requset.contextPath}"/> 처리할 수 있다.
 
 --%>
 
