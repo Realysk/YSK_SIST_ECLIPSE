@@ -50,7 +50,7 @@
 				var pass = $("[name=pass]").val();
 				var snd = "id="+id+"&pass="+pass;
 				console.log(snd);
-				xhr.open("post", "z10_data.jsp", true);
+				xhr.open("post", "z12_data.jsp", true);
 				// 1. post방식일 때 header부분 설정 변경
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				xhr.send(snd);

@@ -44,13 +44,14 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		var xhr = new XMLHttpRequest();
-		$("[name=id],[name=pass]").keyup(function() {
+		$("[name=pname],[name=price],[name=cnt]").keyup(function() {
 			if(event.keyCode==13) {
-				var id = $("[name=id]").val();
-				var pass = $("[name=pass]").val();
-				var snd = "id="+id+"&pass="+pass;
+				var pname = $("[name=pname]").val();
+				var price = $("[name=price]").val();
+				var cnt = $("[name=cnt]").val();
+				var snd = "pname="+pname+"&price="+price+"&cnt="+cnt;
 				console.log(snd);
-				xhr.open("post", "z10_data.jsp", true);
+				xhr.open("post", "z11_data.jsp", true);
 				// 1. post방식일 때 header부분 설정 변경
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				xhr.send(snd);
@@ -71,8 +72,9 @@
 	<h2 align="center"> 비동기 POST 방식 </h2>
 	<form id="frm01">
 	<table align="center" class="listTable">
-		<tr><th> ID </th><td><input type="text" name="id" value=""/></td></tr>
-		<tr><th> PW </th><td><input type="password" name="pass" value=""/></td></tr>
+		<tr><th> 물건명 </th><td><input type="text" name="pname" value=""/></td></tr>
+		<tr><th> 가격 </th><td><input type="text" name="price" value=""/></td></tr>
+		<tr><th> 수량 </th><td><input type="text" name="cnt" value=""/></td></tr>
 	</table>	
 	</form>
 	<div></div>
