@@ -30,7 +30,7 @@
 %>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("[name=dname],[name=loc]").keyup(function(event){
+		$("[name=dname],[name=loc]").keyup(function(event) {
 			//if(event.keyCode==13){
 			search();
 			//}
