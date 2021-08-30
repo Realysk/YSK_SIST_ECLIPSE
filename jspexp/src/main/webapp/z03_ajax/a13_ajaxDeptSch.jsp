@@ -19,49 +19,31 @@
 </style>
 <script src="${path}/a00_com/jquery-3.6.0.js" 
 	type="text/javascript"></script>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+	
+	});
+</script>
 </head>
 <%-- 
 # 
-
+ex) 부서정보를 ajax처리하여 출력하세요 4조
 --%>
 <%
 
 %>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("[name=dname],[name=loc]").keyup(function(event) {
-			//if(event.keyCode==13){
-			search();
-			//}
-		});
-		$("#schBtn").click(function(){
-			search();
-		});
-	});
-	function search(){
-		var snd = "dname="+$("[name=dname]").val()+"&loc="+$("[name=loc]").val();
-		var xhr = new XMLHttpRequest();
-		xhr.open("post","z14_data.jsp",true);
-		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		xhr.send(snd);
-		xhr.onreadystatechange=function(){
-			if(xhr.readyState==4&&xhr.status==200){
-				$("div").html(xhr.responseText);
-			}
-		};
-	}
-</script>
 <body>
-	<h2 align="center">부서 정보 ajax 처리</h2>
-	<form id="frm01" method="post">
+	<h2 align="center"></h2>
+	<form id="frm01">
 	<table align="center" class="listTable">
-		<tr><th>부서명</th><td><input type="text" name="dname" value=""/></td></tr>
-		<tr><th>부서위치</th><td><input type="text" name="loc" value=""/></td></tr>
-		<tr><td colspan="2" style="text-align:center" ><input type="button" id="schBtn" value="검색"/></td></tr>
+		<tr><th>사원명</th><td><input type="text" name="ename" value=""/></td></tr>
+		<tr><td colspan="2" style="text-align:center" ><input type="submit" value="검색"/></td></tr>
 	</table>	
 	</form>
-	<div></div>
+	<table  align="center" class="listTable">
+		<tr><th></th><th></th><th></th></tr>
+		<tr><td></td><td></td><td></td></tr>
+	</table>	
 	
 </body>
 </html>
