@@ -1623,6 +1623,7 @@ public class A05_PreparedDao {
 		dao.empList3(10);
 		
 		//ArrayList<Emp> elist = dao.getEmpList();
+		
 		/*
 		//dao.empList2(30);
 		Emp e = dao.getEmp(7369);
@@ -1634,19 +1635,21 @@ public class A05_PreparedDao {
 		}else {
 			System.out.println("데이터가 없습니다.");
 		}
-		public Emp(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno) {
-			UPDATE emp02
-				SET ename = ename||'(승진)',
-					job = '차장',
-					mgr = 7780,
-					hiredate = TO_date('2021/01/01','YYYY/MM/DD'),
-					sal = sal+1000,
-					comm = comm+300,
-					deptno = 20
-			WHERE empno = 7937;			
+//		public Emp(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno) {
+//			UPDATE emp02
+//				SET ename = ename||'(승진)',
+//					job = '차장',
+//					mgr = 7780,
+//					hiredate = TO_date('2021/01/01','YYYY/MM/DD'),
+//					sal = sal+1000,
+//					comm = comm+300,
+//					deptno = 20
+//			WHERE empno = 7937;			
 		*/
+		
 		//dao.insertEmp(new Emp(0,"김미나","과장",7780,"",6000,1000,10));
 		//dao.updateEmp(new Emp(7937,"김소현(수정)","대리",7780,"2021/07/09",5000,1000,10));
+				
 //		dao.deleteEmp(7935);
 		
 		for(Emp e:dao.getPreparedEmpList(new Emp("",""))) {
