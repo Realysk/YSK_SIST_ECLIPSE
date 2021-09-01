@@ -33,5 +33,19 @@ public class CommonService {
 		
 		return empJson;
 	}
+	
+	public String getJsonMember(String id) {
+		// DAO를 통해 나온 Member객체를 gson으로 처리
+		
+		String memJson = "{}";
+		
+		Member mem = dao.getMember(id);
+		
+		if(dao.getMember(id)!=null) {
+			memJson = gson.toJson(id);
+		}
+		
+		return memJson;
+	}
 
 }

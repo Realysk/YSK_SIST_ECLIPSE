@@ -12,7 +12,7 @@ import jspexp.a02_mvc.a02_service.CommonService;
 /**
  * Servlet implementation class A25_AjaxController
  */
-@WebServlet(name = "schMem.do", urlPatterns = { "/schMem.do" })
+@WebServlet(name = "schMember.do", urlPatterns = { "/schMember.do" })
 public class A27_AjaxController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CommonService service;
@@ -34,7 +34,7 @@ public class A27_AjaxController extends HttpServlet {
 		} else {
 			response.setContentType("text/html;charset=utf-8");
 			
-			response.getWriter().print(service.getMember(id));
+			response.getWriter().print(service.getJsonMember(id));
 			// {"id":"himan"}
 		}
 	}
