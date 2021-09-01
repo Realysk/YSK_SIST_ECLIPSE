@@ -63,25 +63,17 @@
 	<h3 align="center">기본 출력(숫자):${num01}</h3>
 	<h3 align="center">fmt 처리 기본(날짜): <fmt:formatDate value="${now}"/>  </h3>
 	<h3 align="center">fmt 처리 기본(숫자): <fmt:formatNumber value="${num01}"/> </h3>
-	<h3 align="center">fmt 처리 full(날짜): <fmt:formatDate type="date" dateStyle="full" value="${now}"/>  </h3>
-	<h3 align="center">fmt 처리 short(날짜): <fmt:formatDate type="date" dateStyle="short"  value="${now}"/>  </h3>
-	<h3 align="center">fmt 처리 full(시간): <fmt:formatDate type="time" timeStyle="full" value="${now}"/>  </h3>
-	<h3 align="center">fmt 처리 short(시간): <fmt:formatDate type="time" timeStyle="short"  value="${now}"/>  </h3>
-	<h3 align="center">fmt 처리 full(날짜/시간): <fmt:formatDate type="both" dateStyle="full" timeStyle="full" 
-													value="${now}"/>  </h3>
-	<h3 align="center">fmt 처리 short(날짜/시간): <fmt:formatDate type="both" dateStyle="short" timeStyle="short"  
-													value="${now}"/>  </h3>
-	<h3 align="center">fmt 처리 pattern(날짜/시간): 
-	<fmt:formatDate pattern="yyyy/MM/dd kk:mm:ss.S"  value="${now}"/>  </h3>
+	<h3 align="center">fmt 처리 full(날짜): <fmt:formatDate type="date" dateStyle="full" value="${now}"/></h3>
+	<h3 align="center">fmt 처리 short(날짜): <fmt:formatDate type="date" dateStyle="short"  value="${now}"/></h3>
+	<h3 align="center">fmt 처리 full(시간): <fmt:formatDate type="time" timeStyle="full" value="${now}"/></h3>
+	<h3 align="center">fmt 처리 short(시간): <fmt:formatDate type="time" timeStyle="short"  value="${now}"/></h3>
+	<h3 align="center">fmt 처리 full(날짜/시간): <fmt:formatDate type="both" dateStyle="full" timeStyle="full" value="${now}"/></h3>
+	<h3 align="center">fmt 처리 short(날짜/시간): <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${now}"/></h3>
+	<h3 align="center">fmt 처리 pattern(날짜/시간): <fmt:formatDate pattern="yyyy/MM/dd kk:mm:ss.S"  value="${now}"/>  </h3>
 	<%-- 통화형식은 소숫점을 반올림, 천단위 표기 및 앞에 현재 통화단위 표시 --%>
-	<h3 align="center">fmt 처리 기본(숫자/통화): <fmt:formatNumber type="currency" value="${num01}" /> </h3>
-	<h3 align="center">fmt 처리 기본(숫자/통화/지정): <fmt:formatNumber type="currency" 
-												currencySymbol="$"
-												value="${num01}" /> </h3>
-	<h3 align="center">fmt 처리 기본(숫자/통화/지정): <fmt:formatNumber type="currency" 
-												currencySymbol="만원"
-												value="${num01}" /> </h3>
-												
+	<h3 align="center">fmt 처리 기본(숫자/통화): <fmt:formatNumber type="currency" value="${num01}"/></h3>
+	<h3 align="center">fmt 처리 기본(숫자/통화/지정): <fmt:formatNumber type="currency" currencySymbol="$" value="${num01}" /></h3>
+	<h3 align="center">fmt 처리 기본(숫자/통화/지정): <fmt:formatNumber type="currency" currencySymbol="만원" value="${num01}" /></h3>											
 	<h3 align="center">fmt 처리 기본(숫자/퍼센트): <fmt:formatNumber type="percent" value="${0.25}" /> </h3>	
 	<h3 align="center">fmt 처리 기본(숫자/패턴설정): 
 		<fmt:formatNumber pattern="0,000,000.000" value="${num01}" /> </h3>	
