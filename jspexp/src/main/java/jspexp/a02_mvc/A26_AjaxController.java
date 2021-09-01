@@ -7,20 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jspexp.a02_mvc.a02_service.CommonService;
+
 /**
  * Servlet implementation class A25_AjaxController
  */
-@WebServlet(name = "ckAdult.do", urlPatterns = { "/ckAdult.do" })
-public class A25_AjaxController extends HttpServlet {
+@WebServlet(name = "schEmp.do", urlPatterns = { "/schEmp.do" })
+public class A26_AjaxController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public A25_AjaxController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private CommonService service;
+    public A26_AjaxController() {
+		super();
+		service = new CommonService();
+	}
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
@@ -28,16 +27,15 @@ public class A25_AjaxController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		// 1. 요청값 처리.
-		String ageS = request.getParameter("age");
-		
-		// 3. 초기화면 호출
-		if(ageS==null) {
-			request.getRequestDispatcher("a14_mvc\\a05_mvcAjax2.jsp").forward(request, response);
-		}else {
+		String empnoS = request.getParameter("empno");
+
+		if(empnoS==null) {
+			request.getRequestDispatcher("a14_mvc\\a06_mvc_DB.jsp").forward(request, response);
+		} else {
 			response.setContentType("text/html;charset=utf-8");
-			int age = Integer.parseInt(ageS);
-			response.getWriter().print((age >= 18) ? "성인" : "미성년");
+			
+			response.getWriter().print(service.getJsonEmp(Integer.parseInt(empnoS)));
+			// {"name":"홍길동"}
 		}
 	}
 

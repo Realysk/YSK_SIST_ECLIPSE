@@ -26,20 +26,8 @@
 </script>
 </head>
 <%-- 
-# MVC ajax처리.
-1. 처리프로세스 
-	1) controller로 초기화면 호출.
-	2) 초기화면에 입력 처리 및 ajax 로 controller호출.
-	3) 요청값을 받을 controller은 
-		요청값을 기준으로 초기화면과 메시지를 전달하여야 할 내용을 조건 처리한다.
-	4) 메시지 전달은 out.print()를 활용한다.
-2. 실습예제
-	controller : A24_AjaxController.java  buy02.do
-		String priceS = request.getParameter("price");
-		String cntS = request.getParameter("cnt");
-	view : \a14_mvc\a04_mvcAjax.jsp
-		가격:[   ]
-		갯수:[   ] ==> enter키를 입력시, ajax로 controller 호출하여 처리
+#
+
 --%>
 <%
 

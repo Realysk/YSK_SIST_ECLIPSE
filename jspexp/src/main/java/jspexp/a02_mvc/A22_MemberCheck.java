@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jspexp.a02_mvc.a02_service.A22_MemberService;
+import jspexp.a02_mvc.a02_service.CommonService;
 
 /**
  * Servlet implementation class A22_MemberCheck
@@ -18,7 +18,7 @@ import jspexp.a02_mvc.a02_service.A22_MemberService;
 public class A22_MemberCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    private A22_MemberService service;
+    private CommonService service;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -26,7 +26,7 @@ public class A22_MemberCheck extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
         
-        service = new A22_MemberService();
+        service = new CommonService();
         
     }
 
