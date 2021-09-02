@@ -108,77 +108,47 @@
 			$("[name=point]").val($("#show td").eq(4).text());
 		});
 		$("#regBtn").click(function(){
-			if(confirm("등록 하시겠습니까?")){
+			if(confirm("등록하시겠습니까?")){
 				$("[name=proc]").val("ins");
-				var snd = $("form").serialize();
-				console.log(snd);
-				xhr.open("get","${path}/schMember.do?"+snd,true);
-				xhr.send();
-				xhr.onreadystatechange=function(){
-					if(xhr.readyState==4&&xhr.status==200){
-						var jTxt = xhr.responseText;
-						console.log(jTxt);
-						var jData = JSON.parse(jTxt);
-						alert(jData.result);
-						var list = jData.list;
-						var show="";
-						$(list).each(function(idx, mem) {
-							show+="<tr><td>"+mem.id+"</td><td>"+mem.pass+"</td><td>"+mem.name+"</td><td>"+mem.auth+"</td><td>"+mem.point+"</td></tr>";
-						});
-						$("#list tbody").html(show);
-					}
-				};				
-				
+				ajaxFun();
 			}
 		});
 		$("#uptBtn").click(function(){
-			if(confirm("수정 하시겠습니까?")){
+			if(confirm("수정하시겠습니까?")){
 				$("[name=proc]").val("upt");
-				var snd = $("form").serialize();
-				console.log(snd);
-				xhr.open("get","${path}/schMember.do?"+snd,true);
-				xhr.send();
-				xhr.onreadystatechange=function(){
-					if(xhr.readyState==4&&xhr.status==200){
-						var jTxt = xhr.responseText;
-						console.log(jTxt);
-						var jData = JSON.parse(jTxt);
-						alert(jData.result);
-						var list = jData.list;
-						var show="";
-						$(list).each(function(idx, mem) {
-							show+="<tr><td>"+mem.id+"</td><td>"+mem.pass+"</td><td>"+mem.name+"</td><td>"+mem.auth+"</td><td>"+mem.point+"</td></tr>";
-						});
-						$("#list tbody").html(show);
-					}
-				};			
-				
+				ajaxFun();			
 			}
 		});
 		$("#delBtn").click(function(){
-			if(confirm("삭제 하시겠습니까?")){
+			if(confirm("삭제하시겠습니까?")){
 				$("[name=proc]").val("del");
-				var snd = $("form").serialize();
-				console.log(snd);
-				xhr.open("get","${path}/schMember.do?"+snd,true);
-				xhr.send();
-				xhr.onreadystatechange=function(){
-					if(xhr.readyState==4&&xhr.status==200){
-						var jTxt = xhr.responseText;
-						console.log(jTxt);
-						var jData = JSON.parse(jTxt);
-						alert(jData.result);
-						var list = jData.list;
-						var show="";
-						$(list).each(function(idx, mem) {
-							show+="<tr><td>"+mem.id+"</td><td>"+mem.pass+"</td><td>"+mem.name+"</td><td>"+mem.auth+"</td><td>"+mem.point+"</td></tr>";
-						});
-						$("#list tbody").html(show);
-					}
-				};				
-				
+				ajaxFun();				
 			}
-		});
+		});		
+		function ajaxFun(){
+			var snd = $("form").serialize();
+			console.log(snd);
+			xhr.open("get","${path}/schMember.do?"+snd,true);
+			xhr.send();
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					var jTxt = xhr.responseText;
+					console.log(jTxt);
+					var jData = JSON.parse(jTxt);
+					alert(jData.result);
+					var list = jData.list;
+					console.log(list);
+					var show="";
+					$(list).each(function(idx, mem){
+						show+="<tr><td>"+mem.id+"</td><td>"+
+						mem.pass+"</td><td>"+mem.name+"</td><td>"+
+						mem.auth+"</td><td>"+mem.point+"</td></tr>";
+					});
+					$("#list tbody").html(show);
+				}
+			};				
+		}
+		
 	});
 </script>
 <style>td{text-align:center;}</style>
@@ -215,9 +185,9 @@
 	</table>	
 	</form>
 	<table id="list" align="center" class="listTable">
-		<thead><tr><th>아이디</th><th>패스워드</th><th>이름</th><th>권한</th><th>포인트</th></tr></thead>
+		<thead>
+		<tr><th>아이디</th><th>패스워드</th><th>이름</th><th>권한</th><th>포인트</th></tr></thead>
 		<tbody></tbody>
-	</table>
-		
+	</table>			
 </body>
 </html>
