@@ -30,20 +30,21 @@ ex) id로 회원정보 MVC ajax로 검색처리.. 5조
 		var xhr = new XMLHttpRequest();
 		$("[name=id]").keyup(function(event){
 			if(event.keyCode==13){
+				$("#show td").text("");
 				var idVal = $("[name=id]").val();
 				xhr.open("get","${path}/schMember.do?id="+idVal,true);
 				xhr.send();
 				xhr.onreadystatechange=function(){
 					if(xhr.readyState==4&&xhr.status==200){
 						var jTxt = xhr.responseText;
-						$("#show td").text("");
+						
 						if(jTxt!="{}"){
 							var member = JSON.parse(xhr.responseText);
 							console.log(member);
-							$("#show td").eq(0).text(emp.id);
-							$("#show td").eq(1).text(emp.name);
-							$("#show td").eq(2).text(emp.auth);
-							$("#show td").eq(3).text(emp.point);
+							$("#show td").eq(0).text(member.id);
+							$("#show td").eq(1).text(member.name);
+							$("#show td").eq(2).text(member.auth);
+							$("#show td").eq(3).text(member.point);
 						}else{
 							alert("해당 회원번호 데이터가 없습니다.");					
 						}
@@ -60,7 +61,7 @@ ex) id로 회원정보 MVC ajax로 검색처리.. 5조
 	<table align="center" class="listTable">
 		<tr><th>회원아이디</th><td><input type="text" name="id" value=""/></td></tr>
 	</table>	
-	<table id="show"  align="center" class="listTable" width="50%">
+	<table id="show" align="center" class="listTable" width="50%">
 		<col width="20%"><col width="30%"><col width="20%"><col width="30%">
 		<tr><th>아이디</th><td></td><th>이름</th><td></td></tr>
 		<tr><th>권한</th><td></td><th>포인트</th><td></td></tr>

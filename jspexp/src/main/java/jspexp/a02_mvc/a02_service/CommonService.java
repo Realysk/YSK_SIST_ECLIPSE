@@ -15,37 +15,24 @@ public class CommonService {
 		dao = new A05_PreparedDao();
 		gson = new Gson();
 	}
-	
 	public Member getMember(String id) {
 		return dao.getMember(id);
 	}
-	
-	public String getJsonEmp(int empno) {
-		// DAO를 통해 나온 Emp객체를 gson으로 처리
-		
-		String empJson = "{}";
-		
+	public String  getJsonEmp(int empno) {
+		// dao를 통해 나온 Emp객체를 gson으로 처리.
+		String empJson="{}";
 		Emp emp = dao.getEmp(empno);
-		
-		if(dao.getEmp(empno)!=null) {
-			empJson = gson.toJson(emp);
+		if(emp!=null) {
+			empJson =  gson.toJson(emp);
 		}
-		
 		return empJson;
 	}
-	
-	public String getJsonMember(String id) {
-		// DAO를 통해 나온 Member객체를 gson으로 처리
-		
-		String memJson = "{}";
-		
+	public String  getJsonMember(String id) {
+		String memJson="{}";
 		Member mem = dao.getMember(id);
-		
-		if(dao.getMember(id)!=null) {
-			memJson = gson.toJson(id);
+		if(mem!=null) {
+			memJson =  gson.toJson(mem);
 		}
-		
 		return memJson;
 	}
-
 }

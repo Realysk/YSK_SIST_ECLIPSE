@@ -1,6 +1,7 @@
 package jspexp.z01_database;
-// jspexp.z01_database.A05_PreparedDao;
+// jspexp.z01_database.A05_PreparedDao
 import java.sql.Connection;
+import java.lang.ArrayIndexOutOfBoundsException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,15 +12,14 @@ import java.util.ArrayList;
 import jspexp.z02_vo.Dept;
 import jspexp.z02_vo.Emp;
 import jspexp.z02_vo.Member;
-
+import jspexp.z02_vo.Student;
 
 public class A05_PreparedDao {
-	
+
 	private Connection con;
 	private Statement stmt;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-	
 	public void setCon() throws SQLException {
 		// 1. 드라이버 메모리 로딩..
 		try {
@@ -32,7 +32,7 @@ public class A05_PreparedDao {
 		con = DriverManager.getConnection(info,"scott","tiger");
 		System.out.println("접속 성공!!");		
 	}
-	public ArrayList<Emp> getEmpList() {
+	public ArrayList<Emp> getEmpList(){
 		ArrayList<Emp> emplist = new ArrayList<Emp>();
 		try {
 			setCon();
@@ -196,17 +196,16 @@ public class A05_PreparedDao {
 		try {
 			setCon();
 			// 2. 부서 정보 받아 sql 선언.
-			
-			 String sql = "SELECT deptno, empno, ename, job, sal\r\n" + "	FROM emp02\r\n"
-					 	+ "WHERE deptno="+deptno;
-			 
+			String sql = "SELECT deptno, empno, ename, job, sal\r\n"
+					+ "	FROM emp02\r\n"
+					+ "	WHERE deptno="+deptno;
 			/*
 			ex) 문자열을 받으면, ''
 			 * WHERE ename='CLARK';
 			 * */
 			/*
 			String name = "CLARK";
-			String sql = "SELECT deptno, empno, ename, job, sal\r\n"
+			String sql2 = "SELECT deptno, empno, ename, job, sal\r\n"
 					+ "	FROM emp02\r\n"
 					+ "WHERE ename='"+name+"'"; 
 			*/
@@ -310,7 +309,7 @@ public class A05_PreparedDao {
 		}
 		return emp;
 	}
-	public ArrayList<Emp> getPreparedEmpList(Emp sch) {
+	public ArrayList<Emp> getPreparedEmpList(Emp sch){
 		ArrayList<Emp> emplist = new ArrayList<Emp>();
 		try {
 			setCon();
@@ -400,7 +399,7 @@ public class A05_PreparedDao {
 	8) 자원해제처리.		
 	9) 예외 처리 - rollback();	
 	 * */
-	public void insertEmp(Emp ins) {
+	public void insertEmp(Emp ins){
 		try {
 			setCon();
 			con.setAutoCommit(false);
@@ -637,95 +636,24 @@ public class A05_PreparedDao {
 			
 		}
 	}
-	// 1. return 타입, 매개변수,
-	// 2. SQL 삽입
-	// 3. VO 데이터 처리
-	public ArrayList<Dept> getDeptList(Dept sch) {
-		ArrayList<Dept> deptlist = new ArrayList<Dept>();
-		try {
-			setCon();
-			String sql = " SELECT * \r\n"
-					+ " FROM dept02\r\n"
-					+ " WHERE dname LIKE '%'||?||'%'\r\n"
-					+ " AND loc LIKE '%'||?||'%'";
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, sch.getDname());
-			pstmt.setString(2, sch.getLoc());
-			
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				deptlist.add(new Dept(
-							rs.getInt("deptno"),
-							rs.getString("dname"),
-							rs.getString("loc")
-						));
-			}
-			System.out.println("ArrayList의 데이터 갯수:"+deptlist.size());
-			rs.close(); pstmt.close(); con.close();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("SQL 예외 발생~~"+e.getMessage());
-		} catch(Exception e) {
-			System.out.println("일반예외 발생:"+e.getMessage());
-		}finally {
-			if(rs!=null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if(stmt!=null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}	
-			if(pstmt!=null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}			
-			if(con!=null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}	
-			
-		}
-		return deptlist;
-	}
-	
-	public ArrayList<Member> getMemberList(){
-		ArrayList<Member> memlist = new ArrayList<Member>();
+	public ArrayList<Student> getStudents(){
+		ArrayList<Student> emplist = new ArrayList<Student>();
 		try {
 			setCon();
 			String sql = "SELECT * \r\n"
-					+ "FROM member";
+					+ "FROM student";
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				memlist.add(new Member(
-							rs.getString("id"),
-							rs.getString("pass"),
+				emplist.add(new Student(
+							rs.getInt("sno"),
 							rs.getString("name"),
-							rs.getString("auth"),
-							rs.getInt("point")
+							rs.getInt("kor"),
+							rs.getInt("eng"),
+							rs.getInt("math")
 						));
 			}
-			System.out.println("ArrayList의 데이터 갯수:"+memlist.size());
+			System.out.println("ArrayList의 데이터 갯수:"+emplist.size());
 			rs.close(); stmt.close(); con.close();
 			
 		} catch (SQLException e) {
@@ -769,30 +697,31 @@ public class A05_PreparedDao {
 			}	
 			
 		}
-		return memlist;
+		return emplist;
 	}
-	
 	// 1. return 타입, 매개변수,
-	// 2. SQL 삽입
+	// 2. sql 삽입.
 	// 3. VO 데이터 처리
-	public boolean login(String id, String pass) {
-		boolean hasMember = false;
+	public ArrayList<Dept> getDeptList(Dept sch){
+		ArrayList<Dept> deptList = new ArrayList<Dept>();
 		try {
 			setCon();
-			String sql = "SELECT * FROM MEMBER WHERE id=? AND pass=?";
-			
+			String sql = "SELECT * \r\n"
+					+ "FROM dept02\r\n"
+					+ "WHERE dname LIKE '%'||?||'%'\r\n"
+					+ "AND loc LIKE '%'||?||'%'";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, pass);
-			
+			pstmt.setString(1, sch.getDname());
+			pstmt.setString(2, sch.getLoc());
 			rs = pstmt.executeQuery();
-			
-			hasMember = rs.next(); // 데이터가 있으면 true/false
-			
-			System.out.println("입력 값 ID :" + id);
-			System.out.println("입력 값 PW :" + pass);
-			System.out.println("등록 여부 :" + hasMember);
-			
+			while(rs.next()) {
+				deptList.add(new Dept(
+							rs.getInt("deptno"),
+							rs.getString("dname"),
+							rs.getString("loc")
+						));
+			}
+			System.out.println("ArrayList의 데이터 갯수:"+deptList.size());
 			rs.close(); pstmt.close(); con.close();
 			
 		} catch (SQLException e) {
@@ -836,9 +765,132 @@ public class A05_PreparedDao {
 			}	
 			
 		}
+		return deptList;
+	}
+	public ArrayList<Member> getMemberList(){
+		ArrayList<Member> emplist = new ArrayList<Member>();
+		try {
+			setCon();
+			String sql = "SELECT * \r\n"
+					+ "FROM member";
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				emplist.add(new Member(
+							rs.getString("id"),
+							rs.getString("pass"),
+							rs.getString("name"),
+							rs.getString("auth"),
+							rs.getInt("point")
+						));
+			}
+			System.out.println("ArrayList의 데이터 갯수:"+emplist.size());
+			rs.close(); stmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("SQL 예외 발생~~"+e.getMessage());
+		} catch(Exception e) {
+			System.out.println("일반예외 발생:"+e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			
+		}
+		return emplist;
+	}
+	// 1. return 타입, 매개변수,
+	// 2. sql 삽입.
+	// 3. VO 데이터 처리
+	public boolean login(String id, String pass){
+		boolean hasMember=false;
+		try {
+			setCon();
+			String sql = "SELECT * FROM MEMBER WHERE ID=? AND PASS=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pass);
+			rs = pstmt.executeQuery();
+			hasMember=rs.next(); //데이터가 있으면 true/false
+			System.out.println("입력값 id:"+id);
+			System.out.println("입력값 pass:"+pass);
+			System.out.println("등록여부:"+hasMember);
+			
+			rs.close(); pstmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("SQL 예외 발생~~"+e.getMessage());
+		} catch(Exception e) {
+			System.out.println("일반예외 발생:"+e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+		}
 		return hasMember;
 	}
-	
 	/*
 	1) 기능 메서드 선언.
 		public void insertEmp(Emp ins)
@@ -856,11 +908,12 @@ public class A05_PreparedDao {
 	8) 자원해제처리.		
 	9) 예외 처리 - rollback();	
 	 * */
-	public void insertEmp2(Emp ins) {
+	public void insertEmp2(Emp ins){
 		try {
 			setCon();
 			con.setAutoCommit(false);
-			String sql = "INSERT INTO emp02 values(emp_seq_01.nextval, ?,?,?,to_date(?,'YYYY-MM-DD'),?,?,?)";
+			String sql = "INSERT INTO emp02 values(emp_seq_01.nextval, "
+					+ "?,?,?,to_date(?,'YYYY-MM-DD'),?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, ins.getEname());
 			pstmt.setString(2, ins.getJob());
@@ -939,7 +992,7 @@ public class A05_PreparedDao {
 	8) 자원해제처리.		
 	9) 예외 처리 - rollback();	
 	 * */
-	public void insertDept(Dept ins) {
+	public void insertDept(Dept ins){
 		try {
 			setCon();
 			con.setAutoCommit(false);
@@ -1001,10 +1054,6 @@ public class A05_PreparedDao {
 			
 		}
 	}
-	
-	
-	// INSERT INTO MEMBER VALUES(?,?,?,?,?)	
-	
 	/*
 	1) 기능 메서드 선언.
 		public void insertEmp(Emp ins)
@@ -1022,11 +1071,11 @@ public class A05_PreparedDao {
 	8) 자원해제처리.		
 	9) 예외 처리 - rollback();	
 	 * */
-	public void insertMemer(Member ins) {
+	public void insertMember(Member ins){
 		try {
 			setCon();
 			con.setAutoCommit(false);
-			String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?)";
+			String sql = "INSERT INTO MEMBER values(?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, ins.getId());
 			pstmt.setString(2, ins.getPass());
@@ -1183,7 +1232,7 @@ public class A05_PreparedDao {
 			con.setAutoCommit(false);
 			String sql = "UPDATE dept02\r\n"
 					+ "	SET dname = ?,\r\n"
-					+ "		loc = ?,\r\n"
+					+ "		loc = ?\r\n"
 					+ "WHERE deptno = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, upt.getDname());
@@ -1344,16 +1393,17 @@ public class A05_PreparedDao {
 			setCon();
 			con.setAutoCommit(false);
 			String sql = "UPDATE MEMBER\r\n"
-					+ "	SET pass = ?,\r\n"
-					+ "		name = ?,\r\n"
-					+ "		auth = ?,\r\n"
-					+ "		point = ?\r\n"
-					+ "	WHERE id = ?";
+					+ "   SET pass = ?,\r\n"
+					+ "       name = ?,\r\n"
+					+ "       auth = ?,\r\n"
+					+ "       point = ?\r\n"
+					+ "  WHERE id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, upt.getPass());
 			pstmt.setString(2, upt.getName());
 			pstmt.setString(3, upt.getAuth());
 			pstmt.setInt(4, upt.getPoint());
+			pstmt.setString(5, upt.getId());
 			pstmt.executeUpdate();
 			con.commit();
 			pstmt.close(); con.close();
@@ -1407,20 +1457,16 @@ public class A05_PreparedDao {
 			
 		}
 	}
-
 	public void deleteMember(String id){
 		try {
 			setCon();
 			con.setAutoCommit(false);
-			String sql = "DELETE FROM MEMBER WHERE ID = ?";
+			String sql = "delete from member where id=?";
 			pstmt = con.prepareStatement(sql);
-	
 			pstmt.setString(1, id);
 			pstmt.executeUpdate();
 			con.commit();
 			pstmt.close(); con.close();
-		// ex) A02_DeptDao.java 기존 소스를 활용하여 부서번호로 부서정보를 
-		// 삭제하세요 [3조]
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1478,9 +1524,10 @@ public class A05_PreparedDao {
 			String sql = "SELECT *\r\n"
 					+ "FROM member\r\n"
 					+ "WHERE id = ?";
+					// WHERE id = "+id; ==> WHERE id = '"+id+"'";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			rs= pstmt.executeQuery(sql);
+			rs= pstmt.executeQuery();
 			if(rs.next()) {
 				mem = new Member(
 							rs.getString("id"),
@@ -1507,14 +1554,6 @@ public class A05_PreparedDao {
 					e.printStackTrace();
 				}
 			}
-			if(stmt!=null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}	
 			if(pstmt!=null) {
 				try {
 					pstmt.close();
@@ -1536,37 +1575,27 @@ public class A05_PreparedDao {
 		return mem;
 	}
 	// 1. return 타입, 매개변수,
-	// 2. SQL 삽입
+	// 2. sql 삽입.
 	// 3. VO 데이터 처리
-	public Member login2(String id, String pass) {
-//		boolean hasMember = false;
+	public Member login2(String id, String pass){
 		Member m = null;
 		try {
 			setCon();
-			String sql = "SELECT * FROM MEMBER WHERE id=? AND pass=?";
-			
+			String sql = "SELECT * FROM MEMBER WHERE ID=? AND PASS=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pass);
-			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-					m = new Member(
-						rs.getString("id"),
-						rs.getString("pass"),
-						rs.getString("name"),
-						rs.getString("auth"),
-						rs.getInt("point")
-					);
+				m = new Member(
+					rs.getString("id"),
+					rs.getString("pass"),
+					rs.getString("name"),
+					rs.getString("auth"),
+					rs.getInt("point")
+				);
 			}
-//			hasMember = rs.next(); // 데이터가 있으면 true/false
-			
-//			System.out.println("입력 값 ID :" + id);
-//			System.out.println("입력 값 PW :" + pass);
-//			System.out.println("등록 여부 :" + hasMember);
-			
 			rs.close(); pstmt.close(); con.close();
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1605,25 +1634,22 @@ public class A05_PreparedDao {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}	
-			
+			}			
 		}
 		return m;
 	}
+	// INSERT INTO MEMBER values(?,?,?,?,?)
 	// ex) 조회문 select * from dept를 위한 A02_DeptDao.java를 만들고,
 	//     공통 연결메서드와 기능메서드(부서정보조회) 틀을 만드세요 1조
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A05_PreparedDao dao = new A05_PreparedDao();
+		dao.login("himan", "7778");
+		System.out.println("member테스트:"+dao.getMemberList().size());
 		
-		dao.login("himan", "7777");
 		
-		System.out.println("Dept 테스트 : " + dao.getDeptList(new Dept(0, "", "")).size());
-		
-		dao.empList3(10);
 		
 		//ArrayList<Emp> elist = dao.getEmpList();
-		
 		/*
 		//dao.empList2(30);
 		Emp e = dao.getEmp(7369);
@@ -1635,22 +1661,20 @@ public class A05_PreparedDao {
 		}else {
 			System.out.println("데이터가 없습니다.");
 		}
-//		public Emp(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno) {
-//			UPDATE emp02
-//				SET ename = ename||'(승진)',
-//					job = '차장',
-//					mgr = 7780,
-//					hiredate = TO_date('2021/01/01','YYYY/MM/DD'),
-//					sal = sal+1000,
-//					comm = comm+300,
-//					deptno = 20
-//			WHERE empno = 7937;			
+		public Emp(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno) {
+UPDATE emp02
+	SET ename = ename||'(승진)',
+		job = '차장',
+		mgr = 7780,
+		hiredate = TO_date('2021/01/01','YYYY/MM/DD'),
+		sal = sal+1000,
+		comm = comm+300,
+		deptno = 20
+WHERE empno = 7937;			
 		*/
-		
 		//dao.insertEmp(new Emp(0,"김미나","과장",7780,"",6000,1000,10));
 		//dao.updateEmp(new Emp(7937,"김소현(수정)","대리",7780,"2021/07/09",5000,1000,10));
-				
-//		dao.deleteEmp(7935);
+		dao.deleteEmp(7935);
 		
 		for(Emp e:dao.getPreparedEmpList(new Emp("",""))) {
 			System.out.print(e.getEmpno()+"\t");
@@ -1658,15 +1682,7 @@ public class A05_PreparedDao {
 			System.out.print(e.getJob()+"\t");
 			System.out.print(e.getSal()+"\n");
 		}
-		
-		for(Member m:dao.getMemberList()) {
-			System.out.print(m.getId()+"\t");
-			System.out.print(m.getPass()+"\t");
-			System.out.print(m.getName()+"\t");
-			System.out.print(m.getAuth()+"\t");
-			System.out.print(m.getPoint()+"\n");
-		}
- 
+// 
 		
 	}
 
