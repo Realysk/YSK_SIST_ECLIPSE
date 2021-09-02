@@ -30,5 +30,16 @@
   				- 객체들을 특정 url pattern에 의해서 정의된 controller 호출하고 model, view(return으로 jsp등을 호출)을 사용할 수 있게 한다.
   			5) 사용자 정의 controller
   				- 지정된 url에 맞는 /start.do과 mapping되는 controller와 메서드를 호출하게 한다.
+  				- 메서드의 매개변수를 통해서 Model 데이터를 등록할 수 있게 처리.
+  					ex) public String start(Model d)
+  						d.addAttribute("show", "안녕하세요")
+  						모델명으로 show, 할당된 값으로 "안녕하세요"
+  				- 화면단(View)을 return 값으로 선언하여 처리
+  					ex) public String start() {
+  							return ""WEB-INF\\views\\a01_basic\\a01_start.jsp";
+  						}
+  			6) 화면단 구성 (View)
+  				- 웹 화면을 처리하고 컨트롤러에서 넘겨 온 모델 데이터를 처리한다.
+  					<h2>${show}</h2> 컨트롤러에 show라는 이름으로 모델 데이터
   -->
 </web-app>
