@@ -35,4 +35,42 @@ public class CommonService {
 		}
 		return memJson;
 	}
+	// 전체 list 가져오는 dao 처리 및 json 데이터 만들기.
+	public String memberList() {
+		return gson.toJson( dao.getMemberList() );
+	}
+	// 등록 처리하는 dao 호출 및 최종 json 데이터 처리 
+	public String insMemberJson(Member ins) {
+		String ret="등록성공";
+		try {
+			dao.insertMember(ins);
+		}catch(Exception e) {
+			ret="등록시 문제발생("+e.getMessage()+")";
+		}
+		// {"result":"결과","list":[]}
+		return "{\"result\":\""+ret+"\",\"list\":"+memberList()+"}";
+	}
+	public String uptMemberJson(Member upt) {
+		String ret="수정성공";
+		try {
+			dao.updateMember(upt);
+		}catch(Exception e) {
+			ret="수정시 문제발생("+e.getMessage()+")";
+		}
+		// {"result":"결과","list":[]}
+		return "{\"result\":\""+ret+"\",\"list\":"+memberList()+"}";
+	}	
+	public String delMemberJson(Member del) {
+		String ret="삭제성공";
+		try {
+			dao.deleteMember(del.getId());
+		}catch(Exception e) {
+			ret="삭제시 문제발생("+e.getMessage()+")";
+		}
+		// {"result":"결과","list":[]}
+		return "{\"result\":\""+ret+"\",\"list\":"+memberList()+"}";
+	}	
+	
+	
+	
 }

@@ -80,6 +80,15 @@
 					뷰단 호출
 	
 	3. 전날 처리한 ajax 회원 id 조회 화면에서 등록, 수정, 삭제를 버튼으로 추가하여 ajax로 처리해보세요.
+		
+		1) 파일 및 핵심 코드
+		controller (A27_AjaxController.java / schMember.do)
+			요청
+			조건에 따른 초기화면, ajax 데이터
+		service (CommonService.java)
+		
+		view (a14_mvc\a07_mvc_DB3.jsp)
+			초기화면 호출
 	
 		
 	
