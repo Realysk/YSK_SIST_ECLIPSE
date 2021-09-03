@@ -26,7 +26,6 @@
 		<%-- 
 		
 		--%>
-		$("h2").text("시작");
 		$("h2").click(function(){
 			$("#dialog").dialog("open");
 		});	
@@ -45,7 +44,11 @@
 
 <body>
 <div class="jumbotron text-center">
-  <h2>타이틀</h2>
+  <h2>${greet}</h2>
+  <h3>이름 : ${param.name}</h3>
+  <h3>가격 : ${param.price}</h3>
+  <h3>수량 : ${param.cnt}</h3>
+  <h3>총계 : ${tot}</h3>
 </div>
 <div class="container">
     <h2 align='center'></h2>

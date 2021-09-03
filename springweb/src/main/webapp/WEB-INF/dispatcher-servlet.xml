@@ -22,4 +22,5 @@
 	<!-- 컨테이너에 사용할 객체 등록 -->
 	<bean class="springweb.a01_basic.A01_StartCtrl"/>
 	<bean class="springweb.a01_basic.A02_SecondCtrl"/>
+	<bean class="springweb.a01_basic.A03_RequestController"/>
 </beans>
