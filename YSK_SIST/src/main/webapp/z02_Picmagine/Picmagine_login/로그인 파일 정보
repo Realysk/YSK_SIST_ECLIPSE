@@ -1,0 +1,20 @@
+* 지은님 폴더 기준으로 가지고 왔습니다.
+
+AUT_main.html : '로그인 이전' 메인 페이지
+logined_AUT_main.html : '로그인 이후' 메인 페이지
+
+login.html : 로그인 페이지
+	- recieveLogin.jsp : 로그인 데이터 등록
+join.html : 회원가입 페이지
+	- recieveJoin.jsp : 회원정보 데이터 등록
+forgotID.html : ID 찾기 페이지
+	- searchID.jsp : 등록 된 ID 조회
+forgotPW.html : PW 찾기 페이지
+	- searchID.jsp : 등록 된 PW 조회
+	
+	
+team3_join.html : 3조 회원가입 소스 (참고용)
+
+* 미 구현 사항
+	1) 자동 로그인 - JSP 및 세션 요구로 인해 미구현
+	2) 약관동의 미 동의시 회원가입 불가 - 이해 부족

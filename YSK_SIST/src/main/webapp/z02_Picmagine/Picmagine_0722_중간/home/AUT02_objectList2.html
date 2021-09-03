@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css"> 
+
+#tabList {
+	width:90%;
+	height:90%;
+}
+
+
+</style>
+</head>
+<body>
+	<table id="tabList"></table>
+</body>
+<script type="text/javascript">
+
+var tabList = document.querySelector("#tabList");
+var imgTitle = "img/img";
+var imgJpg = "_1.jpg";
+
+var tabShow = "";
+var trCount = 0;
+for(var idx=0;idx<11;idx++) {
+	
+	if(idx%3==0) {
+		tabShow += "<tr>";
+	} 
+	
+	if(idx<9) {
+		tabShow += `<td><a href='../art/상세페이지.html' target='_blank'><img src='${imgTitle}0${idx+1}${imgJpg}' 
+					width='150px' height='150px'></a></td>`;
+	} else {
+		tabShow += `<td><a href='../art/상세페이지.html' target='_blank'><img src='${imgTitle}${idx+1}${imgJpg}' 
+					width='150px' height='150px'></a></td>`;
+	}
+	
+	if (idx%3==2) {
+		tabShow += "</tr>";
+	}
+}
+tabShow += "</tr>";
+tabList.innerHTML = tabShow;
+
+</script>
+</html>

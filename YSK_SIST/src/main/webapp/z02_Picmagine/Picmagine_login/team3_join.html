@@ -1,0 +1,376 @@
+<!DOCTYPE HMTL>
+<html>
+    <head lang="ko">
+        <meta charset="utf-8">
+        <title>WWW.MAIN</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+        <style>
+            * {margin: 0px; padding : 0px; box-sizing: border-box;}
+            .wrap{width : 1260px; margin: 0 auto;}
+            li {list-style: none;}
+            button {background: none; border: none;}
+            a {text-decoration: none; color : #000000;}
+            
+            header {width : 1519px; height:73px;position: relative;}
+            header .wrap{position: relative;}
+            header h1 .main-logo {padding: 20px 25px; color: #2E6FAB;}
+            header h2 a {color: #363E56; position: absolute; top : 20px; left: 80px;}
+            header select {position: absolute; top : 30px; left: 80px;}
+            header ul {position: absolute; top : 25px; right: 30px;}
+            header ul li {
+                float: left;
+                padding: 0px 10px;
+                position: relative;
+            }
+            header ul li::after {
+                content: "|";
+                position: absolute;
+                top : -2px;
+                right : -3px;
+            }
+            header ul li:last-child::after{
+                content: none;
+            }
+            
+            nav {width : 1519px; height:50px; background: #2E6FAB; color: #ffffff; font-weight: bold;
+            position: relative;}
+            nav .wrap {position: relative;}
+            nav a {color: #ffffff;}
+            nav ul:last-child {float : right; } 
+            nav ul li {padding: 13px 10px; float: left;}
+            nav ul li button i {margin: 0px 20px; color: #ffffff;}
+            
+            nav .Main-Search {
+                width: 300px;
+                height: 30px;
+                position: absolute;
+                right: 100px;
+                top : 10px;
+                background-color: #ffffff;
+                border: 1px solid #ffffff;
+                border-radius: 25px;
+            }
+            nav .Main-Search input[type=text] {
+                width: 230px;
+                margin-left: 15px;
+                border: none;
+            }
+            nav .Main-Search input[type=submit] {
+                padding: 2px;
+                border-radius: 25px;
+                background-color : #F1F4F8;
+                
+                border: none;
+            }
+            section {width: 1519px; background-color: #F1F4F8; padding: 30px; overflow: hidden;}
+            .join{
+				width : 700px;
+				height : 590px;
+				/*border : 1px solid gray;*/
+				margin : 0 auto;
+				padding : 5px 10px;
+			}
+			h2{
+				margin : 0px;
+				color : #2E6FAB;
+			}
+			
+			.joinTab{
+				margin-top : 5px;
+				width :100%;
+				height : 450px;
+				border : 1px solid lightgray;
+				border-collapse : collapse;
+			}
+		
+			th{
+				width : 100px;
+				height : 50px;
+				background-color : #2E6FAB;
+				color : white;
+				font-size : 13px;
+			}
+			td{
+				padding : 0 10px;
+			}
+			.btnSec {
+				width : 100px;
+				height : 40px;
+				margin : 0 auto;
+			}
+			.join input {
+				border : none;
+				background-color : #2E6FAB;
+				color : white;	
+			}
+			.join input[type=text] {
+				width : 300px;
+				height : 30px;
+				padding-left : 10px;
+				background-color : #E6E3E2;
+				color : black;
+			}
+			input[type=password]{
+				width : 300px;
+				height : 30px;
+				padding-left : 10px;
+				background-color : #E6E3E2;
+				color : black;
+			}
+			.join input[type=button]{
+				width : 70px;
+				height : 25px;
+			}
+			.join input[type=button]{
+				cursor : pointer;
+			}
+			
+			.btnSec input{
+				margin-top : 10px;
+				width : 100px;
+				height : 40px;
+			}
+			input[name=mail]{
+				width : 150px;
+			}
+			input[type=submit]:hover{
+				cursor : pointer;
+			}
+			select {
+				width : 120px;
+				height : 30px;
+				border : none;
+				padding-left : 10px;
+				background-color : #E6E3E2;
+			}
+			select[name=hpFirst]{
+				width : 70px;
+			}
+			.hp input[type=text]{
+				width : 100px;
+			}
+		
+            footer{
+                height: 150px;
+            }
+            footer p {
+                text-align: center;
+                padding: 25px;
+            }
+            
+        </style>
+        <script>
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="wrap">
+                <h1>
+                    <i class="main-logo fab fa-wordpress-simple"></i>
+                </h1>
+                <h2>
+                    <a href="../index.html">We Will Work</a>
+                </h2>
+                <!--
+                <select>
+                    <option>채용정보</option>
+                    <option>기업정보</option>
+                    <option>인재검색</option>
+                    <option>검증면접</option>
+                    <option>합격</option>
+                </select>
+                -->
+                <ul>
+                    <li><a href="../login/mainlogin.html">로그인</a></li>
+                    <li><a href="../login/mainjoin.html">회원가입</a></li>
+                </ul>
+            </div>
+        </header>
+        <nav>
+            <div class="wrap">
+                <ul>
+                    <li>
+                        <button>
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </li>
+                    <li><a href="../re/recruit/recruitList.jsp">채용하기</a></li>
+                    <li><a href="../re/resume/resumeList.jsp">이력서 관리</a></li>
+                    <li><a href="../communitiy/communityMain.html">커뮤니티</a></li>
+                </ul>
+                <div class="Main-Search">
+                    <input type="text">
+                    <input type="submit" value="검색">
+                </div>
+                <!--
+                <ul>
+                    <li><a href="Main.html">메인홈으로</a></li>
+                </ul>-->
+            </div>
+        </nav>
+        <!-- 공통 헤더 및 네비 여기까지 -->
+        
+        <section>
+            <div class="wrap">
+                <form name="joinForm" action="join.jsp">
+					<div class="join">
+						<h2>회원정보 입력</h2>
+						<div class="inputSec">
+							<table class="joinTab" border>
+							<tr><th>이름</th><td><input type="text" name="pname"></td></tr>
+							<tr><th>아이디</th><td><input type="text" placeholder="아이디는 6-12자로 입력하세요" name="id">
+							<input type="button" value="중복확인" name="dupChk"><br>
+							<div class="idMsg"></div></td></tr>
+							<tr><th>비밀번호</th><td><input type="password" placeholder="비밀번호는 8-15자로 입력하세요" name="pw">
+							<div class="pwMsg"></div></td></tr>
+							<tr><th>비밀번호 확인</th><td><input type="password" placeholder="비밀번호를 한 번 더 입력하세요" name="pwChk">
+							<div class="pwChkMsg"></div></td></tr>
+							<tr><th>이메일</th><td><input type="text" name="mail"> @
+							<select name="mailAdd">
+								<option>직접입력</option>
+								<option>naver.com</option>
+								<option>daum.net</option>
+								<option>gmail.com</option>
+							</select>
+							<input type="hidden" name="fullMail">
+							</td></tr>
+							<tr class="hp"><th>휴대전화</th><td>
+							<select name="hpFirst">
+								<option>010</option>
+								<option>011</option>
+								<option>016</option>
+							</select>
+							 - <input type="text" name="hpMiddle"> - <input type="text" name="hpLast">
+							 <input type="hidden" name="fullHp"></td></tr>
+							<tr><th>주소</th><td><input type="text" name="add"></td></tr>
+						</table>
+						</div>
+						<div class="btnSec">
+							<input type="button" value="회원가입"  onclick="formChk()">
+						</div>
+					</div>
+				</form>
+            </div>
+        </section>
+        
+        
+        <!-- 공통푸터 -->
+        <footer>
+            <div class="wrap">
+                <p>We Will Work 고객센터 : 02-000-0000</p>
+            </div>
+        </footer>
+        
+    </body>
+    <script>
+        function post_scrap(){
+            this.value = "스크랩 완료";
+        }
+        var id = document.querySelector("[name=id]");
+    	var idMsg = document.querySelector(".idMsg");
+    	var pw = document.querySelector("[name=pw]");
+    	var pwMsg = document.querySelector(".pwMsg");
+    	var pwChk = document.querySelector("[name=pwChk]");
+    	var pwChkMsg = document.querySelector(".pwChkMsg");
+    	var idExp = "stronghaji";
+    	var dupChk = document.querySelector("[name=dupChk]");
+    	
+    	id.onkeyup = function(){
+    		var idReg = /^[a-zA-Z0-9]{6,12}$/;
+    		if(!idReg.test(id.value)){
+    			idMsg.innerText = "* 아이디는 공백없이 영문자, 숫자 6-12자로 입력하세요";
+    			idMsg.style.color="red";
+    			idMsg.style.fontSize="12px";
+    			pw.disabled=true;
+    		}else{
+    			idMsg.innerText = "";
+    			pw.disabled=false;
+    			return true; 
+    		}	
+    	}
+    	dupChk.onclick = function(){
+    		var idVal = id.value;
+    		if(idVal==idExp){
+    			alert("이미 등록된 아이디입니다.");
+    		}else{
+    			alert("사용 가능합니다.");
+    		}
+    		
+    	}
+    	pw.onkeyup = function(){
+    		var pwReg = /^[a-zA-Z0-9]{8,15}$/;
+    		if(!pwReg.test(pw.value)){
+    			pwMsg.innerText = "* 비밀번호는 8-15자로 입력하세요";
+    			pwMsg.style.color="red";
+    			pwMsg.style.fontSize="12px";
+    			pwChk.disabled=true;
+    		}else{
+    			pwMsg.innerText="";
+    			pwChk.disabled=false;
+    		}
+    	}
+    	pwChk.onkeyup = function(){
+    		if(pwChk.value!=pw.value){
+    			pwChkMsg.innerText = "* 입력한 비밀번호와 일치하지 않습니다";
+    			pwChkMsg.style.color="red";
+    			pwChkMsg.style.fontSize="12px";
+    		}else{
+    			pwChkMsg.innerText="";
+    		}
+    	}
+    		
+
+    	var mail = document.querySelector("[name=mail]");
+    	var mailAdd = document.querySelector("[name=mailAdd]");
+    	var fullMail = document.querySelector("[name=fullMail]")
+    	mailAdd.onchange = function(){
+    		fullMail = mail.value+"@"+mailAdd.value;
+    		console.log(fullMail);
+    		return fullMail;
+    	}
+    	
+    	var hpFirst = document.querySelector("[name=hpFirst]");
+    	var hpMiddle = document.querySelector("[name=hpMiddle]");
+    	var hpLast = document.querySelector("[name=hpLast]");
+    	var fullHp = document.querySelector("[name=fullHp]");
+    	hpFirst.onchange=function(){
+    		fullHp = hpFirst.value+hpMiddle.value+hpLast.value;
+    		console.log(fullHp);
+    		return fullHp;		
+    	}
+    	
+    	var pname = document.querySelector("[name=pname]");
+    	function submitAct(){
+    		
+    	}
+    	function formChk(){
+    		var pname = document.querySelector("[name=pname]");
+    		if(pname.value==""){
+    			alert("이름을 입력하세요");
+    			pname.focus();
+    			return false;
+    		}
+    		if(id.value==""){
+    			alert("아이디를 입력하세요");
+    			id.focus();
+    			return false;
+    		} 
+    		if(pw.value==""){
+    			alert("비밀번호를 입력하세요");
+    			pw.focus();
+    			return false;
+    		} 
+    		if(pwChk.value==""){
+    			alert("비밀번호 확인란을 입력하세요");
+    			pwChk.focus();
+    			return false;
+    		} else{
+    			alert(pname.value+" 님 가입을 환영합니다!");
+    			document.joinForm.submit();
+        		location.href='../index.html';
+    		}
+    	}
+    	
+    	
+    </script>
+</html>

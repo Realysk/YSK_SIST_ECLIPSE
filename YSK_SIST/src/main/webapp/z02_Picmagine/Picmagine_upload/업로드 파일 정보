@@ -1,0 +1,23 @@
+upload.jps : 게시물 업로드
+story.jsp : 스토리 추가
+	uploaded.jsp : 업로드 완료 시 게시물 형태로 나타나는 데이터
+	UPLController : 업로드 컨트롤러
+	UPLService : 업로드 서비스
+	UPLDAO : 업로드 DAO
+	UPLMain : 업로드 Main
+
+
+07.22 - 07.23
+* 현재 진행 사항
+	- logout_main.html에 '업로드' 버튼 추가.
+	- 해당 버튼 클릭 시 upload.html 이동
+	- 'X' 아이콘 혹은 '취소' 클릭 시 logout_main.html 이동
+	- 입력값이 null일 경우 게시물 등록 불가
+	- 등록 완료 시 uploaded.jsp에 해당 입력 정보 출력 (JAVA에서 불러온 거 아님!)
+
+* 추후 구현 사항 및 이슈
+	- uploaded.jsp에서 다시 메인페이지로 이동하게끔 구현 예정
+	- 등록한 게시물이 홈페이지에 출력되는건 현재로선 사실상 불가능.... 그냥 JSP에서 보여주는 것이 최선..
+
+* 미 구현 사항
+	1) JSP에서 파일명 호출 불가

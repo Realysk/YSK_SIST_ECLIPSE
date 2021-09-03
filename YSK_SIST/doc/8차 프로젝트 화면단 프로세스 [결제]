@@ -1,0 +1,54 @@
+# FRONT단 프로세스 [결제] (일단 제가 알고 있는대로 크게 계획만 작성해봅니다.) - 파일 확장자를 JSP로 통일한다고 가정
+		
+	1. 위시리스트로 이동했을 때
+	
+		1-1. 상세페이지에서 상품을 선택하여 위시리스트로 이동 시
+			
+			상세페이지명.jsp -> wishschProc.jsp -> wishlist.jsp 
+			(상세페이지에서 해당 상품을 검색하는 프로세스를 만들어 위시리스트 페이지로 넘김)
+		
+		
+		1-2. 등록 된 위시리스트를 장바구니로 이동 시
+			
+			wishlist.jsp -> wishdelProc.jsp -> cart.jsp 
+			(위시리스트에서 해당 상품을 삭제하는 프로세스를 만들어 장바구니 페이지로 넘김)
+	
+		
+	2. 장바구니로 이동했을 때
+	
+		2-1. 상세페이지에서 상품을 선택하여 장바구니로 이동 시
+		
+			상세페이지명.jsp -> cartschProc.jsp -> cart.jsp 
+			(상세페이지에서 해당 상품을 검색하는 프로세스를 만들어 장바구니 페이지로 넘김)
+		
+		2-2. 등록 된 장바구니 목록을 선택하여 결제페이지로 이동 시
+		
+			cart.jsp -> cartschProc.jsp -> cartdelProc.jsp -> payment.jsp 
+			(장바구니 목록을 검색하는 프로세스를 진행한 후 검색이 완료되면 장바구니 리스트를 삭제하는 프로세스를 만들어 결제 페이지로 넘김)
+	
+	
+	3. 바로 결제페이지로 이동했을 때
+	
+		3-1. 상세페이지에서 상품을 선택하여 결제페이지로 이동 시
+		
+			상세페이지명.jsp -> prodschProc.jsp -> payment.jsp
+			(상세페이지에서 상품을 선택했을 때 해당 상품을 검색하는 프로세스를 만들어 결제 페이지로 넘김)
+		
+	
+	4. 결제 완료 후 프로세스
+	
+		4-1. 결제가 완료되면 결제완료 페이지 이동 후 메인 페이지로 복귀
+		
+		payment.jsp -> paymentSucc.jsp -> 메인페이지명.jsp
+		(결제페이지에서 상품 결제가 완료되면 결제완료 페이지 이동 후 다시 메인페이지로 복귀)
+		
+	5. [결제] 전체 프로세스
+	
+		[1] 상세페이지명.jsp -> wishschProc.jsp -> wishlist.jsp -> wishdelProc.jsp -> cart.jsp
+		
+		[2] 상세페이지명.jsp														  cart.jsp -> cartschProc.jsp -> cartdelProc.jsp -> payment.jsp	-> paymentSucc.jsp -> 메인페이지명.jsp   
+		
+		[3] 상세페이지명.jsp -> prodschProc.jsp -> payment.jsp -> paymentSucc.jsp -> 메인페이지명.jsp
+	
+	
+	
