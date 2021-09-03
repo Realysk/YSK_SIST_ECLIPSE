@@ -28,8 +28,6 @@ public class A27_AjaxController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		
-		
 		request.setCharacterEncoding("utf-8");
 		String proc = request.getParameter("proc");
 		String id = request.getParameter("id");

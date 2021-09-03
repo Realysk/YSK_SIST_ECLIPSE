@@ -168,7 +168,7 @@
 		</th></tr>			
 	</table>
 	<form method="post"><input type="hidden" name="proc"/>
-	<table  align="center" class="listTable" width="50%">
+	<table align="center" class="listTable" width="50%">
 		<col width="20%"><col width="30%"><col width="20%"><col width="30%">
 		<tr><th>아이디</th><td><input type="text" name="id" /></td>
 			<th>패스워드</th><td><input type="text" name="pass" /></td></tr>
