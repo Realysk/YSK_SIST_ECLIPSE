@@ -35,8 +35,7 @@ public class CommonService {
 		}
 		return memJson;
 	}
-	// 전체 list 가져오는 dao 처리 및 json 데이터 만들기
-
+	// 전체 list 가져오는 dao 처리 및 json 데이터 만들기.
 	public String memberList() {
 		return gson.toJson( dao.getMemberList() );
 	}
@@ -71,7 +70,10 @@ public class CommonService {
 		// {"result":"결과","list":[]}
 		return "{\"result\":\""+ret+"\",\"list\":"+memberList()+"}";
 	}	
-	
+	public String getEmpList(Emp sch) {
+		// dao의 ArrayList형태 데이터 gson.toJson으로 객체로 변환처리..
+		return gson.toJson(dao.getPreparedEmpList(sch));
+	}
 	
 	
 }
