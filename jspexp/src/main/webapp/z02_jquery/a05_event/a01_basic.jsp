@@ -28,8 +28,10 @@
 	이 메서드로 해당 엘리먼트에 원하는 이벤트를 적용할 수 있다.
 	적용 가능한 이벤트는 click, mousedown, focus, resize등 여러 가지가 있다.
 	인자가 기술한 함수는 이벤트가 발생했을 시 자동 실행된다.
-	$("요소객체").one("이벤트명", 이벤트핸들러);
-	해당 이벤트를 한번만 수행할 수 있게 하고 더이상 수행되지 못하게 처리한다.
+	$("요소객체").one("이벤트명",이벤트핸들러);
+	해당 이벤트를 한번만 수행할 수 있게 하고, 더 이상 수행되지 못하게 처리 한다.
+	
+	
 	
 2. jquery에서 지원하는 이벤트
 	blur : focus가 가능한 엘리먼트, 엘리먼트가 포커스를 잃을 때 발생
@@ -66,7 +68,9 @@
 		$("[name=ename]").on("blur",function(){
 			$(this).css('background','white').val('입력완료!!');
 		})		
-		// ex) input 으로 focus되기 전에는 입력하세요 출력되고 focus시 입력하세요 삭제, 배경색상 navy 글자색상 노랑색으로 입력되다가, blur시, 내용은 지워지고 하단의 h3에 입력된 내용이 출력되게 처리하세요.
+		// ex) input 으로 focus되기 전에는 입력하세요 출력되고, 
+		//    focus시 입력하세요 삭제, 배경색상 navy 글자색상 노랑색으로 입력되다가,
+		//    blur시, 내용은 지워지고 하단의 h3에 입력된 내용이 출력되게 처리하세요 1조..
 		$("[name=id]").on({
 			'focus':function(){
 				$(this).val('').css({'background':'navy','color':'yellow'});
@@ -76,25 +80,34 @@
 				$(this).val("");
 			}
 		});
-		$("#oneBtn").one('click', function() { // 한번만 수행
+		$("#oneBtn").one('click',function(){ // 한번만 수행
 			var num01 = parseInt($("h4").eq(0).text());
 			$("h4").eq(0).text(++num01);
 		});
-		$("#dblBtn").on('dblclick', function() { // 더블 클랙으로 수행 처리
+		$("#dblBtn").on('dblclick',function(){ // 더블 클릭으로 수행처리..
 			var num01 = parseInt($("h4").eq(1).text());
 			$("h4").eq(1).text(++num01);
+		});		
+		// ex) 좋아요, 싫어요 버튼을 만들고, 해당 좋아요 버튼을 클릭시, 선호도가 1올라가고,
+		//     싫어요 버튼 클릭시, 선호도가 1차감된다. 현재 선호도는 3, 좋아요/싫어요 한번만 클릭하게 하세요. 2조
+		$("h6").text("♥".repeat( parseInt( $("#fpoint").text() ) ));
+		$(".fav").one('click',function(){
+			var fpoint = parseInt( $("#fpoint").text() );
+			if( $(this).val() == '좋아요'){
+				fpoint++;
+			}else{
+				fpoint--;
+			}
+			$(".fav").click(); // 둘다 강제 수행.. 그래서, 더 이상 클릭 안됨.. ^^
+			$("#fpoint").text(fpoint);
+			// repeat 함수 적용..
+			var heart="";
+			for(var cnt=1;cnt<=fpoint;cnt++){
+				heart+="♥";
+			}
+			$("h6").text(heart);
 		});
 		
-		// ex) 좋아요, 싫어요 버튼을 만들고 해당 좋아요 버튼을 클릭 시, 선호도가 1 올라가고, 싫어요 버튼을 클릭 시 선호도가 1 차감된다. 현재 선호도는 3, 좋아요/싫어요 한번만 클릭하게 처리하세요.
-		
-		$("#likeBtn").one('click', function() {
-			var num01 = parseInt($("span").eq(0).text());
-			$("span").eq(0).text(++num01);
-		});
-		$("#unlikeBtn").one('click', function() {
-			var num01 = parseInt($("span").eq(0).text());
-			$("span").eq(0).text(--num01);
-		});
 	});
 </script>
 	<h2 align="center">초기 화면 내용</h2>
@@ -102,15 +115,19 @@
 	<table align="center" class="listTable">
 		<tr><th>사원명</th><td><input type="text" name="ename" value=""/></td></tr>
 		<tr><th>focus예제</th><td><input type="text" name="id" value="입력하세요"/></td></tr>
-		<tr><td colspan="2" style="text-align:center"><input type="button" id="oneBtn" value="한번만!!"/></td></tr>
-		<tr><td colspan="2" style="text-align:center"><input type="button" id="dblBtn" value="더블클릭"/></td></tr>
-		<tr><td colspan="2" style="text-align:center"><input type="button" id="likeBtn" value="좋아요"/></td></tr>
-		<tr><td colspan="2" style="text-align:center"><input type="button" id="unlikeBtn" value="싫어요"/></td></tr>
+		<tr><td colspan="2" style="text-align:center" ><input type="button" id="oneBtn" value="한번만!!"/></td></tr>
+		<tr><td colspan="2" style="text-align:center" ><input type="button" id="dblBtn"  value="더블클릭"/></td></tr>
+		<tr><td colspan="2" style="text-align:center" >
+				<input type="button" class="fav"  value="좋아요"/>
+				<input type="button" class="fav"  value="싫어요"/>
+				
+				</td></tr>
 	</table>	
 	</form>
+	<h5 align="center">현재 선호도 : <span id="fpoint">3</span></h5>
+	<h6 align="center"></h6>
 	<h4 align="center">0</h4>
 	<h4 align="center">0</h4>
-	<h2 align="center">선호도 추가 : <span>3</span></h2>
 	<h3 align="center">focus 출력내용</h3>
 	
 </body>

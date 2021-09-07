@@ -73,8 +73,9 @@
 					var elist = JSON.parse(xhr.responseText);
 					console.log(elist);
 					if(!confirm("등록 성공\n계속 등록하시겠습니까?")){
-						$("#clsBtn").click();
+						$("#clsBtn").click(); // 닫기 처리를 강제 실행을 통해 모달 창 닫힘
 					}
+					// form의 입력 내용 초기화 처리
 					$("#frm02").each(function(){
 						this.reset();
 					});
