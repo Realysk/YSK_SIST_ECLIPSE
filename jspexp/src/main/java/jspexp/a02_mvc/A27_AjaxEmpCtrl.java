@@ -35,15 +35,28 @@ public class A27_AjaxEmpCtrl extends HttpServlet {
 		// TODO Auto-generated method stub
 		// 1. 요청값 처리.
 		request.setCharacterEncoding("utf-8");
+		String proc = request.getParameter("proc");
 		String ename = request.getParameter("ename");
 		String job = request.getParameter("job");
 		
 		// 2. service
 		
 		// 3. 초기화면 호출
-		if(ename!=null) {
+		if(proc!=null) {
 			System.out.println("ename:"+ename);
 			System.out.println("job:"+job);
+			if(proc.equals("insert")) {
+				String mgrS = request.getParameter("mgr");
+				String hiredateS = request.getParameter("hiredateS");
+				String salS = request.getParameter("sal");
+				String commS = request.getParameter("comm");
+				String deptnoS = request.getParameter("deptno");
+				Emp ins = new Emp(0, ename, job, Integer.parseInt(mgrS), hiredateS, Double.parseDouble(salS), Double.parseDouble(commS), Integer.parseInt(deptnoS));
+				service.insert(ins);
+				
+				// 등록 후, 전체 조회 처리
+				ename=""; job="";
+			}
 			response.setContentType("text/html;charset=utf-8");
 			response.getWriter().print(service.getEmpList(new Emp(ename,job)));
 		}else {

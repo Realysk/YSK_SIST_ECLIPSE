@@ -60,7 +60,7 @@
 		
 		// DAO 기능 메서드 처리
 		A05_PreparedDao dao = new A05_PreparedDao();
-		dao.insertMemer(ins); 
+		dao.insertMember(ins); 
 		isInsert = true;
 	}
 %>

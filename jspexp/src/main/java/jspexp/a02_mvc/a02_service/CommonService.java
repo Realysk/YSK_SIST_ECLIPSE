@@ -74,6 +74,9 @@ public class CommonService {
 		// dao의 ArrayList형태 데이터 gson.toJson으로 객체로 변환처리..
 		return gson.toJson(dao.getPreparedEmpList(sch));
 	}
+	public void insert(Emp ins) {
+		dao.insertEmp2(ins);
+	}
 	
 	
 }
