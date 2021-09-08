@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 // springweb.a01_basic.A03_RequestController
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import springweb.z01_vo.Person;
 @Controller
 public class A03_RequestController {
 
@@ -112,36 +114,46 @@ public class A03_RequestController {
 		d.addAttribute("loc", loc);
 		return "a00_exp\\0906.jsp";
 	}
-	
-	/*
-	 # get/post 방식으로 요청값 받아서 처리하기
-	 */
-	// 명시적으로 get방식으로 받을 때 처리한다.
+/*
+# get방식/post방식으로 요청값 받아서 처리하기.
+	RequestMapping : get/post방식 둘다 처리할 수 있다. 요청값 데이터 유형이 맞을 때..
+ * */	
+	// 명시적으로 get방식으로 받을 때, 처리한다.
 	// http://localhost:7080/springweb/requestexp05.do?name=홍길동
 	@GetMapping("requestexp05.do")
 	public String requestexp05(@RequestParam("name") String name) {
 		return "WEB-INF\\views\\a01_basic\\a05_request.jsp";
 	}
-	
-	// 명시적으로 post방식으로 받을 때 처리한다
+	// 명시적으로 post방식으로 받을 때, 처리한다.
 	@PostMapping("requestexp06.do")
-	public String requestexp06(@RequestParam("name") String name) {
+	public String requestexp06(@RequestParam("name") String name){
 		return "WEB-INF\\views\\a01_basic\\a06_request.jsp";
 	}
 	
-	// ex) requestexp07.do로 get 방식으로 초기화면 a07_request.jsp 출력 후 a07_request.jsp에서 선택(get/post)을 post방식일 경우 a08_request.jsp로 호출되게 하세요. (요청값은 greet로 처리)
-	// http://localhost:7080/springweb/requestexp07.do
-	/*
-	 1. 요청화면 호출은 RequestMapping로는 get/post 방식 둘다 처리가 가능하지만, 메서드로 중복하여 선언이 불가능하다. 단, get/post방식을 명시적으로 했을 때만 가능하다. 
-	 */
+// ex) requestexp07.do로 get 방식으로 초기화면 	a07_request.jsp  출력한 후,) 
+// a07_request.jsp에서 선택(get/post)을 post방식일 경우, a08_request.jsp로 호출되게 하세요
+// 요청값은 greet로 처리.. 3조
+//	http://localhost:7080/springweb/requestexp07.do
+/*
+	1. 요청화면 호출은 RequestMapping로는 get/post방식 둘다 처리가 가능하지만,
+		메서드로 중복하여 선언이 불가능하다. 단, get/post방식을 명시적으로 했을 때만 가능하다.
+ * */	
+	
 	@GetMapping("requestexp07.do")
 	public String requestexp07(@RequestParam(value = "greet", defaultValue = "") String greet) {
-		// 요청값이 있어야 호출이 되지만, defaultValue를 선언하면 가능하다.
+		// 요청값이 있어야 호출이 되지만, defaultValue를 선언하면 가능하다..
 		return "WEB-INF\\views\\a01_basic\\a07_request.jsp";
 	}
-	
 	@PostMapping("requestexp07.do")
 	public String requestexp08(@RequestParam(value = "greet", defaultValue = "") String greet) {
 		return "WEB-INF\\views\\a01_basic\\a08_request.jsp";
+	}
+	
+	// useBean과 같이 요청 객체를 선언해놓으면 요청값이 property와 동일하면 할당이 된다.
+	//	http://localhost:7080/springweb/requestexp09.do
+	@RequestMapping("requestexp09")
+	public String requestexp09(Person p, Model d) {
+		d.addAttribute("p01", p);
+		return "WEB-INF\\views\\a01_basic\\a09_request.jsp";
 	}
 }
