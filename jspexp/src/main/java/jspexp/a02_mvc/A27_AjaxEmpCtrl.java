@@ -36,6 +36,7 @@ public class A27_AjaxEmpCtrl extends HttpServlet {
 		// 1. 요청값 처리.
 		request.setCharacterEncoding("utf-8");
 		String proc = request.getParameter("proc");
+		String empnoS = request.getParameter("empno");
 		String ename = request.getParameter("ename");
 		String job = request.getParameter("job");
 		
@@ -51,14 +52,21 @@ public class A27_AjaxEmpCtrl extends HttpServlet {
 				String salS = request.getParameter("sal");
 				String commS = request.getParameter("comm");
 				String deptnoS = request.getParameter("deptno");
-				Emp ins = new Emp(0, ename, job, Integer.parseInt(mgrS), hiredateS, Double.parseDouble(salS), Double.parseDouble(commS), Integer.parseInt(deptnoS));
+				Emp ins = new Emp(0,ename,job,Integer.parseInt(mgrS), hiredateS, 
+						Double.parseDouble(salS), Double.parseDouble(commS),Integer.parseInt(deptnoS));
 				service.insert(ins);
-				
-				// 등록 후, 전체 조회 처리
+				// 등록 후, 전체 조회 처리.
 				ename=""; job="";
+						
 			}
+			
 			response.setContentType("text/html;charset=utf-8");
-			response.getWriter().print(service.getEmpList(new Emp(ename,job)));
+			if(proc.equals("sch")||proc.equals("insert")) {
+				response.getWriter().print(service.getEmpList(new Emp(ename,job)));
+			}
+			if(proc.equals("detail")) {
+				response.getWriter().print(service.getJsonEmp(Integer.parseInt(empnoS)));
+			}
 		}else {
 			response.sendRedirect("a14_mvc\\a08_mvc_empAjax.jsp");
 		}

@@ -158,14 +158,12 @@
 		<tr><th>회원아이디</th><td><input type="text" name="id" value=""/></td></tr>
 	</table>
 	
-	<table id="show"  align="center" class="listTable" width="50%">
+	<table id="show" align="center" class="listTable" width="50%">
 		<col width="20%"><col width="30%"><col width="20%"><col width="30%">
 		<tr><th>아이디</th><td></td><th>패스워드</th><td></td></tr>
 		<tr><th>이름</th><td></td><th>권한</th><td></td></tr>
 		<tr><th>포인트</th><td></td><th></th><td></td></tr>
-		<tr><th colspan="4">
-			<input type="button" id="addBtn" value="아래로"/>
-		</th></tr>			
+		<tr><th colspan="4"><input type="button" id="addBtn" value="아래로"/></th></tr>			
 	</table>
 	<form method="post"><input type="hidden" name="proc"/>
 	<table align="center" class="listTable" width="50%">

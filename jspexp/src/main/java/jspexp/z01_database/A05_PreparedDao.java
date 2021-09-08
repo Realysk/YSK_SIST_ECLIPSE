@@ -1,5 +1,6 @@
 package jspexp.z01_database;
 // jspexp.z01_database.A05_PreparedDao
+// getPreparedEmpList
 import java.sql.Connection;
 import java.lang.ArrayIndexOutOfBoundsException;
 import java.sql.DriverManager;
@@ -13,7 +14,7 @@ import jspexp.z02_vo.Dept;
 import jspexp.z02_vo.Emp;
 import jspexp.z02_vo.Member;
 import jspexp.z02_vo.Student;
-
+//
 public class A05_PreparedDao {
 
 	private Connection con;
@@ -318,7 +319,7 @@ public class A05_PreparedDao {
 					+ "WHERE ename LIKE '%'||?||'%'\r\n"
 					+ "AND job LIKE '%'||?||'%'\r\n"
 					+ "ORDER BY empno desc";
-			 
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sch.getEname());
 			pstmt.setString(2, sch.getJob());
@@ -1638,6 +1639,86 @@ public class A05_PreparedDao {
 		}
 		return m;
 	}
+	// emp 조회 ==> ArrayList<Emp> 담기 처리..
+	// # 기능 메서드 선언..
+	// 틀만들기
+	// 1) 최종 결과값에 대한 확인 ==> 객체를 return 처리 
+	// ==> 리턴유형, 실제리턴할 객체
+	// 2) 최종 결과를 위해 입력할 데이터 확인 ==> VO객체로 만들기|입력데이터 변수로 선언
+	// ---------------------------------------------------------------
+	// 내용추가.
+	// 3) 
+	// 단일 객체 처리..
+	// 1) 리턴값 단일 객체로 변경 (리턴유형, 객체변경);
+	// 2) sql 변경..
+	// 3) if(rs.next()) emp = new Emp(.....);
+	public Emp getEmp2(int empno){
+		Emp emp=null;
+		try {
+			setCon();
+			String sql = "SELECT empno, ename, job, mgr, to_char(hiredate,'YYYY-MM-DD') hiredate,"
+					+ "sal, comm, deptno\r\n"
+					+ "FROM emp02\r\n"
+					+ "WHERE empno="+empno;
+			stmt = con.createStatement();
+			rs= stmt.executeQuery(sql);
+			if(rs.next()) {
+				emp = new Emp(
+							rs.getInt("empno"),
+							rs.getString("ename"),
+							rs.getString("job"),
+							rs.getInt("mgr"),
+							rs.getString("hiredate"),
+							rs.getDouble("sal"),
+							rs.getInt("comm"),
+							rs.getInt("deptno")
+							);
+			}
+			rs.close(); stmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("SQL 예외 발생~~"+e.getMessage());
+		} catch(Exception e) {
+			System.out.println("일반예외 발생:"+e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			
+		}
+		return emp;
+	}
 	// INSERT INTO MEMBER values(?,?,?,?,?)
 	// ex) 조회문 select * from dept를 위한 A02_DeptDao.java를 만들고,
 	//     공통 연결메서드와 기능메서드(부서정보조회) 틀을 만드세요 1조
@@ -1661,21 +1742,20 @@ public class A05_PreparedDao {
 		}else {
 			System.out.println("데이터가 없습니다.");
 		}
-		
 		public Emp(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno) {
-			UPDATE emp02
-			SET ename = ename||'(승진)',
-				job = '차장',
-				mgr = 7780,
-				hiredate = TO_date('2021/01/01','YYYY/MM/DD'),
-				sal = sal+1000,
-				comm = comm+300,
-				deptno = 20
-			WHERE empno = 7937;			
+UPDATE emp02
+	SET ename = ename||'(승진)',
+		job = '차장',
+		mgr = 7780,
+		hiredate = TO_date('2021/01/01','YYYY/MM/DD'),
+		sal = sal+1000,
+		comm = comm+300,
+		deptno = 20
+WHERE empno = 7937;			
 		*/
 		//dao.insertEmp(new Emp(0,"김미나","과장",7780,"",6000,1000,10));
-		dao.updateEmp(new Emp(7937,"김소현(수정)","대리",7780,"2021/07/09",5000,1000,10));
-		//dao.deleteEmp(7935);
+		//dao.updateEmp(new Emp(7937,"김소현(수정)","대리",7780,"2021/07/09",5000,1000,10));
+		dao.deleteEmp(7935);
 		
 		for(Emp e:dao.getPreparedEmpList(new Emp("",""))) {
 			System.out.print(e.getEmpno()+"\t");

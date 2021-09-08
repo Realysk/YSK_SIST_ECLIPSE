@@ -24,62 +24,45 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		<%-- 
-		# 만들어질 동적인 요소객체에 대한 이벤트 처리
-			1. $("상위객체").on("이벤트", "만들어질요소객체", function() {
-					이벤트 핸들러 함수
-				});
+		# 이벤트의 추가와 삭제 처리
+			1. 이벤트 정의
+				1) $("대상객체").on("이벤트명", 핸들러함수);
+				1) $("대상객체").이벤트명(핸들러함수);
+				1) $("대상객체").bind("이벤트명", 핸들러함수);
+			2. 이벤트 삭제 : 정의된 이벤트를 삭제 처리
+				1) $("대상객체").off("이벤트");
+				2) $("대상객체").unbind("이벤트명", 핸들러함수);
 		--%>
-		$("#createBtn").on("click", function() {
-			$("#show").append("<button type='button' class='nBtn'>생성된 버튼</button>")
-		});
-		// 생성된 버튼에 대한 이벤트 처리
-		$("body").on("click", ".nBtn", function() {
-			$(this).css("background","yellow");
-		});
-		// ex) h3를 선언하고 클릭시, div id="show"에 h4를 추가하여 '@@번째 안녕하세요' 출력되고, 해당 h4를 클릭시, 배경색상과 글자 색상이 변경되게 처리하세요.
-		var cnt=1;
 		$("h3").on("click", function() {
-			$("#show").append("<h4 class='nTxt'>" + (cnt++) + " 번째 " + "안녕하세요.</h4>")
+			$("#show").append("<span>[이벤트 발생]</span>");
 		});
-		$("#show").on("click", ".nTxt", function() {
-			$(this).css({'background':'black', 'color':'yellow'});
+		$("h4").on("click", function() {
+			$("h3").off("click");
+			alert("이벤트 삭제 완료!!");
 		});
-		$("[name=message]").on("focus", function() {
-			$(this).val(""); // focus를 했을 때 공백으로 처리
+		// ex) 구매버튼 클릭시 이벤트에 의헤 구매수량 1++, 단가 1200에 의해 총계가 출력이 되다가 구매완료 클릭시 더이상 구매버튼을 클릭해도 수량과 총계가 변경되지 않게 처리하세요.
+		var cnt=0;
+		var price=1200;
+		$("#buyBtn").bind("click", function() {
+			cnt++;
+			$("#show").html("<h3> 구매수량 : " + cnt + ", 총계 : " + (price*cnt) + "원 </h3>")
 		});
-		// 사용자 정의 이벤트
-		// $("요소객체").on("사용자정의이벤트명", function() { 이벤트 처리시 나타날 내용 });
-		$("[name=message]").on("myCustom", function() {
-			$(this).val("메세지를 입력하세요!!");
-			$(this).css("background", "yellow");
+		$("#endBtn").on("click", function() {
+			$("#buyBtn").unbind("click");
+			alert("구매 확정!!");
 		});
-		// 2. 이벤트 강제 수행
-		// $(요소객체).trigger("이벤트명")
-		$("#btn01").on("click", function() {
-			$("[name=message]").trigger("myCustom");
-		});
-		// ex) #h01에 사용자 정의 이벤트 myEvent01을 정의하고 배경색상과 글자크기를 변경시키는 것을 정의하고 #h02를 클릭시, 위 myEvent01을 수행하게 처리하세요.
-		$("#h01").on("myEvent", function() {
-			$(this).css({'background':'red','color':'pink'});
-		});
-		$("#h02").on("click", function() {
-			$("#h01").trigger("myEvent");
-		});		
 	});
 </script>
 </head>
 
 <body>
 <div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">타이틀</h2>
-  <h1 id="h01">이벤트 대상</h1>
-  <h2 id="h02">이벤트 대상</h2>  
-  <input type="text" name="message" id="message" value="입력하세요"/>
-  <button type="button" id="btn01">입력</button>
-  	<h3 align="center">안녕하세요</h3>
-	<button id="createBtn" type="button">생성</button>
+  	<h2 data-toggle="modal" data-target="#exampleModalCenter">이벤트 처리 연습</h2>
+  	<button type="button" id="buyBtn">구매</button>
+  	<button type="button" id="endBtn">구매완료</button>
+	<h3>이벤트 처리</h3>
+	<h4>이벤트 삭제</h4>
 	<div id="show"></div>
-
 </div>
 <div class="container">
     <h2 align='center'></h2>
