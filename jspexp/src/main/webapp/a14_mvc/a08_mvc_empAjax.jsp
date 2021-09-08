@@ -60,7 +60,7 @@
 						show+="<td>"+emp.deptno+"</td></tr>";
 						
 					});
-					$("tbody").html(show);				
+					$("tbody").html(show);			
 				}
 			};
 			xhr.send();			
