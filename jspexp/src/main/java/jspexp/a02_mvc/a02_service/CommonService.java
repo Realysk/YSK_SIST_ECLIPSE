@@ -1,5 +1,7 @@
 package jspexp.a02_mvc.a02_service;
 
+import java.util.ArrayList;
+
 import com.google.gson.Gson;
 
 import jspexp.z01_database.A05_PreparedDao;
@@ -17,6 +19,13 @@ public class CommonService {
 	}
 	public Member getMember(String id) {
 		return dao.getMember(id);
+	}
+	public String getJsonAllMembers() {
+		String memJson="[]";
+		ArrayList<Member> mlist = dao.getMemberList();
+		memJson = gson.toJson(mlist, ArrayList.class);
+		
+		return memJson;
 	}
 	public String  getJsonEmp(int empno) {
 		// dao를 통해 나온 Emp객체를 gson으로 처리.
