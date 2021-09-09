@@ -19,16 +19,9 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<!-- 컨테이너에 사용할 객체 등록 -->
-	<!-- 
-		Product prod = new Product();
-		prod.setName("사과"); 
-		prod.setPrice(3000); 
-		prod.setCnt(3);
-	-->
-	<bean id="prod" class="diexp.vo.Product">
-		<property name="name" value="사과"/>
-		<property name="price" value="3000"/>
-		<property name="cnt" value="3"/>
-	</bean>
+		<bean id="prod" class="diexp.vo.Product">
+			<property name="name" value="사과"/>
+			<property name="price" value="3000"/>
+			<property name="cnt" value="2"/>
+		</bean>
 </beans>

@@ -1,41 +1,61 @@
 package diexp.vo;
 
+import java.util.ArrayList;
+
 public class ShoppingMall {
+	private String shname;
+	private Member member;
+	private ArrayList<Member> mlist;
 	
-	private String mall;
-	private Member mem;
-	
-	public ShoppingMall(String mall) {
-		super();
-		this.mall = mall;
+	public ShoppingMall() {
+		mlist = new ArrayList<Member>();	
 	}
-	
-	public void show() {
-		System.out.println(mall + " 쇼핑몰의 회원 정보");
-		if(mem!=null) {
-			System.out.println("회원 정보");
-			System.out.println("ID : " + mem.getId());
-			System.out.println("PASS : " + mem.getPass());
-			System.out.println("NAME : " + mem.getName());
-			System.out.println("AUTH : " + mem.getAuth());
-			System.out.println("POINT : " + mem.getPoint());
+	public ShoppingMall(String shname) {
+		this.shname = shname;
+		mlist = new ArrayList<Member>();	
+	}
+	public void showAllMembers() {
+		System.out.println("쇼핑몰:"+shname);
+		System.out.println("회원 정보 리스트");
+		 if(mlist.size()>0) {
+			 for(Member m:mlist) {
+				 System.out.print(m.getId()+"\t");
+				 System.out.print(m.getPass()+"\t");
+				 System.out.print(m.getName()+"\t");
+				 System.out.print(m.getAuth()+"\t");
+				 System.out.print(m.getPoint()+"\n");
+			 }
+		 }
+	}
+	public ArrayList<Member> getMlist() {
+		return mlist;
+	}
+	public void setMlist(ArrayList<Member> mlist) {
+		this.mlist = mlist;
+	}
+	public String getShname() {
+		return shname;
+	}
+	public void setShname(String shname) {
+		this.shname = shname;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	public void showMember() {
+		System.out.println("# 온라인 쇼핑몰 #");
+		System.out.println(shname);
+		if(member!=null) {
+			System.out.println("가입회원정보");
+			System.out.println(member.getId());
+			System.out.println(member.getPass());
+			System.out.println(member.getName());
+			System.out.println(member.getAuth());
+			System.out.println(member.getPoint());
 		}
-	}
-
-	public String getMall() {
-		return mall;
-	}
-
-	public void setMall(String mall) {
-		this.mall = mall;
-	}
-
-	public Member getMem() {
-		return mem;
-	}
-
-	public void setMem(Member mem) {
-		this.mem = mem;
 	}
 	
 }

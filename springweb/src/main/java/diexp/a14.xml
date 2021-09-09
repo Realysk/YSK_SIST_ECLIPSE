@@ -19,19 +19,16 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<!-- 컨테이너에 사용할 객체 등록 -->
-	
-	<!-- 
-	1. 생성자에 의한 객체 생성
-		Dept dept = new Dept(10, "회계", "서울");
-		constructor-arg value="10"
-		constructor-arg value="회계"
-		constructor-arg value="서울"
-	 -->
-
-	<bean id="dept" class="diexp.vo.Dept">
-		<constructor-arg value="10"/>
-		<constructor-arg value="회계"/>
-		<constructor-arg value="서울"/>
-	</bean>
+<!-- 
+1. 생성자에의한 객체 생성.
+	Dept d = new Dept(10,"회계","서울");
+	constructor-arg value="10"
+	constructor-arg value="회계"
+	constructor-arg value="서울"
+ -->
+		<bean id="dept" class="diexp.vo.Dept">
+			<constructor-arg value="10"/>
+			<constructor-arg value="회계"/>
+			<constructor-arg value="서울"/>
+		</bean>		
 </beans>

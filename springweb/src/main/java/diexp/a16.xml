@@ -19,15 +19,14 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<!-- 컨테이너에 사용할 객체 등록 -->
 	<bean id="obj" class="java.lang.Object"/>
 	<bean id="prod" class="diexp.vo.Product">
 		<constructor-arg value="사과"/>
 		<constructor-arg value="3000"/>
 		<constructor-arg value="2"/>
 	</bean>
-	<!--
-	Product prod = new Product("사과", 3000, 2);
+	<!-- 
+	Product prod= new Product("사과",3000,2);
 	Mart mt = new Mart("행복마트");
 	mt.setProduct(prod);
 	 -->
@@ -35,4 +34,31 @@
 		<constructor-arg value="행복마트"/>
 		<property name="prod" ref="prod"/>
 	</bean>
+	<bean id="prod1" class="diexp.vo.Product">
+		<constructor-arg value="사과"/>
+		<constructor-arg value="3000"/>
+		<constructor-arg value="2"/>
+	</bean>
+	<bean id="prod2" class="diexp.vo.Product">
+		<constructor-arg value="바나나"/>
+		<constructor-arg value="4000"/>
+		<constructor-arg value="3"/>
+	</bean>
+	<bean id="prod3" class="diexp.vo.Product">
+		<constructor-arg value="딸기"/>
+		<constructor-arg value="12000"/>
+		<constructor-arg value="5"/>
+	</bean>			
+	<bean id="mt2" class="diexp.vo.Mart">
+		<constructor-arg value="즐거운마트"/>
+		<property name="plist">
+			<list>
+				<ref bean="prod1"/>
+				<ref bean="prod2"/>
+				<ref bean="prod3"/>
+			</list>
+		</property>
+	</bean>	
+	
+	
 </beans>

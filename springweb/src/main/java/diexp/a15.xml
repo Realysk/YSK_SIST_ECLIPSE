@@ -19,23 +19,12 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<!-- 컨테이너에 사용할 객체 등록 -->
-	
-	<!-- 
-	1. 생성자에 의한 객체 생성
-		Student stu = new Student(1000, "홍길동", 80, 80, 100);
-		constructor-arg value="1000"
-		constructor-arg value="홍길동"
-		constructor-arg value="80"
-		constructor-arg value="80"
-		constructor-arg value="100"
-	 -->
-
-	<bean id="stu" class="diexp.vo.Student">
-		<constructor-arg value="1000"/>
+<!-- int sno, String name, int kor, int eng, int math -->
+	<bean id="stud" class="diexp.vo.Student">
+		<constructor-arg value="1"/>
 		<constructor-arg value="홍길동"/>
 		<constructor-arg value="80"/>
-		<constructor-arg value="80"/>
-		<constructor-arg value="100"/>
-	</bean>
+		<constructor-arg value="70"/>
+		<constructor-arg value="90"/>
+	</bean>		
 </beans>

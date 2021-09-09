@@ -19,6 +19,5 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<!-- 컨테이너에 사용할 객체 등록 -->
 	<bean id="obj" class="java.lang.Object"/>
 </beans>

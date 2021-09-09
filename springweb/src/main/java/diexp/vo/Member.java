@@ -1,5 +1,5 @@
 package diexp.vo;
-// jspexp.z02_vo.Member
+// diexp.vo.Member
 public class Member {
 	//아이디,패스워드,이름,권한,포인트
 	private String id;

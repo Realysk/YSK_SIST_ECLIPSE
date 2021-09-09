@@ -19,20 +19,13 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<!-- 컨테이너에 사용할 객체 등록 -->
-	<!-- 
-		Member mem = new Member();
-		mem.setId("himan");
-		mem.setPass("7777");
-		mem.setName("홍길동");
-		mem.setAuth("사용자");
-		mem.setPoint("3000");
-	-->
-	<bean id="mem" class="diexp.vo.Member">
-		<property name="id" value="himan"/>
-		<property name="pass" value="7777"/>
-		<property name="name" value="홍길동"/>
-		<property name="auth" value="사용자"/>
-		<property name="point" value="3000"/>
-	</bean>
+
+		<bean id="mem" class="diexp.vo.Member">
+			<property name="id" value="himan"/>
+			<property name="pass" value="7777"/>
+			<property name="name" value="홍길동"/>
+			<property name="auth" value="권한"/>
+			<property name="point" value="5000"/>
+		</bean>	
+			
 </beans>

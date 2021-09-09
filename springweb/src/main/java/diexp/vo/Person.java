@@ -1,5 +1,5 @@
 package diexp.vo;
-// jspexp.z02_vo.Person
+// diexp.vo.Person
 public class Person {
 	private String name;
 	private int age;
