@@ -31,7 +31,20 @@
 		
 		2. [하:개념정리] 스프링의 요청값 get/post방식 처리에 있어서 controller단과 화면단 form설정과의 관계를 기술하세요.
 		
-			
+			# get방식/post방식으로 요청값 받아서 처리하기.
+				RequestMapping : get/post방식 둘다 처리할 수 있다. 요청값 데이터 유형이 맞을 때..
+			 * */	
+				// 명시적으로 get방식으로 받을 때, 처리한다.
+				// http://localhost:7080/springweb/requestexp05.do?name=홍길동
+				@GetMapping("requestexp05.do")
+				public String requestexp05(@RequestParam("name") String name) {
+					return "WEB-INF\\views\\a01_basic\\a05_request.jsp";
+				}
+				// 명시적으로 post방식으로 받을 때, 처리한다.
+				@PostMapping("requestexp06.do")
+				public String requestexp06(@RequestParam("name") String name){
+					return "WEB-INF\\views\\a01_basic\\a06_request.jsp";
+				}	
 		
 		3. [중:응용] 회원가입 입력화면을 GET방식을 호출하고, 입력처리를 POST방식으로 처리하려 한다. spring 요청방식을 통해 처리하세요.
 		
@@ -43,7 +56,7 @@
 		
 		5. [하:응용] DI13.java, a13.xml을 만들고 회원정보를 xml을 통해서 등록하고 등록된 내용을 DI13.java를 통해서 출력하세요.
 		
-			
+			- 완료
 		
 		--%>	
 	});
