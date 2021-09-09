@@ -1,4 +1,4 @@
-SELECT * FROM emp; 
+SELECT * FROM emp 
 -- ctrl + enter
 -- 복사테이블 만들기..
 /*
