@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import diexp.vo.Product;
 import springweb.z01_vo.Person;
 @Controller
 public class A03_RequestController {
@@ -147,13 +148,29 @@ public class A03_RequestController {
 	@PostMapping("requestexp07.do")
 	public String requestexp08(@RequestParam(value = "greet", defaultValue = "") String greet) {
 		return "WEB-INF\\views\\a01_basic\\a08_request.jsp";
-	}
-	
-	// useBean과 같이 요청 객체를 선언해놓으면 요청값이 property와 동일하면 할당이 된다.
-	//	http://localhost:7080/springweb/requestexp09.do
+	}	
+	// useBean과 같이 요청 객체를 선언해놓으면, 요청값이 property와 동일하면 할당이되낟.
+//	http://localhost:7080/springweb/requestexp09 (X)	
+//	http://localhost:7080/springweb/requestexp09.do	
 	@RequestMapping("requestexp09")
 	public String requestexp09(Person p, Model d) {
 		d.addAttribute("p01", p);
 		return "WEB-INF\\views\\a01_basic\\a09_request.jsp";
 	}
+	// http://localhost:7080/springweb/regmember.do	
+	@GetMapping("regmember.do")
+	public String regmemberGet() {
+		return "a00_exp\\0909.jsp";
+	}
+	@PostMapping("regmember.do")
+	public String regmemberPost() {
+		return "a00_exp\\0909_1.jsp";
+	}	
+	@PostMapping("regProduct.do")
+	public String regProduct(Product prod, Model d) {
+		d.addAttribute("prod",prod);
+		return "a00_exp\\0909.jsp";
+	}
+	
+	
 }
