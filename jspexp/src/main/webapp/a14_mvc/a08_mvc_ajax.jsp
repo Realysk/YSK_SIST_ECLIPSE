@@ -26,60 +26,78 @@
 		<%-- 
 		
 		--%>	
-		search();
+		ajaxFun("allsch");
+		$("#regBtn").on("click",function(){
+			ajaxFun("ins");
+		});
 	});
-	function search(){
+	function ajaxFun(proc){
+		console.log("처리 프로세스:"+proc);
+		var snd = "proc="+proc+((proc=="ins")?"&"+$("#frm01").serialize():"");
+		console.log(snd);
+		
 		$.ajax({
 			type:"post",
 			url:"${path}/schMember2.do",
-			data:"proc=allsch",
+			data:"proc="+proc+((proc=="ins")?"&"+$("#frm01").serialize():""),
 			dataType:"json",
 			success:function(data){
 				console.log("결과");
 				console.log(data);
+				var mlist = data;
+				if(proc=="ins"){
+					mlist = data.list;
+					alert(data.result);
+				}
+				var show="";
+				$(mlist).each(function(idx, mem){
+					show+="<tr  class='text-center'><td>"+mem.id+"</td><td>"+mem.pass+"</td><td>"+
+					mem.name+"</td><td>"+mem.auth+"</td><td>"+mem.point+"</td></tr>"
+					
+				});
+				$("tbody").html(show);
 			},
 			error:function(err){
 				console.log(err);
 			}
 		});
+
 	}
 </script>
 </head>
-
 <body>
 <div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">회원정보</h2>
-
+  <h2 >회원정보</h2>
 </div>
 <div class="container">
     <h2 align='center'></h2>
-	<form id="frm01" class="form-inline"  method="post">
+	<form id="frm01" class="form"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="제목" />
-	    <input class="form-control mr-sm-2" placeholder="내용" />
-	    <button class="btn btn-info" type="submit">Search</button>
+	    <input class="form-control mr-sm-2" placeholder="아이디" name="id"/>
+	    <input class="form-control mr-sm-2" placeholder="패스워드" name="pass"/>
+	    <input class="form-control mr-sm-2" placeholder="이름" name="name"/>
+	    <input class="form-control mr-sm-2" placeholder="권한" name="auth"/>
+	    <input class="form-control mr-sm-2" placeholder="포인트" name="point"/>
+	    <button class="btn btn-info" type="button" id="regBtn">등록</button>
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
-   	<col width="10%">
-   	<col width="50%">
-   	<col width="15%">
-   	<col width="15%">
-   	<col width="10%">
+   	<col width="20%">
+   	<col width="20%">
+   	<col width="20%">
+   	<col width="20%">
+   	<col width="20%">
     <thead>
-    
       <tr class="table-success text-center">
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-        <th>조회</th>
+        <th>아이디</th>
+        <th>패스워드</th>
+        <th>이름</th>
+        <th>권한</th>
+        <th>포인트</th>
       </tr>
     </thead>	
     <tbody>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr  class="text-center"><td></td><td></td><td></td><td></td><td></td></tr>
     </tbody>
 	</table>    
     
