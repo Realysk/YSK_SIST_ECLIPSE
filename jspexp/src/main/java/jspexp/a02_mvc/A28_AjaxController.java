@@ -64,6 +64,9 @@ public class A28_AjaxController extends HttpServlet {
 					System.out.println("등록처리:"+ins.getName());
 					response.getWriter().print(service.insMemberJson(ins));
 				}
+				if(proc.equals("allsch")) {
+					response.getWriter().print(service.getJsonAllMembers());
+				}				
 				if(proc.equals("sch")) {
 					response.getWriter().print(service.getJsonMember(id));
 				}

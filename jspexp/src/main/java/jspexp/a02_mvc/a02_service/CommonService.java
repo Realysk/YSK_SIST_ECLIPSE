@@ -24,13 +24,13 @@ public class CommonService {
 		String memJson="[]";
 		ArrayList<Member> mlist = dao.getMemberList();
 		memJson = gson.toJson(mlist, ArrayList.class);
-		
 		return memJson;
 	}
+	
 	public String  getJsonEmp(int empno) {
 		// dao를 통해 나온 Emp객체를 gson으로 처리.
 		String empJson="{}";
-		Emp emp = dao.getEmp(empno);
+		Emp emp = dao.getEmp2(empno);
 		if(emp!=null) {
 			empJson =  gson.toJson(emp);
 		}
@@ -86,6 +86,5 @@ public class CommonService {
 	public void insert(Emp ins) {
 		dao.insertEmp2(ins);
 	}
-	
 	
 }

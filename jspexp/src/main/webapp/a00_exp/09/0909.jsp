@@ -29,6 +29,7 @@
 	(jspexp\a02_mvc\A27_AjaxController.java 활용)
 	java\jspexp\a02_mvc\A28_AjaxController.java (복사) /schMember2.do
 	a14_mvc\a08_mvc_ajax.jsp (신규생성)
+	jspexp\a02_mvc\a02_service\CommonService.java (추가 변경)
 	
 [하:개념정리]2. 스프링의 요청값 get/post방식처리에 있어서 controller단와 화면단 form설정과의 관계를 기술하세요.
 [중:응용]3. 회원가입입력화면을 GET방식을 호출하고, 입력처리를 POST방식으로 처리할려고 한다. spring요청방식을 통해 처리하세요.

@@ -26,13 +26,29 @@
 		<%-- 
 		
 		--%>	
+		search();
 	});
+	function search(){
+		$.ajax({
+			type:"post",
+			url:"${path}/schMember2.do",
+			data:"proc=allsch",
+			dataType:"json",
+			success:function(data){
+				console.log("결과");
+				console.log(data);
+			},
+			error:function(err){
+				console.log(err);
+			}
+		});
+	}
 </script>
 </head>
 
 <body>
 <div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">타이틀</h2>
+  <h2 data-toggle="modal" data-target="#exampleModalCenter">회원정보</h2>
 
 </div>
 <div class="container">
