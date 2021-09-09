@@ -186,6 +186,6 @@
 		<thead>
 		<tr><th>아이디</th><th>패스워드</th><th>이름</th><th>권한</th><th>포인트</th></tr></thead>
 		<tbody></tbody>
-	</table>			
+	</table>
 </body>
 </html>
