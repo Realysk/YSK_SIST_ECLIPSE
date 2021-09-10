@@ -1,4 +1,4 @@
-package diexp;
+package diexp.di10;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
@@ -12,7 +12,7 @@ public class DI14 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// 스프링의 컨테이너의 메모리 내용 확인..
-		Resource rs = new ClassPathResource("diexp\\a14.xml");
+		Resource rs = new ClassPathResource("diexp\\di10\\a14.xml");
 		BeanFactory bean = new XmlBeanFactory(rs);
 		// id로 해당 bean의 객체 가져온다.
 		Dept dept = (Dept)bean.getBean("dept");

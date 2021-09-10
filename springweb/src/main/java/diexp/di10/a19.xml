@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<bean id="obj" class="java.lang.Object"/>
+	<!-- 
+# 여러가지 구조체를 활용한 컨테이너 설정 처리.
+1. list 형식
+2. set(중복불가) 형식 데이터 할당 처리.
+	set
+		value 입력값..	
+	public void	setAgent(Set<String> agent)	
+3. map(key/value) 형식 데이터 할당 객체
+	Properties : key/value형식 collection
+		컨테이너
+		props
+			prop key="키값" value값
+	Map<key, valuObject> : key와/value의 generic 선언으로 된 collection
+		컨테이너
+		map
+			entry
+				key/value 형식으로 처리..
+		public void setConfig(Map<String, Integer> config)		
+	 -->
+	 <bean id="monitor" class="diexp.vo.Monitor">
+	 	<property name="config">
+	 		<map>
+	 			<entry key="간격" value="1000"></entry>
+	 			<entry key="시간"><value>2000</value></entry>
+	 			<entry key="범위(h)">
+	 				<value>24</value>
+	 			</entry>
+	 		</map>
+	 	</property>
+	 </bean>
+	 
+	 <bean id="sensor1" class="diexp.vo.Sensor">
+	 	<property name="agent">
+	 		<set>
+	 			<value>주식매매</value>
+	 			<value>자산관리</value>
+	 			<value>보험관리</value>
+	 		</set>
+	 	</property>
+	 	<property name="addInfo">
+	 		<props>
+	 			<prop key="threshold">1500</prop>
+	 			<prop key="retry">3</prop>
+	 		</props>
+	 	</property>
+	 	
+	 </bean>
+	 <bean id="fruitshop1" class="diexp.vo.FruitShop">
+       <property name="fruit">
+          <set>
+             <value>바나나</value>
+             <value>수박</value>
+             <value>포도</value>
+          </set>
+       </property>
+       <property name="frInfo">
+          <props>
+             <prop key="바나나">2000원</prop>
+             <prop key="수박">8000원</prop>
+             <prop key="포도">7000원</prop>
+          </props>
+       </property>
+    </bean>	
+	
+	
+</beans>

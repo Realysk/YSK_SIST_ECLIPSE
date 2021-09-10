@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<bean id="obj" class="java.lang.Object"/>
+	<!-- 
+	# Property와 Constructor의 간편한 활용 namespace 사용하기
+		1. xmlns:p
+			p:property명 = 데이터 할당 setName("홍길동") p:name="홍길동"
+			p:property명-ref = 객체참조 setProduct(prod) p:product-ref="prod"
+		2. xmlns:c
+			c:생성자매개변수 = 데이터 할당 Person(String name) c:name="홍길동", c:age="25"
+			c:_0 = 데이터 할당 생성자의 순서에 해당하는 데이터 할당. c:_0="홍길동" c:_1="25"
+			c:_1 = 데이터 할당 
+			c:_2 = 데이터 할당 
+			c:생성자매개변수-ref : 객체참조 Person(Man man) c:man-ref="man"
+	 -->
+	 <bean id="p01" class="diexp.vo.Person" c:name="홍길동" c:age="25" c:loc="서울신림동"/>
+	 <bean id="p02" class="diexp.vo.Person" c:_0="마길동" c:_1="27" c:_2="서울방배동"/>
+	 <bean id="p03" class="diexp.vo.Person" p:name="오길동" p:age="27" p:loc="서울종로"/>
+	 <bean id="prod" class="diexp.vo.Product" p:name="사과" p:price="3000" p:cnt="2"/>
+	 <bean id="mt" class="diexp.vo.Mart" c:mname="행복마트" autowire="byType"/>
+	 <!-- 
+	 # Autowire
+	 	1. 컨테이너 내부에 객체가 메모리 로딩될 때, 연관되는 메서드가 있으면 자동으로 객체가 할당되게 처리 하는 것을 말한다.
+	 	2. public void setProd(Product prod)가 되어 있어서, 객체를 할당할 수 있으면 설정옵션 autowire에 의해 객체가 자동으로 할당 된다.
+	 	3. autowire="byType" 객체가 자동 할당된다.
+	  -->
+	
+</beans>

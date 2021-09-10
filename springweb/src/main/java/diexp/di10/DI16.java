@@ -1,4 +1,4 @@
-package diexp;
+package diexp.di10;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -10,7 +10,7 @@ public class DI16 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		AbstractApplicationContext ctx1 = new GenericXmlApplicationContext("diexp\\a16.xml");
+		AbstractApplicationContext ctx1 = new GenericXmlApplicationContext("diexp\\di10\\a16.xml");
 		Mart mt = ctx1.getBean("mt", Mart.class);
 		mt.show();
 		Mart mt2 = ctx1.getBean("mt2", Mart.class);
