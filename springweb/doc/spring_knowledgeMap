@@ -42,34 +42,75 @@
 		=> 최종 화면단 출력 (EL, JSTL)
 		
 	2. 스프링의 개발 환경 설정
-		Dynamic Web Project
-		Maven
-		Gradle
-		Spring Boot (Maven, Gradle)
+		1) lib 설정
+			Dynamic Web Project
+				springweb\src\main\webapp\WEB-INF\lib
+				직접 필요한 lib 다운로드 : https://mvnrepository.com
+			Maven
+				pom.xml
+				<dependency>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+					<version>5.3.9</version>
+				</dependency>
+			Gradle
+				build.gradle 파일에 아래 내용 선언
+				implementation group: 'org.springframework', name: 'spring-core', version: '5.3.9'
+			Spring Boot (Maven, Gradle)
+				sts (Spring Tool Suits) 설치를 통한 설정.
+		
+		2) web.xml
+			front 컨트롤러 선언, 컨테이너 선언, 요청값 한글 encoding filter 선언.
+		
+		3) 컨테이너 파일 설정
+			Controller, Service, Dao 등록
+			View단 등록
+			기타 필요한 lib나 사용자 정의 클래스 선언을 통해 자동 객체 생성
 	
 	3. 컨테이너에 대한 이해와 설정
-		1) IOC
-		2) DI
-		3) 라이플 사이클과 범위
-		4) 환경 관련 및 메시지 처리
-		5) AOP
-	
+		0) web.xml에서 여러가지 url형태에 따른 컨테이너 파일 설정
+		1) IOC : 제어 역전
+		2) DI/DL
+		3) 라이플 사이클과 범위 : 컨테이너 안에 선언된 빈 객체들의 생성과 소멸 참조
+		4) 환경 관련 및 메시지 처리 : 외부 설정파일 및 다국어 처리를 위한 메시지 처리, 중요 공통 정보 설정.
+		5) AOP : Aspect oriented Programming 문제를 바라보는 관점을 기준으로 프로그래밍하는 기법
+			
 	
 	4. 스프링 웹 개발
-		1) 스프링 MVC 기초 (요청, 컨트롤러, 모델, 세션)
-		2) 스프링 MVC 화면단 처리
+		1) 스프링 MVC 기초 (컨트롤러 (요청, 모델, 뷰 호출) 세션)
+			요청 처리
+				url get/post
+				요청값 (key=value)
+			모델 (Model)
+				요청 + Model : 매개변수 modelattribute
+				컨트롤단에 공통된 모델 : modelattribute
+					ex) 사원정보 Controller - 전체조회, 등록, 상세조회, 수정, 삭제
+			View단 호출
+				redirect 방식 화면 호출
+				forward 방식 화면 호출
+				ModelAndView (모델+View) 같은 객체에서 처리
+			
+		2) 스프링 MVC 화면단 처리 (View)
+			JSP 화면 호출, 기타 View lib에 의한 화면 호출
+			Spring의 태그 lib 화면 - form 화면 처리를 효과적으로 할 수 있다. (Controller의 modelattribute 연동)
+			WAS의 기준 유효성 check, error 처리
+		
 		3) 스프링 MVC XML / JSON / 파일업로드 / PDF / 웹 소켓 통신
+			viewsolever를 컨테이너(dispatcher-servlet)에서 선언을 통해 효과적인 View단 처리를 할 수 있다. 
 	
 	
 	5. 스프링과 DB 연동
-		1) DB 연결
+		1) DB 연결 : connection pool 설정과 DB 연결 처리 (컨테이너)
+		
 		2) mybatis 프레임워크 사용하기
-	
+			- 컨테이너에 프레임워크 호출
+			- 공통 mybatis 설정파일 호출
+			- SQL을 처리할 mapper.xml 선언과 활용
+			- DAO단 연동을 위한 처리방식
 		
 	6. 기타 부가 기능
-		1) 메일 발송
-		2) 작업 실행과 스케줄링
-	
+		1) 메일 발송 : 자동 메일 발송 ex) 회원 비밀번호 분실 시 등록된 메일로 발송, 회사인사정보 시스템 사원정보 전달
+		2) 작업 실행과 스케줄링 ex) 스프링에서는 WAS 단위 특정한 시간과 간격으로 특정 프로그래밍을 반복적으로 수행 처리할 수 있다.
 	
 	7. 실무 활용 예제
 		0) 로그인 세션 처리
@@ -78,3 +119,4 @@
 			- fullcalendar
 			- 기타 차트 등등
 		3) springboot로 답변형 게시판 작성
+		4) 웹 소켓을 통한 상호간의 실시간 채팅
