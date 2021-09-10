@@ -15,12 +15,13 @@ public class DI10 {
 		Object obj2 = ctx1.getBean("obj", Object.class);
 		System.out.println(obj2);
 		ctx1.close();
-/*		
+		
+		
 		AnnotationConfigApplicationContext ctx2 = new AnnotationConfigApplicationContext(Con10.class);
 		Person p01 = ctx2.getBean("getPerson", Person.class);
 		System.out.println(p01.getName());
 		ctx2.close();
-*/		
+		
 		
 
 	}

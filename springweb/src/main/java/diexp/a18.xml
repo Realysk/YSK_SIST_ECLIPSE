@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<bean id="obj" class="java.lang.Object"/>
+	<bean id="pc" class="diexp.vo.Pencil">
+		<property name="kind" value="4B연필"/>
+	</bean>
+	<bean id="note" class="diexp.vo.Note">
+		<constructor-arg value="스케치용 노트"/>
+		<property name="pc" ref="pc"/> <!-- note.setPc(pc); -->
+	</bean>
+	<!-- 
+	// diexp.vo.Computer
+// diexp.vo.Ram
+// diexp.vo.Hdd
+// diexp.vo.Cpu
+	 -->
+	 <bean id="ram" class="diexp.vo.Ram"/>
+	 <bean id="hdd" class="diexp.vo.Hdd"/>
+	 <bean id="cpu" class="diexp.vo.Cpu"/>
+	 <bean id="com" class="diexp.vo.Computer">
+	 	<constructor-arg value="삼성컴퓨터"/>
+	 	<property name="plist">
+	 		<list>
+	 			<ref bean="ram"/>
+	 			<ref bean="hdd"/>
+	 			<ref bean="cpu"/>
+	 		</list>
+	 	</property>
+	 </bean>
+	
+	
+	
+</beans>
