@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+xml
+h4322	h1, h2
+paaak	p align=""
+	1. DTD : 상단에 어떤 태그(태그명과 속성)를 사용할지를 선언
+	2. 위에 선언 후, DTD에 맞는 태그를 활용할 수 있다.
+ -->
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:aop="http://www.springframework.org/schema/aop" 
 	xmlns:context="http://www.springframework.org/schema/context"
 		xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xmlns:util="http://www.springframework.org/schema/util"
 	 xmlns:websocket="http://www.springframework.org/schema/websocket"

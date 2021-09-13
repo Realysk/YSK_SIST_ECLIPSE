@@ -151,7 +151,13 @@ public class A03_RequestController {
 	}	
 	// useBean과 같이 요청 객체를 선언해놓으면, 요청값이 property와 동일하면 할당이되낟.
 //	http://localhost:7080/springweb/requestexp09 (X)	
-//	http://localhost:7080/springweb/requestexp09.do	
+//	http://localhost:7080/springweb/requestexp09.do
+//	http://localhost:7080/springweb/requestexp09.do?name=홍길동&age=25&loc=서울신림동
+//	setName(String name), setAge(int age), setLoc(String loc)
+//	?반드시 확인 특히 객체형으로 요청값 받을 때, 404(페이지 못찾음) 페이지명, 요청key, 매개변수의 데이터 유형
+//	RequestMapping : get/post방식 둘다 받음.
+//	GetMapping : get방식만 받기
+//	PostMapping : post방식만 받기
 	@RequestMapping("requestexp09")
 	public String requestexp09(Person p, Model d) {
 		d.addAttribute("p01", p);
