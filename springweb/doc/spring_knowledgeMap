@@ -36,7 +36,7 @@
 	1. 스프링의 기본처리 프로세스에 대한 이해
 		요청 (URL과 요청값)
 		=> web.xml(front컨트롤단, 컨테이너 설정) 
-		=> dispatcher-servlet.xml (컨테이너 선언) 객체 로딩
+		=> dispatcher-servlet.xml (XXXX-servler.xml XXXX:front 컨트롤러 이름, 컨테이너 선언) 객체 로딩
 		=> 위 컨테이너에 포함된 객체 안에 url요청에 의한 매핑된 메서드 호출
 		=> controller : 요청값 처리, 모델 데이터 처리 (Service => DAO), 화면 (View단) 호출
 		=> 최종 화면단 출력 (EL, JSTL)
@@ -78,11 +78,14 @@
 	
 	4. 스프링 웹 개발
 		1) 스프링 MVC 기초 (컨트롤러 (요청, 모델, 뷰 호출) 세션)
+			public String 메서드명(@RequestParam("요청key") String value, Model d) {}
+			public String 메서드명(요청값을받는객체 참조변수, Model d) {}
+			public String regMember(Member mem, Model d) {}
 			요청 처리
 				url get/post
 				요청값 (key=value)
 			모델 (Model)
-				요청 + Model : 매개변수 modelattribute
+				요청 + Model : 매개변수 modelattribute @ModelAttribute
 				컨트롤단에 공통된 모델 : modelattribute
 					ex) 사원정보 Controller - 전체조회, 등록, 상세조회, 수정, 삭제
 			View단 호출
@@ -95,8 +98,8 @@
 			Spring의 태그 lib 화면 - form 화면 처리를 효과적으로 할 수 있다. (Controller의 modelattribute 연동)
 			WAS의 기준 유효성 check, error 처리
 		
-		3) 스프링 MVC XML / JSON / 파일업로드 / PDF / 웹 소켓 통신
-			viewsolever를 컨테이너(dispatcher-servlet)에서 선언을 통해 효과적인 View단 처리를 할 수 있다. 
+		3) 스프링 MVC XML / JSON / 파일업로드 / 파일다운로드 / PDF / 웹 소켓 통신
+			viewresolver를 컨테이너(dispatcher-servlet)에서 선언을 통해 효과적인 View단 처리를 할 수 있다. 
 	
 	
 	5. 스프링과 DB 연동
@@ -106,7 +109,7 @@
 			- 컨테이너에 프레임워크 호출
 			- 공통 mybatis 설정파일 호출
 			- SQL을 처리할 mapper.xml 선언과 활용
-			- DAO단 연동을 위한 처리방식
+			- DAO단 연동을 위한 처리방식 : interface + xml
 		
 	6. 기타 부가 기능
 		1) 메일 발송 : 자동 메일 발송 ex) 회원 비밀번호 분실 시 등록된 메일로 발송, 회사인사정보 시스템 사원정보 전달
