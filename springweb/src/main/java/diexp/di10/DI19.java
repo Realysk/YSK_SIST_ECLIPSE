@@ -4,6 +4,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+import diexp.vo.Bus;
 import diexp.vo.FruitShop;
 import diexp.vo.Monitor;
 import diexp.vo.Person;
@@ -25,15 +26,16 @@ public class DI19 {
 		
 		Monitor m1 = ctx1.getBean("monitor",Monitor.class);
 		System.out.println(m1);
+		
+		Bus bus = ctx1.getBean("bus",Bus.class);
+		System.out.println(bus);
 		ctx1.close();
 		
-		AnnotationConfigApplicationContext ctx2 = new AnnotationConfigApplicationContext(Con18.class);
-		Person p01 = ctx2.getBean("getPerson", Person.class);
-		System.out.println(p01.getName());
+		AnnotationConfigApplicationContext ctx2 = new AnnotationConfigApplicationContext(Con19.class);
+		Bus bus2 = ctx2.getBean("getBus", Bus.class);
+		System.out.println(bus2);
 		ctx2.close();
 		
-		
-
 	}
 
 }

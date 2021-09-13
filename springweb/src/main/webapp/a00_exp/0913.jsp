@@ -94,7 +94,24 @@
 		4. [하:응용] Bus 클래스에서 Set<String>버스 번호 Properties를 통해 시작/종점을 처리하게 하고, container에 설정하여 처리하세요.
 			main/java/diexp/Con10.java(자바형컨테이너)를 설정해서 처리되게 하세요.
 		
-		
+		    <bean id="bus" class="diexp.vo.Bus">
+		    <!-- setNumbers(Set<String> numbers> -->
+		    	<property name="numbers">
+		    		<set>
+		    			<value>3003</value>
+		    			<value>7700</value>
+		    			<value>7650</value>
+		    		</set>
+		    	</property>
+		    	<!-- setSection(Properties section) -->
+		    	<property name="section">
+		    		<props>
+		    			<prop key="3003">서울~수원</prop>
+		    			<prop key="7700">서울~인천</prop>
+		    			<prop key="7650">부평~강남</prop>
+		    		</props>
+		    	</property>
+		    </bean>
 		
 		5. [하:개념정리] 컨테이너의 namespace 선언방식을 생성자와 property를 나누어 설명하고 물건 정보를 기본 예제로 처리하세요.
 		
