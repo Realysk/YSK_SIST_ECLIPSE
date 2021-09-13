@@ -7,7 +7,11 @@ public class Mart {
 	private String mname;
 	private Product prod;
 	private ArrayList<Product> plist;
-
+	
+	public Mart() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Mart(String mname) {
 		super();
 		this.mname =mname;
@@ -52,6 +56,9 @@ public class Mart {
 	public void setProd(Product prod) {
 		this.prod = prod;
 	}
-	
+	// property명을 product1로 선언
+	public void setProduct1(Product prod) {
+		this.prod = prod;
+	}
 	
 }

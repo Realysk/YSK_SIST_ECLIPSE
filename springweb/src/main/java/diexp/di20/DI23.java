@@ -6,14 +6,14 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 import diexp.vo.Person;
 
-public class DI20 {
+public class DI23 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		AbstractApplicationContext ctx1 = new GenericXmlApplicationContext("diexp\\di20\\a20.xml");
-		Object obj2 = ctx1.getBean("obj", Object.class);
-		System.out.println(obj2);
+		AbstractApplicationContext ctx1 = new GenericXmlApplicationContext("diexp\\di20\\a23.xml");
+		Person person = ctx1.getBean("person", Person.class);
+		System.out.println(person);
 		ctx1.close();
 		
 		
