@@ -41,8 +41,35 @@
 	 <!-- 
 	 # Autowire
 	 	1. 컨테이너 내부에 객체가 메모리 로딩될 때, 연관되는 메서드가 있으면 자동으로 객체가 할당되게 처리 하는 것을 말한다.
+	 		(객체1)	(객체2)
+	 		메모리가 메소드나 기타 속성으로 의존관계에 있으면 자동 할당
+	 		
 	 	2. public void setProd(Product prod)가 되어 있어서, 객체를 할당할 수 있으면 설정옵션 autowire에 의해 객체가 자동으로 할당 된다.
 	 	3. autowire="byType" 객체가 자동 할당된다.
+	 		autowire 속성값
+	 		1) byType : 메서드를 통해서 해당 객체의 type이 정의될 때, 자동으로 할당
+	 		2) byName : 메서드를 통해서 해당 객체의 type이 있고, 참조변수가 메서드의 property와 동일할 때 자동으로 할당된다.
+	 			ex) (객체1)		(객체2)		(객체3)
+	 				Product		Product		Mart	setProduct1(Product pr)
+	 				product1	product		autowire="byName"	메서드의 property가 같은 객체2의 참조변수가 할당된다.
+	 				
+	 		기본예제) a22.xml, DI22.java
+	 			[a22.xml] Product 클래스 두개 bean id product1, product2로 선언
+	 			[Mart.java] Mart 클래스에 setProduct1 메서드 선언 Product 객체 할당 처리
+	 			[a22.xml] mt1클래스 생성. autowire="byName" 선언
+	 			[DI22.java] mt1 호출 메서드 처리
 	  -->
+	  
+	  <!-- 
+	  Product prod2 = new Product("바나나",3000,3);
+	  <bean id="prod2" class="diexp.vo.Product" c:_0="바나나" c:_1="3000" c:_2="3"/>
+	  <bean id="prod3" class="diexp.vo.Product" p:name="오렌지" p:price="2000" p:cnt="2"/>
+	   -->
+	<bean id="pc" class="diexp.vo.Pencil">
+		<property name="kind" value="4B연필"/>
+	</bean>
+	<bean id="note" class="diexp.vo.Note" autowire="byType">
+		<constructor-arg value="스케치용 노트"/>
+	</bean> 
 	
 </beans>

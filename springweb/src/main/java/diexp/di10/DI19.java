@@ -7,6 +7,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import diexp.vo.Bus;
 import diexp.vo.FruitShop;
 import diexp.vo.Monitor;
+import diexp.vo.OnSchool;
 import diexp.vo.Person;
 import diexp.vo.Sensor;
 
@@ -26,16 +27,25 @@ public class DI19 {
 		
 		Monitor m1 = ctx1.getBean("monitor",Monitor.class);
 		System.out.println(m1);
-		
+
 		Bus bus = ctx1.getBean("bus",Bus.class);
 		System.out.println(bus);
-		ctx1.close();
 		
+		OnSchool sInfo = ctx1.getBean("sInfo",OnSchool.class);
+		sInfo.showInfo();		
+		
+		
+		
+		ctx1.close();
 		AnnotationConfigApplicationContext ctx2 = new AnnotationConfigApplicationContext(Con19.class);
 		Bus bus2 = ctx2.getBean("getBus", Bus.class);
 		System.out.println(bus2);
 		ctx2.close();
 		
+		
+		
+		
+
 	}
 
 }

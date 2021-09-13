@@ -23,22 +23,24 @@
 	<bean id="obj" class="java.lang.Object"/>
 	<!-- 
 # 여러가지 구조체를 활용한 컨테이너 설정 처리.
-1. list 형식
+1. list 형식\
+	list
 2. set(중복불가) 형식 데이터 할당 처리.
 	set
 		value 입력값..	
 	public void	setAgent(Set<String> agent)	
 3. map(key/value) 형식 데이터 할당 객체
-	Properties : key/value형식 collection
-		컨테이너
-		props
-			prop key="키값" value값
+
 	Map<key, valuObject> : key와/value의 generic 선언으로 된 collection
 		컨테이너
-		map
+		*map
 			entry
 				key/value 형식으로 처리..
-		public void setConfig(Map<String, Integer> config)		
+		public void setConfig(Map<String, Integer> config)
+4. 	Properties : key/value형식 collection
+		컨테이너
+		*props
+			prop key="키값" value값			
 	 -->
 	 <bean id="monitor" class="diexp.vo.Monitor">
 	 	<property name="config">
@@ -56,6 +58,10 @@
 	 	<property name="agent">
 	 		<set>
 	 			<value>주식매매</value>
+	 			<value>주식매매</value>
+	 			<value>주식매매</value>
+	 			<value>자산관리</value>
+	 			<value>자산관리</value>
 	 			<value>자산관리</value>
 	 			<value>보험관리</value>
 	 		</set>
@@ -83,25 +89,42 @@
              <prop key="포도">7000원</prop>
           </props>
        </property>
-    </bean>
-    <bean id="bus" class="diexp.vo.Bus">
-    <!-- setNumbers(Set<String> numbers> -->
-    	<property name="numbers">
-    		<set>
-    			<value>3003</value>
-    			<value>7700</value>
-    			<value>7650</value>
-    		</set>
-    	</property>
-    	<!-- setSection(Properties section) -->
-    	<property name="section">
-    		<props>
-    			<prop key="3003">서울~수원</prop>
-    			<prop key="7700">서울~인천</prop>
-    			<prop key="7650">부평~강남</prop>
-    		</props>
-    	</property>
-    </bean>
-	
+    </bean>	
+	<bean id="bus" class="diexp.vo.Bus">
+		<!-- 
+		setNumbers(Set<String> numbers)
+		 -->
+		<property name="numbers">
+			<set>
+				<value>3003</value>
+				<value>7700</value>
+				<value>7650</value>
+			</set>
+		</property>
+		<!-- 
+		setSection(Properties section)
+		 -->
+		<property name="section">
+			<props>
+				<prop key="3003">서울~수원</prop>
+				<prop key="7700">서울~인천</prop>
+				<prop key="7650">부평~강남</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="stud01" class="diexp.vo.Student" p:name="홍길동" p:kor="70" p:eng="80" p:math="90"/>
+	<bean id="stud02" class="diexp.vo.Student" 
+		p:name="김길동" p:kor="80" p:eng="90" p:math="95"/>
+	<bean id="stud03" class="diexp.vo.Student" 
+		p:name="마길동" p:kor="85" p:eng="89" p:math="97"/>
+	<bean id="sInfo" class="diexp.vo.OnSchool" c:_0="행복한 학교">
+		<property name="studInfo">
+			<map>
+				<entry key="1" value-ref="stud01"/>			
+				<entry key="2" value-ref="stud02"/>			
+				<entry key="3" value-ref="stud03"/>			
+			</map>
+		</property>
+	</bean>
 	
 </beans>

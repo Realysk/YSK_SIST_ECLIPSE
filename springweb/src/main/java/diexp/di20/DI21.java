@@ -5,6 +5,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import diexp.vo.Mart;
+import diexp.vo.Note;
 import diexp.vo.Person;
 
 public class DI21 {
@@ -21,6 +22,9 @@ public class DI21 {
 		System.out.println(p03.getName() + " : " + p03.getAge() + " : " + p03.getLoc());
 		Mart mt = ctx1.getBean("mt", Mart.class);
 		mt.show();
+		System.out.println("## Autowiring 처리 ##");
+		Note note = ctx1.getBean("note", Note.class);
+		note.showMyNote();
 		ctx1.close();
 		
 		
@@ -29,8 +33,6 @@ public class DI21 {
 		System.out.println(p04.getName());
 		ctx2.close();
 		
-		
-
 	}
 
 }
