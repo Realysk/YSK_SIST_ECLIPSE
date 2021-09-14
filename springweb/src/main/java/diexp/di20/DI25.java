@@ -13,7 +13,8 @@ public class DI25 {
 		
 		AbstractApplicationContext ctx1 = new GenericXmlApplicationContext("diexp\\di20\\a25.xml");
 		Emp obj1 = ctx1.getBean("emp", Emp.class);
-		Dept obj2 = ctx1.getBean("dept", Dept.class);
+		// @Component("d01")로 각 객체의 id값을 찾아서 처리할 수 있다.
+		Dept obj2 = ctx1.getBean("d01", Dept.class);
 		System.out.println(obj1);
 		System.out.println(obj2);
 		obj1.setEmpno(7777);

@@ -1,5 +1,8 @@
 package diexp.vo5;
 
+import org.springframework.stereotype.Component;
+
+@Component("d01")
 public class Dept {
 	private int deptno;
 	private String dname;

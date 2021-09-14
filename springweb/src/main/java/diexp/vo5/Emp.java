@@ -1,6 +1,9 @@
 package diexp.vo5;
 //jspexp.z02_vo.Emp
 import java.util.Date;
+
+import org.springframework.stereotype.Component;
+@Component
 public class Emp {
 	private int empno;
 	private String ename;
