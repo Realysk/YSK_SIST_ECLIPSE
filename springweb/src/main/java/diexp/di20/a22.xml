@@ -33,5 +33,9 @@
     <bean id="pencil2" class="diexp.vo.Pencil" c:_0="샤프"/>
     <bean id="pencil3" class="diexp.vo.Pencil" c:_0="볼펜"/>
     <bean id="note1" class="diexp.vo.Note" c:_0="스케치 노트" autowire="byName"/>
+	<bean id="driver" class="diexp.vo.Driver" c:_0="홍길동" c:_1="대형버스기사"/>
+	<bean id="bus" class="diexp.vo.Bus" p:number="8000" autowire="constructor"/>
+	<bean id="bus1" class="diexp.vo.Bus" c:number="8000" autowire="constructor"/>
+	 
 	 
 </beans>

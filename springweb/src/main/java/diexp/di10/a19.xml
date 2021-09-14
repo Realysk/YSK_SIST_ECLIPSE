@@ -125,6 +125,20 @@
 				<entry key="3" value-ref="stud03"/>			
 			</map>
 		</property>
+		
+	</bean>
+	
+	<bean id="emp01" class="diexp.vo.Emp" p:ename="홍길동" p:job="사원" p:sal="3000"/>
+	<bean id="emp02" class="diexp.vo.Emp" p:ename="김길동" p:job="대리" p:sal="5000"/>
+	<bean id="emp03" class="diexp.vo.Emp" p:ename="신길동" p:job="과장" p:sal="6000"/>
+	<bean id="onEmp" class="diexp.vo.OnEmp" c:_0="IT회사">
+		<property name="map">
+			<map>
+				<entry key="7000" value-ref="emp01"/>
+				<entry key="7001" value-ref="emp02"/>
+				<entry key="7002" value-ref="emp03"/>
+			</map>
+		</property>
 	</bean>
 	
 </beans>

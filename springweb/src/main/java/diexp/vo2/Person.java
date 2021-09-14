@@ -11,13 +11,21 @@ public class Person {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	
 	public Person(String name, int age, String loc) {
 		super();
 		this.name = name;
 		this.age = age;
 		this.loc = loc;
+	}
+	public void showAutoExp() {
+		name = "홍길동";
+		age = 25;
+		loc = "서울 신림동";
+		System.out.println("이름 : " + name);
+		System.out.println("나이 : " + age);
+		System.out.println("거주 : " + loc);
 	}
 
 	public String getName() {

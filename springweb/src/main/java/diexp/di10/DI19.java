@@ -7,6 +7,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import diexp.vo.Bus;
 import diexp.vo.FruitShop;
 import diexp.vo.Monitor;
+import diexp.vo.OnEmp;
 import diexp.vo.OnSchool;
 import diexp.vo.Person;
 import diexp.vo.Sensor;
@@ -34,9 +35,11 @@ public class DI19 {
 		OnSchool sInfo = ctx1.getBean("sInfo",OnSchool.class);
 		sInfo.showInfo();		
 		
-		
-		
+		System.out.println("# EMP(map) #");
+		OnEmp empInfo = ctx1.getBean("onEmp", OnEmp.class);
+		empInfo.showOnEmp();
 		ctx1.close();
+		
 		AnnotationConfigApplicationContext ctx2 = new AnnotationConfigApplicationContext(Con19.class);
 		Bus bus2 = ctx2.getBean("getBus", Bus.class);
 		System.out.println(bus2);

@@ -3,6 +3,7 @@ package diexp.di20;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+import diexp.vo.Bus;
 import diexp.vo.Mart;
 import diexp.vo.Note;
 
@@ -14,7 +15,9 @@ public class DI22 {
 		Mart mt1 = ctx1.getBean("mt1", Mart.class);
 		mt1.show();
 	    Note note1 = ctx1.getBean("note1", Note.class);
-		note1.showMyNote();		
+		note1.showMyNote();	
+		Bus bus = ctx1.getBean("bus", Bus.class);
+		bus.showBusInfo();
 		ctx1.close();
 
 		
