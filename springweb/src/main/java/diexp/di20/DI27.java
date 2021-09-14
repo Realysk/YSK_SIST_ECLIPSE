@@ -3,8 +3,11 @@ package diexp.di20;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+
 import diexp.vo7.Mart;
 import diexp.vo7.Product;
+import diexp.vo7.exp.Bus;
+import diexp.vo7.exp.Driver;
 
 public class DI27 {
 
@@ -18,10 +21,19 @@ public class DI27 {
 		Mart obj2 = ctx1.getBean("mart", Mart.class);
 		
 		obj1.setName("사과");
-		obj1.setPrice(3000);;
+		obj1.setPrice(3000);
 		obj1.setCnt(0);
 		obj2.setMname("행복마트");
 		obj2.show();
+		
+		Bus bus = ctx1.getBean("bus01", Bus.class);
+		Driver driver = ctx1.getBean("driver01", Driver.class);
+		
+		driver.setName("김길동");
+		driver.setRole("광역버스기사");
+		bus.setNumber("7777");
+		bus.showBusInfo();
+		
 		ctx1.close();
 
 	}

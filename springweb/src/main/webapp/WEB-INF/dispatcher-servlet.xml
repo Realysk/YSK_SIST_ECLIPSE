@@ -28,7 +28,14 @@ paaak	p align=""
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
 	<!-- 컨테이너에 사용할 객체 등록 -->
+<!-- 	
 	<bean class="springweb.a01_basic.A01_StartCtrl"/>
 	<bean class="springweb.a01_basic.A02_SecondCtrl"/>
-	<bean class="springweb.a01_basic.A03_RequestController"/>
+	<bean class="springweb.a01_basic.A03_RequestController"/> 
+-->
+	<context:component-scan base-package="springweb">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Dao"/>
+	</context:component-scan>
 </beans>

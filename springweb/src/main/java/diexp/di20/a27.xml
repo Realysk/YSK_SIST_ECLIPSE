@@ -22,8 +22,11 @@
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
 	<bean id="obj" class="java.lang.Object"/>
 	
-	<context:component-scan base-package="diexp.vo7">
+	<!-- 두개 이상의 패키지를 선언할 때 (,)로 추가할 수 있다. -->
+	<context:component-scan base-package="diexp.vo7,diexp.vo7.exp">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
+	
+	<!-- ex) diexp.vo7.exp 패키지 기준으로 Bus, Driver 연관관계를 선언하여 객체를 호출하세요. -->
 	
 </beans>
