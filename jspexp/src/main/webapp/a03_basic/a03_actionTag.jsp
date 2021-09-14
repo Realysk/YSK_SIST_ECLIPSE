@@ -55,7 +55,7 @@
 		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
 	</table>	
 	</form>
-	<jsp:include page="a04_include.jsp"></jsp:include>	
+	<jsp:include page="a04_include.jsp"></jsp:include>
 	
 </body>
 </html>
