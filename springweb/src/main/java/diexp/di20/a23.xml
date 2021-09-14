@@ -41,11 +41,11 @@
 		<!-- 정규식 방법에 의해 해당 패키지 하위에 있는 모든 클래스 객체로 로딩 
 		bean을 통한 id값 지정은 default로 클래스명의 소문자로 다 지정된다.
 		-->
+	</context:component-scan> 
+	<context:component-scan base-package="diexp.vo3">
+		<context:include-filter type="regex" expression=".*"/>
 	</context:component-scan>
 	
-	<context:component-scan base-package="diexp.vo3">
-		<context:include-filter  type="regex" expression=".*"/>
-	</context:component-scan>	
 	
  
 	
