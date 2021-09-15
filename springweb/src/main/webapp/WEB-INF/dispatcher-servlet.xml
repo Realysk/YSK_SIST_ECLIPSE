@@ -38,4 +38,23 @@ paaak	p align=""
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Dao"/>
 	</context:component-scan>
+	
+	<!-- 
+	# DB 연결 처리
+		1. Connection Pool 처리
+			1) 드라이버, 주소, 계정, 비밀번호
+	 -->
+	 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	 	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	 	<property name="username" value="scott"/>
+	 	<property name="password" value="tiger"/>
+	 </bean>
+	<!-- 
+		2. Mybatis 와 연동
+	 -->
+	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	 	<property name="dataSource" ref="dataSource"/>
+	 </bean>
+	
 </beans>
