@@ -1,5 +1,5 @@
 package springweb.z01_vo;
-// jspexp.z02_vo.Emp
+// springweb.z01_vo.Emp
 import java.util.Date;
 
 public class Emp {
