@@ -21,6 +21,14 @@ public class Member {
 		this.auth = auth;
 		this.point = point;
 	}
+	
+	
+	public Member(String id, String pass, String name) {
+		super();
+		this.id = id;
+		this.pass = pass;
+		this.name = name;
+	}
 
 	public Member(String id, String pass) {
 		super();

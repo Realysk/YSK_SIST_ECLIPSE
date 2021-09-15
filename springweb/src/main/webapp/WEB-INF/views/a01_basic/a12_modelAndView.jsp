@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title> REALYSK </title>
 <link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
 <link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
 <script src="${path}/a00_com/jquery.min.js"></script>
@@ -32,34 +32,15 @@
 
 <body>
 <div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">모델 + 요청값</h2>
-  <h3>이름:${p01.name}</h3>
-  <h3>나이:${p01.age}</h3>
-  <h3>사는 곳:${p01.loc}</h3>
+  <h2 data-toggle="modal" data-target="#exampleModalCenter">ModelAndView 객체 처리</h2>
 
 </div>
 <div class="container">
-    <h2 align='center'></h2>
-    <!-- 같은 controller 안에 호출되는 모든 화면에 공통적으로 사용할 모델을
-    	ModelAttribute를 이용해서 처리할 수 있다.. -->
-    <select class="form-control">
-    	<c:forEach var="dept" items="${dlist}">
-    		<option value="${dept.deptno}">${dept.dname }</option>
-    	</c:forEach>
-    </select>
-    
-    <select class="form-control">
-    	<option value="">회원 선택</option>
-    	<c:forEach var="mem" items="${mlist}">
-    		<option value="${mem.pass}">${mem.id}</option>
-    	</c:forEach>
-    </select>    
-    
+    <h2 align='center'>${msg}</h2>
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="이름" name="name" />
-	    <input class="form-control mr-sm-2" placeholder="나이" name="age"  />
-	    <input class="form-control mr-sm-2" placeholder="사는 곳" name="loc"  />
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
 	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
