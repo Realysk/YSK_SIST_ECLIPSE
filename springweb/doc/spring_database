@@ -1,0 +1,26 @@
+# Spring DATABASE
+	1. 기본 설정 관련
+		1) DB 연결을 위한 JDBC Driver 설정
+			cf) JDBC : java database connection
+						java 프로그램으로 DB 서버를 연결하기 위한 공통 모듈 (web에서 lib로 추가)
+						springweb\webapp\WEB-INF\lib\ojdbc6.jar
+		2) mybatis 연결 모듈(framework).jar
+			springweb\webapp\WEB-INF\lib\
+				commons-dbcp-1.2.2.jar
+				mybatis-spring-1.0.2.jar
+				mybatis-3.0.6.jar
+				설정
+		3) 컨테이너(dispatcher-servlet.xml)
+			- DBCP (Database Connection Pool)로 연결정보와 jdbc 드라이버를 통해 DB서버에 연동하도록 한다.
+				IP, PORT, SID, 계정, 비밀번호
+			- mybatis 연결 정보 설정
+				DBCP 연결
+				mybatis와 연결 시, interface를 통해 mybatis가 실제 객체를 만들어 주는데, 이 DAO Interface 폴드 위치를 선언
+					ex) EmpDao dao = new RealEmpDao();
+						RealEmpDao => mybatis를 통해서 만들어진 실제 데이터 처리 결과를 포함하는 실제 객체가 인터페이스명으로 할당되어 service단에서 사용될 수 있다.
+		4) mybatis 공통 xml 설정파일 (mybatis.Spring.xml)
+			- 사용한 VO, DTO 객체를 alias 이름을 선언
+			- 각 DAO 클래스 단위와 연결하는 XXXMapper.xml를 선언.
+				ex) BoardDao(인터페이스), BoardMapper.xml
+		5) XXXMapper.xml의 선언
+			- 조회, 수정, 삭제 처리하는 SQL을 각 기능단위로 선언하는 것을 말한다.
