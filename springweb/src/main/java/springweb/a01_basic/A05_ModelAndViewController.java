@@ -23,10 +23,14 @@ public class A05_ModelAndViewController {
 		return mav;
 	}
 	
-	// http://localhost:7080/springweb/memberReg.do
-	@RequestMapping("memberReg4.do")
-	public String memberReg(@ModelAttribute("mem") Member m) {
-		return "WEB-INF\\views\\a01_basic\\a11_modelAttr.jsp";
+	
+	// ex) http://localhost:7080/springweb/ModelAndView02.do 를 통해서 a13_ModelAndView.jsp를 처리하세요. 모델 데이터는 Person 객체의 이름 나이 거주지를 설정하세요.
+	@RequestMapping("ModelAndView02.do")
+	public ModelAndView modelAttr02() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF\\views\\a01_basic\\a13_ModelAndView.jsp");
+		mav.addObject("p01", new Person("홍길동", 25, "서울 방배동"));
+		return mav;
 	}
 	
 }
