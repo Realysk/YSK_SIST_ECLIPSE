@@ -39,9 +39,15 @@
     <h2 align='center'></h2>
 	<form id="frm01" action="${path}/insert.do" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="제목"/>
-	    <input class="form-control mr-sm-2" placeholder="내용"/>
-	    <button class="btn btn-info" type="submit">등록</button>
+	    <input class="form-control mr-sm-2" name="sch" value="검색값1" placeholder="제목"/>
+	    <button class="btn btn-info" type="submit">등록 (redirect)</button>
+ 	</nav>
+	</form>
+	<h2 align='center'>요청값 : ${param.sch}</h2>
+	<form id="frm01" action="${path}/insert2.do" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" name="sch" value="검색값2" placeholder="제목"/>
+	    <button class="btn btn-info" type="submit">등록 (forward)</button>
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
