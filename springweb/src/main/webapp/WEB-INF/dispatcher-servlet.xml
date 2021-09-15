@@ -57,7 +57,7 @@ paaak	p align=""
 	 -->
 	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	 	<property name="dataSource" ref="dataSource"/>
-<!-- 	 <property name="configLocation" value="classpath:resource/mybatis.Spring.xml"/> -->
+ 	 <property name="configLocation" value="classpath:resource/mybatis.Spring.xml"/>
 	 </bean>
 	 <!--
 	 	3. DAO 인터페이스 패키지 위치를 설정
