@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import diexp.vo.Member;
 import springweb.z01_vo.Person;
 import springweb.z01_vo.Product;
 
@@ -30,5 +31,12 @@ public class A04_ModelController {
 	@RequestMapping("modelAttr02.do")
 	public String modelAttr02(@ModelAttribute("prod") Product prod) {
 		return "WEB-INF\\views\\a01_basic\\a11_model.jsp";
+	}
+	
+	// http://localhost:7080/springweb/memberReg.do
+	
+	@RequestMapping("memberReg.do")
+	public String memberReg(@ModelAttribute("mem") Member m) {
+		return "WEB-INF\\views\\a01_basic\\a11_modelAttr.jsp";
 	}
 }
