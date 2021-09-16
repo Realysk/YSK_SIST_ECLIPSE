@@ -3,10 +3,32 @@
 <!-- 
 // springweb.a05_mvc.a03_dao.A02_EmpDao
 public interface A02_EmpDao {
-	public ArrayList<Emp> getEmpList();
+	public ArrayList<Emp> getEmpList(Emp sch);
  -->
 <mapper namespace="springweb.a05_mvc.a03_dao.A02_EmpDao">
-	<select id="getEmpList" resultType="emp">
+	<select id="getEmpList" resultType="emp" parameterType="emp">
 		SELECT * FROM emp
+		WHERE ename LIKE '%'||#{ename}||'%'
+		AND job LIKE '%'||#{job}||'%'
+	</select>
+	
+	<update id="updateEmp" parameterType="emp">
+		UPDATE emp
+			SET ename = #{ename},
+				job = #{job},
+				mgr = #{mgr},
+				sal = #{sal},
+				hiredate = sysdate,
+				comm = #{comm},
+				deptno = #{deptno}				
+			WHERE empno = #{empno}
+	</update>
+	
+	<delete id="deleteEmp" parameterType="int">
+		DELETE * FROM emp WHERE empno = #{empno}
+	</delete>
+	
+	<select id="schDept" parameterType="int">
+		SELECT * FROM emp WHERE deptno = ${deptno}
 	</select>
 </mapper>

@@ -11,8 +11,15 @@ import springweb.z01_vo.Emp;
 @Service
 public class A02_EmpService {
 	@Autowired
+	
 	private A02_EmpDao dao;
-	public ArrayList<Emp> getEmpList(){
-		return dao.getEmpList();
+	
+	public ArrayList<Emp> getEmpList(Emp sch) {
+		if(sch.getEname() == null) sch.setEname("");
+		if(sch.getJob() == null) sch.setJob("");
+		return dao.getEmpList(sch);
 	}
+	
+	
+	
 }

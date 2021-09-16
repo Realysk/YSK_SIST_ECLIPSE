@@ -24,3 +24,21 @@
 				ex) BoardDao(인터페이스), BoardMapper.xml
 		5) XXXMapper.xml의 선언
 			- 조회, 수정, 삭제 처리하는 SQL을 각 기능단위로 선언하는 것을 말한다.
+			
+	2. XXXMapper.xml VS. XXXDao.java의 관계
+		1) 인터페이스를 통해서 MYBATIS를 톨해 실제 상속받은 클래스를 통해 실제 객체를 만들어주는 관계에 있기에 특정한 코드는 연동이 가능하게 선언해야 한다.
+		2) 연동 규칙
+			[XXXDao.java]											[XXXMapper.xml]
+			
+			interface EmpDao									<mapper namespace="패키지명.EmpDao">
+			public ArrayList<Emp> empList(Emp sch)				<select 속성=속성값
+				(1) ArrayList<Emp>									resultType="emp"
+				(2) empList											id="empList"
+				(3) (Emp sch)										parameterType="emp"
+		
+		ex) public Emp getEmp(int empno)						<select id="getEmp"
+																	resultType="emp"
+																	parameterType="int"														
+		
+		ex) public void insertEmp(Emp ins)						<insert id="insertEmp"
+																	parameterType="emp"

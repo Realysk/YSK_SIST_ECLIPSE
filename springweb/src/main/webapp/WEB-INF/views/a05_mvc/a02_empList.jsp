@@ -42,8 +42,8 @@
     <h2 align='center'></h2>
 	<form id="frm01" class="form-inline" method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="사원명"/>
-	    <input class="form-control mr-sm-2" placeholder="직책명"/>
+	    <input class="form-control mr-sm-2" name="ename" value="${param.ename}" placeholder="사원명"/>
+	    <input class="form-control mr-sm-2" name="job" value="${param.job}" placeholder="직책명"/>
 	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
