@@ -67,3 +67,5 @@
 			2. SQL의 결과 데이터 => 객체로 할당 처리
 			3. DAO 인터페이스가 특정한 규칙에 의해서 XXXMapper.xml의 속성과 연결처리
 			
+	09.16 ex) SELECT * FROM MEMBER 처리를 위해 해야할 부분
+			
