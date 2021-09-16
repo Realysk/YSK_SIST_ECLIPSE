@@ -9,6 +9,6 @@ public interface A02_EmpDao {
  -->
 <mapper namespace="springweb.a05_mvc.a03_dao.A02_EmpDao">
 	<select id="getEmpList" resultType="emp">
-		select * from emp
+		SELECT * FROM EMP
 	</select>
 </mapper>

@@ -5,8 +5,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import springweb.z01_vo.Member;
+import springweb.z01_vo.Emp;
 import springweb.z01_vo.Person;
+import springweb.z01_vo.Product;
 
 @Controller
 public class A05_ModelAndViewController {
@@ -33,4 +34,13 @@ public class A05_ModelAndViewController {
 		return mav;
 	}
 	
+	// http://localhost:7080/springweb/callReqAndModelAndView.do
+	@RequestMapping("callReqAndModelAndView.do")
+	public ModelAndView call(@ModelAttribute("emp") Emp emp) {
+		emp.setEname(emp.getEname() + " / 모델 값 추가");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF\\views\\a01_basic\\a15_callReqAndModelAndView.jsp");
+		mav.addObject("prod", new Product("사과", 3000, 2));
+		return mav;
+	}
 }
