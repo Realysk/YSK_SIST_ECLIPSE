@@ -61,6 +61,7 @@ paaak	p align=""
 	 </bean>
 	 <!--
 	 	3. DAO 인터페이스 패키지 위치를 설정
+	 		인터페이스 => 인터페이스의 상속 받은 실제객체 생성 (mybatis 프레임워크 XXXMapper.xml)
 	  -->
 	  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 	  	<property name="basePackage" value="springweb.a05_mvc.a03_dao"/>

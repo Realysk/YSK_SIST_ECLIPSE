@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
 <!-- 
 // springweb.a05_mvc.a03_dao.A02_EmpDao
 public interface A02_EmpDao {
@@ -9,6 +7,6 @@ public interface A02_EmpDao {
  -->
 <mapper namespace="springweb.a05_mvc.a03_dao.A02_EmpDao">
 	<select id="getEmpList" resultType="emp">
-		SELECT * FROM EMP
+		SELECT * FROM emp
 	</select>
 </mapper>

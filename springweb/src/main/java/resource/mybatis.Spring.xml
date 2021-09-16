@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<!-- vo alias -->
+	<!-- 
+	1. 각 DAO 인터페이스와 연결되는 XXXMapper.xml
+	2. Mapper에서 사용할 VO, DTO를 간단하게 별칭으로 사용할 수 있게 선언.
+	 -->
+	<!-- VO alias -->
 	<typeAliases>
 		<typeAlias alias="emp" type="springweb.z01_vo.Emp"/>
 	</typeAliases>

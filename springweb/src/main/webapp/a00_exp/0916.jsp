@@ -75,59 +75,26 @@
 			
 			[하:개념] 4. 스프링의 데이터베이스 설정 절차(mybatis) 중, 컨테이너에서 설정 내용을 간략하게 기술하세요.
 			
-				dispatcher.servlet.xml
-				
-				1) DB 연결하기 (드라이버, 주소, 계정, 비밀번호)
-				
-					 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-					 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-					 	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-					 	<property name="username" value="scott"/>
-					 	<property name="password" value="tiger"/>
-					 </bean>
-				 
-				 2) mybatis 연동 (dhcp연결, 공통 모듈을 연결할 링크 선정)
-				 
-					 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-					 	<property name="dataSource" ref="dataSource"/>
-				 	 <property name="configLocation" value="classpath:resource/mybatis.Spring.xml"/>
-					 </bean>
-					 
-				3) DAO 인터페이스 패키지 위치 설정
-				
-					  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-					  	<property name="basePackage" value="springweb.a05_mvc.a03_dao"/>
-					  </bean>								
+				# 스프링의 데이터베이스 설정 처리
+					1) 컨테이너에 처리할 내용
+						(1) DB 연결 connection 선언
+						(2) mybatis와 DB Connection 연동, mybatis 공통 파일 위치 선언
+						(3) 현재 컨테이너 안에서 interface DAO의 위치 지정 (mybatis에서 실제 객체를 만들어준다.)
+					2) 공통 mybatis 설정파일 처리
+					3) 각 DAO단 별 연동하는 XXXMapper.xml에 대한 처리
+					4) DAO단 interface 선언								
 			
 			[하:개념] 5. mybatis.Spring.xml의 설정 내용을 기술하세요.
 			
-				<?xml version="1.0" encoding="UTF-8"?>
-				<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-				"http://mybatis.org/dtd/mybatis-3-config.dtd">
-				<configuration>
-					<!-- VO alias (VO 객체 설정) -->
-					<typeAliases>
-						<typeAlias alias="emp" type="springweb.z01_vo.Emp"/>
-					</typeAliases>
-					<!-- XXXMapper.xml (Mapping할 Mapper 설정) -->
-					<mappers>
-						<mapper resource="resource/empMapper.xml"/>
-					</mappers>
-				
-				</configuration>					
+				1) 공통 VO/DTO의 별칭을 선언 => XXXMapper.xml에서 간단하게 사용하기 위해
+				2) XXXMapper.xml을 선언					
 			
 			[하:개념] 6. DAO와 XXXMapper.xml의 설정내용의 연관관계를 기술하세요.
 			
-				<!-- 
-				// springweb.a05_mvc.a03_dao.A02_EmpDao
-				public interface A02_EmpDao {
-					public ArrayList<Emp> getEmpList();
-				 -->
-				<mapper namespace="springweb.a05_mvc.a03_dao.A02_EmpDao">
-					<select id="getEmpList" resultType="emp">
-						SELECT * FROM EMP
-					</select>
-				</mapper>
+				1) DAO의 인터페이스명 => namespace명
+				2) 메서드명 => <select id="메서드명"
+				3) 메서드의 리턴 객체 => <select resultType="VO객체"
+				4) 메서드의 매개변수 => <select parameterType="매개변수"
 			
 		--%>	
 	});
