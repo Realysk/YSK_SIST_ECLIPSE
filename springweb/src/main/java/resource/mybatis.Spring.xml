@@ -8,10 +8,12 @@
 	<!-- VO alias -->
 	<typeAliases>
 		<typeAlias alias="emp" type="springweb.z01_vo.Emp"/>
+		<typeAlias alias="dept" type="springweb.z01_vo.Dept"/>
 	</typeAliases>
 	<!-- XXXMapper.xml -->
 	<mappers>
 		<mapper resource="resource/empMapper.xml"/>
+		<mapper resource="resource/deptMapper.xml"/>
 	</mappers>
 
 </configuration>

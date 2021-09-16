@@ -42,3 +42,28 @@
 		
 		ex) public void insertEmp(Emp ins)						<insert id="insertEmp"
 																	parameterType="emp"
+																	
+	3. SQL 처리 순서
+		1) SQL 작성
+			결과값으로 처리할 VO의 내용 확인
+				SELECT * FROM dept;
+				INSERT INTO dept VALUES(10, '회계', '서울');
+		2) VO 작성 (조회 시, 결과 단위데이터를 저장할 객체)
+		3) DAO 인터페이스 구성
+			springweb.a05.mvc.a03_dao에서 구성.
+				테이블 단위나 업무 단위로 Dao 인터페이스 추가
+				interface
+		4) 기능 메서드 선언
+			SQL을 통해서 나타나는 데이터를 return할 객체, 조회조건 VO
+		5) 공통 mybatis.Spring.xml
+			- 사용할 VO를 alias로 선언
+			- XXXMapper.xml
+				테이블 단위나 업무단위로 XXXMapper.xml을 추가하면 된다.
+		6) XXXMapper.xml
+			- 결과 객체 선언. resultMap
+			- SQL문 처리할 요소객체 선언
+				- ID, 매개변수, return값 선언
+			1. JAVA의 DAO 인터페이스 상속한 실제 객체를 생성해주는 역할을 하는 것이 XXXMapper.xml
+			2. SQL의 결과 데이터 => 객체로 할당 처리
+			3. DAO 인터페이스가 특정한 규칙에 의해서 XXXMapper.xml의 속성과 연결처리
+			
