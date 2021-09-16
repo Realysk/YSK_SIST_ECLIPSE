@@ -13,7 +13,7 @@ import springweb.z01_vo.Product;
 public class A05_ModelAndViewController {
 /*
 # ModelAndView
-	1. 모델과 뷰를 같이 사용할 수 있는 객체를 말한다.
+	1. 모델과 뷰를 같이 사용할 수 있는 객체를 말한다..
 */	
 	// // http://localhost:7080/springweb/ModelAndView01.do	
 	@RequestMapping("ModelAndView01.do")
