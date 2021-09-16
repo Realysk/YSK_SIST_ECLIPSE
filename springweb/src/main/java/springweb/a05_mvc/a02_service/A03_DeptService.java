@@ -11,7 +11,6 @@ import springweb.z01_vo.Dept;
 @Service
 public class A03_DeptService {
 	@Autowired
-	
 	private A03_DeptDao dao;
 	
 	public ArrayList<Dept> dlist() {	
