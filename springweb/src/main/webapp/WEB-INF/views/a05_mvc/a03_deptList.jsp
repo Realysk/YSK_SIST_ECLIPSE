@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> REALYSK </title>
+<title>Insert title here</title>
 <link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
 <link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
 <script src="${path}/a00_com/jquery.min.js"></script>
@@ -39,8 +39,8 @@
     <h2 align='center'></h2>
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="부서명"/>
-	    <input class="form-control mr-sm-2" placeholder="부서지역"/>
+	    <input class="form-control mr-sm-2" placeholder="부서명" />
+	    <input class="form-control mr-sm-2" placeholder="부서위치" />
 	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
@@ -57,14 +57,13 @@
       </tr>
     </thead>	
     <tbody>
-    	<c:forEach var="dept" items="${deptlist}">
-    	    <tr class="table-success text-center">
-    	    	<td>${dept.deptno}</td>
-    	    	<td>${dept.dname}</td>
-    	    	<td>${dept.loc}</td>
-    	    </tr>
+    	<c:forEach var="dept" items="${deptList}">
+    	<tr class="text-center" >
+    		<td>${dept.deptno }</td>
+    		<td>${dept.dname }</td>
+    		<td>${dept.loc}</td></tr>
     	</c:forEach>
-    </tbody>
+     </tbody>
 	</table>    
     
 </div>
