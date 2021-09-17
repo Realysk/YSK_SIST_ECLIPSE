@@ -101,9 +101,9 @@
 					<update id="updateMember" parameterType="member">
 						UPDATE member
 							SET pass = #{pass},
-								name = #{name},			
-								auth = #{auth},			
-								point = #{point},			
+								name = #{name},	
+								auth = #{auth},
+								point = #{point},		
 							WHERE id = #{id}
 					</update>
 					

@@ -46,29 +46,29 @@ public class A06_RedirectForwardCtrl {
 	  	회원 상세화면 호출 (memberDetail.do) => 삭제처리 (memberDelete.do) = (redirect) => 회원리스트 화면
 	 */
 	
-	// http://localhost:7080/springweb/memberList.do	
-	@RequestMapping("memberList.do")
+	// http://localhost:7080/springweb/memberList1.do	
+	@RequestMapping("memberList1.do")
 	public String memberList(@RequestParam(value="id", defaultValue="") String id) {
 		System.out.println("요청값 : " + id);
 		System.out.println("회원 리스트 화면 호출");
 		return "WEB-INF\\views\\a01_basic\\a16_memberlist.jsp";
 	}
 	
-	@RequestMapping("memberDetail.do")
+	@RequestMapping("memberDetail1.do")
 	public String memberDetail(@RequestParam(value="id", defaultValue="") String id) {
 		System.out.println("상세조회 ID : " + id);
 		System.out.println("회원 상세 화면 호출");
 		return "WEB-INF\\views\\a01_basic\\a17_memberDetail.jsp";
 	}
 	
-	@RequestMapping("memberRegister.do")
+	@RequestMapping("memberRegister1.do")
 	public String memberRegister(@RequestParam(value="id", defaultValue="") String id) {
 		System.out.println("등록할 ID : " + id);
 		System.out.println("등록 처리 (forward)");
 		return "forward:/memberDetail.do";
 	}
 	
-	@RequestMapping("memberDelete.do")
+	@RequestMapping("memberDelete1.do")
 	public String memberDelete(@RequestParam(value="id", defaultValue="") String id) {
 		System.out.println("삭제할 ID : " + id);
 		System.out.println("삭제 처리 (redirect)");
