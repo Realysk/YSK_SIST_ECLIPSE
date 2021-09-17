@@ -32,14 +32,14 @@ public class A04_MemberController {
 	@RequestMapping("memberUpdate.do")
 	public String memberUpdate(Member upt) {
 		//d.addAttribute("memList", service.memberList(sch));
-		// 등록 후, 조회리스트 처리..
+		// 수정 후, 조회리스트 처리..
 		service.updateMember(upt);
 		return "redirect:/memberList.do";
 	}		
 	@RequestMapping("memberDelete.do")
 	public String memberDelete(@RequestParam("id") String id) {
 		//d.addAttribute("memList", service.memberList(sch));
-		// 등록 후, 조회리스트 처리..
+		// 삭제 후, 조회리스트 처리..
 		service.deleteMember(id);
 		return "redirect:/memberList.do";
 	}		
