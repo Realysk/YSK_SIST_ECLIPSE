@@ -78,11 +78,52 @@
 				
 			2. [하:응용] A04_MemberDao를 통해 member테이블의 등록/수정/삭제 처리하는 DAO와 resource\memberMapper.xml를 통해서 처리하세요.
 			
+				[A04_MemberDao]
+			
+				public interface A04_MemberDao {
+					public ArrayList<Member> memberList();
+					public void insertMember (Member ins);
+					public void updateMember (Member upt);
+					public void deleteMember (String id);
+				}
 				
+				[memberMapper]
+		
+				<mapper namespace="springweb.a05_mvc.a03_dao.A04_MemberDao">
+					<select id="memberList" resultType="member">
+						SELECT * FROM member
+					</select>
+					
+					<insert id="insertMember" parameterType="member">
+						INSERT INTO member VALUES (#{id}, #{pass}, #{name}, #{auth}, #{point});
+					</insert>
+					
+					<update id="updateMember" parameterType="member">
+						UPDATE member
+							SET pass = #{pass},
+								name = #{name},			
+								auth = #{auth},			
+								point = #{point},			
+							WHERE id = #{id}
+					</update>
+					
+					<delete id="deleteMember" parameterType="String">
+						DELETE * FROM member WHERE id = #{id}
+					</delete>	
+					
+				</mapper>
 			
 			3. [중:응용] member리스트를 DB와 연동되어 스프링 MVC 패턴으로 name/auth를 통해 조회가 되게 하세요.
 			
-			
+				[memberDao]
+				
+				public ArrayList<Member> schMember(String id, String auth);
+				
+				[memberMapper]
+				
+				<select id="schMember" parameterType="String, String">
+					SELECT * FROM member WHERE id = #{id} AND auth = #{auth}
+				</select>
 			
 		--%>	
 	});

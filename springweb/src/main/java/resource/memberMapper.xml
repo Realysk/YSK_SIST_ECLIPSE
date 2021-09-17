@@ -5,4 +5,26 @@
 	<select id="memberList" resultType="member">
 		SELECT * FROM member
 	</select>
+	
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO member VALUES (#{id}, #{pass}, #{name}, #{auth}, #{point});
+	</insert>
+	
+	<update id="updateMember" parameterType="member">
+		UPDATE member
+			SET pass = #{pass},
+				name = #{name},			
+				auth = #{auth},			
+				point = #{point},			
+			WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		DELETE * FROM member WHERE id = #{id}
+	</delete>
+	
+	<select id="schMember" parameterType="String, String">
+		SELECT * FROM member WHERE id = #{id} AND auth = #{auth}
+	</select>
+	
 </mapper>
