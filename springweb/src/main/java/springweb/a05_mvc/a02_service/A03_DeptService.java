@@ -12,8 +12,19 @@ import springweb.z01_vo.Dept;
 public class A03_DeptService {
 	@Autowired
 	private A03_DeptDao dao;
-	
-	public ArrayList<Dept> dlist() {	
-		return dao.dlist();
+	public ArrayList<Dept> dlist(Dept sch){
+		if(sch.getLoc()==null) {
+			sch.setLoc("");
+		}
+		return dao.dlist(sch);
 	}
+	public void insertDept(Dept ins) {
+		dao.insertDept(ins);
+	}
+	public void updateDept(Dept upt) {
+		dao.updateDept(upt);
+	}
+	public void deleteDept(int deptno) {
+		dao.deleteDept(deptno);
+	}		
 }

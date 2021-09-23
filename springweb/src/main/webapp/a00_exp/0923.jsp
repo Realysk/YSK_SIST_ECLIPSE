@@ -53,13 +53,40 @@
 					
 				}
 			
-			2. [한:응용] 부서정보의 조회/등록/삭제 DAO/Mapper.xml을 만드세요.
+			2. [하:응용] 부서정보의 조회/등록/삭제 DAO/Mapper.xml을 만드세요.
 			
-				
+				public interface A03_DeptDao {
+					// SELECT * FROM dept02
+					public ArrayList<Dept> dlist(Dept sch);
+					public void insertDept(Dept ins);
+					public void updateDept(Dept upt);
+					public void deleteDept(int deptno);
+				}	
+			
+				<select id="dlist" parameterType="dept" resultType="dept">
+					SELECT * FROM dept02
+				</select>
+				<insert id="insertDept" parameterType="dept">
+					INSERT INTO dept02 VALUES (#{deptno}, #{dname}, #{loc})
+				</insert>
+				<update id="updateDept" parameterType="dept">
+					UPDATE dept02
+						SET dname = #{dname},
+							loc = #{loc},
+						WHERE deptno = #{deptno}
+				</update>
+				<delete id="deleteDept" parameterType="int">
+					DELETE FROM dept02 WHERE deptno = #{deptno}
+				</delete>			
 			
 			3. [중:응용] 부서정보의 조회/등록/삭제를 MVC패턴으로 화면단과 함께 구현하세요.
 			
-				
+				Dao
+				Service
+				Controller
+					1) 기능메서드 초기화면 호출
+					2) Service단 호출 Model 데이터 처리
+					3) 화면단에서 el, jstl을 통한 데이터 처리
 			
 		--%>	
 	});

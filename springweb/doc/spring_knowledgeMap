@@ -132,6 +132,21 @@
 		1) 요청값 처리 내용 확인
 		2) Service단에 데이터 로딩 및 모델 데이터 처리
 	4. 화면단에서 JSTL/EL을 통한 모델 데이터 처리
+
+# CRUD 처리 구현
+	1. View - 화면 User Interface 결정
+		ex) 등록 버튼 추가 (화면)
+			등록 클릭 시 (JS)
+			등록할 화면 출력 (Modal)
+			등록값 입력 후 Submit 처리 : form의 action 속성 변경
+			등록 처리할 Controller 호출
+			Controller
+				URL Mapping
+					요청값 매개변수로 처리
+					DAO/Mapper 구현
+					Service단 DAO 호출
+					Control 단, Service 단에 등록 데이터 전송
+					return ""; 최종 호출할 화면 선언. ex) return "redirect:/deptList.do"
 	
 # Spring MVC를 활용한 CRUD
 	1. 초기화면 구현

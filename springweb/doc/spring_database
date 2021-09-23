@@ -66,6 +66,23 @@
 			1. JAVA의 DAO 인터페이스 상속한 실제 객체를 생성해주는 역할을 하는 것이 XXXMapper.xml
 			2. SQL의 결과 데이터 => 객체로 할당 처리
 			3. DAO 인터페이스가 특정한 규칙에 의해서 XXXMapper.xml의 속성과 연결처리
-			
-	09.16 ex) SELECT * FROM MEMBER 처리를 위해 해야할 부분
+	
+		7) 동적인 SQL의 작성
+			SELECT * FROM dept02
+			WHERE 1=1
+			AND dname LIKE '%'||#{dname}||'%'
+			dname에 값이 없을 경우
+			AND dname LIKE '%'||'null'||'%'로 되어,
+			초기에 원한 전체 검색이 처리 되지 않고, 데이터가 없는 것으로 검색된다.
+			(1) Service단에서
+				if(sch.getDname()==null) {
+					sch.setDname("");
+				}
+			(2) XXXMapper.xml에서
+				동적인 SQL을 위한 조건 처리를 한다.
+				WHERE 1=1 : 전제 조건으로 1=1이 있으면 다음 SQL을 처리가 간편하다.
+				<if test="dname != null AND dname !=''">
+					AND dname LIKE '%'||#{dname}||'%'
+				</if>
+				dname이 null이 아니고, ''(공백)이 아닐 때
 			
