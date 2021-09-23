@@ -5,15 +5,17 @@
 
 <mapper namespace="springweb.a05_mvc.a03_dao.A03_DeptDao">
 	<select id="dlist" parameterType="dept" resultType="dept" >
-		SELECT * FROM dept02 WHERE 1=1
+		select * from dept02
+		where 1=1
 		<if test = "dname !=null and dname !=''">
-		AND dname LIKE '%'|| #{dname} ||'%'
+		and dname like '%'|| #{dname} ||'%'
 		</if>
-		AND loc LIKE '%'|| #{loc} ||'%'
-		OREDR BY deptno DESC
+		and loc like '%'|| #{loc} ||'%'
+		order by deptno desc
 	</select>
 	<insert id="insertDept" parameterType="dept">
-		INSERT INTO dept02 VALUES (#{deptno}, #{dname}, #{loc})	
+		INSERT INTO dept02 values(
+			#{deptno},#{dname},#{loc})	
 	</insert>
 	<update id="updateDept" parameterType="dept">
 		UPDATE dept02
@@ -22,6 +24,7 @@
 			WHERE deptno = #{deptno}		
 	</update>
 	<delete id="deleteDept" parameterType="int">
-		DELETE FROM dept02 WHERE deptno = #{deptno}	
+		DELETE FROM dept02
+		WHERE deptno = #{deptno}	
 	</delete>
 </mapper>	
