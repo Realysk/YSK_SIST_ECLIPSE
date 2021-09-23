@@ -27,9 +27,33 @@
 		# 정리문제
 			1. [하:개념] DAO와 Mapper.xml의 연동 규칙을 설명해보세요.
 			
+				[mybatis.Spring.xml]
 				
+				<!-- VO alias -->
+				<typeAliases>
+					<typeAlias alias="별칭" type="VO 패키지 경로"/>
+				</typeAliases>
+				<!-- XXXMapper.xml -->
+				<mappers>
+					<mapper resource="java 하위 경로 /xxxMapper.xml"/>
+				</mappers>
+				
+				[XXXMapper.xml]
+				
+				<mapper namespace="DAO 경로">
+					<select id="dao메서드명" resultType="별칭">
+						SQL
+					</select>
+					<insert, <update, <delete
+				</mapper>
+				
+				[XXXDao.xml]
+				
+				public interface DAO이름 {
+					
+				}
 			
-			2. [히:응용] 부서정보의 조회/등록/삭제 DAO/Mapper.xml을 만드세요.
+			2. [한:응용] 부서정보의 조회/등록/삭제 DAO/Mapper.xml을 만드세요.
 			
 				
 			
