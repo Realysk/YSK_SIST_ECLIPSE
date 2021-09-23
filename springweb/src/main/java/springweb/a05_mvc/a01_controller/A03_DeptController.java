@@ -21,21 +21,21 @@ public class A03_DeptController {
 	}
 	@RequestMapping("deptInsert.do")
 	public String deptInsert(Dept ins) {
-		System.out.println("등록할 번호:"+ins.getDeptno());
+		System.out.println("등록할 번호 : " + ins.getDeptno());
 		service.insertDept(ins);
 		return "redirect:/deptList.do";
 	}
 	// deptUpdate.do deptDelete.do
 	@RequestMapping("deptUpdate.do")
 	public String deptUpdate(Dept upt) {
-		System.out.println("수정할 번호:"+upt.getDeptno());
+		System.out.println("수정할 번호 : " + upt.getDeptno());
 		service.updateDept(upt);
 		return "redirect:/deptList.do";
 	}	
 	@RequestMapping("deptDelete.do")
 	public String deptDelete(@RequestParam("deptno") int deptno) {
-		System.out.println("삭제할 번호:"+deptno);
-		service.deleteDept(deptno);;
+		System.out.println("삭제할 번호 : " + deptno);
+		service.deleteDept(deptno);
 		return "redirect:/deptList.do";
 	}		
 	
