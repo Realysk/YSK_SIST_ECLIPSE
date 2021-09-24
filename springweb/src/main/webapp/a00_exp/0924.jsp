@@ -42,14 +42,18 @@
 		 return "WEB-INF\\views\\a05_mvc\\a05_deptList2.jsp" // jsp 파일 호출.
 		
 [하:응용]3. A01_MvcController에 추가하여 Student.java를 요청값으로 등록한 내용을 json뷰를 통해 출력처리하세요.
+java\springweb\a05_mvc\a01_controller\A01_MvcController.java
+WEB-INF\views\a05_mvc\a06_studentAjax.jsp
 [중:응용]4. 요청값을 통해 ajax로 회원등록을 하고, 등록된 회원정보 dao통해 스프링 json 뷰로 출력하세요.
             a03_dao\A04_MemberDao.java 기능 메서드 public inserMember(Member m); 추가 db처리
-            1) SQL 확인
-            2) VO 확인
-            3) DAO 등록, XXXMapper 처리
-            4) Service단 처리
-            5) Controller 화면 구성
-            6) View 처리
+            1) sql 확인
+            2) vo 확인
+            3) dao 등록, xxxmapper 처리
+            4) service단 처리
+            5) controller 화면구성
+            6) view단 처리..
+   webapp\WEB-INF\views\a05_mvc\a07_memberAjax.jsp
+   \java\springweb\a05_mvc\a01_controller\A04_MemberController.java         
 
 # 오늘의 목표
 1. 여러가지 환경 설정값을 컨테이너로 할 수 있다.
