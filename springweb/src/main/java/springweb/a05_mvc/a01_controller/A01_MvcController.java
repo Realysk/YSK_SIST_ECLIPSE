@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import springweb.a05_mvc.a02_service.A01_MvcService;
+import springweb.z01_vo.Student;
 
 @Controller
 public class A01_MvcController {
@@ -18,4 +20,15 @@ public class A01_MvcController {
 		d.addAttribute("serviceMsg", service.call());
 		return "WEB-INF\\views\\a05_mvc\\a01_mvc.jsp";
 	}
+	// http://localhost:7080/springweb/studFrm.do
+	@RequestMapping("studFrm.do")
+	public String studFrm() {
+		return "WEB-INF\\views\\a05_mvc\\a06_studentAjax.jsp";
+	}
+	@RequestMapping("addStudentInfo.do")
+	public String addStudentInfo(Student student) { 
+		// 객체는 기본 type으로 모델 attribute가 설정이 된다.
+		return "pageJsonReport";
+	}
+	
 }
