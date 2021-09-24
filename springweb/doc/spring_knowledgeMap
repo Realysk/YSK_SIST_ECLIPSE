@@ -188,3 +188,9 @@
 		(5) JAVA의 소스
 			@Value("${설정키}")
 			private String 변수명; // 위에 설정된 키의 값을 변수에 할당
+			
+# Spring에서 Session 처리
+	1. 기본 처리 방식
+		1) Controller 상단에 SessionAttributes("이름")
+		2) 클래스명 하단에 전역 ModelAttribute("세션이름")
+		3) 각 기능메서드에 객체를 통해서 @ModelAttribute 선언을 통해 생성 처리하여 할당한다.
