@@ -1,4 +1,5 @@
 # 주석 (인식 안됨)
+
 # DB 서버 설정 정보
 driver=oracle.jdbc.driver.OracleDriver
 dburl=jdbc:oracle:thin:@localhost:1521:xe
@@ -8,3 +9,11 @@ pass=tiger
 # 파일 서버의 경로명 (상단 데스크톱, 하단 노트북)
 upload1=C:/Users/ysk23/AppData/Roaming/SPB_Data/git/YSK_SIST_ECLIPSE/springweb/src/main/webapp/z01_upload
 #upload1=C:/Users/realysk/git/YSK_SIST_ECLIPSE/springweb/src/main/webapp/z01_upload
+
+# ex) info 파일에 name, age, loc를 설정한 후 화면에 a20_setting.jsp에 출력하세요.
+name=kimgildong
+age=28
+loc=seoul
+name1=honggildong
+age1=25
+loc1=jeju

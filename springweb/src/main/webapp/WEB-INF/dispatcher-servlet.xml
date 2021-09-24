@@ -42,8 +42,10 @@ xml
 	1. connection pool 처리
 		1) 드라이버, 주소, 계정, 비번
 	 -->
+	 
 	<!-- 공통설정 처리 -->
-	<context:property-placeholder location="classpath:/resource/properties/info"/>	
+	<context:property-placeholder location="classpath:/resource/properties/info"/>
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
 		destroy-method="close">
 		<property name="driverClassName" value="${driver}"/>	
@@ -51,6 +53,9 @@ xml
 		<property name="username" value="${name}"/>	
 		<property name="password" value="${pass}"/>	
 	</bean>
+	
+	<bean class="springweb.z01_vo.Person" p:name="${name1}" p:age="${age1}" p:loc="${loc1}"/>
+	
 	<!-- 
 	2. Mybatis와 연동
 		1) dbcp연결
