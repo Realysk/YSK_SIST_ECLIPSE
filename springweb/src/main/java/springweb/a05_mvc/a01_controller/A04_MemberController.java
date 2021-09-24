@@ -3,6 +3,7 @@ package springweb.a05_mvc.a01_controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,6 +22,25 @@ public class A04_MemberController {
 		d.addAttribute("memList", service.memberList(sch));
 		return "WEB-INF\\views\\a05_mvc\\a04_memberList.jsp";
 	}
+	
+	// http://localhost:7080/springweb/memberFrm.do
+	@GetMapping("memberFrm.do")
+	public String memberFrm() {
+		return "WEB-INF\\views\\a05_mvc\\a07_memberAjax.jsp";
+	}
+	
+	@RequestMapping("memberListAjax.do")
+	public String memberListAjax(Member sch, Model d) {
+		d.addAttribute("memList", service.memberList(sch));
+		return "pageJsonReport";
+	}
+	
+	@RequestMapping("memberInsertAjax.do")
+	public String memberInsertAjax(Member insert) {
+		service.insertMember(insert);
+		return "redirect:/memberListAjax.do";
+	}
+	
 	// memberInsert.do
 	@RequestMapping("memberInsert.do")
 	public String memberInsert(Member insert) {
@@ -28,14 +48,16 @@ public class A04_MemberController {
 		// 등록 후, 조회리스트 처리..
 		service.insertMember(insert);
 		return "redirect:/memberList.do";
-	}	
+	}
+	
 	@RequestMapping("memberUpdate.do")
 	public String memberUpdate(Member upt) {
 		//d.addAttribute("memList", service.memberList(sch));
 		// 수정 후, 조회리스트 처리..
 		service.updateMember(upt);
 		return "redirect:/memberList.do";
-	}		
+	}
+	
 	@RequestMapping("memberDelete.do")
 	public String memberDelete(@RequestParam("id") String id) {
 		//d.addAttribute("memList", service.memberList(sch));
