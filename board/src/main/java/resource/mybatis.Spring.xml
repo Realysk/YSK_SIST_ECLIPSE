@@ -4,6 +4,7 @@
 	<!-- VO alias -->
 	<typeAliases>
 		<typeAlias alias="board" type="board.vo.Board"/>
+		<typeAlias alias="boardfile" type="board.vo.BoardFile"/>
 	</typeAliases>
 	<!-- XXXMapper.xml -->
 	<mappers>

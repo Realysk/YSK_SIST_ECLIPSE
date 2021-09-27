@@ -6,4 +6,29 @@
 	<resultMap type="board" id="resultBoard">
 	</resultMap>
 	
+	<select id="boardList" resultType="board" parameterType="board">
+		SELECT * FROM board
+		WHERE subject LIKE '%'||#{subject}||'%'
+		AND writer LIKE '%'||#{writer}||'%'
+		ORDER BY no DESC	
+	</select>
+	
+	<select id="getBoard" resultType="board" parameterType="int">
+		SELECT * FROM board
+		WHERE no = #{no}
+	</select>
+	
+	<insert id="insertBoard" parameterType="board">
+		INSERT INTO board VALUES (board_seq.nextval, #{refno}, #{subject}, #{content}, #{writer}, 0, sysdate, sysdate)		
+	</insert>
+	
+	<insert id="uploadFile" parameterType="boardfile">
+		INSERT INTO boardfile VALUES (board_seq.currval, #{fname}, #{pathname}, #{content}, sysdate);
+	</insert>
+	
+	<select id="getBoardFile" resultType="boardfile" parameterType="int">
+		SELECT * FROM boardfile
+		WHERE no = #{no}
+	</select>
+
 </mapper>

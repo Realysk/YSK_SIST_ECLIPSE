@@ -90,6 +90,7 @@
 	      <div class="col">
 	        <input type="text" class="form-control" placeholder="직책명 입력" name="job">
 	      </div>
+	     </div>
 	    </form> 
       </div>
       <div class="modal-footer">
