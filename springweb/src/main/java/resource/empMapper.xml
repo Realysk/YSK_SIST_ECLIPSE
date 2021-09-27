@@ -6,6 +6,14 @@ public interface A02_EmpDao {
 	public ArrayList<Emp> getEmpList(Emp sch);
  -->
 <mapper namespace="springweb.a05_mvc.a03_dao.A02_EmpDao">
+	<!-- 
+	resultMap을 사용하는 이유
+	1. 결과값을 처리하는 vo객체의 property와 DB의 컬럼명이 다를 때, 주로 사용한다.
+	 -->
+	<resultMap type="emp" id="resultEmp">
+		<!-- <collection property="" column=""></collection> -->
+	</resultMap>
+
 	<select id="getEmpList" resultType="emp" parameterType="emp">
 		SELECT * FROM emp
 		WHERE ename LIKE '%'||#{ename}||'%'

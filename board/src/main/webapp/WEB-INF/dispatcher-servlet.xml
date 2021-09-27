@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-xml
- h4322   h1, h2
- paaak   p align=""
- 1. DTD : 상단에 어떤 태그(태그명과 속성)를 사용할지를 선언
- 2. 위에 선언 후, DTD에 맞는 태그를 활용 수 있다.
- -->
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:aop="http://www.springframework.org/schema/aop" 
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -27,92 +20,43 @@ xml
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-		
-	<!-- 컨테이너에 사용할 객체 등록
-	<bean class="springweb.a01_basic.A01_StartCtrl"/>		
-	<bean class="springweb.a01_basic.A02_SecondCtrl"/>		
-	<bean class="springweb.a01_basic.A03_RequestController"/>	 -->
-	<context:component-scan base-package="springweb">
+
+	<context:component-scan base-package="board">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Dao"/>
 	</context:component-scan>
-	<!-- 
-	# DB연결 처리.
-	1. connection pool 처리
-		1) 드라이버, 주소, 계정, 비번
-	 -->
-	 
-	<!-- 공통설정 처리 -->
+	
 	<context:property-placeholder location="classpath:/resource/properties/info"/>
 	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
-		destroy-method="close">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${driver}"/>	
 		<property name="url" value="${dburl}"/>	
 		<property name="username" value="${name}"/>	
 		<property name="password" value="${pass}"/>	
 	</bean>
 	
-	<bean class="springweb.z01_vo.Person" p:name="${name1}" p:age="${age1}" p:loc="${loc1}"/>
-	<bean class="springweb.z01_vo.Product" c:name="${pname}" c:price="${price}" c:cnt="${cnt}"/>
-	
-	<!-- 
-	2. Mybatis와 연동
-		1) dbcp연결
-		2) java/resource/mybatis.Spring.xml
-			로 공통 연결 처리..
-	 --> 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		 
-		<property name="configLocation"
-			value="classpath:resource/mybatis.Spring.xml" />
-		
+		<property name="configLocation" value="classpath:resource/mybatis.Spring.xml"/>
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="board.dao.BoardDao"/>
 	</bean> 
-	<!-- 
-	3. dao 인터페이스 페이지 위치를 설정..
-		인터페이스 ==> 인터페이스의 상속받은
-			 실제객체생성(mybatis 프레임웍 XXXmapper.xml)
-		name="basePackage" value="dao경로1, dao경로2,..."
-	 -->
-	<bean 
-		class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="springweb.a05_mvc.a03_dao"/>
-	</bean> 
-	<!-- 
-	컨트롤러의 리턴값이 return "pageJsonReport" 호출하면
-	아래의 형식으로 모델데이터를 json형식으로 처리하는 view
-	public void call(){
-		return "pageJsonReport"; 
-		 ==> jsp를 위한 view인지 bean의 id을 선언하는 view인지를 설정하는 부분이 필요.
-		 그리고, jsp로 처리하는 것을 우선으로 할 것인가 bean의 id값을 호출하는 것을 우선으로 할 것인가를
-		 order 라는 property로 설정..
-	}
-	 -->
-	<bean id="pageJsonReport" 
-		class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+
+	<bean id="pageJsonReport" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<property name="contentType" value="text/html;charset=utf-8"/>
 	</bean>
-	<!-- id값의 view를 등록하고 우선순위를 최우선으로 설정하는 부분 선언 객체 -->
+	
 	<bean id="btnViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="0"/>
 	</bean>
-	<!-- 컨테이너에 등록된 id값이 아니면 모두 jsp의 경로를 찾아서 해당 jsp를 호출하는 view 선언.. 
-		jsp의 접두어 접미어를 통해서 jsp 호출을 보다 간단하게 호출할 수 있다.
-	-->
+
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="1"/>
-		<!-- 
-		<property name="prefix" value="WEB-INF/views/a01_basic/"/>
+		<property name="prefix" value="WEB-INF/views/"/>
 		<property name="suffix" value=".jsp"/>
-		 -->
 	</bean>
 	
-	
-	
-		
 </beans>
-
-
-
