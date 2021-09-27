@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("board.do")
 public class BoardController {
-	// http://localhost:7080/board.do?method=list
+	// http://localhost:7080/board/board.do?method=list
 	@RequestMapping(params="method=list")
 	public String boardList(Model d) {
 		
