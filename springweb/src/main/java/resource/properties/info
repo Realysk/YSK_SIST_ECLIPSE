@@ -10,10 +10,14 @@ pass=tiger
 upload1=C:/Users/ysk23/AppData/Roaming/SPB_Data/git/YSK_SIST_ECLIPSE/springweb/src/main/webapp/z01_upload
 #upload1=C:/Users/realysk/git/YSK_SIST_ECLIPSE/springweb/src/main/webapp/z01_upload
 
-# ex) info 파일에 name, age, loc를 설정한 후 화면에 a20_setting.jsp에 출력하세요.
+# 09.24 ex) info 파일에 name, age, loc를 설정한 후 화면에 a20_setting.jsp에 출력하세요.
 name=kimgildong
 age=28
 loc=seoul
 name1=honggildong
 age1=25
 loc1=jeju
+# 09.27 ex) 컨테이너의 객체(Product)에 Property로 할당하고 해당 객체를 호출(Autowiring)하는 내용을 A09_SettingCtrl.java를 통해서 처리하세요.
+pname=apple
+price=3000
+cnt=2
