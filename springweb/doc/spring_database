@@ -24,6 +24,27 @@
 				ex) BoardDao(인터페이스), BoardMapper.xml
 		5) XXXMapper.xml의 선언
 			- 조회, 수정, 삭제 처리하는 SQL을 각 기능단위로 선언하는 것을 말한다.
+		6) 프로그래밍과 DB서버의 연결과 처리 (09.28)
+			java의 스프링 웹 프로그램 <===> DB 서버
+				- 연결을 위한 처리 : 컨테이너(dispatcher-servlet.xml)에서 DB연결(DBCP)
+				- 명령문 전달 : mybatis에서 framework로 설정 처리
+					ex) 웹 화면에 ID/PASS 입력 => Controller단에서 프로그램 코드
+						VO,변수 => DB 서버에 접속해서 => SQL로 바꾸어서 처리해야 한다.
+						mybatis framework
+						객체 <==> SQL
+						SELECT 문의 경우 원하는 데이터의 조건 VO/변수를 넘기고 SQL의 결과 내용을 VO/변수 받는 처리를 한다.
+							SELECT * FROM emp
+							WHERE ename LIKE '%'||#{ename}||'%'
+							AND job LIKE '%'||#{job}||'%'
+						객체/변수를 SQL로 SQL의 결과를 객체/변수를 바꾸기 위해서 특정한 규칙으로 처리하게끔 만들어 놓았다.
+							- mybatis.Spring.xml (범위가 많기 때문에)
+								각 SQL 내용을 대분류로 XXXMapper.xml 분류
+								SQL에서 사용되는 데이터를 효과적으로 간단하게 처리하기 위해 필요, VO 이름을 간략하게 alias가 필요
+								
+							- empMapper.xml		
+										 
+						
+				- 서버로부터 처리된 결과를 받기
 			
 	2. XXXMapper.xml VS. XXXDao.java의 관계
 		1) 인터페이스를 통해서 MYBATIS를 톨해 실제 상속받은 클래스를 통해 실제 객체를 만들어주는 관계에 있기에 특정한 코드는 연동이 가능하게 선언해야 한다.
