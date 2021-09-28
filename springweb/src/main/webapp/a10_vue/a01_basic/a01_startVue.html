@@ -2,11 +2,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> Insert title here </title>
+<title> REALYSK </title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" type="text/javascript"></script>
 </head>
 <body>
-
-
-
+<!-- 1. View -->
+	<div id="simple">
+		<h2>{{message}}</h2>
+	</div>
 </body>
+<script type="text/javascript">
+	
+	// 2. 모델데이터 선언
+	var model = {message:"뷰 시작!"};
+	// 3. View Model 선언
+	var vm = new Vue ({
+		el:"#simple",
+		data:model
+	});
+	
+</script>
 </html>
