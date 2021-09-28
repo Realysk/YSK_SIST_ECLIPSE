@@ -1,0 +1,42 @@
+# 스프링의 MVC 패턴 구조
+	1. 학습의 체계 (단계별 확인)
+		1) 웹 화면 로딩
+			URL 지정
+			@RequestMapping("url")
+		
+		2) 요청 값 처리 / 요청 값 내용을 화면에 출력
+			- get 방식 : url?key1=value1&key2=value2
+			- post 방식
+				form method="post"
+			
+		3) 요청 값에 대한 메서드 처리 방식
+			public String form(@RequestParam("요청키") String 요청값) {}
+			public String form(Object object) {}
+			
+		4) Model 처리의 역할
+			public String form(Model d) {}
+			
+		5) View단 처리의 역할
+			public String form() {
+				return "jsp페이지";
+			}
+			
+		6) View단 처리
+			- 기본 출력 화면
+			- form 객체에 의한 처리
+			- model 데이터의 반복문 처리 : <c:forEach var="단위" items="${모델데이터}"
+	
+		7) DB 처리
+			SQL, VO, DAO, XXXMapper.xml 작성
+			
+		8) Service단
+			@Autowired(required=false)
+			private XXXDao dao;
+			Dao 호출
+			
+		9) Controller단
+			@Autowired(required=false)
+			private XXXService service;
+			model.addAttribute ("모델명", service.메서드명(요청값));
+	
+	2. 

@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> REALYSK </title>
+<title>Insert title here</title>
 <link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
 <link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
 <script src="${path}/a00_com/jquery.min.js"></script>
@@ -25,7 +25,16 @@
 	$(document).ready(function(){
 		<%-- 
 		
-		--%>	
+		--%>
+		// 등록버턴으로 등록 화면 로딩..
+		$("#regBtn").click(function(){
+			//alert("등록버튼 클릭!!");
+			// 등록화면이 나타나는 controller 호출..
+			// controller의 상단에 board.do
+			// 각 메서드마다.method=insertForm 호출.. 
+			$(location).attr("href","${path}/board.do?method=insertForm");
+			
+		});		
 	});
 </script>
 </head>
@@ -33,24 +42,23 @@
 <body>
 <div class="jumbotron text-center">
   <h2>답변형 게시판</h2>
-
 </div>
 <div class="container">
     <h2 align='center'></h2>
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" name="subject" value="${board.subject}" placeholder="제목"/>
-	    <input class="form-control mr-sm-2" name="writer" value="${board.writer}" placeholder="작성자"/>
+	    <input class="form-control mr-sm-2" name="subject" value="${board.subject}" placeholder="제목" />
+	    <input class="form-control mr-sm-2" name="writer" value="${board.writer}"  placeholder="작성자" />
 	    <button class="btn btn-info" type="submit">Search</button>
+	    <button class="btn btn-success" id="regBtn" type="button">등록</button>
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
-<%--    	<col width="10%">
+   	<col width="10%">
    	<col width="50%">
    	<col width="15%">
    	<col width="15%">
    	<col width="10%">
- --%>    
     <thead>
       <tr class="table-success text-center">
         <th>번호</th>
@@ -59,48 +67,17 @@
         <th>작성일</th>
         <th>조회수</th>
       </tr>
-    </thead>
+    </thead>	
     <tbody>
-		<c:forEach var="bd" items="${list}">
-			<tr class="text-center">
-				<td>${bd.no}</td>
-				<td>${bd.subject}</td>
-				<td>${bd.writer}</td>
-				<td><fmt:formatDate value="${bd.regdte}"/></td>
-				<td>${bd.readcnt}</td>
-			</tr>
-		</c:forEach>
+    	<c:forEach var="bd" items="${list}">
+    	<tr><td>${bd.no}</td><td>${bd.subject}</td><td>${bd.writer}</td>
+    		<td><fmt:formatDate value="${bd.regdte}"/>
+    		
+    		</td><td>${bd.readcnt}</td></tr>
+    	</c:forEach>
     </tbody>
 	</table>    
     
-</div>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">타이틀</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-		<form id="frm02" class="form"  method="post">
-	     <div class="row">
-	      <div class="col">
-	        <input type="text" class="form-control" placeholder="사원명 입력" name="ename">
-	      </div>
-	      <div class="col">
-	        <input type="text" class="form-control" placeholder="직책명 입력" name="job">
-	      </div>
-	     </div>
-	    </form> 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
 </div>
 </body>
 </html>
