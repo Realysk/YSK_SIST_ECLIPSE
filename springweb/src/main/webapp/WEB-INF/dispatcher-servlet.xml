@@ -46,8 +46,7 @@ xml
 	<!-- 공통설정 처리 -->
 	<context:property-placeholder location="classpath:/resource/properties/info"/>
 	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
-		destroy-method="close">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${driver}"/>	
 		<property name="url" value="${dburl}"/>	
 		<property name="username" value="${name}"/>	
@@ -65,19 +64,15 @@ xml
 	 --> 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		 
-		<property name="configLocation"
-			value="classpath:resource/mybatis.Spring.xml" />
-		
-	</bean> 
+		<property name="configLocation" value="classpath:resource/mybatis.Spring.xml"/>
+	</bean>
 	<!-- 
 	3. dao 인터페이스 페이지 위치를 설정..
 		인터페이스 ==> 인터페이스의 상속받은
 			 실제객체생성(mybatis 프레임웍 XXXmapper.xml)
 		name="basePackage" value="dao경로1, dao경로2,..."
 	 -->
-	<bean 
-		class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="springweb.a05_mvc.a03_dao"/>
 	</bean> 
 	<!-- 
@@ -90,8 +85,7 @@ xml
 		 order 라는 property로 설정..
 	}
 	 -->
-	<bean id="pageJsonReport" 
-		class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+	<bean id="pageJsonReport" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<property name="contentType" value="text/html;charset=utf-8"/>
 	</bean>
 	<!-- id값의 view를 등록하고 우선순위를 최우선으로 설정하는 부분 선언 객체 -->
@@ -108,11 +102,4 @@ xml
 		<property name="suffix" value=".jsp"/>
 		 -->
 	</bean>
-	
-	
-	
-		
 </beans>
-
-
-
