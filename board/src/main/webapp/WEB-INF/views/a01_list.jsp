@@ -39,8 +39,8 @@
     <h2 align='center'></h2>
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" name="subject" value="${param.subject}" placeholder="제목"/>
-	    <input class="form-control mr-sm-2" name="writer" value="${param.writer}" placeholder="작성자"/>
+	    <input class="form-control mr-sm-2" name="subject" value="${board.subject}" placeholder="제목"/>
+	    <input class="form-control mr-sm-2" name="writer" value="${board.writer}" placeholder="작성자"/>
 	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
@@ -56,18 +56,18 @@
         <th>번호</th>
         <th>제목</th>
         <th>작성자</th>
-        <th>조회수</th>
         <th>작성일</th>
+        <th>조회수</th>
       </tr>
     </thead>
     <tbody>
-		<c:forEach var="board" items="${list}">
+		<c:forEach var="bd" items="${list}">
 			<tr class="text-center">
-				<td>${list.no}</td>
-				<td>${list.subject}</td>
-				<td>${list.writer}</td>
-				<td>${list.readcnt}</td>
-				<td>${list.regdte}</td>
+				<td>${bd.no}</td>
+				<td>${bd.subject}</td>
+				<td>${bd.writer}</td>
+				<td><fmt:formatDate value="${bd.regdte}"/></td>
+				<td>${bd.readcnt}</td>
 			</tr>
 		</c:forEach>
     </tbody>

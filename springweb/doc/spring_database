@@ -40,11 +40,20 @@
 							- mybatis.Spring.xml (범위가 많기 때문에)
 								각 SQL 내용을 대분류로 XXXMapper.xml 분류
 								SQL에서 사용되는 데이터를 효과적으로 간단하게 처리하기 위해 필요, VO 이름을 간략하게 alias가 필요
-								
-							- empMapper.xml		
-										 
-						
+							- empMapper.xml
+								객체/변수 <==> SQL
+								java에서 지원하는 객체와 처리하는 기능메서드.
+								객체단위 분류하여 XXXMapper.xml를 만들고, 해당 이름 namespace로 지정 처리
+									1) 해당 dao 객체의 이름은 namespace로 지정
+									2) 입력 데이터 : insert, update, delete, select where 조건문
+										객체화하여 처리 그것을 parameterType으로 선언
+									3) 리턴할 데이터 : select 구문
+										resultType으로 선언
 				- 서버로부터 처리된 결과를 받기
+				- mybatis의 핵심적인 역할
+					VO와 SQL 관계를 분류별로 만들어서 각 기능별로 (메서드=>ID) 만들어 놓고, 궁극적으로 Dao 인터페이스를 상속받은 DB 처리를 해주는 실제 객체를 만들어준다.
+					interface @@Dao{} 
+					=> class @@@Dao implements @@Dao{} (**mybatis가 내부적으로 생성할 객체)
 			
 	2. XXXMapper.xml VS. XXXDao.java의 관계
 		1) 인터페이스를 통해서 MYBATIS를 톨해 실제 상속받은 클래스를 통해 실제 객체를 만들어주는 관계에 있기에 특정한 코드는 연동이 가능하게 선언해야 한다.

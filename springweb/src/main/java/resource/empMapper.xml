@@ -39,4 +39,47 @@ public interface A02_EmpDao {
 	<select id="schDept" parameterType="int">
 		SELECT * FROM emp WHERE deptno = ${deptno}
 	</select>
+	
+	<!--
+		public ArrayList<Emp> schJob(String job);
+		public ArrayList<Emp> groupDept(double sal);
+		public int countEmp(@Param("minsal") int minsal, @Param("maxsal") int maxsal);
+		public int countEmp2(Map<String, Integer> map);
+	
+	 	1) SELECT * FROM emp LIKE '%'||#{job}||'%'
+	 		결과값 : ArrayList<Emp>
+	 		입력값 : String job
+	 		
+	 	2) SELECT deptno, MAX(sal) sal FROM emp
+	 	   GROUP BY deptno
+	 	   HAVING MAX(sal) > #{sal}
+	 		결과값 : ArrayList<Emp>
+	 		입력값 : double sal
+	 	
+	 	3) SELECT COUNT(*) FROM emp
+	 	   WHERE sal BETWEEN #{minsal} AND #{maxsal}
+	 	   	결과값 : int
+	 	   	입력값 : (int minsal, int maxsal)
+	 	   			(Map<String, Integer>)
+	 -->
+	 <select id="schJob" parameterType="String">
+	 	SELECT * FROM emp LIKE '%'||#{job}||'%'
+	 </select>
+	 
+	 <select id="groupDept" resultType="emp" parameterType="double">
+		SELECT deptno, MAX(sal) sal FROM emp
+	 	GROUP BY deptno
+	 	HAVING MAX(sal) > #{sal}	 	
+	 </select>
+	 
+	<select id="countEmp" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM emp
+	 	WHERE sal BETWEEN #{minsal} AND #{maxsal}
+	</select>
+	
+	<select id="countEmp2" resultType="map" parameterType="int">
+		SELECT COUNT(*) FROM emp
+	 	WHERE sal BETWEEN #{minsal} AND #{maxsal}
+	</select>
+	
 </mapper>
