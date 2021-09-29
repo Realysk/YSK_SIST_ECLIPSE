@@ -5,9 +5,5 @@ name=scott
 pass=tiger
 
 # 파일 서버
-tmpUpload=C:\javaexp\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp2\wtpwebapps\board\z01_upload\
-upload=C:\javaexp\workspace\board\src\main\webapp\z01_upload\
-# (실제경로)
-
-#upload=C:\Users\ysk23\AppData\Roaming\SPB_Data\git\YSK_SIST_ECLIPSE\board\src\main\webapp\z01_upload\
-# (깃허브 기준)
+tmpUpload=C:/javaexp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/board/z01_upload/
+upload=C:/javaexp/workspace/board/src/main/webapp/z01_upload/

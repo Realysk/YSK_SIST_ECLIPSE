@@ -42,8 +42,8 @@
  	</update>
 	
 	<insert id="uploadFile" parameterType="boardfile">
-		INSERT INTO boardfile VALUES (board_seq.currval, #{fname}, #{pathname}, #{content}, sysdate);
-	</insert>
+		INSERT INTO boardfile VALUES (board_seq.currval, #{fname}, sysdate, sysdate,'')
+	</insert> 
 	
 	<select id="getBoardFile" resultType="boardfile" parameterType="int">
 		SELECT * FROM boardfile

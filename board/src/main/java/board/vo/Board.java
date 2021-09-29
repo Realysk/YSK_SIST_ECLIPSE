@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 // board.vo.Board
 public class Board {
-	
 	private int no;
 	private int refno;
 	private String subject;
@@ -15,9 +14,8 @@ public class Board {
 	private int readcnt;
 	private Date regdte;
 	private Date uptdte;
-	// 첨부 파일을 받을 수 있는 객체
+	// 첨부 파일을 받을 수 있는 객체..
 	private MultipartFile report;
-	
 	public int getNo() {
 		return no;
 	}

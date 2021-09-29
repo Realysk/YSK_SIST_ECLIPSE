@@ -3,13 +3,21 @@ package board.vo;
 import java.util.Date;
 
 public class BoardFile {
-	
 	private int no;
 	private String fname;
 	private String pathname;
 	private String content;
 	private Date credte;
 	
+	public BoardFile() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public BoardFile(String fname) {
+		super();
+		this.fname = fname;
+	}
 	public int getNo() {
 		return no;
 	}

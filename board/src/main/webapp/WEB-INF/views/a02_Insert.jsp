@@ -37,19 +37,17 @@
 			if(confirm("등록하시겠습니까?")){
 				$("#board").submit();
 			}
-		});
+		});	
 		// custom-file-input custom-file-label
-		$(".custom-file-input").on("", function() {
+		$(".custom-file-input").on("change",function(){
 			$(this).next(".custom-file-label").text($(this).val());
 		});
 	});
 </script>
 </head>
-
 <body>
 <div class="jumbotron text-center">
   <h2>게시판 등록</h2>
-
 </div>
 <div class="container">
 	<form id="board" enctype="multipart/form-data" action="${path}/board.do?method=insert" method="post">
@@ -82,16 +80,17 @@
 				placeholder="내용입력하세요" ></textarea>		 
 		</div>
 		<div class="input-group mb-3">	
-		<div class="input-group-prepend">
-			<span class="input-group-text">첨부 파일</span>
-		</div>
-		<div class="custom-file"> 
-			<input type="file" name="report" class="custom-file-input" id="file01">
-			<label class="custom-file-label" for="file01">
-				첨부할 파일을 선택하세요.
-			</label>
-		</div>
-		</div>
+			<div class="input-group-prepend">
+				<span class="input-group-text">첨부 파일</span>
+			</div>
+			<div class="custom-file"> 
+				<input type="file" name="report" class="custom-file-input" id="file01">
+				<label class="custom-file-label" for="file01">
+					파일을 선택하세요!
+				</label>
+			</div>
+			
+		</div>			 
 		<div class="text-right">
 			<input type="button" class="btn btn-info"
 				value="등록" id="regBtn"/>
