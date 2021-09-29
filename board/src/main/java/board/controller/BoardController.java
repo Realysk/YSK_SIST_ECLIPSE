@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import board.service.BoardService;
 import board.vo.Board;
@@ -27,6 +28,7 @@ public class BoardController {
 		d.addAttribute("list", service.boardList( board ));
 		return "a01_list";
 	}
+	// http://localhost:7080/board/board.do?method=insertForm
 	@RequestMapping(params="method=insertForm")
 	public String insertForm(Board board) {
 		return "a02_Insert"; 
@@ -39,18 +41,22 @@ public class BoardController {
 	}
 	// http://localhost:7080/board/board.do?method=detail	
 	@RequestMapping(params="method=detail")
-	public String boardDetail(Board ins) {
-		return "";
+	public String boardDetail(@RequestParam("no") int no, Model d) {
+		d.addAttribute("board", service.getBoard( no ));
+		
+		return "a03_detail";
 	}	
 	// http://localhost:7080/board/board.do?method=update	
 	@RequestMapping(params="method=update")
 	public String boardUpdate(Board upt) {
-		return "";
+		service.update(upt);
+		return "forward:/board.do?method=detail";
 	}	
 	// http://localhost:7080/board/board.do?method=delete	
 	@RequestMapping(params="method=delete")
-	public String boardUpdate(int delNo) {
-		return "";
+	public String boardDelete(@RequestParam("no") int delNo) {
+		service.deleteBoard(delNo);
+		return "redirect:/board.do?method=list";
 	}	
 	// http://localhost:7080/board/board.do?method=replyFrm	
 	@RequestMapping(params="method=replyFrm")

@@ -2,6 +2,8 @@ package board.vo;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 // board.vo.Board
 public class Board {
 	
@@ -13,6 +15,8 @@ public class Board {
 	private int readcnt;
 	private Date regdte;
 	private Date uptdte;
+	// 첨부 파일을 받을 수 있는 객체
+	private MultipartFile report;
 	
 	public int getNo() {
 		return no;
@@ -61,6 +65,12 @@ public class Board {
 	}
 	public void setUptdte(Date uptdte) {
 		this.uptdte = uptdte;
+	}
+	public MultipartFile getReport() {
+		return report;
+	}
+	public void setReport(MultipartFile report) {
+		this.report = report;
 	}
 	
 }

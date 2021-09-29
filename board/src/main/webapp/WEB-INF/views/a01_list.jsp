@@ -36,6 +36,11 @@
 			
 		});		
 	});
+	function go(no){
+		
+		$(location).attr("href",
+				"${path}/board.do?method=detail&no="+no);
+	}	
 </script>
 </head>
 
@@ -70,7 +75,8 @@
     </thead>	
     <tbody>
     	<c:forEach var="bd" items="${list}">
-    	<tr><td>${bd.no}</td><td>${bd.subject}</td><td>${bd.writer}</td>
+    	<tr class="text-center" ondblclick="javascript:go(${bd.no})">
+    		<td>${bd.no}</td><td>${bd.subject}</td><td>${bd.writer}</td>
     		<td><fmt:formatDate value="${bd.regdte}"/>
     		
     		</td><td>${bd.readcnt}</td></tr>

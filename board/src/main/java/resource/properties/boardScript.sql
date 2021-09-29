@@ -20,6 +20,17 @@ MAXVALUE 999999;
 INSERT INTO board VALUES (board_seq.nextval, 0, '첫번째글', '내용', '홍길동', 0, sysdate, sysdate);
 SELECT * FROM board;
 
+-- 조회수 카운팅
+UPDATE board
+	SET readcnt = readcnt+1
+WHERE NO = 1;
+
+/*
+UPDATE board
+	SET readcnt = readcnt+1
+WHERE NO = #{no}
+ */
+
 DROP TABLE boardfile;
 CREATE TABLE boardfile (
 	NO NUMBER, -- 글번호

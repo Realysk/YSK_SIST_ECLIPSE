@@ -59,4 +59,7 @@
 		<property name="suffix" value=".jsp"/>
 	</bean>
 	
+	<!-- 파일 업로드를 위한 viewResolver 선언 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
 </beans>

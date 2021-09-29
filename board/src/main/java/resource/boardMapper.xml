@@ -22,6 +22,25 @@
 		INSERT INTO board VALUES (board_seq.nextval, #{refno}, #{subject}, #{content}, #{writer}, 0, sysdate, sysdate)		
 	</insert>
 	
+ 	<update id="updateBoard" parameterType="board">
+		UPDATE board
+		   SET subject = #{subject},
+		   	   content = #{content},
+		   	   writer = #{writer},
+		   	   uptdte =sysdate
+		 WHERE NO = #{no}
+ 	</update>
+ 	
+  	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board WHERE NO = #{no}
+ 	</delete>
+ 	 	 
+ 	<update id="uptReadCnt" parameterType="int">
+	 	UPDATE board
+			SET readcnt = readcnt+1
+		WHERE NO = #{no} 	 
+ 	</update>
+	
 	<insert id="uploadFile" parameterType="boardfile">
 		INSERT INTO boardfile VALUES (board_seq.currval, #{fname}, #{pathname}, #{content}, sysdate);
 	</insert>
