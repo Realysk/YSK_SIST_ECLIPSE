@@ -4,6 +4,10 @@ dburl=jdbc:oracle:thin:@localhost:1521:xe
 name=scott
 pass=tiger
 
-# 파일 서버
+# 파일 서버 (개인 PC)
 tmpUpload=C:/javaexp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/board/z01_upload/
 upload=C:/javaexp/workspace/board/src/main/webapp/z01_upload/
+
+# 파일 서버 (개인 노트북)
+#tmpUpload=C:/javaexp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/board/z01_upload/
+#upload=C:/javaexp/workspace/board/src/main/webapp/z01_upload/
