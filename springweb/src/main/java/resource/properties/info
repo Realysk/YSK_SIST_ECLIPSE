@@ -21,3 +21,12 @@ loc1=jeju
 pname=apple
 price=3000
 cnt=2
+
+# 파일 서버 (개인 PC) - tmpUpload는 임시경로, upload는 실제경로 (C:, GitHub)
+tmpUpload=C:/javaexp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/springweb/z01_upload/
+upload=C:/Users/ysk23/AppData/Roaming/SPB_Data/git/YSK_SIST_ECLIPSE/springweb/src/main/webapp/z01_upload/ #(GitHub)
+#upload=C:/javaexp/workspace/springweb/src/main/webapp/z01_upload/ #(C드라이브)
+
+# 파일 서버 (개인 노트북) - tmpUpload는 임시경로, upload는 실제경로 (C:, GitHub)
+#tmpUpload=C:/javaexp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/springweb/z01_upload/
+#upload=C:/javaexp/workspace/springweb/src/main/webapp/z01_upload/
