@@ -22,12 +22,21 @@ public class A02_EmpController {
     }
     
     // http://localhost:7080/springweb/empListAjax.do
-    // http://localhost:7080/springweb/empListAjax.do?ename=A&job=A
+    // http://localhost:7080/springweb/empListAjax.do?ename=A&job=A	
+//	 @RequestMapping("empListAjax.do") 
+//	 public String empListAjax(Emp sch, Model d) { 
+//		 d.addAttribute("empList", service.getEmpList(sch)); 
+//		 return "pageJsonReport"; 
+//	}
+	 
+    
+    // http://localhost:7080/springweb/empListAjax.do
     @RequestMapping("empListAjax.do")
-    public String empListAjax(Emp sch, Model d) {
+    public String mvc02(Emp sch, Model d) {
         d.addAttribute("empList", service.getEmpList(sch));
         return "pageJsonReport";
     }
+    
     // http://localhost:7080/springweb/empForm.do
     // http://localhost:7080/springweb/empForm.do?ename=A&job=A
     @GetMapping("empForm.do")

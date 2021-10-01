@@ -11,7 +11,7 @@ upload1=C:/Users/ysk23/AppData/Roaming/SPB_Data/git/YSK_SIST_ECLIPSE/springweb/s
 #upload1=C:/Users/realysk/git/YSK_SIST_ECLIPSE/springweb/src/main/webapp/z01_upload
 
 # 09.24 ex) info 파일에 name, age, loc를 설정한 후 화면에 a20_setting.jsp에 출력하세요.
-name=kimgildong
+#name=kimgildong
 age=28
 loc=seoul
 name1=honggildong
