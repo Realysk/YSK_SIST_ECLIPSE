@@ -8,62 +8,63 @@
 <fmt:requestEncoding value="utf-8"/>     
 <!DOCTYPE html>
 <%--
-# 정리문제
-	1. [하:개념] 답글처리의 핵심 로직을 기술하세요.
+# 일일정리문제
+[하:개념]1. 답글처리의 핵심로직을 기술하세요.
+	상세화면 답글 클릭 ==(요청값변경)==> 등록화면
+	no ==> refno로 할당
+	subject ==> "RE:"+subject
+	content ==> "\n\n\n\n===<<이전글>>===\n"+content
+	$("form").attr("action","${path}/board.do?method=insertFrm");
 	
-		$("#reBtn").click(function(){
-			if(confirm("답글을 달겠습니다!")){
-				$("[name=refno]").val($("[name=no]").val());
-				$("[name=subject]").val("RE:"+$("[name=subject]").val());
-				$("[name=content]").val(
-						"\n\n\n\n\n========<<이전 글>>=========\n"+
-						$("[name=content]").val());
-				$("form").attr("action",
-						"${path}/board.do?method=insertForm");
-				$("form").submit();
-			}
-		});			
 	
-	2. [하:개념] 단방향 directive의 종류를 화면출력과 속성을 나누어 기술하세요.
+[하:개념]2. 단방향 directive의 종류를 화면출력과 속성을 나누어 기술하세요
+	1) 화면출력형 요소객체 : h1~h6, option, span, td...
+	2) 화면 출력 처리
+		- mustache ex) <h2>{{모델명}}</h2>
+		- v-text  ex) <h2 v-text="모델명"></h2>
+		- v-html  ex) <p v-html="모델명"></p>
+	3) 속성에 모델데이터 처리
+		- v-bind:속성명="모델명" ex) <h2 v-bind:align="align01">
+		- :속성명 = "모델명"	ex) <input :value="data01">
+[하:응용]3. 양방향 directive를 활용하여 회원로그인의 id/pass입력시, 인증여부를 출력하세요.
+            hint) vue는 js이다!! 3항연산자활용
+        data:{msg:"시작!!(뷰와함께)",id:"",pass:""}
+ 	    
+ 	    <input class="form-control mr-sm-2" v-model="id" placeholder="아이디" />
+	    <input class="form-control mr-sm-2"  type="password" v-model="pass" placeholder="패스워드" />
+	    <button class="btn btn-info" type="button">{{id=='himan'&&pass=='7777'?'로그인성공':'로그인실패'}}</button>           
+[중:응용]4. 조건문의 기본형식을 기술하고, 입력한 국어/영어/수학 점수의 평균에 대한 A~F등급의 부여하세요.
+        	<td v-if="((parseInt(kor)+parseInt(eng)+parseInt(math))/3)>=90">A등급</td>
+        	<td v-else-if="((parseInt(kor)+parseInt(eng)+parseInt(math))/3)>=80">B등급</td>
+        	<td v-else-if="((parseInt(kor)+parseInt(eng)+parseInt(math))/3)>=70">C등급</td>
+        	<td v-else-if="((parseInt(kor)+parseInt(eng)+parseInt(math))/3)>=60">D등급</td>
+        	<td v-else>F등급</td>
+[하:응용]5. 반복문에서 객체와 배열의 차이를 기술하고, 부서정보 리스트를 출력하세요.
+	객체 : <요소객체 v-for="(value,prop) in 객체">
+	배열 : <요소객체 v-for="(단위객체, index) in 배열">
 	
-		- 단방향 directive
-			1) {{모델명}} : mustache
-			2) <태그 v-text="모델명"></태그>
-			3) <태그 v-html="모델명"></태그>
-				모델명으로 가진 데이터를 tag로 랜더링하여 화면에 출력 처리..
-			4) <태그 v-bind:속성명="모델명/>
-			   <태그 :속성명="모델명/>
-			   해당하는 태그의 속성을 모델 데이터를 처리한다.
-	
-	3. [하:응용] 양방향 directive를 활용하여 회원로그인의 ID/PASS 입력 시, 인증여부를 출력하세요.
-		hint) vue는 js이다!! 3항연산자 활용
-	
-		
-	
-	4. [중:응용] 조건문의 기본형식을 기술하고, 입력한 국어/영어/수학 점수의 평균에 대한 A~F등글을 부여하세요.
-	
-		- v-show="boolean값"
-			일단 화면에 로딩 후, 특정 조건에 맞을 때 CSS로 보이게 하고 그렇지 않을 때 보이지 않게 처리할 때 사용된다.
-			1) 기본 형식
-				<태그 v-show="모델속성>=조건데이터">
-		- v-if
-			요소객체 안에 속성으로 v-if를 활용하면 해당 요소 객체가 v-if의 속성값으로 true값일 때만 보이게 초기에 랜더링 처리할 수 있다.
-			1) 기본 형식
-				v-if="모델데이터조건1"
-				v-else-if="모델데이터조건2"
-				v-else=위에서 선언한 조건 이외일 때		
-	
-	5. [하:응용] 반복문에서 객체와 배열의 차이를 기술하고 부서정보 리스트를 출력하세요.
-	
-		요소 객체 v-for="(단위객체, index) in 객체형배열모델">
-				{{단위객체.속성}}
-		객체형 v-for="(val,prop) in 객체">		
+
+# 오늘의 목표
+1. 계층형 sql을 이해하고, 스프링의 페이징 처리 로직을 이해하고 구현할 수 있다.
+2. vue에서 이벤트 처리를 활용할 수 있다.
+3. vue를 활용한 DB가 연동된 ajax 처리를 할 수 있다.
+
+# 궁금해하기 및 핵심키워드
+1. vue에서 viewmodel에서 어떻게 이벤트 처리를 할 수 있을까?
+    v-on:이벤트="기능메서드" @이벤트="기능메서드" methods:{메서드:function(){}}
+2. vue에서 ajax를 처리하기 위해 필요로 하는 객체가 어떤 것이 있을까?
+    fetch-api
+    fetch(url).then(함수1).then(함수2).catch(함수3);   
+3. 페이지 처리를 위해 필요하는 주요 속성은 어떤 것이 있고 어떻게 도출하고, 어떤 연관관계가 있는가?
+    총데이터건수, 화면에보여줄데이터건수, 총페이지수, 현재페이지번호, 블럭수
+    
+
 
  --%>
 <html>
 <head>
 <meta charset="UTF-8">
-<title> REALYSK </title>
+<title>Insert title here</title>
 <link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
 <link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
 <script src="${path}/a00_com/jquery.min.js"></script>
@@ -75,47 +76,57 @@
 	$(document).ready(function(){
 		var vm = new Vue({
 			el:".container",
-			data:{msg:"시작!!(뷰와함께)"}
-		});		
+			data:{msg:"시작!!(뷰와함께)",id:"",pass:"",
+				  kor:0,eng:0,math:0,
+				  dlist:[
+					  {deptno:10,dname:"인사",loc:"서울"},
+					  {deptno:20,dname:"회계",loc:"대구"},
+					  {deptno:30,dname:"총무",loc:"광주"}
+				  ]	  
+			}
+		});	
 	});
 </script>
 </head>
-
 <body>
 <div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">타이틀</h2>
-
+  <h2 data-toggle="modal" data-target="#exampleModalCenter">타이틀</h2> 
 </div>
 <div class="container">
     <h2 align='center'>{{msg}}</h2>
-	<form id="frm01" class="form-inline"  method="post">
+   <table class="table table-hover table-striped">
+    <thead><tr class="table-success text-center"><th>부서번호</th><th>부서명</th><th>부서위치</th></tr></thead>	
+    <tbody>
+    	<tr class="text-center" v-for="(dept, idx) in dlist">
+    		<td>{{dept.deptno}}</td><td>{{dept.dname}}</td><td>{{dept.loc}}</td></tr>
+    </tbody>
+	</table>    
+	<form id="frm01" class="form"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="제목" />
-	    <input class="form-control mr-sm-2" placeholder="내용" />
-	    <button class="btn btn-info" type="submit">Search</button>
+	    <input class="form-control mr-sm-2" v-model="id" placeholder="아이디" />
+	    <input class="form-control mr-sm-2"  type="password" v-model="pass" placeholder="패스워드" />
+	    <button class="btn btn-info" type="button">{{id=='himan'&&pass=='7777'?'로그인성공':'로그인실패'}}</button><br>
+	    <input class="form-control mr-sm-2" v-model="kor" placeholder="국어" />
+	    <input class="form-control mr-sm-2" v-model="eng" placeholder="영어" />
+	    <input class="form-control mr-sm-2" v-model="math" placeholder="수학" />  
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
-   	<col width="10%">
    	<col width="50%">
-   	<col width="15%">
-   	<col width="15%">
-   	<col width="10%">
+   	<col width="50%">
     <thead>
     
-      <tr class="table-success text-center">
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-        <th>조회</th>
+      <tr class="text-center">
+        <th class="table-success">총점</th><td>{{parseInt(kor)+parseInt(eng)+parseInt(math)}}</td><tr>
+      <tr class="text-center"><th class="table-success">평균</th><td>{{(parseInt(kor)+parseInt(eng)+parseInt(math))/3}}</td><tr>
+      <tr class="text-center"><th class="table-success">등급</th>
+        	<td v-if="((parseInt(kor)+parseInt(eng)+parseInt(math))/3)>=90">A등급</td>
+        	<td v-else-if="((parseInt(kor)+parseInt(eng)+parseInt(math))/3)>=80">B등급</td>
+        	<td v-else-if="((parseInt(kor)+parseInt(eng)+parseInt(math))/3)>=70">C등급</td>
+        	<td v-else-if="((parseInt(kor)+parseInt(eng)+parseInt(math))/3)>=60">D등급</td>
+        	<td v-else>F등급</td>
       </tr>
     </thead>	
-    <tbody>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    </tbody>
 	</table>    
     
 </div>
