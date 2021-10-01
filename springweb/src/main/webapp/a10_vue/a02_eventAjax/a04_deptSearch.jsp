@@ -8,8 +8,8 @@
 <fmt:requestEncoding value="utf-8"/>     
 <!DOCTYPE html>
 <%--
-
-
+	EX) a04_deptSearch.jsp로 부서정보를 vue로 출력하세요.
+		http://localhost:7080/springweb/deptAjax.do
  --%>
 <html>
 <head>
@@ -61,34 +61,7 @@
 					});
 				}
 			}
-		});	
-		<%-- 
-# vue를 통한 ajax처리.
-1. 핵심 프로세스
-	0) lib 선언
-		<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
-		
-    0) 모델 데이터 초기 선언 : data:{ename:"",job:"",emplist:[]}
-	1) key/click이벤트를 통해서 methods에 있는 특정 기능메서드 호출.
-	2) 기능메서드1 : 검색데이터의 유효성  check
-		공백이 아닐 때 등..
-	3) 기능메서드2 : 유효성 check된 후, ajax 처리.
-		- 위 모델 데이터의 초기화 : this.emplist = [];
-		- ajax처리될 url선언 : var url = "${path}/empListAjax.do?ename="+this.ename
-										+"&job="+this.job;
-		- fetch(url).then(함수1).then(함수2).catch(함수3);
-			익명 함수1:
-				서버에서 온 response값 확인 및 이 중에서 json데이터 return 처리
-					return response.json();
-			익명 함수2:
-				받은 json데이터를 
-				현재 model에 있는 데이터에 할당..
-			익명 함수3:
-				error 내용 처리..
-	4) model 데이터 v-for를 이용해서 화면 출력..
-							
-		
-		--%>	
+		}); 	
 	});
 </script>
 </head>
@@ -98,22 +71,6 @@
   <h2 >부서정보검색(vue)</h2>
 
 </div>
-<%--
-			data:{msg:"시작!!(뷰와함께)",ename:"",job:"",emplist:[]},
-			methods:{
-				search1:function(e){
-					if(e.keyCode==13){
-						console.log("enter키 입력");
-					}
-				},
-				search2:function(){
-					console.log("버튼 클릭");
-				},				
-				fetchList:function(){
-					
-				}
-			}
- --%>
 <div class="container">
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -139,12 +96,7 @@
     		<td>{{dept.deptno}}</td><td>{{dept.dname}}</td><td>{{dept.loc}}</td>
     	</tr>
     </tbody>
-	</table>
-	<!-- 
-	EX) a04_deptSearch.jsp로 부서정보를 vue로 출력하세요.
-		http://localhost:7080/springweb/deptAjax.do
-	 -->    
-    
+	</table>    
 </div>
 </body>
 </html>
