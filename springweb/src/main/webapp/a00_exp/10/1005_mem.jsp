@@ -35,7 +35,6 @@
 					var vm = this;
 					var url = "${path}/memberListAjax2.do?name="+this.name
 							+"&auth="+this.auth;
-					alert(url);
 					fetch(url).then(function(response){
 						console.log(response);
 						return response.json();
