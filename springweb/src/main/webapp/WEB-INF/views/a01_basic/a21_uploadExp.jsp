@@ -25,7 +25,12 @@
 	$(document).ready(function(){
 		<%-- 
 		
-		--%>	
+		--%>
+    	$("#fname").click(function(){
+			if(confirm("파일을 다운로드하시겠습니까?")) {
+				location.href="${path}/download.do?fname="+$(this).text();
+			}    	
+    	});		
 	});
 </script>
 </head>
@@ -45,25 +50,25 @@
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
-   	<col width="10%">
-   	<col width="50%">
-   	<col width="15%">
-   	<col width="15%">
-   	<col width="10%">
     <thead>
     
       <tr class="table-success text-center">
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-        <th>조회</th>
+        <th>업로드파일명</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>	
     <tbody>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<!-- 
+    	$("#fname").click(function(){
+			if(confirm("파일을 다운로드하시겠습니까?")) {
+				location.href="${path}/download.do?fname="+fname;
+			}    	
+    	});
+    	 -->
+    	<tr><td id="fname">${fname}</td></tr>
     </tbody>
 	</table>    
     

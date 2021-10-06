@@ -27,6 +27,7 @@ public class A10_FileUploadCtrl {
 						 @RequestParam("name") String name, Model d) {
 		// Service에 처리한 내용
 		service(report, name);
+		d.addAttribute("fname", report.getOriginalFilename());
 		return "WEB-INF\\views\\a01_basic\\a21_uploadExp.jsp";
 	}
 	

@@ -100,6 +100,9 @@ xml
 	<!-- 파일 업로드 View -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	
+	<!-- 파일 다운로드 View -->
+	<bean id="downloadViewer" class="springweb.z02_util.DownloadViewer"/>
+	
 	<!-- id값의 view를 등록하고 우선순위를 최우선으로 설정하는 부분 선언 객체 -->
 	<bean id="btnViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="0"/>
