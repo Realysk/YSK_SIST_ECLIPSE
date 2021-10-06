@@ -28,7 +28,6 @@ public class A05_RestController {
 		return service.getEmpList(sch); 
 	}
 	
-	// 컴파일 오류 (아마 노트북 기준으로 member 테이블이 갱신되지 않은것으로 보임)
 	// http://localhost:7080/springweb/memberListAjax2.do 
 	@RequestMapping("memberListAjax2.do")
 	public ArrayList<Member> memberListAjax(Member sch) {

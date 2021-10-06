@@ -1,0 +1,18 @@
+# Fullcalendar API
+
+	1. JQuery 플러그인 프로그램으로 일정을 캘린더 형식으로 CRUD 처리할 수 있다.
+	2. 처리 순서
+		1) API 다운로드
+		2) 공통 설정파일 선언
+		3) Controller를 통한 초기화면 호출
+		4) 사용할 DB 확인 및 DB Script 처리
+			테이블/시퀀스 생성, List/Insert/Update/Delete문 작성
+		5) Dao/Mapper 설정
+		6) Dao => Service => Controller(RestController) 호출 처리
+		7) 화면단 초기 로딩 AJAX 처리
+			- 리스트 화면 호출
+		8) 클릭 시, 세부항목 처리
+			- 등록 (Ajax)
+			- 상세내용 확인
+				수정 (Ajax)
+				삭제 (Ajax)
