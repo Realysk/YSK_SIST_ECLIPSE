@@ -1,0 +1,157 @@
+# fullcalendar 처리..
+1. 기본 환경 구성.
+	1) api
+		jquery/bootstrap
+		
+2. 구현 순서
+	1) lib 환경 설정
+	2) 초기화면 DB 로딩 처리
+		사용할 데이터 분석, 테이블 생성, 기본데이터 입력
+		vo, dao, mapper
+		service, controller(RestController)
+		화면의 초기 로딩 처리 내용 확인
+			- 기존 파일 json 형식을 controller ajax 호출 형식으로 변경 처리.
+			events:[]
+			=>
+			events:function(info, successCallback, failureCal) {
+			// ajax 처리
+			// success:function(data) {
+			//	successCallback(data);
+			//	}
+			}
+	3) 데이터 등록 처리
+	4) 상세 내용 처리
+	5) 데이터 수정/삭제 처리.	
+	
+3. 내용 처리를 위한 개념 확인
+	1) 핵심 데이터 파악하기
+        {
+          groupId: 999,	
+          title: 'Long Event',
+          start: '2020-09-07',
+          end: '2020-09-10'
+          url: 'http://google.com/',
+        }		
+		==> DB 입력 처리..
+	
+	2) 지원하는 속성 이벤트의 내용 확인하기
+		initialDate: '2020-09-12', 로딩하는 날짜
+		select: function(arg) 
+			비어 있는 일정을 클릭시, 입정등록을 위한 이벤트
+		
+		
+		
+	3) 각 기능별로 필요로 하는 데이터 내용와 이벤트 내용을 파악하여 처리 계획
+		- 초기 데이터로딩
+		- 입력시 화면로딩
+		- 상세데이터 클릭시 화면로딩
+		- 상세데이터 수정 삭제 처리.
+4. 초기 데이터 로딩 처리(DB)	
+	1)  데이터 분석 및 구성 처리..	
+	allDay: true // 시간일정인지 하루전체 일정인지
+	allow: null
+	backgroundColor: "" // 배경색상지정
+	borderColor: ""	// 테두리색상지정..
+	classNames: Array(0)
+	constraint: (...)
+	display: (...)
+	durationEditable: (...)
+	end: null
+	endStr: ""
+	extendedProps: Object // 확장된 일정
+	groupId: ""
+	id: ""		// 일정 id값 설정..
+	overlap: (...)
+	source: (...)
+	start: (...) // 시작일
+	startEditable: (...)
+	startStr: (...)
+	textColor: (...) // 글자색상
+	title: (...) // 타이틀
+	url: (...)
+	        {
+	          id:1000,
+	          title: '일정등록',
+	          start: '2020-09-08', 시작일시
+	          end: '2020-09-09' 종료일시
+	          backgroundColor: "blue"
+			  borderColor: "orange",
+			  textColor:"yellow"
+			  allDay:true/false
+	        }
+create table calendar(
+	id number,
+	title varchar2(100),
+	start1 varchar2(50),
+	end1 varchar2(50),
+	content varchar2(500), -- 추가할 내용 처리.
+	borderColor varchar2(20),
+	backgroundColor varchar2(20),
+	textColor varchar2(20),
+	allDay number(1) -- 종일여부 // true/false	
+);	       
+create sequence cal_seq
+	start with 1000
+	minvalue 1000
+	maxvalue 9999;
+insert into calendar values( cal_seq.nextval,'일정첫등록',
+	'2021-10-07','2021-10-08','일정등록입니다','navy','blue',
+	'yellow',1);
+
+ex) dao  calList 	~11:08
+	mapper(calMapper.xml)
+	alias cal (Calendar.java)  ~11:10
+	========================
+	controller에서 calList.do 로 호출하여 
+	json데이터로 출력하는 것까지..	~11:25
+	
+5. 일정 등록 처리
+	1) 처리 UI 결정
+		- 기본 색상 지정과 날짜/종일 여부에 대한 내용과 추가 데이터를 처리할 수 있는 모달 박스로 데이터를 입력하게 처리
+		
+		title;
+		start;
+		end;
+		content;
+		borderColor;
+		backgroundColor;
+		textColor;
+		allDay;		
+		
+	2) 이벤트 확인
+		select: function(arg) {
+			arg.start : 시작날짜시간
+			arg.end : 종료날짜시간
+			arg.allDay : 종일여부
+		}
+	
+	3) 화면 구성 소스 처리
+		- 클릭 시, 모달창 로딩이 될 수 있도록 소스 처리
+		- 모달창 안에 입력된 항목들 지정 (form-부트스트랩)
+		타이틀 : 일정등록 변경
+		
+		$("exampleModalLongTitle").text("일정등록");
+		title
+		start
+		end
+		content
+		borderColor
+		backgroundColor
+		textColor
+		allDay
+		를 form 하위 요소객체로 설정 처리
+		
+	4) 화면에 입력 후, ajax 등록 처리
+	
+	
+		
+
+
+ 
+	        
+
+
+
+
+		
+		 
