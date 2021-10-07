@@ -45,6 +45,22 @@
     	console.log("종일여부:"+arg.allDay);
     	$("h2").click(); // h2 클릭으로 모달창이 로딩되게 처리..
     	$("#exampleModalLongTitle").text("일정등록");
+    	// form에 기본 정보 넣기..
+    	// 기존 정보 초기화
+    	$("form")[0].reset();
+    	///./alert(arg.start.toLocaleString());
+    	$("#start").val(arg.start.toLocaleString());
+    	$("[name=start]").val(arg.start.toISOString());
+    	console.log(arg.start.toISOString());
+    	$("#end").val(arg.end.toLocaleString());
+    	$("[name=end]").val(arg.end.toISOString());
+    	$("#allDay").val(""+arg.allDay);
+    	console.log("종일:"+(arg.allDay?1:0));
+    	$("[name=allDay]").val((arg.allDay?1:0));
+    	//alert($("[name=start]").val());
+    	
+    	
+    	
     	/*
         var title = prompt('일정을 입력하세요:');
         if (title) {
@@ -86,6 +102,32 @@
     });
 
     calendar.render();
+    
+    $("#regBtn").click(function(){
+    	if($("[name=title]").val()==""){
+    		alert("일정을 등록하세요!");
+    		return;
+    	}
+    	$.ajax({
+    		type:"post",
+    		url:"${path}/calendarInsert.do",
+    		data:$("form").serialize(),
+    		success:function(data){
+    			
+    			alert("등록 완료!"+data);
+    			//calendar.render();
+    			location.reload();
+    		},
+    		error:function(err){
+    			console.log(err);
+    		}
+    		
+    	});
+    	
+    	
+    });
+    
+    
   });
 
 </script>
@@ -135,13 +177,15 @@ data-target="#exampleModalCenter"></h2>
 		    <div class="input-group-prepend">
 		      <span class="input-group-text">시작일</span>
 		    </div>
-		    <input type="text" name="start" class="form-control" placeholder="입력">
+		    <input type="text" id="start" class="form-control" placeholder="입력">
+		    <input type="hidden" name="start" >
 		  </div>	
 		  <div class="input-group mb-3">
 		    <div class="input-group-prepend">
 		      <span class="input-group-text">종료일</span>
 		    </div>
-		    <input type="text" name="end" class="form-control" placeholder="입력">
+		    <input type="text" id="end" class="form-control" placeholder="입력">
+		    <input type="hidden" name="end" >
 		  </div>	
 		  <div class="input-group mb-3">
 		    <div class="input-group-prepend">
@@ -171,16 +215,17 @@ data-target="#exampleModalCenter"></h2>
 		    <div class="input-group-prepend">
 		      <span class="input-group-text">종일여부</span>
 		    </div>
-		    <select name="allDay" class="form-control" >
+		    <select id="allDay" class="form-control" >
 		    	<option value="true">종일</option>
 		    	<option value="false">시간</option>
 		    </select>
+		    <input type="hidden" name="allDay"/>
 		  </div>	
 		</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">등록</button>
+        <button type="button" id='regBtn' class="btn btn-primary">등록</button>
       </div>
     </div>
   </div>

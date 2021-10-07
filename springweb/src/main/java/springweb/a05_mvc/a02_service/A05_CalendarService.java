@@ -1,6 +1,6 @@
 package springweb.a05_mvc.a02_service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,13 +10,12 @@ import springweb.z01_vo.Calendar;
 
 @Service
 public class A05_CalendarService {
-
 	@Autowired
 	private A05_CalendarDao dao;
-	
-	public ArrayList<Calendar> calList() {
-		
+	public List<Calendar> calList(){
 		return dao.calList();
 	}
-	
+	public void insertCalendar(Calendar insert) {
+		dao.insertCalendar(insert);
+	}
 }
