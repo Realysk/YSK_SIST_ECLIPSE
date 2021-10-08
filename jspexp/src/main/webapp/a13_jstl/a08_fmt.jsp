@@ -69,7 +69,7 @@
 	<h3 align="center">fmt 처리 short(시간): <fmt:formatDate type="time" timeStyle="short"  value="${now}"/></h3>
 	<h3 align="center">fmt 처리 full(날짜/시간): <fmt:formatDate type="both" dateStyle="full" timeStyle="full" value="${now}"/></h3>
 	<h3 align="center">fmt 처리 short(날짜/시간): <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${now}"/></h3>
-	<h3 align="center">fmt 처리 pattern(날짜/시간): <fmt:formatDate pattern="yyyy/MM/dd kk:mm:ss.S"  value="${now}"/>  </h3>
+	<h3 align="center">fmt 처리 pattern(날짜/시간): <fmt:formatDate pattern="yyyy-MM-dd kk:mm:ss.S"  value="${now}"/>  </h3>
 	<%-- 통화형식은 소숫점을 반올림, 천단위 표기 및 앞에 현재 통화단위 표시 --%>
 	<h3 align="center">fmt 처리 기본(숫자/통화): <fmt:formatNumber type="currency" value="${num01}"/></h3>
 	<h3 align="center">fmt 처리 기본(숫자/통화/지정): <fmt:formatNumber type="currency" currencySymbol="$" value="${num01}" /></h3>
