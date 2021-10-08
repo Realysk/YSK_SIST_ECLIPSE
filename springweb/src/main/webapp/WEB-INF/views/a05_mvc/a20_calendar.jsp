@@ -45,6 +45,9 @@
     	console.log("종일여부:"+arg.allDay);
     	$("h2").click(); // h2 클릭으로 모달창이 로딩되게 처리..
     	$("#exampleModalLongTitle").text("일정등록");
+    	$("#regBtn").show();
+    	$("#uptBtn").hide();
+    	$("#delBtn").hide();
     	// form에 기본 정보 넣기..
     	// 기존 정보 초기화
     	$("form")[0].reset();
@@ -76,10 +79,31 @@
       },
       eventClick: function(arg) {
     	console.log("특정일정 클릭시!!");
-    	console.log(arg);
+    	console.log(arg.event);
+    	
+    	$("h2").click(); // h2 클릭으로 모달창이 로딩되게 처리..
+    	$("#exampleModalLongTitle").text("상세일정");
+    	$("#regBtn").hide();
+    	$("#uptBtn").show();
+    	$("#delBtn").show();
+    	
+    	$("form")[0].reset();
+    	$("[name=title]").val(arg.event.title);
+    	$("[name=borderColor]").val(arg.event.borderColor);
+    	$("[name=backgroundColor]").val(arg.event.backgroundColor);
+    	$("[name=textColor]").val(arg.event.textColor);
+    	$("[name=content]").val(arg.event.extendedProps.content);
+    	$("#start").val(arg.event.start.toLocaleString());
+    	$("[name=start]").val(arg.event.start.toISOString());
+    	$("#end").val(arg.event.end.toLocaleString());
+    	$("[name=end]").val(arg.event.end.toISOString());
+    	$("#allDay").val(""+arg.event.allDay);
+    	$("[name=allDay]").val((arg.event.allDay?1:0)); 	
+    	/*
         if (confirm('Are you sure you want to delete this event?')) {
           arg.event.remove()
         }
+    	*/
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
@@ -114,7 +138,7 @@
     		data:$("form").serialize(),
     		success:function(data){
     			
-    			alert("등록 완료!"+data);
+    			alert(data);
     			//calendar.render();
     			location.reload();
     		},
@@ -123,9 +147,13 @@
     		}
     		
     	});
-    	
+    });
+    $("#uptBtn").click(function() {
     	
     });
+    $("#delBtn").click(function() {
+    	
+    });    
     
     
   });
@@ -191,7 +219,8 @@ data-target="#exampleModalCenter"></h2>
 		    <div class="input-group-prepend">
 		      <span class="input-group-text">내용</span>
 		    </div>
-		    <input type="text" name="content" class="form-control" placeholder="입력">
+		    <textarea name="content" rows="5" cols="10"  
+		    	class="form-control" ></textarea>
 		  </div>	
 		  <div class="input-group mb-3">
 		    <div class="input-group-prepend">
@@ -226,6 +255,8 @@ data-target="#exampleModalCenter"></h2>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" id='regBtn' class="btn btn-primary">등록</button>
+        <button type="button" id='uptBtn' class="btn btn-info">수정</button>
+        <button type="button" id='delBtn' class="btn btn-warning">삭제</button>
       </div>
     </div>
   </div>
