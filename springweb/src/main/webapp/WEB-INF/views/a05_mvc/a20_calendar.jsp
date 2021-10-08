@@ -60,21 +60,6 @@
     	$("#allDay").val(""+arg.allDay);
     	console.log("종일:"+(arg.allDay?1:0));
     	$("[name=allDay]").val((arg.allDay?1:0));
-    	//alert($("[name=start]").val());
-    	
-    	
-    	
-    	/*
-        var title = prompt('일정을 입력하세요:');
-        if (title) {
-          calendar.addEvent({
-            title: title,
-            start: arg.start,
-            end: arg.end,
-            allDay: arg.allDay
-          })
-        }
-        */
         calendar.unselect()
       },
       eventClick: function(arg) {
@@ -86,25 +71,32 @@
     	$("#regBtn").hide();
     	$("#uptBtn").show();
     	$("#delBtn").show();
-    	
-    	$("form")[0].reset();
-    	$("[name=title]").val(arg.event.title);
-    	$("[name=borderColor]").val(arg.event.borderColor);
-    	$("[name=backgroundColor]").val(arg.event.backgroundColor);
-    	$("[name=textColor]").val(arg.event.textColor);
-    	$("[name=content]").val(arg.event.extendedProps.content);
-    	$("#start").val(arg.event.start.toLocaleString());
-    	$("[name=start]").val(arg.event.start.toISOString());
-    	$("#end").val(arg.event.end.toLocaleString());
-    	$("[name=end]").val(arg.event.end.toISOString());
-    	$("#allDay").val(""+arg.event.allDay);
-    	$("[name=allDay]").val((arg.event.allDay?1:0)); 	
+    	addForm(arg.event);
+	
     	/*
         if (confirm('Are you sure you want to delete this event?')) {
           arg.event.remove()
         }
     	*/
       },
+	  eventDrop:function(info){ // 특정 일정을 드래그해서 드랍했을 때..
+		//alert("이벤트 드랍")  
+	 	console.log("#이벤트 드랍#")	
+	 	console.log(info.event);
+	 	// form객체에 데이터 입력
+	 	// ajax 처리
+		addForm(info.event);
+		ajaxFun("calendarUpdate.do")
+	  },
+	  eventResize:function(info){ // 특정 일정의 사이즈를 변경했을 때..
+		 //alert("이벤트 사이즈변경")
+		 console.log("#이벤트 사이즈변경#")	
+		 console.log(info.event);	
+	 	// form객체에 데이터 입력
+	 	// ajax 처리	
+		 addForm(info.event);
+		 ajaxFun("calendarUpdate.do")
+	  },      
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
       events: function(info,successCallback, failureCallback){
@@ -132,31 +124,52 @@
     		alert("일정을 등록하세요!");
     		return;
     	}
-    	$.ajax({
-    		type:"post",
-    		url:"${path}/calendarInsert.do",
-    		data:$("form").serialize(),
-    		success:function(data){
-    			
-    			alert(data);
-    			//calendar.render();
-    			location.reload();
-    		},
-    		error:function(err){
-    			console.log(err);
-    		}
-    		
-    	});
+    	ajaxFun("calendarInsert.do")
     });
-    $("#uptBtn").click(function() {
-    	
+    $("#uptBtn").click(function(){
+    	if(confirm("수정하시겠습니까?")){
+    		ajaxFun("calendarUpdate.do")
+    	}
     });
-    $("#delBtn").click(function() {
-    	
-    });    
+    $("#delBtn").click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			ajaxFun("calendarDelete.do")
+    	}   	
+    });
     
     
   });
+  function ajaxFun(url){
+  	$.ajax({
+		type:"post",
+		url:"${path}/"+url,
+		data:$("form").serialize(),
+		success:function(data){
+			alert(data);
+			location.reload();
+		},
+		error:function(err){
+			console.log(err);
+		}
+		
+	});  	  
+  }
+  function addForm(event){
+  	$("form")[0].reset();
+	$("[name=id]").val(event.id);
+	$("[name=title]").val(event.title);
+	$("[name=borderColor]").val(event.borderColor);
+	$("[name=backgroundColor]").val(event.backgroundColor);
+	$("[name=textColor]").val(event.textColor);
+	$("[name=content]").val(event.extendedProps.content);
+	$("#start").val(event.start.toLocaleString());
+	$("[name=start]").val(event.start.toISOString());
+	$("#end").val(event.end.toLocaleString());
+	$("[name=end]").val(event.end.toISOString());
+	$("#allDay").val(""+event.allDay);
+	$("[name=allDay]").val((event.allDay?1:0)); 	  
+	  
+  }
 
 </script>
 <style>
@@ -195,6 +208,7 @@ data-target="#exampleModalCenter"></h2>
       <div class="modal-body">
 
 		<form  class="form"    method="post">
+		  <input type="hidden" name="id" value="0"/>
 		  <div class="input-group mb-3">
 		    <div class="input-group-prepend">
 		      <span class="input-group-text">일정</span>

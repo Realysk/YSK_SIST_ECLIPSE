@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
@@ -51,7 +52,17 @@ public class A05_RestController {
 		calservice.insertCalendar(insert);
 		return "등록완료";
 	}	
-	
-	
-	
+	/*
+calendarUpdate.do, calendarDelete.do
+	 * */
+	@RequestMapping("calendarUpdate.do")
+	public String calendarUpdate(Calendar upt) {
+		calservice.uptCalendar(upt);;
+		return "수정완료";
+	}		
+	@RequestMapping("calendarDelete.do")
+	public String calendarDelete(@RequestParam("id") int id) {
+		calservice.delCalendar(id);
+		return "삭제완료";
+	}		
 }

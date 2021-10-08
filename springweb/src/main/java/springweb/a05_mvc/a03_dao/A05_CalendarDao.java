@@ -7,5 +7,6 @@ import springweb.z01_vo.Calendar;
 public interface A05_CalendarDao {
 	public ArrayList<Calendar> calList();
 	public void insertCalendar(Calendar insert);
-	
+	public void uptCalendar(Calendar upt);
+	public void delCalendar(int id);	
 }

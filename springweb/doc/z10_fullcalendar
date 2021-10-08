@@ -162,22 +162,81 @@ ex) dao  calList 	~11:08
 	    	console.log(arg.event);
 	    	title = arg.event.title;
 	    	extendedProps.content
+	3) 수정/삭제 처리
+		SQL
+			UPDATE calendar
+				SET title = '일정수정',
+					start1 = '2021-10-08',
+					end1 = '2021-10-09',
+					content = '내용수정',
+					bordercolor = '#0099cc',
+					backgroundcolor = '#0099cc',
+					textcolor = '#ccfff',
+					allday = 1
+			WHERE id = 1000;
+			
+			DELETE FROM calendar WHERE id = '1006';			
+		
+		DAO
+			public void uptCalendar(Calendar upt);
+			public void delCalendar(int id);
+		
+		Mapper
+			<update id="uptCalendar" parameterType="cal">
+				UPDATE calendar
+					SET title = #{title},
+						start = #{start},
+						end = #{end},
+						content = #{content},
+						borderColor = #{borderColor},
+						backgroundColor = #{backgroundColor},
+						textColor = #{textColor},
+						allDay = #{allDay}
+				WHERE id = #{id}
+			</update>
+			
+			<delete id="delCalendar" parameterType="int">
+				DELETE FROM calendar WHERE id = #{id}
+			</delete>		
+		
+		Service
+			public void uptCalendar(Calendar upt) {
+				dao.uptCalendar(upt);
+			}
+			public void delCalendar(int id) {
+				dao.delCalendar(id);
+			}	
+		
+		Controller
+			calendarUpdate.do, calendarDelete.do
+			
+			- A05_RestController.java
+			
+			// http://localhost:7080/springweb/calendarUpdate.do
+			@RequestMapping("calendarUpdate.do")
+			public String calendarUpdate(Calendar upt) {
+				calservice.uptCalendar(upt);
+				return "수정완료";
+			}
+			// http://localhost:7080/springweb/calendarDelete.do
+			@RequestMapping("calendarDelete.do")
+			public String calendarDelete(int id) {
+				calservice.delCalendar(id);
+				return "삭제완료";
+			}			
+			
+		View
+			$.ajax({});
+		
 	
 7. 이벤트를 통한 일정변경
+	1) 이벤트 확인
+		eventDrop:function(info) { // 특정 일정을 드래그해서 드랍했을 때
 			
-	
+		},
+		eventResize:function(info) { // 특정 일정의 사이즈를 변경했을 때
 			
-				
-	
-	
+		}
+	2) 이벤트를 통해서 처리할 내용 확인
+		수정처리 프로세스
 		
-
-
- 
-	        
-
-
-
-
-		
-		 

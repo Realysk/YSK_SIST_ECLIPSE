@@ -3,17 +3,36 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
 <mapper namespace="springweb.a05_mvc.a03_dao.A05_CalendarDao">
+	
 	<resultMap type="cal" id="calResult">
+		<!-- resultMap 사용 이유 : 테이블 컬럼명과 VO 객체명이 다를경우 사용 -->
 		<result property="start" column="start1"/>
 		<result property="end" column="end1"/>
 	</resultMap>
 
-	<select id="calList" resultMap="calResult"  >
-		select * from calendar
+	<select id="calList" resultMap="calResult">
+		SELECT * FROM calendar
 	</select>
+	
 	<insert id="insertCalendar" parameterType="cal">
-		insert into calendar values( cal_seq.nextval,#{title},
-		#{start},#{end},#{content},#{borderColor},#{backgroundColor},
-		#{textColor},#{allDay})
+		INSERT INTO calendar VALUES (cal_seq.nextval, #{title}, #{start}, #{end}, #{content}, #{borderColor}, #{backgroundColor}, #{textColor}, #{allDay})
 	</insert>
-</mapper>	
+	
+	<update id="uptCalendar" parameterType="cal">
+		UPDATE calendar
+			SET title = #{title},
+				start1 = #{start},
+				end1 = #{end},
+				content = #{content},
+				borderColor = #{borderColor},
+				backgroundColor = #{backgroundColor},
+				textColor = #{textColor},
+				allDay = #{allDay}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delCalendar" parameterType="int">
+		DELETE FROM calendar WHERE id = #{id}
+	</delete>
+	
+</mapper>

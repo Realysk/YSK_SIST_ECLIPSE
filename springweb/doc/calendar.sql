@@ -21,3 +21,16 @@ INSERT INTO calendar VALUES (cal_seq.nextval, '일정첫등록', '2020-10-07', '
 INSERT INTO calendar VALUES (cal_seq.nextval, '일정첫등록', '2021-10-07', '2021-10-08', '일정등록합니다', 'navy', 'blue', 'yellow', 1);
 
 SELECT * FROM calendar;
+
+UPDATE calendar
+	SET title = '일정수정',
+		start1 = '2021-10-08',
+		end1 = '2021-10-09',
+		content = '내용수정',
+		bordercolor = '#0099cc',
+		backgroundcolor = '#0099cc',
+		textcolor = '#ccfff',
+		allday = 1
+WHERE id = 1000;
+
+DELETE FROM calendar WHERE id = '1006';
