@@ -64,9 +64,240 @@
 				
 			# Download시, 필요로 하는 파일 업로드 정보를 DB에 저장.
 			
+	6. 답글 처리
+		1) 프로세스 정리
+			(1) 답글을 클릭 시, 답글 화면 로딩
+				제목 - Re:이전글
+				상위글 - 이전글의 글번호
+				내용 - 
+				===== 이전 글 =====
 			
+			(2) 내용을 입력해서 답글 처리하면 DB에 입력이 된다.
+				refno에 이전 글을 번호가 입력되게 처리된다.
+				=> 이 후에 계층형 SQL에 의해서 답글이 리스트되게 처리한다.
+				
+		2) 개발 순서
+			(0) Controller : board로 모델값을 받을 수 있게 method=insertForm 처리
+				
+			(1) a02_insert.jsp
+				상세화면에서 처리된 내용을 받을 수 있게 form객체의 내용을 처리해야 한다.
+				Spring에서 지원하는 form태그 활용
+				- 제목, 상위글번호, 내용
 			
+			(2) a03_detail.jsp
+				답글을 클릭 시, a02_insert.jsp에 넘길 데이터를 처리한다.
+				ex) no => refno, subject => RE:subject, content => == 이전 글 == 포함 내용 처리
+	
+	7. 계층 SQL을 통한 페이징 처리
+		1) 목적 : 데이터의 건수의 많아짐에 따라 웹 화면에서 출력할 수 있는 한계가 있기에 페이징 처리를 통해서 데이터를 효과적으로 확인할 수 있게 한다.
+		2) 답글달기가 바로 밑에 처리됨으로 효과적인 게시판의 내용 확인과 대화형 게시판을 만들기 위함이다.
+		
+		- 기능 처리 프로세스
+			1) 계층형 SQL 처리
+				데이터를 특정한 컬럼을 기준으로 계층적으로 데이터를 처리하려는 목적으로 Oracle에서 지원되고 있다.
+				ex) 1레벨 라바						할아버지
+					2레벨 드론, 저글링, 히드라			큰아버지	아버지				삼촌
+					3레벨 			럴커			사촌형	나	누나	언니			사촌동생
+					
+					글1
+						RE:글1
+							RE:RE:글1
+						RE:글1
+					글2
+					글3
+			2) DB 처리
+				컬럼 구조 : no, refno 글과 상위글 간의 계층적 연관관계를 처리
 			
+			3) SQL의 주요 키워드
+				start with 컬럼 = 데이터 : 최상위 레벨의 데이터를 조건
+				ex) 답글형 게시판의 경우 refno = 0
+				connect by prior 연관관계컬럼명 = 연관관계컬럼명
+				정렬처리 : 계층적 데이터처리의 정렬의 순서를 지정
+				order siblings by 컬럼명 asc/desc
+	
+	8. 다운로드 처리
+		1) 상세화면에서 등록된 파일 출력
+			(1) Dao 작성
+				- 상세 로딩 시, 첨부파일로 가져올 수 있게 처리
+					boardfile
+					dao
+					public String getFileName(int no);
+					mapper
+					SELECT fname FROM boardfile WHERE no = #{no}
+					
+			(2) Service단
+				- 출력한 단위 VO에 fname을 추가하여 해당 no에 연관된 fname을 가져오게 처리한다.
+					
+			(3) 화면단에서 fname 출력
+		
+		2) 다운로드 View 만들기
+			(1) 사용자 정의 Viewer 만들기
+		
+		3) Container에 등록 처리
+			(1) <bean id="download"
+		
+		4) 다운로드 Controller 선언
+			@RequestMapping("download.do")
+			(1) public String download(@RequestMapping("fname") String fname, Model d) {
+					d.addAttribute("fname", fname);
+					return "컨테이너에서 선언한 download viewer";
+				}
+		
+		5) 상세화면에서 해당 파일 클릭 시, 다운로드 Controller 호출 및 다운로드 처리
+			location.href="${path}/download.do?fname="+fname;
 			
+	9. 페이징 처리
+		1) 기능 내용 (페이지 관련 속성)
+			(0) 총 데이터 건수
 			
+			(1) 한번에 보여 줄 페이지 지정 : 화면form (3/5/10/30/50/100) => VO
 			
+			(2) 페이지의 갯수 : 120/10 => 10 페이지
+			
+			(3) 클릭한 현재 페이지 번호
+			
+			(4) => 이 페이지의 시작번호, 현재 페이지의 마지막번호
+				count : [DB] 총 데이터 건수
+				pageSize : [요청값] 한번에 보여줄 페이지크기
+				pageCount : [로직] 총 페이지수 (count/pageSize)
+				curPage : [요청값] 클릭한 현재 페이지번호
+				start : [로직] 현재 페이지의 시작번호 : curPage, pageSize 이용해서 도출
+				end : [로직] 현재 페이지의 마지막번호 : curPage, pageSize 이용해서 도출
+			
+		2) 처리 순서
+			(1) 데이터가 순서별로 출력되는 SQL 작성
+				rownum : 데이터의 일련번호를 나타낸다.
+			
+			(2) 위 rownum를 기준으로 페이지의 start, end 번호를 지정하여 특정한 페이지의 데이터를 지정할 수 있다.
+				rownum between #{start} and #{end}
+				
+				-- 페이징 처리
+				SELECT *
+				FROM (
+					SELECT rownum cnt, b.*
+					FROM BOARD b
+					WHERE subject LIKE '%'||#{subject}||'%'
+					AND writer LIKE '%'||#{writer}||'%'
+					START WITH refno = 0
+					CONNECT BY PRIOR NO = refno
+					ORDER siblings BY NO DESC)
+					-- 한 페이지에 표시할 데이터 건수 지정
+					WHERE cnt BETWEEN #{start} AND #{end}		
+				
+			(3) 리스트 VO에 번호 속성 넣기 : cnt 속성 추가
+			
+			(4) 조회 VO (BoardSch)를 통해 요청값과 로직을 통해서 처리할 내용을 선언 확인
+				Controller의 요청값을 BoardSch로 선언
+				=> Service, Dao, Mapper 변경
+				Service단에 기본 속성값 start/end값 강제 설정
+				JSP no => cnt로 출력해서 1단계 화면 내용 확인
+			==========================================================================================
+			(5) DB (DAO, Mapper)를 통해서 나타낼 내용 처리 : [DB] 총 데이터 건수, 전체 SQL Mapper 확인 처리
+				SELECT COUNT(*)
+				FROM BOARD b
+				WHERE subject LIKE '%'||#{subject}||'%'
+				AND writer LIKE '%'||#{writer}||'%'
+
+				public int totCnt(BoardSch sch);
+			
+			(6) Service단에서 BoardSch의 로직 처리 : count, pageSize, pageCount, curPage, start, end 할당 처리
+			
+			(7) JSP(View)를 통해서 요청값으로 처리할 내용 (form) : pageSize, curPage
+				- pageCount를 통해서 하단에 페이지 리스트 처리
+				- 하단 페이지 처리
+				
+				
+			* Service에서 처리하는 페이징 로직
+			
+			// 1. 총 건수 설정
+			sch.setCount(dao.totCnt(sch));
+			
+			// 2. 페이지 크기 (요청) : default로 페이지 크기 지정 - 초기 화면
+			if(sch.getPageSize() == 0) {
+				sch.setPageSize(5);
+			}
+			
+			// 3. 총 페이지 수
+			// ex) 데이터 건수 10 => 2
+			//		데이터 건수 16 => 3 + 1 (4)
+			// sch.getCount()/sch.getPageSize()
+			// Math.ceil() : 올림 처리, 나머지 값이 있으면 바로 올림
+			// java : 정수/정수 => 정수, 원하는대로 소숫점 처리가 되려면 double promote 형 변환 필요
+			// Math.ceil()의 리턴값은 실수여서 정수로 casting
+			// int totPage = (int)( Math.ceil( sch.getCount()/(double)sch.getPageSize() ) );
+			sch.setPageCount( (int)( Math.ceil( sch.getCount()/(double)sch.getPageSize() ) ) );
+			
+			// 4. 화면에서 클릭한 페이지 번호 (요청값) : 초기화면을 위한 default 설정
+			if(sch.getCurPage() == 0) {
+				sch.setCurPage(1);
+			}
+			
+			// 5. DB로 보낼 한 페이지에 보일 데이터 (시작번호/마지막번호 지정)
+			// sch.getCurPage() : 클릭한 페이지 번호
+			// sch.getPageSize() : 한번에 보여줄 데이터 건수
+			// 1, 5 => 마지막 페이지의 번호 1*5 = 5
+			// 2, 5 => 2*5 = 10
+			// 3, 3 => 3*3 = 9
+			/*	
+			 	5건씩 보이는 페이지
+			 	페이지번호		페이지건수		보일페이지
+			 		1			5		1   2   3   4   5
+			 		2			5		6   7   8   9   10
+			 		3			5		11  12  13  14  15
+			 		4			5		16  17  18  19  20
+			 		
+			 		시작 페이지
+			 		(1-1)*5+1 - (현재페이지번호-1)*화면에보일페이지건수+1
+			 		(2-1)*5+1
+			 */
+			sch.setStart((sch.getCurPage()-1) * sch.getPageSize()+1);
+			sch.setEnd(sch.getCurPage()*sch.getPageSize());
+			
+			// 블럭 처리
+			// 1. 블럭 크기 지정
+			sch.setBlockSize(5);
+			// 2. blocknum 지정 : 현재페이지번호/블럭의크기
+			int blocknum = (int)( Math.ceil( sch.getCurPage()/(double)sch.getBlockSize() ) );
+			// 3. 마지막 블럭번호
+			// 총 페이지 수가 23 ==> 한번에 보여줄 block의 수가 5		25로 나와 에러가 발생
+			// 마지막 블럭번호는 총 페이지 수를 넘지 못하게 처리
+			int endBlock = blocknum*sch.getBlockSize();
+			if(endBlock > sch.getPageCount()) {
+				endBlock = sch.getPageCount();
+			}
+			sch.setEndBlock(endBlock);
+			sch.setStartBlock((blocknum-1)*sch.getBlockSize()+1);
+			
+				1	2	3	4	5	>
+			<	6	7	8	9	10	>
+			<	11	12	13	14	15	
+			화살표 next를 클릭 시, 현재 마지막 블럭+1로 해서 curPage를 설정하면 다음 블럭이 출력된다.
+			화살표 previous를 클릭 시, 현재 시작 블럭-1로 해서 curPage를 설정하면 이전 블럭이 출력된다.
+			 
+			 * 하단 페이징 처리
+			 	0. 페이지 크기 변경
+			 		페이지 선택을 변경했을 때
+			 		현재 페이지 번호를 1로 하고, submit() 처리
+			 		
+			 	1. 전체 페이징 처리
+			 		1) 특정 번호 클릭
+			 			JS 함수로 curPage를 지정하고 submit 처리
+			 	
+			 	2. 페이지 block으로 페이지 처리
+			 		1) 데이터양이 증가하여 페이지 건수가 늘어날 때, 한번에 나타날 페이지 블럭의 갯수를 지정하여
+			 			next나 previous로 이동하면서 효과적으로 화면에 데이터를 출력하기 위해 활용된다.
+			 		2) 처리 순서
+			 			- boardSch VO에 시작 block과 마지막 block 속성, 화면에 출력할 blockSize 선언
+			 			- Service단 처리
+			 				(1) blocksize 속성 강제 설정 (5개)
+			 				(2) blocknum 지정 : 현재페이지번호/블럭의크기 올림 처리하면 아래와 같이
+			 					1	2 	3 	4 	5	=> blocknum 1
+			 					6	7 	8 	9 	10	=> blocknum 2
+			 					11	12 	13 	14 	15	=> blocknum 3
+			 				(3) 블럭의 마지막 번호
+			 					blocknum * blockSize
+			 				(4) 블럭의 시작 번호
+			 					(blocknum-1)*blockSize+1
+			 			- 화면단 처리
+			 				출력한 block의 갯수로 화면 표시
+			 				next/previous를 클릭 시, curpage번호 설정 처리

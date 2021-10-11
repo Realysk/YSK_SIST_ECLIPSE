@@ -29,7 +29,18 @@
 	$(document).ready(function(){
 		<%-- 
 		
-		--%>	
+		--%>
+		var isInsert = "${board.subject}";
+		if(isInsert!=""){
+			if(confirm("등록되었습니다!\n계속등록하시겠습니까?")){
+				$(":input").val("");
+				$("[name=refno]").val(0);
+				$("[name=no]").val(0);
+			}else{
+				$("#list").submit();
+			}
+		}
+			
 		$("#goMain").click(function(){
 			$(location).attr("href","${path}/board.do?method=list");	
 		});
@@ -50,6 +61,9 @@
   <h2>게시판 등록</h2>
 </div>
 <div class="container">
+	<form id="list"  action="${path}/board.do?method=list" method="post">
+		<input type="hidden" name="curPage" value="1"></form>
+	<!-- 등록 후, 현재 페이지 번호를 변경 처리 ==> session값에 영향. -->	
 	<form id="board" enctype="multipart/form-data" action="${path}/board.do?method=insert" method="post">
 		<input type="hidden" name="no" value="0"/>
 		<div class="input-group mb-3">
@@ -57,19 +71,18 @@
 				<span class="text-center input-group-text">제 목</span>
 			</div>
 			<input name="subject" class="form-control" 
-				value="" placeholder="제목입력하세요" />	
+				value="${board.subject}" placeholder="제목입력하세요" />	
 		</div>  
 		<div class="input-group mb-3">	
 			<div class="input-group-prepend">
 				<span class="input-group-text">작 성 자</span>
 			</div>
-			<input name="writer" class="form-control" 
-				placeholder="작성자입력하세요" />	
+			<input name="writer" class="form-control" placeholder="작성자입력하세요" />	
 			<div class="input-group-prepend">
 				<span class="input-group-text">상위글번호</span>
 			</div>
 			<input name="refno" class="form-control" 
-				placeholder="상위글번호" value="0" readonly/>	
+				placeholder="상위글번호" value="${board.refno}" readonly/>	
 		</div>		
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
@@ -77,7 +90,7 @@
 			</div>
 			<textarea name="content" rows="10" 
 				class="form-control" 
-				placeholder="내용입력하세요" ></textarea>		 
+				placeholder="내용입력하세요" >${board.content}</textarea>		 
 		</div>
 		<div class="input-group mb-3">	
 			<div class="input-group-prepend">
@@ -92,10 +105,8 @@
 			
 		</div>			 
 		<div class="text-right">
-			<input type="button" class="btn btn-info"
-				value="등록" id="regBtn"/>
-			<input type="button" class="btn btn-success"
-				value="조회 화면으로" id="goMain"/>
+			<button type="button"  id="regBtn"  class="btn btn-info">등록</button>
+			<button type="button"  id="goMain"  class="btn btn-success">조회 화면으로</button>
 		</div>
 	</form>
 </div>

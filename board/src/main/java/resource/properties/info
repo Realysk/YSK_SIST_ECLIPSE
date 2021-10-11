@@ -7,7 +7,6 @@ pass=tiger
 # 파일 서버 (개인 PC)
 tmpUpload=C:/javaexp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/board/z01_upload/
 upload=C:/javaexp/workspace/board/src/main/webapp/z01_upload/
-#upload=C:/Users/ysk23/AppData/Roaming/SPB_Data/git/YSK_SIST_ECLIPSE/board/src/main/webapp/z01_upload/ #(GitHub)
 
 # 파일 서버 (개인 노트북)
 #tmpUpload=C:/javaexp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/board/z01_upload/

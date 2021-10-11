@@ -49,3 +49,47 @@ SELECT * FROM board
 WHERE subject LIKE '%'||''||'%'
 AND writer LIKE '%'||''||'%'
 ORDER BY NO DESC;
+
+
+/*
+SELECT *
+FROM BOARD 
+WHERE subject LIKE '%'||#{subject}||'%'
+AND writer LIKE '%'||#{writer}||'%'
+ORDER BY NO DESC 	
+ */
+
+-- 계층형 SQL
+SELECT * FROM board
+START WITH refno = 0
+CONNECT BY PRIOR NO = refno
+ORDER siblings BY NO DESC;
+
+-- 페이징 처리
+SELECT *
+FROM (
+	SELECT rownum cnt, b.*
+	FROM BOARD b
+	WHERE subject LIKE '%'||''||'%'
+	AND writer LIKE '%'||''||'%'
+	START WITH refno = 0
+	CONNECT BY PRIOR NO = refno
+	ORDER siblings BY NO DESC)
+	-- 한 페이지에 표시할 데이터 건수 지정
+	WHERE cnt BETWEEN 1 AND 5;
+
+
+-- 데이터 총 건수
+SELECT COUNT(*)
+FROM BOARD b
+WHERE subject LIKE '%'||''||'%'
+AND writer LIKE '%'||''||'%';
+
+/*
+SELECT COUNT(*)
+FROM BOARD b
+WHERE subject LIKE '%'||#{subject}||'%'
+AND writer LIKE '%'||#{writer}||'%'
+
+public int totCnt(BoardSch sch);
+ */

@@ -34,13 +34,21 @@
 			// 각 메서드마다.method=insertForm 호출.. 
 			$(location).attr("href","${path}/board.do?method=insertForm");
 			
-		});		
+		});
+		$("[name=pageSize]").val("${boardSch.pageSize}");
+		$("[name=pageSize]").change(function() {
+			$("[name=curPage]").val(1);
+			$("form").submit();
+		});
 	});
-	function go(no){
-		
+	function go(no){		
 		$(location).attr("href",
 				"${path}/board.do?method=detail&no="+no);
-	}	
+	}
+	function goPage(no) {
+		$("[name=curPage]").val(no);
+		$("form").submit();
+	}
 </script>
 </head>
 
@@ -50,13 +58,33 @@
 </div>
 <div class="container">
     <h2 align='center'></h2>
-	<form id="frm01" class="form-inline"  method="post">
+	<form id="frm01" class="form"  method="post">
+		<input type="hidden" name="curPage" value="1"/>
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	    <input class="form-control mr-sm-2" name="subject" value="${board.subject}" placeholder="제목" />
 	    <input class="form-control mr-sm-2" name="writer" value="${board.writer}"  placeholder="작성자" />
 	    <button class="btn btn-info" type="submit">Search</button>
 	    <button class="btn btn-success" id="regBtn" type="button">등록</button>
  	</nav>
+ 	<div class="input-group lb-3">
+ 		<div class="input-group-prepend">
+ 			<span class="input-group-text">총 : ${boardSch.count} 건</span>
+ 		</div>
+ 		
+ 		<div class="input-group-append">
+ 			<span class="input-group-text">페이지 크기:</span>
+ 			<select name="pageSize" class="form-control">
+ 				<option>3</option>
+ 				<option>5</option>
+ 				<option>10</option>
+ 				<option>20</option>
+ 				<option>30</option>
+ 			</select>
+ 		</div>
+ 	
+ 	</div>
+ 	
+ 	
 	</form>
    <table class="table table-hover table-striped">
    	<col width="10%">
@@ -76,14 +104,22 @@
     <tbody>
     	<c:forEach var="bd" items="${list}">
     	<tr class="text-center" ondblclick="javascript:go(${bd.no})">
-    		<td>${bd.no}</td><td>${bd.subject}</td><td>${bd.writer}</td>
+    		<td>${bd.cnt}</td>
+    		<td  class="text-left">${bd.subject}</td><td>${bd.writer}</td>
     		<td><fmt:formatDate value="${bd.regdte}"/>
     		
     		</td><td>${bd.readcnt}</td></tr>
     	</c:forEach>
     </tbody>
 	</table>    
-    
+	<ul class="pagination justify-content-center">
+		
+	  <li class="page-item"><a class="page-link" href="javascript:goPage(${boardSch.startBlock-1})">Previous</a></li>
+		  <c:forEach var="cnt" begin="${boardSch.startBlock}" end="${boardSch.endBlock}">
+		  	<li class="page-item ${boardSch.curPage==cnt?'active':''}"><a class="page-link" href="javascript:goPage(${cnt})">${cnt}</a></li>	  
+		  </c:forEach>
+	  <li class="page-item"><a class="page-link" href="javascript:goPage(${boardSch.endBlock+1})">Next</a></li>
+	</ul>  
 </div>
 </body>
 </html>

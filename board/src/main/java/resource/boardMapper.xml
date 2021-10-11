@@ -1,27 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
-
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
 <mapper namespace="board.dao.BoardDao">
-
+	<!-- 
 	<resultMap type="board" id="resultBoard">
-	</resultMap>
-	
-	<select id="boardList" resultType="board" parameterType="board">
-		SELECT * FROM board
+	</resultMap> -->
+	<select id="totCnt" resultType="int" parameterType="boardsch">
+		SELECT COUNT(*)
+		FROM BOARD b
 		WHERE subject LIKE '%'||#{subject}||'%'
-		AND writer LIKE '%'||#{writer}||'%'
-		ORDER BY no DESC	
+		AND writer LIKE '%'||#{writer}||'%'		
 	</select>
 	
-	<select id="getBoard" resultType="board" parameterType="int">
-		SELECT * FROM board
-		WHERE no = #{no}
-	</select>
-	
+	<select id="boardList" resultType="board"
+ 			parameterType="boardsch">
+		<!-- 페이징 처리 -->
+		SELECT *
+		FROM (
+			SELECT rownum cnt, b.*
+			FROM BOARD b
+			WHERE subject LIKE '%'||#{subject}||'%'
+			AND writer LIKE '%'||#{writer}||'%'
+			START WITH refno = 0
+			CONNECT BY PRIOR NO = refno
+			ORDER siblings BY NO DESC)
+		<!-- 한 페이지에 표시할 데이터 건수 지정 -->
+		WHERE cnt BETWEEN #{start} AND #{end}
+ 	</select>
+	 <select id="getBoard" resultType="board" 
+ 	 	parameterType="int">
+ 	 	select *
+ 	 	from board
+ 	 	where no = #{no}
+ 	 </select>
 	<insert id="insertBoard" parameterType="board">
-		INSERT INTO board VALUES (board_seq.nextval, #{refno}, #{subject}, #{content}, #{writer}, 0, sysdate, sysdate)		
-	</insert>
-	
+		INSERT INTO board values(board_seq.nextval, #{refno}, #{subject}, #{content}, #{writer}, 0, sysdate, sysdate)	
+	</insert> 
+	<insert id="uploadFile" parameterType="boardfile">
+		insert into boardfile values(
+			board_seq.currval, #{fname}, '', '',sysdate )
+	</insert> 		
  	<update id="updateBoard" parameterType="board">
 		UPDATE board
 		   SET subject = #{subject},
@@ -30,24 +49,21 @@
 		   	   uptdte =sysdate
 		 WHERE NO = #{no}
  	</update>
- 	
   	<delete id="deleteBoard" parameterType="int">
-		DELETE FROM board WHERE NO = #{no}
- 	</delete>
- 	 	 
+		DELETE FROM board
+		 WHERE NO = #{no}
+ 	</delete> 	
  	<update id="uptReadCnt" parameterType="int">
-	 	UPDATE board
+		 UPDATE board
 			SET readcnt = readcnt+1
-		WHERE NO = #{no} 	 
- 	</update>
-	
-	<insert id="uploadFile" parameterType="boardfile">
-		INSERT INTO boardfile VALUES (board_seq.currval, #{fname}, sysdate, sysdate,'')
-	</insert> 
-	
-	<select id="getBoardFile" resultType="boardfile" parameterType="int">
-		SELECT * FROM boardfile
-		WHERE no = #{no}
-	</select>
+		WHERE NO = #{no}	
+ 	</update>	 
 
-</mapper>
+	<select id="getBoadFile" 
+		resultType="String" parameterType="int">
+		select fname
+		from boardfile
+		where no = #{no}
+	</select>	
+	
+</mapper>	
