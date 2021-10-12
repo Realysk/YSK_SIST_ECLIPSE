@@ -22,7 +22,7 @@
 <script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script>
-
+// $(document).ready(function() {});
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 	var toDay = new Date().toISOString().split("T")[0];
@@ -167,7 +167,7 @@
 	$("#end").val(event.end.toLocaleString());
 	$("[name=end]").val(event.end.toISOString());
 	$("#allDay").val(""+event.allDay);
-	$("[name=allDay]").val((event.allDay?1:0)); 	  
+	$("[name=allDay]").val((event.allDay?1:0));	  
 	  
   }
 

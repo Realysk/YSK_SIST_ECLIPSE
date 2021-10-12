@@ -117,4 +117,27 @@ xml
 		<property name="suffix" value=".jsp"/>
 		 -->
 	</bean>
+	
+	<!-- 
+		# 메일 전송을 위한 서버 연동 설정
+			1. Host
+			2. Port
+			3. 계정 : username/password
+				등록한 메일주소와 패스워드
+			4. 보안 설정 관련 선언
+	 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="${mail_user}"/><!-- 본인 정보 등록 info @@@.gmail.com -->
+		<property name="password" value="${mail_pass}"/>
+		<!-- 보안 관련 설정 -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean> 
+	
 </beans>
