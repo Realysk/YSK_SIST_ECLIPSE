@@ -32,7 +32,6 @@
 <script src="${path}/a00_com/jquery-ui.js"></script>
 <script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		var wsocket;
@@ -68,8 +67,7 @@
 		$("#chatArea").scrollTop(mx);
 		
 	}
-	
-	
+
 </script>
 </head>
 
