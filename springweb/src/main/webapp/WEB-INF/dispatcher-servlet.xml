@@ -38,6 +38,20 @@ xml
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Dao"/>
 	</context:component-scan>
 	
+	<!-- 
+		웹 소켓 통신을 위한 선언
+		1. 핸들러 선언을 위한 처리
+	 -->
+	 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+	 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+	 <mvc:default-servlet-handler/>
+	 <!-- 
+	 	2. Client단에서 JS와 연동되는 Handler를 URL로 Mapping
+	  -->
+	  <websocket:handlers>
+		<websocket:mapping handler="chatHandler" path="/chat-ws.do"/>		  
+	  </websocket:handlers>
+	
 	<!-- RestController -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>
