@@ -1,4 +1,5 @@
 # 스프링 Chatting 프로그램
+
 	1. 주요 내용
 		1) 웹 소켓에 대한 이해
 		2) 컨테이너 환경 설정
@@ -15,3 +16,20 @@
 		1) 요청 객체의 설정 방식 선언 : HandlerMapping, HandlerAdapter 선언
 		2) 요청 Servlet handler 선언
 		3) Websocket:Handlers를 통해서 handler 객체 호출과 이 핸들러가 client에서 접속을 할 수 있게끔 URL 패턴을 설정 처리해준다.
+		
+	4. 화면 구성
+		계정 접속
+		메세지
+		메세지 내용
+	
+	5. Chatting Handler와 화면 Socket JS와 연동 처리
+		handler								js
+		afterConnectionEstablished			onopen
+		handleTextMessage					send("전송될 메세지") : 메세지를 전송할 때
+		sendMessage (클라이언트에 보낼 메세지)		onmessage : 메세지가 서버로부터 왔을 때
+		afterConnectionClosed				onclose
+		
+	6. 특정 Client가 메세지를 전송했을 때, 모든 Client들에게 메세지 Push 처리
+		0) 모든 Client Session에 전달해야 하기 때문에 전역변수로 clientSession을 누적하는 변수 선언
+		1) client단 send("전송할 메세지") 서버에 전달
+			handleTextMessage()에 전달 받아서 위 전역변수로 선언하여 누적된 sessionClient에 반복문을 이용해서 전송처리
