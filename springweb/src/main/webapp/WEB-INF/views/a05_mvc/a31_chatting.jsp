@@ -51,13 +51,32 @@
 					// 서버에서 온 메시지는 받는 부분.
 					receiveMsg(evt.data);
 				}
+				wsocket.onclose=function() {
+					alert("접속이 종료되었습니다.");
+					$("#chatMessageArea").text("");
+					$("#msg").val("");
+					$("#id").val("");
+					$("#id").focus();
+				}
 			}
 		});
+		// 메세지를 입력하고 enter키를 누르거나 보내기 버튼을 클릭 시
 		$("#msg").keyup(function(e){
 			if(e.keyCode==13){
 				wsocket.send("msg:"+ $("#id").val()+":"+$(this).val());
+				$(this).val("");
+				$(this).focus();
 			}
 		});
+		$("#sndBtn").click(function() {
+			// 다중 처리에서 그룹채팅으로 처리할 때 현재 구분자로 되어있는 split(":")를 활용하여 특정한 사람이나 그룹을 지정하여 메시지를 받게 처리하면 된다.
+			wsocket.send("msg:"+ $("#id").val()+":"+$(this).val());
+		});
+		$("#exitBtn").click(function() {
+			if(confirm("접속을 종료하시겠습니까?")) {
+				wsocket.close();
+			}
+		});		
 	});
 	// 받은 메시지는 하단에 #chatMessageArea에 처리..
 	function receiveMsg(revMsg){
