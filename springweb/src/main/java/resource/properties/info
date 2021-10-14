@@ -6,6 +6,10 @@ dburl=jdbc:oracle:thin:@localhost:1521:xe
 name=scott
 pass=tiger
 
+# 메일 서버
+mail_user=ysk2388@gmail.com
+mail_pass=dbtjdrms6761!!
+
 # 파일 서버의 경로명 (상단 데스크톱, 하단 노트북)
 upload1=C:/Users/ysk23/AppData/Roaming/SPB_Data/git/YSK_SIST_ECLIPSE/springweb/src/main/webapp/z01_upload
 #upload1=C:/Users/realysk/git/YSK_SIST_ECLIPSE/springweb/src/main/webapp/z01_upload

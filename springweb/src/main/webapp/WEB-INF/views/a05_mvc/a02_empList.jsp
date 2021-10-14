@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> REALYSK </title>
+<title>Insert title here</title>
 <link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
 <link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
 <script src="${path}/a00_com/jquery.min.js"></script>
@@ -40,10 +40,11 @@
 </div>
 <div class="container">
     <h2 align='center'></h2>
-	<form id="frm01" class="form-inline" method="post">
+	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" name="ename" value="${param.ename}" placeholder="사원명"/>
-	    <input class="form-control mr-sm-2" name="job" value="${param.job}" placeholder="직책명"/>
+	    <input class="form-control mr-sm-2" name="ename" value="${param.ename}" placeholder="사원명" />
+	    <input class="form-control mr-sm-2" name="job" value="${param.job}"   placeholder="직책명" />
+	    <input class="form-control mr-sm-2" type="date" name="hiredate" value="2001-12-12"   placeholder="날짜" />
 	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
@@ -62,11 +63,12 @@
     </thead>	
     <tbody>
     	<c:forEach var="emp" items="${empList}">
+    	
     	<tr class="text-center">
     		<td>${emp.empno}</td><td>${emp.ename}</td>
     		<td>${emp.job}</td>
     		<td>${emp.mgr}</td>
-    		<td>${emp.sal}</td><td>${emp.deptno}</td></tr>
+    		<td>${emp.sal }</td><td>${emp.deptno}</td></tr>
     	</c:forEach>
     </tbody>
 	</table>    
@@ -82,7 +84,7 @@
         </button>
       </div>
       <div class="modal-body">
-		<form id="frm02" class="form" method="post">
+		<form id="frm02" class="form"  method="post">
 	     <div class="row">
 	      <div class="col">
 	        <input type="text" class="form-control" placeholder="사원명 입력" name="ename">
@@ -90,7 +92,6 @@
 	      <div class="col">
 	        <input type="text" class="form-control" placeholder="직책명 입력" name="job">
 	      </div>
-	     </div>
 	    </form> 
       </div>
       <div class="modal-footer">

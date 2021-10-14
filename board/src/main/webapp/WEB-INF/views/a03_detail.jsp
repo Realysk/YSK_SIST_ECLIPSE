@@ -55,11 +55,19 @@
 		});
 		$("#reBtn").click(function(){
 			if(confirm("답글을 달겠습니다!")){
+				$("[name=refno]").val($("[name=no]").val());
+				$("[name=subject]").val("RE:"+$("[name=subject]").val());
+				$("[name=content]").val(
+						"\n\n\n\n\n========<<이전 글>>=========\n"+
+						$("[name=content]").val());
 				$("form").attr("action",
-						"${path}/board.do?method=reply");
+						"${path}/board.do?method=insertForm");
 				$("form").submit();
 			}
-		});	
+		});
+		$("#fname").click(function() {
+			location.href="${path}/download.do?fname="+$(this).val();
+		});
 	});
 </script>
 </head>
@@ -102,7 +110,11 @@
 		<input name="subject" class="form-control"
 			value="${board.subject}"  
 			placeholder="제목입력하세요" />	
-		 
+		<div class="input-group-prepend">
+			<span class="input-group-text">첨부파일</span>
+		</div>
+		<input class="form-control" id="fname"
+			value="${board.fname}"/>			 
 	</div>  	
 	<div class="input-group mb-3">	
 		<div class="input-group-prepend">

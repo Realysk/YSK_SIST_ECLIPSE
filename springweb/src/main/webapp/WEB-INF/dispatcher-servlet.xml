@@ -44,6 +44,20 @@ xml
 			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	
+	<!-- 
+		웹 소켓 통신을 위한 선언
+		1. 핸들러 선언을 위한 처리
+	 -->
+	 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+	 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+	 <mvc:default-servlet-handler/>
+	 <!-- 
+	 	2. Client단에서 JS와 연동되는 Handler를 URL로 Mapping
+	  -->
+	  <websocket:handlers>
+		<websocket:mapping handler="chatHandler" path="/chat-ws.do"/>		  
+	  </websocket:handlers>	
 		
 	<!-- 
 	# DB연결 처리.
@@ -117,4 +131,43 @@ xml
 		<property name="suffix" value=".jsp"/>
 		 -->
 	</bean>
+	
+	<!-- 
+		# 메일 전송을 위한 서버 연동 설정
+			1. Host
+			2. Port
+			3. 계정 : username/password
+				등록한 메일주소와 패스워드
+			4. 보안 설정 관련 선언
+	 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="${mail_user}"/><!-- 본인 정보 등록 info @@@.gmail.com -->
+		<property name="password" value="${mail_pass}"/>
+		<!-- 보안 관련 설정 -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 
+		다국어 처리 모듈 등록 
+			1. 핵심 클래스
+			2. 다국어 파일 기본 위치 등록..
+				package명기준으로 message.msg로 등록.
+				ex) src/main/java 하위에 패키지와 기준되는 파일로 등록을 한다.
+	-->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.msg</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>	
+	
 </beans>
