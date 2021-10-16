@@ -42,7 +42,7 @@ public class A02_ChattingHandler extends TextWebSocketHandler {
 		super.afterConnectionClosed(session, status);
 		System.out.println(session.getId() + " 님이 접속을 종료했습니다.");
 		// 접속이 종료된 session은 삭제 처리
-		users.remove(session);
+		users.remove(session.getId());
 	}
 
 	@Override
