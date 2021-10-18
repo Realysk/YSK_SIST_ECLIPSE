@@ -1,26 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=${encoding}" pageEncoding="${encoding}" import="java.util.*" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var="path" value="$${pageContext.request.contextPath }"/>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>     
 <!DOCTYPE html>
 <%--
-
+# 지난시간 주요 내용 점검
+	1. 웹화면에서 다국어 처리는 어떤 경우에 필요하고 이를 위해 브라우저단 위치와 언어 설정에 대한 내용을 파악하였는가?
+	
+		- 국내뿐만 아니라 해외에서도 서핑을 할 수 있기 때문에 이에 대해 여러 언어를 지원하는 의미에서 사용된다.
+	
+	2. 다국어 처리를 위한 다국어 처리 파일의 구성 내용을 기술할 수 있는가?
+	
+		- 다국어를 지원하는 바이너리 파일
+	
+	3. 다국어 처리를 위한 컨테이너 설정 부분에 어떤 객체를 어떤 속성으로 사용하는지 아는가?
+	
+		
+	
+	4. 다국어 처리를 위한 controller단과 화면단 구성과 처리를 할 수 있는가?
+	
+		
+	
+	5. Spring에서 지원하는 form태그는 어떤 처리를 하는가?
+	
+		
+	
+	6. form 태그 중에 select/checkbox등에 대하여 VO와 속성관계에서 이해를 하고 있는가?
+	
+		
 
  --%>
 <html>
 <head>
-<meta charset="${encoding}">
+<meta charset="UTF-8">
 <title>REALYSK</title>
-<link rel="stylesheet" href="$${path}/a00_com/bootstrap.min.css" >
-<link rel="stylesheet" href="$${path}/a00_com/jquery-ui.css" >
-<script src="$${path}/a00_com/jquery.min.js"></script>
-<script src="$${path}/a00_com/popper.min.js"></script>
-<script src="$${path}/a00_com/bootstrap.min.js"></script>
-<script src="$${path}/a00_com/jquery-ui.js"></script>
+<link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
+<link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
+<script src="${path}/a00_com/jquery.min.js"></script>
+<script src="${path}/a00_com/popper.min.js"></script>
+<script src="${path}/a00_com/bootstrap.min.js"></script>
+<script src="${path}/a00_com/jquery-ui.js"></script>
 <script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
 <script type="text/javascript">
-	$$(document).ready(function(){
+	$(document).ready(function(){
 		var vm = new Vue({
 			el:".container",
 			data:{msg:"시작!!(뷰와함께)"}
