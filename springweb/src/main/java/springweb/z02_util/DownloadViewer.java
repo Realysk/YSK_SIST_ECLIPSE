@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
-// springweb.z02_util.DownloadViewer
+//springweb.z02_util.DownloadViewer
+
 public class DownloadViewer extends AbstractView{
 
 	//현재 다운로드할 파일의 위치 (공통설정파일에서 호출)
 	@Value("${upload}")
 	private String upload;
-
 	@Override
 	protected void renderMergedOutputModel(
 			Map<String, Object> model, 
@@ -58,7 +58,7 @@ public class DownloadViewer extends AbstractView{
 		FileCopyUtils.copy(fis, out);
 		//		2) 전송 완료 처리..
 		out.flush();
-//		springweb.z02_util.DownloadViewer
+//		springweb.z02.util.DownloadViewer
 	}
 	
 	
@@ -84,7 +84,7 @@ public class DownloadViewer extends AbstractView{
 		- setContentType 설정 : application/download;charset-utf-8
 		- setContentLength로 파일의 길이 설정.
 		- 한글명된 파일은 Encoding처리.
-		- 파일을 reponse에 탑재를 위한 header부분 설정.
+		- 파일을 response에 탑재를 위한 header부분 설정.
 			Content-Disposition으로 attachment로 파일 설정
 			Content-Transfer-Encoding설정 binary 설정..
 		- 파일을 network으로 전송하기위해 Stream객체로 변환.
@@ -92,6 +92,5 @@ public class DownloadViewer extends AbstractView{
 			FileInputStream(파일객체)
 			FileCopyUtils.copy(inputstream, outstream)
 			outstream의 flush를 통해서 자원을 해제..
-
  * */
 

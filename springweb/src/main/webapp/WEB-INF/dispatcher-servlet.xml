@@ -114,6 +114,9 @@ xml
 	<!-- 파일 업로드 View -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	
+	<!-- PDF 뷰어 -->
+	<bean id="pdfViewer" class="springweb.z02_util.PageReportPdfView"/>
+	
 	<!-- 파일 다운로드 View -->
 	<bean id="downloadViewer" class="springweb.z02_util.DownloadViewer"/>
 	

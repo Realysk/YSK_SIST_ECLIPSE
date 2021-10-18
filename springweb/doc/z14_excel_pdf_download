@@ -1,0 +1,48 @@
+# 엑셀과 pdf 다운로드 처리.
+1. 특정 list데이터를 엑셀과 pdf 형식으로 다운되게
+	서버단에서 처리하는 것을 말한다.
+2. 처리프로세스
+	1) 구현된 화면
+	2) excel이나 pdf다운로드 뷰어 생성.
+	3) 컨테이너단에 등록 처리.
+	4) 화면에서 클릭시, 다운로드할 수 있는
+		controller 생성
+	5) 요청값에 의해 특정한 데이터 다운로드 처리.
+	
+3. Viewer 생성 및 처리
+	1) AbstractExcelView를 상속
+	2) 재정의 할 메서드 선언
+		void buildExcelDocument()
+		: excel 파일을 지정하고,
+		모델데이터를 excel로 다운할 수 있도록
+		처리한다.
+	3) 엑셀처리 핵심 객체
+		- 파일 : response.setHeader의 속성
+			attachment:filename=파일명.xls로 설정
+		- HSSFSheet : 엑셀의 sheet 단위로 설정하는 객체.
+		- HSSFRow : 엑셀의 row단위 설정 객체.(sheet에 소속)
+		- HSSFCell : 엑셀의 컴럼단위이면 cell단위인 객체.(row단위에 소속)
+			setCellValue(데이터입력)
+4. 구현순서
+	1) 데이터 리스트 화면에서 엑셀다운로드 버튼 클릭시
+		요청 처리 controller 설정
+	2) 엑셀다운로드할 모델데이터까지 처리한다.
+	3) 엑셀다운로드 뷰어 생성
+	4) 컨터이너에 등록
+	5) 위 list controller 호출시 뷰어가 호출되어, excell이 
+		다운로드되게 한다.
+		
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+					
+	

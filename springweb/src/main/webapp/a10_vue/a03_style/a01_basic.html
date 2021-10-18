@@ -1,0 +1,53 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
+</head>
+<!-- 
+# Vue에서 model로 css 속성 처리..
+1. 기존 css 속성을 :style로 vue에 속성을 선언하는 형태로
+	변경하는 순간, 속성값에 대한 설정도 json 객체 형식으로
+	설정하여 사용할 수 있다.
+2. vue에서 객체화로 속성을 설정하는 순간, model 데이터로 controlle
+	할 수 있다.	
+ -->
+<body>
+	<div id="show">
+		<select v-model="color1">
+			<option>yellow</option>
+			<option>green</option>
+			<option>blue</option>
+		</select>
+		<select v-model="color2">
+			<option>red</option>
+			<option>white</option>
+			<option>navy</option>
+		</select>		
+		<h2 align="center">{{msg}}</h2>
+		<h3 style="background-color:blue;color:yellow">안녕1</h3>
+		<h3 :style="{backgroundColor:'red',color:'yellow'}">안녕2</h3>
+		<h3 :style="{backgroundColor:color1,color:color2}">안녕3</h3>
+		<!-- style일 객체화 되는 순간, v-model에 의해서 영향을 받는
+		모델데이터의 변경에 따라 css 속성이 동적으로 변경된다. 
+		
+		ex) 선택창  
+			배경색상 : [빨/주/노/초/파/남/보]
+			글자색상 : [빨/주/노/초/파/남/보]
+			div  300px, 300px
+			       안녕하세요 
+			       색상 box입니다.
+			==> 위에 선택한 내용을 따라서, 색상박스의 
+			배경색상과 글자색상이 변경되게 처리하세요.
+			       
+		-->
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"css 속성", color1:"yellow", color2:'navy'}
+	});
+</script>
+</html>

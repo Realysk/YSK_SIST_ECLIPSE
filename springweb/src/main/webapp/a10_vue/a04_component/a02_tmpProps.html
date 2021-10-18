@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
+</head>
+<!-- 
+# 컴포넌트의 template과 속성값 설정..
+1. 속성을 template은 id값으로 분리시켜 사용할 수 있다.
+2. props:{
+	   속성1:{속성의 옵션을 설정.},
+	   속성2:{속성의 옵션을 설정.},
+	   속성3:{속성의 옵션을 설정.},
+	}
+3. 위에 넘겨진 속성은 template 안에서 directive 형식으로 사용할 수 있다.
+	{{속성1}} v-text="속성2" v-html="속성3"	
+ -->
+<template id="tmp01">
+	<div>
+	<table  align="center"  width="300pt" border>
+		<col width="30%">
+		<tr><th>이름</th><td>{{name}}</td></tr>
+		<tr><th>나이</th><td v-text="age"></td></tr>
+		<tr><th>사는곳</th><td>{{loc}}</td></tr>
+	</table>
+</template> 
+<!-- 
+ex) 도서명: @@@  가격 : @@@ 의 템플릿을 만들고,
+	위에 해당하는 데이터 3개를 컴포넌트(book)를 통해서 넘기고, 
+	출력하세요 
+ -->
+<script type="text/javascript">
+	Vue.component("p-info",{
+		template:"#tmp01",
+		props:{
+			name:{type:String},
+			age:{type:Number},
+			loc:{type:String}
+		}
+	});
+
+</script>
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		<p-info name="홍길동" age="25" loc="서울신림동"></p-info>
+		<p-info name="신길동" age="27" loc="대전"></p-info>
+		<p-info name="마길동" age="28" loc="대구"></p-info>
+		<p-info name="오길동" age="29" loc="광주"></p-info>
+		<p-info name="하길동" age="24" loc="부산"></p-info>
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"시작!!"}
+	});
+</script>
+</html>

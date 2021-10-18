@@ -25,7 +25,7 @@ public class A10_FormController {
 	// http://localhost:7080/springweb/form.do
 	@GetMapping
 	public String form(Model model,FormCommand formCmd) {
-		// select 선택 옵션을 선언할 수 있게 처리
+		// select  선택 옵션을 선언할 수 있게 처리..
 		formCmd.setLoginType(new String[]{"기업회원","일반회원"});
 		//formCmd.setLoginType("기업회원");
 		List<String> loginTypes = new ArrayList<String>();
@@ -39,14 +39,13 @@ public class A10_FormController {
 				new Code("02", "디자이너"));
 		model.addAttribute("jobCodes", jobCodes);
 		
-		model.addAttribute("favoriteOsNames", new String[] {"Window 8", "Window 10", "Mac OS", "Linux"});
-		model.addAttribute("favoriteOsCodes", Arrays.asList(
-				new Code("01", "Window 8"),
-				new Code("02", "Window 10"),
-				new Code("03", "Mac OS"),
-				new Code("04", "Linux")
-				));
+		model.addAttribute("favoriteOsNames", new String[] {"윈도우8", "윈도우10", "맥OS"});
 		
+		// select나, radio/checkbox   화면에 보이는 내용과 값이 다를 때..
+		// 	ex) <option value='10'>인사</option> 
+		model.addAttribute("favoriteOsCodes", Arrays.asList(
+				new Code("01", "윈도우8"),
+				new Code("02", "윈도우10")));
 		return "WEB-INF\\views\\a05_mvc\\a11_form.jsp";
 	}
 	@PostMapping
@@ -65,7 +64,11 @@ public class A10_FormController {
 		model.addAttribute("favoriteOsNames", new String[] {"윈도우8", "윈도우10", "맥OS"});
 		model.addAttribute("favoriteOsCodes", Arrays.asList(
 				new Code("01", "윈도우8"),
-				new Code("02", "윈도우10")));
+				new Code("02", "윈도우10"),
+				new Code("03", "Mac OS"),
+				new Code("04", "리눅스")
+				
+				));
 		return "WEB-INF\\views\\a05_mvc\\a11_form.jsp";
 	}	
 }
