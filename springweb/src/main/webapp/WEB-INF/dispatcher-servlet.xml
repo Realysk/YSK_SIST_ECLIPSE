@@ -171,6 +171,18 @@ xml
 			</list>
 		</property>
 	</bean>
-	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+	
+	<!-- advise선언 -->
+	<bean id="profiler" class="springweb.a04_aop.advice.Profiler"/>
+	<!-- aspect : pointcut+advise -->
+	<aop:config>
+		<aop:aspect id="traceAspect" ref="profiler">
+			<!-- 특정 시점과 수행내용 선언.. -->
+			<aop:pointcut expression="execution(public * springweb.a05_mvc.a03_dao..*(..))" id="publicMethod"/>
+			<!-- pointcut의 시점 메서드를 연결처리.(weaving) -->
+			<aop:around method="trace" pointcut-ref="publicMethod"/>	
+		</aop:aspect>
+	</aop:config>	
 	
 </beans>

@@ -31,8 +31,7 @@ public class PageReportPdfView extends AbstractPdfView {
 		Table table = new Table(2, pageRanks.size() + 1);
 		table.setPadding(5);
 
-		BaseFont bfKorean = BaseFont.createFont(fontPath, BaseFont.IDENTITY_H,
-				BaseFont.EMBEDDED);
+		BaseFont bfKorean = BaseFont.createFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 
 		Font font = new Font(bfKorean);
 		Cell cell = new Cell(new Paragraph("순위", font));

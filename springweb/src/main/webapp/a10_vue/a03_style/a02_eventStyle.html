@@ -23,16 +23,13 @@
 		<h2 align="center">{{msg}}</h2>
 		<h3 :style="style2" @click="chColor">클릭하면 변경!!</h3>
 		<!-- 
-		button을 만들고 초기에 연결되어 있는 style은 모델로 선언된 
+		ex) button을 만들고 초기에 연결되어 있는 style은 모델로 선언된 
 			style1
 		@mouseover @mouseout시 
 		event01      event02 메서드 호출해서 배경색상과 글자색상이 변경
 		된게 처리하세요.
 		
 		 -->
-		<button :style="style1" 
-			@mouseover="event01"
-			@mouseout="event02">마우스 오버와 아웃</button>	 
 	</div>
 </body>
 <script>
@@ -43,14 +40,6 @@
 			   style1:{backgroundColor:"aqua",color:"navy"}
 			 },
 	    methods:{
-	    	event01:function(){
-	    		this.style1.backgroundColor="purple";
-	    		this.style1.color="yellow";
-	    	},
-			event02:function(){
-	    		this.style1.backgroundColor="aqua";
-	    		this.style1.color="navy";	    		
-	    	},
 	    	chColor:function(){
 	    		//alert("호출");
 	    		// 이벤트에 의해 선언된 model데이터를 변경함으로

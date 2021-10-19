@@ -8,15 +8,18 @@
 	.set1{background-color:aqua;color:purple;}
 	.set2{text-align:center;width:120px;}
 	.set3{border:sandybrown dashed 1px;}
+	.cls1{background-color:navy}
+	.cls2{color:yellow}
+	.cls3{width:250px;text-align:center;}
+
 </style>
 </head>
 <!-- 
 # vue에서 .class 속성의 처리..
 1. vue 속성으로 클래스 mapping하여 아래와 같이 처리한다.
 	요소 class="클래스1 클래스2"
-	ex) class="text-center btn"
 	요소 v-bind:class="{클래스1:true, 클래스2:true}"
-	ex) :class="{클래스명:적용여부}"
+
  -->
 <body>
 	<div id="show">
@@ -33,11 +36,14 @@
 		</select><br>
 		<input type="checkbox" v-model="s3"	value="true"/>
 			set3클래스적용<br>
+		<h3 :class="{cls1:c1,cls2:c2,cls3:c3}">안녕하세요 클래스 적용..</h3>	
 		<!-- 
 		ex) h3에 클래스 cls1, cls2, cls3을 선언하고, 각각의 클래스에
 		type check 로 적용여부를 처리하세요..		
 		 -->
-	
+		<input type="checkbox" v-model="c1"	value="true"/>클래스1<br>			
+		<input type="checkbox" v-model="c2"	value="true"/>클래스2<br>			
+		<input type="checkbox" v-model="c3"	value="true"/>클래스3<br>			
 	</div>
 </body>
 <script>

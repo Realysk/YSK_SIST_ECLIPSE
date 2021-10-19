@@ -7,12 +7,19 @@
 </head>
 <!-- 
 # Vue에서 model로 css 속성 처리..
-0. CSS 속성을 객체로 전환하여 동적으로 처리
-	class 선언한 내용을 vue에서 true/false 적용 처리여부를 동적으로 구현
-1. 기존 css 속성을 :style로 vue에 속성을 선언하는 형태로 변경하는 순간, 속성값에 대한 설정도 json 객체 형식으로 설정하여 사용할 수 있다.
+0. css 속성을 객체로 전환하여, 동적으로 처리
+   class 선언한 내용을 vue에서 true/false 적용 처리여부를 동적으로 구현.
+
+
+1. 기존 css 속성을 :style로 vue에 속성을 선언하는 형태로
+	변경하는 순간, 속성값에 대한 설정도 json 객체 형식으로
+	설정하여 사용할 수 있다.
 	style="속성:속성값"
 	:style="{속성:속성값}"
-2. vue에서 객체화로 속성을 설정하는 순간, model 데이터로 control 할 수 있다.	
+	:style="{속성:모델명}"
+	
+2. vue에서 객체화로 속성을 설정하는 순간, model 데이터로 controlle
+	할 수 있다.	
  -->
 <body>
 	<div id="show">
