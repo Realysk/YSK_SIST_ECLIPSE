@@ -94,12 +94,11 @@
 	 	<property name="suffix" value=".jsp"/>	
 	 </bean>
 
-<bean id="mailSender" 
-      class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="smtp.gmail.com"/>
       <property name="port" value="587"/>
-      <property name="username" value="96daeun12@gmail.com"/>
-      <property name="password" value="wlqrkffo13@"/>
+      <property name="username" value="ysk2388gmail.com"/>
+      <property name="password" value="dbtjdrms6761!!"/>
       <!-- 보안 관련 설정 -->
       <property name="javaMailProperties" >
          <props>

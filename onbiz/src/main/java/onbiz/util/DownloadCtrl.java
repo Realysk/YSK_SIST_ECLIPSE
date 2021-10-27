@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class BoardDLCtrl {
+public class DownloadCtrl {
 	// http://localhost:7080/onbiz/download.do
 	@RequestMapping("download.do")
 	public String download(@RequestParam("bd_fname") String bd_fname, Model d) {
