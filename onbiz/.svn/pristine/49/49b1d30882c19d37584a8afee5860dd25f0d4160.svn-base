@@ -1,0 +1,63 @@
+DROP TABLE OnBoard;
+CREATE TABLE OnBoard (
+	bd_no NUMBER PRIMARY KEY, -- 게시물번호 (pk) (데이터유형 VARCHAR2(10) -> NUMBER)
+	bd_refno NUMBER NOT NULL, -- 답변의 상위 글 번호
+	bd_name VARCHAR2(100) NOT NULL, -- 게시물 제목 (nn)
+	bd_content VARCHAR2(1000) NOT NULL, -- 게시물 내용 (nn) (데이터유형크기 300 -> 1000)
+	bd_viewcnt NUMBER NOT NULL, -- 게시물 조회수 (nn)
+	bd_regdte DATE NOT NULL, -- 게시물 등록일 (nn)
+	bd_uptdte DATE NOT NULL, -- 게시물 수정일 (nn)
+	emp_no VARCHAR2(10) -- 사원번호 (작성자) (fk)
+);
+
+DROP SEQUENCE OnBoard_seq;
+CREATE SEQUENCE OnBoard_seq
+START WITH 1
+MINVALUE 1
+INCREMENT BY 1
+MAXVALUE 999999;
+
+-- 프로젝트, 사원 데이터 생기면 추가예정
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '1차 공지사항', '오늘은 수요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1001');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '2차 공지사항', '오늘은 목요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1001');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '3차 공지사항', '오늘은 금요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1001');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '4차 공지사항', '오늘은 토요일입니다. 좋은 주말 보내세요.', 0, sysdate, sysdate, '1001');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '5차 공지사항', '오늘은 일요일입니다. 좋은 주말 보내세요.', 0, sysdate, sysdate, '1001');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '6차 공지사항', '오늘은 월요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1001');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '7차 공지사항', '오늘은 화요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1001');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '8차 공지사항', '오늘은 수요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1001');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '9차 공지사항', '오늘은 목요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1001');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '10차 공지사항', '오늘은 금요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1001');
+
+SELECT * FROM OnBoard;
+
+-- 조회수 카운팅
+UPDATE OnBoard
+	SET bd_viewcnt = bd_viewcnt+1
+WHERE bd_no = 1;
+
+/*
+UPDATE OnBoard
+	SET bd_viewcnt = bd_viewcnt+1
+WHERE bd_no = #{bd_no}
+ */
+
+-- 게시물 업로드 테이블 삭제
+DROP TABLE OnBoardFile;
+-- 게시물 업로드 테이블 생성
+CREATE TABLE OnBoardFile (
+	bd_fname VARCHAR2(200), -- 파일명
+	bd_pathname VARCHAR2(200), -- 경로명
+	bd_credte DATE, -- 파일 업로드일
+	bd_no NUMBER -- 게시물번호 (fk)
+);
+-- board_seq.currval : 게시판의 현재 입력되는 게시판
+-- 번호와 동일하게 처리
+INSERT INTO OnBoardFile VALUES ('파일명.txt', '경로명', sysdate, 1);
+SELECT * FROM OnBoardFile;
+
+-- 게시물 검색
+SELECT * FROM OnBoard
+WHERE bd_name LIKE '%'||''||'%'
+AND emp_no LIKE '%'||''||'%'
+ORDER BY bd_no DESC;

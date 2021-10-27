@@ -1,0 +1,172 @@
+package onbiz.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
+import onbiz.service.OnEmpServ;
+import onbiz.vo.OnEmp;
+
+@Controller
+@SessionAttributes("/onemp/*")
+public class OnEmpCtrl {
+
+	@Autowired
+	private OnEmpServ service;
+	
+	@ModelAttribute("onemp")
+	public OnEmp getOnEmp() {
+		return new OnEmp();
+	}
+
+	
+	// http://localhost:7080/onbiz/login.do
+/*	@RequestMapping("login.do")
+	public String login() {
+		return "OnEmp/Login/login";	
+	}*/
+	
+	// ------------ 안되서 하위 주석처리 ---------
+	
+	// http://localhost:7080/onbiz/login.do
+	@RequestMapping("login.do")
+	public String login(OnEmp onemp,HttpSession session) throws Exception{
+		System.out.println("login 메서드 확인 - 컨트롤러 -");
+		if(onemp.getEmp_no()!=null) {
+			session.setAttribute("member2",new OnEmp("p05"));
+		}
+		System.out.println("전달 데이터 확인 : "+onemp);
+		
+		return "OnEmp/Login/login";
+	}
+	/* 로그인 체크 부분 추가, 하나만 받을거면 리퀘스트파람으로...아이디랑 비번 각각 받기 */
+	
+	
+	
+	// 로그인 체크
+	//  http://localhost:7080/onbiz/loginCheck.do
+	@RequestMapping("loginCheck.do")
+	public ModelAndView loginCheck(@ModelAttribute OnEmp onemp, HttpSession session) {
+		boolean result = OnEmpServ.loginCheck(onemp, session);
+		ModelAndView mav = new ModelAndView();
+		System.out.println("전달 데이터 확인 : "+onemp);
+		System.out.println("세션 : "+session);
+		
+		if(result == true) {
+			// 로그인 성공
+			mav.setViewName("HR_EMP_01"); // 성공 했을 때 이동
+			mav.addObject("msg", "succe");
+		}else {
+			mav.setViewName("onbiz/login");
+			mav.addObject("msg","failure");
+		}
+		return mav;
+	
+	}
+
+	@RequestMapping("logout.do")
+	public ModelAndView logout(HttpSession session) {
+		OnEmpServ onEmpServ = new OnEmpServ();
+		onEmpServ.logout(session);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("onbiz/login");
+		mav.addObject("msg", "logout");
+		return mav;
+	}
+	
+	
+	
+	/*
+	
+	
+	// ------------ 안되서 하위 주석처리 ---------
+	
+	// http://localhost:7080/onbiz/mvc1.do
+	@GetMapping("mvc1.do")
+	public String mvc1(Model d){
+		d.addAttribute("serviceMsg", service.call());
+		return "OnEmp/Login/mvc1";
+	} */
+	
+	// http://localhost:7080/onbiz/onEmpList.do
+		@RequestMapping("onEmpList.do")
+		public String onEmpList(OnEmp sch) {
+			ArrayList<OnEmp> onEmpList = OnEmpServ.onEmpList(sch);
+			sch.addAttribute("onEmpList",onEmpList);
+			return "OnEmp/HR_EMPCK-01";
+		}
+			
+		
+	// http://localhost:7080/onbiz/loginFrm.do
+	@RequestMapping("loginFrm.do")
+	public String loginFrm(OnEmp onemp){
+			
+		return "OnEmp/Login/NewFile";
+	}
+		
+	/*	@RequestMapping("logout.do")
+	public String logout(HttpSession session) {
+		OnEmpServ.logout(session);
+		OnEmp onemp = new OnEmp();
+		onemp.setViewName("Login/login");
+	}*/
+	
+	
+	// http://localhost:7080/onbiz/login2.do
+	/*@RequestMapping("login2.do")
+	public String login2(OnEmp onemp, HttpSession session) {
+		if(onemp.getEmp_no()!=null) {
+			session.setAttribute("onemp2", new OnEmp("","","","","",""));
+		}
+		return "OnEmp/Login/login";
+	} */
+	
+/*	
+	// http://localhost:7080/onemplist.do
+	@RequestMapping("onEmpList.go")
+	public String login(OnEmp onemp, Model d) {
+		d.addAllAttributes(service.onEmpList(onemp));
+		return "OnEmp/Login/login";
+	}
+	
+		// http://localhost:7080/springweb/empListAjax.do
+	@RequestMapping("empListAjax.do")
+	public String mvc02(Emp sch, Model d) {
+		d.addAttribute("empList", service.getEmpList(sch));
+		return "pageJsonReport";
+	}	
+	
+	
+		
+	@Autowired
+	private OnEmpServ service;
+	
+	@ModelAttribute("onemp")
+	public OnEmp getOnEmp() {
+		return new OnEmp();
+	}
+	*/
+
+}
+

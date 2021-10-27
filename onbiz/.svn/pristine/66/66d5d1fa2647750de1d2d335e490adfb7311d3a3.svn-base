@@ -1,0 +1,31 @@
+
+
+-- 산출물 OnOutput 
+-- 산출물번호(pk), 산출물 종류, 산출물명, 산출물 파일분류, 산출물 파일경로, 작업번호(fk), 회의록번호(fk)
+-- opt_no, opt_kind, opt_name, opt_doctype, opt_docpath, task_no, note_no
+DROP TABLE OnOutput;
+CREATE TABLE OnOutput (
+	opt_no varchar2(10) PRIMARY KEY,
+	opt_kind varchar2(30) CHECK(opt_kind IN('산출물', '회의록')),
+	opt_name varchar2(50),
+	opt_doctype varchar2(30),
+	task_no varchar2(10),
+	note_no varchar2(10)
+);
+DROP SEQUENCE OnOutput_seq;
+CREATE SEQUENCE OnOutput_seq
+   INCREMENT BY 1   
+   START WITH 1
+   MINVALUE 1
+   MAXVALUE 9999999;
+
+  
+-- 산출물번호(pk), 산출물 종류, 산출물명, 산출물 파일분류, 작업번호(fk), 회의록번호(fk)
+-- opt_no, opt_kind, opt_name, opt_doctype, task_no, note_no
+INSERT INTO OnOutput values('opt'||lpad(OnOutput_seq.nextval, 7, 0), '산출물', 'UI화면설계서', 'hwp', 'task000002', null);
+INSERT INTO OnOutput values('opt'||lpad(OnOutput_seq.nextval, 7, 0), '산출물', '업무플로우 설계서', 'hwp', 'task000003', null);
+INSERT INTO OnOutput values('opt'||lpad(OnOutput_seq.nextval, 7, 0), '산출물', '업무플로우 설계서', 'hwp', 'task000003', null);
+INSERT INTO OnOutput values('opt'||lpad(OnOutput_seq.nextval, 7, 0), '산출물', '업무플로우 설계서', 'hwp', 'task000003', null);
+
+SELECT * FROM OnOutput;
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	 
+	 <typeAliases>
+	 	<typeAlias alias="onapproval" type="onbiz.vo.OnApproval"/>
+	 	<typeAlias alias="onboard" type="onbiz.vo.OnBoard"/>
+	 	<typeAlias alias="onemp" type="onbiz.vo.OnEmp"/>
+	 	<typeAlias alias="onoutput" type="onbiz.vo.OnOutput"/>
+	 	<typeAlias alias="onproject" type="onbiz.vo.Onproject"/>
+	 	<typeAlias alias="ontask" type="onbiz.vo.OnTask"/>
+	 	<typeAlias alias="ordercom" type="onbiz.vo.Ordercom"/>
+	 	<typeAlias alias="ontaskproject" type="onbiz.vo.OnTask_Project"/>
+	 	<typeAlias alias="Onemp_dept" type="onbiz.vo.OnEmp_Dept"/>
+      	<typeAlias alias="empdept" type="onbiz.vo.OnEmp_OnDept"/>
+      	<typeAlias alias="onapprovalview" type="onbiz.vo.OnApprovalView"/>
+      	<typeAlias alias="onprojectmember" type="onbiz.vo.OnProject_Member"/>
+      	<typeAlias alias="onprojectfile" type="onbiz.vo.OnProject_File"/>
+	 </typeAliases>
+	 
+	 <mappers>
+	 	<mapper resource="resource/OnEmp_Dept_mapper.xml"/>
+	 	<mapper resource="resource/OnEmp_mapper.xml"/>
+	 	<mapper resource="resource/OnTask_mapper.xml"/>
+	 	<mapper resource="resource/Ordercom_mapper.xml"/>
+	 	<mapper resource="resource/OnProject_mapper.xml"/>
+	 	<mapper resource="resource/OnApproval_mapper.xml"/>
+	    <mapper resource="resource/OnProject_Member_mapper.xml"/>
+	    <mapper resource ="resource/OnProject_File_mapper.xml"/>
+	</mappers>
+	
+
+</configuration>
+

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+	
+	<mapper namespace="onbiz.dao.Pro_regDao">
+	<select id="insertPro" parameterType="onproject">
+	insert into onproject values(
+	'pro'||(pro_no_sequence.nextval),
+	#{pro_kind},#{pro_name},
+	#{pro_goal},#{pro_content},
+	#{pro_startdte},#{pro_enddte},
+	#{ordercom_no},'진행중',
+	sysdate,#{pro_plandoc},
+	#{pro_budget},
+	#{pro_uptcontent}
+	)
+	</select>
+	
+	<select id="getprolist" resultType="onproject" parameterType="onproject">
+	SELECT o.pro_no, o.pro_name, o.pro_startdte, o.pro_enddte, o.pro_kind, o.pro_state, o2.EMP_KORNAME, b.emp_korname AS pm
+	FROM ONPROJECT o , ONPROJECT_MEMBER om, ONEMP o2, ONEMP_AUTH oa,(
+	SELECT DISTINCT AUTH_NO, EMP_KORNAME, pro_no 
+	from
+	(SELECT o3.emp_korname, o3.AUTH_NO,b.pro_no 
+	FROM ONEMP o3,
+	(SELECT om.mem_no, o2.emp_no, o.pro_no 
+	FROM ONPROJECT o, ONPROJECT_MEMBER om , ONEMP o2 
+	WHERE o.PRO_NO = om.PRO_NO
+	AND o2.EMP_NO = om.EMP_No
+	)b
+	WHERE o3.EMP_NO = b.EMP_NO)
+	WHERE AUTH_NO ='a01')b
+	WHERE o.pro_no = om.PRO_NO
+	AND o2.EMP_NO = om.EMP_NO
+	AND o2.AUTH_NO = oa.AUTH_NO
+	AND o.PRO_STATE = #{pro_state}
+
+	and o2.emp_no = #{emp_no}
+	AND o.PRO_NO = b.pro_no
+	</select>
+	
+	<select id="getprolistloading" resultType="onproject" parameterType="String">
+		SELECT o.pro_no, o.pro_name, o.pro_startdte, o.pro_enddte, o.pro_kind, o.pro_state, o2.EMP_KORNAME, b.emp_korname AS pm
+		FROM ONPROJECT o , ONPROJECT_MEMBER om, ONEMP o2, ONEMP_AUTH oa,(
+		SELECT DISTINCT AUTH_NO, EMP_KORNAME, pro_no 
+		from
+		(SELECT o3.emp_korname, o3.AUTH_NO,b.pro_no 
+		FROM ONEMP o3,
+		(SELECT om.mem_no, o2.emp_no, o.pro_no 
+		FROM ONPROJECT o, ONPROJECT_MEMBER om , ONEMP o2 
+		WHERE o.PRO_NO = om.PRO_NO
+		AND o2.EMP_NO = om.EMP_No
+		)b
+		WHERE o3.EMP_NO = b.EMP_NO)
+		WHERE AUTH_NO ='a01')b
+		WHERE o.pro_no = om.PRO_NO
+		AND o2.EMP_NO = om.EMP_NO
+		AND o2.AUTH_NO = oa.AUTH_NO
+		and o2.emp_no = #{emp_no}
+		AND o.PRO_NO = b.pro_no
+	</select>	
+	<select id="getprolist2" resultType="onproject" parameterType="onproject">
+	SELECT o.pro_no, o.pro_name, o.pro_startdte, o.pro_enddte, o.pro_kind, o.pro_state, o2.EMP_KORNAME, b.emp_korname AS pm
+	FROM ONPROJECT o , ONPROJECT_MEMBER om, ONEMP o2, ONEMP_AUTH oa,(
+	SELECT DISTINCT AUTH_NO, EMP_KORNAME, pro_no 
+	from
+	(SELECT o3.emp_korname, o3.AUTH_NO,b.pro_no 
+	FROM ONEMP o3,
+	(SELECT om.mem_no, o2.emp_no, o.pro_no 
+	FROM ONPROJECT o, ONPROJECT_MEMBER om , ONEMP o2 
+	WHERE o.PRO_NO = om.PRO_NO
+	AND o2.EMP_NO = om.EMP_No
+	)b
+	WHERE o3.EMP_NO = b.EMP_NO)
+	WHERE AUTH_NO ='a01')b
+	WHERE o.pro_no = om.PRO_NO
+	AND o2.EMP_NO = om.EMP_NO
+	AND o2.AUTH_NO = oa.AUTH_NO
+	AND o.pro_kind = #{pro_kind}
+	and o2.emp_no = #{emp_no}
+	AND o.PRO_NO = b.pro_no
+	</select>
+
+
+	<select id ="getproject" parameterType="onproject" resultType ="onproject" >
+   select * from onproject where pro_no = #{pro_no}
+   </select>
+   
+   <insert id="profileinsert" parameterType="onprojectfile">   
+   insert into onproject_file values('pf'||(project_file_sequence.nextval),#{profile_name},sysdate,'pro'||(pro_no_sequence.currval))
+   </insert>   	
+	
+	
+	
+	<insert id ="promeminsert" parameterType="String">
+	insert into OnProject_member values 
+	('mem'||(OnProject_Member_sequence.nextval), #{emp_no}, sysdate, '', '활동', 'pro'||(pro_no_sequence.currval))
+	</insert>
+	
+	
+	<insert id ="promeminsert2" parameterType="onemp">
+	insert into OnProject_member values 
+	('mem'||(OnProject_Member_sequence.nextval), #{emp_no}, sysdate, '', '활동', #{pro_no})
+	</insert>
+	
+
+	<select id="getprojectmember" parameterType ="onproject" resultType="onprojectmember2">
+	<![CDATA[
+  SELECT om.MEM_NO, o.EMP_KORNAME ,od.DEPT_NAME, oa.AUTH_NAME, o.EMP_EMAIL, o.emp_profile, o.emp_no,
+    om.mem_regdte, om.mem_witdte, om.mem_state, o2.pro_no
+   FROM ONPROJECT_MEMBER om , ONEMP o , ONEMP_AUTH oa , ONEMP_DEPT od , ONPROJECT o2 
+   WHERE o.DEPT_NO = od.DEPT_NO 
+   AND o.AUTH_NO = oa.AUTH_NO 
+   AND om.EMP_NO =o.EMP_NO 
+   AND om.PRO_NO =o2.PRO_NO
+   AND o2.PRO_NO = #{pro_no}
+   AND rownum <= 4
+   ORDER BY AUTH_NAME
+   ]]>
+   </select>
+   
+   <select id ="getpgmember"  parameterType ="onproject" resultType="onprojectmember2">
+   SELECT om.MEM_NO, o.EMP_KORNAME ,od.DEPT_NAME, oa.AUTH_NAME, o.EMP_EMAIL, o.emp_profile, o.emp_no,
+    om.mem_regdte, om.mem_witdte, om.mem_state, o2.pro_no
+   FROM ONPROJECT_MEMBER om , ONEMP o , ONEMP_AUTH oa , ONEMP_DEPT od , ONPROJECT o2 
+   WHERE o.DEPT_NO = od.DEPT_NO 
+   AND o.AUTH_NO = oa.AUTH_NO 
+   AND om.EMP_NO =o.EMP_NO 
+   AND om.PRO_NO =o2.PRO_NO
+   AND o2.PRO_NO = #{pro_no}
+   
+   </select>
+   	
+	<select  id="getprojectmembertot" parameterType ="onproject" resultType="int">
+    	<![CDATA[
+    SELECT b.memcnt AS memcnt
+    FROM 
+    (SELECT om.MEM_NO, o.EMP_KORNAME ,od.DEPT_NAME, oa.AUTH_NAME, o.EMP_EMAIL, o.emp_profile, o.emp_no,
+     om.mem_regdte, om.mem_witdte, om.mem_state, o2.pro_no
+   FROM ONPROJECT_MEMBER om , ONEMP o , ONEMP_AUTH oa , ONEMP_DEPT od , ONPROJECT o2 
+   WHERE o.DEPT_NO = od.DEPT_NO 
+   AND o.AUTH_NO = oa.AUTH_NO 
+   AND om.EMP_NO =o.EMP_NO 
+   AND om.PRO_NO =o2.PRO_NO
+   AND o2.PRO_NO = #{pro_no}
+   AND rownum <= 4
+   ORDER BY AUTH_NAME)a,
+ (SELECT count(om.MEM_NO)-2 AS memcnt
+   FROM ONPROJECT_MEMBER om , ONEMP o , ONEMP_AUTH oa , ONEMP_DEPT od , ONPROJECT o2 
+   WHERE o.DEPT_NO = od.DEPT_NO 
+   AND o.AUTH_NO = oa.AUTH_NO 
+   AND om.EMP_NO =o.EMP_NO 
+   AND om.PRO_NO =o2.PRO_NO
+   AND o2.PRO_NO =#{pro_no}) b
+   WHERE rownum =1
+  
+   ]]>
+
+   </select>
+   
+ 	<select id ="memobj" parameterType ="onprojectmember" resultType="onprojectmember">
+	select om.*, o.EMP_KORNAME 
+ 	from ONPROJECT_MEMBER om , ONEMP o 
+ 	WHERE o.emp_no = om.emp_no
+ 	and mem_no like '%'||#{mem_no}||'%'
+ 	</select> 
+	
+	<update id ="updatemem" parameterType ="onprojectmember">
+	UPDATE ONPROJECT_MEMBER
+		   SET mem_state = #{mem_state},
+		   	   mem_witdte = sysdate
+		 WHERE mem_no = #{mem_no}
+	</update>
+	
+	
+	<select id="ordercomList" resultType="Ordercom" parameterType="Ordercom">
+	select *
+	from ordercom
+	where ordercom_name like '%'||#{ordercom_name}||'%'
+	or ordercom_kind like '%'||#{ordercom_kind}||'%'
+	</select>
+	
+	
+	<select id="emplist" resultType="onemp" parameterType="onemp">
+	select *
+	from OnEmp
+	where emp_korname like '%'||#{emp_korname}||'%'
+	or emp_engname like '%'||#{emp_engname}||'%'
+	</select>
+	
+	<select id="emptablelist" resultType="empdept" parameterType="empdept">
+	select emp_no, emp_korname, dept_name
+	from OnEmp e, Onemp_Dept d 
+	where emp_korname like '%'||#{emp_korname}||'%'
+	and dept_name like '%'||#{dept_name}||'%'
+	</select>
+	
+	<select id = "deptList" parameterType ="onemp_dept" resultType="onemp_dept">
+	select dept_name
+	from OnEmp_Dept
+	where dept_name like '%'||#{dept_name}||'%'
+	</select>
+	
+	<select id = "empnamelist" resultType="onemp" parameterType ="String">
+	SELECT o.EMP_KORNAME, oa.auth_name, op.ptn_name, o.emp_no
+	FROM OnEmp o, ONEMP_AUTH oa, ONEMP_POSITION op 
+	WHERE dept_no =
+	(SELECT dept_no
+	FROM ONEMP_DEPT 
+	WHERE dept_name =#{dept_name})
+	AND o.AUTH_NO =oa.AUTH_NO
+	AND o.PTN_NO = op.PTN_NO
+	AND oa.auth_name ='tm'
+	</select>
+	
+	<select id="projectupdate" resultType ="onproject" parameterType ="onproject">
+	SELECT o.*, b.ORDERCOM_NAME 
+	FROM ONPROJECT o , ordercom b 
+	WHERE b.ORDERCOM_NO = o.ORDERCOM_NO 
+	and o.pro_no =  #{pro_no}
+	</select>
+	
+	<select id ="empdetail" resultType ="onemp" parameterType="onemp">
+	select o.*, b.dept_name, c.auth_name 
+	from onemp o, onemp_auth c, onemp_dept b 
+	where o.dept_no = b.dept_no
+	and o.auth_no = c.auth_no 
+	and o.emp_no = #{emp_no}
+	</select>
+	
+	<select id = "projectsch" parameterType="onproject" resultType= "onproject">
+	SELECT o.pro_no, o.pro_name, o.pro_startdte, o.pro_enddte, o.pro_kind, o.pro_state, o2.EMP_KORNAME 
+	FROM ONPROJECT o , ONPROJECT_MEMBER om, ONEMP o2, ONEMP_AUTH oa 
+	WHERE o.pro_no = om.PRO_NO
+	AND o2.EMP_NO = om.EMP_NO
+	AND o2.AUTH_NO = oa.AUTH_NO
+	AND o.PRO_name LIKE '%'||#{pro_name}||'%'
+	and o2.emp_no = #{emp_no}
+	</select>
+	
+	<delete id ="deletemem" parameterType = "onprojectmember">
+		DELETE FROM onproject_member
+		 WHERE mem_NO = #{mem_no}
+	</delete>
+
+
+	
+	</mapper>	
+

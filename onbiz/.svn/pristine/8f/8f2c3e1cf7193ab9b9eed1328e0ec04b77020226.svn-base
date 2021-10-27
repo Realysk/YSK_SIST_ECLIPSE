@@ -1,0 +1,130 @@
+package onbiz.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import onbiz.vo.OnEmp;
+
+public class OnEmpDao {
+	private Connection con;
+	private Statement stmt;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+
+	public OnEmpDao() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setCon() throws SQLException {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String info = "jdbc:oracle:thin:@localhost:1521:xe";
+		con = DriverManager.getConnection(info, "scott", "tiger");
+		System.out.println("접속 완료");
+	}
+
+	/*
+ public OnEmpDAO(){ 
+ 	try{ 
+		Class.forName("oracle.jdbc.driver.OracleDriver"); 
+		con = DriverManager.getConnection(info, "scott", "tiger");
+ 
+ 	}catch(Exception e){ 
+ 		e.printStackTrace(); } 
+ 	} 
+	 */
+
+	/* 로그인 DAO */
+
+	
+/*
+public int login(String emp_no, String emp_pass){
+
+	int onemp = null; 
+	boolean isLogin = false;
+
+	try{ 
+	
+	setCon();
+	String sql = "select emp_pass from user " 
+	pstmt = con.prepareStatement(sql);
+	pstmt.setString(1, emp_no); 
+	rs = pstmt.executeQuery(); 
+	if(rs.next()){
+		if(rs.getString(1).equals(emp_pass)){ 
+			return 1; // 로그인 성공 
+		}else 
+			return 0; //비밀번호 오류 
+		} 
+		
+		return -1; // 아이디 누락 
+		}catch(Exception e){ 
+			e.printStackTrace(); }
+	 return -2; // DB오류
+	}
+	 */
+	public OnEmp login(String emp_no, String emp_pass){
+		
+		OnEmp onemp = null;
+		boolean isLogin = false;
+		
+		try {
+			setCon();
+			
+			String sql = "";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, emp_no); // 아이디
+			pstmt.setString(2, emp_pass); // 패스워드
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				isLogin = true;
+				onemp = new OnEmp(rs.getString(1),
+								rs.getString(2));
+				}
+			
+			System.out.println(isLogin?"로그인 성공":"로그인 실패");			
+			rs.close(); pstmt.close(); con.close();
+	}catch(Exception e){
+		e.printStackTrace();
+		System.out.println("예외발생1 :" + e.getMessage());
+	}finally {
+		if(rs!=null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(pstmt!=null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}			
+		if(con!=null) {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
+		
+	}
+		return onemp;
+	}
+}

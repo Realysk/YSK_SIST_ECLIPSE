@@ -1,0 +1,15 @@
+package onbiz.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class OnApprovalCtrl {
+
+	// http://localhost:7080/onbiz/reqapp.do
+	@RequestMapping("reqapp.do")
+	public String reqapp() {
+		return "TM_DA-004";
+	}
+	
+}

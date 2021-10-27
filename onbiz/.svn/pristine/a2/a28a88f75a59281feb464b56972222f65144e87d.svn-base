@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+	
+	<mapper namespace="onbiz.dao.OnDashBoard_Dao" >
+	
+
+	<select id = "getProject" resultType = "onproject">
+	
+	<![CDATA[
+	SELECT pro_no,pro_name , pro_state, pro_enddte 
+	FROM ONPROJECT o 
+	WHERE PRO_ENDDTE <= TO_CHAR(sysdate,'YYYYMMDD')
+	AND pro_state = '진행중'
+	AND rownum <= 5
+    ORDER BY pro_enddte
+	]]>
+	</select>
+
+<select id = "getprojectst" resultType ="ondashboard">
+<![CDATA[
+SELECT a.pro_name , count(task_no) AS tot, b.task2
+FROM (SELECT o2.TASK_NO, b.pro_no, b.MEM_NO , b.pro_name
+FROM ONTASK o2, 
+(SELECT o.PRO_NO ,o.pro_name, om.MEM_NO 
+FROM ONPROJECT o, ONPROJECT_MEMBER om 
+WHERE o.PRO_NO = om.PRO_NO) b  
+WHERE o2.MEM_NO  = b.mem_no) a,
+(SELECT a.pro_name , count(no2) AS task2
+FROM (SELECT o2.TASK_NO AS no2, b.pro_no, b.MEM_NO , b.pro_name
+FROM ONTASK o2, 
+(SELECT o.PRO_NO ,o.pro_name, om.MEM_NO 
+FROM ONPROJECT o, ONPROJECT_MEMBER om 
+WHERE o.PRO_NO = om.PRO_NO) b  
+WHERE o2.MEM_NO  = b.mem_no
+AND o2.TASK_STATE = '진행중') a
+GROUP BY a.pro_name) b
+WHERE a.pro_name = b.pro_name
+AND rownum <= 6
+GROUP BY a.pro_name , b.task2
+
+   ]]>
+	</select>
+
+	
+	
+   <select id = "getProjectCnt" resultType="ondashboard" >
+   SELECT count(pro_no) as procnt
+   FROM ONPROJECT o
+   WHERE PRO_STATE = '진행중'
+   </select>
+   
+
+   <select id = "getRiskCnt" resultType = "ondashboard" >
+   SELECT count(risk_no) AS riskcnt
+   FROM ONRISK o 
+   WHERE RISK_STATE in ('진행중', '오픈', '홀드', '조치중')
+  
+   </select>
+   
+   
+   <select id = "getTaskCnt" resultType = "ondashboard" >
+   SELECT count (task_no) as taskcnt
+   FROM ONTASK o 
+   WHERE TASK_STATE = '진행중'
+   
+   </select>
+   
+  
+  
+   <select id = "getnProjectCnt" resultType = "ondashboard" >
+  <![CDATA[ 
+   SELECT count(pro_no) as nproCnt
+   FROM ONPROJECT
+   WHERE PRO_ENDDTE <= TO_CHAR(sysdate,'YYYYMMDD')
+   AND pro_state = '진행중'
+ 	]]>
+   </select>
+   
+   <select id="dproject" resultType="ondashboard">
+  <![CDATA[
+   select count(pro_name) as dproject 
+   from onproject 
+   where pro_enddte <= to_char(sysdate, 'YYYYMMDD')
+   and pro_state = '진행중' 
+   ]]>
+   </select>
+   
+   
+	<select id = "getristst" resultType="ondashboard">
+	SELECT a.fixing, b.holding, c.complete, d.opening 
+	FROM (SELECT count(risk_state) AS fixing
+	FROM ONRISK o
+	WHERE RISK_STATE ='조치중') a,
+	(SELECT count(risk_state) AS HOLDing 
+	FROM ONRISK o
+	WHERE RISK_STATE ='홀드') b,
+	(SELECT count(risk_state) AS complete
+	FROM ONRISK o
+	WHERE RISK_STATE ='조치완료') c,
+	(SELECT count(risk_state) AS opening
+	FROM ONRISK o
+	WHERE RISK_STATE ='오픈') d 
+	</select>
+
+
+ 	<select id="getrisklist" resultType="onrisk"> 
+ 	<![CDATA[
+ 	SELECT *
+	FROM ONRISK o 
+	WHERE RISK_REGDTE >= TO_CHAR(sysdate-30,'YYYYMMDD')
+	 AND rownum <= 10
+   ORDER BY risk_regdte
+   ]]>
+ 	</select>
+ 	
+  <select id="graphready" resultType = "ondashboard" >
+  SELECT count(pro_no) as graph_ready
+  FROM ONPROJECT o 
+  WHERE pro_state = '시작전'
+  </select>
+  
+  <select id ="graphcomplete" resultType = "ondashboard">
+  SELECT count(pro_no) as graph_complete
+  FROM ONPROJECT o 
+  WHERE pro_state = '완료'
+  and TO_CHAR(to_date(PRO_ENDDTE,'YY-MM-DD'), 'MM') =
+  (SELECT TO_NUMBER(to_char(to_date(sysdate,'YY-MM-DD'), 'MM')) FROM dual)
+
+  </select>
+  
+  <select id = "graphdelay" resultType = "ondashboard"> 
+   <![CDATA[
+SELECT count(pro_name) as graph_delay
+FROM ONPROJECT o 
+WHERE PRO_ENDDTE <= TO_CHAR(sysdate,'YYYYMMDD')
+AND pro_state = '진행중'
+]]>
+ 	</select>
+ 	
+ 	<select id = "graphgoing" resultType = "ondashboard" >
+ 	  SELECT count(pro_no) as graph_graphgoing
+  FROM ONPROJECT o 
+  WHERE pro_state = '진행중'
+ 	
+ 	</select>
+ 	
+	</mapper>	
+

@@ -1,0 +1,36 @@
+package onbiz.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import onbiz.service.Pro_regService;
+import onbiz.vo.OnEmp;
+import onbiz.vo.Ordercom;
+
+@RequestMapping("proreg.do") 
+@Controller
+public class Pro_regCtrl {
+
+  @Autowired
+  private Pro_regService service;
+
+	// http://localhost:7080/onbiz/proreg.do?method=list
+	@RequestMapping(params="method=list")
+	public String getViewProReg(Ordercom sch, OnEmp sch2, Model d) {
+	    d.addAttribute("ordercom", service.ordercomList( sch ));
+	    d.addAttribute("emp", service.emplist( sch2 ));
+	    System.out.println("진행중컨트롤");
+	    System.out.println(service.ordercomList(sch));
+	    System.out.println(service.emplist(sch2));
+		return "PRO-REG-001-PM";
+	}
+	
+	// http://localhost:7080/onbiz/ProForm.do
+   // @RequestMapping("ProForm.do")
+   // public String ProForm(Model d) {
+   //     return "PRO-FORM-001-PM";
+    //}
+	
+	
+}

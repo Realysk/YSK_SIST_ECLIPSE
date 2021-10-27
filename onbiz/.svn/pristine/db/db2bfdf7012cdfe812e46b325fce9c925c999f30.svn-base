@@ -1,0 +1,378 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<fmt:requestEncoding value="utf-8"/>     
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>OnBiz</title>
+
+<!-- Custom fonts for this template-->
+<link href="${path}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="${path}/settings/bootstrap.min.css">
+<link href="${path}/settings/main.css" rel="stylesheet"/>
+	
+<!-- Custom styles for this template-->
+<script src="${path}/settings/jquery.min.js"></script>
+<script src="${path}/settings/jquery-ui.js"></script>
+<script src="${path}/settings/popper.min.js"></script>
+<script src="${path}/settings/bootstrap.min.js"></script>
+<script src="${path}/settings/main.js"></script>
+
+
+<style>
+
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width:80%;
+    margin: 0 auto;
+    padding:20pt;
+  }
+
+</style>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		
+	}); // document.ready end
+	
+	  document.addEventListener('DOMContentLoaded', function() {
+		    var calendarEl = document.getElementById('calendar');
+		    var toDay = new Date().toISOString().split("T")[0];
+		    var calendar = new FullCalendar.Calendar(calendarEl, {
+		      headerToolbar: {
+		        left: 'prev,next today',
+		        center: 'title',
+		        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+		      },
+		      initialDate: toDay,
+		      navLinks: true, // can click day/week names to navigate views
+		      selectable: true,
+		      selectMirror: true,
+		      select: function(arg) {
+  	
+		    	// form 초기화
+		    	$("#CalModalTitle").text("일정등록");
+		    	$("form")[0].reset();
+
+		    	// 등록한 데이터 출력
+		    	calForm(arg);
+
+		    	// 모달창 처리 
+		    	$("#regBtn").show();
+		    	$("#uptBtn").hide();
+		    	$("#delBtn").hide();
+		    	$("h2").click(); 
+		        
+		        calendar.unselect()
+		      },
+		      eventClick: function(arg) {
+		    	  
+				$("#CalModalTitle").text("일정 상세정보");
+				calEventForm(arg);
+
+		    	// 모달창 처리 
+		      	$("#regBtn").hide();
+		      	$("#uptBtn").show();
+		      	$("#delBtn").show();
+		      	$("h2").click(); 
+		    	  
+		      },
+		      
+		   	  // 특정 일정을 드래그해서 드랍했을 때
+			  eventDrop:function(info) {
+				console.log("일정 드랍 : " + info.event);
+				
+				calEventForm(info);
+				calAjax("method=calupt");
+			  }, 
+				
+			  // 특정 일정의 사이즈를 변경했을 때 
+			  eventResize:function(info) {
+				  console.log("리사이즈 : " + info.event);
+				  
+				  calEventForm(info);
+				  calAjax("method=calupt");
+			  },
+		      editable: true,
+		      dayMaxEvents: true,
+		      events: function(info,successCallback, failureCallback){
+		    	  $.ajax({
+		    		  type:"post",
+		    		  url:"${path}/oncal.do?method=calList",
+		    		  dataType:"json",
+		    		  success:function(data){
+		    			  console.log(data)
+		    			  successCallback(data.myCalList);
+		    		  },
+		    		  error:function(err){
+		    			  console.log(err);
+		    		  }
+		    		  
+		    	  });
+		    	  
+		      }
+		    });
+
+		    calendar.render();
+		    
+		    
+		    // 등록 처리 
+		    $("#regBtn").click(function(){
+		    	if($("[name=title]").val()==""){
+		    		alert("일정을 입력하세요!");
+		    		return;
+		    	}
+		    	calAjax("method=calins");
+		    });
+		    
+		    // 수정처리
+		    $("#uptBtn").click(function(){
+		    	console.log("수정버튼 클릭");
+		    	if(confirm("수정하시겠습니까?")){
+		    		calAjax("method=calupt");
+		    	}
+		    	
+		    });
+		    
+		    // 삭제처리
+		    $("#delBtn").click(function(){
+		    	console.log("삭제버튼 클릭");
+		    	if(confirm("삭제하시겠습니까?")){
+		    		calAjax("method=caldel");
+		    	}
+		    	
+		    });
+		    
+		    // 등록시 사용하는 폼
+		    function calForm(arg) {
+		    	$("#start").val(arg.start.toLocaleString());
+		    	$("#end").val(arg.end.toLocaleString());
+		    	$("#allDay").val(""+arg.allDay);
+		    	
+		    	$("[name=start]").val(arg.start.toISOString());
+		    	$("[name=end]").val(arg.end.toISOString());
+		    	$("[name=allDay]").val((arg.allDay?1:0));
+		    }
+		    
+		    // 상세일정시 사용하는 폼
+			function calEventForm(arg) {
+		    	
+		    	$("#allDay").val(""+arg.event.allDay);
+		    	$("#start").val(arg.event.start.toLocaleString());
+		    	$("#end").val(arg.event.end.toLocaleString());
+		    	
+		    	$("[name=id]").val(arg.event.id);
+		    	$("[name=start]").val(arg.event.start.toISOString());
+		    	$("[name=end]").val(arg.event.end.toISOString());
+		    	$("[name=allDay]").val((arg.event.allDay?1:0));
+		    	
+		    	$("[name=title]").val(arg.event.title);
+		    	$("[name=content]").val(arg.event.extendedProps.content);
+		    	$("[name=borderColor]").val(arg.event.borderColor);
+		    	$("[name=backgroundColor]").val(arg.event.backgroundColor);
+		    	$("[name=textColor]").val(arg.event.textColor);
+		    }
+		    
+		    function calAjax(send) {
+		    	$.ajax({
+		    		type:"post",
+		    		url:"${path}/oncal.do?" + send,
+		    		data:$("#modalFrm").serialize(),
+		    		dataTyep:"json",
+		    		success:function(data){
+		    			location.reload();
+		    		},
+		    		error:function(err){
+		    			console.log(err);
+		    		}
+		    	});
+		    }
+	 
+	
+	
+	  });
+	
+</script>
+</head>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+	<jsp:include page="/common/sidebar.jsp"/>
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- Main Content -->
+		<div id="content">
+			<jsp:include page="/common/header.jsp"/>
+				
+			<!-- Section Start : 구현 내용 -->
+			<div class="container-fluid">
+			
+			
+
+			<div>
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <a class="page-link" href="#">&laquo;</a>
+    </li>
+    <li class="page-item active">
+      <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">3</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">4</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">5</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">&raquo;</a>
+    </li>
+  </ul>
+</div>
+			
+			
+			
+			
+			
+			
+			<ol class="breadcrumb">
+			  <li class="breadcrumb-item"><a href="#">일정</a></li>
+			  <li class="breadcrumb-item active">일정관리</li>
+			</ol>
+
+
+			<div class="card border-primary mb-12">
+			  <div class="card-header"><h5>일정관리</h5></div>
+			  <div class="card-body">
+			    <div id="calendar"></div>
+			  </div>
+			</div>
+            
+            
+			
+
+			
+				
+				<h2 data-toggle="modal" data-target="#exampleModalCenter"></h2>  
+			
+			</div>
+            <!-- Section end -->
+
+		</div><!-- End of Main Content -->
+		<jsp:include page="/common/footer.jsp"/>
+	</div><!-- End of Content Wrapper -->
+</div><!-- End of Page Wrapper -->
+    
+
+<h2 data-toggle="modal" data-target="#CalModal"></h2>  
+<div class="modal fade" id="CalModal" tabindex="-1" role="dialog" aria-labelledby="CalModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="CalModalTitle">타이틀</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<form id="modalFrm" class="form" method="post">
+		<input type="hidden" name="id" value="0"/>
+		  <div class="input-group mb-3">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text">일정</span>
+		    </div>
+		    <input type="text" name="title" class="form-control" placeholder="일정입력">
+		  </div>
+		  <div class="input-group mb-3">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text">시작일</span>
+		    </div>
+		    <input type="text" id="start" class="form-control" placeholder="입력">
+		    <input type="hidden" name="start" >
+		  </div>	
+		  <div class="input-group mb-3">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text">종료일</span>
+		    </div>
+		    <input type="text" id="end" class="form-control" placeholder="입력">
+		    <input type="hidden" name="end" >
+		  </div>	
+		  <div class="input-group mb-3">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text">내용</span>
+		    </div>
+		    <textarea name="content" rows="5" cols="10" class="form-control"></textarea>
+		  </div>	
+		  <div class="input-group mb-3">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text">테두리색상</span>
+		    </div>
+		    <input type="color" name="borderColor"  value="#0099cc" class="form-control" placeholder="입력">
+		  </div>	
+		  <div class="input-group mb-3">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text">배경색상</span>
+		    </div>
+		    <input type="color" name="backgroundColor"  value="#0099cc"  class="form-control" placeholder="입력">
+		  </div>	
+		  <div class="input-group mb-3">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text">글자색상</span>
+		    </div>
+		    <input type="color" name="textColor" value="#ccffff" class="form-control" placeholder="입력">
+		  </div>	
+		  <div class="input-group mb-3">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text">종일여부</span>
+		    </div>
+		    <select id="allDay" class="form-control" >
+		    	<option value="true">종일</option>
+		    	<option value="false">시간</option>
+		    </select>
+		    <input type="hidden" name="allDay"/>
+		  </div>	
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="regBtn" class="btn btn-primary">등록</button>
+        <button type="button" id="uptBtn" class="btn btn-info">수정</button>
+        <button type="button" id="delBtn" class="btn btn-warning">삭제</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
+<!-- Custom scripts for all pages-->
+<script src="${path}/resources/js/sb-admin-2.min.js"></script>
+	
+<!-- Core plugin JavaScript-->
+<script src="${path}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+package onbiz.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class OnChatCtrl {
+	
+	// http://localhost:7080/onbiz/onchatting.do
+	@RequestMapping("onchatting.do")
+	public String onchatting() {
+		return "OnBoard/Chat/TM_PM_CH-001";
+	}
+	
+}

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+   		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+		
+	<!-- 0. info파일 위치 선언 -->
+	<context:property-placeholder location="classpath:/resource/properties/info"/>
+
+	<!-- 1. 컨테이너에 사용할 객체 등록 -->
+	<context:component-scan base-package="onbiz">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Dao"/>
+	</context:component-scan>
+	
+	<!-- 2. RestController -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+		</mvc:message-converters>
+	</mvc:annotation-driven>	
+	
+	<!-- 3. DB연결 처리 : connection pool 처리, 공통 설정 -->	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${driver}"/>	
+		<property name="url" value="${dburl}"/>	
+		<property name="username" value="${name}"/>	
+		<property name="password" value="${pass}"/>	
+	</bean>
+	
+	<!-- 4. Mybatis와 연동 : dbcp 연결, mybatis.Spring.xml 연동 --> 
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:resource/mybatis.Spring.xml" />
+	</bean> 
+	
+	<!-- 5. dao 인터페이스 페이지 위치 설정 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="onbiz.dao"/>
+	</bean> 
+	
+	<!-- 6. json 형식 리턴 viewresolver 선언 -->
+	 <bean id="pageJsonReport" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+	 	<property name="contentType" value="text/html; charset=utf-8"/>
+	 </bean>
+	 
+	 <!-- 7. id값의 view를 등록하고 우선순위를 최우선으로 설정하는 부분을 선언하는 객체 -->
+	 <bean id="btnViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	 	<property name="order" value="0"/>
+	 </bean>
+	
+	<!-- 8. 파일 업로드를 위한 viewResolver 선언 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
+	<!-- 9. 다운로드 뷰어 -->
+	<bean id="downloadViewer" class="onbiz.util.DownloadViewer"/>
+	<!-- 
+		10. 웹 소켓 통신을 위한 선언
+			1) 핸들러 선언을 위한 처리
+	 -->
+	 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+	 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+	 <mvc:default-servlet-handler/>
+	 <!-- 
+	 		2) Client단에서 JS와 연동되는 Handler를 URL로 Mapping
+	  -->
+	  <websocket:handlers>
+		<websocket:mapping handler="chatHandler" path="/chat-ws.do"/>		  
+	  </websocket:handlers>	
+
+	<!-- 10. 프로젝트 기본 실행 설정 -->
+	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	 	<property name="order" value="1"/>
+	 	<property name="prefix" value="WEB-INF/views/"/>
+	 	<property name="suffix" value=".jsp"/>	
+	 </bean>
+
+<bean id="mailSender" 
+      class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com"/>
+      <property name="port" value="587"/>
+      <property name="username" value="96daeun12@gmail.com"/>
+      <property name="password" value="wlqrkffo13@"/>
+      <!-- 보안 관련 설정 -->
+      <property name="javaMailProperties" >
+         <props>
+            <prop key="mail.smtp.auth">true</prop>
+            <prop key="mail.smtp.starttls.enable">true</prop>         
+         </props>
+      </property>
+   </bean> 
+		
+		
+</beans>
+
+
+

@@ -1,0 +1,35 @@
+package onbiz.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import onbiz.service.OnDashBoradService;
+import onbiz.vo.OnDashBoard;
+
+@Controller
+public class OnDashBoardCtrl {
+  
+  @Autowired 
+  OnDashBoradService service;
+
+  //http://localhost:7080/onbiz/dash.do
+  @RequestMapping("dash.do")
+  public String dash(Model d) {
+    d.addAttribute("projectlist", service.getProject());
+    d.addAttribute("projectst",service.getprojectst());
+    d.addAttribute("procnt",service.getProjectCnt());
+    d.addAttribute("riskcnt",service.getRiskCnt());
+    d.addAttribute("taskcnt",service.getTaskCnt());
+    d.addAttribute("nprocnt",service.getnProjectCnt());
+    d.addAttribute("riskst", service.getristst());
+    d.addAttribute("risktab", service.getrisklist());
+    d.addAttribute("dproject", service.dproject());
+    //===================================================
+    d.addAttribute("graph_complete",service.graphcomplete());
+    d.addAttribute("graph_delay",service.graphdelay());
+    d.addAttribute("graph_graphgoing",service.graphgoing());
+    d.addAttribute("graph_ready",service.graphready());
+    return "OnDashBoard/DAS-001-pm"; 
+  }
+}

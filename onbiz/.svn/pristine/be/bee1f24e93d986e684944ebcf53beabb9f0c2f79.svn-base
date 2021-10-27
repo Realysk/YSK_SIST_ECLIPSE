@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="onbiz.dao.OnTaskDao">
+
+	<select id="mytaskList" resultType="ontaskproject" parameterType="ontaskproject">	
+		SELECT op.pro_name, ot.*
+		FROM ontask ot, onproject_member opm, onproject op
+		WHERE ot.mem_no = opm.mem_no
+		AND opm.pro_no = op.pro_no
+		AND ot.mem_no = #{mem_no}
+		ORDER BY ot.task_no DESC
+ 	</select>
+ 	
+ 	<select id="schtaskList" resultType="ontaskproject" parameterType="ontaskproject">
+ 		SELECT op.pro_name, ot.*
+		FROM ontask ot, onproject_member opm, onproject op
+		WHERE ot.mem_no = opm.mem_no
+		AND opm.pro_no = op.pro_no
+		AND ot.mem_no = 'mem1001' 
+		AND (ot.task_name LIKE '%'||#{task_name}||'%' OR ot.task_content LIKE '%'||#{task_content}||'%')
+		ORDER BY ot.task_no DESC
+ 	</select>
+ 	
+ 	<select id="myProList" resultType="ontaskproject" parameterType="ontaskproject">
+ 		SELECT DISTINCT op.pro_name, op.pro_no
+		FROM ontask ot, onproject op, OnProject_Member opm
+		WHERE ot.mem_no = opm.mem_no
+		AND opm.pro_no = op.pro_no
+		AND ot.mem_no = #{mem_no}
+ 	</select>
+ 	
+ 	<insert id="insertTask" parameterType="ontask">
+ 		INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), 
+ 			#{task_name}, #{task_content}, ${task_regDte}, NULL, #{task_startDte}, #{task_endDte},
+ 			#{task_state}, #{task_prior}, #{taskref_no}, #{mem_no})
+ 	</insert>
+
+</mapper>	

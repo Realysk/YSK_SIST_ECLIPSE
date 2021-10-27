@@ -1,0 +1,59 @@
+package onbiz.vo;
+
+import java.util.Date;
+
+// 결재 조치 (상세 화면) VO
+public class OnApprovalDetail {
+	
+	private String app_no; // 결재번호
+	private String pro_name; // 프로젝트명
+	private String task_name; // 작업명
+	private String task_content; // 작업내용
+	private Date task_startdte; // 작업시작일
+	private Date task_enddte; // 작업종료일
+	private String app_content; // 결재요청내용
+	
+	public String getApp_no() {
+		return app_no;
+	}
+	public void setApp_no(String app_no) {
+		this.app_no = app_no;
+	}
+	public String getPro_name() {
+		return pro_name;
+	}
+	public void setPro_name(String pro_name) {
+		this.pro_name = pro_name;
+	}
+	public String getTask_name() {
+		return task_name;
+	}
+	public void setTask_name(String task_name) {
+		this.task_name = task_name;
+	}
+	public String getTask_content() {
+		return task_content;
+	}
+	public void setTask_content(String task_content) {
+		this.task_content = task_content;
+	}
+	public Date getTask_startdte() {
+		return task_startdte;
+	}
+	public void setTask_startdte(Date task_startdte) {
+		this.task_startdte = task_startdte;
+	}
+	public Date getTask_enddte() {
+		return task_enddte;
+	}
+	public void setTask_enddte(Date task_enddte) {
+		this.task_enddte = task_enddte;
+	}
+	public String getApp_content() {
+		return app_content;
+	}
+	public void setApp_content(String app_content) {
+		this.app_content = app_content;
+	}
+	
+}

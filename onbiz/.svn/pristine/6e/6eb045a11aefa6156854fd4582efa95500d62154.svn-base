@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+<mapper namespace="onbiz.dao.OnApprovalDao">
+	 
+	<select id="getAppList" resultType="onapprovalview" parameterType="onapprovalview">
+		<!-- 1. 결재 현황 및 프로젝트 검색 -->
+		SELECT oa.APP_NO, op.PRO_NAME, ot.TASK_NAME, ot.TASK_CONTENT, oa.APP_REGDTE, oa.APP_DEADLINE, oa.APP_APPDTE, oa.APP_STATE
+		FROM OnProject op, OnTask ot, OnApproval oa, OnProject_Member pm
+		WHERE oa.TASK_NO = ot.TASK_NO
+		AND op.PRO_NO = pm.PRO_NO
+		AND oa.MEM_NO = pm.MEM_NO
+		AND ot.TASK_NAME LIKE '%'||#{task_name}||'%'
+		ORDER BY ot.task_no DESC
+	</select>
+	
+	<select id="getAppDetail" resultType="onapprovaldetail" parameterType="String">
+		<!-- 2. 결재 조치에 대한 요청내용 조회 -->
+		SELECT oa.APP_NO, ot.TASK_NO, op.PRO_NAME, ot.TASK_NAME, ot.TASK_CONTENT, oa.APP_REGDTE, oa.APP_DEADLINE, oa.APP_APPDTE, oa.APP_CONTENT, oa.APP_COMMENT, ot.TASK_STATE, oa.APP_STATE
+		FROM OnProject op, OnTask ot, OnApproval oa, OnProject_Member pm
+		WHERE oa.TASK_NO = ot.TASK_NO
+		AND op.PRO_NO = pm.PRO_NO
+		AND oa.MEM_NO = pm.MEM_NO
+		AND oa.APP_NO = #{app_no}
+	</select>
+	
+	<update id="uptAppList" parameterType="onapprovaldetail">
+		<!-- 2-1. '승인대기' 상태인 결재 현황 화면에서의 결재 조치 등록 폼 (결재승인일, 결재답변, 결재 승인상태) -->
+		UPDATE OnApproval
+			SET APP_APPDTE = #{app_appdte},
+				APP_COMMENT = #{app_comment},
+				APP_STATE = #{app_state}
+		WHERE app_no = #{app_no}
+	</update>
+
+	<update id="uptTaskStat" parameterType="onapprovaldetail">
+		UPDATE ontask
+			SET TASK_STATE = #{task_state}
+		WHERE task_no = #{task_no}
+	</update>
+
+</mapper>

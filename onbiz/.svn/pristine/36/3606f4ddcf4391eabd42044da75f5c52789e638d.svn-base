@@ -1,0 +1,52 @@
+package onbiz.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import onbiz.service.OnTaskService;
+import onbiz.vo.OnTask_Project;
+
+@Controller
+@RequestMapping("ontask.do")
+public class OnTaskCtrl {
+	@Autowired
+	private OnTaskService service;
+	private OnTask_Project taskPro = null;
+	
+	// 세션에서 받아서 사용해야할 값, 임의로 셋팅해서 쓰기
+	private String pro_no = "pro1001";
+	private String emp_no = "1026";
+
+	// http://localhost:6080/onbiz/ontask.do?method=gantt
+	@RequestMapping(params="method=gantt")
+	public String ganttChart() {
+		return "OnTask/MTA001-ganttChart";
+	}
+	
+	// http://localhost:6080/onbiz/taskAdmin.do
+	@RequestMapping("taskAdmin.do")
+	public String taskAdmin() {
+		return "OnTask/MTA002-taskAdmin";
+		//return "OnTask/sidebar";
+	}
+	
+	// http://localhost:6080/onbiz/ontask.do?method=mytaskList
+	@RequestMapping(params="method=mytaskList")
+	public String mytaskList(Model m) {
+		taskPro = new OnTask_Project(pro_no, emp_no); 
+		m.addAttribute("mytasklist", service.mytaskList(new OnTask_Project(pro_no, emp_no)));
+		return "OnTask/MTA002-taskAdmin";
+	}
+	
+	// http://localhost:6080/onbiz/ontask.do?method=schList
+	@RequestMapping(params="method=schList")
+	public String schtaskList(@RequestParam("schcontent") String content, Model m) {
+		taskPro = new OnTask_Project(content, content, pro_no, emp_no); 
+		m.addAttribute("mytasklist", service.schtaskList(taskPro));
+		return "pageJsonReport";
+	}
+
+}

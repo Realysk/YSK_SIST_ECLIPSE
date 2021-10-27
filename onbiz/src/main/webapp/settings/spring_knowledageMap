@@ -1,0 +1,192 @@
+# 스프링 전체 개관!!!
+1. 스프링의 기본처리 프로세스에 대한 이해
+2. 스프링의 개발 환경 설정
+3. 컨테이너에 대한 이해와 설정
+	1) IOC(제어의 역전)
+	2) DI, DL : 의존성 주입
+	3) 라이플 사이클과 범위
+	4) 환경관련 및 메시지 처리
+	5) AOP
+4. 스프링 웹 개발
+	1) 스프링 MVC(model2) 기초(요청, 컨트롤러, 모델, 세션)
+	2) 스프링 MVC 화면단 처리
+	3) 스프링 MVC xml/json/파일업로로드/pdf/웹소켓통시
+5. 스프링과 데이터 베이스 연동
+	1) DB 연결
+	2) mybatis 프레임웍 사용하기
+6. 기타 부가 기능
+	1) 메일 발송
+	2) 작업 실행과 스케줄링
+7. 실무활용 예제
+	0) 로그인 세션 처리
+	1) 답변형게시판(첨부파일,페이징처리,무한레벨계층형 답글작성)
+	2) js 플러그인 활용하기(ajax처리)/vue연동처리	
+		- fullcalendar
+		- 기타 차트 등등.
+	3) springboot로 답변형 게시판 작성..
+		
+# 세부 사항(누적 필기 및 추가 처리)
+1. 스프링의 기본처리 프로세스에 대한 이해
+	요청(url과 요청값) ==> web.xml(front컨트롤단, 컨테이너 설정) 
+	==> dispatcher-servlet.xml(XXXX-servlet.xml XXXX:front 컨트롤러 이름, 컨테이너 선언)
+		 객체로딩
+	==> 위 컨테이너에 포함된 객체 안에 url요청에 의한 메핑된 메서드 호출.
+	==> controller: 요청값처리, 모델데이터처리(service==> dao), 화면(view단)호출
+	==> 최종 화면단 출력(el,jstl)
+2. 스프링의 개발 환경 설정
+	1) lib 설정
+	dynamic 웹프로젝트
+		springweb\src\main\webapp\WEB-INF\lib
+		직접 필요한 lib 다운 : https://mvnrepository.com
+	maven 
+		pom.xml 
+		<dependency>
+	    	<groupId>org.springframework</groupId>
+	    	<artifactId>spring-core</artifactId>
+	    	<version>5.3.9</version>
+		</dependency>
+	gradle
+		build.gradle 파일에 아래 내용 선언
+		implementation group: 'org.springframework', name: 'spring-core', version: '5.3.9'
+	스프링 부트(maven, gradle)
+		 sts(Spring Tool Suits) 설치를 통한 설정.
+	2) web.xml
+		front컨트롤러 선언, 컨테이너 선언,  요청값 한글 encoding filter 선언.
+	3) 컨테이너 파일 설정.
+		controller, service, dao 등록
+		view단 등록
+		기타 필요한 lib나 사용자 정의 클래스 선언을 통해 자동 객체 생성..		
+	
+3. 컨테이너에 대한 이해와 설정
+	0) web.xml에서 여러가지 url형태에 따른 컨테이너 파일 설정..
+	1) IOC : 제어역전 
+	2) DI/DL
+	3) 라이프 사이클과 범위 : 컨테이너 안에 선언된 빈객체들의 생성과 소멸 참조...
+	4) 환경관련 및 메시지 처리 : 외부 설정파일 및 다국어 처리를 위한 메시지 처리, 중요 공통 정보 설정.
+	5) AOP : aspect oriented programming 문제를 바라보는 관점을 기준으로 프로그래밍하는 기법
+		
+4. 스프링 웹 개발
+	1) 스프링 MVC 기초(컨트롤러 (요청,모델, 뷰호출) 세션)
+		public String 메서드명(@RequestParam("요청key") String  value, Model d){}
+		public String 메서드명(요청값을받는객체 참조변수, Model d){}
+		public String regMember(Memember mem, Model d){}
+		요청처리 
+			url get/post
+			요청값(key=value)
+		모델(Model)
+		
+			요청 + model : 매개변수 modelattribute @ModelAttributie
+			컨트롤단에 공통된 모델 : modelattribute ex) 사원정보controller - 전체조회, 등록, 상세조회, 수정, 삭제..
+		뷰단 호출
+			redirect 방식 화면 호출
+			forward 방식	화면 호출
+			ModelAndView (모델+view) 같은 객체에서 처리.
+	2) 스프링 MVC 화면단 처리(뷰)
+		jsp 화면 호출, 기타 뷰라이버러리에 의한 화면 호출
+			컨테이너에서 선언한 viewresolver를 처리하여 화면으로 호출한다.
+			1. default
+				컨트롤러의 메소드의 최종 문자열 return값을 jsp파일로 뷰를 인식
+			2. 여러가지 view(ex-파일다운로드, json, 파일업로드, pdf, excel, 소켓통신 등등)을
+				처리하기 위해서 특정한 view를 bean으로 설정하고 
+				기본적인 화면처리하는 view를 선택적으로 처리하기 위해 bean을 처리하는 view resovler를
+				등록하여 우선 순위를 지정하여 처리하고자 한다. 
+				ex) 핸드폰 사진/동영상 촬영
+				웹 프로그램 화면구현 html을 처리하는 방식/그 외 여러가지 형태(bean)
+				
+				예를 들어 파랑색 구슬의 수가 8이고 빨강색 구슬의 수가 2일때
+				-> 적은 수의 빨강색 구슬의 예외를 처리한 후 (우선순위 상위)
+				많은 수에 대한 처리를 하는 것이 효과적이다. 
+				
+			3. 특정한 뷰에 대한 우선순위를 지정하는 view resovler를 선언하고
+				경우의 수가 적은 jsp뷰 이외의 뷰를 bean으로 등록하고, 그 이름을 호출할 때는 bean 먼저 처리
+				그 외는 모두 jsp뷰로 인식하여 처리한다. 
+			4. 각각 필요한 view resovler를 선언
+				
+		spring의 태그라이블러리 화면 - form화면 처리를 효과적으로 할 수 있다.(controller의 modelattribute 연동)
+		was의 기준 유효성 check, error 처리
+		
+	3) 스프링 MVC xml/json/파일업로드/파일다운로드/pdf/웹소켓통시
+		viewresolver를 컨테이너(dispatcher-servlet)에서 선언을 통해 효과적인 view단을 처리할 수 있다. 
+5. 스프링과 데이터 베이스 연동
+	1) DB 연결 : connection pool 설정과 DB 연결 처리(컨테이너)
+	2) mybatis 프레임웍 사용하기
+		- 컨테이너에 프레임워호출
+		- 공통 mybatis 설정파일 호출
+		- sql을 처리할 mapper.xml 선언과 활용
+		- dao단 연동을 위한 처리방식 : interface + xml
+6. 기타 부가 기능
+	1) 메일 발송 : 자동메일 발송 ex) 회원비밀번호 잊을시 등록된 메일로 발송, 회사인사정보 시스템 사원정보 전달..
+	2) 작업 실행과 스케줄링 ex) 스프링에서는 was단위 특정한 시간과 간격으로 특정 프로그래밍을 반복적으로 수행 처리할 수 있다.
+7. 실무활용 예제
+	0) 로그인 세션 처리
+	1) 답변형게시판(첨부파일,페이징처리,무한레벨계층형 답글작성)
+	2) js 플러그인 활용하기(ajax처리)/vue연동처리	
+		- fullcalendar
+		- 기타 차트 등등.
+	3) springboot로 답변형 게시판 작성..
+	4) 웹소켓을 통한 상호간의 실시간 채팅
+
+
+
+#MVC 패턴에 의한 DB연결된 화면 개발
+0. 요구사항 내용에 의해 화면에서 전달할 요청값과 DB 처리 및 sql 구문 확인 
+1. DB처리 - dao
+2. Service단 처리 
+3. Controller에서 초기 화면 호출 
+	1) 요청값 처리 내용 확인
+	2) Service단에 데이터로딩 및 모델데이터 처리 
+4. 화면단에서 jstl/el을 통한 모델 데이터 처리 
+
+
+
+#CRUD 처리 구현
+1. view - 화면 user interface 결정
+	ex) 등록 버튼 추가(화면)
+		등록 클릭시 (js 처리)
+		등록할 화면 출력(model)
+		등록값 입력 후 (submit 처리 : form의 action 속성 변경)
+		등록 처리할 controller 호출
+		controller단
+			url mapping
+			요청값 매개변수로 처리
+			dao/mapper 구현
+			service단 dao 호출
+			컨트롤단 service단에 등록데이터 전송
+			return ""; 최종 호출할 화면 선언 
+				ex) return "redirect:/deptList.do";
+				
+2. 컨트롤단 
+	url mapping
+	요청값 매개변수로 처리
+
+3. dao/mapper 구현
+4. service단 dao 호출
+5. 컨트롤단 service 단에 등록 데이터 전송
+	return ""; ""부분에 최종 호출한 화면을 선언한다
+	ex) return "redirect:/deptList.do";
+	
+	
+#환경관련 및 메시지 처리 (3-4 컨테이너의 환경설정)
+1. 프로그래밍에 있어서, 개발 서버 정보(DB서버, file서버 등)나 공통 설정 정보(계정/비번 주요 메시지 등)에
+	대한 내용을 따로 파일을 이용해서 등록하여 해당 파일의 내용만 
+	변경되어도 전체 각 소스별로 지정한 정보로 변경되면 효과적으로 처리할 수 있다 
+	ex) 파일 서버 위치 정보
+	
+2. 설정방법
+	1) classpath로 잡힌 resource 하위에 특정한 text 파일 생성
+	2) 해당 text 파일에 공통적인 정보 설정 (key=value 형식으로 지정)
+	3) 컨테이너에서 해당 정보가 있는 파일을 context:property-placeholder로 호출
+	4) 컨테이너에서는 ${설정키} : 해당 값을 가져오게 한다. 
+	5) java의 소스
+		@Value("${설정키}")
+		private String 변수명; // 위에 설정된 키의 값을 변수에 할당    
+		
+		
+		
+#spring에서 session 처리
+1. 기본 처리 방식 
+	1) controller 상단에 @SessionAttribute("세션이름")
+	2) 클래스명 하단에 전역 @ModelAttribute("세션이름")
+	3) 각 기능메소드에 객체를 통해서 @ModelAttribute 선언을 통해 생성 처리하여 할당한다
+	
+	

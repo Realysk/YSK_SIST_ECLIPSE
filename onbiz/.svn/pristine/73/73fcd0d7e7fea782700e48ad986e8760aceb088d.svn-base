@@ -1,0 +1,102 @@
+package onbiz.controller;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import onbiz.service.OnTaskService;
+import onbiz.vo.OnGantt;
+import onbiz.vo.OnTask;
+import onbiz.vo.OnTask_Project;
+
+@Controller
+@RequestMapping("ontask.do")
+public class OnTaskCtrl {
+	@Autowired
+	private OnTaskService service;
+	private OnTask_Project taskPro = null;
+	private OnGantt ganttVO = null;
+	
+	// 세션에서 받아서 사용해야할 값, 임의로 셋팅해서 쓰기
+	private String mem_no = "mem1001";
+	private String emp_no = "1026";
+
+	// [간트차트] 작업할당 - 초기화면
+	// http://localhost:7080/onbiz/ontask.do?method=gantt
+	@RequestMapping(params="method=gantt")
+	public String ganttView(Model m) {
+		m.addAttribute("proList", 
+				service.myProList(new OnTask_Project(emp_no)));
+		m.addAttribute("userList", service.userList());
+		return "OnTask/MTA001-ganttChart2";
+	}
+	
+	// [간트차트] 작업할당 - 간트차트 리스트 조회
+	// http://localhost:7080/onbiz/ontask.do?method=gatlist
+	@RequestMapping(params="method=gatlist")
+	public String ganttList(Model m, OnTask_Project op) {
+		System.out.println("===<간트차트 리스트 조회>===");
+		System.out.println("pro_no 넘어오는 값 : " + op.getPro_no());
+		m.addAttribute("tasks", service.ganttList(new OnTask_Project(op.getPro_no(), emp_no)));
+		return "pageJsonReport";
+	}
+
+	// [간트차트] 작업할당 - 멤버리스트
+	//public String userList(OnTask sch) {
+	//	System.out.println("===<멤버 리스트 조회>===");
+	//	
+	//	return "pageJsonReport";
+	//};
+	
+	
+	
+	// 템플릿 확인
+	// http://localhost:7080/onbiz/ontask.do?method=template
+	@RequestMapping(params="method=template")
+	public String taskAdmin() {
+		return "OnTask/TAD001-gantt";
+		//return "OnTask/sidebar";
+	}
+	
+	
+	
+
+	
+	
+	
+	// 내작업(작업관리) - 초기화면 
+	// http://localhost:7080/onbiz/ontask.do?method=mytaskList
+	@RequestMapping(params="method=mytaskList")
+	public String mytaskView(Model m) {
+		System.out.println("===<작업관리 초기화면>===");
+		m.addAttribute("proList", service.myProList(new OnTask_Project(emp_no)));
+		return "OnTask/MTA002-taskAdmin";
+	}
+	
+	// 내작업 - 프로젝트 조회
+	@RequestMapping(params="method=mytaskJson")
+	public String myTaskJson(OnTask_Project task, Model m) {
+		System.out.println("===<작업관리 리스트 조회>===");
+		System.out.println("검색값 : " + task.getPro_no());
+		m.addAttribute("mytasklist", service.mytaskList(new OnTask_Project(task.getPro_no(), emp_no)));
+		return "pageJsonReport";
+	}
+	
+	// 내작업 - 프로젝트 검색
+	@RequestMapping(params="method=mySchJson")
+	public String mySchJson(OnTask task, Model m) {
+		System.out.println("===<작업관리 검색>===");
+		System.out.println("검색값 : " + task.getTask_content());
+		m.addAttribute("mytasklist", service.schtaskList(new OnTask(task.getTask_content(), task.getTask_content(), mem_no)));
+		return "pageJsonReport";
+	}
+	
+
+
+
+
+}

@@ -1,0 +1,13 @@
+[OnBoard > teamBoard]
+공지사항 (답변형 게시판) 목록 : TM_PM_HR_BA-001.jsp
+공지사항 (답변형 게시판) 상세 : TM_PM_HR_BA-002.jsp
+공지사항 (답변형 게시판) 작성 : PM_HR_BA-003.jsp
+
+[OnBoard > mtnBoard]
+회의록 목록 : TM_PM_MD-001.jsp
+회의록 상세 : TM_PM_MD-002.jsp
+회의록 결재 요청 : TM_DA-004.jsp
+회의록 결재 조치 : PM_DA-005.jsp
+
+[OnBoard > Chat]
+채팅 : ALL_CH-001.jsp

@@ -1,0 +1,23 @@
+package onbiz.service;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import onbiz.dao.OnTaskDao;
+import onbiz.vo.OnTask_Project;
+
+@Service
+public class OnTaskService {
+	@Autowired
+	private OnTaskDao dao;
+	
+	public ArrayList<OnTask_Project> mytaskList(OnTask_Project sch) {
+		return dao.mytaskList(sch);
+	}
+	
+	public ArrayList<OnTask_Project> schtaskList(OnTask_Project sch) {
+		return dao.schtaskList(sch);
+	}
+}

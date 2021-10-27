@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+	
+	<mapper namespace="onbiz.dao.OnRiskDao">
+	<select id="totCnt" resultType="int" parameterType="onrisksch">
+			SELECT count(*)
+			FROM onrisk  
+			WHERE risk_state LIKE '%'||#{risk_state}||'%'
+			AND risk_name  LIKE '%'||#{risk_name}||'%'				
+	</select>
+	
+	<select id="OnRiskList" resultType="onrisk" parameterType="onrisksch">
+	SELECT o.*, o2.pro_name, o4.emp_korname
+			FROM onrisk o, onproject o2, onproject_member o3, onemp o4
+			WHERE o.pro_no = o2.pro_no 
+			AND  o.pro_no = o3.pro_no 
+			AND o2.PRO_NO =o3.PRO_NO 
+			AND o4.emp_no = o3.emp_no
+			AND o3.mem_no = o.MEM_NO 
+			AND risk_state LIKE '%'||#{risk_state}||'%'
+			AND risk_name LIKE '%'||#{risk_name}||'%'
+	<!--
+		SELECT *
+		FROM (
+			SELECT rownum cnt, o.*
+			FROM onrisk o
+			WHERE risk_state LIKE '%'||#{risk_state}||'%'
+			AND risk_name LIKE '%'||#{risk_name}||'%'
+			START WITH risk_no2 = 0
+			CONNECT BY PRIOR risk_no = risk_no2
+			ORDER siblings BY risk_no DESC)
+			WHERE cnt BETWEEN #{start} AND #{end}		-->
+ 	</select>
+	
+	<select id="getRisk" resultType="onrisk" 
+ 	 	parameterType="int">
+ 		select o.*, b.pro_name, o3.EMP_KORNAME 
+from onrisk o, onproject b, onemp o3, ONPROJECT_MEMBER om 
+where o.pro_no = b.pro_no
+AND o3.emp_no = om.EMP_NO 
+AND om.PRO_NO =o.PRO_NO 
+AND om.MEM_NO = o.MEM_NO 
+and risk_no  = #{risk_no}
+ 	 </select>
+	
+	<update id="uptReadCnt" parameterType="int">
+		 UPDATE onrisk
+			SET risk_viewcnt = risk_viewcnt+1
+		WHERE risk_no = #{risk_no}	
+ 	</update>	 
+
+	<select id="getRiskFile" 
+		resultType="String" parameterType="int">
+		select riskfile_name
+		from risk_file
+		where risk_no = #{risk_no}
+	</select>	
+	
+		<insert id="insertRisk" parameterType="onrisk">
+		INSERT INTO Onrisk values(Onrisk_seqence.nextval,
+		#{risk_kind},#{pro_no}, #{task_no}, #{risk_name},
+		#{risk_content}, sysdate, sysdate,
+		#{risk_occdte}, #{risk_state},
+		0, #{risk_no2}, #{mem_no})
+		</insert> 
+	
+		<update id="updateRisk" parameterType="onrisk">
+		UPDATE Onrisk
+		SET risk_name = #{risk_name},
+		   	   risk_content = #{risk_content},
+		   	   risk_state = #{risk_state}
+		   	    WHERE risk_no = #{risk_no}
+ 		</update>	
+	
+	<insert id="uploadFile" parameterType="onriskfile">
+		insert into risk_File values(
+		risk_file_seq.nextval,#{riskfile_name},sysdate, Onrisk_seqence.currval )
+	</insert> 	
+	
+	<select id ="hold" parameterType="onproject" resultType="onrisk">
+	SELECT count(risk_no) as hold
+	FROM ONRISK o 
+	WHERE RISK_STATE = '홀드'
+	AND pro_no =  #{pro_no}
+	</select>
+	
+	<select id ="open" parameterType="onproject" resultType="onrisk">
+	SELECT count(risk_no) as open
+	FROM ONRISK o 
+	WHERE RISK_STATE = '오픈'
+	AND pro_no =  #{pro_no}
+	</select >
+	
+	<delete id="delRisk" parameterType="onrisk">
+		DELETE FROM onrisk
+		 WHERE risk_NO = #{risk_no}
+ 	</delete> 	
+	
+	<!-- insert부분 : 프로젝트 목록 select box  -->
+	<select id ="projectlist" resultType="onrisk" parameterType= "onemp">
+	select DISTINCT o.pro_name , o.pro_no
+	from onproject o, onemp o2 , onproject_member o3
+	WHERE o.pro_no = o3.PRO_NO
+	AND o2.emp_no = o3.EMP_NO
+	AND o2.emp_no = #{emp_no}
+	</select>
+	
+	<!-- insert부분: 프로젝트 작업 select box -->
+	<select id = "tasklist" parameterType="onemp" resultType ="ontask">
+	SELECT o.task_no as task_no, o.task_name as task_name
+	FROM ONTASK o , onproject_member o2, ONPROJECT o3, onemp o4 
+	WHERE o.MEM_NO = o2.MEM_NO 
+	AND o2.EMP_NO = o4.EMP_NO 
+	AND o2.PRO_NO = o3.PRO_NO 
+	AND o3.PRO_NO = #{pro_no}
+	AND o4.emp_no = #{emp_no}
+	</select>
+
+	<select id="memname" parameterType="ontask" resultType="onprojectmember">
+	select o.mem_no
+	from onproject_member o, ontask b 
+	where o.MEM_NO = b.MEM_NO
+	AND b.TASK_NO = #{task_no}
+	</select>
+	
+	</mapper>	
+

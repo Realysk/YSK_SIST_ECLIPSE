@@ -1,0 +1,15 @@
+package onbiz.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class OnBoardCtrl {
+
+	// http://localhost:7080/onbiz/onboard.do
+	@RequestMapping("onboard.do")
+	public String onboard() {
+		return "OnBoard/teamBoard/PM_HR_BA-003";
+	}
+	
+}

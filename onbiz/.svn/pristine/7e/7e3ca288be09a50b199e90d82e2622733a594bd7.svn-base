@@ -1,0 +1,32 @@
+package onbiz.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import onbiz.service.OnApprovalServ;
+import onbiz.vo.OnApproval;
+
+@Controller
+public class OnApprovalCtrl {
+	
+	@Autowired
+	private OnApprovalServ service;
+	
+	// http://localhost:7080/onbiz/appListAjax.do
+	@RequestMapping("appListAjax.do")
+	public String appListAjax(OnApproval sch, Model d) {
+		d.addAttribute("appList", service.getAppList(sch));
+		return "pageJsonReport";
+	}	
+	
+	// http://localhost:7080/onbiz/appForm.do
+	@GetMapping("appForm.do")
+	public String appForm() {
+		System.out.println("======================================== [Ctrl] 결재 현황 이동 ========================================");
+		return "OnApproval/TM_DA-004";
+	}
+	
+}

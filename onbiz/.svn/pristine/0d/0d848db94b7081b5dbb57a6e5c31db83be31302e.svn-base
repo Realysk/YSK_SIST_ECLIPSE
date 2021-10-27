@@ -1,0 +1,82 @@
+package onbiz.service;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import onbiz.dao.OnEmpDao;
+import onbiz.vo.OnEmp;
+
+@Service
+public class OnEmpServ {
+
+	/* dao에 이 내용 잇음
+	public void register(OnEmp onEmp) throws Exception;
+	
+	public OnEmp login(OnEmp onEmp) throws Exception;
+
+	 */
+	
+	 private HttpSession session;
+	
+	@Autowired
+	private OnEmpDao dao;
+	
+	
+	//로그인
+	public OnEmp login(OnEmp onemp){
+		return dao.login(onemp);
+	} 
+	// 로그인 체크
+	public OnEmp loginCheck(OnEmp onemp) {
+		OnEmp result = dao.loginCheck(onemp);
+		System.out.println(" 로그인 되었습니다!");
+		if(result != null) {
+			session.setAttribute("login", result);
+			System.out.println(" 세션설정 되었습니다!");
+		}
+		return result;
+	}
+	
+	
+	//로그아웃
+	public static void logout(HttpSession session){
+		session.invalidate();
+	}
+	
+	
+	
+	/*
+	// 조회용 전체 회원
+	public ArrayList<OnEmp> onEmpList(OnEmp sch){
+		if(sch.getEmp_no()==null) sch.setEmp_no(""); // 사번검색
+		if(sch.getAuth_no()==null) sch.setAuth_no(""); // 권한검색
+		if(sch.getEmp_korname()==null) sch.setEmp_korname(""); // 한국이름검색 
+		if(sch.getPtn_no()==null) sch.setPtn_no(""); // 직급 검색
+		if(sch.getEmp_workst()==null) sch.setEmp_workst(""); // 재직상태 검색
+		return dao.onEmpList(sch);
+	} 
+	/*
+	public void insertMember(OnEmp ins) {
+		dao.insertMember(ins);
+	}
+	public void updateMember(OnEmp upt) {
+		dao.update(upt);
+	}
+	public void deleteMember(String id) {
+		dao.deleteMember(id);
+	} */
+
+
+	public Object call(){
+		// TODO Auto-generated method stub
+		return "서비스 호출1";
+	}
+
+
+	
+}
+

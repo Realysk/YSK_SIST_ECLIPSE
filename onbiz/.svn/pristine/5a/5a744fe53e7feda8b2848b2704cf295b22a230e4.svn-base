@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+<mapper namespace="onbiz.dao.OnApprovalDao">
+	<select id="getAppList" resultType="onapprovalview" parameterType="onapprovalview">
+		SELECT op.PRO_NAME, ot.TASK_NAME, ot.TASK_CONTENT, oa.APP_REGDTE, oa.APP_DEADLINE, oa.APP_APPDTE, oa.APP_STATE
+		FROM OnProject op, OnTask ot, OnApproval oa, OnProject_Member pm
+		WHERE oa.TASK_NO = ot.TASK_NO
+		AND oa.MEM_NO = pm.MEM_NO
+		AND op.PRO_NAME LIKE '%'||#{pro_name}||'%'
+		ORDER BY oa.TASK_NO DESC
+	</select>
+</mapper>
+

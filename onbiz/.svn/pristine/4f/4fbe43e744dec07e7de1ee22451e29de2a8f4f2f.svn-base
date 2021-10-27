@@ -1,0 +1,50 @@
+package onbiz.service;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import onbiz.dao.OnApprovalDao;
+import onbiz.vo.OnApproval;
+import onbiz.vo.OnApprovalDetail;
+import onbiz.vo.OnApprovalView;
+
+@Service
+public class OnApprovalServ {
+	
+	@Autowired(required = false)
+	private OnApprovalDao dao;
+	
+	public ArrayList<OnApprovalView> getAppList(OnApprovalView sch) {
+		if(sch.getPro_name() == null) sch.setPro_name("");
+		System.out.println("======================================== [Serv] 결재 조회 리스트 호출 ========================================");
+		return dao.getAppList(sch);
+	}
+	
+	public OnApprovalDetail getAppDetail(String app_no) {
+		dao.uptDeadline(app_no);
+		OnApprovalDetail ad = dao.getAppDetail(app_no);
+		System.out.println("======================================== [Serv] 결재 상세 조회 호출 ========================================");
+		return ad;
+	}
+	
+	public void insAppList(OnApprovalDetail ins) {
+		dao.insAppList(ins);
+		System.out.println("======================================== [Serv] 결재 조치 등록 폼 호출 ========================================");
+	}
+	
+	public ArrayList<OnApprovalView> succAppList(OnApprovalView sch) {
+		if(sch.getPro_name() == null) sch.setPro_name("");
+		System.out.println("======================================== [Serv] 결재 완료 리스트 호출 ========================================");
+		return dao.succAppList(sch);
+	}
+	
+	public OnApprovalDetail succAppDetail(String app_no) {
+		OnApprovalDetail ad = dao.succAppDetail(app_no);
+		System.out.println("======================================== [Serv] 결재 완료 상세 조회 호출 ========================================");
+		return ad;
+	}
+	
+}

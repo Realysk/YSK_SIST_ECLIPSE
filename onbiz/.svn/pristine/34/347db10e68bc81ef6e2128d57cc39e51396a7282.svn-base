@@ -1,0 +1,36 @@
+package onbiz.service;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import onbiz.dao.OnEmpDao;
+import onbiz.vo.OnEmp;
+
+@Service
+public class OnEmpServ {
+	@Autowired
+	private OnEmpDao dao;
+
+	public ArrayList<OnEmp> empList(OnEmp emp) {
+		if (emp.getEmp_no() == null)emp.setEmp_no("");
+		return dao.empList(emp);
+	}
+
+	public OnEmp login(OnEmp emp) throws Exception {
+		return dao.login(emp);
+	}
+
+	public void insertMember(OnEmp ins) {
+		dao.insertOnEmp(ins);
+	}
+
+	public void updateMember(OnEmp upt) {
+		dao.updateMember(upt);
+	}
+
+	public void deleteMember(String id) {
+		dao.deleteMember(id);
+	}
+}

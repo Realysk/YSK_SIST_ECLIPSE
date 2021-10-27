@@ -1,0 +1,23 @@
+package onbiz.dao;
+
+
+import java.util.ArrayList;
+import onbiz.vo.OnEmp;
+import onbiz.vo.OnEmp_Dept;
+import onbiz.vo.OnEmp_OnDept;
+import onbiz.vo.Onproject;
+import onbiz.vo.Ordercom;
+
+
+
+public interface Pro_regDao {
+    public ArrayList<Ordercom> ordercomList(Ordercom sch2);
+    public ArrayList<OnEmp> emplist(OnEmp sch2);
+    public ArrayList<OnEmp_Dept> deptList(OnEmp_Dept sch3);
+    public ArrayList<OnEmp> empnamelist(String sch4);
+    public ArrayList<OnEmp_OnDept> emptablelist(OnEmp_OnDept sch5);
+    public void insertPro(Onproject ins);
+ 
+  }
+
+

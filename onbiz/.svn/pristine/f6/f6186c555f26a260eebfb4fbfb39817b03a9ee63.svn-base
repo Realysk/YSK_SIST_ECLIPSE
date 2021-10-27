@@ -1,0 +1,57 @@
+package onbiz.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import onbiz.service.OnCalendarService;
+import onbiz.vo.OnCalendar;
+
+@Controller
+@RequestMapping("oncal.do")
+public class OnCalendarCtrl {
+	
+	@Autowired
+	OnCalendarService service;
+	String emp_no = "1001";
+
+	// http://localhost:7080/onbiz/oncal.do?method=calview
+	@RequestMapping(params="method=calview")
+	public String CalView() {
+		return "OnCalendar/CAL001-calendar";
+	}
+	
+	// http://localhost:7080/onbiz/oncal.do?method=calList
+	@RequestMapping(params="method=calList")
+	public String myCalList(Model m) {
+		m.addAttribute("myCalList", service.mycalList(emp_no));
+		return "pageJsonReport";
+	}
+	
+	@RequestMapping(params="method=calins")
+	public String calInsert(OnCalendar oncal, Model m) {
+		oncal.setEmp_no(emp_no);
+		service.calInsert(oncal);
+		m.addAttribute("myCalList", service.mycalList(emp_no));
+		return "pageJsonReport";
+	};
+	
+	@RequestMapping(params="method=calupt")
+	public String calUpdate(OnCalendar oncal, Model m) {
+		oncal.setEmp_no(emp_no);
+		service.calUpdate(oncal);
+		m.addAttribute("myCalList", service.mycalList(emp_no));
+		return "pageJsonReport";
+	};
+	
+	@RequestMapping(params="method=caldel")
+	public String calDelete(OnCalendar oncal, Model m) {
+		oncal.setEmp_no(emp_no);
+		service.calDelete(oncal);
+		m.addAttribute("myCalList", service.mycalList(emp_no));
+		return "pageJsonReport";
+	};
+	
+	
+}

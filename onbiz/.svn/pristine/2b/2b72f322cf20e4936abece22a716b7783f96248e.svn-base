@@ -1,0 +1,49 @@
+
+-- 작업 OnTask 
+-- 작업번호(pk), 작업명, 작업내용, 작업등록일, 작업수정일, 작업시작일, 작업종료일, 작업 진행상태, 작업 우선순위, 상위작업번호, 프로젝트번호(fk), 작업 담당자(fk)
+-- task_no, task_name, task_content, task_regdte, task_uptdte, task_startdte, task_enddte, task_prior, taskref_no, pro_no, emp_no
+
+CREATE TABLE OnTask (
+	task_no varchar2(10) PRIMARY KEY, -- 작업번호
+	task_name varchar2(100), -- 작업명
+	task_content varchar2(1000),
+	task_regdte DATE,
+	task_uptdte DATE,
+	task_startdte DATE,
+	task_enddte DATE,
+	task_state varchar2(20),
+	task_prior NUMBER,
+	taskref_no varchar2(10),
+	pro_no varchar2(10),
+	emp_no varchar2(10)
+);
+
+CREATE SEQUENCE OnTask_seq
+   INCREMENT BY 1   
+   START WITH 1
+   MINVALUE 1
+   MAXVALUE 999999;
+
+
+-- 11개
+-- 작업번호(pk), 작업명, 작업내용, 작업등록일, 작업수정일, 작업시작일, 작업종료일, 작업 진행상태, 작업 우선순위, 상위작업번호, 프로젝트번호(fk), 사원번호(fk)
+-- task_no, task_name, task_content, task_regdte, task_uptdte, task_startdte, task_enddte, task_state, task_prior, taskref_no, pro_no, emp_no 
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '분석', '분석', to_date('2021-09-01','YYYY-MM-DD'), NULL, to_date('2021-09-02','YYYY-MM-DD'), to_date('2021-09-07','YYYY-MM-DD'), '진행완료', NULL, NULL, 'pro1003', 'emp0001');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '분석', '요구사항 분석', to_date('2021-09-01','YYYY-MM-DD'), NULL, to_date('2021-09-02','YYYY-MM-DD'), to_date('2021-09-07','YYYY-MM-DD'), '진행완료', 1, 'task000001', 'pro1003', 'emp0002');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '분석', '화면 분석', to_date('2021-09-01','YYYY-MM-DD'), NULL, to_date('2021-09-02','YYYY-MM-DD'), to_date('2021-09-07','YYYY-MM-DD'),'진행완료',  2, 'task000001', 'pro1003', 'emp0003');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '분석', '업무플로우 분석', to_date('2021-09-01','YYYY-MM-DD'), NULL, to_date('2021-09-02','YYYY-MM-DD'), to_date('2021-09-07','YYYY-MM-DD'), '진행완료', 3, 'task000001', 'pro1003', 'emp0004');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '설계', '설계', to_date('2021-09-01','YYYY-MM-DD'), NULL, to_date('2021-09-08','YYYY-MM-DD'), to_date('2021-09-11','YYYY-MM-DD'),'진행완료',  NULL, NULL, 'pro1003', 'emp0001');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '설계', 'DB 설계', to_date('2021-09-01','YYYY-MM-DD'), NULL, to_date('2021-09-08','YYYY-MM-DD'), to_date('2021-09-11','YYYY-MM-DD'),'진행완료',  4, 'task000005', 'pro1003', 'emp0002');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '설계', '화면 설계', to_date('2021-09-06','YYYY-MM-DD'), NULL, to_date('2021-09-08','YYYY-MM-DD'), to_date('2021-09-12','YYYY-MM-DD'),'진행완료',  5, 'task000005', 'pro1003', 'emp0003');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '설계', '와이어프레임 설계', to_date('2021-09-01','YYYY-MM-DD'), NULL, to_date('2021-09-08','YYYY-MM-DD'), to_date('2021-09-10','YYYY-MM-DD'),'진행완료',  6, 'task000005', 'pro1003', 'emp0004');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '구현', '구현', to_date('2021-09-01','YYYY-MM-DD'), NULL, to_date('2021-09-13','YYYY-MM-DD'), to_date('2021-09-20','YYYY-MM-DD'),'진행중',  NULL, NULL, 'pro1003', 'emp0001');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '구현', '화면 구현', to_date('2021-09-01','YYYY-MM-DD'), NULL, to_date('2021-09-13','YYYY-MM-DD'), to_date('2021-09-20','YYYY-MM-DD'),'진행중', 7, 'task000009', 'pro1003', 'emp0002');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '구현', 'DB 구현', to_date('2021-09-01','YYYY-MM-DD'), NULL, to_date('2021-09-13','YYYY-MM-DD'), to_date('2021-09-20','YYYY-MM-DD'),'진행중', 8, 'task000009', 'pro1003', 'emp0002');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '구현', '로그인 구현', to_date('2021-09-01','YYYY-MM-DD'), NULL, to_date('2021-09-12','YYYY-MM-DD'), to_date('2021-09-18','YYYY-MM-DD'),'진행중', 9, 'task000009', 'pro1003', 'emp0003');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '구현', '게시판 구현', to_date('2021-09-02','YYYY-MM-DD'), NULL, to_date('2021-09-11','YYYY-MM-DD'), to_date('2021-09-20','YYYY-MM-DD'),'진행중', 10, 'task000009', 'pro1003', 'emp0004');
+
+SELECT * FROM OnTask;
+DROP TABLE OnTask;
+DROP SEQUENCE OnTask_seq;
+
+

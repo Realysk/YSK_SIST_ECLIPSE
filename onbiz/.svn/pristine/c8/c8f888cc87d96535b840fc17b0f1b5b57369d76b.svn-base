@@ -1,0 +1,17 @@
+package onbiz.dao;
+
+import java.util.ArrayList;
+
+import onbiz.vo.OnApproval;
+import onbiz.vo.OnApprovalDetail;
+import onbiz.vo.OnApprovalView;
+
+public interface OnApprovalDao {
+	
+	// 결재 조회
+	public ArrayList<OnApprovalView> getAppList(OnApprovalView sch);
+	
+	// 결재 조치 (상세)
+	public OnApprovalDetail appDetail(String app_no);
+
+}

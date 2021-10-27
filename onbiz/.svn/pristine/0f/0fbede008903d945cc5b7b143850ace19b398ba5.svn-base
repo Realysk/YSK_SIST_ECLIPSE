@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+<mapper namespace="onbiz.dao.OnBoardDao">
+
+	<select id="bdList" resultType="onboard" parameterType="onboard">
+		SELECT * FROM OnBoard
+		WHERE bd_name LIKE '%'||#{bd_name}||'%'
+		AND mem_no LIKE '%'||#{mem_no}||'%'
+		ORDER BY bd_no DESC
+	</select>
+	
+	<select id="getBoard" resultType="onboard" parameterType="int">
+ 	 	SELECT * FROM OnBoard
+ 	 	WHERE bd_no = #{bd_no}
+	</select>
+	
+	<insert id="insBoard" parameterType="onboard">
+		INSERT INTO OnBoard VALUES(OnBoard_seq.nextval, #{bd_refno}, #{bd_name}, #{bd_content}, 0, sysdate, sysdate, #{mem_no})
+	</insert>
+	 
+	<update id="uptBoard" parameterType="onboard">
+		UPDATE OnBoard
+			SET bd_name = #{bd_name},
+				bd_content = #{bd_content},
+				bd_uptdte = sysdate
+		WHERE bd_no = #{bd_no}
+	</update>
+	
+	<delete id="delBoard" parameterType="int">
+		DELETE FROM OnBoard WHERE bd_no = #{bd_no}
+	</delete>
+	
+	<update id="uptViewCnt" parameterType="int">
+		UPDATE OnBoard
+			SET bd_viewcnt = bd_viewcnt+1
+		WHERE bd_no = #{bd_no}	
+	</update>
+
+</mapper>
+

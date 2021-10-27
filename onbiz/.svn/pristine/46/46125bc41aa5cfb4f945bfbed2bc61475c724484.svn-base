@@ -1,0 +1,21 @@
+package onbiz.dao;
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Repository;
+
+import onbiz.vo.OnTask;
+import onbiz.vo.OnTask_Project;
+
+@Repository
+public interface OnTaskDao {
+
+	// 프로젝트별 내작업 조회
+	public ArrayList<OnTask_Project> mytaskList(OnTask_Project sch);
+	
+	// 프로젝트별 간트차트 조회
+	public ArrayList<OnTask> projectTaskList(OnTask sch);
+	
+	// 검색 - 일단 작업명으로 검색
+	public ArrayList<OnTask_Project> schtaskList(OnTask_Project sch);
+}

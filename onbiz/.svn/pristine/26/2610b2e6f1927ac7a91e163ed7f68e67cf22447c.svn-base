@@ -1,0 +1,25 @@
+package onbiz.service;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import onbiz.dao.OnApprovalDao;
+import onbiz.vo.OnApproval;
+import onbiz.vo.OnApprovalView;
+
+@Service
+public class OnApprovalServ {
+	
+	@Autowired(required = false)
+	private OnApprovalDao dao;
+	
+	public ArrayList<OnApprovalView> getAppList(OnApproval sch) {
+		if(sch.getPro_name() == null) sch.setPro_name("");
+		System.out.println("======================================== [Serv] 결재 조회 리스트 호출 ========================================");
+		return dao.getAppList(sch);
+	}
+	
+
+}

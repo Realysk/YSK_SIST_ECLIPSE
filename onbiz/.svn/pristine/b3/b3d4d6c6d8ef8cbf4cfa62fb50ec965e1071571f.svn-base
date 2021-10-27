@@ -1,0 +1,17 @@
+package onbiz.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class Pro_regCtrl {
+
+	// http://localhost:7080/onbiz/proRegview.do
+	@RequestMapping("proRegview.do")
+	public String getViewProReg(Model d) {
+		return "PRO-REG-001_PM";
+	}
+	
+	
+}

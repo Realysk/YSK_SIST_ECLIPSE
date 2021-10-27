@@ -1,0 +1,66 @@
+ package onbiz.dao;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
+
+import onbiz.vo.OnEmp;
+
+
+@Repository
+public interface OnEmpDao {
+
+	
+	
+	
+	
+	
+	// 로그인 체크
+	public OnEmp loginCheck(OnEmp onemp);
+	
+	
+	
+	
+	// 로그아웃
+	public void logout(HttpSession session);
+	
+	
+	
+	
+	// 로그인
+	public OnEmp login(OnEmp onEmp);
+
+
+
+// 조회
+	public ArrayList<OnEmp> onEmpList(OnEmp sch); 
+	
+	// 상세조회
+	public default OnEmp viewMember(String userId) {
+		SqlSession sqlSession = null;
+		return (OnEmp) sqlSession.selectOne("OnEmp.viewMember", userId);
+		
+	}
+
+
+	
+	//사원 등록
+	public void register(OnEmp onEmp) throws Exception;
+	
+	//사원 정보 수정
+	public void update(OnEmp upt);
+	
+	//사원 삭제
+	// public void delete();
+	
+	
+	/*
+	public ArrayList<OnEmp> onEmpList(OnEmp sch2);
+
+	public void insertMember(OnEmp ins);
+
+	public void deleteMember(String id); */ 
+}

@@ -1,0 +1,317 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<fmt:requestEncoding value="utf-8"/>     
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Custom fonts for this template-->
+<link href="${path}/resources/vendor/fontawesome-free/css/all.min.css" 
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,
+	400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	
+<!-- Custom styles for this template-->
+<link rel="stylesheet" href="${path}/settings/jquery-ui.css">
+<link rel="stylesheet" href="${path}/settings/bootstrap.min.css">
+<!-- Custom styles for this template-->
+<script src="${path}/settings/jquery.min.js"></script>
+<script src="${path}/settings/jquery-ui.js"></script>
+<script src="${path}/settings/popper.min.js"></script>
+<script src="${path}/settings/bootstrap.min.js"></script>
+<!-- CSS 템플릿 추가 (10.04) -->
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+	}); // document.ready end
+	
+</script>
+</head>
+<title>인사정보등록</title>
+</head>
+<body id="page-top">
+	<!-- Page Wrapper -->
+
+		<jsp:include page="/common/HR/sidebar2.jsp" />
+
+
+			<!-- Main Content -->
+			<div id="content">
+				<jsp:include page="/common/header.jsp" />
+
+
+
+			<!-- Section : 구현 내용 -->
+	       <div class="container">
+    <h2 align='center'>인사정보등록</h2>
+
+
+<!-- 사원번호 -->
+
+
+<form action="">
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_no">사원번호</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+<!-- 직급번호 - 선택지, 과장급 이상부턴 신규로 안 들어올 듯 싶어서 안 적음 -->
+<div class="form-group">
+    <label class="form-label" for="ptn_no">직급번호</label>
+    <fieldset class="form-group" control-id="ControlID-15">
+      <legend class="mt-4">직급 선택</legend>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="" control-id="ControlID-16">
+        사원
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2" control-id="ControlID-17">
+          선임
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2" control-id="ControlID-17">
+          대리
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2" control-id="ControlID-17">
+          팀장
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2" control-id="ControlID-17">
+          과장
+        </label>
+      </div>
+    </fieldset>
+</div>
+
+
+<!-- 부서번호 - 선택지  -->
+
+<div class="form-group">
+    <label class="form-label" for="dept_no">부서번호</label>
+    <fieldset class="form-group" control-id="ControlID-15">
+      <legend class="mt-4">부서 선택</legend>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="" control-id="ControlID-16">
+        백엔드개발팀1
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2" control-id="ControlID-17">
+          백엔드개발팀2
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled="ControlID-17">
+          UI개발팀1
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2" control-id="ControlID-17">
+          UI개발팀2
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2" control-id="ControlID-17">
+          인사관리팀
+        </label>
+      </div>
+    </fieldset>
+</div>
+
+<!-- 권한번호(pm/tm/hr), CEO는 신규로 들어올 일이 없으므로 X  -->
+
+<div class="form-group">
+    <label class="form-label" for="auth_no">직급번호</label>
+    <fieldset class="form-group" control-id="ControlID-15">
+      <legend class="mt-4">직급 선택</legend>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="" control-id="ControlID-16">
+        TM
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="" control-id="ControlID-16">
+        PM
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="" control-id="ControlID-16">
+        HR
+        </label>
+      </div>
+      </fieldset>
+      </div>
+     
+
+<!-- 비밀번호 -->
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_pass">비밀번호</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+
+<!-- 한글이름 -->
+
+
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_korname">한글이름</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+
+<!-- 영어이름 -->
+
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_engname">영어이름</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+
+<!-- 이메일 -->
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_email">이메일</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+  
+</div>
+
+<!-- 입사일, 캘린더 사용으로 변경-->
+
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_hiredte">입사일</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+<!-- 생년월일 -->
+
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_birth">생년월일</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+<!-- 소개 -->
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_content">소개</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+<!-- 증명사진, 업로드 기능 필요 -->
+
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_profile">증명사진파일이름</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+<!-- 전화번호 -->
+
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_tel">전화번호</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+<!-- 주소 -->
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_addr">주소</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+
+<!-- 재직상태 -->
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_workst">재직상태</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+
+<!-- 재직상태 변경일 -->
+<div class="form-group">
+  <fieldset control-id="ControlID-29">
+    <label class="form-label" for="emp_workchdte">재직상태 변경일</label>
+    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" control-id="ControlID-30">
+  </fieldset>
+</div>
+
+
+<!-- 버튼, 취소시 대시보드로 돌아가게 처리 -->
+<div class="d-grid gap-2">
+  <button class="btn btn-lg btn-primary" type="submit" id="submit">사원정보 등록</button>
+  <button class="btn btn-lg btn-primary" type="button" href="DAS-001-HR">등록 취소</button>
+ </div>
+
+</form>
+				<br>
+				<!-- Section end -->
+
+			</div>
+			</div>
+			<!-- End of Main Content -->
+
+			<jsp:include page="/common/footer.jsp" />
+
+		</div>
+		<!-- End of Content Wrapper -->
+
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- Custom scripts for all pages-->
+	<script src="${path}/resources/js/sb-admin-2.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script
+		src="${path}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+</html>

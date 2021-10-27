@@ -1,0 +1,20 @@
+package onbiz.dao;
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Repository;
+
+import onbiz.vo.OnEmp;
+
+
+@Repository
+public interface OnEmpDao {
+
+	// 로그인
+	public OnEmp login(OnEmp onEmp) throws Exception;
+
+	//회원가입
+	public void register(OnEmp onEmp) throws Exception;
+	
+	public ArrayList<OnEmp> onEmpList(OnEmp onEmp);
+}

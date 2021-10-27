@@ -1,0 +1,29 @@
+package onbiz.service;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import onbiz.dao.OnEmpDao;
+import onbiz.vo.OnEmp;
+
+@Service
+public class OnEmpServ {
+
+	/* dao에 이 내용 잇음
+	public void register(OnEmp onEmp) throws Exception;
+	
+	public OnEmp login(OnEmp onEmp) throws Exception;
+
+	 */
+	@Autowired
+	private OnEmpDao dao;
+	
+	
+	// 조회용 전체 회원
+	public ArrayList<OnEmp> onEmpList(OnEmp onEmp){
+		return dao.onEmpList(onEmp);
+	}
+}
+

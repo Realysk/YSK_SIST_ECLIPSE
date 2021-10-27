@@ -1,0 +1,14 @@
+package onbiz.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class OnDashBoardCtrl {
+
+  //http://localhost:7080/onbiz/dash.do
+  @RequestMapping("dash.do")
+  public String dash() {
+    return "OnDashBoard/DAS-001-pm";
+  }
+}

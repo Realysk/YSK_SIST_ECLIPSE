@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+<mapper namespace="onbiz.dao.Pro_regDao">
+	<select id="emplist" resultType="emp" parameterType="emp">
+		select *
+		from OnEmp
+		where emp_korname like '%'||#{emp_korname}||'%'
+		or emp_engname like '%'||#{emp_engname}||'%'
+	</select>
+</mapper>	
+

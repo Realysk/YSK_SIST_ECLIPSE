@@ -1,0 +1,34 @@
+package onbiz.dao;
+
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
+
+import onbiz.vo.OnEmp;
+
+
+@Repository
+public interface OnEmpDao {
+
+	// 로그인
+	public OnEmp login(OnEmp onEmp);
+
+//	public ArrayList<OnEmp> = onemplist(OnEmp sch);
+
+
+	//사원 등록
+	public void register(OnEmp onEmp) throws Exception;
+	
+	//사원 정보 수정
+	public void update(OnEmp upt);
+	
+	//사원 삭제
+	// public void delete();
+	
+	public ArrayList<OnEmp> onEmpList(OnEmp sch2);
+
+	public void insertMember(OnEmp ins);
+
+	public void deleteMember(String id); 
+}

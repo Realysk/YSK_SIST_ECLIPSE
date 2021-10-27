@@ -1,0 +1,50 @@
+package onbiz.vo;
+
+// 산출물 VO
+public class OnOutput {
+	String opt_no;
+	String opt_kind;
+	String opt_name;
+	String opt_doctype;
+	String note_no;
+	String task_no;
+	public OnOutput() {
+		super();
+	}
+	public String getOpt_no() {
+		return opt_no;
+	}
+	public void setOpt_no(String opt_no) {
+		this.opt_no = opt_no;
+	}
+	public String getOpt_kind() {
+		return opt_kind;
+	}
+	public void setOpt_kind(String opt_kind) {
+		this.opt_kind = opt_kind;
+	}
+	public String getOpt_name() {
+		return opt_name;
+	}
+	public void setOpt_name(String opt_name) {
+		this.opt_name = opt_name;
+	}
+	public String getOpt_doctype() {
+		return opt_doctype;
+	}
+	public void setOpt_doctype(String opt_doctype) {
+		this.opt_doctype = opt_doctype;
+	}
+	public String getNote_no() {
+		return note_no;
+	}
+	public void setNote_no(String note_no) {
+		this.note_no = note_no;
+	}
+	public String getTask_no() {
+		return task_no;
+	}
+	public void setTask_no(String task_no) {
+		this.task_no = task_no;
+	}
+}

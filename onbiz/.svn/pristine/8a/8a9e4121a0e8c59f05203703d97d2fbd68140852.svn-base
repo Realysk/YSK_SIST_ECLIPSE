@@ -1,0 +1,99 @@
+package onbiz.controller;
+
+import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
+import onbiz.service.Pro_regService;
+import onbiz.vo.OnEmp;
+import onbiz.vo.OnEmp_Dept;
+import onbiz.vo.OnEmp_OnDept;
+import onbiz.vo.Onproject;
+import onbiz.vo.Ordercom;
+
+
+
+//@RequestMapping("proreg.do") 
+@Controller
+public class OnProjectCtrl {
+
+  @Autowired
+  private Pro_regService service;
+
+    // http://localhost:7080/onbiz/proreg.do?method=reg
+    //@RequestMapping(params="method=reg")
+  
+    //http://localhost:7080/onbiz/getViewProReg.do
+    @RequestMapping("getViewProReg.do")
+    public String getViewProReg(String member, HttpSession session, Ordercom sch, OnEmp sch2, OnEmp_Dept sch3, Model d) {
+       if(member==null) {
+        session.setAttribute("member","himan");}
+        d.addAttribute("ordercom", service.ordercomList( sch ));
+        d.addAttribute("emp", service.emplist( sch2 ));
+        d.addAttribute("dept",service.deptList( sch3 ));
+        System.out.println("진행중컨트롤");
+        System.out.println(service.ordercomList(sch));
+        System.out.println(service.emplist(sch2));
+        System.out.println(service.deptList(sch3));
+        return "OnProject/PRO-REG-001-PM";
+        
+          
+    }
+    // http://localhost:7080/onbiz/empnameListAjax.do
+    //http://localhost:7080/onbiz/empnameListAjax.do?dept_name=백엔드개발팀1
+    @RequestMapping("empnameListAjax.do")
+    public String empnameListAjax(@RequestParam("dept_name")String sch4, Model d) {
+        d.addAttribute("empnamelist", service.empnamelist(sch4));
+        return "pageJsonReport";
+    }
+    
+    // http://localhost:7080/onbiz/emptableListAjax.do
+    // http://localhost:7080/onbiz/emptableListAjax.do?emp_korname=이정호&dept_name=백엔드개발팀1
+    @RequestMapping("emptableListAjax.do")
+    public String emptableListAjax(OnEmp_OnDept sch5, Model d) {
+        d.addAttribute("emptablelist", service.emptablelist(sch5));
+        return "pageJsonReport";
+    }
+    
+    // http://localhost:7080/onbiz/proInsert.do?
+    @RequestMapping("proInsert.do")
+    public String proInsert( @RequestPart(value="file",required = false) MultipartFile pro_plandoc, Onproject ins) {
+      String fileName = pro_plandoc.getOriginalFilename();
+        System.out.println("등록할 번호:"+ins.getEmp_no());
+        System.out.println("발주처"+ins.getOrdercom_());
+        System.out.println("예산:"+ins.getPro_budget());
+        System.out.println("내용:"+ins.getPro_content());
+        System.out.println("목표:"+ins.getPro_goal());
+        System.out.println("종류:"+ins.getPro_kind());
+        System.out.println("프로트명"+ins.getPro_name());
+        System.out.println("파일경로:"+ins.getPro_plandoc());
+        System.out.println("상태:"+ins.getPro_state());
+        System.out.println("끝일"+ins.getPro_enddte());
+        System.out.println("등록일"+ins.getPro_regdte());
+        System.out.println("시작일"+ins.getPro_startdte());
+        service.insertPro(ins,pro_plandoc);
+        return "OnProject/PRO-REG-002-PM";
+    }
+    
+    // http://localhost:7080/onbiz/getViewmemReg.do?
+    @RequestMapping("getViewmemReg.do")
+    public String getViewmemReg(OnEmp sch2, OnEmp_Dept sch3, Model d) {
+      d.addAttribute("emp", service.emplist( sch2 ));
+      d.addAttribute("dept",service.deptList( sch3 ));
+        return "OnProject/PRO-REG-002-PM";
+        
+          
+    }
+    // http://localhost:7080/onbiz/ProForm.do
+   // @RequestMapping("ProForm.do")
+   // public String ProForm(Model d) {
+   //     return "PRO-FORM-001-PM";
+    //}
+    
+    
+}

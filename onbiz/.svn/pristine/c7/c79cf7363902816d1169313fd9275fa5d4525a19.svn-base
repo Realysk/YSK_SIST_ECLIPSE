@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+	
+	<mapper namespace="onbiz.dao.Pro_regDao">
+	<select id="insertPro" parameterType="onproject">
+	insert into onproject values(
+	'pro'||(pro_no_sequence.nextval),
+	'웹',#{pro_name},
+	#{pro_goal},#{pro_content},
+	#{pro_startdte},#{pro_enddte},
+	#{ordercom_no},'진행중',
+	sysdate,#{pro_plandoc},
+	#{pro_budget},
+	#{pro_uptcontent}
+	)
+	</select>
+	
+	<select id="getprolist" resultType="onproject" parameterType="onproject">
+	SELECT o.pro_no, o.pro_name, o.pro_startdte, o.pro_enddte, o.pro_kind, o.pro_state, o2.EMP_KORNAME 
+	FROM ONPROJECT o , ONPROJECT_MEMBER om, ONEMP o2, ONEMP_AUTH oa 
+	WHERE o.pro_no = om.PRO_NO
+	AND o2.EMP_NO = om.EMP_NO
+	AND o2.AUTH_NO = oa.AUTH_NO
+	AND oa.AUTH_NO = 'a01'
+	AND o.PRO_STATE LIKE '%'||#{pro_state}||'%'
+	AND o.pro_kind LIKE '%'||#{pro_kind}||'%'
+	AND o.PRO_name LIKE '%'||#{pro_name}||'%'
+	</select>
+
+	
+	
+	<select id ="getproject" parameterType="onproject" resultType ="onproject" >
+	select * from onproject where pro_no = #{pro_no}
+	</select>
+	</mapper>	
+

@@ -1,0 +1,409 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<fmt:requestEncoding value="utf-8"/>     
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>OnBiz</title>
+<!-- Custom fonts for this template-->
+<link href="${path}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<!-- Custom styles for this template-->
+<script src="${path}/settings/jquery.min.js"></script>
+<script src="${path}/settings/jquery-ui.js"></script>
+<script src="${path}/settings/popper.min.js"></script>
+<script src="${path}/settings/bootstrap.min.js"></script>
+<link href="${path}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${path}/settings/jquery-ui.css">
+
+<!-- Gantt Chart 적용 -->
+<link rel="stylesheet" href="${path}/settings/dhtmlxgantt.css" >
+<script src="${path}/settings/dhtmlxgantt.js"></script>
+
+<style>
+
+body { font-family: 'Nanum Gothic', sans-serif; font-size: 12px;}
+  
+.folder_row { font-weight: bold;}
+  
+.group_row, .group_row.odd, .gantt_task_row.group_row {
+	background-color: rgba(232, 232, 232, 0.3);
+}
+	
+.highlighted_resource, .highlighted_resource.odd {
+	background-color: rgba(255, 251, 224, 0.3);
+}
+
+</style>
+<script type="text/javascript">
+
+
+
+	$(document).ready(function(){
+
+		/*
+		
+		var g = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'day');
+
+		g.setOptions({
+		  vCaptionType: 'Complete',  // Set to Show Caption : None,Caption,Resource,Duration,Complete,     
+		  vQuarterColWidth: 36,
+		  vDateTaskDisplayFormat: 'yyyy-mm-dd', // Shown in tool tip box
+		  vDayMajorDateDisplayFormat: 'mon yyyy - Week ww',// Set format to dates in the "Major" header of the "Day" view
+		  vWeekMinorDateDisplayFormat: 'dd mon', // Set format to display dates in the "Minor" header of the "Week" view
+		  vDateTaskTableDisplayFormat:'yyyy-m-dd',
+		  vLang: 'ko',
+		  vShowTaskInfoLink: 1, // Show link in tool tip (0/1)
+		  vShowEndWeekDate: 0,  // Show/Hide the date for the last day of the week in header for daily
+		  vUseSingleCell: 1000, // Set the threshold cell per table row (Helps performance for large data.
+		  vFormatArr: ['Day', 'Week', 'Month'], // Even with setUseSingleCell using Hour format on such a large chart can cause issues in some browsers,
+		  vEvents: function(e){
+			  console.log("v이벤트: " + e.vTaskList.pID);
+		  },
+		  vEventClickRow: function(e){
+			  console.log(e)
+			  console.log("클릭 : " + e.getOriginalID);
+		  }
+		  
+		 
+		});
+		
+		// Load from a Json url
+		JSGantt.parseJSON("${path}/settings/data/data.json", g);
+
+
+		g.Draw();
+		*/
+		
+		
+		// 수정중
+		gantt.config.date_format = "%Y-%m-%d %H:%i";
+		
+
+		var memNo = "mem1001";
+		
+		$.ajax({
+			type:"post",
+			url:"${path}/ontask.do?method=gatlist",
+			data:"mem_no=" + memNo,
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				gantt.parse(data);
+			},
+			error:function(err){
+				console.log(err);
+			}
+		});
+		
+
+		
+		//gantt.config.reorder_grid_columns = true;
+		gantt.config.columns = [
+			//{name: "wbs", label: "경로", min_width: 50, width: 50, template: gantt.getWBSCode, resize:false},
+			{name: "id", align: "center", label: "번호", min_width: 50, width: 50, resize:false},
+			{name: "text", label: "작업명", tree: true, min_width: 100, width: 160, resize:false},
+			{name: "type", label:"분류", align: "center", width: 60, template: function(task){return task.type || gantt.config.types.task}, resize:true},
+			{name: "start_date", label:"시작일", align: "center", width: 80, resize:false},
+			{name: "end_date", label:"종료일", align: "center", width: 80, template: function(task){
+					return gantt.templates.date_grid(task.end_date, task);
+				}, resize:false},
+			{name: "duration", label:"기간", align: "center", width: 60, resize:false},
+			{name: "user", label:"담당자",  align: "center", width: 70, resize:false},
+			{name: "add", width: 40}
+		];
+		
+		gantt.config.layout = {
+				css: "gantt_container",
+				cols: [
+					{
+						width:600,
+						min_width:600,
+						rows:[
+							{view: "grid", scrollX: "gridScroll", scrollable: true, scrollY: "scrollVer"},
+						]
+					},
+					{resizer: true, width: 1},
+					{
+						width:700,
+						min_width: 700,
+						rows:[
+							{view: "timeline", scrollX: "scrollHor", scrollY: "scrollVer"},
+							{view: "scrollbar", id: "scrollHor", group:"horizontal"}
+						]
+					},
+					{view: "scrollbar", id: "scrollVer"}
+				]
+			};
+		
+		gantt.templates.grid_row_class = function(start, end, task){
+			var css = [];
+			if(gantt.hasChild(task.id)){
+				css.push("folder_row");
+			}
+
+			if(task.$virtual){
+				css.push("group_row")
+			}
+
+			if(task.parent == 0){
+				css.push("highlighted_resource");
+			}
+
+			return css.join(" ");
+		};
+		
+		// 우선순위 선택
+		var opts = [
+		    { key: 1, label: 'High' },
+		    { key: 2, label: 'Normal' },
+		    { key: 3, label: 'Low' }
+		];
+		 
+		// 입력창 커스텀
+		gantt.config.lightbox.sections = [
+		    {name:"description", height:38, map_to:"text", type:"textarea", focus:true},
+		    {name:"priority",    height:22, map_to:"priority", type:"select", options:opts},
+		    {name:"parent", type:"parent", allow_root:"true", root_label:"No parent"}, 
+		    {name:"time",        height:72, map_to:"auto", type:"duration"}
+		];
+		
+		// 입력창 상위작업 선택 영역 제목 설정
+		gantt.locale.labels.section_description = "작업명";
+		gantt.locale.labels.section_priority = "작업 우선순위";
+		gantt.locale.labels.section_parent = "상위작업";
+		gantt.locale.labels.section_time = "작업 기간";
+		
+		gantt.attachEvent("onLightbox", function (task_id){
+		    //any custom logic here
+		    console.log("입력창/상세정보창열었을때");
+		    console.log("입력 task_id : " + task_id);
+		    //console.log();
+		});
+		
+		
+		/*
+		if (gantt.getState().lightbox){
+		    //the code for the opened lighbox
+		    console.log("등록창 열음");
+		    var value = gantt.getLightboxSection('description').getValue();
+		} else {
+		    //the code for the closed lighbox
+			console.log("등록창 닫음");
+		}
+		*/
+/*
+		task_no NUMBER PRIMARY KEY , -- *작업번호(id)
+		task_name varchar2(100), -- *작업명(text)
+		task_startdte varchar2(50), -- *작업 시작일(start_date)
+		task_enddte varchar2(50), -- 작업 종료일(end_date)
+		task_duration NUMBER, -- *작업 기간(duration)
+		task_progress NUMBER, -- *작업 진행퍼센트(progress)
+		taskref_no NUMBER, -- *상위작업번호(parent)
+		task_prior varchar2(20), -- *작업 우선순위(priority)
+		*/
+		gantt.attachEvent("onAfterTaskAdd", function(id,item){
+		    //any custom logic here
+		    console.log("추가후???");
+		    console.log(item.id);
+		    console.log(item.text);
+		    console.log(item.start_date);
+		    console.log(item.end_date);
+		    console.log(item.duration);
+		    console.log(item.progress);
+		    console.log(item.parent);
+		    console.log(item.priority);
+		});
+		
+		gantt.init("gantt_here");
+		
+		/*
+		gantt.parse({
+		  data: [
+			  {id:1, text:"Project #1", start_date:"01-04-2020", duration:18},
+			  {id:2, text:"Task #1", start_date:"02-04-2020", duration:8, parent:1},
+			  {id:3, text:"Task #2", start_date:"11-04-2020", duration:8, parent:1}
+		  ],
+		  links:[
+		    {id:1, source:2, target:3, type:"0"},
+		    {id:2, source:3, target:4, type:"0"},
+		    {id:3, source:5, target:6, type:"0"}
+		  ]
+		});
+		
+		// 작업을 클릭하면 나타남
+		gantt.attachEvent("onTaskClick", function(id, e) {
+		    alert("You've just clicked an item with id="+id);
+		});
+		
+		*/
+		
+		
+	
+	});
+
+</script>
+</head>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+	    
+	<jsp:include page="/common/sidebar.jsp"/>
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- Main Content -->
+		<div id="content">
+			<jsp:include page="/common/header.jsp"/>
+					
+			<!-- Section : 구현 내용 -->
+	        <div class="container-fluid">
+	       
+				<br>
+				<ol class="breadcrumb">
+				  <li class="breadcrumb-item"><a href="#">Home</a></li>
+				  <li class="breadcrumb-item active">작업할당</li>
+				</ol>
+				
+
+				<!--  3번 네비바 : 페이지 이동 -->
+				<nav class="navbar pagenav navbar-expand-sm bg-dark navbar-dark">
+				  <ul class="navbar-nav">
+				    <li class="nav-item">
+				      <a class="nav-link" href="#">프로젝트 등록</a>
+				    </li>
+				    <li class="nav-item">
+				      <a class="nav-link" href="#">멤버 등록</a>
+				    </li>
+				    <li class="nav-item active">
+				      <a class="nav-link" href="${path}/ontask.do?method=gantt">작업 할당</a>
+				    </li>
+				  </ul>
+				</nav>
+				
+				<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+				  <div class="card-header">Header</div>
+				  <div class="card-body">
+				    <h4 class="card-title">Primary card title</h4>
+				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				  </div>
+				</div>
+
+                <br>
+                <!-- <div style="position:relative" class="gantt" id="GanttChartDIV"></div>  -->
+                <button type="button" class="btn btn-primary">Primary</button>
+                
+                <div id="gantt_here" style='width:100%; height:90vh;'></div>
+                
+                <div class="row justify-content-between">
+					<div class="col-xs-4 col-sm-4 col-ms-4">
+						<form id="frmGnt" method="get">
+							<input type="hidden" name="mem_no" value="mem1001"/>
+						</form>
+					</div>
+					<div class="col-xs-4 col-sm-4 col-ms-4"></div>
+					<div class="col-auto">
+						<button class="btn btn-primary" type="button" id="btnReg" 
+						data-toggle="modal" data-target="#exampleModalCenter">등록</button>　
+					</div>
+				</div><br>
+                
+                <div id="gantt_here"></div>
+                
+                
+                
+                
+ 			</div>
+            <!-- Section end -->
+
+		</div>
+		<!-- End of Main Content -->
+		
+		<jsp:include page="/common/footer.jsp"/>
+
+	</div> 
+	<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+    
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
+
+<!-- 작업 등록 modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">작업 등록</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	<span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<form id="regFrm" class="form"  method="post">
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">작업명　</span>
+				</div>
+				<input name="task_name" class="form-control" 
+					placeholder="입력" />	
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">작업내용</span>
+				</div>
+				<textarea name="content" rows="3" 
+				class="form-control" placeholder="입력"></textarea>
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">작업기간</span>
+				</div>
+				<input type="text" id="date1" name="task_startDte"/>  -  <input type="text" id="date2" name="task_endDte"/>	
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">담당자　</span>
+				</div>
+				<input name="task_name" class="form-control" 
+					placeholder="입력" />	
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">우선순위</span>
+				</div>
+				<input name="task_name" class="form-control" 
+					placeholder="입력" />	
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">상위작업</span>
+				</div>
+				<!-- 셀렉트로 수정 예정 -->
+				<input name="task_name" class="form-control" 
+					placeholder="입력" />	
+			</div>
+	    </form> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" id="btnReg" class="btn btn-primary">등록</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

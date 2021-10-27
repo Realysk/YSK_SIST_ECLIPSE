@@ -1,0 +1,18 @@
+package onbiz.dao;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import onbiz.vo.OnApprovalDetail;
+import onbiz.vo.OnApprovalView;
+
+public interface OnApprovalDao {
+	
+	public ArrayList<OnApprovalView> getAppList(OnApprovalView sch); // 1. '승인대기' 상태의 결재 목록
+	public OnApprovalDetail getAppDetail(String app_no); // 2. 결재 상세내용 조회
+	public void uptAppList(OnApprovalDetail upt); // 2-1. 결재 조치 등록
+	//public void uptDeadline(String app_no); // 2-2. 결재만료일 설정 (serv에서 설정) 
+	//public ArrayList<OnApprovalView> succAppList(OnApprovalView sch); // 3. 조치가 완료된 결재 목록
+	//public OnApprovalDetail succAppDetail(String app_no); // 4. 조치가 완료된 결재 목록의 상세 조회
+
+}

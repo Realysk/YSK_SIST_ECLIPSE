@@ -1,0 +1,51 @@
+package onbiz.service;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import onbiz.dao.OnEmpDao;
+import onbiz.vo.OnEmp;
+
+@Service
+public class OnEmpServ {
+
+	/* dao에 이 내용 잇음
+	public void register(OnEmp onEmp) throws Exception;
+	
+	public OnEmp login(OnEmp onEmp) throws Exception;
+
+	 */
+	
+	
+	@Autowired
+	private OnEmpDao dao;
+	
+	//로그인
+	public OnEmp login(OnEmp onemp){
+		return dao.login(onemp);
+	}
+	
+	
+	// 조회용 전체 회원
+	public ArrayList<OnEmp> onEmpList(OnEmp sch2){
+		if(sch2.getEmp_no()==null) sch2.setEmp_no(""); // 사번검색
+		if(sch2.getAuth_no()==null) sch2.setAuth_no(""); // 권한검색
+		if(sch2.getEmp_korname()==null) sch2.setEmp_korname(""); // 한국이름검색 
+		if(sch2.getPtn_no()==null) sch2.setPtn_no(""); // 직급 검색
+		if(sch2.getEmp_workst()==null) sch2.setEmp_workst(""); // 재직상태 검색
+		return dao.onEmpList(sch2);
+	} 
+	
+	public void insertMember(OnEmp ins) {
+		dao.insertMember(ins);
+	}
+	public void updateMember(OnEmp upt) {
+		dao.update(upt);
+	}
+	public void deleteMember(String id) {
+		dao.deleteMember(id);
+	}
+}
+

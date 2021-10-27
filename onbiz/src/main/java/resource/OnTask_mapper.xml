@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="onbiz.dao.OnTaskDao">
+
+	<resultMap type="ontask" id="tsResult">
+		<result property="id" column="task_no"/>
+		<result property="text" column="task_name"/>
+		<result property="content" column="task_content"/>
+		<result property="start_date" column="task_startdte"/>
+		<result property="end_date" column="task_enddte"/>
+		<result property="duration" column="task_duration"/>
+		<result property="progress" column="task_progress"/>
+		<result property="parent" column="taskref_no"/>
+		<result property="priority" column="task_prior"/>
+		<result property="user" column="emp_korname"/>
+	</resultMap>
+	
+	<resultMap type="ontaskproject" id="tpResult">
+		<result property="id" column="task_no"/>
+		<result property="text" column="task_name"/>
+		<result property="content" column="task_content"/>
+		<result property="start_date" column="task_startdte"/>
+		<result property="end_date" column="task_enddte"/>
+		<result property="duration" column="task_duration"/>
+		<result property="progress" column="task_progress"/>
+		<result property="parent" column="taskref_no"/>
+		<result property="priority" column="task_prior"/>
+		<result property="user" column="emp_korname"/>
+	</resultMap>
+	
+	<!--  [공통] 프로젝트별 작업조회를 위한 프로젝트 조회 (세션값 사용)-->
+	<select id="myProList" resultMap="tpResult" parameterType="ontaskproject">
+ 		SELECT DISTINCT op.pro_name, op.pro_no
+		FROM onproject_member otm, onproject op
+		WHERE otm.pro_no = op.pro_no AND otm.emp_no = #{emp_no}
+		ORDER BY op.pro_no
+ 	</select>
+ 	
+ 	<select id="myProDuration" resultType="ontaskproject" parameterType="String">
+ 		SELECT pro_no, pro_name, to_char(pro_startdte, 'YYYY-MM-DD') pro_startdte, 
+			to_char(pro_enddte, 'YYYY-MM-DD') pro_enddte 
+		FROM onproject 
+		WHERE pro_no = #{pro_no}
+ 	</select>
+
+	<!--  [내작업] 프로젝트와 사원번호에 맞는 프로젝트 참여멤버번호 호출 -->
+	<select id="myMemNo" resultType="String" parameterType="ontaskproject">
+		SELECT DISTINCT ot.mem_no
+		FROM ontask ot, onproject_member otm, onproject op
+		WHERE ot.mem_no = otm.mem_no AND otm.pro_no = op.pro_no
+		AND op.pro_no = #{pro_no} AND otm.emp_no = #{emp_no}
+	</select>
+	
+	<!--  [내작업] 프로젝트별로 등록된 내작업 불러오기 (프로젝트번호, 세션값 사용) -->
+	<select id="mytaskList" resultMap="tpResult" parameterType="ontaskproject">	
+		SELECT ot.*, op.pro_name, oa.app_state, 
+				to_char(pro_startdte, 'YYYY-MM-DD') pro_startdte, 
+ 				to_char(pro_enddte, 'YYYY-MM-DD') pro_enddte
+		FROM ontask ot, onapproval oa, onproject_member opm, onproject op
+		WHERE ot.mem_no = opm.mem_no AND opm.emp_no = #{emp_no}
+		AND (opm.pro_no = op.pro_no AND opm.pro_no = #{pro_no})
+		AND ot.task_no = oa.task_no(+)
+		ORDER BY ot.task_no DESC
+ 	</select>   
+ 	
+ 	<!--  [내작업] 내작업의 작업 검색 (불러온 멤버번호, 작업명/내용 검색) -->
+	<select id="schtaskList" resultMap="tpResult" parameterType="ontaskproject">	
+		SELECT ot.*, op.pro_name, oa.app_state, 
+		to_char(pro_startdte, 'YYYY-MM-DD') pro_startdte, 
+ 		to_char(pro_enddte, 'YYYY-MM-DD') pro_enddte
+		FROM ontask ot, onproject_member opm, onproject op, onapproval oa
+		WHERE opm.pro_no = op.pro_no AND ot.task_no = oa.task_no(+)
+		AND (ot.mem_no = opm.mem_no AND ot.mem_no = #{mem_no})
+		AND (ot.task_name LIKE '%'||#{text}||'%' OR ot.task_content LIKE '%'||#{content}||'%')
+		ORDER BY ot.task_no DESC
+ 	</select>
+ 	
+ 	
+	
+ 	<!--  [내작업] 내작업의 상세조회 (불러온 멤버번호, 등록되어있는 작업번호) -->
+	<select id="detailTask" resultMap="tpResult" parameterType="ontask">
+		SELECT op.pro_name, op.pro_no, ot.*
+		FROM ontask ot, onproject_member opm, onproject op
+		WHERE (ot.mem_no = opm.mem_no AND ot.mem_no = #{mem_no})
+		AND opm.pro_no = op.pro_no
+		AND ot.task_no = #{id}
+		ORDER BY ot.task_no desc
+	</select>
+
+	<!--  [내작업] 내작업 등록 (불러온 멤버번호) -->
+ 	<insert id="myinsert" parameterType="ontaskproject">
+ 		INSERT INTO OnTask values(OnTask_seq.nextval, #{text}, 
+ 		#{start_date}, #{end_date}, #{duration}, #{priority, jdbcType=INTEGER}, #{parent}, #{priority}, 
+ 		#{content}, to_char(sysdate, 'YYYY-MM-DD'), #{task_uptdte, jdbcType=VARCHAR},  #{task_state}, #{mem_no})
+ 	</insert>
+ 	
+ 	<!--  [내작업] 내작업 수정 (작업번호, 불러온 멤버번호) -->
+	<update id="myupdate" parameterType="ontaskproject">
+		UPDATE OnTask 
+		SET task_name=#{text}, task_startdte=#{start_date}, task_enddte=#{end_date}, 
+			task_duration=#{duration}, taskref_no=#{parent}, task_prior=#{priority, jdbcType=INTEGER}, 
+			task_content=#{content}, task_uptdte=to_char(sysdate, 'YYYY-MM-DD')
+		WHERE task_no=#{id} AND mem_no=#{mem_no}
+	</update>
+	
+	<!--  [내작업] 내작업 삭제 (작업번호, 불러온 멤버번호) -->
+	<delete id="mydelete" parameterType="ontaskproject">
+		DELETE FROM OnTask
+		WHERE task_no=#{id} AND mem_no=#{mem_no}
+	</delete>
+	
+	<!--  [내작업] 산출물 제출 (작업번호 사용) -->
+	<insert id="uploadOutput" parameterType="onoutput_app">
+		INSERT INTO OnOutput 
+			values('opt'||lpad(OnOutput_seq.nextval, 6, 0), 
+			#{opt_name}, #{opt_doctype, jdbcType=VARCHAR}, to_char(sysdate, 'YYYY-MM-DD'), #{task_no})
+	</insert>
+	
+	<!-- [내작업] 프로젝트 담당 PM의 mem_no 가져오기 -->
+	<select id="appPM" resultType="String" parameterType="String">
+		SELECT opm.mem_no
+		FROM onproject_member opm, onemp oe
+		WHERE opm.emp_no = oe.emp_no
+		AND pro_no=#{pro_no}
+		AND oe.auth_no='a01'
+	</select>
+	
+	<!--  [내작업] 산출물 제출 후 결재 요청 -->
+	<insert id="approvalInsert" parameterType="onoutput_app">
+		INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), 
+		to_char(sysdate, 'YYYY-MM-DD'), '승인대기', to_char(sysdate+7, 'YYYY-MM-DD'), 
+		NULL, #{app_content}, NULL, #{mem_no}, #{task_no}, NULL)
+	</insert>
+	
+	<!--  [내작업] 산출물/결재 상세정보 확인 -->
+	<select id="appDetail" resultType="onoutput_app" parameterType="String">
+		SELECT ot.task_no, app_no, app_content, app_comment, opt_name, opt_doctype
+		FROM Ontask ot, OnApproval op, Onoutput oop
+		WHERE ot.task_no = op.task_no
+		AND ot.task_no = oop.task_no
+		AND ot.task_no = #{task_no}
+	</select>
+
+</mapper>	

@@ -1,0 +1,61 @@
+package onbiz.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import onbiz.service.OnEmpServ;
+import onbiz.vo.OnEmp;
+
+
+@Controller
+@SessionAttributes("member")
+public class OnEmpCtrl {
+	
+	@Autowired
+	private OnEmpServ service;
+	
+	
+	@ModelAttribute("member")
+	public OnEmp getOnEmp_no() {
+		return new OnEmp();
+	}
+	
+	@RequestMapping("login.do")
+	public String login(OnEmp emp) {
+		return "WEB-INF\\views\\a05_mvc\\a10_login.jsp";
+	}
+	
+	@RequestMapping("EmpList.do")
+	public String mvc01(OnEmp sch, Model d) {
+		d.addAttribute("memList", service.empList(sch));
+		return "WEB-INF\\views\\a05_mvc\\a04_memberList.jsp";
+	}
+	// http://localhost:7080/springweb/memberFrm.do
+	@GetMapping("memberFrm.do")
+	public String memberFrm() {
+		return "WEB-INF\\views\\a05_mvc\\a07_memberAjax.jsp";
+	}
+
+	@RequestMapping("memberInsertAjax.do")
+	public String memberInsertAjax(OnEmp insert) {
+		service.insertMember(insert);
+		return "redirect:/memberListAjax.do";
+	}	
+	
+}

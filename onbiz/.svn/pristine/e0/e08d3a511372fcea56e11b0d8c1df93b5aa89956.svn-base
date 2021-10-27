@@ -1,0 +1,5 @@
+package onbiz.vo;
+
+public class Member_vo {
+	/*로그인시 사용하는 vo*/
+}

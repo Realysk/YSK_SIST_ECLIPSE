@@ -1,0 +1,309 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<fmt:requestEncoding value="utf-8"/>     
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>OnBiz</title>
+<!-- Custom fonts for this template-->
+<link href="${path}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<!-- Custom styles for this template-->
+<script src="${path}/settings/jquery.min.js"></script>
+<script src="${path}/settings/jquery-ui.js"></script>
+<script src="${path}/settings/bootstrap.min.js"></script>
+<script src="${path}/settings/popper.min.js"></script>
+<link href="${path}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<!-- CSS 템플릿 추가 (10.04) -->
+<link href="${path}/resources/css/sb-admin-2.css" rel="stylesheet">
+<!-- CSS 템플릿 -->
+<link rel="stylesheet" href="${path}/settings/jquery-ui.css">
+<link rel="stylesheet" href="${path}/settings/bootstrap.min3.css">
+<!--  1001 위에 설정들을 그대로 가져가주세요~! 그리고 밑에 각 부분에 맞게 include 파일을 넣어주세요! 
+	sidebar, header, footer 있고 body에는 id="page-top" 설정해주셔야 위로 스크롤링 될거에요 -->
+<style type="text/css">
+
+	.card {margin:1%;}
+	.card-body {padding:0 1% 0 1%;}
+	.breadcrumb {margin:1%;}
+	.nav nav-tabs {margin:1%;}
+	
+</style>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		schApp();
+		
+		$("[name=pro_name]").on("keydown",function() {
+			if(event.keyCode==13) {
+				//schApp();
+				event.preventDefault();
+			}
+		});
+		
+		function go(app_no) {
+			$(location).attr("href", "${path}/onapproval.do?method=succappDetail&app_no="+app_no);
+		}		
+		
+	});
+</script>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+    	<jsp:include page="/common/sidebar.jsp"/>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+			<jsp:include page="/common/header.jsp"/>
+                
+                <!-- !!섹션 : 구현 내용 입력부분!! -->
+                <div class="container-fluid">
+                
+				<ol class="breadcrumb" id="pagePath">
+					<li class="breadcrumb-item">내 작업</li>
+					<li class="breadcrumb-item active"><a href="${path}/onapproval.do?method=applist">결재조치</a></li>
+					<li class="breadcrumb-item"><a href="${path}/onapproval.do?method=succapplist">결재현황</a></li>
+				</ol>					   
+                                
+                <form id="frm01" method="post">
+                <input type="hidden"/>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                             <h5>완료된 결재 목록</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                	<div class="row">
+                                		<div class="col-sm-12 col-md-6">
+                                			<div class="dataTables_length" id="dataTable_length">
+                                				<label>
+                                					<select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                						<option value="페이지">페이지</option>
+                                						<option value="10">10</option>
+                                						<option value="25">25</option>
+                                						<option value="50">50</option>
+                                						<option value="100">100</option>
+                                					</select>
+                                				</label>
+                                				&nbsp;
+                                				<label>
+                                					<select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                						<option value="25">승인</option>
+                                						<option value="50">반려</option>
+                                						<option value="100">취소</option>
+                                					</select>
+                                				</label>
+                                				&nbsp;
+												<label>
+													<input type="text" class="form-control form-control-sm" name="pro_name" placeholder="프로젝트 검색" aria-controls="dataTable">
+												</label>                              				                             				                            				                              				
+                                			</div>                          			
+                                		</div>
+                                		                                		
+                                		<div class="col-sm-12 col-md-6" align="right"><div id="dataTable_filter" class="dataTables_filter">
+                                		</div>
+                                	</div>
+                                </div>
+                                <!-- 데이터베이스 표 시작 -->
+                               	<div class="row" style="text-align:center;">
+                               	<div class="col-sm-12">
+                               	<table class="table table-hover">
+                                    <thead>
+                                   		<col width="20%">
+   										<col width="20%">
+   										<col width="20%">
+   										<col width="10%">
+   										<col width="10%">                                   
+   										<col width="10%">                                   
+   										<col width="10%">                                   
+                                        <tr role="row">
+                                        	<th class="sorting sorting_asc">프로젝트</th>
+                                        	<th class="sorting">작업명</th>
+                                        	<th class="sorting">작업내용</th>
+                                        	<th class="sorting">등록일</th>
+                                        	<th class="sorting">만료일</th>
+                                        	<th class="sorting">승인일</th>
+                                        	<th class="sorting">상태</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<c:forEach var="app" items="${succlist}">                                  	
+											<tr class="text-center" ondblclick="javascript:go('${app.app_no}')">
+												<td>${app.pro_name}</td>
+												<td>${app.task_name}</td>
+												<td>${app.task_content}</td>
+												<td><fmt:formatDate pattern="YYYY-MM-dd" value="${app.app_regdte}"/></td>
+												<td><fmt:formatDate pattern="YYYY-MM-dd" value="${app.app_deadline}"/></td>
+												<td><fmt:formatDate pattern="YYYY-MM-dd" value="${app.app_appdte}"/></td>
+												<td>${app.app_state}</td>
+											</tr>
+                                    	</c:forEach>
+                                    </tbody>
+                                </table>
+                                </div>
+                                </div>
+                                <!-- 데이터베이스 표 끝 -->
+                                <!-- 페이징 화면 시작 -->
+                                <div class="row">
+                                <div class="col-sm-12 col-md-5">
+                                	<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"><!-- 전체 57개의 항목 중 1~10 표시 --></div>
+                                </div>
+                                	<!-- 페이징 처리 -->
+                                	<div class="col-sm-12 col-md-7">
+                                		<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                			<ul class="pagination">
+                                				<li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                                					<a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                				</li>
+                                				<li class="paginate_button page-item active">
+                                					<a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                                				</li>
+                                				<li class="paginate_button page-item ">
+                                					<a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                                				</li>
+                                				<li class="paginate_button page-item ">
+                                					<a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                                				</li>
+                                				<li class="paginate_button page-item ">
+                                					<a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+                                				</li>
+                                				<li class="paginate_button page-item ">
+                                					<a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+                                				</li>
+                                				<li class="paginate_button page-item ">
+                                					<a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+                                				</li>
+                                				<li class="paginate_button page-item next" id="dataTable_next">
+                                					<a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                                				</li>
+                                			</ul>
+                                		</div>
+                                	</div>
+                                </div>
+                               <!-- 페이징 화면 끝 -->
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+				<!-- 결재 상세 (조회) modal -->
+				<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLongTitle">결재 조회</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        	<span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+						<form id="regFrm" class="form"  method="post">
+							<div class="input-group mb-3">	
+								<div class="input-group-prepend">
+									<span class="text-center input-group-text">결재번호</span>
+								</div>
+								<input name="app_no" class="form-control" value="" readonly/>	
+							</div>
+							<div class="input-group mb-3">	
+								<div class="input-group-prepend">
+									<span class="text-center input-group-text">프로젝트</span>
+								</div>
+								<input name="pro_name" rows="3" class="form-control" readonly/>
+							</div>
+							<div class="input-group mb-3">	
+								<div class="input-group-prepend">
+									<span class="text-center input-group-text">결재기간 [등록일-만료일]</span>
+								</div>
+								<input type="date" id="date1" name="app_regdte" value="" readonly/>  -  <input type="date" id="date2" name="app_deadline" value="" readonly/>	
+							</div>
+							<div class="input-group mb-3">	
+								<div class="input-group-prepend">
+									<span class="text-center input-group-text">승인일</span>
+								</div>
+								<input type="date" name="app_appdte" value="" class="form-control" readonly/>	
+							</div>
+							<div class="input-group mb-3">	
+								<div class="input-group-prepend">
+									<span class="text-center input-group-text">요청내용</span>
+								</div>
+								<input name="app_content" class="form-control" value="" readonly/>	
+							</div>
+							<div class="input-group mb-3">	
+								<div class="input-group-prepend">
+									<span class="text-center input-group-text">답변</span>
+								</div>
+								<input name="app_comment" class="form-control" value="" readonly/>	
+							</div>			
+					    </form> 
+				      </div>
+				    </div>
+				  </div>
+				</div>           
+                
+                </div>
+                <!--  섹션 끝  -->
+
+            </div>
+            <!-- End of Main Content -->
+			<jsp:include page="/common/footer.jsp"/>
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+        
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--  하단에 js 파일 설정도 넣어주세요!  -->
+    <!-- Custom scripts for all pages-->
+    <script src="${path}/resources/js/sb-admin-2.min.js"></script>
+	
+	<!-- Bootstrap core JavaScript-->
+    <script src="${path}/resources/vendor/jquery/jquery.min.js"></script>
+    <script src="${path}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="${path}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>       
+    
+</body>
+</html>

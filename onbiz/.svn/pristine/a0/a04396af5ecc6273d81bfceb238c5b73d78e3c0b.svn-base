@@ -1,0 +1,17 @@
+package onbiz.dao;
+
+import org.springframework.stereotype.Repository;
+
+import onbiz.vo.OnEmp;
+
+@Repository
+public class OnEmpDaoImpl {
+	/*	
+	OnEmpDao dao = new OnEmpDao();
+	
+	
+	public OnEmp login(OnEmp onEmp) throws Exception {
+		return dao.login(onEmp);
+	}
+	*/
+}

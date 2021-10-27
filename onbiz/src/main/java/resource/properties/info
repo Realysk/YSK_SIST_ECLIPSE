@@ -1,0 +1,14 @@
+
+#DB 서버 설정 정보 
+driver=oracle.jdbc.driver.OracleDriver
+dburl=jdbc:oracle:thin:@localhost:1521:xe
+name=scott
+pass=tiger
+
+# 파일 서버
+tmpUpload=C:/javaexp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/onbiz/z99_upload/
+upload=C:/javaexp/workspace/onbiz/src/main/webapp/z99_upload/
+
+#이메일 설정정보
+email=ysk2388@gmail.com
+password=dbtjdrms6761!!

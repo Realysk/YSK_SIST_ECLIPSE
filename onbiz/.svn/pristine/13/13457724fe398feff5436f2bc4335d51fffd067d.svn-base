@@ -1,0 +1,15 @@
+package onbiz.dao;
+
+
+import java.util.ArrayList;
+import onbiz.vo.OnEmp;
+import onbiz.vo.Ordercom;
+
+
+public interface Pro_regDao {
+    public ArrayList<Ordercom> ordercomList(Ordercom sch2);
+    public ArrayList<OnEmp> emplist(OnEmp sch2);
+ 
+  }
+
+

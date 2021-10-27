@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+   		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+		
+
+	<!-- 0. 컨테이너에 사용할 객체 등록 -->
+	<context:component-scan base-package="onbiz">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Dao"/>
+	</context:component-scan>
+	
+	<!-- 1. DB연결 처리 : connection pool 처리, 공통 설정 -->	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${driver}"/>	
+		<property name="url" value="${dburl}"/>	
+		<property name="username" value="${name}"/>	
+		<property name="password" value="${pass}"/>	
+	</bean>
+	
+	<!-- 2. Mybatis와 연동 : dbcp 연결, mybatis.Spring.xml 연동 --> 
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:resource/mybatis.Spring.xml" />
+	</bean> 
+	
+	<!-- 3. dao 인터페이스 페이지 위치 설정 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="onbiz.dao"/>
+	</bean> 
+	
+	<!--  json 형식 리턴 viewresolver 선언 -->
+	 <bean id="pageJsonReport" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+	 	<property name="contentType" value="text/html; charset=utf-8"/>
+	 </bean>
+	 
+	 <!--  id값의 view를 등록하고 우선순위를 최우선으로 설정하는 부분을 선언하는 객체 -->
+	 <bean id="btnViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	 	<property name="order" value="0"/>
+	 </bean>
+
+	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	 	<property name="order" value="1"/>
+	 	<property name="prefix" value="WEB-INF/views/"/>
+	 	<property name="suffix" value=".jsp"/>	
+	 </bean>
+		
+</beans>
+
+
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="onbiz.dao.OnTaskDao">
+
+	<select id="mytaskList" resultType="ontaskproject" parameterType="ontaskproject">	
+		SELECT op.pro_name, ot.*
+		FROM ontask ot, onproject op
+		WHERE ot.pro_no = op.pro_no
+		AND ot.pro_no = #{pro_no}
+		AND ot.emp_no = #{emp_no}
+		ORDER BY ot.task_no DESC
+ 	</select>
+ 	
+ 	<select id="schtaskList" resultType="ontaskproject" parameterType="ontaskproject">
+ 		SELECT op.pro_name, ot.*
+		FROM ontask ot, onproject op
+		WHERE ot.pro_no = op.pro_no
+		AND ot.emp_no = #{emp_no}
+		AND ot.pro_no = #{pro_no}
+		AND (ot.task_name like '%'||#{task_name}||'%' OR ot.task_content like '%'||#{task_content}||'%')
+		ORDER BY ot.task_no DESC
+ 	</select>
+
+</mapper>	

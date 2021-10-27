@@ -1,0 +1,9 @@
+package onbiz.vo;
+
+public class Member_vo {
+	/*로그인시 사용하는 vo
+	 인사팀은 입사년도0001 부터 시작 ex) 20140001
+	 일반 사원은 ON
+	 * */
+	
+}

@@ -1,0 +1,26 @@
+
+#DB 서버 설정 정보 
+driver=oracle.jdbc.driver.OracleDriver
+dburl=jdbc:oracle:thin:@localhost:1521:xe
+name=scott
+pass=tiger
+
+# 파일 서버 (성근 - 일단 제 기준 경로로 설정해봅니다! 추후 논의해서 결정해봐요!)
+tmpUpload=C:/javaexp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/onbiz/z99_upload/
+upload=C:/javaexp/workspace/onbiz/src/main/webapp/z99_upload/
+
+# 파일 서버 (혜진) 저도용 ! 
+tmpUpload2=C:/javaexp/workspace4/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/onbiz/z99_upload/
+upload2=C:/javaexp/workspace4/onbiz/src/main/webapp/z99_upload/
+
+#파일서버 (지은) 
+tmpUploadout=C:/projectexp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/onbiz/z99_upload/
+uploadout=C:/projectexp/workspace/onbiz/src/main/webapp/z99_upload/
+
+#파일서버-서버PC
+tmpUpload0=C:/javaexp/workspace3/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/onbiz/z99_upload/
+upload0=C:/javaexp/workspace3/onbiz/src/main/webapp/z99_upload/
+
+#이메일 설정정보(다은님) 비밀번호:집갈래13@
+email=96daeun12@gmail.com
+password=wlqrkffo13@

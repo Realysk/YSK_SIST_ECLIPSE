@@ -1,0 +1,259 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<fmt:requestEncoding value="utf-8"/>     
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>OnBiz</title>
+
+<!-- Custom fonts for this template-->
+<link href="${path}/resources/vendor/fontawesome-free/css/all.min.css" 
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,
+	400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	
+<!-- Custom styles for this template-->
+<script src="${path}/settings/jquery.min.js"></script>
+<script src="${path}/settings/jquery-ui.js"></script>
+<script src="${path}/settings/popper.min.js"></script>
+<script src="${path}/settings/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${path}/settings/bootstrap.min.css">
+<link rel="stylesheet" href="${path}/settings/jquery-ui.css">
+
+<!--  1001 위에 설정들을 그대로 가져가주세요~! 그리고 밑에 각 부분에 맞게 include 파일을 넣어주세요! 
+	sidebar, header, footer 있고 body에는 id="page-top" 설정해주셔야 위로 스크롤링 될거에요 -->
+	
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$("#btnSch").click(function(){
+			schTask();	
+		});
+		
+		
+		$("[name=schcontent]").keyup(function(event){
+			schTask();	
+			console.log(event.keyCode + " 입력한 키보드값");
+			
+			if(event.keyCode == 13) {
+				schTask();
+				console.log("13확인");
+			}
+			
+		});
+		
+		$(".detail").on("click",function(){
+			console.log("행 클릭됨!");
+		});
+		
+		
+		function schTask() {
+			$.ajax ({
+				type:"post",
+				url:"ontask.do?method=schList",
+				data:$("#frm01").serialize(),
+				dataType:"json",
+				success:function(data){
+					console.log(data.mytasklist);
+					var list = data.mytasklist;
+					var show = "";
+					
+					$(list).each(function(idx, tk){
+						show += "<tr class='detail text-center'><td>" + tk.pro_name + "</td>";
+						show += "<td>" + tk.task_name + "</td>";
+						show += "<td>" + tk.task_content + "</td>";
+						
+						const startDte = new Date(tk.task_startdte);
+						var sYear = startDte.getFullYear();
+						var sMon = startDte.getMonth();
+						var sDay = startDte.getDate();
+						
+						const endDte = new Date(tk.task_enddte);
+						var eYear = endDte.getFullYear();
+						var eMon = endDte.getMonth();
+						var eDay = endDte.getDate();
+						
+						show += "<td>"+sYear+". "+sMon+". " +sDay+"</td>";
+						show += "<td>"+eYear+". "+eMon+". " +eDay+"</td>";
+						
+						show += "<td>" + tk.task_prior + "</td>";
+						show += "<td>" + tk.task_state + "</td>";
+						show += "<td>산출물</td></tr>";
+					});
+					
+					$("#dataTable tbody").html(show);
+					
+				}, 
+				error:function(err){
+					console.log(err);
+				}
+			});
+		}
+		
+	});
+</script>
+</head>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    
+	<jsp:include page="/common/sidebar.jsp"/>
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- Main Content -->
+		<div id="content">
+			<jsp:include page="/common/header.jsp"/>
+				
+			<!-- Section : 구현 내용 -->
+           	<div class="container-fluid">
+           	
+           	<ul class="nav nav-tabs"> 
+           		<li class="active"><a href="#" data-toggle="tab">탭 이름1</a></li> 
+           		<li><a href="#" data-toggle="tab">탭 이름2</a></li>
+           	</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane fade in active" id="home">Home 메뉴</div>
+			</div>
+
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">작업 목록</h6>
+				</div>
+				<div class="card-body">
+					<div class="row justify-content-between">
+						<div class="col-sm-12 col-md-4 col-lg-4">
+							<div class="dropdown">
+								<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
+									data-toggle="dropdown" aria-expanded="true">
+								    프로젝트 선택
+								    	<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+									<li>프로젝트1</li>
+									<li><a role="menuitem" tabindex="-1" href="#">프로젝트2</a></li>
+									<li><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+									<li><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-auto">
+							<div class="input-group">
+								<form id="frm01" class="form-inline"  method="post">
+									<input type="text" name="schcontent" class="form-control mr-sm-2" placeholder="작업명 or 작업내용 검색">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button" id="btnSch">검색</button>
+									</span>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" 
+							width="100%" cellspacing="0">
+							<col width="15%">
+							<col width="10%">
+							<col width="15%">
+							<col width="10%">
+							<col width="12%">
+							<col width="12%">
+							<col width="10%">
+							<col width="15%">
+						<thead>
+							<tr class="text-center">
+								<th>프로젝트명</th>
+								<th>작업명</th>
+								<th>작업내용</th>
+								<th>시작일</th>
+								<th>종료일</th>
+								<th>우선순위</th>
+								<th>진행상태</th>
+								<th>산출물</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="ts" items="${mytasklist}">
+							<tr class="detail text-center">
+								<td>${ts.pro_name}</td>
+								<td>${ts.task_name}</td>
+								<td>${ts.task_content}</td>
+								<td><fmt:formatDate value="${ts.task_startdte}"/></td>
+								<td><fmt:formatDate value="${ts.task_enddte}"/></td>
+								<c:choose>
+									<c:when test="${ts.task_prior == 0}">
+										<td></td>
+									</c:when>
+									<c:otherwise>
+										<td>${ts.task_prior}</td>
+									</c:otherwise>	
+									</c:choose>
+								<td>${ts.task_state}</td>
+								<td>산출물버튼</td>
+							</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+           	</div>
+            <!--  Section and -->
+
+		</div>
+		<!-- End of Main Content -->
+		<jsp:include page="/common/footer.jsp"/>
+
+	</div>
+	<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+    
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+		<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+		<div class="modal-footer">
+			<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+			<a class="btn btn-primary" href="login.html">Logout</a>
+		</div>
+		</div>
+	</div>
+</div>
+    
+<!-- Custom scripts for all pages-->
+<script src="${path}/resources/js/sb-admin-2.min.js"></script>
+	
+<!-- Bootstrap core JavaScript-->
+<script src="${path}/resources/vendor/jquery/jquery.min.js"></script>
+<script src="${path}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="${path}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+    
+</body>
+</html>

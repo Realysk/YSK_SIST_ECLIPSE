@@ -1,0 +1,537 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<fmt:requestEncoding value="utf-8"/>     
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>OnBiz</title>
+
+<!-- Custom fonts for this template-->
+<link href="${path}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<script src="${path}/settings/jquery.min.js"></script>
+<script src="${path}/settings/popper.min.js"></script>
+<script src="${path}/settings/bootstrap.min.js"></script>
+<script src="${path}/resources/vendor/chart.js/Chart.min.js"></script>
+<link href="${path}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="${path}/settings/bootstrap.min3.css">
+<link rel="stylesheet" href="${path}/settings/bootstrap-datepicker3.standalone.css">
+
+<script src="${path}/settings/bootstrap-datepicker.js"></script>
+<script src="${path}/settings/bootstrap-datepicker.ko.min.js"></script>
+
+
+<style type="text/css">
+
+a{color:black;}
+
+#date1, #date2 {width:120px;}
+
+#pagePath {padding:1%; background:transparent;}
+
+.form-control {height:50px;}
+
+
+.card {margin:1%;}
+
+.card-body {padding:0 1% 0 1%;}
+
+</style>
+<script type="text/javascript">
+
+//id
+function detail(no) {
+	
+	$.ajax({
+		type:"post",
+		url:"${path}/ontask.do?method=detailTask",
+		data:"id="+no,
+		dataType:"json",
+		success:function(data){
+			console.log(data.detail);
+			var tk = data.detail;
+
+			console.log(tk.start_date);
+			$(".modal-title").text("작업 내용");
+			$("[name=id]").val(tk.id);
+			$("[name=text]").val(tk.text);
+			$("[name=content]").val(tk.content);
+			$("#start_date").val(tk.start_date);
+			$("#end_date").val(tk.end_date);
+			$("[name=duration]").val(tk.duration);
+			$("[name=priority]").val(tk.priority);
+			$("[name=parent]").val(tk.parent);
+			
+			
+			$("#btnReg").hide();
+			$("#btnUpt").show();
+			$("#btnDel").show();
+			$("#title").click();
+		}, 
+		error:function(err){
+			console.log(err);
+		}
+	});
+
+}
+
+
+
+
+	$(document).ready(function(){
+		
+		
+	$.datepicker.setDefaults({
+        dateFormat: 'yy-mm-dd',
+        prevText: '이전 달',
+        nextText: '다음 달',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        showMonthAfterYear: true,
+        yearSuffix: '년'
+    });
+	
+	$("#start_date, #end_date").datepicker();
+	
+	$("#start_date").datepicker("option", "maxDate", $("#end_date").val());
+    $("#start_date").datepicker("option", "onClose", function ( selectedDate ) {
+        $("#end_date").datepicker( "option", "minDate", selectedDate );
+    });
+    
+    
+    
+    $("#end_date").datepicker("option", "minDate", $("#start_date").val());
+    $("#end_date").datepicker("option", "onClose", function ( selectedDate ) {
+        $("#start_date").datepicker( "option", "maxDate", selectedDate );
+    });
+	
+		/*
+			$('#start_date').datepicker({
+			    format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+			    autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+			    calendarWeeks : false, //캘린더 옆에 몇 주차인지 보여주는 옵션 기본값 false 보여주려면 true
+			    clearBtn : false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
+			    disableTouchKeyboard : false,	//모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
+			    immediateUpdates: false,	//사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false 
+			    multidate : false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
+			    multidateSeparator :",", //여러 날짜를 선택했을 때 사이에 나타나는 글짜 2019-05-01,2019-06-01 
+			    showWeekDays : true ,// 위에 요일 보여주는 옵션 기본값 : true
+			    title: "작업시작일",	//캘린더 상단에 보여주는 타이틀
+			    todayHighlight : true ,	//오늘 날짜에 하이라이팅 기능 기본값 :false 
+			    toggleActive : true,	//이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
+			    language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+			});//datepicker end
+		
+			$('#end_date').datepicker({
+			    format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+			    autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+			    calendarWeeks : false, //캘린더 옆에 몇 주차인지 보여주는 옵션 기본값 false 보여주려면 true
+			    clearBtn : false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
+			    disableTouchKeyboard : false,	//모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
+			    immediateUpdates: false,	//사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false 
+			    multidate : false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
+			    showWeekDays : true ,// 위에 요일 보여주는 옵션 기본값 : true
+			    title: "작업종료일",	//캘린더 상단에 보여주는 타이틀
+			    todayHighlight : true ,	//오늘 날짜에 하이라이팅 기능 기본값 :false 
+			    toggleActive : true,	//이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
+			    language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+			});//datepicker end
+		
+		*/
+		
+
+		
+		viewTask($("#proSel").val());
+			
+		$("#proSel").on("change", function(){
+			console.log("선택한 val값 : " + $(this).val());
+			viewTask($(this).val());
+		});
+		
+		$("#end_date").change(function(){
+			console.log($("#end_date").val());
+			var stDte = new Date($("#start_date").datepicker().val());
+			var edDte = new Date($("#end_date").datepicker().val());
+
+		    const elapsedMSec = edDte.getTime() - stDte.getTime(); // 시간으로 변환
+			const elapsedDay = elapsedMSec / 1000 / 60 / 60 / 24; // 경과일 체크
+		    
+		    console.log(elapsedDay + "일");
+  			$("[name=duration]").val(elapsedDay);
+		});
+		
+		$("#dateClick").click(function(){
+			var stDte = new Date($("#start_date").datepicker().val());
+			var edDte = new Date($("#end_date").datepicker().val());
+
+		    const elapsedMSec = edDte.getTime() - stDte.getTime(); // 시간으로 변환
+			const elapsedDay = elapsedMSec / 1000 / 60 / 60 / 24; // 경과일 체크
+		    
+		    console.log(elapsedDay + "일");
+  			$("[name=duration]").val(elapsedDay);
+		});
+		
+		// 검색 - Click 처리
+		$("#btnSch").click(function(){
+			schTask();	
+			$(this).val("");
+		});
+			
+		// 검색 - KeyDown 처리
+		$("[name=task_content]").on("keydown", function(event){
+			event.preventDefault(); 
+			if(event.keyCode == 13) {
+				schTask();
+				event.preventDefault(); 
+				$(this).val("");
+			}
+			
+		});
+		
+
+		
+
+		// 등록 
+		$("#btnFrm").click(function(){
+			$("#regFrm")[0].reset();
+			$(".modal-title").text("작업 등록");
+			$("#btnReg").show();
+			$("#btnUpt").hide();
+			$("#btnDel").hide();
+			$("#title").click();
+		});
+		
+		
+		
+		$("#btnReg").click(function(){
+			$("[name=pro_no]").val($("#proSel").val());
+			
+			taskAction("myinsert");
+			$("#btnCal").click();
+		});
+		
+		
+		
+		$("#btnUpt").click(function(){
+			$("[name=pro_no]").val($("#proSel").val());
+			taskAction("myupdate");
+			$("#btnCal").click();
+		});
+		
+		
+		$("#btnDel").click(function(){
+			$("[name=pro_no]").val($("#proSel").val());
+			taskAction("mydelete");
+			$("#btnCal").click();
+		});
+		
+
+		function viewTask(no) {
+			
+			$.ajax ({
+				type:"post",
+				url:"${path}/ontask.do?method=mytaskJson",
+				data:"pro_no=" + no,
+				dataType:"json",
+				success:function(data){
+					console.log(data.mytasklist);
+					var list = data.mytasklist;
+					
+					showTable(list);
+					
+				}, 
+				error:function(err){
+					console.log(err);
+				}
+			});
+		}
+		
+		function schTask() {
+			
+			$.ajax ({
+				type:"post",
+				url:"${path}/ontask.do?method=mySchJson",
+				data:$("#frm01").serialize(),
+				dataType:"json",
+				success:function(data){
+					console.log(data.mytasklist);
+					var list = data.mytasklist;
+		
+					showTable(list);
+					
+				}, 
+				error:function(err){
+					console.log(err);
+				}
+			});
+		}
+		
+		function showTable(list) {
+			var show = "";
+			
+			$(list).each(function(idx, tk){
+				//show += "<tr class='detail text-center'><td>"+tk.pro_name+"</td>";
+				//show += "<td>" + tk.text + "</td>";
+				show += "<tr class='text-center' ondblclick='javascript:detail("+tk.id+")'><td>"+tk.text+"</td>";
+				show += "<td>" + tk.content + "</td>";
+				
+				/*
+				const startDte = new Date(tk.start_date);
+				var sYear = startDte.getFullYear();
+				var sMon = startDte.getMonth();
+				var sDay = startDte.getDate();
+				
+				const endDte = new Date(tk.end_date);
+				var eYear = endDte.getFullYear();
+				var eMon = endDte.getMonth();
+				var eDay = endDte.getDate();
+				
+				show += "<td>"+sYear+". "+sMon+". " +sDay+"</td>";
+				show += "<td>"+eYear+". "+eMon+". " +eDay+"</td>";
+				*/
+				
+				show += "<td>" + tk.start_date + "</td>";
+				show += "<td>" + tk.end_date + "</td>";
+				show += "<td>" + tk.priority + "</td>";
+				show += "<td>" + tk.task_state + "</td>";
+				
+				if(tk.task_state == "진행중") {
+					show += "<td><button type='button' class='btn btn-primary'>제출</button></td></tr>";
+				} else {
+					show += "<td><button type='button' class='btn btn-primary disabled'>완료</td></tr>";
+				}
+				
+			});
+			
+			$("#dataTable tbody").html(show);
+		}
+		
+		function taskAction(method) {
+			
+			$.ajax ({
+				type:"post",
+				url:"${path}/ontask.do?method="+method,
+				data:$("#regFrm").serialize(),
+				dataType:"json",
+				success:function(data){
+					console.log(data.mytasklist);
+					var list = data.mytasklist;
+		
+					showTable(list);
+					
+				}, 
+				error:function(err){
+					console.log(err);
+				}
+			});
+		}
+		
+
+
+	});
+	
+	
+	
+
+	
+</script>
+</head>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    
+	<jsp:include page="/common/sidebar.jsp"/>
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- Main Content -->
+		<div id="content">
+			<jsp:include page="/common/header.jsp"/>
+				
+			<!-- Section : 구현 내용 -->
+           	<div class="container-fluid">
+           	
+           	<ol class="breadcrumb" id="pagePath">
+				  <li class="breadcrumb-item"><a href="#">Home</a></li>
+				  <li class="breadcrumb-item active">작업관리</li>
+			</ol>
+           	
+			<!-- Categories widget-->
+                    <div class="card my-4">
+                        <h5 class="card-header">작업 현황</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+ 
+                                   
+                                </div>
+                                <div class="col-lg-6">
+                                    <!-- 작업간략내용  -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+			<div class="card shadow mb-4">
+				<h5 class="card-header" id="title" data-toggle="modal" data-target="#exampleModalCenter">작업 목록</h5>
+				<div class="card-body"><br>
+					<div class="row justify-content-between">
+						<div class="col-sm-4 col-md-4 col-lg-4">
+							<select id="proSel" class="form-select">
+								<c:forEach var="pl" items="${proList}">
+									<option value="${pl.pro_no}">${pl.pro_name}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-auto">
+							<div class="input-group">
+								<form id="frm01" class="form-inline"  method="post">
+									<input type="text" name="content" class="form-control mr-sm-2" 
+										placeholder="작업명 or 작업내용 검색">
+									<span class="input-group-btn">
+										<button class="btn btn-secondary" type="button" id="btnSch">검색</button>
+										
+									</span>
+								</form>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="table">
+						<table class="table" id="dataTable" width="100%" cellspacing="0">
+							<col width="10%">
+							<col width="25%">
+							<col width="17%">
+							<col width="17%">
+							<col width="12%">
+							<col width="10%">
+							<col width="15%">
+						<thead>
+							<tr class="text-center">
+								<th>작업명</th>
+								<th>작업내용</th>
+								<th>시작일</th>
+								<th>종료일</th>
+								<th>우선순위</th>
+								<th>진행상태</th>
+								<th>산출물</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					</div>
+				</div>
+				<div class="row justify-content-between">
+					<div class="col-xs-4 col-sm-4 col-ms-4"></div>
+					<div class="col-xs-4 col-sm-4 col-ms-4"></div>
+					<div class="col-auto">
+						<button class="btn btn-primary" type="button" id="btnFrm">등록</button>　
+					</div>
+				</div><br>
+				
+			</div>
+           	</div>
+            <!--  Section and -->
+
+		</div>
+		<!-- End of Main Content -->
+		<jsp:include page="/common/footer.jsp"/>
+
+	</div>
+	<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+    
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
+
+<!-- 작업 등록 modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">작업모달창</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	<span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<form id="regFrm" class="form"  method="post">
+			<input type="hidden" name="id">
+			<input type="hidden" name="mem_no">
+			<input type="hidden" name="pro_no">
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">작업명　</span>
+				</div>
+				<input name="text" class="form-control" 
+					placeholder="입력" />	
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">작업내용</span>
+				</div>
+				<textarea name="content" rows="3" 
+				class="form-control" placeholder="입력"></textarea>
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">작업기간</span>
+				</div>
+				<input type="text" id="start_date" name="start_date"/>  -  
+				<input type="text" id="end_date" name="end_date"/>	
+			</div>
+			<div class="input-group mb-3" id="duration">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">작업기간</span>
+				</div>
+				<input type="text" name="duration" class="form-control"/>
+				<button type="button" id="dateClick" class="btn btn-outline-warning btn-sm">확인</button>
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">우선순위</span>
+				</div>
+				<input name="priority" class="form-control" 
+					placeholder="입력" />	
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">상위작업</span>
+				</div>
+				<input name="parent" class="form-control" 
+					placeholder="입력" />	
+			</div>
+	    </form> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnCal" class="btn btn-outline-primary" data-dismiss="modal">취소</button>
+        <button type="button" id="btnReg" class="btn btn-primary">등록</button>
+        <button type="button" id="btnUpt" class="btn btn-success">수정</button>
+        <button type="button" id="btnDel" class="btn btn-danger">삭제</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

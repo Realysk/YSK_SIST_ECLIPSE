@@ -1,0 +1,43 @@
+package onbiz.service;
+
+import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import onbiz.dao.Pro_regDao;
+import onbiz.vo.OnEmp;
+import onbiz.vo.OnEmp_Dept;
+import onbiz.vo.OnEmp_OnDept;
+import onbiz.vo.Ordercom;
+
+@Service
+public class Pro_regService {
+
+  @Autowired(required = false)
+  private Pro_regDao dao;
+  public ArrayList<Ordercom> ordercomList(Ordercom sch){
+      if(sch.getOrdercom_name()==null) sch.setOrdercom_name("");
+      if(sch.getOrdercom_kind()==null) sch.setOrdercom_kind("");
+      System.out.println("진행중-서비스");
+      return dao.ordercomList(sch);
+  
+  }
+  
+  //2.
+  public ArrayList<OnEmp> emplist(OnEmp sch2){
+    if(sch2.getEmp_korname()==null) sch2.setEmp_korname("");
+    if(sch2.getEmp_engname()==null) sch2.setEmp_engname("");
+    System.out.println("진행중-서비스");
+    return dao.emplist(sch2);
+
+}
+  //3. 부서명 불러오기 
+  public ArrayList<OnEmp_Dept> deptList(OnEmp_Dept sch3){
+    if(sch3.getDept_name()==null) sch3.setDept_name("");
+    return dao.deptList(sch3);
+  }
+  //4. 부서명 선택 후 결과값 불러오기
+  public ArrayList<OnEmp> empnamelist(String sch4){
+    if(sch4 == null) sch4 = "";
+    return dao.empnamelist(sch4);
+  }
+}

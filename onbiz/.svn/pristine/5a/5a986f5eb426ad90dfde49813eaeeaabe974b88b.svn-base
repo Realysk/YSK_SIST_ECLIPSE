@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="onbiz.dao.OnCalendarDao">
+
+	<resultMap type="oncal" id="calResult">
+		<result property="id" column="cal_no"/>
+		<result property="title" column="cal_name"/>
+		<result property="start" column="cal_startDte"/>
+		<result property="end" column="cal_endDte"/>
+		<result property="content" column="cal_content"/>
+		<result property="borderColor" column="cal_bdColor"/>
+		<result property="backgroundColor" column="cal_bColor"/>
+		<result property="textColor" column="cal_tColor"/>
+		<result property="allDay" column="cal_allDay"/>
+	</resultMap>
+
+	<select id="mycalList" resultMap="calResult" parameterType="String">	
+		SELECT * FROM OnCalendar
+		WHERE emp_no = #{emp_no}
+ 	</select>
+
+ 	<insert id="calInsert" parameterType="oncal">
+	 	INSERT INTO OnCalendar values(cal_no_seq.nextval, #{title}, 
+		 	to_char(sysdate,'YYYY-MM-DD'), NULL, #{start}, #{end}, 
+		 	#{content}, #{borderColor}, #{backgroundColor}, 
+		 	#{textColor}, #{allDay}, #{emp_no})
+ 	</insert>
+ 	
+ 	<update id="calUpdate" parameterType="oncal">
+ 		update OnCalendar 
+ 		set cal_name=#{title}, cal_uptDte=to_char(sysdate,'YYYY-MM-DD'), 
+ 			cal_startDte=#{start}, cal_endDte=#{end}, cal_content=#{content}, 
+ 			cal_bdColor=#{borderColor}, cal_bColor=#{backgroundColor}, 
+ 			cal_tColor=#{textColor}, cal_allDay=#{allDay}
+ 		where emp_no=#{emp_no} 
+ 		and cal_no=#{id}
+ 	</update>
+ 	
+ 	<delete id="calDelete" parameterType="oncal">
+ 		delete from OnCalendar 
+ 		where emp_no=#{emp_no} and cal_no=#{id}
+ 	</delete>
+
+</mapper>	

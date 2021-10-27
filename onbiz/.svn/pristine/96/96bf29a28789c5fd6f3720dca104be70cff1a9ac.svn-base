@@ -1,0 +1,614 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<fmt:requestEncoding value="utf-8"/>     
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>OnBiz</title>
+<!-- Custom fonts for this template-->
+<link href="${path}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css?v=7.1.7">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<!-- Custom styles for this template-->
+<script src="${path}/settings/jquery.min.js"></script>
+<script src="${path}/settings/jquery-ui.js"></script>
+<script src="${path}/settings/popper.min.js"></script>
+<script src="${path}/settings/bootstrap.min.js"></script>
+<link href="${path}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${path}/settings/jquery-ui.css">
+<link rel="stylesheet" href="${path}/settings/bootstrap.min3.css">
+
+<!-- Gantt Chart 적용 -->
+<link rel="stylesheet" href="${path}/settings/dhtmlxgantt_meadow.css" >
+<script src="${path}/settings/dhtmlxgantt.js"></script>
+
+<style>
+
+body { font-family: 'Nanum Gothic', sans-serif; font-size: 14px;}
+  
+.folder_row { font-weight: bold;}
+  
+.group_row, .group_row.odd, .gantt_task_row.group_row {
+	background-color: rgba(232, 232, 232, 0.3);
+}
+	
+.highlighted_resource, .highlighted_resource.odd {
+	background-color: rgba(255, 251, 224, 0.3);
+}
+
+#pagePath {padding:1%; background:transparent;}
+
+.card {margin:1%;}
+
+.card-body {padding:0 1% 0 1%;}
+
+		.fa {
+			cursor: pointer;
+			font-size: 14px;
+			text-align: center;
+			opacity: 0.2;
+			padding: 5px;
+		}
+
+		.fa:hover {
+			opacity: 1;
+		}
+
+		.fa-pencil {
+			color: #ffa011;
+		}
+
+		.fa-plus {
+			color: #328EA0;
+		}
+
+		.fa-times {
+			color: red;
+		}
+
+</style>
+<script type="text/javascript">
+
+function clickGridButton(id, action) {
+	switch (action) {
+		case "edit":
+			gantt.showLightbox(id);
+			break;
+		case "add":
+			gantt.createTask(null, id);
+			break;
+		case "delete":
+			gantt.confirm({
+				title: gantt.locale.labels.confirm_deleting_title,
+				text: gantt.locale.labels.confirm_deleting,
+				callback: function (res) {
+					if (res)
+						gantt.deleteTask(id);
+				}
+			});
+			break;
+	}
+}
+
+
+//프로젝트 참여 멤버 가져오기 
+function memList(no) {
+	var mems = [];
+	var list = [];
+	var members = {};
+	
+	$.ajax({
+		type:"get",
+		url:"${path}/ontask.do?method=userList",
+		data:"pro_no="+no,
+		dataType:"json",
+		success:function(data){
+			console.log("참여멤버리스트");
+			console.log(data.userList);
+			
+			 $.each(data.userList,function(index, list){
+					mems.push({key:list.user, label:list.user});
+
+				});
+
+			members = JSON.parse(JSON.stringify(mems));
+			console.log(members);
+			gantt.updateCollection("user", members);
+			//gantt.updateCollection("lists", list);
+			//gantt.serverList("user")
+		},
+		error:function(err){
+			console.log(err);
+		}
+	});
+	
+	console.log(mems);
+	return list;
+}
+
+
+
+	$(document).ready(function(){
+
+		// 임시데이터변수
+		var memNo = "mem1001";
+		var memlist = [];
+		
+		// 초기화면 설정
+		console.log("초기 프로젝트 : " + $("#proSel").val());
+		ganttShow($("#proSel").val());
+		memlist = memList($("#proSel").val());
+		
+		// 조회할 프로젝트 변경시
+		$("#proSel").on("change", function(){
+			var proVal = $(this).val();
+			console.log("선택한 프로젝트번호: " + proVal);
+			ganttShow(proVal);
+			memlist = memList(proVal);
+			
+			
+		});
+		
+		
+		// 간트차트 설정
+		gantt.config.date_format = "%Y-%m-%d";
+		
+		
+		
+		
+
+		
+		
+		
+		// 삽입, 수정, 삭제 버튼 
+		var colHeader = '<div class="gantt_grid_head_cell gantt_grid_head_add" onclick="gantt.createTask()"></div>',
+		colContent = function (task) {
+			return ('<i class="fa gantt_button_grid gantt_grid_edit fa-pencil" onclick="clickGridButton(' + task.id + ', \'edit\')"></i>' +
+				'<i class="fa gantt_button_grid gantt_grid_add fa-plus" onclick="clickGridButton(' + task.id + ', \'add\')"></i>' +
+				'<i class="fa gantt_button_grid gantt_grid_delete fa-times" onclick="clickGridButton(' + task.id + ', \'delete\')"></i>');
+		};
+
+		// gantt.config.reorder_grid_columns = true;
+		// 간트차트의 왼쪽 그리드 설정
+		gantt.config.columns = [
+			{name: "wbs", label: "WBS", min_width: 70, width: 70, align: "center", template: gantt.getWBSCode, resize:false},
+			//{name: "id", align: "center", label: "번호", min_width: 50, width: 50, resize:false},
+			//{name: "", align: "center", label: "번호", min_width: 50, width: 50, resize:false},
+			{name: "text", label: "작업명", tree: true, min_width: 100, width: 200, resize:false},
+			// {name: "type", label:"분류", align: "center", width: 60, template: function(task){return task.type || gantt.config.types.task}, resize:true},
+			{name: "start_date", label:"시작일", align: "center", width: 90, resize:false},
+			//{name: "end_date", label:"종료일", align: "center", width: 90, template: function(task){
+			//		return gantt.templates.date_grid(task.end_date, task);
+			//	}, resize:false},
+			{name: "duration", label:"기간", align: "center", width: 60, resize:false},
+			{name: "user", label:"담당자",  align: "center", width: 70, resize:false},
+			{
+				name: "buttons",
+				label: colHeader,
+				width: 75,
+				template: colContent
+			}
+		];
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		// 간트차트의 레이아웃 설정
+		gantt.config.layout = {
+				css: "gantt_container",
+				cols: [
+						{ width:566, min_width:566, 
+						  rows:[{view: "grid", scrollX: "gridScroll", scrollable: true, scrollY: "scrollVer"}]
+						},
+						{resizer: true, width: 1},
+						{ width:800, min_width:800,
+						  rows:[{view: "timeline", scrollX: "scrollHor", scrollY: "scrollVer"},
+								{view: "scrollbar", id: "scrollHor", group:"horizontal"}]
+						},
+						{view: "scrollbar", id: "scrollVer"}
+					]
+			};
+		
+		// 간트차트의 CSS 설정
+		gantt.templates.grid_row_class = function(start, end, task){
+			var css = [];
+			if(gantt.hasChild(task.id)){
+				css.push("folder_row");
+			}
+
+			if(task.$virtual){
+				css.push("group_row")
+			}
+
+			if(task.parent == 0){
+				css.push("highlighted_resource");
+			}
+
+			return css.join(" ");
+		};
+		
+		// 우선순위 선택
+		var opts = [
+		    { key: 1, label: 'High' },
+		    { key: 2, label: 'Normal' },
+		    { key: 3, label: 'Low' }
+		];
+		
+		
+		
+		
+		
+		// 입력창 커스텀
+		gantt.config.lightbox.sections = [
+		    {name:"text", 		 height:30, map_to:"text", type:"textarea", focus:true, default_value:""},
+		    {name:"content", 	 height:30, map_to:"content", type:"textarea", default_value:""},
+		    {name:"user",        height:30, map_to:"user", type:"select", options:gantt.serverList("user")},
+		    {name:"priority",    height:30, map_to:"priority", type:"textarea"},
+		    {name:"parent", 	 height:30, type:"parent", allow_root:"true", root_label:"상위작업선택"},
+		    {name:"time",        height:50, map_to:"auto", type:"duration", time_format:["%Y","%m","%d"]},
+		];
+		
+		// 출력형식
+		gantt.templates.task_text = function(start,end,task){
+		    return "["+task.text+"] "+task.user;
+		};
+		
+		// 입력창 날짜형식
+		gantt.templates.task_date= function(date){
+		    return gantt.date.date_to_str(gantt.config.date_format)(date);
+		};
+
+		// 입력창 상위작업 선택 영역 제목 설정
+		gantt.locale.labels.section_text = "작업명";
+		gantt.locale.labels.section_content = "작업내용";
+		gantt.locale.labels.section_time = "작업 일정 선택";
+		gantt.locale.labels.section_user = "작업 담당자";
+		gantt.locale.labels.section_priority = "작업 우선순위";
+		gantt.locale.labels.section_parent = "상위작업";
+		
+		
+		gantt.attachEvent("onLightbox", function (task_id){
+		    console.log("입력창/상세정보창 열었을때");
+		    console.log("입력 task_id : " + task_id);
+		    
+		    var value = gantt.getLightboxSection('text').getValue();
+		    
+		    // 새로운 작업 생성시 작업명 초기화 
+		    if(value == "New task"){
+		    	 gantt.getLightboxSection('text').setValue('');
+		    }
+		   
+		    
+		    //gantt.getTask(task_id);
+		    //console.log(gantt.getTask(task_id));
+		});
+		
+		
+		/*
+		if (gantt.getState().lightbox){
+		    //the code for the opened lighbox
+		    console.log("등록창 열음");
+		    var value = gantt.getLightboxSection('description').getValue();
+		} else {
+		    //the code for the closed lighbox
+			console.log("등록창 닫음");
+		}
+		*/
+/*
+		task_no NUMBER PRIMARY KEY , -- *작업번호(id)
+		task_name varchar2(100), -- *작업명(text)
+		task_startdte varchar2(50), -- *작업 시작일(start_date)
+		task_enddte varchar2(50), -- 작업 종료일(end_date)
+		task_duration NUMBER, -- *작업 기간(duration)
+		task_progress NUMBER, -- *작업 진행퍼센트(progress)
+		taskref_no NUMBER, -- *상위작업번호(parent)
+		task_prior varchar2(20), -- *작업 우선순위(priority)
+		*/
+		
+		// 테스크 생성시에 작동 
+		gantt.attachEvent("onAfterTaskAdd", function(id,item){
+		    //any custom logic here
+		    console.log("추가후???" + item);
+		    console.log("1작업번호: " + item.id);
+		    console.log("1작업번호?: " + id);
+		    console.log("2작업명: " + item.text);
+		    
+		    console.log("3작업시작일: " + item.start_date.toLocaleString());
+		    console.log("4작업종료일: " + item.end_date.toLocaleString());
+		    console.log("5작업기간: " + item.duration);
+		    console.log("6작업퍼센트: " + item.progress);
+		    console.log("7상위작업: " + item.parent);
+		    console.log("8작업우선순위: " + item.priority);
+		    console.log("9작업명: " + item.content);
+		    console.log("9담당자명: " + item.user);
+
+		    console.log(gantt.getTask(id));
+
+		    $("[name=text]").val(item.text);
+		    $("[name=content]").val(item.content);
+		    $("[name=user]").val(item.user);
+		    $("[name=start_date]").val(item.start_date.toLocaleString());
+		    $("[name=end_date]").val(item.end_date.toLocaleString());
+		    $("[name=duration]").val(item.duration);
+		    $("[name=progress]").val(item.progress);
+		    $("[name=parent]").val(item.parent);
+		    $("[name=priority]").val(item.priority);
+		    $("[name=mem_no]").val(memNo);
+		
+		    
+		    ganntCRUD("insertTask");
+		    
+		});
+		
+		gantt.attachEvent("onAfterTaskUpdate", function(id,item){
+		    //any custom logic here
+		    
+		    console.log("업데이트함!");
+		    console.log(item);
+		    console.log("1작업번호: " + item.id);
+		    console.log("1작업번호?: " + id);
+		    console.log("2작업명: " + item.text);
+		    
+		    console.log("3작업시작일: " + item.start_date.toLocaleString());
+		    console.log("4작업종료일: " + item.end_date.toLocaleString());
+		    console.log("5작업기간: " + item.duration);
+		    console.log("6작업퍼센트: " + item.progress);
+		    console.log("7상위작업: " + item.parent);
+		    console.log("8작업우선순위: " + item.priority);
+		    console.log("9작업명: " + item.content);
+		    console.log("9담당자명: " + item.user);
+		    
+		    fromAdd(item);
+		    ganntCRUD("updateTask");
+		});
+		
+		gantt.attachEvent("onAfterTaskDelete", function(id,item){
+		    //any custom logic here
+			console.log("삭제함!");
+		    console.log(item);
+		    console.log("1작업번호: " + item.id);
+		    console.log("1작업번호?: " + id);
+		    console.log("2작업명: " + item.text);
+		    
+		    console.log("3작업시작일: " + item.start_date.toLocaleString());
+		    console.log("4작업종료일: " + item.end_date.toLocaleString());
+		    console.log("5작업기간: " + item.duration);
+		    console.log("6작업퍼센트: " + item.progress);
+		    console.log("7상위작업: " + item.parent);
+		    console.log("8작업우선순위: " + item.priority);
+		    console.log("9작업명: " + item.content);
+		    console.log("9담당자명: " + item.user);
+		    
+		    fromAdd(item);
+		    ganntCRUD("deleteTask");
+		});
+		
+		
+		// 라이트박스의 save버튼을 눌렀을 때 유효성체크 
+		gantt.attachEvent("onLightboxSave", function(id, item){
+			
+			// 다른 데이터도 추가할 예쩡
+		    if(!item.text){
+		    	alert("작업명을 입력하세요!");
+		        return false;
+		    }
+		    if(!item.user){
+		    	alert("담당자를 선택하세요!");
+		        return false;
+		    }
+		        return true;
+		});
+	
+		
+		// 작업의 내용 확인을 위해 오픈 설정
+		gantt.config.open_tree_initially = true;
+
+		gantt.init("gantt_here");
+		
+		/*
+		gantt.parse({
+		  data: [
+			  {id:1, text:"Project #1", start_date:"01-04-2020", duration:18},
+			  {id:2, text:"Task #1", start_date:"02-04-2020", duration:8, parent:1},
+			  {id:3, text:"Task #2", start_date:"11-04-2020", duration:8, parent:1}
+		  ],
+		  links:[
+		    {id:1, source:2, target:3, type:"0"},
+		    {id:2, source:3, target:4, type:"0"},
+		    {id:3, source:5, target:6, type:"0"}
+		  ]
+		});
+		
+		// 작업을 클릭하면 나타남
+		gantt.attachEvent("onTaskClick", function(id, e) {
+		    alert("You've just clicked an item with id="+id);
+		});
+		
+		*/
+		
+		function fromAdd(item) {
+			$("[name=text]").val(item.text);
+			$("[name=id]").val(item.id);
+		    $("[name=content]").val(item.content);
+		    $("[name=user]").val(item.user);
+		    $("[name=start_date]").val(item.start_date.toLocaleString());
+		    $("[name=end_date]").val(item.end_date.toLocaleString());
+		    $("[name=duration]").val(item.duration);
+		    $("[name=progress]").val(item.progress);
+		    $("[name=parent]").val(item.parent);
+		    $("[name=priority]").val(item.priority);
+		    $("[name=mem_no]").val(memNo);
+		}
+		
+		
+		// 간트차트에 나타낼 작업 호출
+		function ganttShow(no) {
+			gantt.clearAll();
+			$.ajax({
+				type:"post",
+				url:"${path}/ontask.do?method=gatlist",
+				data:"pro_no=" + no,
+				dataType:"json",
+				success:function(data){
+					console.log("작업리스트");
+					console.log(data);
+					gantt.parse(data);
+				},
+				error:function(err){
+					console.log(err);
+				}
+			});
+		}
+		
+		function ganntCRUD(method) {
+			//gantt.clearAll();
+			$.ajax({
+				type:"post",
+				url:"${path}/ontask.do?method="+method,
+				data:$("#taskFrm").serialize(),
+				dataType:"json",
+				success:function(data){
+					console.log("CRUD");
+					console.log(data);
+					//gantt.parse(data);
+					location.reload();
+				},
+				error:function(err){
+					console.log(err);
+				}
+			});
+		}
+		
+		
+		
+		
+		
+	
+	});
+
+</script>
+</head>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+	    
+	<jsp:include page="/common/sidebar.jsp"/>
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- Main Content -->
+		<div id="content">
+			<jsp:include page="/common/header.jsp"/>
+					
+			<!-- Section : 구현 내용 -->
+	        <div class="container-fluid">
+
+			
+				<ol class="breadcrumb" id="pagePath">
+				  <li class="breadcrumb-item"><a href="#">Home</a></li>
+				  <li class="breadcrumb-item active">작업할당</li>
+				</ol>
+				
+				
+
+				<!--  3번 네비바 : 페이지 이동
+				
+				<nav class="navbar pagenav navbar-expand-sm bg-dark navbar-dark">
+				  <ul class="navbar-nav">
+				    <li class="nav-item">
+				      <a class="nav-link" href="#">프로젝트 등록</a>
+				    </li>
+				    <li class="nav-item">
+				      <a class="nav-link" href="#">멤버 등록</a>
+				    </li>
+				    <li class="nav-item active">
+				      <a class="nav-link" href="${path}/ontask.do?method=gantt">작업 할당</a>
+				    </li>
+				  </ul>
+				</nav>
+				 -->
+				<div class="card shadow mb-4">
+				  <div class="card-header">
+					  <h4>작업 할당</h4>
+				  </div>
+				  <div class="card-body">
+					<div class="row justify-content-between">
+						<div class="col-sm-4 col-md-4 col-lg-4"><br>
+							<select id="proSel"  class="form-select">
+								<c:forEach var="pl" items="${proList}">
+									<option value="${pl.pro_no}">${pl.pro_name}</option>
+								</c:forEach>
+							</select><br>
+						</div>
+					</div>
+					<div id="gantt_here" style='width:100%; height:80vh;'></div><br>
+				  </div>
+				</div>
+
+
+ 			</div><!-- Section end -->
+		</div><!-- End of Main Content -->		
+		<jsp:include page="/common/footer.jsp"/>
+	</div> 
+	<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+    
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
+
+<div>
+	<form id="taskFrm" class="form"  method="post">
+		<input type="hidden" name="id">
+		<input type="hidden" name="text">
+		<input type="hidden" name="user">
+		<input type="hidden" name="start_date">
+		<input type="hidden" name="end_date">
+		<input type="hidden" name="duration">
+		<input type="hidden" name="progress">
+		<input type="hidden" name="parent">
+		<input type="hidden" name="priority">
+		<input type="hidden" name="content">
+		<input type="hidden" name="mem_no">
+	</form>
+</div>
+
+<!-- 작업 등록 modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">작업 등록</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	<span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<form id="regFrm" class="form"  method="post">
+			<input type="hidden" name="">
+	    </form> 
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+package onbiz.controller.task;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class TaskCtrl {
+
+	// http://localhost:7080/onbiz/ganttChart.do
+	@RequestMapping("ganttChart.do")
+	public String ganttChart() {
+		return "task/MTA001-ganttChart";
+	}
+	
+	// http://localhost:7080/onbiz/taskAdmin.do
+	@RequestMapping("taskAdmin.do")
+	public String taskAdmin() {
+		return "task/MTA002-taskAdmin";
+	}
+}

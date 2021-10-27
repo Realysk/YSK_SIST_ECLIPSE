@@ -1,0 +1,52 @@
+/* 회사의 임직원 정보 테이블 */
+
+create table OnEmp( -- 사원 테이블
+	emp_no varchar2(50) PRIMARY KEY, -- 사원번호, 아이디로 사용
+	emp_auth varchar2(50), -- 권한
+	emp_pass varchar2(50), -- 비밀번호
+	emp_korname varchar2(50), -- 한글이름
+	emp_engname varchar2(50), -- 영어이름
+	emp_email varchar2(100), -- 이메일
+	emp_hiredte date, -- 입사일
+	emp_birth date, -- 생년월일
+	emp_content varchar2(300), -- 소개
+	emp_profile varchar2(100), -- 증명사진 
+	emp_tel varchar2(100), -- 전화번호
+	emp_addr varchar2(100), -- 주소
+	emp_workst varchar2(50), -- 재직상태
+	emp_workchdte date -- 재직상태변경일
+);
+
+
+create table OnEmp_position( -- 사원_직급	
+	ptn_no varchar2(10) primary key, -- 사원직급 번호
+	ptn_name varchar2(30) -- 사원 직급 이름
+	);
+
+create table OnEmp_Dept(
+	
+	dept_no varchar2(10) PRIMARY KEY, -- 부서번호
+	dept_name varchar2(30), -- 부서이름
+	dept_loc varchar2(50) -- 부서 위치
+
+);
+
+create table OnEmp_Auth( --사원권한 = 직책
+	auth_no varchar2(10) PRIMARY KEY, -- 사원 권한번호
+	auth_name varchar2(30) -- 사원 권한명
+);
+
+-- 10개 
+
+/* 사원번호(pk), 사원권한, 사원 비밀번호, 사원 한글이름, 사원 영어이름, 
+사원 이메일, 사원 입사일, 사원 생년월일, 사원 소개, 사원 사진파일명, 사원전화번호, 사원 주소, 
+사원 재직상태, 사원재직상태변경일 */
+
+insert into OnEmp values ('TM2007001','TM','zip1234','이정호', 'Lee Jungho','Jungho@gmail.com','2007/02/25', '1980/05/28', '2009년 J프로젝트 PM','img1113.jpg', 01088445656, '서울특별시 종로구', '재직', '2007/02/25');
+insert into OnEmp values ('HR2005021','HR','tjdnf12','김서연', 'Kim Seoyeon','kimhun33@onbiz.com','2005/02/22', '1978/02/04', 'HR 인사팀','img1125.jpg', 01011111313, '서울특별시 중구', '재직', '2005/02/22');
+insert into OnEmp values ('TM2013011','TM','52522013','이하윤', 'Lee Hayoon','55leaun@onbiz.com','2013/08/25', '1990/11/24', '2013년 H프로젝트 TM','img1136.jpg', 01013134545, '서울특별시 성동구', '재직', '2013/08/25');
+insert into OnEmp values ('TM2015005','PM','8282zzzz','박예린', 'Park Yerin','park14@onbiz.com','2015/02/20', '1992/04/20', '2015년 T프로젝트 PM','img1144.jpg', 01092828686, '서울특별시 관악구', '재직', '2015/02/20');
+insert into OnEmp values ('TM2015009','TM','soso0701','임소율', 'Lim Soyul','limrim@onbiz.com','2015/02/20', '1991/07/01', '2015년 E프로젝트 TM','img1145.jpg', 01019283333, '서울특별시 관악구', '재직', '207/02/20');
+insert into OnEmp values ('TM2014001','HR','kjsu13','김철수', 'Kim Chulsoo','Chulsoo@gmail.com','2014/08/25', '1989/12/28', '2014년 인사팀 입사','img1551.jpg', 01077778888, '서울특별시 종로구', '재직', '207/02/25');
+insert into OnEmp values ('HR2005011','HR','junjim','윤이준', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2005년 인사팀 입사','img1114.jpg', 01083321675, '서울특별시 중구', '퇴직', '2008/07/12');
+insert into OnEmp values ('TM2010032','TM','122477','강산', 'Kang San','KangSan15@gmail.com','2010/08/25', '1985/11/17', '2010년 H프로젝트 PM','img123123.jpg', 01051604512, '서울특별시 노원구', '퇴직', '2011/06/03');

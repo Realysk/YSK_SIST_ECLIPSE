@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    
+    <typeAliases>
+         <typeAlias alias="onapproval" type="onbiz.vo.OnApproval"/>
+         <typeAlias alias="onapprovalview" type="onbiz.vo.OnApprovalView"/>
+         <typeAlias alias="onapprovalsch" type="onbiz.vo.OnApprovalSch"/>
+         <typeAlias alias="onapprovaldetail" type="onbiz.vo.OnApprovalDetail"/>
+         <typeAlias alias="onboard" type="onbiz.vo.OnBoard"/>
+         <typeAlias alias="onboardsch" type="onbiz.vo.OnBoardSch"/>
+         <typeAlias alias="onboardfile" type="onbiz.vo.OnBoardFile"/>
+         <typeAlias alias="onemp" type="onbiz.vo.OnEmp"/>
+         <typeAlias alias="onoutput" type="onbiz.vo.OnOutput"/>
+         <typeAlias alias="onproject" type="onbiz.vo.Onproject"/>
+         <typeAlias alias="ontask" type="onbiz.vo.OnTask"/>
+         <typeAlias alias="ordercom" type="onbiz.vo.Ordercom"/>
+         <typeAlias alias="ontaskproject" type="onbiz.vo.OnTask_Project"/>
+         <typeAlias alias="Onemp_dept" type="onbiz.vo.OnEmp_Dept"/>
+         <typeAlias alias="empdept" type="onbiz.vo.OnEmp_OnDept"/>
+         <typeAlias alias="onprojectmember" type="onbiz.vo.OnProject_Member"/>
+         <typeAlias alias="onprojectfile" type="onbiz.vo.OnProject_File"/>
+         <typeAlias alias="oncal" type="onbiz.vo.OnCalendar"/>
+         <typeAlias alias="ongantt" type="onbiz.vo.OnGantt"/>
+         <typeAlias alias="onprojectmember2" type="onbiz.vo.Onproject_Member2"/>
+         <typeAlias alias="onrisk" type="onbiz.vo.OnRisk"/>
+         <typeAlias alias="onrisksch" type="onbiz.vo.OnRiskSch"/>
+         <typeAlias alias="onriskfile" type="onbiz.vo.OnRisk_File"/>
+         <typeAlias alias="ondashboard" type="onbiz.vo.OnDashBoard"/>  
+         <typeAlias alias="onoutput_app" type="onbiz.vo.OnOutput_Approval"/>  
+    </typeAliases>
+    
+    <mappers>
+       <mapper resource="resource/OnTask_mapper.xml"/>
+       <mapper resource="resource/OnProject_mapper.xml"/>
+       <mapper resource="resource/OnApproval_mapper.xml"/>
+       <mapper resource="resource/OnCalendar_mapper.xml"/>
+       <mapper resource="resource/OnBoard_mapper.xml"/>
+       <mapper resource="resource/OnEmp_mapper.xml"/>
+       <mapper resource="resource/OnRisk_mapper.xml"/>
+       <mapper resource="resource/OnGantt_mapper.xml"/>
+       <mapper resource="resource/OnDashBoard_mapper.xml"/>
+   </mappers>
+   
+
+</configuration>

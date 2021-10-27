@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="onbiz.dao.OnGanttDao">
+
+	<resultMap type="ontaskproject" id="tpResult">
+		<result property="id" column="task_no"/>
+		<result property="text" column="task_name"/>
+		<result property="content" column="task_content"/>
+		<result property="start_date" column="task_startdte"/>
+		<result property="end_date" column="task_enddte"/>
+		<result property="duration" column="task_duration"/>
+		<result property="progress" column="task_progress"/>
+		<result property="parent" column="taskref_no"/>
+		<result property="priority" column="task_prior"/>
+		<result property="user" column="emp_korname"/>
+	</resultMap>
+	
+	<!--  [공통] 프로젝트별 작업조회를 위한 프로젝트 조회 (세션값 사용)-->
+	<select id="myProList" resultMap="tpResult" parameterType="ontaskproject">
+		SELECT DISTINCT op.pro_name, op.pro_no
+		FROM onproject_member otm, onproject op
+		WHERE otm.pro_no = op.pro_no AND otm.emp_no = #{emp_no}
+		ORDER BY op.pro_no
+ 	</select>
+	
+	<!--  [작업할당] 선택한 프로젝트번호로 해당 프로젝트의 작업 불러오기 (프로젝트번호 사용)  -->
+	<select id="ganttList" resultMap="tpResult" parameterType="ontaskproject">
+		SELECT op.pro_name, oe.emp_korname, ot.* 
+		FROM OnTask ot, onproject_member om, onproject op, OnEmp oe
+		WHERE ot.mem_no = om.mem_no AND om.pro_no = op.pro_no
+		AND om.emp_no = oe.emp_no AND om.pro_no = #{pro_no}
+	</select>
+	
+	<!--  [작업할당] 선택한 프로젝트번호로 해당 프로젝트에 참여한 인원 불러오기 (프로젝트번호 사용) -->
+	<select id="userList" resultMap="tpResult" parameterType="ontaskproject">
+		SELECT DISTINCT emp_korname, opm.mem_no
+		FROM OnProject_member opm, OnProject op, OnEmp oe
+		WHERE opm.emp_no = oe.emp_no
+		AND (opm.pro_no = op.pro_no AND opm.pro_no = #{pro_no})
+		AND mem_state = '활동'
+	</select>
+	
+	<!--  [작업할당] PM의 작업할당 등록 (유저리스트에 있는 멤버번호 사용) -->
+	 <insert id="insertTask" parameterType="ontaskproject">
+ 		INSERT INTO OnTask values(OnTask_seq.nextval, #{text}, 
+ 		#{start_date}, #{end_date}, #{duration}, #{progress, jdbcType=INTEGER}, #{parent}, #{priority, jdbcType=VARCHAR}, 
+ 		#{content}, to_char(sysdate, 'YYYY-MM-DD'), #{task_uptdte, jdbcType=VARCHAR}, #{task_state}, #{mem_no})
+ 	</insert>
+
+	<!-- [작업할당] PM의 작업할당 수정 (등록된 테스크번호로 사용, 멤버번호는 필요없..?) -->
+	<update id="updateTask" parameterType="ontaskproject">
+		UPDATE OnTask SET task_name=#{text}, task_startdte=#{start_date}, task_enddte=#{end_date}, task_duration=#{duration},
+		taskref_no=#{parent}, task_prior=#{priority, jdbcType=INTEGER}, task_content=#{content}, 
+		task_uptdte=to_char(sysdate, 'YYYY-MM-DD'), mem_no=#{mem_no}
+		WHERE task_no=#{id}
+	</update>
+ 	
+ 	<!--  [작업할당] PM의 작업할당 삭제 (등록된 테스크번호로 사용, 멤버번호는 필요없? =등록하는 사람이 PM이므로) -->
+ 	<delete id="deleteTask" parameterType="ontaskproject">
+ 		DELETE FROM OnTask 
+		WHERE task_no=#{id}
+ 	</delete>
+	
+
+</mapper>	

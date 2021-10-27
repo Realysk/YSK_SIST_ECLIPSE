@@ -1,0 +1,107 @@
+
+-- 게시판 수업 끝나면 삭제 예정입니다!
+
+-- 게시판 테이블 삭제
+DROP TABLE OnBoard;
+-- 게시판 테이블 생성
+CREATE TABLE OnBoard (
+	bd_no NUMBER PRIMARY KEY, -- 게시물번호 (pk) (데이터유형 VARCHAR2(10) -> NUMBER)
+	bd_name VARCHAR2(100) NOT NULL, -- 게시물 제목 (nn)
+	bd_content VARCHAR2(1000) NOT NULL, -- 게시물 내용 (nn) (데이터유형크기 300 -> 1000)
+	bd_regdte DATE NOT NULL, -- 게시물 등록일 (nn)
+	bd_viewcnt NUMBER NOT NULL, -- 게시물 조회수 (nn)
+	emp_no VARCHAR2(10) CONSTRAINTS OnBoard_emp_no_fk REFERENCES OnEmp(emp_no), -- 사원번호 (fk)
+	pro_no VARCHAR2(10) CONSTRAINTS OnBoard_pro_no_fk REFERENCES onProject(pro_no) -- 프로젝트번호 (fk)
+);
+
+-- 게시물번호 시퀀스 삭제
+DROP SEQUENCE OnBoard_seq;
+-- 게시물번호 시퀀스 생성
+CREATE SEQUENCE OnBoard_seq;
+	INCREMENT BY 1
+	START WITH 1
+	MINVALUE 1
+	MAXVALUE 9999999;
+
+-- 프로젝트, 사원 데이터 생기면 추가예정
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, '0901 공지사항', '오늘은 수요일입니다. 좋은 하루 보내세요.', TO_DATE('2021-09-01','YYYY-MM-DD'), 0, 'HR2005011', );
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, '0902 공지사항', '오늘은 목요일입니다. 좋은 하루 보내세요.', TO_DATE('2021-09-02','YYYY-MM-DD'), 0, 'HR2005021', );
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, '0903 공지사항', '오늘은 금요일입니다. 좋은 하루 보내세요.', TO_DATE('2021-09-03','YYYY-MM-DD'), 0, 'HR2005011', );
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, '0904 공지사항', '오늘은 토요일입니다. 좋은 주말 보내세요.', TO_DATE('2021-09-04','YYYY-MM-DD'), 0, 'HR2005011', );
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, '0905 공지사항', '오늘은 일요일입니다. 좋은 주말 보내세요.', TO_DATE('2021-09-05','YYYY-MM-DD'), 0, 'HR2005021', );
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, '0906 공지사항', '오늘은 월요일입니다. 좋은 하루 보내세요.', TO_DATE('2021-09-06','YYYY-MM-DD'), 0, 'HR2005021', );
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, '0907 공지사항', '오늘은 화요일입니다. 좋은 하루 보내세요.', TO_DATE('2021-09-07','YYYY-MM-DD'), 0, 'HR2005021', );
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, '0908 공지사항', '오늘은 수요일입니다. 좋은 하루 보내세요.', TO_DATE('2021-09-08','YYYY-MM-DD'), 0, 'HR2005021', );
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, '0909 공지사항', '오늘은 목요일입니다. 좋은 하루 보내세요.', TO_DATE('2021-09-09','YYYY-MM-DD'), 0, 'HR2005021', );
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, '0910 공지사항', '오늘은 금요일입니다. 좋은 하루 보내세요.', TO_DATE('2021-09-10','YYYY-MM-DD'), 0, 'HR2005021', );
+
+SELECT * FROM OnBoard;
+
+--================================= 미리 설정 후 ERD 수정과 같이 적용 예정 =================================
+
+-- 게시판 테이블 참고 예정 (ERD 수정하게 되면 다시 설정할 예정)
+DROP TABLE OnBoard;
+CREATE TABLE OnBoard (
+	bd_no NUMBER PRIMARY KEY, -- 게시물번호 (pk) (데이터유형 VARCHAR2(10) -> NUMBER)
+	bd_refno NUMBER NOT NULL, -- 답변의 상위 글 번호
+	bd_name VARCHAR2(100) NOT NULL, -- 게시물 제목 (nn)
+	bd_content VARCHAR2(1000) NOT NULL, -- 게시물 내용 (nn) (데이터유형크기 300 -> 1000)
+	bd_viewcnt NUMBER NOT NULL, -- 게시물 조회수 (nn)
+	bd_regdte DATE NOT NULL, -- 게시물 등록일 (nn)
+	bd_uptdte DATE NOT NULL, -- 게시물 수정일 (nn)
+	emp_no VARCHAR2(10) CONSTRAINTS OnBoard_emp_no_fk REFERENCES OnEmp(emp_no), -- 사원번호 (작성자) (fk)
+	pro_no VARCHAR2(10) CONSTRAINTS OnBoard_pro_no_fk REFERENCES onProject(pro_no) -- 프로젝트번호 (fk)
+);
+
+DROP SEQUENCE OnBoard_seq;
+CREATE SEQUENCE OnBoard_seq
+START WITH 1
+MINVALUE 1
+INCREMENT BY 1
+MAXVALUE 999999;
+
+-- 프로젝트, 사원 데이터 생기면 추가예정
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '1차 공지사항', '오늘은 수요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1001', 'pro1002');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '2차 공지사항', '오늘은 목요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1002', 'pro1003');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '3차 공지사항', '오늘은 금요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1003', 'pro1004');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '4차 공지사항', '오늘은 토요일입니다. 좋은 주말 보내세요.', 0, sysdate, sysdate, '1004', 'pro1005');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '5차 공지사항', '오늘은 일요일입니다. 좋은 주말 보내세요.', 0, sysdate, sysdate, '1005', 'pro1006');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '6차 공지사항', '오늘은 월요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1006', 'pro1007');
+/* -- 데이터 생기면 추가예정
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '7차 공지사항', '오늘은 화요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1007', 'pro1008');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '8차 공지사항', '오늘은 수요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1008', 'pro1009');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '9차 공지사항', '오늘은 목요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1009', 'pro1010');
+INSERT INTO OnBoard VALUES (OnBoard_seq.nextval, 0, '10차 공지사항', '오늘은 금요일입니다. 좋은 하루 보내세요.', 0, sysdate, sysdate, '1010', 'pro1011');
+*/
+SELECT * FROM OnBoard;
+
+-- 조회수 카운팅
+UPDATE OnBoard
+	SET bd_viewcnt = bd_viewcnt+1
+WHERE bd_no = 1;
+
+/*
+UPDATE OnBoard
+	SET bd_viewcnt = bd_viewcnt+1
+WHERE bd_no = #{bd_no}
+ */
+
+-- 게시물 업로드 테이블 삭제
+DROP TABLE OnBoardFile;
+-- 게시물 업로드 테이블 생성
+CREATE TABLE OnBoardFile (
+	bd_fname VARCHAR2(200), -- 파일명
+	bd_pathname VARCHAR2(200), -- 경로명
+	bd_credte DATE, -- 파일 업로드일
+	bd_no NUMBER CONSTRAINTS OnBoardFile_bd_no_fk REFERENCES OnBoard(bd_no) -- 게시물번호 (fk)
+);
+-- board_seq.currval : 게시판의 현재 입력되는 게시판
+-- 번호와 동일하게 처리
+INSERT INTO OnBoardFile VALUES ('파일명.txt', '경로명', sysdate, 1);
+SELECT * FROM OnBoardFile;
+
+-- 게시물 검색
+SELECT * FROM OnBoard
+WHERE bd_name LIKE '%'||''||'%'
+AND emp_no LIKE '%'||''||'%'
+ORDER BY bd_no DESC;

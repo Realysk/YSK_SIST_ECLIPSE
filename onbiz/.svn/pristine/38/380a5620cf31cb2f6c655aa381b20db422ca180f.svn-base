@@ -1,0 +1,114 @@
+
+-- 작업 OnTask 
+-- 작업번호(pk), 작업명, 작업내용, 작업등록일, 작업수정일, 작업시작일, 작업종료일, 작업 진행상태, 작업 우선순위, 작업 상위번호, 작업 담당자(fk) 
+-- task_no, task_name, task_content, task_regdte, task_uptdte, task_startdte, task_enddte, task_state, task_prior, taskref_no, emp_no
+
+DROP TABLE OnTask;
+CREATE TABLE OnTask (
+	task_no varchar2(10) PRIMARY KEY, -- 작업번호
+	task_name varchar2(100), -- 작업명
+	task_content varchar2(1000), -- 작업내용
+	task_regdte DATE, -- 작업 등록일
+	task_uptdte DATE, -- 작업 수정일
+	task_startdte DATE, -- 작업 시작일
+	task_enddte DATE, -- 작업 종료일
+	task_state varchar2(20), -- 작업 진행상태
+	task_prior NUMBER, -- 작업 우선순위
+	taskref_no varchar2(10), -- 상위작업번호
+	mem_no varchar2(10) -- 작업 담당자(fk)
+);
+
+DROP SEQUENCE OnTask_seq;
+CREATE SEQUENCE OnTask_seq
+   INCREMENT BY 1   
+   START WITH 1
+   MINVALUE 1
+   MAXVALUE 999999;
+
+
+-- 11개
+-- 작업번호(pk), 작업명, 작업내용, 작업등록일, 작업수정일, 작업시작일, 작업종료일, 작업 진행상태, 작업 우선순위, 상위작업번호, 사원번호(fk)
+-- task_no, task_name, task_content, task_regdte, task_uptdte, task_startdte, task_enddte, task_state, task_prior, taskref_no, mem_no
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '분석', '분석', '2021-09-01', NULL, '2021-09-02', '2021-09-07', '진행완료', NULL, NULL, '1001');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '분석', '요구사항 분석', '2021-09-01', NULL, '2021-09-02', '2021-09-07', '진행완료', 1, 'task000001', '1018');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '분석', '화면 분석', '2021-09-01', NULL, '2021-09-02', '2021-09-07','진행완료',  2, 'task000001', '1026');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '분석', '업무플로우 분석', '2021-09-01', NULL, '2021-09-02', '2021-09-07', '진행완료', 3, 'task000001', '1012');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '설계', '설계', '2021-09-01', NULL, '2021-09-08', '2021-09-11','진행완료',  NULL, NULL, '1001');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '설계', 'DB 설계', '2021-09-01', NULL, '2021-09-08', '2021-09-11','진행완료',  4, 'task000005', '1018');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '설계', '화면 설계', '2021-09-06', NULL, '2021-09-08', '2021-09-12','진행완료',  5, 'task000005', '1012');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '설계', '와이어프레임 설계', '2021-09-01', NULL, '2021-09-08', '2021-09-10','진행완료',  6, 'task000005', '1026');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '구현', '구현', '2021-09-01', NULL, '2021-09-13', '2021-09-20','진행중',  NULL, NULL, '1001');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '구현', '메인 구현', '2021-09-01', NULL, '2021-09-13', '2021-09-20','진행중', 7, 'task000009', '1026');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '구현', 'DB 구현', '2021-09-01', NULL, '2021-09-13', '2021-09-20','진행중', 8, 'task000009', '1018');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '구현', '로그인 구현', '2021-09-01', NULL, '2021-09-12', '2021-09-18','진행중', 9, 'task000009', '1026');
+INSERT INTO OnTask values('task'||lpad(OnTask_seq.nextval, 6, 0), '구현', '게시판 구현', '2021-09-02', NULL, '2021-09-11', '2021-09-20','진행중', 10, 'task000009', '1012');
+
+SELECT * FROM OnTask;
+
+
+
+
+
+
+
+-- 작업_산출물
+-- 작업 파일번호(pk), 작업_파일명, 작업_파일분류, 작업_파일등록일, 작업번호(fk)
+CREATE TABLE OnOutput (
+	opt_no varchar2(10) NOT NULL, -- 작업_파일번호
+	opt_name varchar2(50), -- 작업_파일명
+	opt_doctype varchar2(30), -- 작업_파일분류
+	opt_regDte DATE, -- 작업_파일등록일
+	task_no varchar2(10) -- 작업번호
+);
+
+
+
+
+
+-- 1006 아래는 수정예정입니다 
+
+-- 프로젝트 이름 조회
+SELECT DISTINCT op.pro_name 
+FROM ontask ot, onproject op
+WHERE ot.pro_no = op.pro_no
+AND ot.emp_no = '1026' 
+AND ot.pro_no = 'pro1001';
+
+
+
+-- 프로젝트별로 간트차트 조회 (간트차트로는 팀별 조회)
+SELECT * 
+FROM ontask 
+WHERE pro_no = 'pro1001';
+
+
+-- 프로젝트별로 내작업 조회 (개인별로 프로젝트별 조회)
+SELECT * 
+FROM ontask 
+WHERE emp_no = '1026'
+AND pro_no = 'pro1001'
+ORDER BY task_no DESC;
+
+SELECT * 
+FROM ontask 
+WHERE emp_no = '1026'
+AND pro_no = 'pro1001'
+ORDER BY task_no DESC;
+
+SELECT op.pro_name, ot.*
+FROM ontask ot, onproject op
+WHERE ot.pro_no = op.pro_no
+AND ot.emp_no = '1026' 
+AND ot.pro_no = 'pro1001'
+ORDER BY ot.task_no DESC;
+
+
+
+-- 검색 (작업명이나 작업내용에서 검색)
+SELECT op.pro_name, ot.*
+FROM ontask ot, onproject op
+WHERE ot.pro_no = op.pro_no
+AND ot.emp_no = '1026' 
+AND ot.pro_no = 'pro1001'
+AND (ot.task_name LIKE '%'||''||'%' OR ot.task_content LIKE '%'||''||'%')
+ORDER BY ot.task_no DESC;

@@ -1,0 +1,136 @@
+SELECT * FROM dept;
+SELECT * FROM emp;
+DROP TABLE onemp;
+
+
+-- 사원 테이블, 
+/*
+CREAT SEQUECE emp_no
+INCREMENT BY 0001
+START WITH 0001
+MINVALUE 0001
+MAXVALUE 10000
+NOCYCLE ;
+
+사원번호 생성 예시
+*/
+
+
+
+
+create table OnEmp( -- 사원 테이블
+   emp_no varchar2(50) PRIMARY KEY, -- 사원번호, 아이디로 사용
+   ptn_no varchar2(30) CONSTRAINT OnEmp_ptn_no_fk REFERENCES OnEmp_position(ptn_no),  --사원직급번호 
+   dept_no varchar2(50) CONSTRAINT OnEmp_dept_no_fk REFERENCES OnEmp_Dept(dept_no), --부서번호
+   auth_no varchar2(30) CONSTRAINT OnEmp_auth_no_fk REFERENCES OnEmp_Auth(auth_no), --권한번호 
+   emp_pass varchar2(50), -- 비밀번호
+   emp_korname varchar2(50), -- 한글이름
+   emp_engname varchar2(50), -- 영어이름
+   emp_email varchar2(100), -- 이메일
+   emp_hiredte date, -- 입사일
+   emp_birth date, -- 생년월일
+   emp_content varchar2(300), -- 소개
+   emp_profile varchar2(100), -- 증명사진 
+   emp_tel varchar2(100), -- 전화번호
+   emp_addr varchar2(100), -- 주소
+   emp_workst varchar2(50), -- 재직상태
+   emp_workchdte DATE -- 재직상태변경일
+);
+
+DROP TABLE onemp;
+create table OnEmp_position( -- 사원_직급
+   ptn_no varchar2(10) primary key, -- 사원직급 번호
+   ptn_name varchar2(30) -- 사원 직급 이름
+);
+
+INSERT INTO OnEmp_position values('po01','사원');
+INSERT INTO OnEmp_position values('po02','선임');
+INSERT INTO OnEmp_position values('po03','대리');
+INSERT INTO OnEmp_position values('po04','팀장');
+INSERT INTO OnEmp_position values('po05','과장');
+INSERT INTO OnEmp_position values('po06','부장');
+INSERT INTO OnEmp_position values('po07','대표');
+
+DROP TABLE OnEmp_Dept;
+create table OnEmp_Dept(
+   
+   dept_no varchar2(10) PRIMARY KEY, -- 부서번호
+   dept_name varchar2(30), -- 부서이름
+   dept_loc varchar2(50) -- 부서 위치
+);
+INSERT INTO OnEmp_Dept values('de01','백엔드개발팀1','서초');
+INSERT INTO OnEmp_Dept values('de02','백엔드개발팀2','판교');
+INSERT INTO OnEmp_Dept values('de03','UI개발팀1','서초');
+INSERT INTO OnEmp_Dept values('de04','UI개발팀2','판교');
+INSERT INTO OnEmp_Dept values('de05','인사관리팀','서초');
+
+
+DROP TABLE OnEmp_Auth;
+create table OnEmp_Auth( --사원권한 = 직책
+   auth_no varchar2(10) PRIMARY KEY, -- 사원 권한번호
+   auth_name varchar2(30) -- 사원 권한명
+);
+
+INSERT INTO OnEmp_Auth values('au01','pm');
+INSERT INTO OnEmp_Auth values('au02','tm');
+INSERT INTO OnEmp_Auth values('au03','hr');
+INSERT INTO OnEmp_Auth values('au04','ceo');
+
+
+-- 10개 
+
+/* 사원번호(pk), 사원권한, 사원 비밀번호, 사원 한글이름, 사원 영어이름, 
+사원 이메일, 사원 입사일, 사원 생년월일, 사원 소개, 사원 사진파일명, 사원전화번호, 사원 주소, 
+사원 재직상태, 사원재직상태변경일 */
+
+insert into OnEmp values ('TM2007001','po01','de01','au01','zip1234','이정호', 'Lee Jungho','Jungho@gmail.com','2007/02/25', '1980/05/28', '2009년 J프로젝트 PM','img1113.jpg', '01088445656', '서울특별시 종로구', '재직', '2007/02/25');
+insert into OnEmp values ('HR2005021','po05','de05','au03','tjdnf12','김서연', 'Kim Seoyeon','kimhun33@onbiz.com','2005/02/22', '1978/02/04', 'HR 인사팀','img1125.jpg', '01011111313', '서울특별시 중구', '재직', '2005/02/22');
+insert into OnEmp values ('TM2013011','po01','de01','au02','52522013','이하윤', 'Lee Hayoon','55leaun@onbiz.com','2013/08/25', '1990/11/24', '2013년 H프로젝트 TM','img1136.jpg', '01013134545', '서울특별시 성동구', '재직', '2013/08/25');
+insert into OnEmp values ('TM2015005','po04','de01','au01','8282zzzz','박예린', 'Park Yerin','park14@onbiz.com','2015/02/20', '1992/04/20', '2015년 T프로젝트 PM','img1144.jpg', '01092828686', '서울특별시 관악구', '재직', '2015/02/20');
+insert into OnEmp values ('TM2015009','po01','de01','au02','soso0701','임소율', 'Lim Soyul','limrim@onbiz.com','2015/02/20', '1991/07/01', '2015년 E프로젝트 TM','img1145.jpg', '01019283333', '서울특별시 관악구', '재직', '207/02/20');
+insert into OnEmp values ('TM2014001','po05','de05','au03','kjsu13','김철수', 'Kim Chulsoo','Chulsoo@gmail.com','2014/08/25', '1989/12/28', '2014년 인사팀 입사','img1551.jpg', '01077778888', '서울특별시 종로구', '재직', '207/02/25');
+
+
+--백엔드 개발팀 1
+insert into OnEmp values ('HR2005011','po01','de01','au01','komajun','김이준', 'komajun','Yijue@gmail.com','2020/02/22', '1990/03/15', '2021년 백엔드1팀 입사','img1114.jpg', '01083321675', '서울특별시 중구', '퇴직', '2021/07/12');
+insert into OnEmp values ('HR2005012','po02','de01','au01','parksoyoul','박소율', 'komajun','Yijun@gmail.com','2020/02/22', '1990/03/15', '2021년 백엔드1팀 입사','img1114.jpg', '01083321675', '서울특별시 중구', '퇴직', '2021/07/12');
+insert into OnEmp values ('HR2005013','po03','de01','au01','kimhayoul','김하율', 'parksoyoul','Yijun@gmail.com','2020/02/22', '1990/03/15', '2020년 백엔드1팀 입사','img1114.jpg', '01083321675', '서울특별시 중구', '퇴직', '2021/07/12');
+insert into OnEmp values ('HR2005014','po04','de01','au02','madongseok','마동석', 'parksoyoul','Yijun@gmail.com','2020/02/22', '1989/03/15', '2020년 백엔드1팀 입사','img1114.jpg', '01083321675', '서울특별시 중구', '퇴직', '2008/07/12');
+insert into OnEmp values ('HR2005015','po05','de01','au02','kimjisu','김지수', 'parksoyoul','Yijun@gmail.com','2019/02/22', '1970/03/15', '2019년 백엔드1팀 입사','img1114.jpg', '01083321675', '서울특별시 중구', '퇴직', '2008/07/12');
+insert into OnEmp values ('HR2005016','po06','de01','au02','komjiu','김지우', 'parksoyoul','Yijun@gmail.com','2019/02/22', '1960/03/15', '2019년 백엔드1팀 입사','img1114.jpg', '01083321675', '서울특별시 중구', '퇴직', '2008/07/12');
+
+
+--백엔드개발팀 2
+insert into OnEmp values ('HR2005017','po01','de02','au01','kimjina','김지나', 'parksoyoul','Yijun@gmail.com','2005/02/22', '1978/03/15', '2020년 백엔드2팀 입사','img1114.jpg', '01083321675', '서울특별시 중구', '퇴직', '2020/07/12');
+insert into OnEmp values ('HR2005018','po02','de02','au01','kimena','김이나', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2020년 백엔드2팀 입사','img1114.jpg', '01083321675', '서울특별시 중구', '퇴직', '2020/07/12');
+insert into OnEmp values ('HR2005019','po03','de02','au01','seockjun','윤석준', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2020년 백엔드2팀 입사','img1114.jpg', '01083321675', '서울특별시 중구', '퇴직', '2020/07/12');
+insert into OnEmp values ('HR2005021','po04','de02','au02','aramyoun','윤아람', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2007년 백엔드2팀 입사','img1114.jpg', '01083321675', '서울특별시 성동구', '퇴직', '2007/07/12');
+insert into OnEmp values ('HR2005022','po05','de02','au02','scikyeaol','윤석열', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2007년 백엔드2팀 입사','img1114.jpg', '01083321675', '서울특별시 중구', '퇴직', '2007/07/12');
+insert into OnEmp values ('HR2005023','po06','de02','au02','dongseock','김동석', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2007년 백엔드2팀 입사','img1114.jpg', '01083321675', '서울특별시 서초구', '퇴직', '2007/07/12');
+
+
+
+--ui개발팀1
+insert into OnEmp values ('HR2005024','po01','de03','au01','kim','김다미', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2020년 ui개발1팀 입사','img1114.jpg', '01083321675', '서울특별시 강남구', '퇴직', '2020/07/12');
+insert into OnEmp values ('HR2005025','po02','de03','au01','leedami','이다미', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2029년 ui개발1팀 입사','img1114.jpg', '01083321675', '서울특별시 성동구', '퇴직', '2020/07/12');
+insert into OnEmp values ('HR2005026','po03','de03','au01','leeyoungseock','이용석', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2020년 ui개발1팀 입사','img1114.jpg', '01083321675', '서울특별시 강남구', '퇴직', '2020/07/12');
+insert into OnEmp values ('HR2005027','po04','de03','au02','youkyoungwon','유경원', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2005년 ui개발1팀 입사','img1114.jpg', '01083321675', '서울특별시 강남구', '퇴직', '2005/07/12');
+
+
+--ui개발팀2
+insert into OnEmp values ('HR2005028','po01','de04','au01','leeminsang','이민상', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2021년 ui개발2팀 입사','img1114.jpg', '01083321675', '서울특별시 서초구', '퇴직', '2021/07/12');
+insert into OnEmp values ('HR2005029','po02','de04','au01','komejoon','김이준', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2021년 ui개발2팀 입사','img1114.jpg', '01083321675', '서울특별시 서초구', '퇴직', '2021/07/12');
+insert into OnEmp values ('HR2005030','po03','de04','au01','leejunpark','박이준', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2003년 ui개발2팀 입사','img1114.jpg', '01083321675', '서울특별시 서초구', '퇴직', '2003/07/12');
+insert into OnEmp values ('HR2005031','po04','de04','au02','parkarem','윤아름', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2007년 ui개발2팀 입사','img1114.jpg', '01083321675', '서울특별시 강동구', '퇴직', '2007/07/12');
+
+
+
+
+--인사
+insert into OnEmp values ('HR2005036','po01','de05','au03','namgoongmin','남궁민', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2020년 인사팀 입사','img1114.jpg', '01083321675', '서울특별시 성동구', '퇴직', '2020/07/12');
+insert into OnEmp values ('HR2005037','po02','de05','au03','parknarea','박나래', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2020년 인사팀 입사','img1114.jpg', '01083321675', '서울특별시 성동구', '퇴직', '2020/07/12');
+insert into OnEmp values ('HR2005038','po03','de05','au03','jisuckjin','지석진', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '20205년 인사팀 입사','img1114.jpg', '01083321675', '서울특별시 중랑구', '퇴직', '2020/07/12');
+insert into OnEmp values ('HR2005039','po04','de05','au03','youjeasoeck','유재석', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2019년 인사팀 입사','img1114.jpg', '01083321675', '서울특별시 도봉구', '퇴직', '2019/07/12');
+insert into OnEmp values ('HR2005040','po05','de05','au03','hongildong','홍길동', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2018년 인사팀 입사','img1114.jpg', '01083321675', '서울특별시 도봉구', '퇴직', '2018/07/12');
+insert into OnEmp values ('HR2005041','po06','de05','au03','leekilldong','이길동', 'Yoon Yijun','Yijun@gmail.com','2005/02/22', '1978/03/15', '2017년 인사팀 입사','img1114.jpg', '01083321675', '서울특별시 도봉구', '퇴직', '2017/07/12');
+

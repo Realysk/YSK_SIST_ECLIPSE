@@ -1,0 +1,18 @@
+package onbiz.service;
+
+import onbiz.dao.OnEmpDao;
+import onbiz.vo.OnEmp;
+
+public class OnEmpServ {
+	private OnEmpDao dao;
+	
+	public OnEmpServ() {
+		super();
+		dao = new OnEmpDao();
+	}
+	
+	public OnEmp login(String emp_no, String emp_pass) {
+		System.out.println("로그인 처리 - 서비스");
+		return dao.login(emp_no, emp_pass);
+	}
+}

@@ -1,0 +1,37 @@
+package onbiz.dao;
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Repository;
+
+import onbiz.vo.OnGantt;
+import onbiz.vo.OnTask;
+import onbiz.vo.OnTask_Project;
+
+@Repository
+public interface OnTaskDao {
+
+	// 간트차트에 불러와야하는데.. 
+	public ArrayList<OnTask_Project> ganttList(OnTask_Project sch);
+	
+	public ArrayList<OnTask_Project> userList();
+	
+	
+	// 프로젝트별 내작업 조회
+	public ArrayList<OnTask_Project> mytaskList(OnTask_Project sch);
+	
+	// 검색 - 일단 작업명으로 검색
+	public ArrayList<OnTask_Project> schtaskList(OnTask sch);
+	
+	// 프로젝트명을 중복되지않게 조회
+	public ArrayList<OnTask_Project> myProList(OnTask_Project sch);
+		
+		
+		
+	
+	// 프로젝트별 간트차트 조회
+	public ArrayList<OnTask> projectTaskList(OnTask sch);
+	
+	// 작업 등록
+	public void insertTask(OnTask ins);
+}

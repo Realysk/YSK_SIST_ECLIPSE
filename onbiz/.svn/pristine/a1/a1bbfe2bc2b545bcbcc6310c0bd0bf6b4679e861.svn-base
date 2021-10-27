@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+<mapper namespace="onbiz.dao.OnEmpDao">
+	 <!-- 로그인 --><!-- 다은 -->
+	<select id="login" parameterType="onemp" resultType="onemp">
+		SELECT emp_no, emp_pass 
+		  FROM onemp
+		 WHERE emp_no = #{emp_no}
+		   AND emp_pass = #{emp_pass}   
+	</select>
+	<!-- 사원정보 업데이트 -->
+	<update id="update" parameterType="onemp">
+			update emp_no
+				set pass =#{userPass},
+			   where emp_no = #{userId}	
+	</update>
+	
+	<!-- 사원정보 삭제 -->
+	<delete id="delete" parameterType="onemp">
+		delete from onemp where emp_no = #{userId}
+	</delete>
+		<!-- 신규 사원 추가 -->
+	<insert id="register">
+	    INSERT INTO onemp(   emp_no 
+	    					   , ptn_no
+	    					   , dept_no
+	    					   , auth_no
+	   					       , emp_pass
+	   					       , emp_korname
+	   					       , emp_engname
+	   					       , emp_email
+	   					       , emp_hiredte
+	   					       , emp_birth
+	   					       , emp_content
+	   					       , emp_profile
+	   					       , emp_tel
+	   					       , emp_addr	
+	   					       , emp_workst
+	   					       , emp_workchdte)
+	                  VALUES(    #{userId} 
+	                  		   , #{userPtn}
+	                  		   , #{userDept}
+	                  		   , #{userAuth}
+	                 		   , #{userPass}
+	                 		   , #{userKorName}
+	                 		   , #{userEngName}
+	                 		   , #{userEmail}
+	                 		   , #{userHiredte}
+	                 		   , #{userBirth}
+	                 		   , #{userContent}
+	                 		   , #{userProfile}
+	                 		   , #{userTel}
+	                 		   , #{userAddr}
+	                 		   , #{userWorkst}
+	                 		   , #{userWorkdte})
+   
+    </insert>
+</mapper>

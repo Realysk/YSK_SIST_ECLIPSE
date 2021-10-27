@@ -1,0 +1,55 @@
+package onbiz.service;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import onbiz.dao.OnTaskDao;
+import onbiz.vo.OnGantt;
+import onbiz.vo.OnTask;
+import onbiz.vo.OnTask_Project;
+
+@Service
+public class OnTaskService {
+	@Autowired
+	private OnTaskDao dao;
+	
+	public ArrayList<OnTask_Project> mytaskList(OnTask_Project sch) {
+		return dao.mytaskList(sch);
+	}
+	
+	public ArrayList<OnGantt> ganttList(OnGantt sch) {
+		
+		System.out.println("service에서 mem_no "  + sch.getMem_no());
+		return dao.ganttList(sch);
+	}
+	
+	public ArrayList<OnTask_Project> schtaskList(OnTask_Project sch) {
+		return dao.schtaskList(sch);
+	}
+	
+	public ArrayList<OnTask_Project> myProList(OnTask_Project sch) {
+		return dao.myProList(sch);
+	}
+	
+	public void insertTask(OnTask ins) {
+		
+		// startDte가 regDte보다 뒤면 진행대기
+		// startDte가 regDte보다 앞이면 진행중 
+		// startDte < regDte < endDte
+		ins.getTask_startdte();
+		
+		Date sysDte = new Date();
+		LocalDate date = LocalDate.now();
+		
+		// DB에 삽입할 날짜 형식
+		SimpleDateFormat temp = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss", java.util.Locale.KOREA);
+		
+		
+		dao.insertTask(ins);
+	}
+}

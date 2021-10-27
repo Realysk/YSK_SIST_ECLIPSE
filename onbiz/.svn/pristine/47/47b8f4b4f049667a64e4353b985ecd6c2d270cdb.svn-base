@@ -1,0 +1,12 @@
+package onbiz.controller;
+
+
+import onbiz.vo.OnEmp;
+
+public class OnEmpCtrl {
+
+/*
+Servlet implementation class OnEmpServ.java
+	
+*/
+}

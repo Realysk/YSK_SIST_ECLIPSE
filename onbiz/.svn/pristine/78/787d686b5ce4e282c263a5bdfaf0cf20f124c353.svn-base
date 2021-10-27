@@ -1,0 +1,148 @@
+package onbiz.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import onbiz.service.OnEmpServ;
+import onbiz.vo.OnEmp;
+
+@Controller
+@SessionAttributes("/onemp/*")
+public class OnEmpCtrl {
+
+	@Autowired
+	private OnEmpServ service;
+
+	private HttpServletRequest request;
+
+	@ModelAttribute("onemp")
+	public OnEmp getOnEmp() {
+		return new OnEmp();
+	}
+
+	// http://localhost:7080/onbiz/login.do
+	@RequestMapping("login.do")
+	public String login(OnEmp onemp, HttpSession session) 
+			throws Exception {
+		System.out.println("login 메서드 확인 - 컨트롤러 -");
+		
+		
+	
+		System.out.println("전달 데이터 확인 : " + onemp);
+		return "OnEmp/Login/login";}
+	// 로그인 체크
+	// http://localhost:7080/onbiz/loginCheck.do
+	@RequestMapping("loginCheck.do")
+	public String loginCheck(@ModelAttribute OnEmp onemp, HttpSession session) {
+		String returnURL = "";
+		System.out.println("전달 데이터 확인 : " + onemp);
+		if (session.getAttribute("login") != null) {
+			session.removeAttribute("login"); // 기존 login 세션값 제거
+		}
+		OnEmp vo = service.login(onemp);
+		if (vo != null) {
+			session.setAttribute("login", vo);
+			session.getAttribute("login");
+			returnURL = "OnDashBoard/DAS-001-pm";
+			System.out.println("onemp 전달 : " + onemp);
+			System.out.println("vo : " + vo);
+			System.out.println("세션 확인 :  " + session);
+		} else {
+			System.out.println("사원번호/비밀번호 불일치");
+			returnURL = "OnEmp/Login/login";
+		}
+		return returnURL;
+	}
+
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		System.out.println("세션 : " +session);
+		session.removeAttribute("login");
+		OnEmpServ.logout(session);
+		return "OnEmp/Login/login";
+	}
+
+	// ------------ 안되서 하위 주석처리 ---------
+
+	// http://localhost:7080/onbiz/mvc1.do
+	@GetMapping("mvc1.do")
+	public String mvc1(Model d) {
+		d.addAttribute("serviceMsg", service.call());
+		return "OnEmp/Login/mvc1";
+	}
+//------------------------------------------------10 14 ---------------------
+	// 세션값 불러오기
+/*	@RequestMapping(value="text1.do")
+	public String call(HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		String onemp ="홍길동";
+		session.setAttribute("login", onemp);
+		
+		return "OnEmp/Login/LOGIN_SELECT";
+	} */
+	
+	// 세션 저장 데이터 가져오기
+	@RequestMapping(value="/test2.do")
+	public String call2(HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		String name = (String)session.getAttribute("login");
+		
+		System.out.println("세션변수 :" + name); // 세션 이름 출력
+		session.setAttribute("login", name);
+		
+		return "OnEmp/Login/LOGIN_SELECT";
+	}
+// -----------------------------      조회      ------------------------------------------------------
+	// 사원정보조회 1, 상세 x, 사원번호/이름/권한/입사일/이메일/주소 출력
+	// http://localhost:7080/onbiz/onEmpList.do
+	  @RequestMapping("onEmpList.do") 
+	  public String onEmpList(OnEmp sch, Model d) {
+		  ArrayList<OnEmp> onEmpList = service.onEmpList(sch);
+		  System.out.println("개수:"+onEmpList.size());
+		  d.addAttribute("onEmpList",onEmpList); 
+	  	return "OnEmp/HR_EMPCK-01"; 
+	  }
+	  
+	  
+	  
+		// http://localhost:7080/onbiz/onEmpList2.do
+	  @RequestMapping("onEmpList2.do") public String onEmpList2(OnEmp sch) {
+	  ArrayList<OnEmp> onEmpList = service.onEmpList(sch);
+	  sch.addAttribute("onEmpList2",onEmpList); return "OnEmp/HR_EMPCK-03"; }
+	  
+
+	  
+// ------------ 검색 !! -------------------
+	  
+	  
+	  
+	  // 로그인 폼	  
+	  // http://localhost:7080/onbiz/loginFrm.do
+	  
+	  @RequestMapping("loginFrm.do") public String loginFrm(OnEmp onemp){
+	  
+	 return "OnEmp/Login/NewFile"; }
+
+
+}

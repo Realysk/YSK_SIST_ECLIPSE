@@ -1,0 +1,28 @@
+package onbiz.dao;
+
+import java.util.ArrayList;
+import onbiz.vo.OnRisk;
+import onbiz.vo.OnRiskSch;
+import onbiz.vo.OnRisk_File;
+public interface OnRiskDao {
+  
+  //0. 리스크 조회수 
+  public int totCnt(OnRiskSch sch);
+  //1. 리스크 목록 불러오기 
+  public ArrayList<OnRisk> OnRiskList(OnRiskSch Sch);
+  
+  //2. 리스크상세보기
+  public OnRisk getRisk(int risk_no);
+  
+  //3. 파일 
+  public String getRiskFile(int risk_no);
+  
+  //4. 조회수(?)
+  public void uptReadCnt(int risk_no);
+  
+  //5. 리스크등록 
+  public void insertRisk(OnRisk ins);
+  
+  //6. 파일 업로드 
+  public void uploadFile(OnRisk_File ins);
+}

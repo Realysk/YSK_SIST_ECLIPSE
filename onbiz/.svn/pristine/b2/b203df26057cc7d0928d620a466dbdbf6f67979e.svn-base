@@ -1,0 +1,378 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<fmt:requestEncoding value="utf-8"/>     
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>OnBiz</title>
+
+<!-- Custom fonts for this template-->
+<link href="${path}/resources/vendor/fontawesome-free/css/all.min.css" 
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,
+	400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	
+<!-- Custom styles for this template-->
+<script src="${path}/settings/jquery.min.js"></script>
+<script src="${path}/settings/jquery-ui.js"></script>
+<script src="${path}/settings/popper.min.js"></script>
+<script src="${path}/settings/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${path}/settings/bootstrap.min.css">
+<link rel="stylesheet" href="${path}/settings/jquery-ui.css">
+
+<!--  1001 위에 설정들을 그대로 가져가주세요~! 그리고 밑에 각 부분에 맞게 include 파일을 넣어주세요! 
+	sidebar, header, footer 있고 body에는 id="page-top" 설정해주셔야 위로 스크롤링 될거에요 -->
+	
+<script type="text/javascript">
+
+function go(no) {
+	console.log(no);
+}
+
+	$(document).ready(function(){
+		
+		// 검색 - Click 처리
+		$("#btnSch").click(function(){
+			schTask();	
+		});
+			
+		// 검색 - KeyDown 처리
+		$("[name=schcontent]").on("keydown", function(event){
+			if(event.keyCode == 13) {
+				schTask();
+				console.log("13확인");
+				event.preventDefault(); 
+			}
+			
+			
+		});
+		
+		$("#proSel").on("change", function(){
+
+			console.log("선택한 val값 : " + $(this).val());
+			myTask($(this).val());
+		});
+		
+		function myTask(no) {
+			$.ajax ({
+				type:"post",
+				url:"ontask.do?method=mytaskJson",
+				data:"no=" + no,
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					console.log(data.mytasklist);
+					var list = data.mytasklist;
+					var show = "";
+					
+					/*
+					$(list).each(function(idx, tk){
+						
+					});
+					*/
+				}, 
+				error:function(err){
+					console.log(err);
+				}
+			});
+				
+		} 
+
+		function schTask() {
+			$.ajax ({
+				type:"post",
+				url:"ontask.do?method=schList",
+				data:$("#frm01").serialize(),
+				dataType:"json",
+				success:function(data){
+					console.log(data.mytasklist);
+					var list = data.mytasklist;
+					var show = "";
+					
+					$(list).each(function(idx, tk){
+						show += "<tr class='detail text-center'><td>" + tk.pro_name + "</td>";
+						show += "<td>" + tk.task_name + "</td>";
+						show += "<td>" + tk.task_content + "</td>";
+						
+						const startDte = new Date(tk.task_startdte);
+						var sYear = startDte.getFullYear();
+						var sMon = startDte.getMonth();
+						var sDay = startDte.getDate();
+						
+						const endDte = new Date(tk.task_enddte);
+						var eYear = endDte.getFullYear();
+						var eMon = endDte.getMonth();
+						var eDay = endDte.getDate();
+						
+						show += "<td>"+sYear+". "+sMon+". " +sDay+"</td>";
+						show += "<td>"+eYear+". "+eMon+". " +eDay+"</td>";
+						
+						show += "<td>" + tk.task_prior + "</td>";
+						show += "<td>" + tk.task_state + "</td>";
+						show += "<td>산출물</td></tr>";
+					});
+					
+					$("#dataTable tbody").html(show);
+					
+				}, 
+				error:function(err){
+					console.log(err);
+				}
+			});
+		}
+		
+		
+		
+	});
+	
+
+	
+</script>
+</head>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    
+	<jsp:include page="/common/sidebar.jsp"/>
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- Main Content -->
+		<div id="content">
+			<jsp:include page="/common/header.jsp"/>
+				
+			<!-- Section : 구현 내용 -->
+           	<div class="container-fluid">
+           	
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link" href="#">간트차트</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="#">작업관리</a>
+				</li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane fade in active" id="home">Home 메뉴</div>
+			</div>
+
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">작업 목록</h6>
+				</div>
+				<div class="card-body">
+					<div class="row justify-content-between">
+						<div class="col-sm-12 col-md-4 col-lg-4">
+							<select id="proSel">
+								<c:forEach var="pl" items="${proList}">
+									<option value="${pl.pro_no}">${pl.pro_name}</option>
+								</c:forEach>
+							</select>
+						
+						<!--   값이 동적생성된 경우 데이터를 가져오는게 어려움 -> select 사용 
+							<div class="dropdown">
+								<button class="btn btn-default dropdown-toggle" type="button" id="btnproSel" 
+									data-toggle="dropdown" aria-expanded="true">
+								    프로젝트 선택
+								    	<span class="caret"></span>
+								</button>
+								<ul id="prosel" class="dropdown-menu" role="menu" aria-labelledby="btnproSel">
+								<c:forEach var="pl" items="${proList}">
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="${pl.pro_name}">${pl.pro_name}</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="a">프로젝트 A</a></li>
+								</c:forEach>
+								</ul>
+							</div>
+						-->
+						</div>
+						<div class="col-auto">
+							<div class="input-group">
+								<form id="frm01" class="form-inline"  method="post">
+									<input type="text" name="schcontent" class="form-control mr-sm-2" 
+										placeholder="작업명 or 작업내용 검색">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button" id="btnSch">검색</button>
+										
+									</span>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" 
+							width="100%" cellspacing="0">
+							<col width="15%">
+							<col width="10%">
+							<col width="15%">
+							<col width="10%">
+							<col width="12%">
+							<col width="12%">
+							<col width="10%">
+							<col width="15%">
+						<thead>
+							<tr class="text-center">
+								<th>프로젝트명</th>
+								<th>작업명</th>
+								<th>작업내용</th>
+								<th>시작일</th>
+								<th>종료일</th>
+								<th>우선순위</th>
+								<th>진행상태</th>
+								<th>산출물</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="ts" items="${mytasklist}">
+							<tr class="detail text-center" ondblclick="javascript:go('${ts.task_no}')">
+								<td>${ts.pro_name}</td>
+								<td>${ts.task_name}</td>
+								<td>${ts.task_content}</td>
+								<td><fmt:formatDate value="${ts.task_startdte}"/></td>
+								<td><fmt:formatDate value="${ts.task_enddte}"/></td>
+								<c:choose>
+									<c:when test="${ts.task_prior == 0}">
+										<td></td>
+									</c:when>
+									<c:otherwise>
+										<td>${ts.task_prior}</td>
+									</c:otherwise>	
+									</c:choose>
+								<td>${ts.task_state}</td>
+								<td>산출물버튼</td>
+							</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					</div>
+				</div>
+				<div class="row justify-content-between">
+					<div class="col-xs-6 col-sm-4 col-ms-6">
+						<button class="btn btn-default" type="button" id="btnReg" data-toggle="modal" data-target="#exampleModalCenter">등록</button>
+					</div>
+				</div>
+				
+			</div>
+           	</div>
+            <!--  Section and -->
+
+		</div>
+		<!-- End of Main Content -->
+		<jsp:include page="/common/footer.jsp"/>
+
+	</div>
+	<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+    
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+		<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+		<div class="modal-footer">
+			<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+			<a class="btn btn-primary" href="login.html">Logout</a>
+		</div>
+		</div>
+	</div>
+</div>
+
+<!-- 작업 등록 modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">작업 등록</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	<span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<form id="frm02" class="form"  method="post">
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">&nbsp;&nbsp;작업명</span>
+				</div>
+				<input name="task_name" class="form-control" 
+					placeholder="입력" />	
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">작업내용</span>
+				</div>
+				<textarea name="content" rows="3" 
+				class="form-control" placeholder="입력"></textarea>
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">작업기간</span>
+				</div>
+				<input name="task_name" class="form-control" 
+					placeholder="입력" />	
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">&nbsp;&nbsp;담당자</span>
+				</div>
+				<input name="task_name" class="form-control" 
+					placeholder="입력" />	
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">우선순위</span>
+				</div>
+				<input name="task_name" class="form-control" 
+					placeholder="입력" />	
+			</div>
+			<div class="input-group mb-3">	
+				<div class="input-group-prepend">
+					<span class="text-center input-group-text">상위작업</span>
+				</div>
+				<input name="task_name" class="form-control" 
+					placeholder="입력" />	
+			</div>
+	    </form> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+<!-- Custom scripts for all pages -->
+<script src="${path}/resources/js/sb-admin-2.min.js"></script>
+	
+<!-- Bootstrap core JavaScript-->
+<script src="${path}/resources/vendor/jquery/jquery.min.js"></script>
+<script src="${path}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="${path}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,59 @@
+-- (성근) 10.03 결재 테이블 - 프로젝트번호, 작업번호 외래키 추가
+
+-- 결재 테이블 삭제
+DROP TABLE OnApproval;
+-- 결재 테이블 생성
+CREATE TABLE OnApproval (
+	app_no VARCHAR2(10) PRIMARY KEY, -- 결재번호 (pk) 
+	app_regdte DATE NOT NULL, -- 결재 등록일 (nn)
+	app_state VARCHAR2(20) CHECK (app_state IN ('승인대기', '승인', '반려', '취소')), -- 결재 승인 상태 (nn)
+	app_deadline DATE NOT NULL, -- 승인 만료일 (nn)
+	app_appdte DATE NOT NULL, -- 결재 승인일 (nn)
+	app_content VARCHAR2(300) NOT NULL, -- 결재 요청내용 (nn)
+	app_comment VARCHAR2(300), -- 결재 답변
+	emp_no VARCHAR2(10) CONSTRAINTS OnApproval_emp_no_fk REFERENCES OnEmp(emp_no), -- 결재 승인관리자 (fk)
+	opt_no VARCHAR2(10) CONSTRAINTS OnApproval_opt_no_fk REFERENCES OnOutput(opt_no), -- 산출물번호 (fk)
+	pro_no VARCHAR2(10) CONSTRAINTS OnApproval_pro_no_fk REFERENCES OnProject(pro_no), -- 프로젝트번호 (fk)
+	task_no VARCHAR2(10) CONSTRAINTS OnApproval_task_no_fk REFERENCES OnTask(task_no) -- 작업번호 (fk)
+);
+
+-- 결재번호 시퀀스 삭제
+DROP SEQUENCE OnApproval_seq;
+-- 결재번호 시퀀스 생성
+CREATE SEQUENCE OnApproval_seq
+	INCREMENT BY 1
+	START WITH 1001
+	MINVALUE 1001
+	MAXVALUE 9999999;
+	
+INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), TO_DATE('2021-09-01','YYYY-MM-DD'), '승인', TO_DATE('2021-09-08','YYYY-MM-DD'), TO_DATE('2021-09-02','YYYY-MM-DD'), '결재요청 부탁드립니다!', '결재 승인되었습니다! 이대로 진행하시죠~', '1001', 'opt0000001', 'pro1001', 'task000001');
+INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), TO_DATE('2021-09-02','YYYY-MM-DD'), '반려', TO_DATE('2021-09-09','YYYY-MM-DD'), TO_DATE('2021-09-03','YYYY-MM-DD'), '결재 검토 부탁드립니다!', '조금 더 보충해주세요!', '1002', 'opt0000002', 'pro1002', 'task000002');
+INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), TO_DATE('2021-09-03','YYYY-MM-DD'), '승인', TO_DATE('2021-09-10','YYYY-MM-DD'), TO_DATE('2021-09-04','YYYY-MM-DD'), '요청합니다', '괜찮네요 이대로 가시죠~', '1003', 'opt0000003', 'pro1003', 'task000003');
+INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), TO_DATE('2021-09-04','YYYY-MM-DD'), '반려', TO_DATE('2021-09-11','YYYY-MM-DD'), TO_DATE('2021-09-05','YYYY-MM-DD'), '요청합니다', '이건 좀 아닌거 같네요.. 다시 부탁드립니다', '1004', 'opt0000004', 'pro1004', 'task000004');
+INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), TO_DATE('2021-09-05','YYYY-MM-DD'), '승인', TO_DATE('2021-09-12','YYYY-MM-DD'), TO_DATE('2021-09-06','YYYY-MM-DD'), '결재 부탁드리겠습니다!', '괜찮네요 이대로 가시죠~', '1005', 'opt0000005', 'pro1005', 'task000005');
+/* -- 산출물 데이터 생기면 추가 예정
+INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), TO_DATE('2021-09-06','YYYY-MM-DD'), '승인', TO_DATE('2021-09-13','YYYY-MM-DD'), TO_DATE('2021-09-07','YYYY-MM-DD'), '요청드려요~', '괜찮네요 이대로 가시죠~', '1006', 'opt0000006', 'pro1006', 'task000008');
+INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), TO_DATE('2021-09-07','YYYY-MM-DD'), '승인', TO_DATE('2021-09-14','YYYY-MM-DD'), TO_DATE('2021-09-08','YYYY-MM-DD'), '결재 요청합니다', '괜찮네요 이대로 가시죠~', '1007', 'opt0000007', 'pro1007', 'task000007');
+INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), TO_DATE('2021-09-08','YYYY-MM-DD'), '승인대기', TO_DATE('2021-09-15','YYYY-MM-DD'), TO_DATE('2021-09-09','YYYY-MM-DD'), '요청합니다', NULL, '1008', 'opt0000008', 'pro1008', 'task000008');
+INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), TO_DATE('2021-09-09','YYYY-MM-DD'), '승인대기', TO_DATE('2021-09-16','YYYY-MM-DD'), TO_DATE('2021-09-10','YYYY-MM-DD'), '요청합니다!', NULL, '1009', 'opt0000009', 'pro1009', 'task000009');
+INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), TO_DATE('2021-09-10','YYYY-MM-DD'), '취소', TO_DATE('2021-09-17','YYYY-MM-DD'), TO_DATE('2021-09-11','YYYY-MM-DD'), '결재 부탁드려요!', '요청일이 만료되어 취소되었습니다.', '1010', 'opt0000010', 'pro1010', 'task000010');
+INSERT INTO OnApproval VALUES ('app'||(OnApproval_seq.nextval), TO_DATE('2021-09-11','YYYY-MM-DD'), '승인', TO_DATE('2021-09-18','YYYY-MM-DD'), TO_DATE('2021-09-12','YYYY-MM-DD'), '요청해주세요~', '괜찮네요 이렇게 갑시다!', '1011', 'opt0000011', 'pro1011', 'task000011');
+*/
+
+SELECT * FROM OnApproval;
+
+-- join 해야할 것 (산출물 - 산출물 분류 (opt_kind) | 작업 - 작업명, 작업내용 (task_name, task_content) | 프로젝트 - 프로젝트명 (pro_name))
+
+-- 1) 결재 조회 join (프로젝트, 작업명, 작업내용, 등록일, 만료일, 승인일, 분류, 상태)
+SELECT op.pro_name 프로젝트, ot.task_name 작업명, ot.task_content 작업내용, oa.app_regdte 등록일, oa.app_deadline 만료일, oa.app_appdte 승인일, oo.opt_kind 분류, oa.app_state 상태
+FROM OnApproval oa, OnProject op, OnOutput oo, OnTask ot
+WHERE oa.pro_no = op.pro_no
+-- 결재테이블의 프로젝트번호 = 산출물테이블의 프로젝트번호
+AND oa.opt_no = oo.opt_no
+-- 결재테이블의 프젝번호 = 산출물테이블의 산출물번호
+AND oa.task_no = ot.task_no;
+-- 결재테이블의 작업번호 = 작업테이블의 작업번호
+/*
+AND oa.app_no = op.app_no;
+-- 결재테이블의 결재번호 = 프로젝트테이블의 결재번호
+*/

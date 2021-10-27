@@ -1,0 +1,136 @@
+package onbiz.vo;
+
+import java.util.Date;
+
+public class OnApprovalView {
+	
+	private String pro_name; // 프로젝트명
+	private String task_name; // 작업명
+	private String task_content; // 작업명
+	private Date app_regdte; // 결재 등록일
+	private Date app_deadline; // 결재 승인 만료일
+	private Date app_appdte; // 결재 승인일	
+	private String opt_kind; // 산출물 분류 (산출물, 회의록)
+	private String app_state; // 결재 승인상태 (승인대기 / 승인 / 반려 / 취소)
+	private String pro_no; // 프로젝트 번호 (fk)
+	private String opt_no; // 산출물 번호 (fk)
+	private String task_no; // 작업 번호 (fk)
+	
+	public OnApprovalView() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	// 아래는 결재 조회 VO (프로젝트명, 작업명, 작업내용, 결재등록일, 결재만료일, 결재승인일, 산출물분류, 승인상태)
+	/*
+	 SELECT op.pro_name 프로젝트, ot.task_name 작업명, ot.task_content 작업내용, oa.app_regdte 등록일, oa.app_deadline 만료일, oa.app_appdte 승인일, oo.opt_kind 분류, oa.app_state 상태
+	FROM OnApproval oa, OnProject op, OnOutput oo, OnTask ot
+	WHERE oa.pro_no = op.pro_no
+	-- 결재테이블의 프로젝트번호 = 산출물테이블의 프로젝트번호
+	AND oa.opt_no = oo.opt_no
+	-- 결재테이블의 프젝번호 = 산출물테이블의 산출물번호
+	AND oa.task_no = ot.task_no;
+	-- 결재테이블의 작업번호 = 작업테이블의 작업번호
+	 */
+	
+	public OnApprovalView(String pro_name, String task_name, String task_content, Date app_regdte, Date app_deadline, Date app_appdte, String opt_kind, String app_state) {
+		super();
+		this.pro_name = pro_name;
+		this.task_name = task_name;
+		this.task_content = task_content;
+		this.app_regdte = app_regdte;
+		this.app_deadline = app_deadline;
+		this.app_appdte = app_appdte;
+		this.opt_kind = opt_kind;
+		this.app_state = app_state;
+	}
+
+	public String getPro_name() {
+		return pro_name;
+	}
+
+	public void setPro_name(String pro_name) {
+		this.pro_name = pro_name;
+	}
+
+	public String getTask_name() {
+		return task_name;
+	}
+
+	public void setTask_name(String task_name) {
+		this.task_name = task_name;
+	}
+
+	public String getTask_content() {
+		return task_content;
+	}
+
+	public void setTask_content(String task_content) {
+		this.task_content = task_content;
+	}
+
+	public Date getApp_regdte() {
+		return app_regdte;
+	}
+
+	public void setApp_regdte(Date app_regdte) {
+		this.app_regdte = app_regdte;
+	}
+
+	public Date getApp_deadline() {
+		return app_deadline;
+	}
+
+	public void setApp_deadline(Date app_deadline) {
+		this.app_deadline = app_deadline;
+	}
+
+	public Date getApp_appdte() {
+		return app_appdte;
+	}
+
+	public void setApp_appdte(Date app_appdte) {
+		this.app_appdte = app_appdte;
+	}
+
+	public String getOpt_kind() {
+		return opt_kind;
+	}
+
+	public void setOpt_kind(String opt_kind) {
+		this.opt_kind = opt_kind;
+	}
+
+	public String getApp_state() {
+		return app_state;
+	}
+
+	public void setApp_state(String app_state) {
+		this.app_state = app_state;
+	}
+
+	public String getPro_no() {
+		return pro_no;
+	}
+
+	public void setPro_no(String pro_no) {
+		this.pro_no = pro_no;
+	}
+
+	public String getOpt_no() {
+		return opt_no;
+	}
+
+	public void setOpt_no(String opt_no) {
+		this.opt_no = opt_no;
+	}
+
+	public String getTask_no() {
+		return task_no;
+	}
+
+	public void setTask_no(String task_no) {
+		this.task_no = task_no;
+	}
+	
+}

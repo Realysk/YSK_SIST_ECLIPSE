@@ -1,0 +1,23 @@
+[OnApproval]
+결재 조치 : TM_DA-004.jsp
+결재 현황 : PM_DA-005.jsp
+
+0. SQL 작성
+	
+
+0. 결재 조치 화면에서는 상태가 "승인대기"인 결재 목록만 출력하도록 함. (서비스단에서 필터링)
+	[Service]
+	- if(sch.getApp_state().equals(sch)) sch.setApp_state("승인대기");
+	
+0. "승인대기" 상태인 결재 목록을 ondbclick 처리 시 Modal 창 출력 (TM_DA-004에서 Modal 출력)
+	[TM_DA-004]
+	- <input ondbclick ~
+
+0. Modal창 데이터 폼 화면구성
+	[결재조치 Modal]
+	프로젝트명 : ${app.pro_name}
+	작업명 : ${app.task_name}
+	작업내용 : ${app.task_content}
+	결재등록일 : ${app.app_regdte}
+	결재만료일 : ${app.app_deadline}
+	요청내용 : ${app.app_content}

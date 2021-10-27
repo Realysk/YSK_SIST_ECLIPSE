@@ -1,0 +1,51 @@
+package onbiz.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import onbiz.service.OnRiskServ;
+import onbiz.vo.OnRisk;
+import onbiz.vo.OnRiskSch;
+
+@Controller
+@SessionAttributes("OnRiskSch")
+@RequestMapping("Onrisk.do")
+public class OnRiskCtrl {
+
+  @Autowired(required = false)
+  private OnRiskServ service;
+  
+
+  // http://localhost:7080/onbiz/Onrisk.do?method=list
+  @RequestMapping(params="method=list")
+  public String OnRisk(OnRiskSch onrisk , Model d) { // 모델어트리뷰트로 객체 이름으로 지원
+   d.addAttribute("list", service.OnRiskList( onrisk ));
+  return "OnRisk/RIS-001-riskboard";
+  }
+  
+  
+  //http://localhost:7080/onbiz/Onrisk.do?method=detail?risk_no=1
+  @RequestMapping(params="method=detail")
+  public String boardDetail(@RequestParam("risk_no") int risk_no, Model d) {
+    d.addAttribute("detail", service.getOnRisk( risk_no ));
+    return "OnRisk/RIS-003-riskdetail";
+}   
+  
+//http://localhost:7080/board/board.do?method=insertForm
+  @RequestMapping(params="method=insertForm")
+  public String insertForm(OnRisk onrisk) {
+      return "OnRisk/RIS-002-riskinsert"; 
+  }   
+  // http://localhost:7080/board/board.do?method=insert   
+  @RequestMapping(params="method=insert")
+  public String boardInsert(OnRisk ins) {
+      service.insertOnRisk(ins);
+      return "OnRisk/RIS-002-riskinsert";
+  }
+  
+  
+  
+}

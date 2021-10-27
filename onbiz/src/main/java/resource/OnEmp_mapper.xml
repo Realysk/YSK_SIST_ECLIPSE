@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+<mapper namespace="onbiz.dao.OnEmpDao">
+	 <!-- 로그인 --><!-- 다은 -->
+	<select id="login" parameterType="onemp" resultType="onemp">
+		select om.auth_name, o.*  
+		from onemp o, onEmp_auth om
+		where om.auth_no = o.auth_no 
+		and emp_no = #{emp_no} and emp_pass = #{emp_pass} 
+	</select>
+	<!--로그인 체크 -->
+	<!-- 권한 체크를 넣을 것 / 이름과 권한 가져올것 -->
+	<select id ="loginCheck" resultType="onemp" parameterType="onemp">
+	select om.auth_name, o.*  
+		from onemp o, onEmp_auth om
+		where om.auth_no = o.auth_no 
+		and emp_no = #{emp_no} and emp_pass = #{emp_pass}
+	</select>	
+	<!--사원정보 조회 -->
+	<select id="onEmpList" resultType="onemp" parameterType="String">
+		select emp_no, emp_korname, ptn_no,
+		emp_hiredte, emp_email, emp_addr	
+		from onemp
+		where emp_korname like '%'||#{name}||'%'
+	</select>
+	
+	<!--사원정보 상세 조회 -->
+	<select id="onEmpList2" resultType="onemp" parameterType="String">
+		select emp_no, ptn_no, dept_no, auth_no,emp_pass, emp_korname,
+		emp_engname, emp_email, emp_hiredte, emp_birth, emp_content,
+		emp_profile, emp_tel, emp_addr, emp_workst, emp_workchdte
+		from onemp
+	</select>
+	
+	<!-- 사원정보 삭제 -->
+	<delete id="delete" parameterType="onemp">
+		delete from onemp where emp_no = #{emp_no}
+	</delete>
+	
+	
+	
+	
+		<!-- 신규 사원 추가 -->
+		
+		
+	<select id="register" resultType="onemp" parameterType="onemp">
+	    INSERT INTO onemp(emp_no, ptn_no, dept_no, auth_no, emp_pass
+	   		, emp_korname, emp_engname, emp_email, emp_hiredte, emp_birth
+	   		, emp_content, emp_profile, emp_tel, emp_addr	
+	   		, emp_workst, emp_workchdte)
+	    VALUES(#{emp_no}, #{ptn_no}, #{dept_no}, #{auth_no}
+	          , #{emp_pass}, #{emp_korname}, #{emp_engname}
+	          , #{emp_email}, #{emp_hiredte}, #{emp_birth}
+	          , #{emp_content}, #{emp_profile}, #{emp_tel}
+	          , #{emp_addr}, #{emp_workst}, #{emp_workchdte})
+   
+    </select>
+   
+   <select id="insertUser"  parameterType="onemp">
+    insert into onemp values(emp_no_seqence.nextval, #{ptn_no}, #{dept_no}, #{auth_no}
+	          , #{emp_pass}, #{emp_korname}, #{emp_engname}
+	          , #{emp_email}, #{emp_hiredte}, #{emp_birth}
+	          , #{emp_content}, #{emp_profile}, #{emp_tel}
+	          , #{emp_addr}, #{emp_workst}, #{emp_workchdte})
+   </select>
+  
+  <!-- 사원정보 검색 -->  
+  <select id="search" resultType="onemp" parameterType="onemp">
+  
+    select emp_no, emp_korname, emp_email from onemp
+    </select>
+</mapper>

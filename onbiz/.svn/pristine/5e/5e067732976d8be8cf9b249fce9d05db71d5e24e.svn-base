@@ -1,0 +1,45 @@
+package onbiz.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import onbiz.service.OnApprovalServ;
+import onbiz.vo.OnApprovalView;
+
+@Controller
+@RequestMapping("onapproval.do")
+public class OnApprovalCtrl {
+	
+	@Autowired(required = false)
+	private OnApprovalServ service;
+	
+	// http://localhost:7080/onbiz/onapprovalajax.do
+	@RequestMapping("onapprovalajax.do")
+	public String appListAjax(OnApprovalView sch, Model d) {
+		d.addAttribute("appList", service.getAppList(sch));
+		System.out.println("======================================== [Ctrl] Json 데이터 변환 ========================================");
+		return "pageJsonReport";
+	}	
+	
+	// http://localhost:7080/onbiz/onapproval.do?method=applist
+//	@GetMapping("onapproval.do")
+	@RequestMapping(params="method=applist")
+	public String appForm(OnApprovalView list, Model d) {
+		d.addAttribute("list", service.getAppList(list));
+		System.out.println("======================================== [Ctrl] 결재 현황 이동 ========================================");
+		return "OnApproval/TM_DA-004";
+	}
+	
+	
+	// http://localhost:7080/onbiz/onapproval.do?method=detail
+	@RequestMapping(params="method=appDetail")
+	public String appDetail() {
+		System.out.println("======================================== [Ctrl] 결재 상세 이동 ========================================");
+		return "OnApproval/PM_DA-005";
+	}
+	
+	
+}

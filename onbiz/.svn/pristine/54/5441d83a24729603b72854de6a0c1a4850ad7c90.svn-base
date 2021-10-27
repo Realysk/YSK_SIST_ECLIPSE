@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+<mapper namespace="onbiz.dao.Pro_regDao">
+	<select id="emplist" resultType="onemp" parameterType="onemp">
+		select *
+		from OnEmp
+		where emp_korname like '%'||#{emp_korname}||'%'
+		or emp_engname like '%'||#{emp_engname}||'%'
+	</select>
+	<select id="emptablelist" resultType="empdept" parameterType="empdept">
+	select emp_no, emp_korname, dept_name
+		from OnEmp e, Onemp_Dept d 
+		where emp_korname like '%'||#{emp_korname}||'%'
+		and dept_name like '%'||#{dept_name}||'%'
+	</select>
+	
+	 <!-- 로그인 -->
+	<select id="login" parameterType="OnEmp" resultType="String">
+		SELECT emp_no, emp_pass 
+		  FROM onemp
+		 WHERE emp_no = #{emp_no}
+		   AND emp_pass = #{emp_pass}   
+	</select>
+</mapper>	
+

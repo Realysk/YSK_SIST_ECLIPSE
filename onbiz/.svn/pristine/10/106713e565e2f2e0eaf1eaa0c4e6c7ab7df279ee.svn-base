@@ -1,0 +1,173 @@
+package onbiz.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+
+import onbiz.service.OnTaskService;
+import onbiz.vo.OnEmp;
+import onbiz.vo.OnGantt;
+import onbiz.vo.OnTask;
+import onbiz.vo.OnTask_Project;
+
+@Controller
+@RequestMapping("ontask.do")
+public class OnTaskCtrl {
+	@Autowired
+	private OnTaskService service;
+	private OnTask_Project taskPro = null;
+	private OnGantt ganttVO = null;
+
+	
+	// 세션에서 받아서 사용해야할 값, 임의로 셋팅해서 쓰기
+	private OnEmp sessionEmp; 
+	private String sessionEmpNo; 
+	private String mem_no = "mem1001";
+	private String emp_no = "1026";
+
+
+	// 템플릿 확인
+	// http://localhost:7080/onbiz/ontask.do?method=template
+	@RequestMapping(params="method=template")
+	public String taskAdmin() {
+		return "OnTask/TAD001-gantt";
+	}
+	
+	
+	// [내작업] 간트차트 - 초기화면
+	// http://localhost:7080/onbiz/ontask.do?method=mygantt
+	@RequestMapping(params="method=mygantt")
+	public String myGanttView(Model m, HttpSession session) {
+		
+		sessionEmp = (OnEmp) session.getAttribute("login");
+		sessionEmpNo = (String) session.getAttribute("login.emp_no");
+		
+		if(sessionEmpNo != null) {
+			
+			System.out.println("세션값1 ; " + sessionEmp);
+			System.out.println("세션값2 ; " + sessionEmpNo);
+		} else {
+			System.out.println("세션설정안됨");
+		}
+		
+		m.addAttribute("proList", service.myProList(new OnTask_Project(emp_no)));
+		//m.addAttribute("userList", service.userList());
+		return "OnTask/TM/MTA001-ganttChart2";
+	}
+	
+	
+	// [내작업] 초기화면 + [공통] 참여프로젝트 조회
+	// http://localhost:7080/onbiz/ontask.do?method=mytaskList
+	@RequestMapping(params="method=mytaskList")
+	public String mytaskView(Model m) {
+		System.out.println("===<작업관리 초기화면>===");
+		m.addAttribute("proList", service.myProList(new OnTask_Project(emp_no)));
+		return "OnTask/MTA002-taskAdmin";
+	}
+	
+	// [내작업] 프로젝트별 내 작업 조회
+	// http://localhost:7080/onbiz/ontask.do?method=mytaskJson
+	@RequestMapping(params="method=mytaskJson")
+	public String myTaskJson(OnTask_Project task, Model m) {
+		System.out.println("===<작업관리 리스트 조회>===");
+		System.out.println("프로젝트 검색값 : " + task.getPro_no());
+		System.out.println("사원 검색값 : " + task.getEmp_no());
+		//task.setEmp_no(emp_no);
+		m.addAttribute("mytasklist", service.mytaskList(task));
+		return "pageJsonReport";
+	}
+	
+	// [내작업] 내작업 검색 
+	@RequestMapping(params="method=mySchJson")
+	public String mySchJson(OnTask task, Model m) {
+		System.out.println("===<작업관리 검색>===");
+		System.out.println("검색값 : " + task.getContent());
+		m.addAttribute("mytasklist", service.schtaskList(new OnTask(task.getContent(), task.getContent(), mem_no)));
+		return "pageJsonReport";
+	}
+	
+	// [내작업] 내작업 상세조회
+	@RequestMapping(params="method=detailTask")
+	public String detailTask(OnTask task, Model m) {
+		System.out.println("===<내작업 상세조회>===");
+		task.setMem_no(mem_no);
+		System.out.println("조회할 아이디 : " + task.getId());
+		m.addAttribute("detail", service.detailTask(task));
+		return "pageJsonReport";
+	}
+
+	// [내작업] 내작업 등록
+	@RequestMapping(params="method=myinsert")
+	public String myinsert(OnTask_Project task, Model m, HttpServletRequest request) {
+		System.out.println("===<내작업 등록>===");
+		task.setMem_no(mem_no);
+		
+		HttpSession session = request.getSession();
+		sessionEmpNo = (String) session.getAttribute("login");
+		emp_no = (String) session.getAttribute("login.emp_no");
+		
+		if(sessionEmpNo != null) {
+			System.out.println("세션값1 ; " + sessionEmpNo);
+			System.out.println("세션값2 ; " + emp_no);
+		}
+		
+		System.out.println(task.getDuration());
+		System.out.println(task.getContent());
+		System.out.println(task.getMem_no());
+		service.myinsert(task);
+		
+		task.setEmp_no(emp_no);
+		m.addAttribute("mytasklist", service.mytaskList(task));
+		return "pageJsonReport";
+	}
+	
+	// [내작업] 내작업 수정
+	@RequestMapping(params="method=myupdate")
+	public String myupdate(OnTask_Project task, Model m) {
+		System.out.println("===<내작업 수정>===");	
+		task.setMem_no(mem_no);
+		
+		System.out.println(task.getDuration());
+		System.out.println(task.getContent());
+		System.out.println(task.getMem_no());
+		service.myupdate(task);
+		
+		task.setEmp_no(emp_no);
+		m.addAttribute("mytasklist", service.mytaskList(task));
+		return "pageJsonReport";
+	}
+	
+	// [내작업] 내작업 삭제
+	@RequestMapping(params="method=mydelete")
+	public String mydelete(OnTask_Project task, Model m) {
+		System.out.println("===<내작업 수정>===");	
+		task.setMem_no(mem_no);
+		
+		System.out.println(task.getDuration());
+		System.out.println(task.getContent());
+		System.out.println(task.getMem_no());
+		//service.deleteTask(task);
+		
+		task.setEmp_no(emp_no);
+		m.addAttribute("mytasklist", service.mytaskList(task));
+		return "pageJsonReport";
+	}
+	
+	
+	
+	
+	// [내작업] 산출물 제출 
+	@RequestMapping(params="method=insertOutput")
+	public String uploadOutput(OnTask_Project task, MultipartFile output, Model m) {
+		
+		service.uploadOutput(task.getId(), output);
+		// 산출물 제출 등록할 떄 누르는 버튼임 
+		// sql로 산출물 테이블에 등록되니까 데이터를 다 전달받아야함
+		return "redirect:/ontask.do?method=mytaskList";
+	}
+}

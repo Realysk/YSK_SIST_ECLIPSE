@@ -1,0 +1,128 @@
+package onbiz.vo;
+
+import java.util.Date;
+
+// 주 테이블 : OnTask 테이블 + 부 테이블 : OnProject 테이블 
+public class OnTask_Project {
+	String pro_name;
+	String task_no;
+	String task_name;
+	String task_content;
+	Date task_regdte;
+	Date task_uptdte;
+	Date task_startdte;
+	Date task_enddte;
+	String task_state;
+	int task_prior;
+	String taskref_no;
+	String pro_no;
+	String emp_no;
+	
+	public OnTask_Project() {
+		super();
+	}
+
+	public String getPro_name() {
+		return pro_name;
+	}
+
+	public void setPro_name(String pro_name) {
+		this.pro_name = pro_name;
+	}
+
+	public String getTask_no() {
+		return task_no;
+	}
+
+	public void setTask_no(String task_no) {
+		this.task_no = task_no;
+	}
+
+	public String getTask_name() {
+		return task_name;
+	}
+
+	public void setTask_name(String task_name) {
+		this.task_name = task_name;
+	}
+
+	public String getTask_content() {
+		return task_content;
+	}
+
+	public void setTask_content(String task_content) {
+		this.task_content = task_content;
+	}
+
+	public Date getTask_regdte() {
+		return task_regdte;
+	}
+
+	public void setTask_regdte(Date task_regdte) {
+		this.task_regdte = task_regdte;
+	}
+
+	public Date getTask_uptdte() {
+		return task_uptdte;
+	}
+
+	public void setTask_uptdte(Date task_uptdte) {
+		this.task_uptdte = task_uptdte;
+	}
+
+	public Date getTask_startdte() {
+		return task_startdte;
+	}
+
+	public void setTask_startdte(Date task_startdte) {
+		this.task_startdte = task_startdte;
+	}
+
+	public Date getTask_enddte() {
+		return task_enddte;
+	}
+
+	public void setTask_enddte(Date task_enddte) {
+		this.task_enddte = task_enddte;
+	}
+
+	public String getTask_state() {
+		return task_state;
+	}
+
+	public void setTask_state(String task_state) {
+		this.task_state = task_state;
+	}
+
+	public int getTask_prior() {
+		return task_prior;
+	}
+
+	public void setTask_prior(int task_prior) {
+		this.task_prior = task_prior;
+	}
+
+	public String getTaskref_no() {
+		return taskref_no;
+	}
+
+	public void setTaskref_no(String taskref_no) {
+		this.taskref_no = taskref_no;
+	}
+
+	public String getPro_no() {
+		return pro_no;
+	}
+
+	public void setPro_no(String pro_no) {
+		this.pro_no = pro_no;
+	}
+
+	public String getEmp_no() {
+		return emp_no;
+	}
+
+	public void setEmp_no(String emp_no) {
+		this.emp_no = emp_no;
+	}
+}

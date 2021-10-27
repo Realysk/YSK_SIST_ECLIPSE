@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="onbiz.dao.OnTaskDao">
+
+	<resultMap type="ongantt" id="taskResult">
+		<result property="id" column="task_no"/>
+		<result property="text" column="task_name"/>
+		<result property="start_date" column="task_startdte"/>
+		<result property="end_date" column="task_enddte"/>
+		<result property="duration" column="task_duration"/>
+		<result property="progress" column="task_progress"/>
+		<result property="parent" column="taskref_no"/>
+		<result property="priority" column="task_prior"/>
+		<result property="user" column="emp_korname"/>
+	</resultMap>
+	
+	<resultMap type="ontask" id="tsResult">
+		<result property="id" column="task_no"/>
+		<result property="text" column="task_name"/>
+		<result property="start_date" column="task_startdte"/>
+		<result property="end_date" column="task_enddte"/>
+		<result property="duration" column="task_duration"/>
+		<result property="progress" column="task_progress"/>
+		<result property="parent" column="taskref_no"/>
+		<result property="priority" column="task_prior"/>
+		<result property="user" column="emp_korname"/>
+	</resultMap>
+	
+	<resultMap type="ontaskproject" id="tpResult">
+		<result property="id" column="task_no"/>
+		<result property="text" column="task_name"/>
+		<result property="start_date" column="task_startdte"/>
+		<result property="end_date" column="task_enddte"/>
+		<result property="duration" column="task_duration"/>
+		<result property="progress" column="task_progress"/>
+		<result property="parent" column="taskref_no"/>
+		<result property="priority" column="task_prior"/>
+		<result property="user" column="emp_korname"/>
+	</resultMap>
+	
+	<select id="ganttList" resultMap="tpResult" parameterType="ontaskproject">
+		SELECT op.pro_name, oe.emp_korname, ot.* 
+		FROM OnTask ot, onproject_member opm, onproject op, OnEmp oe
+		WHERE ot.mem_no = opm.mem_no
+		AND opm.pro_no = op.pro_no
+		AND	opm.emp_no = oe.emp_no
+		AND opm.pro_no = #{pro_no}
+	</select>
+	
+	<select id="userList" resultMap="tpResult">
+		SELECT DISTINCT emp_korname
+		FROM OnProject_member opm, OnEmp oe
+		WHERE opm.emp_no = oe.emp_no
+	</select>
+	
+	
+	
+	
+	
+	<select id="mytaskList" resultMap="tpResult" parameterType="ontaskproject">	
+		SELECT op.pro_name, ot.*
+		FROM ontask ot, onproject_member opm, onproject op, onEmp oe
+		WHERE ot.mem_no = opm.mem_no
+		AND (opm.pro_no = op.pro_no AND opm.pro_no = #{pro_no})
+		AND	(opm.emp_no = oe.emp_no AND opm.emp_no = #{emp_no})
+		ORDER BY ot.task_no desc
+ 	</select>
+ 	
+	<select id="schtaskList" resultMap="tpResult" parameterType="ontaskproject">	
+		SELECT op.pro_name, ot.*
+		FROM ontask ot, onproject_member opm, onproject op
+		WHERE (ot.mem_no = opm.mem_no AND ot.mem_no = #{mem_no})
+		AND opm.pro_no = op.pro_no
+		AND (ot.task_name LIKE '%'||#{text}||'%' OR ot.task_content LIKE '%'||#{task_content}||'%')
+		ORDER BY ot.task_no desc
+ 	</select>
+ 	
+ 	
+	<select id="myProList" resultMap="tpResult" parameterType="ontaskproject">
+ 		SELECT DISTINCT op.pro_name, op.pro_no
+		FROM ontask ot, onproject_member otm, onproject op, onemp oe
+		WHERE ot.mem_no = otm.mem_no
+		AND otm.pro_no = op.pro_no
+		AND otm.emp_no = oe.emp_no
+		AND otm.emp_no = ${emp_no}
+ 	</select>
+ 	
+ 	
+
+</mapper>	
