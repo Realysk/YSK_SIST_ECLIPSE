@@ -4,6 +4,7 @@
     %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>     
 <!DOCTYPE html>
@@ -58,11 +59,11 @@
 </div>
 <div class="container">
     <h2 align='center'></h2>
-	<form id="frm01" class="form"  method="post">
+    <form:form modelAttribute="boardSch" class="form" method="post">
 		<input type="hidden" name="curPage" value="1"/>
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" name="subject" value="${board.subject}" placeholder="제목" />
-	    <input class="form-control mr-sm-2" name="writer" value="${board.writer}"  placeholder="작성자" />
+  		<form:input path="subject" class="form-control mr-sm-2" placeholder="제목"/>
+  		<form:input path="writer" class="form-control mr-sm-2" placeholder="작성자"/>
 	    <button class="btn btn-info" type="submit">Search</button>
 	    <button class="btn btn-success" id="regBtn" type="button">등록</button>
  	</nav>
@@ -81,11 +82,8 @@
  				<option>30</option>
  			</select>
  		</div>
- 	
  	</div>
- 	
- 	
-	</form>
+	</form:form>
    <table class="table table-hover table-striped">
    	<col width="10%">
    	<col width="50%">
