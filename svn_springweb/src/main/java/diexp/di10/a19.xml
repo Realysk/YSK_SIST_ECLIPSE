@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<bean id="obj" class="java.lang.Object"/>
+	<!-- 
+# 여러가지 구조체를 활용한 컨테이너 설정 처리.
+1. list 형식\
+	list
+2. set(중복불가) 형식 데이터 할당 처리.
+	set
+		value 입력값..	
+	public void	setAgent(Set<String> agent)	
+3. map(key/value) 형식 데이터 할당 객체
+
+	Map<key, valuObject> : key와/value의 generic 선언으로 된 collection
+		컨테이너
+		*map
+			entry
+				key/value 형식으로 처리..
+		public void setConfig(Map<String, Integer> config)
+4. 	Properties : key/value형식 collection
+		컨테이너
+		*props
+			prop key="키값" value값			
+	 -->
+	 <bean id="monitor" class="diexp.vo.Monitor">
+	 	<property name="config">
+	 		<map>
+	 			<entry key="간격" value="1000"></entry>
+	 			<entry key="시간"><value>2000</value></entry>
+	 			<entry key="범위(h)">
+	 				<value>24</value>
+	 			</entry>
+	 		</map>
+	 	</property>
+	 </bean>
+	 
+	 <bean id="sensor1" class="diexp.vo.Sensor">
+	 	<property name="agent">
+	 		<set>
+	 			<value>주식매매</value>
+	 			<value>주식매매</value>
+	 			<value>주식매매</value>
+	 			<value>자산관리</value>
+	 			<value>자산관리</value>
+	 			<value>자산관리</value>
+	 			<value>보험관리</value>
+	 		</set>
+	 	</property>
+	 	<property name="addInfo">
+	 		<props>
+	 			<prop key="threshold">1500</prop>
+	 			<prop key="retry">3</prop>
+	 		</props>
+	 	</property>
+	 	
+	 </bean>
+	 <bean id="fruitshop1" class="diexp.vo.FruitShop">
+       <property name="fruit">
+          <set>
+             <value>바나나</value>
+             <value>수박</value>
+             <value>포도</value>
+          </set>
+       </property>
+       <property name="frInfo">
+          <props>
+             <prop key="바나나">2000원</prop>
+             <prop key="수박">8000원</prop>
+             <prop key="포도">7000원</prop>
+          </props>
+       </property>
+    </bean>	
+	<bean id="bus" class="diexp.vo.Bus">
+		<!-- 
+		setNumbers(Set<String> numbers)
+		 -->
+		<property name="numbers">
+			<set>
+				<value>3003</value>
+				<value>7700</value>
+				<value>7650</value>
+			</set>
+		</property>
+		<!-- 
+		setSection(Properties section)
+		 -->
+		<property name="section">
+			<props>
+				<prop key="3003">서울~수원</prop>
+				<prop key="7700">서울~인천</prop>
+				<prop key="7650">부평~강남</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="stud01" class="diexp.vo.Student" p:name="홍길동" p:kor="70" p:eng="80" p:math="90"/>
+	<bean id="stud02" class="diexp.vo.Student" 
+		p:name="김길동" p:kor="80" p:eng="90" p:math="95"/>
+	<bean id="stud03" class="diexp.vo.Student" 
+		p:name="마길동" p:kor="85" p:eng="89" p:math="97"/>
+	<bean id="sInfo" class="diexp.vo.OnSchool" c:_0="행복한 학교">
+		<property name="studInfo">
+			<map>
+				<entry key="1" value-ref="stud01"/>			
+				<entry key="2" value-ref="stud02"/>			
+				<entry key="3" value-ref="stud03"/>			
+			</map>
+		</property>
+	</bean>
+	<bean id="emp01" class="diexp.vo.Emp" p:ename="홍길동" p:job="사원" p:sal="3000"/>
+	<bean id="emp02" class="diexp.vo.Emp" p:ename="김길동" p:job="대리" p:sal="5000"/>
+	<bean id="emp03" class="diexp.vo.Emp" p:ename="신길동" p:job="과장" p:sal="6000"/>
+	<!-- 
+	public void setMap(Map<Integer, Emp> map)
+	 -->
+	<bean id="onEmp" class="diexp.vo.OnEmp" c:_0="it회사">
+		<property name="map">
+			<map>
+				<entry key="7000" value-ref="emp01"/>
+				<entry key="7001" value-ref="emp02"/>
+				<entry key="7002" value-ref="emp03"/>
+			</map>
+		</property>
+	</bean>
+	
+	
+</beans>

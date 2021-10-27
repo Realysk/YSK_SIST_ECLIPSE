@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<body>
+<h3>비디오 삽입</h3>
+<hr>
+<!-- 
+# 미디어 삽입.
+1. html5 (!DOCTYPE html)로 선언된 것은 html5 dtd 표준 선언 방식.
+	표준 브라우저에서 플러그인 없이 오디오 비디오 재생이 되게 한다.
+2. 비표준(예전 브라우저 - html4이하..)
+	플래시, embed, object 태그를 활용..
+3. video 태그
+	video src="해당비디오파일" width="" height=""  
+	controls(하단에 실행관련 제어 툴)	 
+	autoplay(자동 실행)   
+ -->
+<video id="id01" src="media/bear.mp4" width="320" height="240"
+	   controls autoplay="autoplay"  muted="muted">
+	브라우저가 video 태그를 지원하지 않습니다.
+</video>
+</body>
+<script type="text/javascript">
+	document.querySelector("#id01").play();
+</script>
+</html>

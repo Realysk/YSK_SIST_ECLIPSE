@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	class Person{
+		constructor(name, age, loc){
+			this.name = name;
+			this.age = age;
+			this.loc = loc;
+		} 
+		show(){
+			return "이름:"+this.name+", 나이:"+this.age+", 사는 곳:"+this.loc;
+		}
+	}	
+	function makePerson(){
+		var p01 = new Person("홍길동",25,"서울 신림동");
+		document.querySelector("h4").innerText=p01.show();
+	}
+	// ex) Product 클래스를 선언하고, 물건명,가격,갯수를 속성으로 하여,
+	//    구매물건 클릭시,  화면에 출력하게 하세요   1조..
+	class Product{
+	    constructor(pname, price, cnt){
+	       this.pname = pname;
+	       this.price = price;
+	       this.cnt = cnt;
+	    }
+	    show(){
+	       return "물건명: "+this.pname+", 가격: "+this.price+"갯수: "+this.cnt;
+	    }
+	}
+   	function makeProduct(){
+      	var p = new Product("사과",3000,2);
+      	document.querySelector("h3").innerText=p.show();
+   	}	
+</script>
+	<h2 onclick="makePerson()" align="center">Person 객체 호출</h2>
+	<h2 onclick="makeProduct()" align="center">Product 객체 호출</h2>
+	<h4 align="center"></h4>
+	<h3 align="center"></h3>
+</body>
+<script type="text/javascript">
+/*
+# ecma6에 지원하는 클래스형 생성자.
+1. 기본 형식
+	class 클래스명{
+		constructor(매개변수1, 매개변수2){
+			// 클래스명 하위에 선언없이 this.필드명으로 선언된다.
+			this.필드명 = 매개변수1;
+		}
+		메서드명(){
+			this.필드명 : 다른 생성자나 메서드에서 선언된 필드를 사용할 수 있다.
+		}
+	}
+	var 참조변수 =  new 클래스명(데이터1, 데이터2);
+	참조변수.메서드명();
+ */
+
+ 	
+</script>
+</html>

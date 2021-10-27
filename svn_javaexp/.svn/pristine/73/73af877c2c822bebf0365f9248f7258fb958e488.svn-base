@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	/* td의 정렬을 중앙으로 처리 속성:속성값*/
+	td{text-align:center;}
+</style>
+<script type="text/javascript">
+/*
+ 5. 물건명 [  ] 가격 [   ][등록] - 해당 버튼을 클릭시 마다 테이블에 물건이 추가 등록되게 처리.
+    번호  물건명 가격
+    1    @@    @@
+*/
+
+</script>
+</head>
+<body>
+물건명 <input type="text" id="pname"/>
+가격 <input type="text" name="price"/>
+<input type="button" id="regBtn" value="등록"/><br>
+<table width="500" border>
+	<tr><th>번호</th><th>물건명</th><th>가격</th></tr>
+</table>
+</body>
+<script type="text/javascript">
+	var pname = document.querySelector("#pname");
+	// [속성=속성값]으로 선택할 수 있다.
+	var price = document.querySelector("[name=price]");
+	var regBtn = document.querySelector("#regBtn");
+	var table = document.querySelector("table");
+	var cnt=1;
+	regBtn.onclick=function(){
+		var pnameVal = pname.value; 
+		// form하위 입력객체는 .value 입력한 값을 가져올 수 있다.
+		var priceVal = price.value;
+		console.log("물건명:"+pnameVal);
+		console.log("가격:"+priceVal);
+		console.log("테이블 출력내용:"+table.innerHTML);
+		table.innerHTML+="<tr><td>"+(cnt++)+"</td>"+
+			"<td>"+pnameVal+"</td><td>"+priceVal+"</td></tr>";
+	}
+
+</script>
+</html>

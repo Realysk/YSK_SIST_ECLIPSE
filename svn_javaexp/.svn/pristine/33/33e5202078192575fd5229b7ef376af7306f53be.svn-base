@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+/*   
+# 초기값이 있는 가변함수.
+1. 함수명(매개1, 매개2=매개2가없을때초기, 매개3=매개3이 없을 때, 초기값)
+
+ */
+	function product(name, price=0,cnt=0){
+		console.log("물건명:"+name+", 가격:"+price+", 갯수:"+cnt);
+	} 
+ 	product("사과");
+ 	product("바나나",4000);
+ 	product("딸기",13000,3);
+ 	// ex) 회원명, 아이디, 패스워드, 권한
+ 	///    1개 매개값 부터 4개의 매개값이 가변적으로 처리될 때, 
+ 	//     아이디의 default값 : "아이디없음"
+ 	//     패스워드의 default값 : "패스워드없음"
+ 	//     권한의 default값 : "방문자"
+ 	//  함수를 선언하고, console로 출력하세요.. 2조  15:22 풀이하겠습니다.
+ 	function memberReg(name, id="아이디없음", pass="패스워드없음", auth="방문자"){
+ 		console.log("# 회원등록 가변인자 #");
+ 		console.log("회원명:"+name);
+ 		console.log("아이디:"+id);
+ 		console.log("패스워드:"+pass);
+ 		console.log("권한:"+auth);
+ 		console.log("====================");
+ 	}
+ 	memberReg("홍길동");
+ 	memberReg("김길동","goodMan");
+ 	memberReg("신길동","darkMan","7777");
+ 	memberReg("마길동","whitewolf","8888","관리자");
+/*
+# ...배열명으로 가변적 매개변수 처리. ecma6~
+function 함수명(기본매개1, ...가변변수배열 ) 
+ */ 	
+ 	function buyProd(name, ...buyPros){
+		console.log("# 구매 물건 #");
+		console.log("물건명:"+name);
+		buyPros.forEach(function(prod,idx){
+			console.log(idx+1+"번째 인자의 값:"+prod);
+		});
+	}	
+ 	buyProd("사과");
+ 	buyProd("바나나",3000,2);
+ 	buyProd("딸기",2000);
+ 	// ex) 컴퓨터부품 구매를 가변매개변수를 받되, 컴퓨터회사를 기준으로
+ 	//    cpu, ram, hdd로 설정하여, 구매한 물건의 정보를 출력 처리하세요.. 4조
+ 	function buyCom(company, ...buyList){
+ 		console.log("#구매물품#")
+ 		console.log("회사명:"+company);
+ 		var titles=["cpu","ram","hdd"];
+ 		buyList.forEach(function(prod,idx){
+ 			console.log(titles[idx]+":"+prod);
+ 		});
+ 	}
+ 	buyCom("삼성");
+ 	buyCom("LG","i7 4.3GHZ");
+ 	buyCom("현대","i5 3.3GHZ","16G");
+ 	buyCom("조립식","i7 4.3GHZ","32G","500G SSD");
+</script>
+
+</head>
+<body>
+
+</body>
+<script>
+/* 
+
+
+*/
+</script>
+</html>

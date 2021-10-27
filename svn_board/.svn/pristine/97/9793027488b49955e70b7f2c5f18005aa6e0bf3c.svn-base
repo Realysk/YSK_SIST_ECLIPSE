@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="board.dao.BoardDao">
+	<!-- 
+	<resultMap type="board" id="resultBoard">
+	</resultMap> -->
+	<select id="boardList" resultType="board"
+ 			parameterType="board">
+		SELECT *
+		FROM BOARD 
+		WHERE subject LIKE '%'||#{subject}||'%'
+		AND writer LIKE '%'||#{writer}||'%'
+		ORDER BY NO DESC 	
+ 	</select>
+	 <select id="getBoard" resultType="board" 
+ 	 	parameterType="int">
+ 	 	select *
+ 	 	from board
+ 	 	where no = #{no}
+ 	 </select>
+	<insert id="insertBoard" parameterType="board">
+		INSERT INTO board values(board_seq.nextval,
+		#{refno},#{subject},
+		#{content},#{writer},0,sysdate, sysdate )		
+	</insert> 	
+ 	<update id="updateBoard" parameterType="board">
+		UPDATE board
+		   SET subject = #{subject},
+		   	   content = #{content},
+		   	   writer = #{writer},
+		   	   uptdte =sysdate
+		 WHERE NO = #{no}
+ 	</update>
+  	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board
+		 WHERE NO = #{no}
+ 	</delete> 	
+	 
+	<insert id="uploadFile" parameterType="boardfile">
+		insert into boardfile values(
+			board_seq.currval, #{fname}, #{pathname},
+			#{content}, sysdate )
+	</insert> 
+	<select id="getBoadFile" 
+		resultType="boardfile" parameterType="int">
+		select *
+		from boardfile
+		where no = #{no}
+	</select>	
+	
+</mapper>	

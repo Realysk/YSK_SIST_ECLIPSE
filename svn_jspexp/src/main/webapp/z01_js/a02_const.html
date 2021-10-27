@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+// ex) a02_const.html로  Calculator로 매개변수로 두개값을 받아서,
+//        this.plus=function(){}를 통해서 합산된 값을 출력하세요. 3조
+	function Calculator(num01, num02){
+		this.num01 = num01;
+		this.num02 = num02;
+		this.plus = function(){
+			document.write("<h2>"+num01+" + "+num02+" = "
+					+(this.num01+this.num02)+"</h2>");
+		}	
+	}
+	var c01 = new Calculator(30,40);
+	c01.plus();
+	
+</script>
+
+</body>
+</html>

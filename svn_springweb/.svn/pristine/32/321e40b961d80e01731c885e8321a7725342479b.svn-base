@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
+</head>
+<!-- 
+# v-for를 통한 배열형 데이터의 반복문 처리.
+1. model 데이터가 객체형 배열일 때,
+	반복데이터를 화면에 list형식으로 출력할 수 있다.
+2. 기본 형식
+   1) 배열 요소 객체 v-for="(단위객체, index) in 객체형배열모델">
+   		{{단위객체.속성}}
+   2) 객체형 v-for="(val,prop) in 객체"	
+ -->
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		<table align="center" border>
+			<tr><th>속성</th><th>속성값</th></tr>
+			<tr v-for="(val,prop) in person">
+				<td>{{prop}}</td><td>{{val}}</td>
+			</tr>
+			
+		</table>
+		<h3 align="center" v-for="(color,index) in colors">
+			{{index+1}}번째 {{color}}
+		</h3>
+		<!-- 
+		ex) 물건정보를 모델 데이터를 할당하고, 사원정보리스트를 선언하여,
+			 각각 테이블로 출력해보세요.
+		 -->
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"반복문 처리!!",
+			person:{name:"홍길동",age:25,loc:"서울신림동"},
+			colors:["red","orange","yellow","green","blue","navy","purple"]
+		}
+	});
+</script>
+</html>

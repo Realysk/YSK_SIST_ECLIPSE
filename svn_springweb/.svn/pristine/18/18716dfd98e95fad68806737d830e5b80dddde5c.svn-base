@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<!-- 
+// springweb.a05_mvc.a03_dao.A02_EmpDao
+public interface A02_EmpDao {
+	public ArrayList<Emp> getEmpList(Emp sch);
+ -->
+<mapper namespace="springweb.a05_mvc.a03_dao.A02_EmpDao">
+	<!-- 
+	resultMap을 사용하는 이유
+	1. 결과값을 처리하는 vo객체의 property와 DB의 컬럼명이 다를 때, 주로 사용한다.
+	
+		and hiredate between #{hiredate} and sysdate
+	 -->
+	<resultMap type="emp" id="resultEmp">
+		<!-- <collection property="" column=""></collection> -->
+	</resultMap>
+
+	<select id="getEmpList" resultMap="resultEmp" parameterType="emp">
+		select * from emp
+		where ename like '%'||#{ename}||'%' 
+		and job like '%'||#{job}||'%'
+		and hiredate between #{hiredate} and sysdate
+	</select>
+	<update id="updateEmp" parameterType="emp">
+		update emp
+		   set ename=#{ename},
+		   	   job = #{job},
+		   	   mgr = #{mgr},
+		   	   sal = #{sal},
+		   	   hiredate = sysdate,
+		   	   comm = #{comm},
+		   	   deptno = #{deptno}
+		where empno = #{empno}   	   
+	</update>
+	<delete id="deletEmp" parameterType="int">
+		delete from emp where empno=#{empno}
+	</delete>
+	<select id="schDept" parameterType="int">
+		select *
+		from emp
+		where deptno=#{deptno}
+	</select>
+	<select id="schJob" resultType="emp" parameterType="String">
+		select * from emp like '%'||#{job}||'%'
+	</select>
+	<select id="groupDept" resultType="emp" parameterType="double">
+		select deptno, max(sal) sal
+			from emp
+		   group by deptno
+		   having max(sal) > #{sal}
+	</select>
+	<select id="countEmp" resultType="int" parameterType="int">
+		select count(*)
+		   from emp
+		   where sal between #{minsal} and #{maxsal}		
+	</select>
+	<select id="countEmp2" resultType="map" parameterType="int">
+		select count(*)
+		   from emp
+		   where sal between #{minsal} and #{maxsal}		
+	</select>
+	 
+	 
+	 
+
+</mapper>	

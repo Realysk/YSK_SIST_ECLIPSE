@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  
+# 정리문제
+1. 구조선택자의 종류와 내용에 대하여 기술하세요
+	first, last, nth, child
+	요소객체:first-child : 요소객체가 부모로 부터 첫번째
+	요소객체:last-child : 요소객체가 부모로부터 마지막번째
+	:nth-child(2) : 2번째 객체.
+	:nth-child(반복단위n+번째) : 반복한 단위로 번째 처리할 내용.
+		ex) tr:nth-child(2n+1) : tr 홀수번째 반복할 선택자 지정. 
+
+2. 테이블 4X4 테이블에 tr부분에 짝수번째/홀수번째 배경색상을 지정하고, 
+    td부분을 3개씩의 첫번째에 글자색상을 지정하세요.(css)
+*/
+	#tab01 tr:nth-child(2n){background-color:yellow;}    
+	#tab01 tr:nth-child(2n+1){background-color:pink;}    
+	#tab01 td:nth-child(3n+1){color:blue;}    
+    
+/*    
+3. 테이블 3X3 테이블을 짝수번째 배경색상을 핑크로하고(css),
+    1) 1~9까지 글자를 js로 입력하고, 
+    2) td 클릭하면 배경색상이 노랑색으로 변경(js), 
+    3) 임의의 번호를 클릭하면  빙고라고 출력되고, 배경색상을 변경하세요(js)
+*/
+	#tab02 td:nth-child(2n){background-color:pink;}
+/*    
+4. text-XXXX : 정렬 및, 들여쓰기, 사선관련 속성과 속성값을 기술하세요.
+	1) text-indent : 들여쓰기 속성 길이 및 %지정
+	2) text-align : 정렬 (left|right|center|justify)
+	3) text-decoration : 텍스트의 하단, 중단, 상단에 선긋기 및 없애기 옵셔
+		none|underline|overline|line-throught
+
+
+5. h2를 출력하고, 기능 버튼을 위에 속성(4번문제)으로 선언하고, 
+    클릭시 마다 속성이 변경되게 하세요.
+*/
+
+</style>
+<script>
+	function func01(){
+		var btns = document.querySelectorAll("[type=button]")
+		var h2Obj = document.querySelector("h2")
+		btns[0].onclick=function(){
+			h2Obj.style.textIndent="20%";
+		}
+		btns[1].onclick=function(){
+			h2Obj.style.textAlign="center";
+		}		
+		btns[2].onclick=function(){
+			h2Obj.style.textDecoration="underline";
+		}		
+	}
+</script>
+
+</head>
+<body>
+	<h2>안녕하세요!! 반갑습니다!! 좋은 날입니다!!</h2>
+	<input type="button" onclick="func01()" value="들여쓰기"/>
+	<input type="button" onclick="func01()" value="중앙정렬"/>
+	<input type="button" onclick="func01()" value="언더라인긋기"/>
+	<h1>2번문제 테이블</h1>
+	<table width="300px" height="300px" id="tab01" border>
+		<tr><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+		<tr><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+		<tr><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+		<tr><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+	</table>
+	<h1>3번문제 테이블</h1>
+	<table width="300px" height="300px" id="tab02" border>
+		<col width="33%">
+		<col width="33%">
+		<col width="33%">
+		<tr><td>1</td><td>2</td><td>3</td></tr>
+		<tr><td>1</td><td>2</td><td>3</td></tr>
+		<tr><td>1</td><td>2</td><td>3</td></tr>
+	</table>	
+
+</body>
+<script>
+	// 1. 선택자 선언
+	var tds = document.querySelectorAll("#tab02 td");
+	//           정수형변환(Math.floor())
+	//            Math.random()*임의의 경우의 수
+	//          0.0 <= Math.random() < 1.0
+	var ranIdx = Math.floor( Math.random() * tds.length);
+	// 2. for문을 통한 처리
+	for(var idx=0;idx<tds.length;idx++){
+		tds[idx].innerText = idx+1;
+		tds[idx].style.textAlign = "center";
+		// 임의의 수에 해당할 때, 이벤트 함수 처리와
+		// 그렇지 않을 때, 이벤트 함수 처리를 구분하여 선언.
+		if( idx == ranIdx){
+			tds[idx].onclick=function(){
+				this.style.backgroundColor="navy";
+				this.style.color="yellow";
+				this.innerText="빙고";
+			}			
+		}else{
+			tds[idx].onclick=function(){
+				this.style.backgroundColor="yellow";
+			}
+		}
+	}
+	
+</script>
+</html>

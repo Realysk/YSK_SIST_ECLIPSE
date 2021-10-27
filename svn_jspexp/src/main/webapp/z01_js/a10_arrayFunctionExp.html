@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table id="tab01" width="40%" border>
+		<thead><tr><th>물건명</th><th>가격</th><th>갯수</th></thead>
+		<tbody></tbody>
+	</table>
+	<table id="tab02" width="40%" border>
+		<thead><tr><th>물건명</th><th>가격</th><th>갯수</th></thead>
+		<tbody></tbody>	
+	</table>
+</body>
+<script>
+	var prods = [];
+	var prod1={};
+	prod1.name = "사과";
+	prod1.price = 3000;
+	prod1.cnt = 2;
+	prods.push(prod1);
+	var prod2={};
+	prod2.name = "바나나";
+	prod2.price = 4000;
+	prod2.cnt = 5;
+	prods.push(prod2);
+	var prod3={};
+	prod3.name = "딸기";
+	prod3.price = 5000;
+	prod3.cnt = 2; // [{},{},{}]
+	prods.push(prod3);
+	console.log(prods);
+	// ex1) tab01 : 물건명, 가격, 갯수를 forEach를 통해서 tab01에 출력.
+	var tab01 = document.querySelector("#tab01 tbody");
+	var show="";
+	prods.forEach(function(prod, index, array){
+		show+="<tr><td>"+prod.name+"</td><td>"+prod.price+"</td><td>"+prod.cnt+"</td></tr>";
+	});
+	tab01.innerHTML = show;
+	// ex2) prods배열을 filter()통해서 newProds배열을 총계(물건*가격)>=10000 이상인 것을
+	//      tab02에 출력 처리.. 3조
+	var newArry = prods.filter(function(prod, index, array){
+		return  (prod.price*prod.cnt)>=10000;
+	});
+	console.log(newArry);
+	var tab02 = document.querySelector("#tab02 tbody");
+	var show="";
+	newArry.forEach(function(prod, index, array){
+		show+="<tr><td>"+prod.name+"</td><td>"+prod.price+"</td><td>"+prod.cnt+"</td></tr>";
+	});
+	tab02.innerHTML = show;	
+	
+</script>
+</html>

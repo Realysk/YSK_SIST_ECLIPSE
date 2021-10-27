@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 
+	1. 각 dao 인터페이스와 연결되는 XXXMapper.xml
+	2. mapper에서 사용할 VO,DTO를 간단하게 별칭으로 사용할 수 있게 선언.
+	 -->
+
+
+	<!-- vo alias -->
+	<typeAliases>
+		<typeAlias alias="emp" type="springweb.z01_vo.Emp"/>
+		<typeAlias alias="dept" type="springweb.z01_vo.Dept"/>
+		<typeAlias alias="member" type="springweb.z01_vo.Member"/>
+		<typeAlias alias="cal" type="springweb.z01_vo.Calendar"/>
+	</typeAliases>
+	<!-- XXXMapper.xml
+	resource\empMapper.xml
+	 -->
+	<mappers>
+		<mapper resource="resource/empMapper.xml"/>
+		<mapper resource="resource/deptMapper.xml"/>
+		<mapper resource="resource/memberMapper.xml"/>
+		<mapper resource="resource/calMapper.xml"/>
+	</mappers>
+
+</configuration>

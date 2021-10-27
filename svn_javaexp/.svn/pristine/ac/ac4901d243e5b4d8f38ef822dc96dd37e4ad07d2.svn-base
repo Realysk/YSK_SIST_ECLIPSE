@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+</style>
+<script type="text/javascript">
+/*
+# 텍스트 꾸미기 css 속성..
+1. text-indent : 들여쓰기 속성  길이 및 %
+2. text-align : left|right|center|justify 정렬 옵션.
+3. text-decoration : none|underline|overline|line-throught 
+	텍스트의 하단, 중단, 상단에 선긋기 및 선 없애기 옵션...
+*/
+
+</script>
+<style>
+h3 { 
+	text-align : right; /* 오른쪽 정렬 */
+}
+span { 
+	text-decoration : line-through; /* 중간 줄 */
+}  
+strong { 
+	text-decoration : overline; /* 윗줄 */
+}
+.p1 { 
+	text-indent : 3em; /* 3 글자 들여쓰기 */
+	text-align : justify; /* 양쪽 정렬 */
+} 
+.p2 {
+	text-indent : 1em; /* 1 글자 들여쓰기 */ 
+	text-align : center; /* 중앙 정렬 */
+}  
+</style>
+</head>
+<body>
+<!-- ex) 위키백과사전에 css, js, jsp를 검색하여 타이틀과 해당 내용을 
+붙여 놓고, 위에 text 옵션을 적용하여 처리하세요. 6조 -->
+	<p class="p1">HTML의 태그만으로 기존의 워드 프로세서와 같이 들여쓰기, 정렬, 공백, 
+		간격 등과 세밀한 <span>텍스트 제어</span>를 할 수 없다. </p>
+	<p class="p2">그러나, <strong>스타일 시트</strong>는 이를
+		 가능하게 한다. 들여쓰기, 정렬에 대해서 알아본다</p>
+	<p><a href="http://www.naver.com" style="text-decoration : none">
+		 밑줄이 없는 네이버 링크</a> <!-- ~16:30 -->
+</body>
+<script type="text/javascript">
+/*
+
+ */
+
+</script>
+</html>

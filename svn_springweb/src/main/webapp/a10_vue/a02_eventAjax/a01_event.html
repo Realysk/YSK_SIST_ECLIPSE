@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
+</head>
+<!-- 
+# 이벤트 처리.
+1. 기본 구조
+	v-on:이벤트명="기능메서드"
+	==> @이벤트명="기능메서드"
+	기능 함수 정의
+		methods:{
+			함수명1:function(){
+				처리할 내용
+			},
+			함수명2:function(){
+				처리할 내용
+			}	
+		}
+ -->
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		입금액:<input v-model="amount"/>
+		<input type="button" v-on:click="deposit" value="합계"/>
+		<h3>합계:{{balance}}</h3> 
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"이벤트 처리", amount:0, balance:0},
+		methods:{
+			deposit:function(){
+				//alert("함수호출:"+this.amount);
+				this.balance+=parseInt(this.amount);
+			}
+		}
+	});
+	// ex) a02_evntExp.html 만들고, id:[  ] pass:[  ] [로그인]
+	//     성공여부를 하단에 표기.	
+</script>
+</html>

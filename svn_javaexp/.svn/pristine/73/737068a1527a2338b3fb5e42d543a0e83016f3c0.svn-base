@@ -1,0 +1,529 @@
+# java의 커리 맵
+1. 개발 환경 설정.
+	jdk, eclipse 설치
+	외부에서 파일을 가져와서 다른 workspace 설정
+2. 주석문, 출력, 컴파일, 실행
+	// 
+	/**/
+	System.out.println("");
+	Person.java ==> Person.class ==> 
+	main() - 메인메서드가 있는 클래스파일에서 실행할 수 있다 ** 
+	Person p = new Person();
+3. 데이터의 저장 처리 1
+	1) 변수와 데이터 유형
+		기본 데이터 유형 : 정수/실수/boolean
+			byte, short, char, int(정수형의 default), long (2000L)
+			float(39.52F), double(실수형의 default)
+			boolean
+			cf) 연산자가 포함시, int형이상의 유형 할당되어야 한다.
+			 	ex) short num01 = 25 + 30; (X)
+		객체형 : 배열(byte[]), String(문자열-equals()),
+				Person, api(Wrapper(기본유형의 객체형태))
+		
+	2) 형변환
+		promote : 작은 유형 ==> 큰유형, 
+				하위객체 ==> 상위객체(폴리모피즘-다형성)
+				자동형변환
+		==> generic 				
+		casting	: 큰데이터를 작은 데이터에 할당할 때, 
+			(작은데이터)형식으로 casting하여야 한다.
+			강제형변환 
+			ex) double num01 = 30.25
+				int num02 = (int)(num01);
+		==> generic 
+		==> **상속관계의 polymorphism의 type casting
+	# 상속관계 자동형변환과 casting
+	Father f1 = new Son(); // 자동 형변환(다형성)
+	Son s1 = (Son)f1; // casting에  의한 강제 형변환
+	# 모든 클래스의 최상위 클래스는 Object이다.
+	Object o1 = new Person(); // 자동 형변화(다형성)
+	Person p1 = (Person) o1; // 강제 형변화
+	ArrayList list = new ArrayList();
+	list.add(new Person()); 
+	// ArrayList는 default 유형이 Object이므로 모두 할당 가능
+	list.add(new Father()); 		
+	할당된 하위에 특정 객체를 활용할려면 강제 형변환 처리
+	Person p02 = (Person)list.get(0);
+	// 위와같이 기본 유형인 Object이기에 사용할려면 casting
+	// 을 하여야 하지만, generic을 활용하면,
+	// 할당할 수 있는 유형이 지정되기에 바로 사용이 가능하다.
+	ArrayList<Person> plist = new ArrayList<Person>();
+	plist.add(new Person());
+	plist.add(new Person());
+	Person p03 = plist.get(0);
+	
+4. 연산자
+	1) 연산자의 종류 : 사칙, 나머지 연산자(+, - , *, /, %)
+		비교연산자(boolean, ==, !=, >=, >=, >, <), 
+		논리(&&,|| : 비교연산자&&비교연산자(둘다 true일때, true)
+					비교연산자||비교연산자(둘다 false일때, false)
+			!(not)		
+			 ), 증감연산자(++,--, +=, -=..), 
+			 ex) sum += 3; 누적증감 처리..
+			     sum += cnt;
+		대입( num01=25 )
+		삼항연산자(비교논리?true일때데이터:false일때데이터)
+		ex) boolean isPass =  point>=80;
+		String result = isPass?"합격":"불합격";
+		System.out.println(
+		id.equals("himan")&&pass.equals("7777")
+		?"로그인성공":"로그인실패");
+		ex) 점심 식사로 얼마정도 비용일 들것인가? 시간이 얼마나 걸릴 것인가?
+	2) 우선 순위 : (), */, +/- ....
+	3) 단항/이항 +num01, -num01, ++num01
+		num01+num02   if(num02>25)
+5. 조건문 반복문
+	ex) 특정 데이터를 기준으로 판단을 처리..
+	if, if else, if else if else,||
+	switch 
+		case break 나타나기 전까지는 누적해서 프로세스가 처리된다.
+		default;
+	for
+		for(초기;비교;증감)
+		for(객체형/일반 배열/의 단위데이터:배열/객체형배열)
+			ex) for(Student s:studList)
+	while(true)
+		입력값에 따른 반복 프로세스를 break에 의해 중단 처리할 때, 사용.
+		if(조건)
+			break;
+		
+	do{
+	 	일단 반복조건과 관련없이 한번은 수행 처리해 준다.
+	}while(반복조건);
+	
+	
+6. 데이터의 저장 처리(메모리) 2
+	0) 기능 함수 ==> 메서드, 배열
+	1) 메모리 저장에 대한 이해 stack/heap
+		stack에는 기본데이터타입의 데이터는 그대로 할당, 
+				객체는 heap영역의 주소값
+				==, !=  : stack영역의 데이터를 비교한다.
+		heap는 객체가 할당
+				==, !=  : 객체는 stack영역에는 참조변수가 할당 되기때문에
+				heap영역의 주소값을 비교한다.
+				ex) if(객체참조변수!=null) : 
+					객체를 참조없을 때(객체가 생성되지 않을 때),
+						수행하지 않게 조건 처리.(NullPointerException 방지)
+				
+	2) 참조변수 설정 : Person p = new Person()
+		p : 객체의 heap영역의 주소를 참조하는다 의미로 사용한다. 참조변수
+7. 클래스
+	1) 객체 지향 프로그램의 이해
+		ex) 하나의 메모리가 아니라, 여러가지의 속성을 묶음으로
+			특정한 프로그램을 처리할 때, 활용..
+	2) 클래스와 객체  : 도면과 실제 건축된 건물
+		클래스/컴파일된 내용을 파일로만 존재
+		컴퓨터의 메모리에 로딩하여 process을 실행시키는 것은 main()를 통해서
+		가능 하다. 
+		? 하나의 클래스로 여러 개의 객체를 만들 수 있다(O)
+			Person p = new Person();
+		cf) static : 클래스로 부터 생성되는 객체들의 공유 메모리를 설정할 때
+			사용되는 keyword	
+			클래스변수/상수로 클래명.속성형식으로 객체 생성없이 사용할 수
+			있다.
+			ex) Person.COUNT;
+	3) class/Object 구성요소 : 필드, 생성자, 메서드
+		class Person{
+			private String name; // 필드 - 클래스에 사용할 전역변수/객체/상수
+			
+			// main()
+			// Person p = new Person("홍길동");
+			Person(String name){ // 생성자는 필드를 초기화할 때, 주로 사용된다.
+				this.name = name;
+			}
+			// p.getName();  저장된 name값을 가져온다.
+			public String getName(){
+				return name;
+			}
+			// p.setName("마길동") ; field의 속성 name을 변경한다.
+			// 리턴할 데이터가 없을 때는 void를 사용한다.
+			public void setName(String name){
+				this.name = name;
+			}
+			
+		}
+		필드 : 클래스의 모든 구성요소에 영향을 미치는 변수/상수/객체..
+		생성자 : 다른 외부 객체/main()에서 객체가 생성할 때, 쓰이는 함수 new Person();
+				클래스명과 동일하다. return값이 없고, 초기화할 때 사용.
+		메서드 : 리턴값, 매개변수, 프로세스 처리.
+					
+	4) 멤버와 this
+		멤버는 class의 구성요소(필드, 생성자, 메서드)
+		this : 지역변수와 필드에 선언한 데이터를 구분하기 위하여  
+			기능 메서드와 생성자에서 사용한다.
+			Person(String name){
+				// 1. 매개변수의 데이터는 지역변수이다.
+				this.name = name; // 지역변수과 전역변수에 할당할 때,
+				// 지역변수와 전역변수를 구분하기 위하여 this를 사용한다.
+			}
+			void setName(String name){
+				// 2. 생성자나 메서드 안에서 선언한 변수
+				int age = 25;
+				
+			}
+			
+			
+		this/super : 
+			상속관계에서 상위객체의 구성요소와 하위 객체의 구분되는 개념.
+			super : 상위/부모 객체의 구성요소
+			this : 현재 객체의 구성요소
+			ex)
+			1) 상위 객체 생성자 호출
+			   상속관계에서는 반드시 상위 클래스에 선언한 생성자를
+			   하위 클래스의 생성자 선언 1번째 라인에서 선언하여야 한다.
+			   cf) 생략가능하는 경우 : 
+			   	default생성자나 매개변수가 없는 생성자가 상위에 선언된
+			   	경우, default호출로 가능하다.
+			   	default가 아니고, 매개변수가 있는 생성자가 상위에 선언된
+			   	경우에는 하위에 해당 생성자를 super로 선언된 매개변수에
+			   	type에 맞게 데이터를 할당하여야 한다.
+			   	
+				PoliceMan(){
+					// super(); 내부적으로 default로 포함되어 있다.
+					super("경찰관"); 
+					// 상위 클래스의 생성자를 호출하여 매개값을
+					// 문자열 전달..
+					// 상속관계에 있어서 하위 클래스는 반드시 
+					// 상위 클래스의 생성자를 생성자 *첫번째 라인에서
+					// 호출하여야 한다.
+					// ## default 생성자를 호출하는 경우, 자동으로
+					// super()로 default로 호출하기 때문에 명시화하지
+					// 않아도 된다.
+				}	
+			2) 상속관계에서 메서드 재정의 할 때, 상위에 있는 메서드를
+		 		호출할 때.
+		 		class PoliceMan extends Worker{
+		 		
+		 			// 상위에 있는 선언된 메서드 재정의
+		 			public void working(){
+		 				super.working(); 
+		 				// 상위에 선언된 메서드 호출
+		 				System.out.println("경찰관이 도둑을 잡다");
+		 			}
+		 			public void goWorking(){
+		 				this.working(); // 현재 객체의 working()메서드
+		 				super.working(); // 부모 객체의 working()메서드
+		 			
+		 			}
+		 		}	
+		 		
+		 	
+		
+		
+	5) 정적멤버
+		static : 객체의 공유메모리 영역을 사용할 때, class 구성요소에 
+			앞에 붙는다.
+			클래스 생성없이 사용할 수 있다.
+			class Person{
+				public static int age=25;
+			}
+			main()이나 외부 클래스에서 호출시, 객체의 공유메모리 ==> 클래스변수
+				이기 때문에, 클래스명.필드명 형태로 사용하고 있다.
+				Person.age;   
+			// 객체생성없이 객체의 공유 메모리이기에 사용가능하다.
+			class Account{
+				public static int tot; // 객체 공유 메모리
+				private int inMoney; // 객체 각각의 메모리
+			}
+			
+			
+	6) final
+		일반변수 : 상수   final int NUM01=25; 한번 할당하면 변경할 수 없는 데이터
+			상수는 일반적으로 가독성에 의해서 대문자로 선언한다.
+		클래스명 : final class Son{} 하위 상속이 불가능한 클래스 선언
+			ex) class GrandSon extends Son(X) 에러발생.
+		메서드명 : final void call(){} 하위 클래스에서 
+			재정의가 불가능한 메서드선언(컴파일 에러발생)
+			ex) 하위 클래스에서
+			void call(){} (X) 재정의 불가능
+		
+	7) 패키지 : class명의 최상단에 선언된 내용으로 해당 클래스를 포함하는
+		grouping 개념. 하나의 패키지는 여러 개의 클래스(객체)를 가지고 있다.
+		패키지 안에 있는 클래스의 구성요소들을 default(X)로 접근이 가능하다.
+		import 패키지명.클래스명; 
+		// 외부 패키지의 클래스명을 패키지명 없이 사용할 때, 선언한다.
+		// import를 사용하지 않고, 객체를 생성할려면
+		// ex) 패키지명.클래스명 참조 = new 패키지명.생성자명();
+		import 패키지명.*;
+		// 해당 패키지에 포함된 모든 클래스/객체 import 처리
+		 
+		class 클래스명{}
+		
+	8) 접근제어자 : private/default(X)/protected/public
+		접근제어자를 붙은 범위 내에서만 현재 클래스,
+		현재 같은 패키지,
+		상속관계에서 외부 패키지에 있는 클래스, : 전제조건 - 외부패키지라는 것을 선언
+		모두 다 접근 가능 : 전제조건 - 외부패키지라는 것을 선언
+8. 상속
+	1) 기본 상속(실제클래스 vs 실제클래스)
+		ex) 기존의 프로그램의 프로세스를 클래스로 만들 내용을
+		추가해서 특정 프로그램/클래스를 만들어 처리할 때, 사용된다.
+		 DB서버연결 클래스
+		 1. 상속 : Mysql DB
+		 2. 상속 : Oracle DB
+		 3. 상속 : 원격서버 DB
+		 class Father{}
+		 class Son extends Father{} (**단일 상위 클래스 상속)
+	2) 추상클래스(추상클래스 vs 실제클래스)
+		abstract class 클래스으로 선언된 클래스로 추상메서드가 1개 이상
+		선언되었을 때, 추상클래스가 된다.
+		이 클래스는 혼자 객체 생성이 불가능하고, 상속받은 하위 클래스는 
+		반드시 추상메서드를 재정의(overriding)하여야 한다. 메서드 통일성을 유지할 수 있다.
+		다형성 : 상위추상 = new 하위실제생성자();
+		abstract class 추상클래스{
+			공통실제메서드(){}
+			공통실제메서드(){}
+			abstract 오버라이딩추상메서드(); 
+		}
+		# 1:1상속 : 상위클래스가 1개만 선언하여 사용할 수 있다.
+		# 클래스에서 사용되는 일반 필드와 메서드를 사용가능
+		# 공통실제메서드를 기반으로 다양한 재정의한 메서드를 하위에서 선언하여
+			사용할 수 있다.
+	3) 인터페이스(인터페이스 vs 실제클래스)
+		public abstract가 선언되어 있지 않더라도 이 내용이 내부적으로
+		포함된 추상메서드를 가지고 있다.
+		interface 인터페이스명{
+			// public은 자동을 붙는다..
+			static final 데이터유형상수; // 객체 종속적이지 않다. 인터페이스명.상수명
+			// ex) int NUM=25; 자동으로 public static final이 붙는다.
+			// 인터페이스명.NUM 형태로만 사용이 가능하다.
+			void 추상메서드(); // implements 인터페이스 형태로 상속된 하위 클래스에서
+				// 사용된다.
+			====================1.8이후로 아래 메서드 추가.
+			default 메서드명(){}
+			static 메서드(){}			
+		}
+		// ** 인터페이스는 여러 개의 인터페이스를 implements할 수 있다.
+		// 1:다 상속 가능..  class 하위클래스 implements 인터페이스1, 인터페이스2
+		
+		class 클래스명 implements 인터페이스명1, 인터페이스명2{		
+			void 추상메서드재정의(){
+			
+			}
+
+		}
+		인터페이스명 참조 = new 하위클래스생성자();
+		상위 = new 하위생성자() : 다형성을 처리할 수 있다.
+		
+9. 예외처리
+	1) 프로그래밍에 발생할 수 있는 예외 상황을 대비해서 처리하는 것을
+		말한다.
+		지정한 에러가 발생하더라도 프로그램을 중지시키지 않고 계속 진행하게
+		함으로 프로그램의 안정성을 유지하게 처리하는 것을 말한다.
+		Exception
+		try{
+			에러가 발생할 가망성이 있는 코드.
+			예외가 발생하는 순간 throw로 해당 예외 객체를 catch 블럭에 던진다.
+			예외 객체를 던지는 순간, 그 다음 라인은 수행되지 않는다.
+			
+		}catch(하위예외클래스 e){
+			해당 에러가 발생했을 때, 처리할 내용.
+			e.getMessage() : 에러에 대한 메시지를 문자열로 확인할 수 있다.
+			예외 처리 클래스 순서는 하위에 객체가 먼저 선언하고,
+			최종적으로 최상위 클래스를 선언하여 사용한다.
+		}catch(Exception e){
+			에러가 발생시 처리할 내용.
+		}finally{
+			예외가 발생했던 발생하지 않았던 처리할 구문
+		}
+		// 예외 위임으로 클래스안에 특정 메서드에서 선언할 수 있다.
+		class Person{
+			public void call() throws 예외클래스{
+				메서드 안에서 try{}catch{}로 처리할 내용을 throws로 예외를 위임할
+				수 있다.
+			}
+		}
+		main()나 외부 클래스의 메서드에서()
+		try{
+			p.call();
+			p.call2();
+			p.call3();  // 다른 메서드와 함께 위임된 예외를 처리할 수 있다.
+		}catch(예외처리){
+		
+		}
+	2) 사용자 정의 예외 : Exception를 상속받으며 여러가지 사용자 정의 예외를
+		선언하여 사용할 수 있다.
+		class UserException extends Exception{
+			UserException(String msg){
+				super(msg); // Exception의 생성자 호출.
+			}
+			public String getMessage(){
+				super.getMessage()
+			}
+		}	
+		main()/외부 클래스
+		
+		try{
+			if(특정 조건) 
+				throw new UserException("사용자에러1");
+				// 일반적으로 사용자 정의 객체는 명시적으로 선언하여 사용할 
+				// 수 있다.
+		
+		}catch(UserException e){
+			// 던진 사용자 예외 객체를 받아서 처리하는 block
+			e.getMessage(); // "사용자에러1"가 getMessage()를 통해서 처리된다.
+		}
+		
+		
+10. 기본 api 클래스
+	1) 유용한 프로그램의 기본적을 utility
+		문자열을 숫자로 변환 : 
+		Integer.parseInt("25"), Double.parseDouble("27.35")
+		promote(작은유형==>큰유형) ex) int num01=25; double num02=num01; 
+		casting(큰유형==>작은유형,원하는 유형으로 명시화)
+			ex) double num03 = 30.25; int num04 = (int)num03;
+		캘런더 데이터 처리
+			Calendar c = Calendar.getInstance();
+			c.set(설정할 상수, 상수값);
+			// 년/월/주/일/시/분/초/1/1000초 설정하여 데이터 저장 및
+			// 호출 처리..
+		랜덤 형식의 처리..  Math.random()*경우의 수 + 시작수
+			0.0	<= Math.random() < 1.0
+			1	<= (int)(Math.random()*6+1) < 7
+				1~6까지 임의의 숫자 나온다.
+	2) String, Wrapper 클래스
+		String str1 = "홍길동";
+		String str2 = "홍길동";
+		String str3 = new String("홍길동");
+		String의 ==(비교연산자) heap의 주소의 비교이기에 
+		문자열에 대하여 문자열이 동일한지
+		여부에 대한 메서드 .equals()를 활용하여야 한다.
+		concat(), substring(), split()	
+	4) enum 이름{
+		 상수1, 상수2, 상수3...
+	   }	
+	   열거형 데이터 형식..
+	   .values() : 열거형 데이터를 배열로 가져온다.
+	   .name() : 열거형 데이터의 구성의 이름
+	   .ordinal() : 열거형 데이터의 구성 index번호
+	   .valuesOf("이름") : 해당 열거형의 이름에 객체리턴
+	    
+============	
+11. 쓰레드
+	다중 작업..
+	- 하나의 컴퓨터에서 여러 개의 프로그램을 수행(프로세스) 
+		: 멀티 프로세스
+		
+	- 하나의 프로그램에서 여러 개의 또 다른 처리를 수행 : 멀티 쓰레드..
+	- 형식
+		class 클래스명 extends Thread{}
+		
+		클래스명 참조변수 = new 생성자명();
+		참조변수.start();
+		
+		class 클래스명 implements Runnable{}
+		
+		클래스명 참조변수 = new 생성자명();
+		Thread t1 = new Thread(참조변수);
+		t1.start();
+		.setPriority(우선순위상수:1~10)
+		.setName("저장할 이름");
+		ex) 하나의 프로세스 안에서 여러개의 모듈이 작동하는 것을 말한다.
+			채팅프로그램에서 채팅도하고 파일다운로드 업로드도 동시에 처리할 수 있는
+			것은 thread를 통해서 가능하다.
+				통신프로그램/안드로이드
+				
+				
+	
+12. generic
+	- 객체에 대한 데이터의 유형을 선언해서 사용하는 것을 말한다.
+		java 의 모든 객체는 Object로 귀결/할당.
+		Object(모든 클래스의 최상위 클래스) ==> 사용할려면 typcasting이라는 개념으로 처리.
+		<타입> : 형식을 타입을 지정해서 데이터를 할당/다시 호출하여 처리하는 것을
+		말한다. 다형성에 의해서 자바의 모든 클래스는 Object에 할당이 가능하지만,
+		할당된 내용을 고유의 기능 메서드를 사용하기 위해서는 typecasting이
+		필요로 한다.
+		  Object o = new Person(); // 다형성에 의해 할당은 가능.
+		  o.call(); (X) Person 클래스에서 선언한 call()는 사용하지 못한다.
+		  Person p01 = (Person)o; (타입캐스팅을 하여야 한다)
+		  p01.call(); (O)
+		  ArrayList plist1 = new ArrayList();
+		  plist1.add(new Person());
+		  plist1.add(new Person());
+		  plist1.add(new Person());
+		  Person p01 = (Person)plist1.get(0);
+		  // Object로 들어갔기때문에 typecasting이 필요하다.
+		  
+		  // ArrayList<객체유형> : 들어올 객체의 유형을 generic으로
+		  // 선언하여 할당하기에, 추후에 호출할 때, typecasting에 대한
+		  // 부담을 없애준다.
+		  ArrayList<Person> plist2 = new ArrayList<Person>();
+		  plist2.add(new Person());
+		  plist2.add(new Person());
+		  plist2.add(new Person());
+		  Person p02 = plist2.get(0);
+		  // generic으로 선언하였기때문에 typcasting이 필요없다.
+		  
+		  
+		  
+		  Object<Person> o2 = new Person();
+		  Person p02 = o2; generic으로 해당 객체의 type을 설정했기에
+		  typecasting이 없이도 해당 객체의 고유 메서드를 사용가능하다.
+		  
+		  		  
+		ex) 방배동의 @@번지에 사는 사람(의사, 학생, 주부..).
+			중에 @@@를 지정.
+			
+13. 람다식
+	- 함수/메서드를 보다 간편하게 표기하는 방식
+		메서드명(){
+			return 리턴값;
+		}
+		메서드명() => 리턴값;	 (함수에서 화살표 함수)
+	- 기본 인터페이스나 추상클래스의 재정의 내용을 익명 함수/익명 클래스로
+		활용할 때도 많이 쓰이게 된다.
+			
+		
+14. 컬렉션 프레임워크(**)
+	- 여러개의 객체를 어떻게 할당하여 처리할 것인가?
+	- 다중의 객체들을 하나의 묶음 프레임 워크에 입력하여 활용하는 것을 말한다.
+	Set(중복을 허용하지 않으나 순서확보를 하지 못 함), 
+	List(중복을 허용, 순서확보, 빠른 속도) ###
+		ex) ArrayList<VO> list = new ArrayList<VO>();
+		    list.add(new 객체(..,..));
+		    list.add(new 객체(..,..));
+		    list.add(new 객체(..,..)); // 마지막에 추가 처리..
+		    list.get(index번호 0...)// 저장된 객체를 index번호로 가져오는것
+	Map<key, value> : key, value형식으로 데이터가 저장되는 구조.
+		key는 중복을 허용하지 않는다.
+	
+15. Stream을 활용한 IO입출력 처리
+	필수 예외 처리를 하여야 한다.
+	입력/출력을 할 때 활용되는 객체
+	1) 스트림 병렬 처리 : InputStream/OutputStream
+		여러가지 기능 처리를 위해서 
+		new 최하위클래스(new 하위클래스(new 상위클래스()));
+		형식의 생성자 매개변수를 통해서 기능 메서드를 추가하면서 처리된다.
+		
+	2) IO 기반 입출력 :
+		 Console창에서 입/출력, File을 입력/출력, File을 network상에서 전송처리
+	3) NIO 기반 입출력
+	 	** 파일의 특정한 경로에 저장/복사/변경 처리..
+	cf) java.util.Scanner
+	Scanner sc = new Scanner(System.in);
+	sc.nextInt();  입력된 정수값 가져오기
+	sc.nextFloat(); 입력된 실수값 가져오기
+	sc.nextLine(); 입력된 문자열 가져오기.(enter)
+	
+	
+16. 화면 처리 fx/**jsp/안드로이드
+	jsp 화면단 처리.
+	1) webapp의 jsp 파일과 객체 호출..
+		- tomcat이라는 웹어플리케이션서버(WAS)
+		- .jsp ==> XXXservlet.java ==> **.class ==> 
+			was를 통해 response객체에서 
+			Stream객체를 이용해서 html파일을 client에 전달.
+			html을 client(브라우저) 전송
+	2) was에서 jsp를 호출
+		브라우저 --> url로 요청 -->  was가 해당 jsp을 로딩(java로)
+		--> html코드를 만드어서 --> 브라우저에 stream 방식으로 html파일 전송
+		--> 브라우저에서 결과 화면을 확인..
+
+
+
+
+
+
+	 
+		
+		 	

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+
+<mapper namespace="springweb.a05_mvc.a03_dao.A03_DeptDao">
+	<select id="dlist" parameterType="dept" resultType="dept" >
+		select * from dept02
+		where 1=1
+		<if test = "dname !=null and dname !=''">
+		and dname like '%'|| #{dname} ||'%'
+		</if>
+		and loc like '%'|| #{loc} ||'%'
+		order by deptno desc
+	</select>
+	<insert id="insertDept" parameterType="dept">
+		INSERT INTO dept02 values(
+			#{deptno},#{dname},#{loc})	
+	</insert>
+	<update id="updateDept" parameterType="dept">
+		UPDATE dept02
+			SET dname = #{dname},
+				loc = #{loc}
+			WHERE deptno = #{deptno}		
+	</update>
+	<delete id="deleteDept" parameterType="int">
+		DELETE FROM dept02
+		WHERE deptno = #{deptno}	
+	</delete>
+</mapper>	

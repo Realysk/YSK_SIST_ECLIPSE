@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*
+4. css의 상대적 크기단위와 절대적 크기 단위의 예를 2가지씩 기술해 보세요.
+	상대적크기 : em, %
+	절대적크기 : px, pt, cm, mm, in, 
+/*
+5. font-XXXX 제어 속성을 기본예제와 함께 기술하세요.
+	font-size : 글자의 크기
+	font-family : 글자체로 궁서, 고딕, 굴림 등등.
+	font-style : 기울림체 italic, normal
+	font-weight : 글자의 두께  light, bold, px단위로 설정 가능.
+
+*/
+	h2{font-size:24px;}
+	h3{font-family:굴림체;}
+/*
+6. 박스 모델의 기본 속성과 접미어를 통한 기본 속성을 예제로 기술하세요.
+	padding, border, margin
+	- 접미어1 : top, bottom, left, right
+	- 접미어2 : weight, style, color (border의 속성)
+	ex) div{padding-top:10px;border-color:yellow;
+			border-style-top:ridge;}
+
+*/
+/*
+7. border의 속성을 기능 버튼 3개(굵기, 스타일, 색상)에 의해 기술하세요.(js)*/
+	h2{border:1px solid red;}
+</style>
+<script>
+	function func01(){
+		var btns = document.querySelectorAll("[type=button]")
+		var h2Obj = document.querySelector("h2")
+		btns[0].onclick=function(){
+			h2Obj.style.borderWidth="30px";
+		}
+		btns[1].onclick=function(){
+			h2Obj.style.borderStyle="double";
+		}		
+		btns[2].onclick=function(){
+			h2Obj.style.borderColor="navy";
+		}		
+	}
+</script>
+</head>
+<body>
+	<h2>border 속성 설정</h2>
+	<input type="button" onclick="func01()" value="굵기"/>
+	<input type="button" onclick="func01()" value="스타일"/>
+	<input type="button" onclick="func01()" value="색상"/>
+
+
+</body>
+<script>
+
+	
+</script>
+</html>

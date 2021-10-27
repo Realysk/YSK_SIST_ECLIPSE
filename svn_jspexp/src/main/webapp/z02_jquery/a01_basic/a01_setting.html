@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-3.6.0.js" type="text/javascript"></script>
+<script type="text/javascript">
+	// document : DOM객체들이 포함한 문서객체 (body에 있는 객체들)
+	// .ready() : 준비가 되면 즉, 로딩이 되면
+	// function(){} : 호출할 익명함수..
+	$(document).ready( function(){
+		// $("선택자").text("출력할 문자열");
+		$('h2').text("jquery 시작");
+			
+	});
+	// ex) a02_setting.html로 환경설정하고 h3를 출력 처리.. 4조..
+
+</script>
+</head>
+<body>
+	<h2></h2>
+<!-- 
+# jquery 환경설정.
+1. jquery lib 다운로드..
+2. <script> 선언 두개..
+	- src 속성으로 해당 jquery lib 할당.
+3. $ : jquery표시..
+	$(document).ready();
+	$(선택자).action메서드(기능 함수..);
+# jquery 개요.
+1. DOM과 자바스크립트 오픈 소스 자바스크립트 라이브러리
+2. 존 레식(John Resig) 쉽게 엘리먼트를 찾아내는 함수를 만듦
+3. 자바스크립트에서 DOM 엘리먼트를 질의(query) 한다
+4. DHTML 개념에서 확장된 형태
+	자바스크립트, CSS, DOM에 대한 기본 지식이 있어야 함
+5. 장점
+	인터렉티브한 사이트를 구축
+	일반적인 작업을 자동화하고 복잡한 작업을 단순화
+	설계의 일관성과 균형을 유지
+6. 기본 코드 
+	$() : jquery 메서드.
+	$("선택자") : css 선택자로 DOM객체를 선택할 수 있다.
+	ex)
+	$("tr:even").css("background-color","pink");
+7. 초기화면 호출..
+	$(document).ready(함수);
+	1) 브라우저에 HTML문서가 로드되어 준비된 상태(ready)가 되었을 때..
+	2) document객체를 jquery 함수($())로 둘어싼 후체 ready()기능 메서드 호출.
+	3) ready() : DOM이 로드되고 이미지가 로드되기 전에 호출되는 jquery가
+		지원하는 이벤트 핸들러.
+	4) 함수 : 선언된 함수를 함수명으로 호출할 수 있다.
+		또는, 익명함수로 바로 선언할 수 있다.
+		# 함수호출
+		function start(){
+			$("h1").text("시작");
+		}		
+		$(document).ready(start);
+		# 익명함수호출
+		$(document).ready(function(){
+			익명함수 처리 내용...
+			$("h2").text("익명함수 처리");
+		});
+		
+		
+	
+	 
+	
+	
+	
+ -->
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<bean id="obj" class="java.lang.Object"/>
+	<bean id="prod" class="diexp.vo.Product">
+		<constructor-arg value="사과"/>
+		<constructor-arg value="3000"/>
+		<constructor-arg value="2"/>
+	</bean>
+	<!-- 
+	Product prod= new Product("사과",3000,2);
+	Mart mt = new Mart("행복마트");
+	mt.setProduct(prod);
+	 -->
+	<bean id="mt" class="diexp.vo.Mart">
+		<constructor-arg value="행복마트"/>
+		<property name="prod"  ref="prod"  /> <!-- public void setProduct(Product d) -->
+	</bean>
+	<bean id="prod1" class="diexp.vo.Product">
+		<constructor-arg value="사과"/>
+		<constructor-arg value="3000"/>
+		<constructor-arg value="2"/>
+	</bean>
+	<bean id="prod2" class="diexp.vo.Product">
+		<constructor-arg value="바나나"/>
+		<constructor-arg value="4000"/>
+		<constructor-arg value="3"/>
+	</bean>
+	<bean id="prod3" class="diexp.vo.Product">
+		<constructor-arg value="딸기"/>
+		<constructor-arg value="12000"/>
+		<constructor-arg value="5"/>
+	</bean>			
+	<bean id="mt2" class="diexp.vo.Mart">
+		<constructor-arg value="즐거운마트"/>
+		
+		<!-- 
+		List 
+		ArrayList
+		public void setPlist(ArrayList<Product> pl)
+		-->
+		<property name="plist">
+			<list>
+				<ref bean="prod1"/>
+				<ref bean="prod2"/>
+				<ref bean="prod3"/>
+			</list>
+		</property>
+	</bean>	
+	
+	
+</beans>

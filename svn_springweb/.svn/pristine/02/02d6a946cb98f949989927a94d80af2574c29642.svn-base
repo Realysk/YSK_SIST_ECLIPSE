@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<bean id="obj" class="java.lang.Object"/>
+	<!-- 
+	# property와 constructor의 간편한 활용 namespace 사용하기..
+	1. xmlns:p
+		p:property명 = 데이터할당  setName("홍길동")   p:name="홍길동"
+		p:property명-ref = 객체참조 setProduct(prod) p:product-ref="prod"
+	2. xmlns:c
+		c:생성자매개변수=데이터할당  Person(String name, int age)  c:name="홍길동", c:age="25"
+		c:_0=데이터할당  생성자의 순서에 해당하는 데이터할당. c:_0="홍길동" c:_1="25"
+		c:_1=데이터할당
+		c:_2=데이터할당
+		c:생성자매개변수-ref:객체참조  Person(Man man) c:man-ref="man"
+	
+	 -->
+	<bean id="p01" class="diexp.vo.Person" c:name="홍길동" c:age="25" c:loc="서울신림동" />	 
+	<bean id="p02" class="diexp.vo.Person" c:_0="마길동" c:_1="27" c:_2="서울방배동" />	 
+	<bean id="p03" class="diexp.vo.Person" p:name="오길동"  p:age="29" p:loc="서울종로" />	 
+	<bean id="prod" class="diexp.vo.Product" p:name="사과"  p:price="3000" p:cnt="2" />
+	 	 
+	<bean id="mt" class="diexp.vo.Mart" c:mname="행복마트" autowire="byType"/>
+		 
+ 	<!-- 
+ 	# autowire
+ 	1. 컨테이너 내부에 객체가 메모리 로딩될때, 연관되는 메서드가 있으면 자동으로 객체가 할당되게 처리 하는 것을 
+ 	말한다.
+ 		(객체1)  (객체2)
+ 		메모리가 메소드나 기타 속성으로 의존관계에 있으면 자동할당.
+ 	2. public void setProd(Product prod)가 되어 있어서, 객체를 할당할 수 있으면 설정옵션 autowire에
+ 		의해 객체가 자동 할당된다.
+ 	3. autowire="byTpe" 객체가 자동할당된다.
+ 	 	autowire 속성값
+ 	 	1) byType : 메서드를 통해서 해당 객체의 type이 정의될 때, 자동으로 할당.
+ 	 	2) byName : 메서드를 통해서 해당 객체의 type이 있고,
+ 	 		참조변수가 메서드 property와 동일할 때 자동으로 할당 된다.
+ 	 		 (객체1)     (객체2)     (객체3)
+ 	 		 Product    Product    Mart  setProduct(Product pr)
+ 	 		 product1   product    autowire="byName"  메서드의 property가 같은 객체2의
+ 	 		 						참조변수가 할당된다.
+ 	 	3) constructor : 생성자가 정의로 해당 type이 있을 때.
+ 	 	4) autodetect : 생성자나 메서드가 해당 type이 있을 때, 자동으로 할당된다.	 						
+ 		기본예제) a22.xml, DI22.java
+ 			[a22.xml]Product 클래스 두개 bean id product1, product2로 선언..
+ 			[Mart.java]Mart클래스에 setProduct1메서드 선언 Product객체 할당처리.
+ 			[a22.xml] ㅔmt1클래스 생성.. autowire="byName"선언.
+ 			[DI22.java] mt1호출 메서드 처리..
+ 			
+ 	 -->
+ 	<!-- Product prod2 = new Product("바나나",3000,3); 
+	<bean id="prod2" class="diexp.vo.Product"	c:_0="바나나" c:_1="3000" c:_2="3"/>
+	<bean id="prod3" class="diexp.vo.Product"	p:name="오렌지" p:price="2000" p:cnt="2"/>
+	 	-->  
+ 	<bean id="pc" class="diexp.vo.Pencil">
+		<property name="kind" value="4B연필"/>
+	</bean>
+	<bean id="note" class="diexp.vo.Note" autowire="byType">
+		<constructor-arg value="스케치용 노트(autowire)"/>
+	</bean>	 
+	
+</beans>
+

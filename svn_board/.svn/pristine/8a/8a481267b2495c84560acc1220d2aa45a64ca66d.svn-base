@@ -1,0 +1,89 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    import="java.util.*"
+    %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath }"/>
+<fmt:requestEncoding value="utf-8"/>     
+<!DOCTYPE html>
+<%--
+
+
+ --%>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
+<link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
+<script src="${path}/a00_com/jquery.min.js"></script>
+<script src="${path}/a00_com/popper.min.js"></script>
+<script src="${path}/a00_com/bootstrap.min.js"></script>
+<script src="${path}/a00_com/jquery-ui.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		<%-- 
+		
+		--%>
+		// 등록버턴으로 등록 화면 로딩..
+		$("#regBtn").click(function(){
+			//alert("등록버튼 클릭!!");
+			// 등록화면이 나타나는 controller 호출..
+			// controller의 상단에 board.do
+			// 각 메서드마다.method=insertForm 호출.. 
+			$(location).attr("href","${path}/board.do?method=insertForm");
+			
+		});		
+	});
+	function go(no){
+		
+		$(location).attr("href",
+				"${path}/board.do?method=detail&no="+no);
+	}	
+</script>
+</head>
+
+<body>
+<div class="jumbotron text-center">
+  <h2>답변형 게시판</h2>
+</div>
+<div class="container">
+    <h2 align='center'></h2>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" name="subject" value="${board.subject}" placeholder="제목" />
+	    <input class="form-control mr-sm-2" name="writer" value="${board.writer}"  placeholder="작성자" />
+	    <button class="btn btn-info" type="submit">Search</button>
+	    <button class="btn btn-success" id="regBtn" type="button">등록</button>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회수</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<c:forEach var="bd" items="${list}">
+    	<tr class="text-center" ondblclick="javascript:go(${bd.no})">
+    		<td>${bd.no}</td><td>${bd.subject}</td><td>${bd.writer}</td>
+    		<td><fmt:formatDate value="${bd.regdte}"/>
+    		
+    		</td><td>${bd.readcnt}</td></tr>
+    	</c:forEach>
+    </tbody>
+	</table>    
+    
+</div>
+</body>
+</html>

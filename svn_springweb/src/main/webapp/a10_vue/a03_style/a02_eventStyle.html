@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
+</head>
+<!-- 
+# vue에서 style과 모델의 연결처리.
+1. 모델데이터
+	모델명 :{속성:속성값, ....}
+	모델에 매핑된 속성값을 css의 속성으로 처리할 수 있다.
+2. 요소객체의 속성으로 바로 모델명을 지정하여 v-bind:style="모델명"
+	지정하여 처리할 수 있다.
+	ex) style01:{backgroundColor:'yellow', color:'blue'}
+	<h2 v-bind:style="style01"
+3. 이벤트를 통한 css로 선언된 모델 데이터의 변경을 mapping된 css의
+	동적인 변경을 가능하게 한다.	
+
+ -->
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		<h3 :style="style2" @click="chColor">클릭하면 변경!!</h3>
+		<!-- 
+		ex) button을 만들고 초기에 연결되어 있는 style은 모델로 선언된 
+			style1
+		@mouseover @mouseout시 
+		event01      event02 메서드 호출해서 배경색상과 글자색상이 변경
+		된게 처리하세요.
+		
+		 -->
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{ msg:"이벤트와 스타일 변경..",
+			   style2:{backgroundColor:"orange",color:"tomato"},
+			   style1:{backgroundColor:"aqua",color:"navy"}
+			 },
+	    methods:{
+	    	chColor:function(){
+	    		//alert("호출");
+	    		// 이벤트에 의해 선언된 model데이터를 변경함으로
+	    		// style의 내용을 동적인 처리를 하게 한다.
+	    		this.style2.backgroundColor="purple",
+	    		this.style2.color="yellow";
+	    	}	
+	    }
+	});
+</script>
+</html>

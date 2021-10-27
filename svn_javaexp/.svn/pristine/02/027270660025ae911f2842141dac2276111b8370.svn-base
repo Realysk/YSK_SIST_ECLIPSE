@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	/*
+# css 선언
+1. 선택자 : js에서 사용하는 아이디, 태그, 클래스, [속성=속성값	], 속성과 속성값으로
+	적용할 내용을 상단에 선언
+	.클래스명{속성:속성값}
+2. 속성과 속성값 : 선택자에 의해서 지정된 태그는 속성과 속성값에 의해서 적용이 된다.
+	margin : 여백
+	padding : 글자/내용과 border와 사이
+		ex) html, body{ margin:10px;padding:10px;border:10px solid red;}
+	height : 높이
+	width : 넓이
+	background-color : 배경색상.
+	float : 순서 정렬을 해당방향으로 처리
+	clear : 위에 순서정렬 float의 설정을 취소처리하는 옵션.
+	*/
+	
+	html, body{ margin:0px;padding:0px;height:100%;}
+	.header{ width:100%;height:15%;background:yellow;}	
+	.nav{
+		width:15%;height:70%;float:left;
+		background:orange;
+	}
+	.section{
+		width:70%;height:70%;float:left;
+		background:olivedrab;
+	}
+	.aside{
+		width:15%;height:70%;float:left;
+		background:orange;
+	}
+	.footer{
+		width:100%;height:15%;clear:both;
+		background:plum;
+	}
+
+
+
+
+</style>
+
+
+<script type="text/javascript">
+/*
+ # 시맨틱 웹
+1. 기존 html의 구조화의 한계를 보완하여 html5에서는 웹 문서를 구조화하여 의미 있는 내용 
+	탐색이 용이한 웹을 만들어 간다.
+2. 시맨틱 태그
+	1) 문서의 구조와 의미를 전달하는 태그
+		header, section, article, main, summary, mark, time
+	2) 시맨틱 태그의 의미
+		header - 페이지나 섹션의 머리말 표현, 페이지 제목, 페이지 소개하는 간단한 설명
+		nav - 하이프링크들을 모아 놓은 특별한 섹션
+			페이지 내 목차를 만드는 용도
+		section - 문서의 장 혹은 절을 구성하는 역할
+			일반문서에 여러 장이 있듯이 웹 페이지에 여러 section 가능
+			헤딩 태그(h1~h6)를 사용하여 절 혹은 섹션의 주제 기입
+		article - 본문과 연관 있지만, 독립적인 콘텐츠 담는 영역
+			보조 기사, 블로그 포스트, 댓글 등 기타 독립적인 내용을 담는다.
+			article에 담는 내용이 많은 경우 여러 section을 둘 수 있음.
+		aside - 본문에서 약간 벗어난 노트나 팁
+			신문. 잡지에서 주요 기사 옆 관련 기사, 삽입 어구로 표시된 논평 등
+			페이지 오르쪽이나 왼쪽에 주로 배치
+		footer - 꼬리말 영역, 주로 저자나 저작권 정보  
+*/
+</script>
+</head>
+<body>
+	<header class="header">헤더부분</header>
+	<nav class="nav">메뉴이동처리(navigation)</nav>
+	<section class="section">section 부분 처리(문서 장/절)</section>
+	<aside class="aside">aside(본문에서 약간 벗어난 노트나 팁)</aside>
+	<footer class="footer">꼬리말 영역</footer>
+</body>
+<script type="text/javascript">
+/*
+
+ */
+
+</script>
+</html>

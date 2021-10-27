@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	// js에서 사용되는 데이터 유형
+	// 1. 숫자형 데이터(정수/실수)
+	var num01 = 25;
+	// typeof() : 해당 데이터가 어떤 유형인지를 나타내는 내장 함수.
+	console.log(typeof(num01)+":"+num01);
+	document.write(typeof(num01)+":"+num01+"<br>");
+	// F12
+	// 2. 문자열 데이터
+	var str = "홍길동";
+	var str2 = '홍길동';
+	console.log(typeof(str)+":"+str);
+	document.write(typeof(str2)+":"+str2+"<br>");
+	// 3. 함수형 데이터
+	var plus = function(num01, num02){
+		console.log("입력값1:"+num01+", 입력값2:"+num02);
+		return num01+num02;
+	}
+	console.log(typeof(plus)+":함수호출 결과:"+plus(25,30));
+	document.write(typeof(plus)+":함수호출 결과:"+plus(25,30)+"<br>");
+	// 4. boolean 데이터
+	var isPass = num01>=30;
+	console.log(typeof(isPass)+":"+isPass);
+	document.write(typeof(isPass)+":"+isPass+"<br>");
+	// 5. object 데이터
+	// {속성:"속성값",속성:function(){},속성:[25,30,40]}
+	var person = {name:"홍길동",age:25, loc:"서울신림동"};
+	var arry =["사과","바나나","딸기"];
+	document.write(typeof(person)+":"+typeof(arry)+"<br>");
+	console.log(person);
+	console.log(person.name); // person객체의 이름
+	console.log(arry);
+	// ex1) js json객체 형태로, 물건명/가격/갯수를 선언하고,
+	//    document.write와 console.log로 속성하나씩 출력하세요 [1조]
+   var product = 
+   	{name:"사과",price:3000,cnt:3,
+		show:function(){
+   			console.log("물건명:"+this.name);
+   			console.log("가격:"+this.price);
+   			console.log("갯수:"+this.cnt);
+   		},
+		show2:function(){
+			document.write("물건명:"+this.name+"<br>");
+			document.write("가격:"+this.price+"<br>");
+			document.write("갯수:"+this.cnt+"<br>");
+   		} 		
+	};
+   console.log("#메서드호출1#");
+   product.show();
+   console.log("#메소드호출2#");
+   product.show2();
+   console.log(product.name);
+   console.log(product.price);
+   console.log(product.cnt);
+   document.write(product.name+"<br>");
+   document.write(product.price+"<br>");
+   document.write(product.cnt+"<br>");
+   // ecma6 : class도입 전에 객체 선언 형식.
+   function Person(name, age, loc){
+	   this.name = name; // js에는 필드를 반드시 this를 선언하여야 한다.
+	   this.age = age;
+	   this.loc = loc;
+	   this.show = function(){
+			document.write("<h2>생성자형객체</h2>");
+			document.write("<h3>이름:"+this.name+"</h3>");
+			document.write("<h3>나이:"+this.age+"</h3>");
+			document.write("<h3>사는 곳:"+this.loc+"</h>");
+	   }
+   }
+   var p01 = new Person("홍길동",25,"서울 신림동");
+   var p02 = new Person("김길동",27,"서울 방배동");
+   p01.show();
+   p02.show();
+   // ex) Product 생성자형 선언하고, 물건명,가격, 갯수, 총계를 화면에 출력하세요
+   //     2조
+   function Product(pname, price, cnt){
+      this.pname = pname;
+      this.price = price;
+      this.cnt = cnt;
+      this.show = function(){
+         document.write("<h3>물건이름:"+this.pname+"</h3>");
+         document.write("<h3>가격:"+this.price+"</h3>");
+         document.write("<h3>갯수:"+this.cnt+"</h3>");
+         document.write("<h3>총계:"+this.cnt*this.price+"</h3>");
+      }
+   
+   }   
+   var t01 = new Product("사과",3000,2);
+   var t02 = new Product("바나나",4000,5);
+   t01.show();
+   t02.show();  
+   
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

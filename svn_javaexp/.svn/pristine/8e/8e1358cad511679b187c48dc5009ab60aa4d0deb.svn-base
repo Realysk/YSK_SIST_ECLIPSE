@@ -1,0 +1,187 @@
+# java를 통해 DB서버 접속 및 데이터 처리..
+1. DAO 작성
+	0) 공통 기능 필드 선언
+		- Connection (연결객체)
+		- Statement, PreparedStatement (대화객체)
+		- ResultSet(결과 받는 객체 - select)		
+	1) 연결 모듈(공통메서드) 
+		- jdbc드라이버 메모리 로딩
+		- 주요접속정보와 함께 Connection 객체 생성.
+	2) 조회리스트메서드
+		- 위에 선언한 공통 연결메서드호출(Connection생성)
+		- sql 작성
+		- Connection로 부터 Statement 객체 생성..
+		- sql를 	Statement에 의해 실행 ==> ResultSet 객체
+		- ResultSet 객체를 통해 결과내용 확인
+		- ResultSet를 while next(), getXXX(컬럼명)을 통해서
+		
+		
+			최종적으로 return할 ArrayList<VO> 객체
+			데이터 할당.
+		- 자원 해제 : 생성된 객체들에 대한 자원을 해제, 
+				ResultSet ==> Statement ==> Connection 순.
+		- 예외 처리의 내용을 구체화 처리.
+			- 혹, 남아 있는 객체들 메모리 해제,
+			- DML의 경우, rollback 처리..
+2.	기능 메서드 처리 순서.
+	1) sql 작성/실행
+	2) 위 sql의 결과에 해당하는 VO를 생성해서 필드의 이름과 조회된 컬럼의
+		데이터유형과 이름을 동일하게 한다.
+	3) 기능메서드 추가. sql의 입력값(조회 조건,입력) 매개변수로 선언,
+		결과에 대한 내용을 단일, vo, ArrayList<vo>
+	4) main() 메서드를 통해서 해당 최종 결과값을 확인 처리.
+		- DAO객체 생성.
+		- 참조변수.기능메서드();		 	
+/*
+CREATE TABLE "SCOTT"."EMP02" 
+   (	"EMPNO" NUMBER(4,0), 
+	"ENAME" VARCHAR2(50), 
+	"JOB" VARCHAR2(50), 
+	"MGR" NUMBER(4,0), 
+	"HIREDATE" DATE, 
+	"SAL" NUMBER(7,2), 
+	"COMM" NUMBER(7,2), 
+	"DEPTNO" NUMBER(2,0)
+   ) 
+
+*/		
+3. ResultSet 객체 ==> VO객체형태로 만들기
+	1) 기능메서드를 통해서 최종적으로 리턴할 VO 객체를 통해서,
+		화면단에서 효과적으로 처리할 수 있다.
+		- 기능 메서드의 return 객체는 VO 객체이어야 한다.
+	2) 종류 : 리턴할 데이터의 종류에 따른 처리.
+		- 다중의 ArrayList<VO> 객체 : select를 통해서 여러 행을 가져올 때.
+		- 단일 VO객체 : select를 통해서 단일 행을 가져올 때.
+		- 단일 변수 
+			boolean
+			숫자형
+			문자열형
+		SELECT * FROM emp; -- 여러행을 사용하는 데이터 ArrayList<VO> 
+			==> while(rs.next())			
+		SELECT sum(sal), avg(sal), count(*)
+		FROM emp; -- 단일행의 결과값을 받은 데이터 VO   
+			==> if(rs.next())
+		SELECT count(*) -- 단일행의 단일 변수(숫자)
+		FROM emp;
+			==> rs.next(); int cnt = rs.getInt(1);
+		SELECT ename  -- 단일행의 단일 변수(문자)
+		FROM emp
+		WHERE sal = (SELECT max(sal) FROM emp);
+			==> rs.next(); String ename = rs.getString(1);  
+		SELECT *	-- rs.next()로 boolean을 리턴할 수 있다.
+		FROM emp
+		WHERE empno = 7780; -- key를 입력하여 있는지 여부만 확인할 때..
+			1) row단위로 컬럼에 있는 데이터 가져오는 경우.
+				if(rs.next()) rs.getInt()
+			2) 데이터가 있는지 여부만 가져오는 경우
+				boolean hasData = rs.next();	
+	3) 유형별 VO객체 처리.
+		- 여러행에 대한  ArrayList<VO>형 처리.
+			- vo 생성
+			- ArrayList<Vo>객체 상단에 선언..
+			- while(rs.next){
+				list.add(new Vo객체생성자( rs.getString(1), ...... ));
+			
+			  }		
+			- 메서드 최하단에 ArrayList형 데이터가 리턴 처리된다.  
+			  				
+4. DB server에 데이터 전달하여 결과를 받는 내용.
+	0) 서버에서 사용하는 sql을 받은 데이터와 문자열 조합으로 전달하면 된다.
+	1) where 조건문이 있을 때..
+		- 숫자형일 때.
+		
+		- 문자형일 때.
+		
+		- 날짜형일 때.
+-- 문자열 데이터 조회            
+public ArrayList<Emp> schEmp(String ename, String job){
+String sql = "SELECT *
+			  FROM emp
+            WHERE ename LIKE '%'||'"+ename+"'||'%'
+			 AND job LIKE '%'||'"+job+"'||'%' ";
+			 
+public ArrayList<Emp> schEmp(Emp sch){
+String sql = "SELECT *
+			  FROM emp
+            WHERE ename LIKE '%'||'"+sch.getEname()+"'||'%'
+			 AND job LIKE '%'||'"+sch.getJob()+"'||'%' "; 						
+	
+# PreparedStatement 객체..
+1. 동적 sql(문자열조합)구문의 보안적 필요성과 처리 속도에 대한 이슈로
+만들어진 객체이다.
+2. 보안적 필요성
+	select *
+	from emp
+	where empno = 데이터입력	
+	사원번호 : [    ] [검색]
+	
+	select *
+	from member
+	where id = 'himan'
+	and pass= '7777';
+	select *
+	from member
+	where id = ''or '1'='1'
+	and pass= ''or '1'='1';	
+	   로그인
+	id : ['or '1'='1]
+	pass : ['or '1'='1]
+		[로그인]
+	입력창에 문자열로 위와 같이 입력하면 sql을 만들어서 처리하면
+	인증을 할 수 있는 것을 볼 수 있다. 이것을 sql injection이라고 한다.
+3. 속도의 이슈
+	오라클 서버는 sql을 실행하면 컴파일 과정을 거쳐서 수행하여 준다.
+	동일한 sql이 다시 실행요청들어오면 이전 했는 컴파일 과정을 거치지 않고,
+	바로 수행하여 준다.
+	1) 동적 sql
+	select *
+	from emp
+	where empno = 7780;
+	select *
+	from emp
+	where empno = 7781; -- 다른 sql을 전달하여 변경할 때마다 sql을 수행한다.
+	2) PreparedStatement sql
+	select *
+	from emp
+	where empno = ?;	 	
+	select *
+	from emp
+	where empno = ?;	동일한 sql로 인식하여 컴파일 과정 없이 바로 수행.
+	매개변수로 ?에 해당하는 데이터를 넘겨준다.
+	속도가 향상.
+3. 기본 형식
+	1) 기본 sql 작성 입력할 데이터를 ?로 변경 처리..
+	select *
+	from emp
+	where empno = ?
+	2) PareparedStatement 객체 할당. 수행 처리. 
+	3) pstmt.set데이터유형( 순서, 실제데이터);				
+		
+4. DML(insert, update, delete)처리..	
+	1) 기능 메서드 선언.
+		public void insertEmp(Emp ins)
+	2) 연결 공통 메서드 호출..
+	3) con.setAutocommit(false);
+		자동 autocommit 발생 방지..
+	4) sql 선언..
+		insert into emp02 values(emp_seq.nextval,?,?,sysdate,?,?,?);
+	
+	5) PreparedStatement 처리
+		pstmt.setXXXX(1, 데이터);	
+		pstmt.setXXXX(2, 데이터);	
+		pstmt.setXXXX(3, 데이터);
+	6) executeUpdate()
+	7) con.commit();
+	8) 자원해제처리.		
+	9) 예외 처리 - rollback();
+	
+	
+	
+			
+			
+			
+		
+		
+		
+				
+				

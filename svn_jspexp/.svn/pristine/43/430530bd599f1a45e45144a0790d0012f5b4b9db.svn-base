@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h3></h3>
+	<h4></h4>
+	<h5></h5>
+	<h6></h6>	
+</body>
+
+<script type="text/javascript">
+	var h2Arr = document.querySelectorAll("h2");
+	var arry1 = [1000, 4000, 3000, 2000]; 
+	h2Arr[0].innerText = arry1;
+	h2Arr[1].innerText = "배열의 길이:"+arry1.length;
+	h2Arr[2].innerText = "pop():"+arry1.pop();
+	h2Arr[3].innerText = "pop()이후 배열:"+arry1;
+	arry1.push(7000)
+	h2Arr[4].innerText = "push(7000)이후 배열:"+arry1;
+	h2Arr[5].innerText = "reverse():"+arry1.reverse();
+	h2Arr[6].innerText = "reverse()이후:"+arry1; // 구조가 변경됨
+	h2Arr[7].innerText = "slice(1,4):"+arry1.slice(1,4);
+	h2Arr[8].innerText = "#slice(1,4)이후:"+arry1;
+	h2Arr[9].innerText = "sort():"+arry1.sort();
+	h2Arr[10].innerText = "sort()이후:"+arry1; // 구조가 변경됨
+	h2Arr[11].innerText = "splice(1,2):"+arry1.splice(1,2); // 구조가 변경됨
+	h2Arr[12].innerText = "splice(1,2)이후:"+arry1; // 구조가 변경됨
+	h2Arr[13].innerText = "join():"+arry1.join();
+	var arry2 = [9000,2000]
+	h2Arr[14].innerText = "#concat():"+arry1.concat(arry2);
+	h2Arr[15].innerText = "concat()이후:"+arry1;
+	// ex) 학생 5명의 국어 점수를 배열로 선언하고,
+	//    1. 배열의 갯수와, 오름차순으로 정렬 처리하여 h3에 출력하세요.
+	//    2. 이 중에, 1등~3등을 추출하여 h4에 출력하세요.. 
+	//    3. 데이터를 0~100점 사이의 임의로 5개 추가 등록하고, 최종 1~3등의 배열을
+	//       만들어 h5 출력하세요..  3조
+ 	var h3Obj = document.querySelector("h3");
+ 	var h4Obj = document.querySelector("h4");
+ 	var h5Obj = document.querySelector("h5");
+ 	var h6Obj = document.querySelector("h6");
+	var kors = [100,80,70,90,60];
+	h3Obj.innerText = kors.length+":"+
+		kors.sort(function(left, right){ return left-right}); // 오름차순
+	// 배열명.sort(function(left,right){return left-right})	
+	h4Obj.innerText = kors.reverse().slice(0,3);
+	for(var cnt=1;cnt<=5;cnt++){
+		kors.push(parseInt(Math.random()*101));
+	}
+	h5Obj.innerText = kors;
+	kors.sort(function(left, right){ 
+				return right-left}); // 내림차순
+	var last = kors.splice(0,3);
+	h6Obj.innerText = last;	
+	// slice(index0부터, 1부터 순서)
+	
+/*
+# 배열
+1. 배열이 선언 방식
+	1) var array01 = new Array();
+	   var array02 = new Array(크기);
+	   var array03 = new Array(데이터1, 데이터2, 데이터3..);
+	   var array04 = [데이터1, 데이터2, 데이터3....];
+2. 배열의 메서드
+	length : 배열 요소의 갯수
+	concat() :배열 요소를 이어줌.
+	join() : 모든 요소 문자열로
+	pop() : 마지막 요소 제거, 리턴
+	push() : 마지막 추가
+	reverse() : 순서 뒤집기
+	slice() : 지정부분 리턴
+	sort() : 정렬
+	splice() : 지정 부분 삭제, 삭제한 요소 리턴
+ */
+	
+</script>
+</html>

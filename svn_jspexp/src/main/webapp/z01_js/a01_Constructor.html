@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 
+# 생성자형 객체..
+1. 기본 형식.
+	function 객체명(속성){
+		this.속성 = 속성;
+		this.함수 = function(){
+		
+		}
+	}
+	var 참조변수 = new 객체명(속성값);
+	참조변수.함수();
+ -->
+<script type="text/javascript">
+	function Person(name, age, loc){
+		this.name = name;
+		this.age = age;
+		this.loc = loc;
+		this.show = function(){
+			document.write("<h2>이름:"+this.name+"</h2>");
+			document.write("<h2>나이:"+this.age+"</h2>");
+			document.write("<h2>사는곳:"+this.loc+"</h2>");
+		}
+	}
+	var p01 = new Person("홍길동",25,"서울");
+	p01.show();
+	// ex) a02_const.html로  Calculator로 매개변수로 두개값을 받아서,
+	//        this.plus=function(){}를 통해서 합산된 값을 출력하세요. 3조
+</script>
+
+</body>
+</html>

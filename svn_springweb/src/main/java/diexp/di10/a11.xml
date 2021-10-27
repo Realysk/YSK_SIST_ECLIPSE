@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+		
+		<!-- 
+		Person p01 = new Person();
+		p01.setName("홍길동");
+		p01.setAge(25);
+		p01.setLoc("신림동");
+		 -->
+		<bean id="p01" class="diexp.vo.Person">
+			<property name="name" value="홍길동"/>
+			<property name="age" value="25"/>
+			<property name="loc" value="신림동"/>
+		</bean>
+<!-- 
+# IOC
+1. Inversion of Control라는 말로 제어의 역전 즉 인스턴스생서부터 소멸까지의 인스턴스 생명주기
+관리를 개발자가 아닌 컨테이너가 대신 해준다라는 뜻이다.
+2. 컨테이너 역할을 해주는 프레임워크에서 제어하는 권한을 넘겨서 개발자가 코드를 신경 쓰는 부분을 
+줄이는 전략이다.
+3. IOC 컨테이너는 객체의 생성을 책임지고, 의존성을 관리한다.
+4. 스프링은 IOC 기반으로 메인 컨테이너(dispatcher-servlet.xml)에 의해 설정되어 진다.
+	1) WAS가 시작되면, IOC기반의 컨터이너안에 선언된 객체가 생성되어 메모리에 로딩이 되고,
+	2) 이 객체들 간에 연관 관계를 setXXX()에 의해 선언되면, 자동 할당(autowire)가 처리된다.
+	3) MVC의 controller, service, dao는 이러한 컨테이너 기반으로 처리되기에,
+		따로 new XXXX()로 생성자를 호출할 필요가 없어진다.
+		
+ -->		
+		
+</beans>

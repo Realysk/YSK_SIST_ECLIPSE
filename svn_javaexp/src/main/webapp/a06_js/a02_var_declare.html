@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+
+</script>
+
+</head>
+<body>
+
+</body>
+<script>
+//문장 단위 : 표현식이 모여 세미콜론이 붙었을 때..
+//alert("안녕하세요"); // alert(), "안녕하세요" - 표현식
+var name="김길동"; // var, name, "김길동" - 표현식
+//키워드 : 프로그램 내장 명령어를 말하는 것으로 식별자로 사용할 수 없다.
+//var, break, if, for, ...
+//var break="안녕";(X)
+//식별자 : 변수에 이름을 붙을 때 사용하는 단어..
+//1. 변수명, 함수명, 객체명, 참조변수명..
+// 	ex)  var age=25; var call=function(){};  function plus(){}
+//         var person={}; function Woman(){}; var w1 = new Woman();
+//2. 식별자 선언 규칙..
+// 	1)  키워드 사용 금지..
+//		ex) var if = 25;(X)
+//    2) 숫자로 시작하면 안된다.
+//        ex) var 10num;(X) var 15age;(X),
+//            var num01;(O), var name05;(O)
+//    3) 특수문자는 $, _ 만 허용된다.
+//        ex) var #name;(X), var $name;(O), var num_01;(O)
+//        변수명으로 연산자 내용도 사용하지 못한다. var num-good; (X)
+//    4) 중간에 공백문자는 허용하지 않는다.
+//        ex) var num good;(X)     
+//       
+//3. 출력
+//   1) alert, confirm(입력/출력), prompt(입력/출력)
+	//alert("경고창 출력");
+//   2) document.write("html태그");
+	document.write("<h1>화면에 출력합니다</h1>");
+	var name="홍길동";
+	document.write(`<h1>${name}화면에 출력합니다</h1>`);
+//   3) console.log() : f12로 bug를 찾을때 활용된다.
+	console.log("버그를 찾을 때, 출력"); 
+//   4) DOM객체 - innerHTML/innerText	
+// ex) ecma6에서 활용하는 `(아포스트로피)와 ${변수명}을 활용해서, 화면에
+//      1~10까지 누적된 변수를  h3로 출력하세요 5조  
+	var tot =0;
+	for(var cnt =1;cnt<=10;cnt++){
+		tot+=cnt;
+		document.write(`<h3>번호 :${cnt} - 합산:${tot}</h3>`);
+	}
+/*
+# js의 ''(홋따옴표) ""(쌍따옴표)의 활용..
+1. js에서는 '',"" 구분없이 문자열 데이터를 사용할 때, 활용된다.
+2. 두개의 형태의 문자열을 변수나 함수의 매개변수로 구분할 때, 주로 활용된다.
+	1) 포함관계로 구분하여 사용할 수 있지만,
+	2) 겹쳐서 사용은 에러가 발생한다.
+ */
+ 	document.write("<h2 align='center'>안녕</h2>")
+ 	document.write("<h2 onclick='call(\"안녕\")'>클릭하세요</h2>")
+ 	function call(str){
+		alert('이벤트 호출:'+str);
+	}
+	console.log('This is "String" ');
+	console.log("This is 'String' ");
+//	console.log("This is 'String" '); 포함관계가 아닌 겹쳐서 사용은 에러가 발생한다.
+/*
+3. 홋따움표, 쌍따옴표를 같이 활용할 때, \(역슬래쉬)를 활용한다.
+ */
+ 	console.log("This is \"string\" ");
+ 	console.log('This is \'string\' ');
+	
+/*
+ex) document.write()를 활용하여 "", ''을 같이 활용하는 예제 간단하게 만들어 보세요..
+		6조..
+ */
+ 	document.write("<a href='#'>링크 처리..</a><br>")
+ 	document.write("<h2 onclick=\"alert('안녕')\"></h2>")
+/*
+5. `(아파스트로피) : ecma6이후 버젼에서 출력을 효과적으로 활용할 때, 사용된다.
+	줄바꿈, ${변수/상수} 사용을 효과적으로 처리한다.
+ 
+ */
+ 	
+ 	
+/*
+# 데이터의 입력 처리 : 함수의 리턴값으로 결과값을 처리할 수 있다.
+1. confirm("출력문자열") : 확인시 true/취소시 false값 리턴..
+2. prompt("출력문자열","입력초기값") : 확인시, 입력된 값 리턴, 취소시,
+	문자열 'null' 리턴...
+ */
+ 	var isReg = confirm("등록하시겠습니까?");
+ 	if(isReg){
+ 		document.write("<h3>등록되었습니다!</h3>");
+ 	}else{
+ 		document.write("<h3>등록/취소 되었습니다!</h3>");
+ 	}
+ 	var name = prompt("이름을 입력하세요","이름입력");
+	console.log("취소시:"+name);
+	console.log("취소시:"+typeof(name));
+ 	if(name!='null'){
+ 		document.write(`<h3>이름 : ${name}</h3>`);	
+ 	}else{
+ 		document.write(`<h3>이름을 등록하지 못 했습니다.</h3>`);
+ 	}
+ // ex1) 물건명/가격/갯수를 입력하고,
+ //      화면에 출력하시겠습니까? ==> 웹 화면에 출력
+//          취소시 ==> console.log에 출력   1조.
+   var pname = prompt("물건명을 입력하세요");
+   var price = prompt("가격을 입력하세요");
+   var cnt = prompt("개수를 입력하세요");
+   //var isPrint = confirm("화면에 출력하시겠습니까?");
+   if( confirm("화면에 출력하시겠습니까?") ){
+	   // 입력값에 취소를 클릭 시, pname!='null'?pname:'입력안됨'
+		/*
+		# 3항연산자
+		1. 형식
+			boolean값?true일때데이터:false일때데이터
+			ex) pname!='null'?pname:'입력안됨'
+		
+		*/		   
+			   
+      document.write(`<h4>물건명: ${pname!='null'?pname:'입력안됨'}</h4>`);
+      document.write(`<h4>가격: ${price!='null'?price:'입력안됨'}</h4>`);
+      document.write(`<h4>개수: ${cnt!='null'?cnt:'입력안됨'}</h4>`);
+   }else{
+      console.log(pname, price, cnt);
+   }
+/*
+# 입력 처리와 숫자형 데이터 처리..
+Number(prompt()) :입력값에 대한 숫자형 처리
+isNaN(): 숫자형 문자열에 대한 유효성 확인 처리..
+ 
+ */ 	
+ 	
+ 	
+
+</script>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>과일사이트입니다</title>
+</head>
+<body>
+<!-- 
+ex1) a02_basic2.html로 파일을 만들고,
+	타이틀과  과일명 3개와 이미지를 왼쪽 오른쪽 중앙으로
+	정렬시켜 출력하세요..[6조]
+ -->
+<h1 align="left">사과<img src="img01.jpg"/></h1>
+<h1 align="center">바나나<img src="img01.jpg"/></h1>
+<h1 align="right">딸기<img src="img01.jpg"/></h1>
+</body>
+</html>

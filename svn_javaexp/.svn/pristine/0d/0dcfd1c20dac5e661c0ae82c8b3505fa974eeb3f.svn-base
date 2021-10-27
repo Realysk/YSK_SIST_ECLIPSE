@@ -1,0 +1,39 @@
+# 프로젝트 진행 sample
+0. 웹프로그램..
+                           model1 : 화면에서 java 혼합해서 처리.
+    http://.... ==> 서버안에 model2
+                             **controller   ===> service ==> **dao ==> DB
+    							msg	      <===로그인성공/실패 <--	  <--
+    						  model : 화면단에 데이터 전송/메시지 전송	
+    	아이디[    ]
+    	패스워드[  ]
+    	   [로그인]				
+
+
+
+1. Backend단에서 처리한 내용을
+	화면캡쳐와 함께 소스를 캡쳐해서 ppt자료에 출력
+	
+	
+	
+2. 로그인화면
+	1) 로그인화면 캡쳐
+	2) java 클래스 작성.
+		화면단 구현(X)
+		화면단에서 로그인 넘겨오는 데이터 : id, pass
+		Controller에서 요청값으로 받는다.
+		public String login(Member login, Model d){
+			login.getId()/login.getPass()
+			화면에서 넘겨온 데이터를 받을 수 있다.
+			d.addAttribute("모델명", 화면에 넘겨줄 내용)
+		
+		
+			return "뷰단 호출";
+		}	
+		Service단(비지니스 로직 처리)
+			DAO 호출..:필요에 따라 처리.
+		
+		Dao인터페이스(실체객체로 선언) 
+		
+		
+		

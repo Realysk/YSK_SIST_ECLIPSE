@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+/*   
+#
+
+
+ */
+</script>
+
+</head>
+<body>
+	<table id="tab1" border></table>
+</body>
+<script>
+/* 
+# 행단위 배열 처리
+ex) 배열데이터  홍길동, 김길동, 신길동 을 선언하고, 
+	아래와 같은 형식을 출력 처리하세요.. 4조
+	no 이름	 아이디	  권한
+	1  홍길동  himan    관리자
+	2  김길동  goodman  일반사용자
+	3  신길동  badman   관리자
+*/
+
+	var arry = [{name:"홍길동1", id:"himan",auth:"관리자"},
+				{name:"김길동1", id:"goodman",auth:"일반사용자"},
+				{name:"신길동1", id:"badman",auth:"관리자"}];
+	// 속성추가
+	var show = "<tr><th>no</th><th>이름</th><th>아이디</th><th>권한</th></tr>";
+	// 타이틀 추가.
+	for(var idx in arry){
+		show += `<tr><td>${Number(idx)+1}</td>`;
+		var mem = arry[idx]; // 단위 객체로 할당.
+		for(var pro in mem){ // 속성 in 객체
+			show+=`<td>${mem[pro]}</td>`;
+		}
+		show +=`</tr>`;
+	    // 속성 추가.
+	}
+	var tab1Obj = document.querySelector("#tab1");
+	tab1Obj.innerHTML = show;
+</script>
+</html>
+
+
+
+

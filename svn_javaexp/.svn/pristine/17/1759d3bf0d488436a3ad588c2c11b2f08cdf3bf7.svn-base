@@ -1,0 +1,218 @@
+# database 처리 실무 프로세스
+1. 요구정의서 작성 후,
+	여러사람이 공유하고, 영구적으로 관리할 데이터에 대한 식별
+	속성을 만들고 속성의 그룹단위를 만들어 테이블을 구성한다.
+	1) 처리단계
+		- 요구사항 정의서
+		- 영구적데이터/임시데이터 식별
+			속성도출 및 속성을 그룹화하여 테이블 구성
+		- 테이블간의 연관관계 설정(관계데이터 모델링) 
+			- exerd(erd 모델링 도구/툴)
+		- sql 작성.
+		- 프로그래밍 적용 처리..
+	
+	
+	ex) 로그인 ==> 회원관리 ==> 회원이 등록할 정보
+		==> 회원에 들어갈 속성 ==> 속성을 함께 가지고 있을 테이블 구성
+		속성 : 아이디, 패스워드, 이름, 주소, 이메일, 포인트, 권한
+		이들을 묶어서 사용자라는 member테이블 안에 구성할 수 있다.
+	= 관련 자료 검토, excel 검토..
+	= 고객과 대화..
+		
+2. 속성과 이들 그룹단위로 테이블을 만들고, 적절한 데이터 유형(데이터 타입에
+	따라 테이블을 생성한다.
+	ex)
+	create table member(
+		id varchar2(50),  
+		-- id라는 이름으로 50개의 문자가 가변적으로 들어갈수 있게 속성 정의
+		pass varchar2(20),
+		name varchar2(50),
+		address varchar2(500),
+		email varchar2(100),
+		civilcode char(13), -- 13의 고정형문자 주민등록번호, 학번
+		point number, -- 숫자형 데이터
+		auth varchar2(50)
+	);		
+3. erd를 통해 테이블과 테이블의 연관관계를 설정하고, 
+	(테이블 설계-속성, 연관관계설정)
+	sql로 join 처리(subquery 포함)
+4. 화면별로 필요한 sql 사용
+	1) 조회(DQL)
+	2) 등록(DML)
+	3) 수정(DML)
+	4) 삭제(DML)
+5. 프로그램에서 dao로 데이터베이스 연결 객체를 처리하여,
+	DB 서버에서 데이터를 가져오게 한 후, 화면단에 출력 처리한다.
+	1) 화면을 통해 입력된 값
+	2) 서버에서 만들 데이터를 객체형태로 화면에 출력 처리.
+	
+
+# 전체적인 knowledage Map - 엑스마인드맵
+1. database의 개론
+2. sql(기본 조회 처리-DQL)
+	1) select 리스트 부분
+		연산자 처리..
+	2) where 조건문
+	3) 함수 - 리스트문, 조건문.
+		단일함수 : 문자, 숫자, 날짜, 기타 기능함수
+		그룹함수 : 그룹 함수 max, min,
+			목적 : 데이터의 그룹별로 처리를 하는 목적
+			ex) 부서번호별 최고급여, 직책별 최저급여, 월별 평균급여
+				 
+				그룹되는 컬럼이 없으면, 해당 테이블의 전체 데이터를 기준으로
+				가져온다
+			select max(sal), min(sal), max(hiredate)
+			from emp; -- 해당테이블의 전체 데이터 기준으로 함수 적용.
+			
+			select to_char(hiredate, 'MM'), max(sal)
+			from emp
+			group by to_char(hiredate,'MM')
+			having max(sal)>2000;	
+			-- 그룹함수를 기준으로 조건데이터 처리할 때, having을 활용
+			ex) 그룹함수를 이용한 subquery (where, update)...
+	4) 테이블과 테이블의 조인관계
+		- join문 : 여러 테이블과 조인을 처리하는 형식
+		    select 테이블1.컬럼...., 테이블2.컬럼...
+			from 테이블1 alias1, 테이블2 alias2, ...
+			where 테이블1.컬럼 = 테이블2.컬럼
+		- subquery
+			select 컬럼, ... (select max(컬럼) from 테이블)...
+			from (select 컬럼 from 테이블 ) a,
+				 (select 컬럼 from 테이블 ) b,
+				 ...
+			where 조건 in ( select min(컬럼) from 테이블명)
+			 and (열1, 열2..) in ( select 다중열1, 다중열2 )
+			 ans (열1, 열2, 열..) = ( select 다일행... )
+				 
+		# 기본 구문 형식(DQL)
+		select 컬럼
+		from 테이블명
+		where 조건명
+		group by 그룹할컬럼
+		having 그룹함수로 조건 처리
+		order by 컬럼 [desc];	
+		
+		
+3. sql(DML(데이터의 조작), DDL(정의), DCL(제어))
+	CRUD(create, read, update, delete), merge
+	1) insert
+		insert 테이블명 values(데이터1, 데이터2....);
+		insert 테이블명(컬럼명1, 컬럼명2 ...) 
+			  values( 데이터1, 데이터2... );
+	2) update
+		update 테이블명
+			set 변경할컬럼1 = 변경할데이터,
+				변경할컬럼2 = 변경할데이터,
+				..
+				..
+		   where 조건문;
+		   ex) 
+		   update emp
+		   	  set ename = '홍길동',
+		   	  	  deptno = 20
+		   	where empno = 7780;
+		   # subquery 활용..
+		   update 테이블명 a
+		   set 컬럼1 in ( select ... from 테이블 b where a.키 = b.키)	
+		   	
+		   	
+	3) delete
+		데이터를 row(행)단위로 삭제 처리.
+			cf) 특정한 column만 삭제할수 없다. 
+			==> update 테이블 set 컬럼 = null;
+		delete
+		from 테이블명
+		where 조건;
+		ex) 
+		delete
+		from emp
+		where empno= 7999;
+		
+	==> insert, update, delete 구문을 처리한 후에는
+	 	트랜잭션 제어 rollback(복구, 수행 명령 취소), commit(확정)를 처리한다.
+	 	트랜잭션 제어(세션처리)
+	 		client1 ==> DB 서버  <== client2
+	 	ex) client1이 데이터 입력한 내용은 접속한 client2에 초기에는 반영이 되지
+	 	않는다. client1이 입력 후, commit를 처리했을 때 모든 client에
+	 	입력한 내용을 확인할 수 있다.
+	 	이것을 트랜잭션 제어라고 하면, 이것을 통해서 데이터의 안정성을 유지
+	 	할 수 있다.	
+	 	ex) 신입이 보통  delete
+	 				  from 테이블
+	 				  where .. (X) 생략하면 모두 삭제 (주의!!!)	
+	4) create table 테이블{} *
+		create table 테이블{
+			컬럼명1 데이터유형 제약조건,
+			컬럼명2 데이터유형 제약조건,
+			컬럼명3 데이터유형 제약조건
+			...
+		}
+		# 데이터 유형
+		숫자형 number(n,p), 고정문자(char),가변문자(varchar2)
+		날짜형 date
+		
+		# 제약조건 : primary key(not null, unique), foreign key, 
+					not null, unique, check
+			데이터의 입력이나 수정시, 해당 제약조건에 맞지 않으면, 에러를
+			발생하게 하여, 데이터의 무결성을 유지하게 할 수 있다.
+		
+		
+	5) 테이블 구조 수정/삭제
+		alter 테이블명
+			add 추가할 컬럼 데이터유형 
+			modify ..
+			rename column 컬럼명 to @@@..
+	6) 여러가지 객체 sequence, index, view, trigger, role,
+		ex) create sequence emp_seq
+				start with 시작할데이터
+				minvalue 최소값
+				maxvalue 최대값
+				increment by 증가값;  
+	 
+				
+4. sql(사용자 권한 부여 및 회수)
+	계정을 만들고, 해당 계정에 따라서 권한 부여를 처리하는 것을 말한다.
+	
+	1) grant : 권한을 부여  ex)  grant 권한 to 계정;
+	2) revoke : 권한을 회수
+	3) role : 특정한 권한을 모아서 role을 지정하여 처리
+	
+5. pl/sql
+	프로그래밍으로 sql을 사용
+6. DB 설계
+	스키마도출 : 속성 처리
+	테이블 관계 설정 : 두개 이상의 테이블 구성하여 테이블 나누어
+		관계를 설정처리.
+		ex)  사원 정보 테이블에서 부서명이 변경되었을 때,
+		부서 테이블를 나누는 것이 효율적일까? 통합된 테이블이 효율적일까?
+7. 집합 데이터 처리
+	union, union all, minus, intersection
+	ex) 조회sql1 union 조회sql2 : 
+		두 조회구문의 중복을 뺀 통합 결과 출력 (집합의 합) 
+		 		
+8. 계층적 sql
+	oracle DB에서 지원하는 계층적 sql 처리 
+	start with
+	prior
+	siblings 
+	ex) 무한 레벨의 답변형 게시판에서 활용. 
+			 
+# DB 과제
+1. 수업시간 : 응용 sql 위주
+2. 조별과제
+	1) DB 설계
+		- 테이블 도출
+		- 관계 도출
+		- 기타 객체 도출 [요구사항분석, java 모듈 구현]
+	2) 계정 생성 및 권한 부여..
+	3) 화면별 sql 도출..[화면구현시]
+	4) jsp가 끝난 후에는 프로그래밍으로 DB 연동 sql 처리
+	
+		
+				 
+
+
+
+
+
+

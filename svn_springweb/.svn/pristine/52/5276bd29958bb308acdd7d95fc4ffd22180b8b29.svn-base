@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<template id="sch-tmp">
+	<div>
+		검색할 내용:<input type="text" :value="sname"/>
+	</div>
+</template> 
+<template id="list-tmp">
+	<!-- 배열형 데이터를 props로 전달되었을 때, 처리.. -->
+	<table border>
+		<tr><th>사원번호</th><th>사원명</th><th>부서번호</th></tr>
+		<tr v-for="emp in list">
+			<td>{{emp.empno}}</td>
+			<td>{{emp.ename}}</td>
+			<td>{{emp.deptno}}</td>
+		</tr>
+	</table>
+</template>
+<script src="https://code.jquery.com/jquery-3.5.1.js"/></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+# 여러가지 속성의 유형.
+1. 상위 컴포넌트의 속성으로 하위에 있는 template에 데이터 전송할 때,
+	여러가지 유형으로 다중의 데이터를 전달 수 있다.
+2. props:{
+	속성:{type:유형,default:속성없을때, 기본데이터, }
+   }
+3. type으로 설정 가능한 유형들.
+	1) String : 문자열 데이터
+	2) Number : 숫자형 데이터
+	3) Array : 배열형 데이터 
+		ex) 객체형 배열의 list로 데이터를 넘기 때, 주로 활용된다.
+*/
+	$(document).ready(function(){
+	// sch-tmp sname    list-tmp list
+		Vue.component("sch-comp",{
+			template:"#sch-tmp",
+			props:['sname']
+		});
+		Vue.component("list-comp",{
+			template:"#list-tmp",
+			props:{
+				list:{type:Array}
+			}
+		});
+		
+		var vm = new Vue({
+			el:"#show",
+			data:{
+				msg:"여러가지 props속성들",
+				emplist:[
+					{empno:7788,ename:"홍길동",deptno:10},
+					{empno:7789,ename:"김길동",deptno:20},
+					{empno:7790,ename:"신길동",deptno:30}
+				]
+			}
+		});		
+	});
+</script>
+</head>
+<body>
+	<div id="show">
+ 		<h2 align="center">{{msg}}</h2>
+ 		<!--  최상위에서 컴포넌트 속성을 sname을 지정하고,
+ 			값을 "홍길동"을 전달한다. -->
+ 		
+ 		<sch-comp sname="홍길동"></sch-comp>
+ 		<!-- 주의!!!
+ 			data:{ al01:"center"}
+ 				일반속성 align="center"
+ 				모델데이터로 매핑할 속성 :align="al01"
+ 		  -->
+ 		<list-comp :list="emplist"></list-comp>
+ 		<!-- 
+ 			하위 템플릿에 넘길 속성을 list이나,
+ 			실제넘길 데이터 model데이터 이기때문 반드시 
+ 			v-bind:속성="모델명"으로 처리하여야 하기에
+ 			:list="emplist" 
+ 		 -->
+ 	</div>	
+</body>
+</html>

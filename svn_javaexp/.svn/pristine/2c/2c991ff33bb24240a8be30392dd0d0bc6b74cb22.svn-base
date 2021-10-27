@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function changeArry(obj){
+		obj.align="center";
+		obj.innerHTML="중앙정렬";
+	}
+</script>
+</head>
+<body>
+	<h4 align="right">left</h4>
+	<h4 align="center">right</h4>
+	<h4 >center</h4>
+<!-- 
+
+ -->
+	<h2>초기값</h2> 
+	<h3 align="right" onclick="changeArry(this)">오른쪽 정렬</h3>
+	<h5>red</h5>
+	<h5>orange</h5>
+	<h5>yellow</h5>
+	<h5>green</h5>
+	<h5>blue</h5>
+	<h5>navy</h5>
+	<h5>purple</h5>
+
+</body>
+<script type="text/javascript">
+/*
+# 전날 정리 문제
+1. 익명함수란 무엇인가? h2를 클릭하여 익명 함수를 통해 화면에
+    글자와 배경색상이 변경되게 처리하세요.
+    객체.속성 = function(){
+    };
+    해당 객체의 속성메서드가 수행될 때, 호출되는 함수를 바로 할당하여,
+    함수의 이름이 필요하지 않는 함수를 말한다.
+    주로, 이벤트 처리시 활용된다.
+*/
+	var h2Obj = document.querySelector("h2");
+    h2Obj.onclick=function(){
+    	// this : 이벤트가 일어나는 클릭시 사용되는 객체..
+    	this.innerHTML = "안녕하세요(글자변경)";
+    	this.style.backgroundColor="yellow";
+    };
+/*
+2. html의 기본 요소의 구성요소를 기술하세요.
+	기본 요소는 태그인데 이것을 객체개념으로 element(요소)라고 한다.
+	js에서는 객체화하여 DOM(document object model)이라는 개념으로
+	속성의 동적인 처리를 할 수 있게 한다.
+	<태그  속성=속성값> 내용/타이틀 </태그>
+
+
+3. html과 js의 주석에 대하여 기술하세요.
+	html은 <!-- --> 형식을 주석을 활용한다.
+	js는 java와 동일한 형식으로 *다중주석* // 단일 주석 사용하고
+	실행하더라도 실행 결과 내용이 반영된지 않는다. */
+
+/*
+4. h3의 내용을 화면에서 오른쪽 정렬로 출력했다고, 클릭시,
+    중앙 정렬로 이벤트에 의해 처리하세요.
+5. 태그에 배열형과 단일형 선택시, 코드의 차이를 기술하세요.
+	DOM에서 단일선택과 다중 선택 처리..
+	body에서 단일 선택 태그 하나만 있는 경우,
+		여러개들 중에 첫번째 단일 태그만 선택하는 경우.
+		var obj = document.querySelector("태그");
+	body에서 동일한 태그가 여러개 있는 경우
+		모든 각각의 속성과 타이틀을 처리해야 하는 경우.
+		var array = documente.querySelectorAll("태그");
+		array[index값].innerHTML
+		array[index값].속성..
+		for(var idx=0;idx<array.length;idx++){
+			array[idx].innerHTML = 데이터;
+		}
+
+6. h5 7개를 출력하고, 해당 내용을 클릭시, 각각의 색상을 
+    배경색으로 출력하세요 
+ */
+ 	var h5Array = document.querySelectorAll("h5");
+ 	console.log("크기:"+h5Array.length);
+ 	for(var idx=0;idx<h5Array.length;idx++){
+ 		h5Array[idx].onclick=function(){
+ 			var color=this.innerHTML; 
+ 			// title로 있는 색상으로 가져올 수 있다.
+ 			this.style.backgroundColor=color;
+ 			this.align="center";
+ 		};
+ 	}
+/*	ex) h4 3개를 출력하고 
+		center,  right, left 레이블이 있는 것을 3개 출력하고
+		해당 내용을 클릭시, 정렬이 레이블 내용을  변경되게 처리하세요.[1조]
+ */	
+	var h4Array = document.querySelectorAll("h4");
+	// for(인덱스의 시작인 0 ~ 인덱스의 마지막: 크기 -1 )
+	// 4개면  0,1,2,3 index 처리..
+	for(var idx=0;idx<h4Array.length;idx++){
+		h4Array[idx].onclick=function(){
+			// this : 클릭한 대상객체..
+			var align=this.innerText; 
+			// 내용의 text만 가져오기. 타이틀로 된 정렬 내용 가져오기..
+			this.align=align;			
+		}
+	}
+	
+	
+</script>
+
+</html>

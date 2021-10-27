@@ -1,0 +1,36 @@
+# MVC 패턴으로 데이터 처리
+1. Controller
+    0) 서비스단 객체 선언과 생성..
+	1) 요청값 처리 : request.getParameter()
+	2) 모델데이터 선언(Model)
+		 request.setAttribute("모델명", 서비스단결과값) : Service(Dao객체 생성 호출) ==> Dao
+	3) View(jsp) 호출
+2. View
+	1) 초기화면
+	2) 요청값 처리 form
+	3) 결과 처리 내용 el/jstl로 출력
+	
+# MVC 패턴으로 id값입력시, 있으면 상세내용 출력, 없으면 등록되지 않는 회원	
+1. Controller(A22_MemberCheck.java,  memCheck.do)
+    0) 서비스단 객체 선언과 생성..
+	1) 요청값 처리 : request.getParameter("id")
+	2) 모델데이터 선언
+		 request.setAttribute("모델명", 서비스단결과값) : Service(Dao객체 생성 호출) ==> Dao
+		 서비스 : jspexp.a02_mvc.a02_service.A22_MemberService.java
+		 dao : 	A05_PreparedDao.java
+	3) View(jsp) 호출
+2. View(a03_memberCheck.jsp)
+	1) 초기화면
+	2) 요청값 처리 form
+	3) 결과 처리 내용 el/jstl로 출력
+3. 처리순서
+	1) 각 기능별 파일 생성
+	2) 연동처리..
+		서비스단 : DAO 생성 및 메서드 호출
+		컨트롤러단 : 서비스단 생성 및 호출(모델)
+			뷰단 호출.
+ex) 화면에 id값을 입력해서, 해당 데이터가 있으면 그외 정보 출력
+	없으면 없음이라고 출력 jstl choose문 활용.  4조			
+	
+	
+	

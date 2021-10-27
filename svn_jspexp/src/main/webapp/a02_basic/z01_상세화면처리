@@ -1,0 +1,90 @@
+# 상세화면처리
+0. 주요 페이지
+	a28_empList.jsp(메인리스트화면)
+	a29_empInsert.jsp(등록화면)
+	a32_empDetail.jsp(상세화면)
+	a33_empUptProc.jsp(수정처리 프로세스)
+	a34_empDelProc.jsp(삭제처리 프로세스)
+	jspexp.z01_database.A05_PreparedDao
+		- 상세조회 메서드 public Emp getEmp(int empno)
+		- 수정처리 메서드 public void uptEmp(Emp upt)
+		- 삭제처리 메서드 public void delEmp(int empno)
+		
+	
+1. 주요기능
+	메인화면에서 상세화면이동
+	상세화면 데이터 확인 : key를 통한 데이터 확인
+	데이터변경 후, 수정처리 : 수정버튼 클릭시, 수정처리 프로세스
+	삭제처리..: 삭제버트 클릭 시, 삭제 처리 프로세스..
+2. 메인화면에서 상세화면이동
+	1) a28_empList.jsp(메인리스트화면)에서 처리할 내용
+		a28_empList.jsp(메인리스트화면)에 있는 특정 row(사원정보)를 클릭시,
+		상세화면으로 a32_empDetail.jsp?empno=사원번호로 해당 상세화면에
+		empno와 함께 요청한다.
+	2) a32_empDetail.jsp(상세화면)에서 처리할 내용.
+		- request.getParameter("empno")로
+			empno번호를 가져온다.
+		- DAO에  public Emp getEmp(int empno) 기능 메서드로
+			select * from emp02 from empno=?를 통해 단위 객체 Emp를 Vo로
+			가져온다.
+		- 상세 form화면 구성..
+			사원번호 :[   ] 사원:[     ]
+			직책 :[   ]    관리자번호[     ]
+			입사일 :[   ]  급여:[     ]
+			보너스 :[   ]  부서번호:[     ]
+		- dao 받아온 Emp 객체는 <input type="text" name="empno" 
+			value="<%=emp.getEmpno()%>"/>
+			형식으로 할당한다.
+	3) 수정처리 프로세스.
+		- a32_empDetail.jsp(상세화면)	==> a33_empUptProc.jsp(수정처리 프로세스)
+		- 수정기능버튼 클릭 ==> 수정함수호출
+		- 수정함수 내용
+			폼의 action 속성을 a33_empUptProc.jsp(수정처리 프로세스)로 처리되게
+			변경..
+			document.querySelector("form").action="a33_empUptProc.jsp";
+			document.querySelector("form").submit();
+		- a33_empUptProc.jsp(수정처리 프로세스)
+			요청값을 받아서
+			String empnoS = request.getParameter("empno");
+			Emp upt = new Emp(....);
+			Dao에 public void uptEmp(Emp upt){} 기능메서드 선언.
+				sql 확인 update emp02
+						   set ename =?,
+						       job = ?,
+						       ..
+						  where empno = ?
+			DAO 객체 생성과 dao.uptEmp(upt);
+			alert(수정완료)
+			location.href="a32_empDetail.jsp?empno=<%=empnoS%>";			  
+	4) 삭제처리 프로세스.	
+		- a32_empDetail.jsp(상세화면) ==> a34_empDelProc.jsp(삭제처리 프로세스)	
+		- 삭제기능버튼 클릭 ==> 삭제함수호출
+		- 삭제함수 내용
+			폼의 action 속성을 a34_empDelProc.jsp(삭제처리 프로세스)로 처리되게 변경
+			document.querySelector("form").action="a34_empDelProc.jsp";
+			document.querySelector("form").submit();
+		- a34_empDelProc.jsp(삭제처리 프로세스)
+			요청값을 받아서.
+			String empnoS = request.getParameter("empno");
+			Dao에 public void delEmp(int empno)
+			
+			DAO 객체 생성과 dao.delEmp(empno);
+			alert(삭제처리완료)
+			location.href="a28_empList.jsp";		
+			
+			
+								
+					
+			
+# 연습부서처리
+0. 주요 페이지
+	부서정보리스트(a30_deptList.jsp)
+	부서정보등록(a31_deptInsert.jsp)
+	부서정보상세(a35_deptDetail.jsp)
+	부서정보수정(a36_deptUptProc.jsp)
+	부서정보삭제(a37_deptDelProc.jsp)
+1. 부서정보리스트 ==> 부서정보 상세 화면 이동 처리 4조	
+2. 부서정보상세(a35_deptDetail.jsp) ==> 부서정보수정(a36_deptUptProc.jsp)
+<%-- ex) 부서정보 수정처리하고 확인하세요.. 1조 --%>
+	
+	

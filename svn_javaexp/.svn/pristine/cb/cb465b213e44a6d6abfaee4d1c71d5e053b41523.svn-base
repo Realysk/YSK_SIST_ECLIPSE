@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+	<h3 align="center">로그인</h3>
+	<form action="a09_result.jsp">
+	<table align="center" border>
+    	<tr><th >아이디</th><td><input type="text" name="id"/></td></tr>
+    	<tr><th >패스워드</th><td><input type="password" name="pass"/></td></tr>
+    	<!-- 
+    	 td colspan="2" :  col을 span(확대한다)   td을 합치는 처리를 한다.
+    	 style="text-align:center"  : inline으로 정렬을 중앙 정렬 처리.
+    		~14:40
+    	 -->
+    	<tr><td colspan="2" style="text-align:center">
+    			<input type="submit" value="로그인"/></td></tr>
+    </table>
+    </form>	
+</body>
+<script type="text/javascript">
+
+</script>
+</html>

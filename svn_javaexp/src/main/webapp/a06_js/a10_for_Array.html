@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+/*   
+#
+
+
+ */
+</script>
+
+</head>
+<body>
+	<h2>회원리스트</h2>
+	<table border></table>
+</body>
+<script>
+/* 
+	ex) 위 회원정보를  json 객체로 선언하고,
+		아래와 같이 출력하세요..
+		번호 회원명 아이디 패스워드 권한 	포인트
+		1	홍길동 himan  7777  admin 1000   2조
+*/
+	var tabObj = document.querySelector("table");
+	var member = {name:"홍길동",id:"himan",pass:"7777", 
+				  auth:"admin", point:1000};
+	// 추가 속성, 속성값 처리..
+	
+	var show = "<tr><th>번호</th><th>회원명</th><th>아이디</th><th>패스워드</th>"+
+	"<th>권한</th><th>포인트</th></tr>";
+	/// 타이틀 추가
+	var idx = '0';
+	// .innerHTML 활용, for in 구문 출력처리..
+	// (Number(idx)+1) for in 구문에서는 idx가 데이터 유형이 string 이기에
+	// 형변환을 해주어야 한다.
+	show+="<tr><td>"+(Number(idx)+1)+"</td>";
+	for(var pro in member){
+		show+="<td>"+member[pro]+"</td>";
+	}
+	show+="</tr>";
+	tabObj.innerHTML = show;
+</script>
+</html>
+

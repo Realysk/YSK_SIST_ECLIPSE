@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<body>
+	<table id="tab01" width="200" height="200" border>
+		<tr><td>1</td><td>2</td></tr>
+		<tr><td>3</td><td>4</td></tr>
+	</table>
+	<table id="tab02" width="300" height="100" border>
+		<tr><td>1</td><td>2</td><td>3</td></tr>
+	</table>
+	<!-- addCol addRow  tab03 -->
+	<input type="button" value="컬럼추가" id="addCol"/>
+	<input type="button" value="행추가" id="addRow"/>
+	<table id="tab03" width="300" height="300" 
+		border><tr><td>1</td></tr></table>
+	
+</body>
+<script type="text/javascript">
+/*
+1. 테이블의 기본 속성과 tr, td의 의미를 기술하세요.
+	<table 속성="속성값">
+	1) 속성
+		align : 화면에서 테이블의 위치를 지정.
+		border : 셀라인의 굵기, 일반 라인은 css 적용 필요
+		width : 넓이
+		height : 높이
+		js의 DOM객체에서  객체명.속성 = 속성값 형식으로 동적으로
+		변경이 가능하다. ex) tbObj.width = 300;
+	2) tr : table row 행단위 테이블 구성
+	   td : table data 열단위 테이블 구성.
+	   th : table head 테이블의 타이틀을 구성
+	   table과 tr사이에 구성요소로 생략가능
+	   	thead 
+	   	tbody
+	   	tfoot
+2. 2X2테이블을 만들고, 클릭시, 연결되어 있는 과일명 4가지 중에 하나를
+    출력처리하세요.
+   	1) 테이블 하위에 있는 td 선택자  
+*/  
+	// 과일명을 배열로 선언.
+	var fruits = ["사과","바나나","딸기","오렌지"];
+	// #tab01 td가 다수일 때는 document.querySelectorAll
+	// 를 통해서 배열로 선택해준다.
+  	var tds01=document.querySelectorAll("#tab01 td");
+   	// tds01.length : 배열의 갯수를 반복문을 통해서 수행 처리.   	
+   	for(var idx=0;idx<tds01.length;idx++){
+   		// 속성값을 index로 저장 처리.
+   		// js에서는 DOM의 속성값을 지정하여 DOM객체.속성=속성값
+   		tds01[idx].id = idx;
+   		tds01[idx].onclick=function(){
+   			// 저장된 속성값을 호출 : this.id
+   			console.log("클릭한 idx:"+this.id);
+   			console.log("선택한 과일명:"+fruits[ this.id ]);
+   			this.innerText = fruits[ this.id ];
+   		}
+   	}
+/*
+    // ex) 1X3 테이블을 만들고, 해당 셀을 클릭시, 가위/바위/보가 출력되게
+    //     처리하세요..   
+*/
+	var games = ["가위","바위","보"];
+	var tds02 = document.querySelectorAll("#tab02 td");
+    for(var idx=0;idx<tds02.length;idx++){
+    	tds02[idx].id = idx;
+    	tds02[idx].onclick=function(){
+    		// 익명함수는 현재 내용과 mapping해서 처리되는 것이
+    		// 아니고, 만약에 클릭하면이라는 내용으로 처리되기 때문에
+    		// 함수내부에 선언된 데이터는 따로 메모리 관리가 되어 
+    		// 반복문에서 수행되는 최종데이터가 처리된다.
+    		console.log("idx:"+idx);
+    		this.innerText = games[this.id];
+    	};
+    }
+/*
+3. innerHTML과 innerText의 차이를 기본예제를 통하여 기술하세요.
+	innerHTML : html태그를 랜더링(태그가 있으면 지정된 화면처리방식으로 변환처리) 처리..
+	innerText : html태그가 포함되어 있으면 그대로 문자열로 표현처리..
+4. setInterval 함수의 사용 방법을 기술하세요.
+	setInterval(처리할 함수, 반복할시간간격(1/1000))
+	ex) setInterval(function(){ alert("1초지났습니다.")}, 1000);
+	// 1초마다 alert창이 띄워진다.
+5. 숫자형 문자열을 숫자로 변경하는 js 함수를 기술하세요.
+	parseInt() : 숫자형문자열을 정수로 변환, 시작하는 문자열이 숫자형이면 숫자만 추출
+				parseInt("300원") ==> 300 만추출..
+	parseFloat() : 숫자형문자열을 실수로 변환
+	Number() : 숫자형문자열을 실수/정수로 변환.
+6. 1X1테이블에서 [컬럼추가][행추가] 클릭시, 처리되게 하세요 [응용]
+    - table 선택 및 innerHTML을 활용하여 html로 tr td로 테이블 구성을 만드세요
+ */
+// <!-- addCol addRow  tab03 -->
+	var addCol = document.querySelector("#addCol");
+	var addRow = document.querySelector("#addRow");
+	var tab03 = document.querySelector("#tab03");
+	var colCnt = 1; // 열의 갯수
+	var rowCnt = 1;	// 행의 갯수
+	addCol.onclick=function(){
+		colCnt++;
+		createTab(rowCnt, colCnt);
+		cnt++;
+	};
+	addRow.onclick=function(){
+		rowCnt++;
+		createTab(rowCnt, colCnt);
+		cnt++;
+	}
+ 	// 위에 행/열단위로 테이블 구성하는 공통함수 선언.
+ 	function createTab(row, col){
+ 		console.log(row+":"+col);
+		var show="";
+		var cnt = 1; // 번호
+		for(var rcnt=1;rcnt<=row;rcnt++){
+			show+="<tr>";
+			// 열단위 데이터 처리
+			for(var ccnt=1;ccnt<=col;ccnt++){
+				show+="<td>"+(cnt++)+"</td>";
+			}
+			show+="</tr>";
+		}
+		tab03.innerHTML=show;
+ 	}
+</script>
+</html>

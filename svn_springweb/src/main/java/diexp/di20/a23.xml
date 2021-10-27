@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<bean id="obj" class="java.lang.Object"/>
+<!-- 
+	# 자동 패키지 단위 객체 등록 처리..
+	1. container 설정파일에서 특정 패지키지와,
+		annotation 단위로 객체를 등록 처리할 수 있다.
+	2. 등록된 객체는 외부에서 default로 클래스명의 소문자로
+		참조하여 호출 사용한다.
+	3. 기본 형식
+		1) base-package : 대상 패키지 선언.
+		2) context:include-filter : filter 기준으로 설정하는 내용(포함)
+		   context:exclude-filter : filter 기준으로 설정하는 내용(배제할내용)
+		3) type : filter 대상에 대한 type ex) annotation(@), regex(정규식표현)
+			지정된 방식을 이용해서 객체를 로딩하여 처리한다.
+		4) expression : 실제 쓰이는 대상이 되는 클래스 ex) Controller, Service, Repository
+
+ -->	
+	<context:component-scan base-package="diexp.vo2">
+		<context:include-filter  type="regex" expression=".*"/>
+		<!-- 정규식 방법에 의해 해당 패키지 하위에 있는 모든 클래스 객체로 로딩 
+		bean을 통한 id값 지정은 default로 클래스명의 소문자로 다 지정된다.
+		-->
+	</context:component-scan> 
+	<context:component-scan base-package="diexp.vo3">
+		<context:include-filter type="regex" expression=".*"/>
+	</context:component-scan>
+	
+	
+ 
+	
+</beans>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<template id="child-tmp">
+	<div style="background-color:yellow;">
+		<h2>하위 객체</h2>
+		입력:<input v-model="name"/>
+		<button v-on:click="clickEvent">클릭클릭(하위 컴포넌트)</button>
+	</div>
+</template>
+<script src="https://code.jquery.com/jquery-3.5.1.js"/></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+# 상/하위 컴포넌트에서 이벤트 발산하기
+1. 데이터 흐름 처리.
+	1) 상위 컴포넌트 ==> 하위 컴포넌트
+		props 속성을 통해서 전달.
+	2) 하위 컴포넌트 ==> 상위 컴포넌트
+		- 이벤트 발산(emit)를 통해서 처리.
+		- 처리 순서
+			하위 템플릿
+				v-on:이벤트명="하위컴포넌트정의함수"
+				function 하위컴포넌트정의함수(){
+					$.emit("하위선언이벤트",전달할매개1,전달매개2)
+				}
+			<하위컴포넌트   @하위선언이벤트="상위컴포넌트에정의된함수"
+			상위 템플릿
+				function 상위컴포넌트에정의된함수(매개1, 매개2){
+					하위에서 넘겨온 데이터.
+				
+				
+			}
+		
+	*/
+	Vue.component("child-comp",{
+		template:"#child-tmp",
+		data:function(){
+			return {name:""}
+		},
+		methods:{
+			clickEvent:function(){
+				// 입력한 이름을 상위이벤트에 전달.
+				// 현재 입력한 이름 전달.
+				this.$emit("btnclick", this.name);
+			// 상위 화면에
+			// <child-comp @btnclick="parentClick"
+			// 상위화면의 메서드 parentClick를 호출하게 되고.
+			// parentClick=function(param1, param2){} param1에 this.name
+			}
+		}
+	});
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:"#show",
+			data:{
+				msg:"시작합니다.",
+				name:""
+			},
+			methods:{
+				parentClick:function(param1){
+					//하위에서 전달한 내용을 this.$emit("btnclick", this.name);
+					// 화면에서 @btnclick="parentClick"
+					// 매개변수로 받아서, 모델데이터로 처리한다.
+					alert("상위 요소 호출됨:"+param1);
+					this.name = param1;
+				}
+			}
+		});		
+	});
+	/*
+	body(최상위) ===>  new Vue(모델데이터, 메서드)
+	body하위에
+		컴포넌트  ==>  Vue.Component(모델데이터, 메서드);
+	
+	컴포넌트 안에 선언된 메서드를 상위에 Vue에 영향미쳐 데이터를 처리할 때,
+	활용하는 방법..
+	
+	
+	*/
+	
+	
+</script>
+</head>
+<body>
+	<div id="show">
+ 		<h2 align="center">{{msg}}</h2>
+ 		<!-- 컴포넌트  -->
+ 		<child-comp @btnclick="parentClick"></child-comp>
+ 		
+ 		<!-- 컴포넌트보다 상위에  요소 객체..-->
+ 		<h3>이름:{{name}}</h3>
+ 	</div>	
+</body>
+</html>

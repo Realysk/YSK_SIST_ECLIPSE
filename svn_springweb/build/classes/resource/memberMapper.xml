@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="springweb.a05_mvc.a03_dao.A04_MemberDao">
+	<select id="memberList" resultType="member" parameterType="member" >
+		select * from member
+		where name like '%'||#{name}||'%'
+		and auth like '%'||#{auth}||'%'
+	</select>
+	<select id="login" resultType="member" parameterType="member" >
+		select * from member
+		where id=#{id}
+		and pass=#{pass}
+	</select>	
+	<insert id="insertMember" parameterType="member">
+		insert into member values(#{id},#{pass},#{name},
+			#{auth},#{point})
+	</insert>
+	<update id="updateMember" parameterType="member">
+			update member
+				set pass =#{pass},
+				    name = #{name},
+				    auth = #{auth},
+				    point= #{point}
+			   where id = #{id}	
+	</update>
+	<delete id="deleteMember" parameterType="String">
+		delete from member where id = #{id}
+	</delete>
+</mapper>	

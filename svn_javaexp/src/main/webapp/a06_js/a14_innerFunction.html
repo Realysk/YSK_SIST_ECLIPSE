@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+/*   
+#
+
+
+ */
+</script>
+
+</head>
+<body>
+	<h2 onclick="clickCnt(this)">클릭하세요..</h2>
+	물건명 : <input type="text" name="pname"/>
+</body>
+<script>
+/* 
+# 내장 함수..
+1. setTimeout(함수, 1/1000초시간)
+	해당 시간후, 정의된 함수가 수행 처리하는 내장 함수 이다.
+2. 메모리의 해제..
+	var 변수명 = setTimeout();
+	clearTimout(변수명);
+*/
+/*
+	var cnt = 0;
+	function clickCnt(obj){
+		obj.innerText = "클릭횟수:"+(++cnt);
+	}
+	if(confirm("게임을 시작합니다!!")){
+		var time = setTimeout(function(){
+			alert("3초가 지났습니다. 총 클릭한 갯수:"+cnt);
+			clearTimeout(time); // 자원을 해제 처리..
+		},3000);
+	}
+*/
+	// ex) 구매물건을 입력하세요(10초이내), 10초가 지났을 때, 입력한 물건명은 @@@ 입니다. 출력..
+	//     2조...  hit 물건명 <input type="text" name="pname"/>
+	//    1) 10초가 지났습니다.
+	//    2) <input type="text" name="pname"/>
+	//       var pnameVal = document.querySelector("[name=pname]").value;
+	//     ~16:08 풀이..
+	if(confirm("구매물건을 입력하세요(10초이내)")){
+		var timeout = setTimeout(function(){
+			 var pnameVal = document.querySelector("[name=pname]").value;
+			 alert("10초가 지났습니다! 입력된 물건명:"+pnameVal);
+			 clearTimeout(timeout);
+		},10000);
+	}
+
+
+</script>
+</html>

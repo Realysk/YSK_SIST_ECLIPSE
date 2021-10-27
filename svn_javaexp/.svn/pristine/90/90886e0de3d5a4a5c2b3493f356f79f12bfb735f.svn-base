@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+</style>
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<body>
+<!-- 
+ex) 기본 선택자 태그, 아이디, 클래스로 속성을 선언하고,
+하단에 해당 객체를 DOM객체를 호출하여 속성을 변경처리하세요. [2조]
+
+ -->
+	<h2>기본태그</h2>
+	<h3 id="ch01">아이디선택</h3>
+	<h3 class="cls01">클래스선택</h3>
+	<input type="text" name="num01"/>
+	
+</body>
+<script type="text/javascript">
+/*
+1. 고정 ip 임대
+2. 학원 pc, 집에 pc 연동하여 서버로 설정. 임대한 고정 ip와 연동
+3. 해당 server pc
+	1) visual svn 설치 (소스 공유)
+	2) webserver tomcat (eclipse에서 설정)
+	3) db server xe 설치
+4. 외부에서 고정 ip로 어느 곳에서나 접속하여 개발을 할 수 있다.
+
+
+
+
+ */
+ 	var h2Obj = document.querySelector("h2");
+ 	h2Obj.align="center";
+ 	var ch01 = document.querySelector("#ch01");
+ 	ch01.align="right";
+ 	var cls01 = document.querySelector(".cls01");
+ 	cls01.style.backgroundColor="yellow";
+ 	var num01Obj = document.querySelector("input[name=num01]");
+ 	num01Obj.value="25";
+ 	
+
+</script>
+</html>

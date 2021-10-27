@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/* 
+@@ 가상 선택자 @@
+# 반응 선택자
+1. 사용자의 반응으로 생성되는 특정한 상태를 선택하는 것
+2. 사용자가 특정 태그위에 마우스 커서를 올리면 hover상태
+3. 특정 태그를 마우스 클릭하면 acitve 상태
+4. 기본코드
+	:active - 사용자가 마우스를 클릭한 태그 선택
+	:hover - 사용자가 마우스 커서를 올린 태그 선택
+# 상태 선택자
+1. 주로 입력하는 form 하위의 요소객체에 활용된다.
+	상태의 변경에 따른 css 처리 변경
+	input, select, textarea
+		
+2. 기본 코드
+	
+	:checked - 해당 선택자가 checked가 되었을 때, 
+		처리할 내용에 대한 부분을 의미
+		주로 type="radio|checkbox"를 사용할 때, 활용된다.
+	:focus - 해당 선택자에 focus를 위치시켰을 때, 처리된다.
+		form 하위의 입력 요소객체를 사용할 때, 쓰인다.
+	:enabled - 해당 선택자의 요소객체가 활성화 되었을 때, 처리할 css 속성
+		설정시 활용된다
+	:disabled - 해당 선택자의 요소객체가 비활성화 되었을 때, 처리할 css 속성
+		설정시 활용된다
+# 구조 선택자
+	:nth-child(n) : 같은 부모를 둔 하위 순서
+		ex) td:nth-child(1)
+		tr
+			td *
+			td
+			td
+		tr
+			td *
+			td
+			td
+	:even : 해당 객체의 짝수번째 선택
+	:odd : 해당 객체의 홀수번째 선택
+# 기타
+	선택자1, 선택자2, ... {속성:속성값;}  여러 선택자를 동일한 속성과 속성값으로 설정.
+	선택자1+선택자2{속성:속성값;} 형제관계에 있는 요소객체 중에, 선택자1을 앞에 둔 
+		선택자2(하나만)에 대한 속성설정 처리..
+	선택자1~선택자2{속성:속성값;} 형제관계에 있는 요소객체 중에, 선택자1을 앞에 둔 모든
+	 선택자2에 대한 속성설정 처리..
+		
+	
+ */
+	h2:active{background-color:orange;}
+	h3:hover{color:blue;}
+	tr:hover{background-color:blue;color:yellow;}
+	td:active{font-size:30px;color:red;background-color:pink;}
+	/* input요소객체의 type 속성이 checkbox인 경우에, check가 된 경우,
+		+ 요소객체(바로 옆에 있는 객체일 때, 해당 요소객체의 속성 설정.*/
+	input[type=checkbox]:checked+span{background-color:pink;}
+	/*
+	ex) type을 checkbox|radio를 설정하고, 
+	    좋아하는 취미와 성별을 선택했을 때, 해당 내용을 글자색상과 배경색상을
+	    변경하고, js를 통해서 선택된 내용을 하단 div에 출력처리하세요.
+	    hint document.querySelector("선택자") 활용 2조
+	    	.innerText나 .innerHTML 활용.
+	    	
+	*/
+	/* 요소1, 요소2{속성:속성값;}*/
+	div input[type=checkbox]:checked+span,
+	div input[type=radio]:checked+span{ background-color:yellow;}
+</style>
+<script>
+
+</script>
+
+</head>
+<body>
+	<div>
+		<h2>취미</h2>
+			<input type="checkbox" name="hobby" value="독서" /><span>독서</span>
+			<input type="checkbox" name="hobby" value="운동" /><span>운동</span>
+			<input type="checkbox" name="hobby" value="낚시" /><span>낚시</span>
+			<input type="checkbox" name="hobby" value="수영" /><span>수영</span>
+			<input type="checkbox" name="hobby" value="등산" /><span>등산</span>
+			<input type="checkbox" name="hobby" value="기타" /><span>기타</span>
+		<h2>성별</h2>	
+			<input type="radio" name="gender" value="남자" /><span>남자</span>
+			<input type="radio" name="gender" value="여자" /><span>여자</span>
+		<div id="show">
+		
+		</div>
+	</div>
+
+	<input type="checkbox"/><span>선택1</span>
+	<input type="checkbox"/><span>선택2</span>
+	<input type="checkbox"/><span>선택3</span>
+
+
+
+	<h2>안녕하세요!!! 반갑습니다! (active)</h2>
+	<h3>오늘도 좋은 날입니다. (hover)</h3>
+<!-- 
+ex) table로 물건정보 리스트를 한 후, tr부분은 hover로 처리하고
+	td 부분은 active로 배경색상과 글자색상/글자 크기를 변경하여,
+	출력되게 하세요.. [1조]
+ -->	
+	<table width="70%" border>
+		<tr><th>번호</th><th>물건명</th><th>가격</th></tr>
+		<tr><td>1</td><td>사과</td><td>3,000원</td></tr>
+		<tr><td>2</td><td>사과</td><td>3,000원</td></tr>
+		<tr><td>3</td><td>사과</td><td>3,000원</td></tr>
+		<tr><td>4</td><td>사과</td><td>3,000원</td></tr>
+		<tr><td>5</td><td>사과</td><td>3,000원</td></tr>
+		<tr><td>6</td><td>사과</td><td>3,000원</td></tr>
+		<tr><td>7</td><td>사과</td><td>3,000원</td></tr>
+	</table>
+</body>
+<script>
+/*
+# js에서의 선택자와 속성처리.
+1. js에서 DOM객체는 초기 선언으로 선택자와 속성을 선언할 수 있다.
+2. DOM객체는 event에 의해 동적으로 다른 DOM의 속성을 변경함으로 
+	동적인 처리를 할 수 있다.
+3. 선택자는 단일이냐 다중이냐에 따라 아래와 같이 객체를 선택할 수 있고,
+	css와 동일한 선택자 형식을 이용하여 특정한 요소객체를 지정할 수 있다.
+	var obj = document.querySelector("css선택자"); //단일 객체
+	var array = document.querySelectorAll("css선택자"); //다중 객체
+ 	obj.속성 = "속성값";  //태그의 기본속성을 변경할 때, 활용된다.
+ 		ex) <input name="속성값"  : name, value, 
+ 			<h2 : align
+ 			<img : src, width, height, alt 등등..
+ 			<table : align, width, height 
+ 	obj.style.속성 = "속성값"; //태그의 inline css 속성을 변경할 때, 활용된다.
+ 		ex) <h2 style="background-color:yellow"
+ 		obj.style.backgroundColor="yellow";
+ 	배열인 경우, for(var idx=0;idx<array.length;idx++){
+ 				array[idx].속성
+ 				array[idx].style.속성
+ 				}
+ 4. dom의 출력 속성
+ 	1) .innerHTML
+ 	2) .innerText
+ 	3) .value
+ 
+ */
+
+
+	// 1. 대상 객체 ?  checkbox radio 객체를 다중으로 선택 DOM선언
+	//  		[2조] css 선언과 동일
+	//   js에서 사용되는 querySelector, querySelectorAll
+	//    은 css의 선택자와 동일한 처리를 할 수 있다.
+	//    document.querySelector("선택자1, 선택자2");	
+	//    document.querySelectorAll("선택자1, 선택자2");	
+	var etTgtObj = document.querySelectorAll(
+			"div input[type=checkbox],div input[type=radio]");
+	var divShow = document.querySelector("#show");
+	console.log("이벤트 대상객체의 갯수:"+etTgtObj.length);
+	
+	// 2. 이벤트 처리
+	//    EX) 배열을 이벤트 처리시, 수행되어야 할 내용..
+	//    for(var idx=0;idx<etTgtObj.length;idx++)
+	///       객체.onclick=function(){}
+	//      check나 radio를 클릭시, 클릭되었습니다. 출력..[4조]
+	
+	for(var idx=0;idx<etTgtObj.length;idx++){
+		
+		etTgtObj[idx].onclick=function(){
+			// 1 단계 처리
+			/*
+			console.log("value:"+this.value);
+			console.log("checked:"+this.checked);
+			// ?? show 변수 누적
+					
+			// 출력할 대상 객체에 show 할당.
+			// check가 된 경우에서 누적해서...
+			if(this.checked){
+				show+=this.value+",";
+			}
+			*/
+			// 2단계 처리..
+			var show="";
+			// 출력할 div에 할당. 처리..
+	// 		1) 이벤트 처리시 선택된 객체 지정.
+	//      2) 해당 객체의 label 내용 가져오기..
+			// check된 요소객체의 옆에 있는 span 객체 DOM으로 가져오기?? [4,5조]
+			var target = document.querySelectorAll(
+					"div input[type=checkbox]:checked+span,"+
+					"div input[type=radio]:checked+span");
+	//      3) 출력 객체에 label 내용 처리..
+	//         for문을 반복하면서 show에 중복할당 하기..
+			for(var jdx=0;jdx<target.length;jdx++){
+				show+=target[jdx].innerText+",";
+			}
+			divShow.innerText = show;
+		}
+		
+	}
+	
+	
+	
+
+	
+
+
+</script>
+</html>

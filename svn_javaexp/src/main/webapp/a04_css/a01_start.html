@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+*{color:blue;}
+h2{text-align:center;}
+#ch01{border:1px solid navy;}
+[name=name01]{background-color:orange;}
+/*
+# css의 기본 형식
+	선택자 {속성1:속성1값;속성2:속성2값;.....}
+
+	==> js에서는 위 선택자를 활용하여, DOM객체를 만들고,
+	이벤트를 통해서 동적인 처리를 하게 한다.
+
+# css 선택자.
+0. 선택자: body 안에 지정된 선택자로 선택되어 css속성을 적용하게 한다 
+		ex) 태그명 , id명 , class명 
+1. 전체 선택자 : *
+2. 특정태그 선택자 태그명{속성:속성값;}
+3. 아이디 선택자: #아이디명{속성:속성값;}
+	페이지에서 1개만 식별하여 선택할 때, 주로 사용된다.
+4. 클래스 선택자: .클래스명{속성:속성값;}
+5. 속성 선택자:
+	태그[속성=속성값]{스타일속성:적용할 값;} 	
+	ex)
+	<input type="password"/>
+	<input name="name01"/>
+	<select name="name01"/>
+	
+	input[type=password]{color:yellow;}
+	[name=name01]{background-color:oranage;}
+6. 후손 선택자
+	- 상위계층[공백한칸]하위계층 : 계층 레벨에 관계없이 해당 상위계층을 태그로 가진 하위계층에 적용할 css속성 설정	
+		#tab01 td{color:red;}
+		id 값이 tab01로 된 태그 하위에 td에 대한 글자 색상으로 빨강으로 처리	
+	- 상위계층 > 하위계층 : 부모계층관계가 있는 하위요소 객체에 대한 css 속성값
+		css 속성선언
+		div > h1 {background-color:yellow;}
+		div태그 바로 밑에 있는 h1을 포함하는 요소 객체는 모두 다 배경색상을 노랑으로 처리
+*/
+
+</style>
+<script>
+
+</script>
+<style type="text/css">
+	#tab01 td{color:orange;}
+</style>
+</head>
+
+<body>
+	<!-- 
+	table tbody tr td
+	특정 태그가 계층과 레벨 하위에만 있을 때, 선택자로 선택할 때,
+	#tab01 td : 상위는 id값이 tab01이것의 하위에 레벨 깊이 상관없이 td가 있으면..
+		td에 적용할 내용..
+	p>h2 : 상위 p로 둔 h2를 적용 처리할 때, 활용된다.	
+	 -->
+	<div>
+		<h2>반가워요1</h2>
+		<p>
+			<h2>반갑습니다2</h2>
+		</p>
+	
+	</div> 
+	 
+	<table id="tab01" border>
+		<tr><th>목록</th></tr>
+		<tr><td>사과</td></tr>
+		<tr><td>바나나</td></tr>
+		<tr><td>딸기</td></tr>
+	</table>
+	<h2>안녕하세요</h2>
+	<p>반갑습니다</p>
+	<p id="ch01">반갑습니다</p>
+	<p>반갑습니다</p>
+	<p>반갑습니다</p>
+	<input name="name01"/>
+<!-- 
+다음 화면의 요소객체와 주요 속성을 활용하여 화면 구현 하세요..
+a02_exp.html
+1. 주요 태그 : body, h3, hr(선긋기), span
+2. css 속성
+	background-color, color, border:굵기 형태(solid) 색상;
+	font-size : 글자의 크기;
+	3조
+ -->	
+</body>
+<script>
+
+</script>
+
+
+
+</html>

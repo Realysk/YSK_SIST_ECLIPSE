@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+</style>
+<script type="text/javascript">
+/*
+
+	2) 단일/다중
+		- body 기준은 하나의 태그 또는 태그 중 첫번째,
+			.클래스 중에서 첫번째인 것, #아이디명으로 호출하여 사용할 것은
+			다일 호출 DOM 객체인
+			document.querySelector("선택자") 로 처리한다.
+		- 여러개의 태그, 여러 개의 class 속성의 DOM객체를 선택하여
+			사용하는 것은 document.querySelectorAll("선택자")로
+			호출하여 사용할 수 있다.
+*/
+</script>
+</head>
+<body>
+	<h2>안녕(태그가 하나뿐/첫번째..)</h2>
+	<h2>안녕(태그가 하나뿐/첫번째.)</h2>
+	<h2>안녕(태그가 하나뿐/첫번째.)</h2>
+	<h3 id="ch01">반갑습니다(아이디)</h3>
+	<h3 class="cls01">클래스중 하나뿐/첫번째</h3>
+	<h3 class="cls01">클래스중 하나뿐/첫번째</h3>
+	<h3 class="cls01">클래스중 하나뿐/첫번째</h3>
+	<h4>모두 다 적용</h4>
+	<h4>모두 다 적용</h4>
+	<h4>모두 다 적용</h4>
+	<h4>모두 다 적용</h4>
+	<h5>특정 클래스 다 적용</h5>
+	<h5 class="cls02">특정 클래스 다 적용</h5>
+	<h5>특정 클래스 다 적용</h5>
+	<h5 class="cls02">특정 클래스 다 적용</h5>
+	<h5 class="cls02">특정 클래스 다 적용</h5>
+	<input type="text"  class="cls02"/><br>
+	<input type="text"/><br>
+	<input type="text"  class="cls02"/>
+	<table id="tab01" width="70%" border>
+		<tr id="id01"><th>물건명</th><th>가격</th></tr>
+		<tr><td>사과</td><td class="cls">3000</td></tr>
+		<tr><td>바나나</td><td class="cls">4000</td></tr>
+		<tr><td>딸기</td><td class="cls">15000</td></tr>
+	</table>
+	<table id="tab02" width="70%" border>
+		<tr><th>물건명</th><th>가격</th></tr>
+		<tr><td>사과</td><td class="cls">3000</td></tr>
+		<tr><td>바나나</td><td class="cls">4000</td></tr>
+		<tr><td>딸기</td><td class="cls">15000</td></tr>
+	</table>	
+</body>
+<script type="text/javascript">
+	var id01Obj = document.querySelector("#tab01 #id01");
+	id01Obj.style.backgroundColor="navy";
+	id01Obj.style.color="yellow";
+	var tdObj = document.querySelector("#tab01 td");
+	tdObj.style.fontSize="30px";
+	var clsObj = document.querySelector("#tab01 td.cls");
+	clsObj.style.textAlign="right";
+	// 상위 하위객체
+	var tdArray= document.querySelectorAll("#tab02 td");
+	for(var idx=0;idx<tdArray.length;idx++){
+		tdArray[idx].style.fontSize="30px";
+	}
+	// 상위 하위객체.속성클래스
+	var clsArray = document.querySelectorAll("#tab02 td.cls");
+	for(var idx=0;idx<clsArray.length;idx++){
+		clsArray[idx].style.textAlign="right";	
+	}
+	
+
+
+
+
+
+ 	var h2Obj = document.querySelector("h2");
+ 	var ch01 = document.querySelector("#ch01");
+ 	var cls01 = document.querySelector(".cls01");
+ 	h2Obj.style.backgroundColor="pink";
+ 	ch01.style.backgroundColor="pink";
+ 	cls01.style.backgroundColor="pink";
+ 	// document.querySelectorAll는 배열로 선언이 된다.
+ 	var h4Arry = document.querySelectorAll("h4");
+ 	var cls02Arry = document.querySelectorAll(".cls02");
+ 	// 반복문을 활용 한다. for(var idx=0;idx<배열객체.length;idx++)
+ 	for(var idx=0;idx<h4Arry.length;idx++){
+ 		h4Arry[idx].style.color="blue";
+ 	}
+ 	for(var idx=0;idx<cls02Arry.length;idx++){
+ 		cls02Arry[idx].style.backgroundColor="yellow";
+ 	} 	
+ // ex) 1번째 테이블을 만들고, tr에 id를 설정한 경우, td 태그, td 클래스 설정으로
+ //     단일 객체를 호출하고,   
+ //     2번째 테이블에  tr태그와 td 클래스 설정으로 여러개의 객체를 호출하여
+ //     배경색상과 글자 색상이 처리되게 하세요.. 1조
+ 
+ 
+ 
+
+</script>
+</html>

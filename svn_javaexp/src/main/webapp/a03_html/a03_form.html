@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ https://www.gmarket.co.kr/?jaehuid=200011415&cosemkid=go16169957302996414&gclid=CjwKCAjwt8uGBhBAEiwAayu%5F9XgyvKVPug6H31RJHqCtrsvqw%2DuVCgEfRC4Jflm7p5%2DycOR2U0SlKxoCp7MQAvD%5FBwE
+	주소?key=value&key=value  : 화면에서 form으로 전송할 때, 이 규칙으로 서버에 전달.
+	로그인처리페이지?id=himan&pass=7777		
+			
+			
+			
+*/
+
+</script>
+</head>
+<body>
+<!-- 
+# 입력 양식 태그
+1. 입력 양식: 사용자에게 정보를 입력 받는 공간
+2. 입력 양식의 기본 태그와 속성
+	1) form: 입력 양식의 최상위 요소객체
+		데이터 전송은 form단위로 전송이 된다. 
+	2) input: form하위의 요소 객체
+	3) type="submit"
+		?name=이름&age=25&loc=서울+신림동
+        form의 속성 action ="전달할 페이지" 
+		 해당  submit 버튼을 클릭시 , input의 name값의 key로 하고, 
+		 value를 value로 저장
+	   <form action"gopage.jsp">
+	   		<input name="name" value="꿀딴지/>
+	    	<input name="age" value="24"/>
+	    	<input type="submit" value="전송"/>
+	    submit를 클릭시, 서버에 	gopage.jsp?name=꿀단지&age=24로 전송이 된다.	    	
+	4) input 요소 하위에 type 따른 요소 객체 선택 
+		type="button" 버튼 모양
+		value="버튼의 레이블" 처리
+		type="check" 다중 선택의 checkbox
+		type="file" 파일을 선택하는 모양 생성
+		type="image" 이미지 형태 생성
+		type="password" 패스워드 입력 형태 생성
+		type="radio" 라디오 버튼 생성
+		type="reset" 초기화
+		type="submit" 제출 버튼 생성
+ -->
+	<form action="a04_receive.jsp">
+		<h2>회원정보입력</h2>
+		이름:<input type="text" name="name" value=""/><br>
+		나이:<input type="text" name="age"/><br>
+		사는곳:<input type="text" name="loc"/><br>
+		<input type="submit" value="등록"/>
+	</form> 
+ 	<!-- 
+ 	a04_receive.jsp?name=홍길동&age=25&loc=서울신림동
+ 	action으로 지정한 jsp파일(java server page -
+ 	jsp ==>	 .java ==> .class ==> html만들고
+ 	==> 최종을 url로 호출한 client 브라우저에 전달한다.
+ 	
+ 	a05_inputProduct.html
+ 		물건명 :[   ] 
+ 		가격 :[   ]
+ 		갯수 :[   ]
+ 			[등록]
+ 	a06_showProduct.jsp
+ 		등록된 물건 정보
+ 		@@
+ 		@@
+ 		@@		
+ 	 
+ 	 -->
+ 
+</body>
+<script type="text/javascript">
+/*
+
+ */
+
+</script>
+</html>

@@ -1,0 +1,167 @@
+# spring에서 데이터베이스 연동처리
+0. 프로그램과 DB 서버 접속 프로세스
+	1) DB 베이스 서버 구축.
+		- oracle 사이트. 11g xe 서버를 다운
+			접속을 하기 위해 ip, port, sid, 계정, 비밀번호
+			ip : tcp/ip기반의 특정 위치 네트워크 접속
+			port : 서버의 특정 연동 통로 
+				ex) 웹서버7080, 오라클:1521, 메일서버, 파일서버
+		- 계정에 포함된, 2차원 테이블 기반의 데이터를 저장, 수정, 삭제
+			로딩을 할 수 있다.
+	2) DB client를 통해서 접속.
+		- cmd창에서 sqlplus 계정/비밀번호
+		- eclipse의 plugin 프로그램(dbeaver) 설치, 접속
+			드라이버 관리(jdbc 드라이버)
+			접속처리 (새데이터베이스 연결) 연결
+			 DB 내용을 확인.
+	3) 프로그래밍(spring)을 접속..
+		- jdbc 드라이버를 통해 접속할 수 있다. 	
+		 springweb\WebContent\WEB-INF\lib하위에 ojdbc6.jar		 	 				
+	4) DB에 있는 데이터를 controller하는 실제 명령어 : sql
+		ex) select * from emp, insert into 테이블명 value(입력데이터.. )
+	5) 프로그래밍과 DB서버의 연결과 처리.
+		java의 스프링 웹프로그램  <====>  DB서버
+		- 연결을 위한 처리 : 컨테이너(dispatcher-servlet.xml)에서 DB연결(DBCP)
+		- 명령문 전달 : mybatis에서 framework로 설정 처리.
+			ex)웹화면에 id/pass 입력 ==>  controller단에서 프로그램 코드
+				VO,변수 ==> DB 서버에 접속해서 ==> sql로 바꾸어서 처리해야 한다.
+			 	mybatis 프레임웍
+			 	객체/변수 <==> sql
+			 	
+			 	select 문의 경우 원하는 데이터의 조건 vo/변수를 넘기고,
+			 	sql의 결과 내용을 VO/변수 받는 처리를 한다.  
+					select * from emp
+					where ename like '%'||#{ename}||'%' 
+					and job like '%'||#{job}||'%'			 	
+			 	객체/변수를 sql로 sql의 결과를 객체/변수를 바꾸기 위해 특정한 규칙으로
+			 	처리하게끔 만들어 놓았다.
+			 		mybatis.Spring.xml(범위가 많기 때문에)
+			 			각 sql내용을 대분류로 XXXmapper.xml 분류 
+			 			sql에서 사용되는 데이터를 효과적 간단하게 처리하기 필요 vo 이름을
+			 				간략하게 alias가 필요..
+			 			<typeAlias alias="emp" type="springweb.z01_vo.Emp"/>
+			 			<mapper resource="resource/empMapper.xml"/>	
+			 		empMapper.xml(실제sql있는 부분)
+			 			객체/변수 <==> sql
+			 			java에서 지원하는 객체와 처리하는 기능메서드.
+			 			객체단위 분류하여 XXXMapper.xml를 만들고,
+			 			해당 이름 namespace로 지정 처리
+			 			1. 해당 dao 객체의 이름은 namespace로 지정
+			 			2. 입력 데이터 : insert, update, delete, select where조건문
+			 				객체화하여 처리 그것을 parameterType으로 선언
+			 			3. 리턴할 데이터 : select 구문
+			 				resultType으로 선언
+			- 서버로 부터 처리된 결과를 받기
+			- mybatis의 핵심적인 역할 
+				vo와 sql 관계를 분류별로 만들어서 각 기능별로(메서드==>id) 만들어 놓고,
+				궁글적으로 dao인터페이스를 상속받은 DB처리를 해주는  실제 객체를 만들어 준다.
+				interface @@Dao{} 
+				==> class @@@Dao implements @@Dao{}(**mybatis가 내부적으로 생성할 객체)
+		
+		
+		
+			
+		
+1. 기본 설정관련.
+	1) db연결을 위한 jdbc driver 설정.
+		cf) jdbc : java database connection
+			java 프로그램으로 db 서버를 연결하기 위한 공통 모듈
+			web에서 lib로 추가.
+			springweb\WebContent\WEB-INF\lib\ojdbc6.jar
+	2) mybatis 연결 모듈(framework).jar
+			springweb\WebContent\WEB-INF\lib\
+			commons-dbcp-1.2.2.jar : DB를 Pool
+			mybatis-spring-1.0.2.jar
+			mybatis-3.0.6.jar, 
+			설정.
+			
+	3) 컨테이너(dispatcher-servlet.xml)에서 
+		- dbcp(database connection pool)로 연결정보와
+			jdbc 드라이버를 통해 db서버에 연동하도록 한다.
+			ip, port, sid, 계정, 비밀번호
+		- mybatis 연결 정보 설정.
+			dbcp 연결
+			mybatis의 연결의 공통 설정 파일 선언(mybatis.Spring.xml위치)
+		- mybatis와 연결시, interface를 통해 mybatis가
+			실제 객체를 만들어 주는데, 이 dao interface 
+			폴드 위치를 선언.
+					인터페이스 = 실제 객체();
+				ex) EmpDao dao = new RealEmpDao();
+				RealEmpDao ==> mybatis를 통해서 만들어 진 실제
+				데이터 처리 결과를 포함하는 실제 객체가 인터페이스명
+				으로 할당되어 service단에서 사용될 수 있다.					
+	4) mybatis 공통 xml 설정파일(mybatis.Spring.xml)
+		- 사용한 VO,DTO 객체를 alias이름을 선언
+		- 각 DAO클래스 단위와 연결하는 XXXMapper.xml를 선언.
+			ex) BoardDao(인터페이스), BoardMapper.xml
+	5) XXXMapper.xml의 선언.
+		- 조회, 수정, 삭제 처리하는 sql을 각 기능단위로
+			선언하는 곳을 말한다.
+2. XXXMapper.xml VS XXXDao.java의 관계
+	1) 인터페이스를 통해서 MYBATIS를 통해 실제 상속받은 클래스를 통해 실제 객체를 
+		만들어 주는 관계에 있기에 특정한 코드는 연동이 가능하게 선언하여야 한다.
+	2) 연동 규칙 
+		xxxDao.java							XXXMapper.xml
+		interface EmpDao					<mapper namespace="패키지명.EmpDao">
+		public ArrayList<Emp> empList(Emp sch)	<select 속성=속성값
+		1)	ArrayList<Emp>							resultType="emp"
+		2) 	empList									id="empList"
+		3) 	(Emp sch)								parameterType="emp"
+	ex) public Emp getEmp(int empno)		<select id="getEmp"	
+												resultType="emp"
+												parameterType="int"
+	ex) public void insertEmp(Emp ins) 		<insert id="insertEmp
+												parameterType="emp"
+// ex) 																							
+
+3. sql 처리 순서..
+	1) sql 작성.
+		결과값으로 처리할 vo의 내용 확인
+		select * from dept;
+		insert into dept values(10,'회계','서울');
+	2) VO 작성(조회시 결과 단위데이터를 저장할 객체)
+	3) DAO 인터페이스 구성..
+		springweb.a05_mvc.a03_dao에서 구성.	
+			테이블 단위나 업무단위로 Dao인터페이스 추가..
+			interface DeptDao{}
+	4) 기능 메서드 선언.
+		sql통해서 나타나는 데이터를 
+		return할 객체, 조회조건 VO
+	5) 공통 mybatis.Spring.xml
+		- 사용할 VO를 alias로 선언.
+		- XXXMapper.xml
+			테이블 단위나 업무단위로 XXXMapper.xml을 추가하면 된다.		
+	6) XXXMapper.xml
+		- 결과 객체 선언. resultMap
+		- sql문 처리할 요소객체 선언
+			- id, 매개변수, return값 선언..	
+		1. java의 Dao인터페이스 상속한 실제 객체를 생성해주는 역할을
+		하는 것이 XXXMapper.xml
+		2. sql의 결과 데이터 ==> 객체로 할당 처리..
+		3. DAO인터페이스가 특정한 규칙에 의해서 XXXMapper.xml의
+			속성과 연결처리..
+	7) 동적인 sql의 작성
+	
+		select * from dept02
+		where 1=1
+		and dname like '%'|| #{dname} ||'%'	
+		dname에 값이 없을 경우
+		and dname like '%'|| 'null' ||'%'로 되어,
+		초기에 원한 전체 검색이 처리 되지 않고, 데이터가 없는 것으로 검색된다.
+		1) service단에서 
+			if(sch.getDname()==null){
+				sch.setDname("");
+			}
+		2) xxxmapper.xml에서
+			동적인 sql을 위한 조건 처리를 한다.
+			where 1=1  : 전제 조건으로 1=1이 있으면 다음 sql을 처리가 간편하다..
+			<if test="dname !=null and dname !=''">
+			and dname like '%'|| #{dname} ||'%'		
+			</if>
+			dname이 null 아니고, ''(공백)이 아닐 때...			
+			
+		
+		
+
+		
+		

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+                
+                ul li {      
+                         list-style:none;
+                        float: left;
+                        line-height: 85px;
+                        margin-left: 110px;
+                 }
+                 a{
+                 text-decoration : none;
+                 color:black;
+                 }
+        </style>
+<script type = "text/javascript">
+/*
+ */
+
+</script>
+</head>
+<body>
+ <nav id="topMenu" >
+<div>
+<img id="카테고리" src="421.PNG" width="850px" height="70px"
+	algin="center"/>
+</div>
+                <ul>
+                        <li><a href="A_세트메뉴.html">세트메뉴</a></li>
+                        <li><a href="A_햄버거.html">햄버거</a></li>
+                        <li><a href="A_사이드.html">사이드</a></li>
+                        <li><a href="A_디저트.html">디저트</a></li>
+                </ul>
+        </nav>
+</body>
+<script type = "text/javascript">
+/*
+ */
+</script>
+</html>

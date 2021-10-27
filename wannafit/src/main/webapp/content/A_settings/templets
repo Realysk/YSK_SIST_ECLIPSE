@@ -1,0 +1,66 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+    import = "java.util.*"
+    import ="wannafit.content.vo.*"
+    import ="wannafit.content.DB.*"
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<fmt:requestEncoding value ="utf-8"/> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> Wanna-Fit, 나만의 핏을 찾아서 </title>
+<link rel="stylesheet" href="${path}/content/A_settings/main_nav.css">
+<style type="text/css">
+
+</style>
+<script src="${path}/content/A_settings/jquery-3.6.0.js" type="text/javascript"></script>
+<script type="text/javascript">
+</script>
+</head>
+<body>
+<nav class="navbar">
+	<div class="nav-wrapper">
+	<ul class="logo">
+		<li><a href="${path}/content/Main.jsp">WANNAFIT</a></li>
+	</ul>
+	</div>
+    
+	<div class="menu-wrapper">
+	<c:choose>
+		<c:when test="${empty login_User || login_User == ''}">
+			<ul class="menu">
+				<li><a href="${path}/content/user/UT001-Login.jsp">로그인</a></li>
+				<li><a href="${path}/content/user/UT002-Sti.jsp">회원가입</a></li>
+				<li><a href="#">워너핏 X 파트너</a></li>
+			</ul>
+		</c:when>
+		<c:when test="${not empty login_User && login_User != ''}">
+			<ul class="menu">			
+				<li><a href="${path}/content/user/UT001-Logout.jsp">로그아웃</a></li>
+				<li><a href="${path}/content/mypage/mypage_main.jsp">마이페이지</a></li>
+			</ul>
+		</c:when>
+	</c:choose>
+	</div>
+</nav>
+  
+<nav class="navar1-1">
+	<div><b>내가 원하는 삶을 살기 위한 건강 프로젝트! 워너핏</b></div>
+</nav>
+  
+<nav class="navbar2">
+	<ul class="side_menu1">
+		<li><a href="${path}/content/mapfit/wfmap01.jsp"><b>맵핏</b></a></li>
+		<li><a href="${path}/content/reserve/RV001-List.jsp"><b>예약</b></a></li>
+		<li><a href="${path}/content/groupfit/GF001-board.jsp"><b>그룹핏</b></a></li>
+		<li><a href="${path}/content/funding/FUN-UI-01.jsp"><b>펀인핏</b></a></li>
+		<li><a href="#"><b>마인핏</b></a></li>
+	</ul>
+</nav>
+<section class="section">
+
+</section>
+</body>

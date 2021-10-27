@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>반가워요!</h2>
+	<h3>초기</h3>
+	<h4></h4> <!--  다수개가 있을 때는 배열로 선언해서 가져와야 된다. -->
+	<h4></h4> <!--  var h4Arry = document.querySelectorAll("h4") -->
+	<h4></h4>
+	<h4></h4>
+</body>
+<script type="text/javascript">
+	var h4Arry = document.querySelectorAll("h4");
+	// 배열이므로 해당내용은 index 0부터 시작하여 접근하여 처리한다.
+	h4Arry[0].innerHTML = "사과";
+	h4Arry[1].innerHTML = "바나나";
+	h4Arry[2].innerHTML = "딸기";
+	h4Arry[3].innerHTML = "오렌지";
+
+
+	// DOM 객체로 중앙 정렬, Glad meet you!![2조]
+	var h2Obj = document.querySelector("h2");
+	h2Obj.innerHTML="Glad meet you!!";
+	h2Obj.align="center";
+	// h2Obj.이벤트명 = function(){ 익명함수로 지정. };
+	// 해당 객체가 이벤트가 처리될 때, 익명함수에서 정의된 내용이 수행된다.
+	h2Obj.onclick = function(){
+		// this : 현재 클릭한 객체.
+		this.align="right";
+	};
+	// ex) h3로  과일명을 입력하고 중앙 정렬, 
+	//    클릭시, 과일명 변경 왼쪽 정렬 처리.[3조]
+	var fruit = document.querySelector("h3");
+	fruit.innerHTML="사과";
+	fruit.align="center";
+	fruit.onclick = function(){
+	   this.align="left";
+	}          
+	
+	
+	
+	
+</script>
+</html>

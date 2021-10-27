@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<body>
+<!-- form 하위에 여러가지 요소 객체들 -->
+<h5>회원가입과 함께하는 요소객체들</h5>
+<table border>
+	<tr><th>이름</th><td><input type="text" name="name"/></td></tr>
+	<tr><th>비밀번호</th><td><input type="password" name="pass"/></td></tr>
+	<tr><th>선택(멀티)</th><td>
+		<input type="checkbox" name="ch01"/>독서,
+		<input type="checkbox" name="ch01"/>영화감상,
+		<input type="checkbox" name="ch01"/>운동
+	
+	</td></tr>
+	<tr><th>버튼</th><td><input type="button" name="btn" 
+						value="클릭하세요"/></td></tr>
+
+</table>
+
+</body>
+<script type="text/javascript">
+/*
+
+ */
+
+</script>
+</html>

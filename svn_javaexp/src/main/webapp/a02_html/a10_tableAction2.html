@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<body>
+	<h2>클릭하면 곰돌이 이미지 추가 출력(for활용)</h2>
+	<table border></table>
+</body>
+<script type="text/javascript">
+	var h2Obj = document.querySelector("h2");
+	var tabObj = document.querySelector("table");
+	var clickCnt = 1;
+	// 열단위 데이터를 <tr><td></td><td></td><td></td></tr>
+	h2Obj.onclick=function(){
+		var show = "";
+		// 특정한 열단위로 처리할 수 있게 수행
+		for(var cnt = 1;cnt<=clickCnt;cnt++){
+			// 4개단위로 tr(행) 처리.
+			if(cnt%4==1){
+				show+="<tr>";
+			}
+			show += "<td><h2>"+cnt+"번째 곰돌이</h2>";
+			show += "<img src='곰돌이.PNG' width='100' height='100'/></td>";
+			// 4개단위로 끝날때, </tr> 수행..
+			if(cnt%4==0){
+				show+="</tr>";
+			}
+			
+			
+		}
+		console.log(show);
+		clickCnt++;
+		tabObj.innerHTML = show;
+	};
+	// ex) 행단위로 곰돌이가 밑으로 추가되어 출력되게 처리하세요.
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  
+# display 속성
+1. 해당 요소객체를 새라인으로 시작할지, 기존 라인에 포함될지,
+	두가지 내용(새라인, 기존라인)을 포함하는 내용을 처리할 지를 결정하는 속성을 말한다.
+2. none, block, inline, inline-block
+	none:공간도 안잡고 화면에 보이지 않게 처리..
+	ps)  visibility:hidden;
+
+*/
+
+</style>
+<script>
+
+</script>
+<style>
+div { border : 2px solid yellowgreen;
+	 color : blue;
+	 background : aliceblue; }
+span { border : 3px dotted red;
+	background : yellow;}
+</style>
+</head>
+<body>
+<h3>인라인, 인라인 블록, 블록</h3>
+<hr>
+나는 <div style="display:none">div(none)</div>입니다.<br><br>
+나는 <div style="display:inline"> div(inline)</div> 입니다.<br><br>
+나는 <div style="display:inline-block; height:50px">
+	div(inline-block)</div> 입니다.<br><br>
+나는 <div>div<span style="display:block">span(block)</span> 입니다.</div>
+<button type="button" onclick="opt('none')">all none</button>
+<button type="button" onclick="opt('inline')">all inline</button>
+<button type="button" onclick="opt('inline-block')">all block</button>
+<button type="button" onclick="opt('block')">all inline-block</button>
+</body>
+<script>
+	// 위 기능 버튼으로 해당 화면에 내용을 설정 처리하세요..6조  16:28 풀이하겠습니다.
+	var divArry = document.querySelectorAll("div");
+	function opt(option){
+		for(var idx=0;idx<divArry.length;idx++){
+			divArry[idx].style.display = option; 
+		}
+	}
+</script>
+</html>
+<!-- 소스 공유 
+	 svn 주소:  
+     https://203.216.179.152/svn/share
+	 master/1111
+ -->
+

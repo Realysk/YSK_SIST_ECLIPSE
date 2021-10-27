@@ -1,0 +1,59 @@
+# mvc 패턴을 활용한 로그인 세션 처리.
+1. 개발 주요 요구사항.
+	id, pass 입력을 통한 mvc 패턴으로 로그인을 처리한다.
+	db테이블의 등록된 회원 id와 pass를 확인하여 인증여부를 처리한다.
+2. 처리 프로세스
+	1) 초기 화면
+		로그인 id, pass form 화면..
+	2) 아이디 패스워드 입력 후, 로그인
+	3) 로그인 인증 여부에 따라, 로그인 실패 alert 후, 다시 로그인 화면
+		로그인 성공과 함께 메인페이지에 session값을 가지고 있는 화면 호출
+		@@ 님 로그인중으로 표기..
+	4) 메인화면에서 로그아웃 클릭시, session이 종료되고 다시 로그인 화면 호출.
+3. 개발 순서와 주요 파일
+	1) MVC controller를 통한 초기화면 호출. A11_LoginMVC.java
+		- 로그인 화면 구현.. 요청값 전달.
+	2) 요청값을 입력 후, 요청값을 controller 단에서 확인,
+		간단하게 요청값에 따라서 분기되는 view단 구현.  
+		a05_login.jsp // a06_main.jsp
+	----------------------------------------------	
+	3) dao단 추가  A05_PreparedDao.java
+		public Member login(String id, String pass);
+			select * from member where id=? and pass=?
+	4) service단 추가   a02_mvc.a01_service 패키지에 A11_LoginService.java 추가.
+	# MVC에서 controller ===> service ===> dao 호출 패턴
+		A11_LoginMVC <===> A13_LoginService <===> A05_PreparedDao
+	    모델데이터로 매핑         login2(id,pass)     public Member login2(String id, String pass)
+	# view단 호출
+		a05_login.jsp
+		a06_main.jsp
+		
+		
+	5) controller에서 A11_LoginService 객체 생성
+		요청값 id/pass를 통한 인증여부와 Member객체 할당처리.
+		session.setAttribute("mem",@@@)
+		세션값 설정.
+		인증 여부에 따른 view단 분리 호출..
+	6) 화면단, 로그인 성공시 alert, 로그인 실패시 alert
+	7) 메인화면에서 로그아웃 클릭시, A11_LoginMVC.java 호출
+		세션종료 처리..
+	
+// ex) A12_ShppingMVC.java 
+//     구매를 하지 않았을 때, 초기 페이지 a07_buy.jsp  구매물품:[   ] 구매가격[   ] 구매 갯수[    ]
+//     구매금액이 100000이상을 때 페이지 a08_vip.jsp  VIP 페이지 입니다. 구매 물품 @@, 구매가격 @@@, 구매 갯수 @@ 15%할인 금액 
+//     구매금액이 100000미만을 때 페이지 a09_cus.jsp  고객 페이지 입니다. 구매 물품 @@, 구매가격 @@@, 구매 갯수 @@ 3%할인 금액
+//     처리하여 출력 하세요   1조..
+//     1) 초기화면호출..  
+//     2) 요청값 받아서, 구매금액 처리..
+//      	
+//     3) 구매금액에 따른 할인 금액 처리..
+//     4) 구매금액에 따른 화면 호출..
+//    	
+/*
+# 조별로 수업 진행 속도..
+1. 17:00에 속도 부분에 불편하신 내용있으시면, 조별로 협의 해서 전달해 주세요..~~~ 
+
+*/	
+	
+					
+		

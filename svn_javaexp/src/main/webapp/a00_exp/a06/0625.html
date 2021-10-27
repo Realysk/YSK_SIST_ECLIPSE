@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/*
+   ---------------------------
+   타이틀 상하 10%
+   ---------------------------
+   상단 메뉴 상하 10%
+   ---------------------------
+   왼쪽메뉴| 
+   왼쪽메뉴| 
+   왼쪽메뉴|메인메뉴 70%(상하/좌우 모두)
+   30%  |           
+   왼쪽메뉴|           
+   왼쪽메뉴|
+   ---------------------------
+   하단 메뉴 상하 10%
+*/
+
+
+html, body{ margin:0px;padding:0px;height:100%;
+			text-align:center;}
+.header{width:100%; height:10%; background:yellow;}   /*.클래스명으로 호출 */
+.nav1{
+   width:100%; height:10%;
+   background:pink;
+}
+.nav2{
+   width:30%; height:70%; float:left;
+   background:yellow;
+}
+.section{
+   width:70%; height:70%; float:left;
+   background:plum;
+}
+.footer{
+   width:100%; height:10%; clear:both;
+   background:olivedrab;
+}
+</style>
+
+
+
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<body>
+	<!-- 
+	<form action="0625_1.jsp">
+        <h2>로그인</h2>
+         ID: <input type="text" name="id"/><br>
+         패스워드: <input type="password" name="pass"/><br>
+         <input type="submit" value="로그인"/>
+      </form>
+    -->
+    <header class="header">헤더(타이틀 부분)</header>
+    <nav class="nav1">상단 메뉴 부분</nav>
+    <nav class="nav2">왼쪽 메뉴 부분
+    	<ul>
+    		<li><a href="a0625_sub1.html" target="frame01">로그인</a></li>
+    		<li><a href="a0625_sub2.html" target="frame01">물품</a></li>
+    		<li><a href="a0625_sub3.html" target="frame01">관리자</a></li>
+    	
+    	</ul>
+    </nav>
+    <section class="section">
+    	<iframe name="frame01" src="a0625_sub1.html" 
+    		width="100%" 
+    		height="100%"></iframe>
+    </section>
+    <footer class="footer">하단메뉴</footer>
+    
+    
+       
+</body>
+<!-- 
+submit를 클릭하는 순간
+0625_1.jsp?id=himan&pass=222
+ -->
+<script type="text/javascript">
+/*
+1. 전날 진행한 화면구성의 시맨틱 태그를 의미를 기술하세요.
+	header - 페이지나 섹션의 머리말 표현, 페이지 제목, 페이지 소개하는 간단한 설명
+	nav - 하이퍼링크들을 모아 놓은 특별한 섹션
+	   페이지 내 목차를 만드는 용도
+	section - 문서의 장 혹은 절을 구성하는 역할
+	   일반문서에 여러 장이 있듯이 웹 페이지에 여러 section 가능
+	   해당 태그(h1~h6)를 사용하여 절 혹은 섹션의 주체 기입
+	article - 본문과 연관 있지만, 독립적인 콘텐츠 담는 영역
+	   보조 기사, 블로그 포스트, 댓글 등 기타 독립적인 내용을 담는다.
+	   article에 담는 내용이 많은 경우 여러 section을 둘 수 있음.
+	aside - 본문에서 약간 벗어난 노트나 팁
+	   신문, 잡지에서 주요 기사 옆 관련 기사, 삽입 어구로 표시된 논평 등
+	   페이지 오른쪽이나 왼쪽에 주로 배치
+	footer - 꼬리말 영역, 주로 저자나 저작권 정보
+
+2. 시맨틱 태그나 div를 이용하여 화면전체를 배치 구성할 때, 
+	사용되는 css 주요 속성과 속성값에 대하여 기술하세요.
+	<style>
+		선택자{속성:속성명;}   선택자: 태그명, 태그명[속성=속성값], [속성=속성값]
+								#아이디명, .클래스명
+		화면구성시, 주로 사용되는 속성
+		margin : 여백
+		border : 특정한 요소객체의 테두리.
+		padding : 글자|내용 간에 있는 border와 사이 간격
+		height : 높이
+		width : 넓이
+		background-color: 배경색상
+		float : 순서 정렬을 해당 방향으로 처리.
+			속성값 left, right
+		clear : 이전에 선언된 float를 초기화 처리
+			clear : both;
+		text-align : 글자의 정렬 처리.. 
+			속성값 left, right, cneter
+3. form 태그의 action 속성의 의미와, input type에서 submit는 어떤 역할을 하는지 기술하세요.
+	action 속성 :form 태그의 하위에 있는 요소객체들 가운데, 속성 name 속성값이 있는 경우에
+		지정된 서버에 있는 페이지로 데이터를 전송할 때 사용된다.
+		ex) <form actin = "gogo.jsp">
+				<input name="id" value="himan"/>
+				<input name="pass" value="7777"/>
+				<input type="submit" value="전송"/>
+			?gogo.jsp?id=himan&pass=7777 형식의 query 문으로
+				서버에 지정한 데이터를 전송한다.
+			<<gogo.jsp>>에서는 ${param.id} ${param.pass} 형식의
+				jsp 코드로 받을 수 있다.
+				
+
+
+4. form 태그와 요소태그를 활용하여 아래와 같은 내용을 처리하세요.
+    로그인
+    ID:[    ]          결과
+    패스워드:[   ]  ==>  로그인 아이디:@@@ 로그인 패스워드:@@
+      [로그인]
+5. 시매틱 태그를 이용하여 아래와 같은 화면 구성을 css로 구현하세요
+    해당 비율과 적절한 배경색으로 설정하세요. 
+    iframe을 활용하여 왼쪽 메뉴클릭시, 메인메뉴가 변경되게 처리
+   ---------------------------
+   타이틀 상하 10%
+   ---------------------------
+   상단 메뉴 상하 10%
+   ---------------------------
+   왼쪽메뉴| 
+   왼쪽메뉴| 
+   왼쪽메뉴|메인메뉴 70% 
+   30%   |           
+   왼쪽메뉴|           
+   왼쪽메뉴|
+   ---------------------------
+   하단 메뉴 상하 10%
+ */
+
+</script>
+</html>

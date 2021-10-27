@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  
+# 전날 정리.
+1. css의 border-radius의 속성값에 대하여 여러가지 형식을 예제를 통해 기술하세요.
+ 1) border-radius : 전방향
+ 2) border-radius : 왼쪽상단 오른쪽상단 오른쪽하단 왼쪽하단 시계방향 처리.
+ ex)
+	#round1{ border-radius : 60px;}
+	#round2{ border-radius : 25px 25px 45px 45px;}
+2. css 배경이미지 크기, 이미지명, 반복, 위치 속성을 js로 구현해보자.
+
+3. text-showdow의 속성을 순서를 기술하세요.
+   선택자{ text-shadow:h-shadow v-shadow blur-radius color|none}
+   h-shadow, v-shadow : 원본 텍스트와 그림자 텍스트 사이에 수평/수직거리
+   blur-radius : 흐릿한 그림자를 만드는 효과로 번지게 하는 길이
+   color : 색상
+   none : 그림자 효과 없음
+
+4. inline-block은 어떠한 특성 가졌는지, inline속성과 block속성과 비교하여 기본 예제를 통하여 기술하세요.
+	inline : 줄바꿈없이 표현되는 것을 말한다.
+	block : 줄바꿈으로 요소객체들 간에 표현되는 것
+	inline-block: 상위객체와 대상요소객체간는  inline으로 처리
+		내부적 요소객체는 block으로 처리..
+   나는<div style="display:none">div(none)</div>입니다<br><br>
+   나는<div style="display:inline">div(inline)</div>입니다<br><br>
+   나는<div style="display:inline-block; height:50px;"">div(inline-block)</div>입니다<br><br>
+   나는<div>div<span style="display:block">span(block)</span>입니다</div>
+
+5. :hover와 position 속성을 활용하여, Hello라는 
+	글자의 짝수번째는 글자가 위로, 홀수번째는 아래로 출력되게 처리하세요
+	
+
+*/
+	div{width:400px;height:400px;}
+	span{color:red;font-size:30px;}
+/*	span.showTxt:nth-child(even){background:yellow;} */
+	.down:hover{position:relative;top:10px;}
+	.up:hover{position:relative;bottom:10px;}
+</style>
+<script>
+
+</script>
+
+</head>
+<body>
+	<span class="down" class="showTxt">H</span>
+	<span class="up"  class="showTxt">e</span>
+	<span class="down" class="showTxt">l</span>
+	<span class="up"  class="showTxt">l</span>
+	<span class="down"  class="showTxt">o</span>
+
+	<div onclick="ch()">spongebob is an over-optimistic sponge that annoys 
+		other characters.</div>
+</body>
+<script>
+	function ch(){
+		var div = document.querySelector("div");
+		div.style.backgroundColor="skyblue";
+		div.style.backgroundSize="100px 100px";
+		div.style.backgroundRepeat="repeat-y";
+		div.style.backgroundPosition="center center";
+		div.style.backgroundImage="url('spongebob.png')";
+	}
+
+</script>
+</html>

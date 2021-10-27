@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<body>
+<!-- 
+# frame
+1. html페이지에서 html페이지 삽입하는 처리는 하는 것을 말한다.
+2. 기본형식
+	iframe src="추가할 페이지" width="폭" height="높이"
+3. 속성
+	1) src : 출력할 내부 웹페이지(상대적/절대적 위치), 외부페이지	
+	2) name : 프레임의 이름 지정, a href="" target="대상frame의 name값"
+	3) width, height
+	4) srcdoc : 사용할 html 태그를 바로 작성하여 출력.
+		외부호출페이지 없이 바로 작성하여 출력할 때..
+ -->
+<h2>iframe</h2> 
+<hr>
+	<!-- 
+	a href="이동할페이지" target="대상프레임"
+	 -->
+	<a href="a01_basic.html" target="frame01">초기페이지(1)</a>
+	<a href="a02_basic2.html" target="frame01">초기페이지(2)</a>
+	<a href="a03_basic3.html" target="frame01">초기페이지(3)</a>
+	<a href="a04_content.html" target="frame01">초기페이지(4)</a><br>
+	<iframe name= "frame01" src="a14_iframe1.html" 
+		width="200" height="150">
+	</iframe>
+	<iframe src="a15_iframe2.html" width="200" height="100">
+	</iframe> <!-- 페이지에 페이지를 포함하여 처리. -->
+	<iframe src="http://www.w3.org" width="200" height="200"></iframe>
+	<iframe srcdoc="<html><body><h2>바로 호출</h2></html>"
+			width="100" height="100">
+	</iframe>
+</body>
+<script type="text/javascript">
+/*
+
+ */
+
+</script>
+</html>

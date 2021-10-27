@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+
+</script>
+
+</head>
+<body>
+
+</body>
+<script>
+/*
+# js의 데이터 유형
+1. 데이터유형을 함수로 확인 : typeof(변수명)
+2. 문자열(string) : var strVar = '홍길동';
+3. 숫자형(number) : var numVar = 25;
+4. 논리형(boolean) : var isOver = numVar>=70;
+5. 함수형(function) : var funVar = function(){};
+6. 객체형(object) : var objVar = {name:'홍길동'};
+				  var arrVar = [7000,8000,9000];
+ */
+ 	var strVar = '홍길동';
+ 	var numVar = 25;
+ 	var isOver = numVar>=70;
+ 	var funVar = function(){ return '함수결과값';};
+ 	var objVar = {name:'홍길동'};
+ 	var arrVar = [7000,8000,9000];
+	document.write(`<h2>데이터 :${strVar}, 데이터유형${typeof(strVar)}</h2>`); 
+	document.write(`<h2>데이터 :${numVar}, 데이터유형${typeof(numVar)}</h2>`); 
+	document.write(`<h2>데이터 :${isOver}, 데이터유형${typeof(isOver)}</h2>`); 
+	document.write(`<h2>데이터 :${funVar}, 데이터유형${typeof(funVar)}</h2>`); 
+	document.write(`<h2>데이터 :${funVar()}, 데이터유형${typeof(funVar)}</h2>`); 
+	document.write(`<h2>데이터 :${objVar}, 데이터유형${typeof(objVar)}</h2>`); 
+	document.write(`<h2>데이터 :${arrVar}, 데이터유형${typeof(arrVar)}</h2>`);
+	/* 
+	ex) 물건명과 가격을 변수로 선언하고,
+		이것이 2000이 넘는 여부와  이 가격의 10%할인된 금액을 리턴하는 함수,
+		이러한 물건명, 가격, 2000여부와 함수를 저장하는 객체를 선언하세요..
+	
+	*/
+	var pname = "사과";
+	var price = 3000;
+	var isOver = price>=2000;
+	var fun01 = function(price){
+		return price-(price*0.1);
+	};
+	console.log( "10%할인된 금액:" + fun01(price) );
+	var obj01 = {
+		pname:"바나나",
+		price:4500,
+		isOver:false,// this.현재 객체가 가지고 있는 멤버를 호출시, 반드시 선언.
+		fun01:function(price){
+			return price-(price*0.1);
+		},
+		innerObj:{title:"js기초", price:32000}, // 객체 안에 객체 선언
+		arry01:[3000,4000,'안녕',true] 
+		// 객체 안에 배열 선언, js에서는 다른 유형의 데이터를 하나의 배열에 선언이 가능하다.
+	};
+	console.log("#객체활용#");
+	console.log("물건명:"+obj01.pname);
+	obj01.isOver = obj01.price>=2000;
+	console.log("가격:"+obj01.price);
+	console.log("2000이상:"+obj01.isOver);
+	console.log("10%할인금액:"+obj01.fun01(obj01.price));
+	console.log("객체 안에 객체:"+obj01.innerObj.title);
+	console.log("객체 안에 배열:"+obj01.arry01[0]);
+	
+	/*
+	ex) com 객체의 속성으로 제조사, 가격, 제조사가 삼성인지여부, 
+		구매잔액처리 함수:입력값-구매입금, 리턴값-입금된 금액-컴퓨터가격 
+	객체선언과 화면에 출력 처리 2조, 3조 
+	
+	*/
+	var comObj = {
+	      madeCom:"삼성",
+	      priceCom:1500000,
+	      isSamsung:false, // 변수내부에서는 할당 불가능.
+	      funMoney:function(inmoney) {
+		        return inmoney - this.priceCom;
+	      }   
+	};
+	document.write("제조사 : " + comObj.madeCom + "<br>");
+	document.write("가격 : " + comObj.priceCom + "<br>");
+	// 외부에서 호출하여 비교연산자 할당 처리..
+	comObj.isSamsung = comObj.madeCom=="삼성";
+	document.write("삼성여부 : " + comObj.isSamsung + "<br>");	
+	document.write("구매잔액 확인 : " + comObj.funMoney(2000000) + "<br>");	
+
+</script>
+</html>

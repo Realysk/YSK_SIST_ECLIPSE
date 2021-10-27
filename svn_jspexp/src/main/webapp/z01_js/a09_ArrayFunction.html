@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<table id="tab01" width="40%" border>
+		<col width="10%">
+	</table>
+	<table id="tab02" width="40%" border>
+		<col width="10%">
+	</table>	
+</body>
+<script>
+/*
+# 기타배열처리함수.
+1. 배열명.forEach(function(단위객체, index, 배열전체){
+		매개변수로 단위객체, index, 배열 전체데이터를 처리할 수 있다.
+   });
+2. 배열명.map(function(단위객체){
+		return 단위객체 <== 해당 데이터를 연산 및 문자열 처리로 새로운 배열 만듦
+3. 배열명.filter(function(단위객체, index, 배열전체){
+	
+		return boolean값; boolean값이 true인 데이터만 새로운 배열에 만들어진다. 
+	});
+   }); 
+ */
+ 	var h2Arr = document.querySelectorAll("h2");
+	var arry = [70,80,90];
+	var show = "";
+	arry.forEach(function(point, index, arry){
+		show+=index+1+"번 "+point+"점, ";
+	});
+	h2Arr[0].innerText = show;
+	
+	var arry2=arry.map(function(point){
+		return Math.floor(point*0.8);
+	})
+	h2Arr[1].innerText=arry2;
+// ex) 구매물건의 가격을 배열로 3개를 주어지고, 각각 15%할인된 금액을 출력하세요. 2조
+	var prodPrice = [3000,4000,5000];
+	var prodPriceDis = prodPrice.map(function(price){
+		return Math.floor(price*0.85);
+	});
+	h2Arr[2].innerText="할인된 금액:"+prodPriceDis;
+	/*
+	<table id="tab01" width="40%" border>
+		<col width="10%">
+	</table>	
+	*/
+	var points=[];
+	for(var cnt=1;cnt<=30;cnt++){
+		var stud = {};  // 배열 안에 객체를 할당...
+		stud.kor = Math.floor(Math.random()*101);
+		stud.eng = Math.floor(Math.random()*101);
+		stud.math = Math.floor(Math.random()*101);
+		points.push(stud); // 0~100
+	}
+	// [{kor:@@,eng:@@,math:@@},{kor:@@,eng:@@,math:@@},{kor:@@,eng:@@,math:@@},..]
+	var tab01 = document.querySelector("#tab01");
+	var show="";
+	points.forEach(function(stud, index, arry){
+		show+="<tr><td>"+(index+1)+"</td><td>"+stud.kor+"</td><td>"+stud.eng+"</td><td>"+stud.math+"</td></tr>";
+	});
+	tab01.innerHTML = show;
+	//h2Arr[3].innerText = points;
+ 	var newStuds = points.filter(function(stud, index, arry){
+ 		return stud.kor >= 60;
+ 	});
+ 	
+	var tab02 = document.querySelector("#tab02");
+	var show="";
+	newStuds.forEach(function(stud, index, arry){
+		show+="<tr><td>"+(index+1)+"</td><td>"+stud.kor+"</td><td>"+
+			stud.eng+"</td><td>"+stud.math+"</td></tr>";
+	});	
+	tab02.innerHTML = show;
+ 	console.log(newStuds);
+ 	//h2Arr[4].innerText = passPoints;
+ 	
+ 
+</script>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*
+# 구조 선택자.
+1. 구조에 따라 특정한 위치에 속하는 태그를 선택할 수 있는 선택자를 말한다.
+2. 주요키워드.
+	child : 같은 부모를 둔 형제 객체를 지칭할 때, 사용되는 접미어이다.
+	nth- : 순서를 지정하는 부분으로 위 접미어와 합성하여 같은 부모를 둔,
+		특정한 위치에 있는 요소 객체를 선택할 때, 사용된다.
+	ex) nth-child(1)
+	nth-child(반복할횟수n+1) :같은 부모를 둔 반복할 횟수로 해당 css 선언할
+		때, 사용된다. 
+	first
+	last
+	 
+	ex) div 하위에 h2 6개씩 넣고, 
+		h2의 두번째 글자색상을 노랑색..
+		h2의 3개씩 단위로 배경색상이 파랑색이 되게 처리하세요.. 1조
+	1) 첫번째와 마지막에 대한 선택
+		first-child : 첫번째 요소를 선택..		
+		last-child : 마지막 요소를 선택
+		
+	ex) 테이블의 td의 첫번째를 클릭하세요라고 표시(js)하고, 
+		첫번째를 클릭하면, 배경색이 변하고, 글자 내용이
+		클릭 되었습니다로 출력되게 처리하세요.. 2조	
+*/
+	/*td:nth-child(1){background-color:yellow;} */
+	tr:nth-child(4n+1){background-color:pink;}
+   	h2:nth-child(2){color:yellow;}
+   	h2:nth-child(3n){background-color:blue;}
+   	h2:last-child, h2:first-child{
+   		color:orange;background-color:purple}
+</style>
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<body>
+   <div>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+   </div>
+   <div>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+   </div>
+     <div>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+      <h2>안녕하세요</h2>
+   </div> 
+
+	<table width="70%" border>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+	</table>
+	<table width="70%" border>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+		<tr><td>번호</td><td>물건명</td><td>가격</td></tr>
+	</table>	
+</body>
+<script type="text/javascript">
+	var arry = document.querySelectorAll("td:first-child"); 
+	console.log("크기:"+arry.length)
+	for(var idx=0;idx<arry.length;idx++){
+		arry[idx].innerText = "클릭하세요";
+		arry[idx].onclick=function(){
+			this.style.backgroundColor="yellow";
+			this.innerText="클릭되었습니다!!"
+		}
+	}
+ /*
+ 	ex) table 3X3 테이블을 만들고, 첫번째와 마지막 td의 배경색상을
+ 	노랑색으로 하고, 클릭하였을 때, 중앙 정렬하면서, ★로 표시.. 
+ 	2,3조
+ */	
+ /*
+ 1. 에러 처리 f12
+ 2. 태그의 기본 속성, css 속성, js의 속성 처리 
+ 3. 배열 index에 대한 이해, for문과의 관계이해..
+ 
+ 
+ 
+ 
+ 
+ */
+ 
+ 
+	
+
+</script>
+</html>

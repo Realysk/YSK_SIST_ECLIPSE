@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>jspexp</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>start.do</display-name>
+    <servlet-name>start.do</servlet-name>
+    <servlet-class>jspexp.a02_mvc.A01_ServletStart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>start.do</servlet-name>
+    <url-pattern>/start.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>start2.do</display-name>
+    <servlet-name>start2.do</servlet-name>
+    <servlet-class>jspexp.a02_mvc.A02_Test</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>start2.do</servlet-name>
+    <url-pattern>/start2.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>mvc01.do</display-name>
+    <servlet-name>mvc01.do</servlet-name>
+    <servlet-class>jspexp.a02_mvc.A10_MVCController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mvc01.do</servlet-name>
+    <url-pattern>/mvc01.do</url-pattern>
+  </servlet-mapping>
+  <context-param>
+  	<description>database ip</description>
+  	<param-name>DB_IP</param-name>
+  	<param-value>127.0.0.1</param-value>
+  </context-param>
+   <context-param>
+     <description> DATABASE PORT </description>
+     <param-name>DB_PORT</param-name>
+     <param-value>1521</param-value>  
+  </context-param>
+  <context-param>
+     <description> DATABASE SID </description>
+     <param-name>DB_SID</param-name>
+     <param-value>XE</param-value>         
+  </context-param>
+  <context-param>
+     <description> DATABASE USERNAME </description>
+     <param-name>USERNAME</param-name>
+     <param-value>scott</param-value> 
+  </context-param>
+  <context-param>
+     <description> DATABASE PASS </description>
+     <param-name>PASSWORD</param-name>
+     <param-value>tiger</param-value>    
+  </context-param> 
+
+  <context-param>
+  	<description>이미지 경로</description>
+  	<param-name>IMG_PATH</param-name>
+  	<param-value>/z01_img/</param-value>
+  </context-param> 
+  <context-param>
+  	<description>파일 다운로드 경로</description>
+  	<param-name>DOWN_PATH</param-name>
+  	<param-value>/z03_download/</param-value>
+  </context-param>  
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/a08_exception/a02_404.jsp</location>
+  </error-page>
+  <error-page>
+  	<exception-type>java.lang.NullPointerException</exception-type>
+  	<location>/a08_exception/a03_nullPointer.jsp</location>
+  </error-page>
+  <error-page>
+  	<exception-type>java.lang.ArrayIndexOutOfBoundsException</exception-type>
+  	<location>/a08_exception/a04_indexOutOfBoundsExpt.jsp</location>
+  </error-page>
+   <error-page>
+  	<exception-type>java.lang.Exception</exception-type>
+  	<location>/a08_exception/a05_Exception.jsp</location>
+  </error-page>
+  <!-- session-timeout : 분단위 세션 설정.(서버단위) --> 
+  <session-config>
+  	<session-timeout>30</session-timeout>
+  </session-config>
+  
+</web-app>

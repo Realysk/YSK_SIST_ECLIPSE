@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+// 변수를 선언합니다.
+var input = Number(prompt('숫자를 입력하세요.', '숫자'));
+// 조건문
+// input % 2 값을 가지고,
+// case에 위에 값에 따라서 처리 하는 구문
+switch (input % 2) {
+    case 0:
+        console.log('짝수입니다.');
+        break;
+    case 1:
+    	console.log('홀수입니다.');
+        break;
+    default:
+    	c('숫자가 아닙니다.');
+        break;
+}
+// ex) 4지 선다 문제 정답을 입력하세요.. switch case문을 활용하여,
+//     	3번일 때는 정답, 그외에는 오답입니다. 출력하세요. 3조
+//     ~12:45 풀이합니다.
+ var answer = Number( prompt("정답을 입력하세요.(1~4)"));
+ switch(answer){
+    case 1 :
+    case 2 :
+    case 4 :
+    	console.log("오답입니다.");
+       	break;
+    case 3 :
+    	console.log("정답입니다.")
+       	break;
+    default :
+    	if( isNaN(answer) ){
+    		console.log("숫자형 데이터 입력해주세요.")
+    	}else{
+    		console.log("번호는 1~4까지 입력가능합니다.")
+    	}
+ }
+</script>
+
+</head>
+<body>
+
+</body>
+<script>
+
+</script>
+</html>

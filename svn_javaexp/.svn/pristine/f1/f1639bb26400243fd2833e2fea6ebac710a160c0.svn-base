@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/* 
+3. 가상선택자 중에 반응 선택자를 기술하고 h1을 기준으로 기본예제를 작성하세요.
+	반은 선택자:  
+		선택자:hover{} 마우스 커서를 오버했을 때, 처리할 css속성/속성값 
+		선택자:active{} 클릭했을 때, 처리할 css속성/속성값
+4. 가상선택자 중에 상태 선택자를 input 객체를 활용하여 check와 focus를 처리하는 예제를 만드세요.
+
+5. DOM객체의 메모리 로딩 순서와 함수처리 형식 3가지를 클릭이벤트 예제로 기술하세요.
+	1) html은 코드 순차적으로 메모리에 로딩이 된다.
+	2) body안에 있는 태그들을 해당 내용이 순차적으로 실행된 경우에 로딩이 된다.
+	3) body 마지막에 script를 선언해서 dom 객체를 호출하면 해당 메모리에 로딩된 상황이기때문에
+		처리가 가능하다.
+	4) 함수의 선언은 현재 메모리를 로딩한 상태를 기준으로 하는 것이 아니라,
+		앞으로 메모리를 로딩될 것을 예상해서 선언한다.
+		선언 후, 이벤트를 통해서 호출하여 처리할 수 있다.	
+
+ */
+	h1:hover{background-color:yellow;}
+	h1:active{color:blue;}
+	input[type=text]:focus{background-color:orange;}
+	/*input[type=checkbox]:checked{} checked를 한 checkbox에 대한 속성  */
+	/*
+	선택자1+선택자2 : 계층적으로 형제 관계에 선택자에서
+		선택자1을 바로 앞에 둔 선택자2에 대한 속성을 설정 */
+	input[type=checkbox]:checked+span{background-color:yellow;}
+</style>
+<script>
+	function call(){
+		var h2Obj1 = document.querySelector("h2");
+		h2Obj1.align="center";
+	}
+	function call2(obj){
+		obj.style.backgroundColor="pink";
+	}
+</script>
+
+</head>
+<body>
+	<h1>안녕하세요(반응선택자!!)</h1>
+	아이디:<input type="text"/><br>
+	<input type="checkbox"/><span>사과</span>
+	<input type="checkbox"/><span>바나나</span>
+	<input type="checkbox"/><span>딸기</span>
+	<h2 onclick="call()">정의된 함수호출</h2>
+	<h2 onclick="call2(this)">DOM 객체를 매개변수로 전달 함수호출</h2>
+	<h3 >하단에 DOM객체를 통해서 처리.</h3>
+</body>
+<script>
+	var h3Obj = document.querySelector("h3");
+	h3Obj.innerText = "하단 DOM 내용 변경";
+	// <h3 onclick="함수">
+	h3Obj.onclick = function(){
+		// this : 클릭한 현재 객체 즉, h3Obj를 지칭한다.
+		this.style.color="orange";
+		this.align = "center";
+	};
+	
+</script>
+</html>

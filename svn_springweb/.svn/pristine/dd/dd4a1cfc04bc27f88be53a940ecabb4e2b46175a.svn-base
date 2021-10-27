@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+xml
+ h4322   h1, h2
+ paaak   p align=""
+ 1. DTD : 상단에 어떤 태그(태그명과 속성)를 사용할지를 선언
+ 2. 위에 선언 후, DTD에 맞는 태그를 활용 수 있다.
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+		
+	<!-- 컨테이너에 사용할 객체 등록
+	<bean class="springweb.a01_basic.A01_StartCtrl"/>		
+	<bean class="springweb.a01_basic.A02_SecondCtrl"/>		
+	<bean class="springweb.a01_basic.A03_RequestController"/>	 -->
+	<context:component-scan base-package="springweb">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Dao"/>
+	</context:component-scan>
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+		</mvc:message-converters>
+	</mvc:annotation-driven>	
+	<!-- 웹 소켓 통신을 위한 선언 
+	1. 핸들러 선언을 위한 처리 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+	<mvc:default-servlet-handler/>
+	<!-- 
+	2. client단에서 js와 연동되는 handler를 url로 mapping
+	 -->
+	<websocket:handlers>
+		<websocket:mapping handler="chatHandler" path="/chat-ws.do"/>
+	</websocket:handlers> 
+	
+	
+	
+	
+	
+
+
+	<!-- 공통설정 처리 -->	
+	<context:property-placeholder
+		location="classpath:/resource/properties/info" />
+	<bean class="springweb.z01_vo.Person"
+		 p:name="${name1}" p:age="${age1}" p:loc="${loc1}"/>	
+	<bean class="springweb.z01_vo.Product" 
+		 c:name="${pname}" c:price="${price}" c:cnt="${cnt}"/>	 
+	<!-- 
+	# DB연결 처리.
+	1. connection pool 처리
+		1) 드라이버, 주소, 계정, 비번
+	 -->			  
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close">
+		<property name="driverClassName" value="${driver}"/>	
+		<property name="url" value="${dburl}"/>	
+		<property name="username" value="${name}"/>	
+		<property name="password" value="${pass}"/>	
+	</bean>
+	<!-- 
+	2. Mybatis와 연동
+		1) dbcp연결
+		2) java/resource/mybatis.Spring.xml
+			로 공통 연결 처리..
+	 --> 
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		 
+		<property name="configLocation"
+			value="classpath:resource/mybatis.Spring.xml" />
+		
+	</bean> 
+	<!-- 
+	3. dao 인터페이스 패키지 위치를 설정..
+		인터페이스 ==> 인터페이스의 상속받은
+			 실제객체생성(mybatis 프레임웍 XXXmapper.xml)
+		name="basePackage" value="dao경로1, dao경로2,..."
+	 -->
+	<bean 
+		class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="springweb.a05_mvc.a03_dao"/>
+	</bean> 
+	<!-- 
+	컨트롤러의 리턴값이 return "pageJsonReport" 호출하면
+	아래의 형식으로 모델데이터를 json형식으로 처리하는 view
+	public void call(){
+		return "pageJsonReport"; 
+		 ==> jsp를 위한 view인지 bean의 id을 선언하는 view인지를 설정하는 부분이 필요.
+		 그리고, jsp로 처리하는 것을 우선으로 할 것인가 bean의 id값을 호출하는 것을 우선으로 할 것인가를
+		 order 라는 property로 설정..
+	}
+
+	 -->
+	<bean id="pdfViewer" class="springweb.z02_util.PageReportPdfView"/>
+	<bean id="pageJsonReport" 
+		class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="contentType" value="text/html;charset=utf-8"/>
+	</bean>
+	<!-- 파일업로드 뷰.. -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
+	<!-- 파일다운로드 뷰 -->
+	<bean id="downloadViewer" class="springweb.z02_util.DownloadViewer"/>
+	<!-- id값의 view를 등록하고 우선순위를 최우선으로 설정하는 부분 선언 객체 -->
+	<bean id="btnViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"/>
+	</bean>
+	<!-- 컨테이너에 등록된 id값이 아니면 모두 jsp의 경로를 찾아서 해당 jsp를 호출하는 view 선언.. 
+		jsp의 접두어 접미어를 통해서 jsp 호출을 보다 간단하게 호출할 수 있다.
+	-->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="1"/>
+		<!-- 
+		<property name="prefix" value="WEB-INF/views/a01_basic/"/>
+		<property name="suffix" value=".jsp"/>
+		 -->
+	</bean>
+	<!-- 
+	# 메일 전송을 위한 서버 연동 설정
+	1. host
+	2. port
+	3. 계정 : username/password
+		등록한 메일주소와 비밀번호..
+	4. 보안 설정 관련 선언.. 
+	 -->
+	<bean id="mailSender" 
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="${mail_user}"/><!-- 본인 정보 등록 info @@@.gmail.com -->
+		<property name="password" value="${mail_pass}"/>
+		<!-- 보안 관련 설정 -->
+		<property name="javaMailProperties" >
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>			
+			</props>
+		</property>
+	</bean> 
+	<!-- 다국어 처리 모듈 등록 
+	1. 핵심 클래스
+	2. 다국어 파일 기본 위치 등록..
+		package명기준으로 message.msg로 등록..	
+		ex) src/main/java 하위에 패키지와 기준되는 파일로 등록을 한다.
+		
+		언어 ==>  code
+		greet ==> 언어1, 언어2, 언어3...
+			
+	-->
+	<bean id="messageSource" 
+	class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.msg</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 
+	브라우저나 요청값에 의한 언어설정.
+	 -->
+	<bean id="localeResolver" 
+	class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>	 
+	
+	<!-- advice선언 -->
+	<bean id="profiler" class="springweb.a04_aop.advice.Profiler"/>
+	<!-- aspect : pointcut+advise -->
+	<aop:config>
+		<aop:aspect id="traceAspect" ref="profiler">
+			<!-- 특정 시점과 수행내용 선언.. -->
+			<aop:pointcut expression="execution(public * springweb.a05_mvc.a03_dao..*(..))" 
+				id="publicMethod"/>
+			<!-- pointcut의 시점 메서드를 연결처리.(weaving) 
+				1. 최종적으로 수행되는 시점과 advice 안에 메서드를 선언..
+			-->
+			<aop:around method="trace" pointcut-ref="publicMethod"/>	
+		</aop:aspect>
+	</aop:config>	
+	
+	
+		
+</beans>
+
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2></h2>
+	<h3></h3>
+	<h4></h4>
+</body>
+<script type="text/javascript">
+/*
+# Math객체
+1. java의 static 메서드와 동일 바로 사용..
+2. 종류
+	생성자 함수 사용하지 않는 객체
+	메서드
+	*Math.abs(x) : 절대값
+	Math.acos(x)
+	Math.asin(x)
+	Math.atan(x)
+	Math.atan2(y, x)
+	*Math.ceil(x) : 올림 
+	Math.cos(x)
+	Math.exp(x)
+	*Math.floor(x) : 내림   ex) Math.floor(Math.random()*6+1); 주사위 1~6
+	Math.log(x)
+	*Math.max(a,b,c,...n) 최대값
+	*Math.min(a,b,c...n) 최소값
+	Math.pow(x,y)
+	*Math.random() 0.0~1.0
+	*Math.round(x) 반올림 처리..
+	Math.sin(x)
+	Math.sqrt(x)
+	Math.tan(x)
+	
+	ex) 5명이 주사위를 던지고, 각각의 주사위 점수를 h2에 출력하고,
+	    그중 가장 점수가 높은 점수 h3와 낮은 점수를 h4에 출력하세요  1조..
+	    Math.floor(Math.random()*경우의수+시작수) : 
+	    Math.floor(Math.random()*6+1) : 
+ */
+ 	var gMembers = [];
+	for(var cnt=1;cnt<=5;cnt++){
+		gMembers.push(Math.floor(Math.random()*6+1));
+	}
+	var h2 = document.querySelector("h2");
+	var h3 = document.querySelector("h3");
+	var h4 = document.querySelector("h4");
+	h2.innerText = gMembers;
+	h3.innerText = "최대값:"+Math.max(gMembers[0],gMembers[1],gMembers[2],gMembers[3],gMembers[4]);
+	h4.innerText = "최소값:"+Math.min(gMembers[0],gMembers[1],gMembers[2],gMembers[3],gMembers[4]);
+
+</script>
+</html>

@@ -1,0 +1,336 @@
+# 답변형 게시판 처리
+1. 주요기능
+	1) 게시판 글 등록, 리스트, 상세화면, 수정, 삭제, *답글화면/답글달기 처리
+	2) 등록 데이터
+		글번호, 상위글번호, 작성자, 등록일, 수정일, 조회수
+		제목, 내용, 첨부파일
+	3) 답글 등록 처리
+		무한레벨 계층적으로 답글 등록 가능
+	4) 리스트에 페이지 처리
+		선택한 페이지당 글의 수에 따른, 페이징 처리
+		하단에 페이지 번호 리스트
+	5) 첨부파일 추가 기능
+2. 개발 순서
+	1) DB 테이블 구성
+		- 게시판 메인 테이블
+		- *첨부파일 정보 테이블
+	2) sql 작성
+		* 답글 후, 계층형으로 sql 작성 페이지 처리..
+	   ex) 테이블 2이상으로 join해서 리스트나 결과 내용이 테이블과 다르게
+	   	나타날께 어떻게 처리할까요??
+	   	단위 데이터 최종 VO ( 테이블 vo, 테이블 vo...)
+	   	==> 최종 sql 맞는 VO를 만들고, 해당 데이터 저장..
+	3) 초기 리스트 화면 DB처리 및 화면구성
+	4) 등록 처리 :첨부파일 추가하기
+	5) 상세 화면 처리
+		- 상세보기
+		- 수정
+		- 삭제	
+		- 답글처리 ==> no->refno, RE:, 이전글 ==> 등록글처리
+3. 등록 처리.
+	1) 등록 버튼 클릭
+	2) 등록 화면 전환/dialogue 호출.
+	3) 등록데이터입력 submit 처리
+	4) controller 요청 데이터 확인
+	5) dao ==> service ==> controller
+	6) 등록 후, 리스트 controller 호출.
+	
+4. 상세보기 처리
+	1) 클릭시 key를 기준으로 상세 내용 조회
+	2) 조회건수를 카운트up 처리..
+		dao/mappeer
+		service단에서 상세보기 시에 조회건수 처리 dao 호출.
+		
+5. 첨부파일 처리.
+	1)	환경설정(container)에 파일 업로드 처리 선언.
+		업로드 뷰 선언: org.springframework.web.multipart.commons.CommonsMultipartResolver
+		VO : Multipart 추가.
+	2) 클라이언트 ==> 서버 파일 전송을 위한 처리
+		# 화면단에서 처리.
+		- 파일을 업로드할 수 있는 form 유형으로 속성 선언.
+			enctype="multipart/form-data"
+		- 첨부파일 인터페이스 설정(html/js)
+		# 요청값도 파일을 첨부할 수 있는 요청객체를 선언.
+	3) 받은 파일을 서버단에서 처리할 내용(service)
+		# Multipart로 전송되어온 파일객체 File로 변경하여 특정 서버의 파일 저장 위치에 저장
+		0. 임시경로와 실제 경로를 properties info 등록하기..
+		1. 파일명 가져오기
+		2. File 객체 생성하기..(업로드할 파일정보를 선언)
+		3. multipart파일(메모리에 있는 객체)을 File객체(물리적 저장가능 객체)로 변환하기.
+			transferTo
+		4. 임시경로에서 파일을 받았다가 실제 경로로 복사 처리 필요
+			cf)eclipse에서 지원하는 tomcat 서버를 사용하기때문에 필요
+				파일서버를 따로 구축하여 처리할 경우, 임시경로/실제경로 복사 로직 필요 없음..
+			임시경로
+			C:\z01_java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\board\z01_upload
+			실제경로	
+			C:\z01_java\workspace\board\src\main\webapp\z01_upload
+			
+		# 다운로드시, 필요로 하는 파일업로드 정보를 DB에 저장.
+# 답글 처리
+1. 프로세스 정리
+	1) 답글을 클릭시, 답글 화면 로딩.
+		제목 : Re:이전글
+		상위글 : 이전글을 글번호 no ==> refno
+		내용 :
+		
+		
+		=====이전 글 ==== (입력된 상위글 내용 처리)
+		@@@   
+	2) 내용을 입력해서 답글 처리하면 DB에 입력이 된다.
+		refno에 이전글을 번호가 입력되게 처리된다.
+		==> 이 후에 계층형 sql에 의해서 답글이 리스트되게 처리한다.
+2. 개발 순서
+	0) controller : board로 모델값을 받을 수 있게  method=insertForm 처리..
+	1) a02_insert.jsp 
+		화면에서 상세화면에서 처리된 내용을 받을 수 있게 form객체의 내용을 처리하여야 한다.
+		spring에서 지원하는 form태그 활용..
+		제목, 상위글번호, 내용
+	2) a03_detail.jsp
+		답글을 클릭시, 	a02_insert.jsp 에 넘길 데이터를 처리한다.
+		ex) no ==> refno, subject ==> RE:subject,
+			content ==>  == 이전글 == 포함 내용 처리..
+					
+
+
+# 계층 sql을 통한 페이징 처리.
+1. 목적 
+	1) 데이터의 건수의 많아짐에 따라 웹 화면에서 출력할 수 있는 한계가 있기에
+	페이징 처리를 통해서 데이터를 효과적으로 확인할 수 있게 한다.
+	2) 답글달기가 바로 밑에 처리됨으로 효과적인 게시판의 내용 확인과 대화형
+		게시판을 만들기 위함이다.
+2. 기능 처리 프로 세스
+	1) 계층형 sql 처리.
+		데이터를 특정한 컴럼을 기준으로 계층적으로 데이터를 처리할려는 목적으로
+		오라클에서 지원되고 있다.
+		ex) 1레벨 라바				할아버지
+			2레벨 드론, 저글링, 히드라.  큰아버지  아버지  		 삼촌
+			3레벨            러커..   사촌형   나  누나 언니	사촌동생
+		글1
+			RE:글1
+				RE:RE:글1
+			RE:글1
+		글2
+		글3	
+		
+	2) DB처리..
+		컬럼 구조 :no, refno  글과 상위글 간의 계층적 연관관계를 처리.
+	3) sql의 주요 키워드(oracle)
+		start with 컬럼 = 데이터  : 최상위 레벨의 데이터를 조건..	
+		ex) 답글형 게시판의 경우 refno=0
+		connect by prior 연관관계컬럼명 = 연관관계컬럼명
+		정렬처리 : 계층적 데이터처리의 정렬의 순서를 지정.
+		order siblings by 컬럼명 asc/desc
+				
+# 다운로드처리..
+1. 상세화면에서 등록된 파일 출력
+	1) dao 작성
+		상세로딩 시, 첨부파일로 가져올 수 있게 처리..
+		boardfile
+		dao
+		public String getFileName(int no);
+		mapper
+		select fname
+		from boardfile
+		where no=#{no}
+	2) service단에
+		출력한 단위 vo에 fname을 추가하여,
+		해당 no에 연관된 fname을 가져오게 처리한다.
+	3) 화면단에서 fname 출력..		
+2. 다운로드 viewer 만들기.
+	1) 사용자 정의 viewer만들기..
+		모델명이 다운할 파일명 mapping되게 처리..
+		cf) <a href="파일"> 기본적으로 지원은 하지만, 한글파일이나,
+			파일 형식에 제한이 있어서, 가능한한 viewer를 활용한다.\
+		전송 header에 설정 형식 선언.	
+			파일형식
+			stream 프로세스 처리
+			response 객체로 파일형식으로 다운되게 처리..
+	cf) pdf, excel 형식으로 viewer를 만들어 컨테이너 등록하면, 
+		해당 형식으로 다운로드되게 처리가 된다.
+3. container에 등록 처리..
+	1) <bean id="download뷰어" class="사용자정의 뷰가있는 위치"
+4. 다운로드 controller 선언..
+	1) 게시판의 경우 상세화면에서 첨부파일을 클릭시, 호출할 요청 url 선언..
+		ex) download.do?fname=파일명
+	@RequestMapping("download.do")
+	public String download(@RequestMapping("fname") String fname, model d){
+		d.addAttribute("downloadFile", fname);
+		return "컨테이너에서 선언한 download viewer";
+	}
+5. 상세화면에서 해당 파일 클릭시, 다운로드 controller 호출 및 다운로드 처리..
+	location.href="${path}/download.do?fname"+fname;
+
+# 페이지처리 
+1. 기능 내용(페이지관련 속성)
+	0) 총데이터 건수
+	1) 한번에 보여줄 페이지지정 : 화면form(3/5/10/30/50/100) ==> vo 
+	2) 페이지의 갯수 : 120/10 ==> 10페이지
+	3) 클릭한 현재 페이지번호 
+	4) ==> 이 페이지의 시작번호, 현 페이지의 마지막번호
+	count : [DB]총 데이터 건수
+	pageSize : [요청값] 한번에 보여줄 페이지크기
+	pageCount : [로직]  총페이지수 count/pageSize
+	curPage : [요청값] 클릭한 현재 페이지번호-하단에 리스트된 페이지번호를 클릭시.
+					js 이벤트 처리하면서 요청값을 넘기기 위해서 
+					<input type="hidden" name="curPage"/>
+	start : [로직] 현재 페이지의 시작번호 : curPage, pageSize 이용해서 도출
+			최종 sql에 조건 데이터를 처리하기 위해 속성 선언
+			where rownum between ${start} and ${end}
+	end : [로직] 현재 페이지의 마지막 번호	:  curPage, pageSize 이용해서 도출
+			최종 sql에 조건 데이터를 처리하기 위해 속성 선언
+	
+2. 처리 순서.
+	1) 데이터가 순서별로 출력되는 sql 작성 
+		rownum : 데이터의 일련번호를 나타낸다.
+	2) 위 rownum를 기준으로 페이지의 start, end 번호를 지정하여 특정한 페이지의
+		데이터를 지정할 수 있다.
+		 rownum  between #{start} and #{end}
+		 cf) rownum : 오라클에서 지원하는 데이터로딩 순서를 나타내는 내장 keyword
+		SELECT *
+		FROM (
+				SELECT rownum cnt, b.*
+				FROM BOARD b 
+				WHERE subject LIKE '%'||#{subject}||'%'
+				AND writer LIKE '%'||#{writer}||'%'
+				START WITH refno = 0
+				CONNECT BY PRIOR NO = refno
+				ORDER siblings BY NO DESC )
+		WHERE cnt BETWEEN #{start} AND #{end} : 페이지당 특정 범위의 데이터를 출력..
+					 
+	3) 리스트 vo에 번호 속성 넣기 : cnt 속성 추가
+	4) 조회VO(BoardSch)를 통해 요청값과 로직을 통해서 처리할 내용을 선언 확인
+		controller의 요청값을 BoardSch로 선언,
+		cf) Board : 주로 리스트되는 데이터를 기준으로 속성 설정, cf) vo
+			BoardSch : 조회 요청값이나 paging 처리를 위한 요청 모델 데이터처리를 위해 속성 설정
+			cf) dto
+		==> service, dao, mapper 변경.. 
+		service단에 기본 속성값 start/end값 강제 설정 
+		jsp no ==> cnt로 출력해서 일단계 화면 내용 확인..	
+	==============================================================	
+	5) DB(DAO,mapper)를 통해서 나타낼 내용 처리 : 
+		[DB]총 데이터 건수, 전체 sql mapper 확인 처리 
+			SELECT count(*)
+			FROM BOARD b 
+			WHERE subject LIKE '%'||#{subject}||'%'
+			AND writer LIKE '%'||#{writer}||'%'
+			
+			public int totCnt(BoardSch sch);
+					
+	7) service단에서 BoardSch의 로직 처리..
+		count, pageSize, pageCount, curPage, start, end 할당 처리
+	8) jsp(뷰)를 통해서 요청값으로 처리할 내용 (form) pageSize, curPage
+		pageCount를 통해서 하단에 페이지 리스트 처리..
+		- 하단 페이지 처리
+		
+		
+		
+# 페이지 처리 service단(***)
+		// 1. 총건수 설정.
+		sch.setCount(dao.totCnt(sch));
+		// 2. 페이지 크기 (요청) : default로 페이지 크기 지정 - 초기 화면
+		if(sch.getPageSize()==0) {
+			sch.setPageSize(5);
+		
+		}
+		cf) vo/dto에서 데이터를 입력을 하지 않을 때, default값
+			문자열/객체 ==> null, 숫자형(0,0.0)
+			ps) 요청값에 404에서의 대다수가 숫자형 vo propert 속성에  value=""
+				으로 설정했기 때문에 발생한다. ==> 요청값 name=@@@를 빼거나,
+				숫자형은 value="0" 명시적으로 설정해주면 에러를 벗어 날 수 있다.
+	    // 3. 총페이지 수..
+		// 	  ex) 데이터 건수 10 ==> 2
+		//.       데이터 건수 16 ==> 3 + 1 (4)
+		//    sch.getCount()/sch.getPageSize()
+		//    Math.ceil() :올림처리, 나머지값이 있으면 바로 올림..
+		//   java : 정수/정수 ==>정수, 원하는데로 소숫점 처리가 될려면
+		//          double promote 형변환필요
+		//    Math.ceil()의 리턴값은 실수이어서 정수로 casting
+		sch.setPageCount( (int)Math.ceil( 
+				sch.getCount()/(double)sch.getPageSize() ));
+		// 4. 화면에서 클릭한 페이지 번호 (요청값) : 초기화면을 위한 default설정.
+		if(sch.getCurPage()==0) {
+			sch.setCurPage(1);
+		}
+		// 5. DB 한페이지 보일 데이터(시작번호/마지막번호 지정)
+		//    sch.getCurPage() : 클릭한 페이지번호
+		//    sch.getPageSize() : 한번에 보여줄 데이터 건수.
+		//    1, 5 ==> 마지막 페이지의 번호  1*5 = 5
+		//    2, 5 ==>  2*5 = 10
+		//    3, 3 
+		/*	  5건 보이는 페이지
+		 * 	  페이지번호	페이지건수		보일페이지
+		 * 		1		5			1 2 3 4 5
+		 *      2       5 			6 7 8 9 10
+		 *      3       5           1112131415
+		 *      4       5          	1617181920
+		 * 
+		 *      시작 페이지
+		 *      (1-1)*5+1 - (현재페이지번호-1)*화면에보일페이지건수+1
+		 *      (2-1)*5+1
+		 * */
+		 
+		 
+		 
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());		
+		
+# 하단 페이징 처리
+0. 페이지 크기 변경.
+	페이지 선택을 변경했을 때,
+	현재 페이지 번호를 1으로 하고, submit() 처리..
+1. 전체 페이징 처리
+	1) 특정 번호 클릭
+		js 함수로 curPage를 지정하고, submit처리
+	
+
+2. 페이지 block으로 페이지 처리		
+	1) 데이터양이 증가하여 페이지 건수가 늘어날 때,
+		한번에 나타날 페이지 블럭의 갯수를 지정하여, next나 previous로 이동하면서
+		효과적으로 화면에 데이터를 출력하기 위하여 활용된다.
+	2) 처리 순서
+		- boardSch vo에 시작 block과 마지막 block 속성, 화면에 출력할 blockSize 선언
+		- service단 처리
+			1. blocksize 속성 강제 설정.. 5
+			2. blocknum 지정. : 현재페이지번호/블럭의크기 올림 처리하면 아래와 같이..
+				1 2 3 4 5   ==> blocknum 1
+				6 7 8 9 10  ==> blocknum 2
+				1112131415  ==> blocknum 3
+			3. 블럭의 마지막 번호
+				blocknum * blockSize
+			4. 블럭의 시작번호
+				(blocknum-1)*blockSize+1
+		- 화면단 처리.
+			출력한 block의 갯수로 화면에 표시
+			next/previous를 클릭시, curpage번호 설정 처리..
+		// 블럭 처리.
+		// 1. 블럭 크기 지정.
+		sch.setBlockSize(5);
+		// 2. blocknum 지정 : 현재페이지번호/블럭의 크기
+		int blocknum = (int)(Math.ceil(sch.getCurPage()/(double)sch.getBlockSize()));
+		// 3. 마지막 블럭번호..
+		//    총페이지수가 23 ==> 한번에 보여줄 block의 수가 5   25로 나와 에러가 발생.
+		//    마지막 블럭번호는 총페이지수를 넘지 못하게 처리..
+		int endBlock = blocknum*sch.getBlockSize();
+		if(endBlock>sch.getPageCount()) {
+			endBlock =sch.getPageCount(); 
+		}
+		sch.setEndBlock(endBlock);
+		sch.setStartBlock((blocknum-1)*sch.getBlockSize()+1);				
+			
+			 
+		  1 2 3 4 5 >
+		< 6 7 8 9 10 >		
+		< 111213
+		화살표next를 클릭시, 현재 마지막 블럭+1로 해서 curPage를 설정하면 다음 블럭이 출력된다.
+		화살표privious를 클릭시, 현재 시작 블럭-1로 해서 curpage를 설정하면 이전 블럭이 출력된다.
+		
+	
+			 	 	
+	
+	
+ 		
+			
+			
+		
+		

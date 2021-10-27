@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<body>
+	<input type="button" id="add01" value="물건추가-아래로"/>
+	<p id="show01"></p>
+	<input type="button" id="add02" value="좋아요-옆으로"/>
+	<p id="show02"></p>	
+	<input type="button" id="enlarge01" value="옆으로커져라"/>
+	<input type="button" id="enlarge02" value="아래위로커져라"/><br>
+	<img src="망고.PNG" width="100" height="100"/>
+	<img src="가위.PNG" id="game01" width="200" height="200"/>
+	
+	
+</body>
+<script type="text/javascript">
+var game01 = document.querySelector("#game01"); 
+var idx=1;
+game01.onclick=function(){
+	var imgs = ["가위","바위","보"];
+	// 클릭시 마다, idx 증가, %3을 통해서 0,1,2,0,1,2.. 반복처리..
+	// this.클릭한 대상객체..
+	// setInterval(반복함수, 1/1000)
+	idx=1;
+	var set01 = setInterval(function(){
+		game01.src=imgs[ idx++%3 ]+".PNG";
+		if(idx==30){
+			// 반복중지 함수.
+			clearInterval(set01);			
+			var ranIdx = parseInt(Math.random()*3);
+			game01.src=imgs[ ranIdx ]+".PNG";
+		}
+	},100);
+
+	
+}
+
+var enlarge01 = document.querySelector("#enlarge01"); 
+var enlarge02 = document.querySelector("#enlarge02"); 
+var imgs = document.querySelectorAll("img"); 
+enlarge01.onclick=function(){
+	imgs[0].width+=10;
+}
+enlarge02.onclick=function(){
+	imgs[0].height+=10;
+}
+var show01 = document.querySelector("#show01"); 
+var show02 = document.querySelector("#show02"); 
+var add01 = document.querySelector("#add01"); 
+
+add01.onclick=function(){
+	show01.innerHTML+="<h2>물건!!(사과)</h2>";
+}
+var add02 = document.querySelector("#add02"); 
+add02.onclick=function(){
+	show02.innerHTML+="<span>좋아요!!!</span>";
+}
+
+/*
+1. html의 태그의 2가지 형식의 특징을 기본예제와 함께 설명하세요
+	block 태그 : 태그내에 라인변경을 포함한다.
+		ex) <h2>안녕하세요</h2><p>문단</p>
+	inline 태그 : 태그내에 라인변경을 포함하지 않는다.
+		ex) <span>홍길동</span><a href="">링크</a>
+2. 아래와 같은 형식으로 버튼을 클릭시, 추가 처리하세요.
+    [물건추가-아래로]
+    [좋아요-옆으로]
+*/
+
+/*
+3. 망고이미지 [옆으로커져라] [아래위로커져라] 해당 버튼을 클릭시, 동적으로 이미지가 변경되게 처리하세요.
+4. 가위/바위/보 이미지를 다운로드해서 해당이미지를 클릭시, 3개의 이미지가 번갈아 변경되게 처리하세요.
+ */
+
+</script>
+</html>

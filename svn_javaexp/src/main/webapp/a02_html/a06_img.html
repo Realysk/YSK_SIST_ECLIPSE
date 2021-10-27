@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<body>
+<!-- 
+# 이미지 태그의 활용
+1. img 태그는 주로 이미지 파일을 화면에 출력할 때, 사용된다.
+2. 주요 속성  img 속성1="속성값"  속성2="속성값" ...
+	1) src 
+		이미지 경로를 상대주소/절대주소로 설정해 줄 수 있다.
+		현재 폴드에 이미지 있을 때는 해당 이미지를 로딩해서 출력할 수 있다.
+		이미지 폴드를 현재폴드에서 만들고 그 안에 이미지가 있을 때는
+			폴드명/이미지명 형식으로 설정할 수 있다.	
+	2) width : 해당 이미지의 넓이를 지정할 때, 사용된다.
+	3) height : 해당 이미지의 높이를 지정할 때, 사용된다.
+	이미지 다운로드 apple.png, banana.png
+ -->
+ 	<h3>첫번째 이미지!</h3>
+ 	<!-- media 폴드 하위에 apple.png 파일이 있으면
+ 		이미지를 볼 수 있다. -->
+ 	<img src="media/apple.png" 
+ 	width="100" height="100"/>
+ 	<!-- 
+ 	ex) banana.png, Elvis.png
+ 		100 150     100 200 크기로
+ 		사과  엘비스 타이틀로 출력해주세요.
+ 	 -->
+ 	<h3>바나나</h3> 
+ 	<input id="lgBtn" type="button" value="커져라"/>
+ 	<input id="smBtn"  type="button" value="작아져라"/>
+ 	<input id="chBtn" type="button" value="변해라"/><br>
+ 	<img id="bananaImg" src="media/banana.png" 
+ 	width="100" height="150"/>
+ 	<h3>엘비스</h3> 
+ 	<input id="lgBtn2" type="button" value="커져라"/>
+ 	<input id="smBtn2"  type="button" value="작아져라"/>
+ 	<input id="chBtn2" type="button" value="변해라"/><br> 	
+ 	<img id="elvisImg" src="media/Elvis.png" 
+ 	width="100" height="200"/> 	 	
+</body>
+<script type="text/javascript">
+	var lgBtn = document.querySelector("#lgBtn");
+	lgBtn.onclick=function(){
+		var bananaImg = document.querySelector("#bananaImg");
+		//alert(bananaImg.width);
+		// 객체.속성 += 증가변수;
+		bananaImg.width+=20;
+		bananaImg.height+=20;
+	};
+ // ex) 버튼 두개를 추가해서 클릭을 통해서 엘비스가 커지고 작아지게 하세요..
+// ex) 클릭을 통해서 엘비스가 커지고 작아지게 하세요
+   var elvisImg = document.querySelector("#elvisImg");
+   var lgBtn2 = document.querySelector("#lgBtn2");
+   lgBtn2.onclick=function(){
+      elvisImg.width+=20;
+      elvisImg.height+=20;
+   };
+   var smBtn2 = document.querySelector("#smBtn2");
+   smBtn2.onclick=function(){
+      elvisImg.width-=20;
+      elvisImg.height-=20;
+   };
+   var chBtn2 = document.querySelector("#chBtn2");
+   var chImg= true;
+   chBtn2.onclick=function(){
+	   // 이미지 변경 처리..
+	  // 3항연산자    boolean?true일때할당내용:false일때할당내용
+      elvisImg.src="media/"+(chImg?"Elvis1.jpg":"Elvis.png");
+	   // ! : not연산자.  true ==> false, false ==> true
+      chImg=!chImg; 
+   };
+ 
+</script>
+</html>

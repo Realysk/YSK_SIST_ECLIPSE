@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+/*
+# js에서 형변환 처리.
+1. 문자열과 숫자형 데이터을 자동형 변환을 많이 지원하고 있다.
+	+ 이외는 대부분 사칙연산자, 비교연산자, 논리연산자 지원을 하고 있다.
+	ex)
+	if('25'>='30'){ // 숫자형으로 자동형변환되어 처리된다.
+	}
+	var num01 = 25;
+	var num02 = "25";
+	if(num01 == num02) : 자동형변환이 되어 true값으로 처리된다.
+	* if(num01 === num02) : ===는 해당 데이터 유형이 같은지 여부와 
+		함께 데이터가 같은지도 check한다.
+	
+	
+2. 형변환 처리 지원 함수와 객체
+	1) Number("25"), Number("25.7") ==> 정수형, 실수형 둘다 지원한다.
+	2) parseInt("25.7") ==> 정수형으로 변환하여 숫자를 리턴한다.
+		25
+	3) parseFloat("25.5") ==> 실수형 데이터 숫자 리턴.
+		25.5
+	# Number()는 정수형 문자열과 실수형 문자열을 둘다,
+	해당 type에 맞게 숫자로 변환해준다. 
+	단, 뒤에 숫자형 이외에 문자가 있으면 에러(NaN)가 발생하지만,
+	parseInt(), parseFloat() 는 숫자로 시작만 하면, 앞에 숫자를 추출하고,
+	형변환을 해준다. parseInt()인 경우 숫자형 문자열이거나 숫자인경우 실수이면,
+	정수로 형변환까지 해준다. 
+	ex)parseInt("25.75") ==> 25
+	parseFloat("25.25KG") ==> 25.25
+	parseInt("3000원") ==> 3000
+	parseInt("$4000") ==> NaN 에러 발생.. 반드시 숫자형으로 시작될 때,
+		숫자값문 추출하여 숫자로 바꾸어 준다.
+	
+	# 숫자형이 아닌데이터를 형변환시, NaN 에러 발생..
+	4) isNaN("문자열") :  숫자형이 아닌 문자열은 true로 처리된다.
+		위 함수와 함께 효과적으로 처리가 필요하다.
+	# eval("25 + 30 * 25") : eval 문자열로 된 코드를 실행주는 역할을 하기에
+		문자열로 된 연산 결과를 처리해준다.
+		
+	
+ 
+ */
+ 	var num01Str = "25";
+ 	var num02Str = "5";
+ 	var num03Str = "3000원";
+ 	var num04Str = "75.5KG";
+ 	document.write(`<h2>함수활용하지 않음:${num01Str+num02Str}</h2>`)
+ 	document.write(`<h2>Number객체:${Number(num01Str)+Number(num02Str)}</h2>`)
+ 	document.write(`<h2>Number객체2(문자열포함):${Number(num03Str)+Number(num04Str)}</h2>`)
+ 	document.write(`<h2>parseInt(문자열 포함):
+ 			${parseInt(num03Str)+parseInt(num04Str)}</h2>`)
+ 	document.write(`<h2>parseFloat(문자열 포함):
+ 			${parseFloat(num03Str)+parseFloat(num04Str)}</h2>`)
+ // ex1) 물건명1가격, 물건2가격을 prompt로 입력 받아 위 함수를 이용해서 합산결과 출력하세요.
+ // ex2) 사람1의 키, 사람2의 키를 prompt로 입력 받아 위 함수를 이용해서 
+ //           단위와 함께 합산결과를 출력하세요. 1조
+ //  ~11:25 풀이하겠습니다.
+ 	var prodPrice1 = Number( prompt("1번째 물건 가격을 입력하세요!","0"));
+ 	var prodPrice2 = Number( prompt("2번째 물건 가격을 입력하세요!","0"));
+ 	document.write(`<h3>물건1 가격:${prodPrice1}</h3>`);
+ 	document.write(`<h3>물건2 가격:${prodPrice2}</h3>`);
+ 	document.write(`<h3>합산 가격:${prodPrice1+prodPrice2}</h3>`);
+ 	var p01Height = prompt("1번째 사람의 키입력(단위)","0cm");
+ 	var p02Height = prompt("2번째 사람의 키입력(단위)","0cm");
+ 	document.write(`<h3>사람1의 키:${p01Height}</h3>`);
+ 	document.write(`<h3>사람2의 키:${p02Height}</h3>`);
+ 	document.write(`<h3>합산 키:${parseFloat(p01Height)
+ 					+parseFloat(p02Height)} cm</h3>`);
+ 	
+ 	
+ 
+ 
+</script>
+
+</head>
+<body>
+
+</body>
+<script>
+
+</script>
+</html>

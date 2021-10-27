@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
+</head>
+<!-- 
+# 컴포넌트 사용
+1. 구조화된 화면을 처리하기 위하여, 사용자 정의 컴포넌트를 
+지정하여 사용할 수 있다.
+2. 기본형식
+	1) Vue.componenet("컴포넌트명", {template:"컴포넌트로 나타날 화면",
+		속성1:{},메서드:function(){}}
+	2) 화면에서는 
+		컴포넌트명으로 태그를 활용할 수 있다.	
+ -->
+<script type="text/javascript">
+	Vue.component("hello-component",{
+		template:"<div><h2>컴포넌트1</h2><p>반갑습니다!!</p></div>"
+	});
+	// ex) 즐거운 금요일입니다. Fire!! 출력하는 컴포넌트  
+	//     tgif - 컴포넌트 정의 및 출력..
+	Vue.component("tgif",{template:"<h2>즐거운 금요일입니다. Fire!!</h2>"});
+</script> 
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		<hello-component></hello-component>
+		<hello-component></hello-component>
+		<hello-component></hello-component>
+		<hello-component></hello-component>
+		<tgif></tgif>
+		<tgif></tgif>
+		<tgif></tgif>
+		<tgif></tgif>
+		<tgif></tgif>
+		<tgif></tgif>
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"컴포넌트연습!!"}
+	});
+</script>
+</html>

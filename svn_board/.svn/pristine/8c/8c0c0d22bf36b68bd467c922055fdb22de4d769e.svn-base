@@ -1,0 +1,20 @@
+package board.dao;
+
+import java.util.ArrayList;
+
+import board.vo.Board;
+import board.vo.BoardFile;
+
+// board.dao.BoardDao
+public interface BoardDao {
+	public ArrayList<Board> boardList(Board sch);
+	public void insertBoard(Board ins);
+	public void uploadFile(BoardFile ins);
+	public ArrayList<BoardFile> getBoadFile(int no);
+	public Board getBoard(int no);
+	/*
+	ex) mapper작성 후, 손내리기..- 검색은 제목과 작성자로 하겠습니다.
+	
+	다하신 분들은 초기 조회화면 구현해주세요.	
+	*/	
+}

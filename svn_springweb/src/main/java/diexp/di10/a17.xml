@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<bean id="obj" class="java.lang.Object"/>
+	<bean id="member" class="diexp.vo.Member">
+		<property name="id" value="himan"/>
+		<property name="pass" value="7777"/>
+		<property name="name" value="홍길동"/>
+		<property name="auth" value="관리자"/>
+		<property name="point" value="9000"/>
+	</bean>
+	
+	<bean id="shmall" class="diexp.vo.ShoppingMall">
+		<constructor-arg value="컴퓨터온라인쇼핑몰"/>
+		<property name="member" ref="member"/>
+	</bean>
+	<bean id="member1" class="diexp.vo.Member">
+		<property name="id" value="himan"/>
+		<property name="pass" value="7777"/>
+		<property name="name" value="홍길동"/>
+		<property name="auth" value="관리자"/>
+		<property name="point" value="9000"/>
+	</bean>
+	<bean id="member2" class="diexp.vo.Member">
+		<property name="id" value="higirl"/>
+		<property name="pass" value="8888"/>
+		<property name="name" value="홍리나"/>
+		<property name="auth" value="일반사용자"/>
+		<property name="point" value="1000"/>
+	</bean>
+	<bean id="member3" class="diexp.vo.Member">
+		<property name="id" value="goodMan"/>
+		<property name="pass" value="5555"/>
+		<property name="name" value="마영식"/>
+		<property name="auth" value="관리자"/>
+		<property name="point" value="5000"/>
+	</bean>
+	<bean id="shmall2" class="diexp.vo.ShoppingMall">
+		<constructor-arg value="식품류온라인쇼핑몰"/>
+		<property name="mlist" >
+			<list>
+				<ref bean="member1"/>
+				<ref bean="member2"/>
+				<ref bean="member3"/>
+			</list>
+		</property>
+	</bean>	
+	
+</beans>

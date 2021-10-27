@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/* 
+# css의 단위
+1. 크기 단위
+	1) 상대적 크기 설정.:기본적인 태그 지원 크기에서 상대적
+		크기로 설정
+	%: 기본 크기에 대하여 백분율로 표기할 때 사용. 
+		기본크기:100% / 1.5배:150% 
+	em: 해당 기본 크기에서 상대적 크기로 
+		1.5em:1.5배 크기 설정.
+		2.0em:2배 크기 설정.
+	2) 절대적 크기 설정.
+	px: 픽셀 단위로 절대적 크기를 설정해준다.
+	----------------------------------
+	cm, mm 
+	in :인치, 1in = 2.54cm = 96px
+	pt:포인트 1pt = 1in의 1/72
+# font 제어 속성..
+1. font-family 
+  	serif 형 : 끝부분에 각진 표시가 있는 모양
+  	Sans-Serif 형 : serif 없는 서체..
+  	monospace형 : 글자폭 동일한 유형..
+  	궁서체, 고딕, 굴림, 맑은 고딕, Arial, Times New Roman
+  	ex) font-family:Arial, "Times New Roman", Serif;
+2. font-size : 폰트의 크기
+	ex) font-size:40px;  
+3. font-style : 
+	ex) font-style:italic; 기울임체 설정.
+4. font-weight : 폰트의 굵기
+	ex) font-weight:300; font-weight:bold;				
+5. font로 위에 나열된 속성을 한번에 지정도 가능하다.
+	선택자{font:font-style font-weight font-size font-family}
+	 ex) h2{italic bold 20px 궁서체;}
+	
+
+ */
+
+</style>
+<script>
+
+</script>
+
+</head>
+<style>
+body {
+	font-family: "Times New Roman", Serif;
+	font-size: large;
+}
+h2 {
+	font: italic bold 40px consolas, sans-serif;
+}
+/* 글자 굵기, 글자체, 글자 크기*
+h3{
+	font-weight:200;
+	font-family:고딕체;
+	font-size:20px;
+}
+</style>
+<body>
+	<h2>Consolas font</h2>
+	<hr>
+	<p style="font-weight:900">font-weight 900</p>
+	<p style="font-weight:100">font-weight 100</p>
+	<p style="font-style:italic">Italic Style</p>
+	<p style="font-style:oblique">Oblique Style</p>
+	<p>현재 크기의 
+		<span style="font-size:1.5em">1.5배</span>
+		크기로
+	</p>
+	<!-- 
+	ex) 3조
+	안녕하세요 - h3 글자 굵기, 글자체, 글자 크기 (기본 css 설정.)[1단계]
+	select 글자체변경, : 선택시, 해당 내용을 위 h3를 변경처리.[2단계 js 처리]
+	select 글자크기변경, 
+	select 글자스타일변경,
+	1단계 제출, 2단계 제출 해주세요. 
+	 -->
+
+	<h3>안녕하세요</h3>
+	<select onchange="chFamily(this)">
+		<option>글자체변경</option>
+		<option>굴림체</option>
+		<option>궁서체</option>
+		<option>맑은 고딕</option>
+	</select>
+	<!-- 글자크기 변경 -->
+	<!-- 글자스타일 변경 -->
+ 	<select onchange="chSize(this)">
+       <option>크기변경</option>
+       <option>15px</option>
+       <option>25px</option>
+       <option>40px</option>
+    </select>
+    <select onchange="chStyle(this)">
+       <option>스타일변경</option>
+       <option>normal</option>
+       <option>italic</option>
+       <option>oblique</option>
+    </select>	
+	<script>
+		var h3Obj = document.querySelector("h3");
+		function chFamily(obj){
+			// style 변경 처리 : obj.value를 활용.
+			// select에서 전달된 내용을 value 속성으로 올 수 있으니,
+			// h3의 속성을 변경할 수 있다.
+			h3Obj.style.fontFamily=obj.value;
+		}
+		function chSize(obj){
+			h3Obj.style.fontSize=obj.value;
+		}
+		function chStyle(obj){
+			h3Obj.style.fontStyle=obj.value;
+		}		
+	</script>
+</body>
+<script>
+
+</script>
+</html>

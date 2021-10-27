@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+/*   
+# js에서 함수..
+1. 익명함수 : 변수형 함수..
+	var 함수명 = function(매개변수){ return 리턴할데이터;};
+	함수명();
+	함수를 선언한 후, 호출하여 사용한다.
+2. 선언적 함수 :
+	함수명();
+	function  함수명(){
+	}
+	선언적 함수는 함수명이 선언되기 전에 호출하여도,
+	호출이 처리된다. function  함수명() 선언된 것은
+	코드 라인별 실행 순서보다 메모리에 먼저 로딩되기때문이다...
+ */
+ 	//console.log("익명함수 호출1:"+call01()); 익명함수는 반드시 선언 후 호출하여야 한다.
+	var call01 = function(){ 
+		return "익명함수리턴값";
+	};
+	console.log("익명함수 호출1:"+call01());
+	console.log("선언적함수 호출2(선언 전 라인):"+call02());
+	// 선언적 함수는 선언 전/후에 다 처리가 가능하다.
+	function call02(){
+		return "선언적 함수리턴값";
+	}
+	console.log("선언적함수 호출3(선언 후 라인):"+call02());
+ // ex) 익명함수로 매개변수를 두개를 받아서 리턴값를 합산한 처리결과를 호출 하여 출력
+ //     선언적 함수로 매개변수를 두개 받아 곱셈을 처리한 결과를 리턴하여 호출 출력  6조.
+ 	var plus = function(num01, num02){
+	 console.log("plus 함수 호출:"+ num01+","+num02);
+	 console.log("리턴값:"+ (num01+num02));
+	 return num01 + num02; 
+ 	}	
+ 	console.log("함수의 호출 결과:"+plus(25,30));
+ 	
+ 	console.log("선언적 함수 호출 결과:"+calcu(3000,2));
+ 	function calcu(price, cnt){
+ 		console.log("선언적 함수:"+price+":"+cnt);
+ 		console.log("리턴값:"+(price*cnt))
+ 		return price*cnt;
+ 	}
+ 	
+ 
+</script>
+
+</head>
+<body>
+
+</body>
+<script>
+/* 
+#
+
+*/
+</script>
+</html>

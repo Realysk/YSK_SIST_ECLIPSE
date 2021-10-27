@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function callHandler(obj){
+		// 받은 매개값을 통해
+		// 배경 색상을 변경 처리..
+		obj.style.backgroundColor="yellow";
+	}
+/*
+ ex1) h4를 클릭했을 때, hello ==> 안녕하세요로 변경( 인라인 속성 처리.)  
+ ex2) h5를 클릭시, 배경색상 변경  : DOM객체 선언과 객체 이벤트 속성할당 처리
+ 		[1조]
+ 
+ */
+ 	function call(obj){
+		obj.innerHTML = "안녕하세요!"; 
+ 	}
+</script>
+</head>
+<body>
+	<h4 onclick="call(this)">hello</h4>
+	<h5>배경 색상 변경!!</h5>
+	<h2>마우스 오버했을 때..</h2>
+	<!-- 
+	태그  이벤트속성 = "처리할함수(매개값)" 인라인 속성 처리.
+	 -->
+	<h3 onclick="callHandler(this)">
+		인라인 이벤트 처리</h3>
+</body>
+<script type="text/javascript">
+	// 1. 대상 객체 지정
+	var h2Obj = document.querySelector("h2");
+	// 2. 이벤트 속성 지정
+	//    이벤트 속성에 정의된 이벤트 함수를 지정 처리.
+	//    onmouseover : 마우스를 해당 객체에 커서를 위치시켰을 때,
+	//      발생하는 이벤트
+	//    객체.이벤트명 = 선언된 이벤트 핸들러함수;
+	h2Obj.onmouseover=change1;
+	h2Obj.onmouseout=change2;
+	// 3. 함수 선언..:해당 이벤트가 발생하면 수행할 함수를 정의
+	function change1(){
+		// 
+		this.style.backgroundColor="pink";
+	}
+	function change2(){
+		this.style.backgroundColor="yellow";
+	}	
+	
+	// h2Obj.onmouseover(); 이벤트 수행...
+	function call05(){
+		this.style.backgroundColor="yellow";
+	}
+	
+	var h5Obj = document.querySelector("h5");
+	h5Obj.onclick = call05;
+	
+</script>
+</html>

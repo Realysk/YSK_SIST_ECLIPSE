@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
+<style>
+	.set1{background-color:aqua;color:purple;}
+	.set2{text-align:center;width:120px;}
+	.set3{border:sandybrown dashed 1px;}
+	.cls1{background-color:navy}
+	.cls2{color:yellow}
+	.cls3{width:250px;text-align:center;}
+
+</style>
+</head>
+<!-- 
+# vue에서 .class 속성의 처리..
+1. vue 속성으로 클래스 mapping하여 아래와 같이 처리한다.
+	요소 class="클래스1 클래스2"
+	요소 v-bind:class="{클래스1:true, 클래스2:true}"
+
+ -->
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		<button v-bind:class="{set1:s1,set2:s2,set3:s3}">
+			클래스 적용?</button><br>
+		<input type="checkbox" v-model="s1"	value="true"/>set1클래스적용<br>
+		<!-- check가 되면 value을 가지고, uncheck가 되면 value값을
+		가지지 못 한다. -->
+		set2클래스 적용:
+		<select v-model="s2">
+			<option value="true">적용</option>
+			<option value="">미적용</option>
+		</select><br>
+		<input type="checkbox" v-model="s3"	value="true"/>
+			set3클래스적용<br>
+		<h3 :class="{cls1:c1,cls2:c2,cls3:c3}">안녕하세요 클래스 적용..</h3>	
+		<!-- 
+		ex) h3에 클래스 cls1, cls2, cls3을 선언하고, 각각의 클래스에
+		type check 로 적용여부를 처리하세요..		
+		 -->
+		<input type="checkbox" v-model="c1"	value="true"/>클래스1<br>			
+		<input type="checkbox" v-model="c2"	value="true"/>클래스2<br>			
+		<input type="checkbox" v-model="c3"	value="true"/>클래스3<br>			
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"Vue의 class 처리..",s1:true,s2:true,s3:true,
+				c1:true,c2:true,c3:true}
+	});
+</script>
+</html>

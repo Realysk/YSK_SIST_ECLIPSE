@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h4></h4>
+	<script type="text/javascript">
+	// // ex)  getXXXX()을 통해서 날짜 객체를 생성하여, 현재 년도, 월, 일을 h4에 출력하세요  2조
+	var h4Obj = document.querySelector("h4");
+	var toDay = new Date(); // 현재 날짜..
+	// 오늘 이후로 40일로 변경..
+	toDay.setDate(toDay.getDate()+40);
+	var days = ["일","월","화","수","목","금","토"];
+	h4Obj.innerText = toDay.getFullYear()+"년 "+(toDay.getMonth()+1)+"월 "+toDay.getDate()+"일 "+
+		days[ toDay.getDay() ]+"요일";
+	</script>
+</body>
+<script type="text/javascript">
+/*
+# 내장 객체 Date
+1. 기본 형식
+	var d01 = new Date();
+	현재 시간 표시..
+2. 하위 지원메서드
+	.getFullYear() : 연도
+	.getMonth() : 월 (0~11) index값을 가져온다.
+	.getDate() : 날짜
+	.getDay() : 요일(0~7) index값을 가져온다.
+	.getHours() : 시간
+	.getMinutes() : 분
+	.getSecounds() : 초
+	.toLocaleString() : GMT기준으로 위치표현방식에 맞게 처리..
+	
+	.setXXXX(변경할 데이터);
+ */
+ 	var h2Arry = document.querySelectorAll("h2");
+ 	setInterval(function(){
+ 	 	var toDay = new Date();
+ 		
+ 		h2Arry[0].innerText = toDay;
+ 		h2Arry[1].innerText = toDay.toLocaleString(); 		
+ 	},1000);
+//# 특정 날짜를 지정하여 처리하기.
+// var 참조변수 = new Date("영문월 날짜, 년도")
+// var 참조변수 = new Date("영문월 날짜, 년도 시간:분:초")
+	var d_day = new Date("December 10, 2022");
+	h2Arry[2].innerText = d_day.toLocaleString();
+	var d_day2 = new Date("December 10, 2021 10:15:26");
+	h2Arry[3].innerText = d_day2.toLocaleString();
+	
+	var d_day3 = new Date(); // 오늘 날짜가 설정되어 있음.
+	// 기능 메서드를 통해서 변경..
+	d_day3.setDate(15); // 날짜만 변경 처리..
+	h2Arry[3].innerText = d_day3.toLocaleString();
+	// ex)  getXXXX()을 통해서 날짜 객체를 생성하여, 현재 년도, 월, 일을 h4에 출력하세요  2조
+	//      
+
+
+</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<h3>오디오 삽입</h3> 
+<hr>
+페이지 로드 즉시 음악이 연주됩니다.
+<p>
+<audio src="media/EmbraceableYou.mp3" controls  
+	autoplay="autoplay"  loop>
+  	브라우저가 audio 태그를 지원하지 않습니다.
+</audio> <!--
+크롬에서 브라우저 보안 정책상 autoplay가 되지 않음. 
+다른 브라우저에서는 자동 실행가능.
+  -->
+</p>
+</body>
+<script type="text/javascript">
+	document.querySelector("audio").play();
+</script>
+</html>

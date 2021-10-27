@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
+</head>
+<!-- 
+# 조건 반복 directive
+1. v-show="boolean값"
+	일단 화면에 로딩후, 특정 조건에 맞을 때,
+	css로 보이게 하고, 그렇지 않을 때, 보이지 않게 처리할
+	때, 사용된다.
+	자주 활용되는 데이터를 처리할 때, 사용한다.
+	1) 기본 형식
+		<태그 v-show="모델속성>=조건데이터">
+2. v-if
+	요소객체 안에 속성으로 v-if를 활용하면, 해당 요소 객체
+	가 v-if의 속성값으로 true값일 때만 보이게 초기에
+	랜더링 처리할  수 있다.
+	1) 기본 형식
+		v-if="모델데이터조건1"
+		v-else-if="모델데이터조건2"
+		v-else 위에서 선언한 조건이외일 때
+			
+ -->
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		사과의 가격:<input v-model="price"/><br>
+		<img :src="img01" v-show="price>=3000"><br>
+		획득한 점수:<input v-model="point"/><br>
+		<h3 v-if="point>=80">합격</h3>
+		<h3 v-else-if="point>=0">불합격</h3>
+		<h3 v-else>점수를 입력하세요</h3>
+		<!-- 
+		ex) 구매한 금액 :[    ]
+			1000000 이상 골드
+			500000~1000000미만 실버
+			200000~500000미만 브런즈
+			그외 기본
+		 -->
+		구매한 금액:<input v-model="pay"/><br>
+		회원의 등급:
+		<span v-if="pay>=1000000">Gold</span>
+		<span v-else-if="pay>=500000">Silver</span>
+		<span v-else-if="pay>=200000">Bronze</span>
+		<span v-else>Basic</span>		 
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"조건 directive!!",
+			  price:0, img01:"apple.jpg",
+			  point:-1, pay:0}
+	});
+</script>
+</html>

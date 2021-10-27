@@ -1,0 +1,60 @@
+# 스프링에서 chatting 프로그래밍 
+1. 주요내용
+	1) 웹 소켓에 대한 이해
+	2) 컨테이너 환경 설정
+	3) 초기 화면 구성
+	4) backend단 handler 처리내용
+		==> **push방식이기에 java코드와 front단의 js의 연동 부분에
+		이해.. 
+	5) 기능 확정을 위한 주요 처리 내용
+	
+2. 웹 소켓 서버에 대한 이해
+	1) 메세지나 여러가지 멀티미디어 데이터를 실시간으로 서버에 전달하면,
+	해당 서버는 웹 소켓 서버에 접속한 클라이언트에게 push방식으로 전송을 한다.
+	2) 이 때, 각 클라이언트는 서버에 핸들러 기능메서드와 동기적으로 js를 통해서
+	특정한 메시지를 처리해준다.
+3. 컨테이너 환경 설정.
+	1) 요청 객체의 설정 방식 선언 : HandlerMapping, HandlerAdapter 선언.
+	2) 요청 servlet handler 선언
+	3) Handler 클래스 선언
+	4) websocket:handlers를 통해서 handler 객체 호출과
+		이 핸들러가 client에서 접속을 할 수 있게끔 url 패턴을 설정 처리한다.
+		
+4. 화면 구성
+	계정 접속
+	메시지
+	메시지 내용
+	
+
+5. chatting handler와 화면 socket js와 연동 처리..
+	handler							js
+	afterConnectionEstablished		onopen
+	handleTextMessage				send("전송될 메시지") :메시지를 전송할 때. 
+		sendMessage(클라이언트보낼메시지)onmessage : 메시지가 서버 왔을 때
+	afterConnectionClosed			onclose
+									
+6. 특정 client가 메시지를 전송했을 때, 모든 client들에게 메시지 push 처리
+	0) 모든 client Session에 전달하여야 하기때문에 전역변수로
+		clientSession를 누적하는 변수 선언.
+		 
+	1) client단 send("전송할 메시지") 서버에 전달
+		handleTextMessage()에 전달 받아서.
+		위 전역변수로 선언하여 누적된 sessionClient에 반복문을 이용해서 전송처리.
+		
+		
+		
+
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+	

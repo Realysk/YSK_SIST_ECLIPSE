@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+/*
+# 정리문제
+1. 테이블관련 css 속성을  table 속성과 td,th 속성을 나누어 속성값과 함께 기술하세요.
+	table{border : 크기, 스타일, 컬러; 
+	border-collapse : collapse ;
+	ex) table{border:1px dotted blue;border-collapse:collapse;}
+	td,th : border, width, height, padding 
+		:hover, :nth-child(event|odd|2n+1...)
+
+2. 장바구니현황을 나타나는 데이터를 table로 나타내되 아래의 기능을 포함하세요.
+    1) 테이블은 중앙에 전체화면 대비 70%, 전체 선은 1라인으로 출력
+    2) 타이틀은 하단이 이중선, 배경색상과 글자색상 지정
+    3) 짝수 선언에 연한 배경색상 처리
+    4) 마우스 오버된 행에는 배경색상과 글자색상, 글자 크기를 다르게 표현처리
+3. confirm, prompt과 while문을 활용하여,
+    물건을 계속 입력하시겠습니까?, 물건명입력을 변수로 받아서, 취소를 클릭시까지
+    입력받은 후, 아래와 같이 출력하세요.
+    no  물건
+    1   @@@
+    2   @@@
+4. js의 데이터 유형 5가지를 간단한 예제와 함께 기술하세요. 
+	숫자형 : var num = 25;
+	문자열형 : var str = '홍길동'
+ 	boolean형 : var isPass = num>=20;
+    함수형 : var show = function(num) { return num-5 };
+   	객체형 :var arry = ['홍길동', 2, 1000];
+           var obj = {name : '홍길동', age : 25, isAult:true,
+        		      show : function(){return 1000}}; 
+ */
+ document.write(`<h5>no 물건명</h5>`);
+    var count = 1;
+    /*
+    while(confirm("물건을 계속 입력하시겠습니까?")){
+       var product = prompt("물건명을 입력해주세요.");
+       if(product!='null'){
+       	  document.write(`<h5>${count} : ${product}</h5>`);
+       }
+       count++;
+    } 
+    */
+    do{
+    // do while은 일단 1번 진행하고, 반복 조건을 체크하여 진행한다.
+        var product = prompt("물건명을 입력해주세요.");
+    	// prompt에 취소를 클릭시, 문자열로 'null'이 처리가 된다.
+        if(product!='null'){
+        	  document.write(`<h5>${count} : ${product}</h5>`);
+        }
+        count++;   	
+    }while( confirm("물건을 계속 입력하시겠습니까?") );
+    
+    
+ 
+</script>
+<style>
+   .tab01 {
+      width: 70%;
+      margin: 0 auto;
+      border: 2px solid black; 
+      border-collapse: collapse;
+      text-align : center;
+   }  
+   .tab01 th, td {
+      border : 1px solid black;
+   }
+   .tab01 th {
+   	  color:yellow;
+   	  background-color:blue;
+      border-bottom: 3px double red;
+   }
+    /* 행단위로 짝수행으로 배경 색상 지정
+   		tr:nth-child(even)
+   */
+   .tab01 tr:nth-child(2n){
+      background : aliceblue;
+   }   
+   .tab01 tr:hover {
+      background-color : yellow;
+      color : blue;
+      font-size : 20px;
+   }
+</style>
+</head>
+<body>
+   <table class="tab01">
+      <tr><th>번호</th><th>물건명</th></tr>
+      <tr><td>1</td><td>필통</td></tr>
+      <tr><td>2</td><td>볼펜</td></tr>
+      <tr><td>3</td><td>수박</td></tr>
+      <tr><td>3</td><td>수박</td></tr>
+      <tr><td>3</td><td>수박</td></tr>
+      <tr><td>3</td><td>수박</td></tr>
+      <tr><td>3</td><td>수박</td></tr>
+      <tr><td>3</td><td>수박</td></tr>
+      <tr><td>3</td><td>수박</td></tr>
+   </table>
+</body>
+<script>
+
+</script>
+</html>

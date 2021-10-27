@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<bean id="obj" class="java.lang.Object"/>
+	<context:component-scan base-package="diexp.vo6">
+		<context:include-filter type="annotation" 
+			expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<!-- 
+	@Controller가 있는 클래스를 객체로 메모리에 로딩한다.
+	
+	# 소스상으로 autowiring 설정 방법
+	1. 컨테이너 메모리에 연관관계가 있는 객체가 선언.
+	2. 컨테이너 옵션에 소스상에 설정으로 처리가 가능한 옵션은 설정
+		- spring5에서는 자동 지원(spring4에서는 지정해야함)
+		context:annotation-config
+	3. 소스상 autowiring 선언..
+		필드나 메서드선언 위에 아래의 옵션을 선언..해당 객체는 연관관계가 설정이 된다.
+		@Autowired
+	 -->
+	
+</beans>

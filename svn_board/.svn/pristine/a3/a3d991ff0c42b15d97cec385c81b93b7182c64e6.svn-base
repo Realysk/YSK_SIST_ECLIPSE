@@ -1,0 +1,25 @@
+package board.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import board.vo.Board;
+
+@Controller
+@RequestMapping("board.do")
+public class BoardController {
+	
+	
+	/*
+	ex1) 조회화면 구현해주세요.	
+	ex2) 검색되는 조회화면 구현해주세요.	
+	*/	
+	// http://localhost:7080/board/board.do?method=list
+	@RequestMapping(params="method=list")
+	public String boardList(Board board, Model d) {
+		
+		d.addAttribute("list", "");
+		return "a01_list";
+	}
+}

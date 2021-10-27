@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ 
+*/
+
+</script>
+</head>
+<body>
+<!-- 
+# hyperlink 만들기
+1. hyperlink란 다른 html페이지와 연결하여
+	1) 현재 서버에 있는 html페이지의 특정 위치로 이동할 수 있을 뿐만 아니라
+		ex) a href="a01_start.html" 현재 폴드에 있는 특정한 페이지로 이동
+	2) 외부 서버에 있는 페이지로 이동을 가능하게 한다.
+		ex) a href="http://www.naver.com" 네이버
+	3) 이미지로 링크 a href="" img	
+2. 기본 형식
+	a href="이동할페이지" target="페이지가 출력할 이름"
+ -->
+<h3>링크 만들기</h3>
+<hr>
+포털 사이트
+<!-- ul/li 구성되어 리스트 처리할 때, 활용된다. -->
+<ul><!-- 외부 페이지로 이동 처리. -->
+	<li><a href="http://www.naver.com">네이버</a></li>
+	<li><a href="http://www.daum.net">다음</a></li>
+</ul>
+신문 사이트
+<ul><!-- 이미지로 외부사이트 연결 -->
+	<li><a href="http://www.etnews.com">
+		<img src="media/iconetnews.png" alt="전자신문">
+		</a>
+	</li>
+	<li><a href="http://www.chosun.com">
+		<img src="media/iconchosun.png" alt="조선일보">
+		</a>
+	</li>
+</ul> 
+내부 사이트
+<ul>
+	<li><a href="a01_basic.html">첫페이지로 이동</a></li>
+	<li><a href="javascript:call('홍길동')">js 함수 호출</a></li>
+	<li><a href="javascript:go()">js 함수로 페이지 이동</a></li>
+</ul>
+<table border>
+	<tr><th>외부페이지 이동1</th><td><a href="http://lms1.sist.co.kr/">쌍용교육센터</a></td></tr>
+	<tr><th>외부페이지 이동2</th><td><a href="https://www.gmarket.co.kr/?jaehuid=200011415&cosemkid=go16169957302996414&gclid=CjwKCAjw8cCGBhB6EiwAgORey18j1RPOpjQp9GwRSjV8Zp7qX8CF4iRLJX%2DwbtlQlLffPJ%2Dq6AjxhRoCtO4QAvD%5FBwE">
+									G마켓</a></td></tr>
+	<tr><th>내부페이지 이동1</th><td onclick="go2()">
+								내부 페이지 이동</td></tr>
+	<tr><th>js내부페이지 이동2</th>
+			<td><a href="javascript:go3()">내부페이지 이동</a>
+						</td></tr>
+</table> 
+ 
+ 
+</body>
+<script type="text/javascript">
+	function call(str){
+		alert("js 함수 호출:"+str);
+	}
+	function go3(){
+		alert("내부 페이지 이동2");
+		location.href="a04_content.html ";
+	}	
+	function go2(){
+		alert("내부 페이지 이동1");
+		location.href="a06_img.html";
+	}
+	function go(){
+		alert("테이블 페이지로 이동");
+		location.href="a08_table.html";
+	}
+
+/*
+ex) 
+테이블을 만들고 테이블 안에..  해당 내용 클릭시,
+	외부페이지 이동1   |  아는 포탈사이트1 이동
+	외부페이지 이동2   |  아는 포탈사이트2 이동
+	내부페이지 이동1   |  a06_img.html 
+	js내부페이지 이동2 |  a04_content.html 
+
+
+
+ */
+
+</script>
+</html>

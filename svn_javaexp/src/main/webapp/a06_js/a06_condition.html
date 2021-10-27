@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+/*
+# js의 프로세스 처리..
+1. 	if(조건1 boolean){
+	   	조건1이 true일 때, 처리할 내용
+  	}else if(조건2 boolean){
+		조건1이 아니고, 조건2일 때, 처리할 내용
+	}else{
+	   조건인 false일 때, 처리할 내용
+	   	위 조건1, 조건2가 아닌 경우 처리할 내용..
+   	}
+   	ex) 
+   	if(point>=90){
+   		
+   	}else if(point>=80){ // 90이상 제외하고 80이상이기 때문에
+   						 // if( point<90 && point>=80 )
+   	}else if(point>=70){
+   		
+   	}
+2.  switch(데이터1){
+		case 데이터1특정한 데이터인경우:
+			처리할 프로세스 break;
+		case 데이터1특정한 데이터인경우:
+			처리할 프로세스 break;
+		case 데이터1특정한 데이터인경우:
+			처리할 프로세스 break;
+		default : 위에 case에 해당하지 않는 경우;		
+    }
+3. 반복문
+	while(반복조건){}
+	do{}while(반복조건); 일단 한번은 실행하고, 반복처리할 내용.
+	for(초기값;반복조건;증감연산){}
+	for(단위데이터:배열){} (X) js에서는 지원하지 않는다.
+	==> for(단위데이터 of 배열){} (O) 위 내용을 대체하는 구문.
+	for(단위속성 in 객체/배열){
+		단위속성
+		객체[속성]
+		배열[index]
+	}
+	ex) 
+	var p01 = {name:"홍길동", price:3000, cnt:5};
+	for(var pro in p01){
+		pro : name, price, cnt
+		p01[pro] : "홍길동", 3000, 5
+	}
+	var arry = {3000,4000,5000}
+	for(var idx in arry){
+		idx : '0', '1', '2' 
+		arry[idx] : 3000, 4000, 5000
+	}
+ */
+ // 변수를 선언합니다.
+ var score = Number(prompt('학점을 입력하세요.', '0.0'));
+ console.log("입력한 데이터:"+score);
+ console.log("입력한 데이터:"+typeof(score));
+ 
+ // 조건문
+ if (4.0 <= score && score <= 4.5) {
+ 	console.log('A 등급입니다.');
+ }else{
+	// 0미만이거나 4.5 초과
+	if(score < 0 || score > 4.5){
+		console.log("입력 범위에서 벗어납니다.입력범위(0~4.5)");	
+	}else{
+		// 함수 isNaN(데이터) :  숫자형인지 여부를 확인 처리..
+		//  Is not a number?  숫자형이 아닐 때, true
+		//console.log("isNaN(score):"+isNaN(score));	
+		if( isNaN(score) ){
+			console.log("숫자형을 입력하세요!!!")
+		}else{
+			console.log("A등급이 아닙니다.");
+		}
+	} 
+ 	
+ }
+ // ex) 위에서 숫자형을 입력하지 않는 경우, 취소를 클릭 한 경우에 대한 예외 처리를 하여,
+ //     출력 처리하세요. 2조.. ~12:10 풀이하겠습니다.
+</script>
+
+</head>
+<body>
+
+</body>
+<script>
+
+</script>
+</html>

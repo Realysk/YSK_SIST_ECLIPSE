@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+
+</style>
+<script>
+/*   
+#
+1. isNaN(), isFinity()는 어떤 유형에 데이터를 처리할 때, 사용되는가?
+	isNaN() : NaN 에러(숫자형데이터를 입력하지 않을 때, 형변환시 나타남)에 
+		대한 체크 boolean 결과를 나타낸다.
+	isFinity() : Infinity 에러( /0으로 처리할때, 나오는 에러)에 대한 boolean값 
+		체크를 처리해주는 함수이다.
+		
+		
+2. 매개변수가 가변형인 것 중에, default값 처리형식을 기본예제를 통해서 기술하세요.
+	function 함수명(매개변수1, 가변매개변수1=초기값, 가변매개변수2=초기값,.... )
+	function login(name, id="아이디없음", pass="패스워드없음", auth="방문자"){
+	      console.log("회원명:"+name+", 아이디:"+id+", 패스워드:"+pass+", 권한:"+auth);
+	}
+	login("홍길동");
+	login("홍길동","himan");
+	login("홍길동","himan",7777);
+	login("홍길동","himan",7777,"회원");	
+
+3. 가변매개변수의 형태를 정리해보세요.
+	1) function 함수명(){ arguments : 가변 매개변수를 배열로 처리한다.
+	2) function 함수명(매개변수=default값처리 ) : 매개변수값이 없을 때, default로 처리.
+	3) function 함수명(매개변수, ...가변매개변수배열)
+		: 가변매개변수배열 - 가변 매개변수를 배열로 받아서 처리할 수 있다.
+
+4. 객체의 속성의 대한 확인과 with 구문을 통한 객체 속성 처리를 기본 예제를 통해서 기술하세요.
+	var prod = {name:"사과", price:3000, cnt:2}
+	with(prod){
+	      console.log("물건명:"+name);
+	      console.log("가격:"+price);
+	      console.log("갯수:"+cnt);
+	}
+
+5. 초기 객체를 선언하고(var obj={}), 5가지 데이터유형을 할당한 후, 호출해보세요..
+	var p01 ={};
+	// 1. 문자열
+	p01.name="홍길동";
+	// 2. 숫자형
+	p01['age'] = 25;
+	// 3. boolean
+	p01['isAdult'] = true;
+	// 4. 함수형
+	p01.show = function(){
+		console.log(this.name) // this:현재 객체가 가지고 있는 속성 호출..	
+		console.log(this.age)	
+		console.log(this.isAdult)	
+	}
+	// 5. 객체형(배열포함)
+	p01.myfriend = { name:'김친구',age:28, loc:'어린시절고향'};
+
+6. 아래와 같은 등록 form으로 객체형 배열에 데이터를 등록하고,  forEach함수를 이용하여,
+    등록된 내용을 리스트 되게 처리하세요.
+    물건명[   ] 가격[   ] 갯수[   ]  [등록]
+    구매물건리스트
+    번호  물건명  가격  갯수  계
+    # 진행 순서
+    1. 화면구현 body
+    2. 이벤트 확인 : 등록버튼에 onclick="함수"
+    3. DOM객체 확인 
+    	물건명 : var pname= document.querySelector("[name=pname]");
+    	출력테이블 : var tab = document.querySelector("#tab01");
+    4. 이벤트를 통해 출력처리 형식..
+    	1) 일단, 객체로 만들기..
+    		var plist = [];
+    	2) 이벤트를 통해서 입력된 데이터 배열에 추가하기.
+    		plist[idx] = {name:pname,....};
+    	3) 화면에 출력 처리하기..
+    		var show = "";
+    		plist.forEach(function(prod,idx){
+    			show+=`<tr><td>${prod.name}</td>...`
+    		tab.innerHTML = show;  
+    
+    
+7. eval() 함수를 이용하여, 계산기 5X4의 계산기를 폼을 만들었을 때, 상단에 출력되게
+    하고, = 클릭시, 계산결과값이 출력되게 하세요
+		    [      2*6]  
+		    1  2  3  +   ==> 계산기와 동일하게 클릭시, 상단에 출력내용 나오고,
+		    4  5  6  -   
+		    7  8  9  *
+		    C  0  =  /
+	1) 화면 구현 5X4 td안에 위 기능 문자열 넣기.
+	2) 요소객체 선택  및 이벤트 처리.. 
+		 개별적으로 onclick="함수"
+	     var tds = document.querySelectorAll("td");
+		 for(var idx=0;idx<tds.lengt;idx++){
+			tds[idx].onclick=function(){
+				// 클릭한 td의 레이블 내용 출력.. console.log	 
+			}
+		 }
+	3) 이벤트를 통해 해당 cell에 있는 문자열 가져오기 ~ 4조.. ~11:37 풀이하겠습니다.
+	
+	4) 가져온 문자열을 상단에 표시하기.
+	5) = 클릭시, eval()함수로 연산 결과값 처리..
+		
+ */
+ 	var plist = [];
+ 	var idx=0;
+	function regist(){
+		var pnameV= document.querySelector("[name=pname]").value; 	
+		var priceV= document.querySelector("[name=price]").value; 	
+		var cntV= document.querySelector("[name=cnt]").value; 	
+		var tab = document.querySelector("#tab01 tbody");
+		var prod ={pname:pnameV,price:priceV,cnt:cntV};
+		console.log(prod);
+		
+		plist[idx++] = prod;
+		var show = "";
+		plist.forEach(function(prod, idx){
+			show+=`<tr><td>${idx+1}</td><td>${prod.pname}</td>
+						<td>${prod.price}</td><td>${prod.cnt}</td>
+						<td>${prod.price*prod.cnt}</td></tr>`;
+		});
+		tab.innerHTML = show;
+    } 
+</script>
+<style>
+	#cal{font-size:40px;text-align:center;}
+</style>
+</head>
+<body>
+<!-- 
+		    [      2*6]  
+		    1  2  3  +   ==> 계산기와 동일하게 클릭시, 상단에 출력내용 나오고,
+		    4  5  6  -   
+		    7  8  9  *
+		    C  0  =  /
+ -->
+	<h2>계산기 프로그램</h2>
+	<table id="cal" width="400" height="500" border>
+		<!--  colspan="열단위 셀을 합치는 갯수" -->
+		<tr><td id="show" colspan="4" style="padding:10px;text-align:right;height:100px;">0</td></tr>
+		<tr><td>1</td><td>2</td><td>3</td><td>+</td></tr>
+		<tr><td>4</td><td>5</td><td>6</td><td>-</td></tr>
+		<tr><td>7</td><td>8</td><td>9</td><td>*</td></tr>
+		<tr><td>C</td><td>0</td><td>=</td><td>/</td></tr>
+	</table>
+<script>
+	var tds = document.querySelectorAll("#cal td");
+	var show = document.querySelector("#show");
+	for(var idx=0;idx<tds.length;idx++){
+		tds[idx].onclick=function(){
+			// 클릭한 td의 레이블 내용 출력.. console.log	 
+			console.log("클릭한 td:"+this.innerText);
+			if(show.innerText=='0'){
+				show.innerText='';
+			}
+			if(this.innerText=="="){
+				// eval 함수를 통해 계산된 결과값을 출력내용으로 확인 할 수 있다.
+				show.innerText=eval( show.innerText );
+			}else if(this.innerText=="C"){
+				show.innerText="0";
+			}else{
+				show.innerText +=this.innerText;	
+			}
+			
+		}
+	}
+
+</script>	
+	
+<!-- 
+    2. 이벤트 확인 : 등록버튼에 onclick="함수"
+    3. DOM객체 확인 
+    	물건명 : var pname= document.querySelector("[name=pname]");
+    	출력테이블 : var tab = document.querySelector("#tab01");    
+    	버튼을 눌렀을 때, console.log로 입력한 물건명, 가격, 갯수를 출력하는 처리.
+    	3조 ~10:45 풀이하겠습니다.
+ -->
+   	<h3>구매물건등록</h3>
+    물건명 <input type="text" name="pname"/><br>
+    가격 <input type="text" name="price"/><br>
+    갯수 <input type="text" name="cnt"/><br>
+   	<input type="button" onclick="regist()" value="등록"/><br>
+   	<h3>구매물건리스트</h3>
+   	<table id="tab01" border>
+   		<thead>
+   			<tr><th>번호</th><th>물건명</th><th>가격</th><th>갯수</th><th>계</th></tr>
+   		</thead>
+   		<tbody></tbody>
+   	</table>
+    
+    
+    
+</body>
+<script>
+/* 
+
+
+*/
+</script>
+</html>

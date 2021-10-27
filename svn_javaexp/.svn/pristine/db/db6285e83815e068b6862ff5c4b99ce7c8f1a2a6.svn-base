@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	// BOM은 DOM의 상위 포함객체이다.
+
+
+	// 전역변수 선언..
+	var win = null;
+	function openWindow(){
+		// win :윈도우 객체 할당.
+		win = window.open("","","width=300, height=300");
+		win.document.write("<h2>창문이 열림!!</h2");
+	}
+	function goLeft(){
+		// win에 기능 메서드 처리.
+		//win.moveBy(x, y) : x,y 축으로 이동
+		win.moveBy(-10,0); // 왼쪽으로 이동
+		// By : 상대
+		// To : 절대
+		// win.moveTo(x,y) : x, y축 의 절대 위치로 이동..
+	}
+	function goRight(){
+		//win.moveBy(x, y) : x,y 축으로 이동
+		win.moveBy(10,0); // 오른쪽으로 이동..
+	}	
+	//ex1) 로딩윈도우를 통해서  창이  100/100 정도 크기가 로딩되고,
+    //     내용으로 Bus1 h3로 표시,
+    ////   위로/아래로 클릭시,  아래 위로 이동 처리하세요.
+    // 전역변수로 선언
+   	var win2;
+	var cnt=1;
+	function openWin2(){
+		// 전역변수에 할당..
+		win2 = window.open("","","width=100, height=100");
+		// cnt는 호출할 때마다 변수를 증가처리..
+		win2.document.write("<h3>Bus"+cnt+"</h3>");
+		cnt++;
+	}
+	function goUp(){
+		// 전역변수에 내용의 속성을 변경 처리..
+		win2.moveBy(0,-20);
+	}
+	function goDown(){
+		win2.moveBy(0,20);
+	}	
+</script>
+</head>
+<body>
+	<h2 onclick="openWin2()">로딩 윈도우</h2>
+	<button onclick="goUp()">위로</button>
+	<button onclick="goDown()">아래로</button>	
+
+	<h2 onclick="openWindow()">창문을 열어다오!!</h2>
+	<button onclick="goLeft()">왼쪽으로</button>
+	<button onclick="goRight()">오른쪽으로</button>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+</style>
+<script type="text/javascript">
+/*
+ 2. DOM객체의 다중 설정과 단일 설정 처리를 테이블 tr, td 기준으로 처리하여 출력하세요.
+--------------------------------------------------------
+3. css의 후손 선택자 선언방식 2가지를 기술하세요
+	조상선택자 후손선택자{속성:속성값} : 조상과 후손에 중간에 요소객체 상관없어 처리된다.
+	부모선택자>자식선택자{속성:속성값} : 계층상 바로 윗단계를 둔 자식객체에 대한 속성 처리된다.
+4. 선택자 중 h4중에서 class cls01로 설정하고자 한다. 해당 내용을 처리하세요.
+	h4.cls01{속성:속성값;}
+5. 가상 선택자 3가지 유형을 기술하세요
+	1) 반응 선택자 : 사용자의 이벤트에 따라서 처리되는 선택자 처리 :active, :hover
+	2) 상태 선택자 : 사용자의 form요소객체에 대한 처리로 변경되는 선택자 :focus, :disabled
+	3) 구조 선택자 : 리스트형이나 테이블의 반복적인 데이터에 대한 처리 선택자 :nth-child
+		:even, odd
+*/
+
+</script>
+</head>
+<body>
+	<h4>안녕하세요</h4>
+	<h4 class="cls01">안녕하세요(클래스)</h4>
+	<h4>안녕하세요</h4>
+	<h4 class="cls01">안녕하세요(클래스)</h4>
+	<h4>안녕하세요</h4>
+	<table width="70%" border>
+		<tr><th>물건명</th></tr>
+		<tr><td>사과</td></tr>
+		<tr><td>바나나</td></tr>
+		<tr><td>딸기</td></tr>
+	</table>
+</body>
+<script type="text/javascript">
+/*
+
+ */
+	var tdObj = document.querySelector("td"); //단일 td의 첫번째 데이터
+	// 글자크기 변셩.
+	tdObj.style.fontSize="30px";
+	var tdArry = document.querySelectorAll("td"); // 다중의 td 전체 배열.
+	for(var idx=0;idx<tdArry.length;idx++){
+		tdArry[idx].align="center";
+		tdArry[idx].style.backgroundColor="yellow";
+	}
+
+</script>
+</html>

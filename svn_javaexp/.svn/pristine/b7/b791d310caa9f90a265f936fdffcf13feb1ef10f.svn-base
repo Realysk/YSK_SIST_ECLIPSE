@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*  */
+td{width:33%;height:33%;}
+</style>
+<script>
+/*   
+#
+
+
+ */
+function exjs(){
+	var code = document.querySelector("textarea").value;
+	console.log(code);
+	eval(code);
+}
+/*
+	<h3 onclick="start()">구구단 문제 시작</h3>
+	<h2 id="gugu"></h2>
+	결과입력:<input type="text" size="3" name="reply"/>  
+ */
+function start(){
+	var num01 = parseInt(Math.random()*8+2);
+	var num02 = parseInt(Math.random()*9+1);
+	var corReply = num01*num02;
+	document.querySelector("#gugu").innerText = num01 + " X "+ num02;
+	var set01 = setTimeout(function(){
+		alert("시간이 종료 되었습니다.");
+		var inNum = document.querySelector("[name=reply]").value;
+		console.log(inNum+":"+corReply);
+		if(corReply==inNum){
+			alert("정답입니다!!");
+		}else{
+			if(inNum==''){
+				alert("시간이 경과했습니다!!")
+			}else{
+				alert('오답입니다.')
+			}
+		}
+		clearTimeout(set01); // 자원의 해제..
+	},5000);
+}
+function gameStart(){
+	// 필요한 요소객체..
+	var cnt = 1;
+	var tds = document.querySelectorAll("#tab td");
+	var span = document.querySelector("span");
+	for(var idx=0;idx<tds.length;idx++){
+		tds[idx].innerText = idx+1;
+		tds[idx].style.textAlign = "center";
+		tds[idx].onclick=function(){
+			if(this.innerHTML!=""){
+				span.innerText=cnt++;
+			}
+			console.log(this.innerHTML);
+		}
+	}
+	// 랜덤의 특정한 td에 배경색상변경 0.5초마다.
+	var set01 = setInterval(function(){
+		// 초기화 처리..
+		for(var idx=0;idx<tds.length;idx++){
+			tds[idx].innerHTML="";
+		}		
+		// 0~배열의갯수(16)-1까지 범위 랜덤 발생..
+		var rIx = parseInt(Math.random()*tds.length);
+		tds[rIx].innerHTML="<img src='두더지.PNG' width='100%' height='80px'/>";
+	},1000);
+}
+</script>
+</head>
+<body>
+	<h2 onclick="gameStart()">두더지게임초기(시작) [점수]:<span>0</span>점</h2>
+	<table id="tab" width="300pt" height="300pt" border>
+		<col width="33%"><col width="33%"><col width="33%">
+		<tr><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td></tr>
+	</table>
+	<h2 onclick="exjs()">js 코드(실행)</h2>
+	<textarea cols="20" rows="10"></textarea>
+	<h3 onclick="start()">구구단 문제 시작</h3>
+	<h2 id="gugu"></h2>
+	결과입력:<input type="text" size="3" name="reply"/> 
+
+</body>
+<script>
+/* 
+1. for in 구문의 객체와 배열의 반복처리를 기본 예제를 통해서 기술하세요.
+*/
+// 1) 객체
+	var p01 = {name:"홍길동", age:25, loc:"서울"};
+	var arry = ["사과","바나나","딸기"];
+	for(var pro in p01){
+		console.log(pro+":"+p01[pro]);
+	}
+	for(var idx in arry){
+		console.log(idx+":"+arry[idx]);
+	}
+/*
+2. for of 와 for in의 차이를 기술하세요.
+	for(var index in 배열) :
+		index : 배열의 인덱스
+		배열[index] : 배열의 값..
+	for(var 단위객체 of 배열)
+		배열안의 단위데이터/단위 객체.
+*/
+	console.log("# for of 구문 #");
+	for(var fruit of arry){
+		console.log(fruit)
+	}
+/*
+3. arguments의 역할을 기술하세요.
+	함수를 정의할 때, 여러가지 매개변수를 arguments라는 객체에 배열로
+	가져와서 처리할 수 있다.
+*/
+	function product(){
+		console.log("# 다양한 매개변수 처리 #");
+		for(var idx=0;idx<arguments.length;idx++){
+			console.log(idx+":"+arguments[idx]);
+		}
+	}
+	product('사과');
+	product('딸기',12000);
+	product('수박',15000, 5);
+/*
+4. 내장 함수 setTimeout과 setInterval의 기본 예제와 내용을 기술하세요.
+//setTimeout: 일정시간 후 함수 호출
+/*
+var set01 = setTimeout(function(){
+   alert("3초가 지났습니다.")
+   clearTimeout(set01); // 메모리 해제 처리.
+}, 3000)*/
+
+// setInterval: 일정시간 간격으로 함수를 반복적으로 실행
+/*
+var cnt = 1;
+var set02 = setInterval(function(){
+   console.log("3초마다 수행..(반복).")
+   cnt++;
+   if(cnt > 3){
+	   clearInterval(set02); // 반복 중지 및 메모리 해제..
+   }
+}, 3000)
+
+5. eval 함수를 이용하여, 웹상 textarea를 통해 js프로그램 실행결과를 확인하세요.
+function exjs(){
+	var code = document.querySelector("textarea").value;
+	console.log(code);
+	eval(code);
+}
+	<h2 onclick="exjs()">js 코드(실행)</h2>
+	<textarea cols="20" rows="10"></textarea>
+6. 임의로 구구단 1문제를 출력하여 5초이내에 입력하고, 정답여부를 출력하게 하세요.
+	
+7. 3X3테이블에 0.5초 마다 임의의 td의 배경색상이 바뀌게 처리하세요.(두더지게임기초단계)
+	1) 화면 구현..
+	2) 요소객체 선택..
+	3) 이벤트 결정 - 시작, 0.5초마다 배경색변경..
+	
+*/
+
+</script>
+</html>

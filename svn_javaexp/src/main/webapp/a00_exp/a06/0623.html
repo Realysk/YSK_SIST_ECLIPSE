@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ 
+*/
+	function call(){
+		alert("함수호출");
+	}
+</script>
+</head>
+<body>
+	<table></table>
+	외부페이지 <a href="http://www.naver.com">네이버</a><br>
+	<!-- ../ : 상위 폴드로 이동 처리.. -->
+	내부페이지 <a href="../../a02_html/a01_basic.html">
+				내부페이지이동(상대경로)</a><br>
+	js함수호출 <a href="javascript:call()">함수호출</a><br>
+	<!-- a href="이동할페이지" target="지정한프레임의이름"
+		 iframe name="프레임이름"
+	 -->
+	<a href="0615.html" target="frame01">[6/15]</a>
+	<a href="0617.html" target="frame01">[6/17]</a>
+	<a href="0621.html" target="frame01">[6/21]</a><br>
+	<iframe name="frame01" src="0623.html" 
+		width="600" height="400"></iframe>
+	
+	
+	
+
+</body>
+<script type="text/javascript">
+/*
+1. 초기 <table></table>화면에 구성된 내용을 2X2테이블로 javascript 코드로
+    만들어 보세요.
+    화면에 있는 태그를 js에 의해서 DOM로 선언하여,
+    여러가지 함수와 이벤트를 통해서 동적인 속성과 내용변경을 할 수 있다.
+    
+*/
+	var tab = document.querySelector("table");
+	tab.border="1";
+	tab.width="200";
+	tab.height="200";
+	tab.align="center";
+	var show = "<tr><td>1</td><td>2</td></tr>";
+	show += "<tr><td>3</td><td>4</td></tr>";
+	tab.innerHTML = show;
+	
+/*
+2. hyperlink의 기본 속성에 대하여 기술하세요.
+	<a href="외부사이트/내부페이지/js함수" 
+		target="top/_parent/프레임명">링크할 키워드</a>
+3. a 태그를 이용해서, 외부페이지, 내부페이지, javascript 함수호출예제를 코드로 만드세요.
+4. a 태그와 iframe의 링크연동을 기본예제를 통하여 설명하세요.
+
+5. 물건명 [  ] 가격 [   ][등록] - 해당 버튼을 클릭시 마다 테이블에 물건이 추가 등록되게 처리.
+    번호  물건명 가격
+    1    @@    @@
+ */
+
+</script>
+</html>

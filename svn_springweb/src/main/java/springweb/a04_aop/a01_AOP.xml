@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-4.0.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+<!-- 
+# AOP란?
+1. 문제를 바라보는 관점을 기준으로 프로그래밍하는 기법을 말한다.
+	Aspect Oriented Programming!!
+	1) 핵심기능인 계좌이체, 대출승인, 이자계산이라는 프로그램이 있다면,
+	그 중에 특정한 데이터 처리시, 부가기능인 로깅, 보안, 트랜잭션을 처리한다면
+	부가기능을 모두 다 각 핵심기능 마다 프로그래밍 하는 것이 아니라,
+	부가기능 모듈을 만들고, 특정시점에 weaving 처리하는 것을 말한다.
+	2) 에러를 빠르게 처리하고, 통합 테스트 등, 개발 속도를 향상 시킬 수 있다.
+2. 핵심기능에  공통기능(로그, 예외처리)를 핵심 기능 수행 되기 전, 수행 이후,
+	예외가 발생했을 때 등인  advice를 지정해서 처리할 수 있다.
+3. 주요 요소 정의
+	1) Aspect : 관점으로 여러 객체에 공토으로 적용되는 기능을 말한다.
+	2) Pointcut : 적용 가능한 지점의 최소 단위
+	3) JoinPoint : Pointcut을 집합체로서 언제 적용할 지점을 의미한다.
+		주로 메서드 호출, 필드 값 변경등을 지정한다.
+	4) Advice : 언제 공통 관심 기능을 핵심로직에 적용할 지를 정의한다.
+	5) Weaving : advice를 핵심 로직 코드에 적용하는 것을 말한다.
+3. Advice의 종류
+	1) 예외가 발생한 경우(After Throwing) : 그 예외를 어떻게 처리해야
+		하는지에 대한 공통처리 모듈 작성하는 것을 말한다.
+			xml : aop:after-thrwoing
+			java : @AfterThrowing
+	2) 주업무 시작과 마지막부분(Around) : 주업무의 앞과 뒤에 필요한 부가
+		작업을 처리하는 경우를 말한다.
+			xml : aop:around
+			java : @Around
+	3) 주업무 시작 이전(Before) : 주업무 시작 앞에 처리할 필요가 있는
+		부가 작업을 처리하는 경우를 말한다.
+			xml : aop:before
+			java : @Before
+	4) 주업무 처리 이후 (After Returning) : 주업무 처리 이후에 리턴할 때,
+		처리할 필요가 있는 부가 작업을 처리한 경우를 말한다.
+			xml : aop:after-returning
+			java : @AfterReturning
+4. Pointcut의 표현식 :지정한 특정 위치의 객체나 메서드를 지칭
+	1) execution 명시자
+		- 기본 형식 : execution("수식패턴|리턴타입 클래스이름패턴|메서드이름
+			패턴(파라미터 패턴)"
+		- 실행 예제
+			execution(public void set*(..) ) : 리턴타입이 void이고,
+				메서드명이 set으로 시작하고, 파라미터가 0개 이상인 메서드 호출.
+			execution(* net..*.get*(*,*) ) : 리턴타입 상관없고, net으로 시작
+				하는 하위 패키지의 클래스에서 메서드명이 get으로 시작하고, 2개의
+				파라미터가 있는 경우 수행.. 
+	2) within 명시자
+		- 기본 형식 : 특정 타입에 속하는 메서드를 pointcut으로 설정.
+			within(net.prj.Service) : 해당 클래스가 수행될 때.
+			within(.vo..*) : 패키지명이 vo가 들어가는 하위에 있는 모든
+				클래스 수행시.
+	3) bean 명시자
+		 스프링에 추가적으로 제공되는 bean 선언내용
+		 	bean(*Service)
+	4) JdkRegexpMethodPoint
+		- 기본 형식 :pattern/patterns 프로퍼터를 통해 Pointcut 메서드
+			패턴을 정규표현식으로 설정.
+			property name="pattern" value=".*someWord.*"  :
+				someWord메서드 포함된 경우를 지정.
+	5) point의 조합
+		- 형식 : 표현식1&&표현식2 : 두개의 표현식에 다 합치될 때, 수행
+				표현식1||표현식2 : 둘 중에 하나의 표현식만도 합치될 때
+					수행..
+	6) @Order(적용순서)								 	
+-->		
+	<!-- java source에서 annotation 사용 처리. -->
+	<context:annotation-config/>		
+	<bean class="java.lang.String">
+		<constructor-arg value="스프링 AOP"/>
+	</bean>
+	<!-- 1. 핵심 모듈(target) 클래스를 정의  
+			aop가 적용될 대상 클래스
+	-->
+	<bean id="msg" class="springweb.a04_aop.vo.Message"/>
+	<!-- 2. 관심 모듈(AOP) 클래스 정의 빈.. 
+			대상클래스에서 특정한 pointcut/advice로 처리할 실제 부가
+			기능 내용에 대한 aop 클래스.
+			해당 시점에 처리될 실제 내용에 대한 정의
+	-->
+	<!-- advise를 포함한 aop -->
+	<bean id="logAop" class="springweb.a04_aop.vo.A01_Loggin"/>
+	
+	<!-- 3. advisor = advice + pointcut 
+			적용될 시점에 대한 정의(수행 시간 기준, 수행할 특정 코드 기준)
+	-->
+	<bean id="advisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="logAop"/>
+		<property name="pointcut">
+			<bean class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+				<property name="pattern">
+					<value>.*.helloApp*.*</value>
+				</property>
+			
+			</bean>
+		</property>
+	</bean>
+	<!-- 4. proxy를 통해서 target과 AOP를 연동 처리..
+		advisor와 대당 msg의 weaving 처리..
+	 -->
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!-- 적용할 대상 객체 -->
+		<property name="target">
+			<ref bean = "msg"/>
+		</property>
+		<!-- 처리한 advisor -->
+		<property name="interceptorNames">
+			<list>
+				<value>advisor</value>
+			</list>
+		</property>
+	</bean> 
+</beans>       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:util="http://www.springframework.org/schema/util"
+	 xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+   		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<bean id="product1" class="diexp.vo.Product" c:_0="사과" c:_1="3000" c:_2="2"/>
+	<bean id="product2" class="diexp.vo.Product" c:_0="딸기" c:_1="12000" c:_2="3"/>
+	<bean id="mt1" class="diexp.vo.Mart" c:_0="행복마트"  autowire="byName"/>
+	<!-- 
+	Pencil 3개를 만들고, 이 중에 autowir로 처리할 
+	내용으로 Note객체의 메서드를 선언하고, byName autowire
+	처리 후, DI22.java에서 호출하세요. 1조
+	
+	 -->
+    <bean id="pencil1" class="diexp.vo.Pencil" c:_0="4B연필"/>
+    <bean id="pencil2" class="diexp.vo.Pencil" c:_0="샤프"/>
+    <bean id="pencil3" class="diexp.vo.Pencil" c:_0="볼펜"/>
+    <bean id="note1" class="diexp.vo.Note" c:_0="스케치 노트" autowire="byName"/>
+	<bean id="driver" class="diexp.vo.Driver" c:_0="홍길동" c:_1="대형버스기사"/>
+	<bean id="bus" class="diexp.vo.Bus" p:number="8000" autowire="constructor"/>
+	<bean id="bus1" class="diexp.vo.Bus" c:number="8000" autowire="constructor"/>
+	 
+	 
+</beans>
