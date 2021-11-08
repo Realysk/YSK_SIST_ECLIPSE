@@ -1,0 +1,13 @@
+# DB 서버 설정 정보 
+driver=oracle.jdbc.driver.OracleDriver
+dburl=jdbc:oracle:thin:@localhost:1521:xe
+name=scott
+pass=tiger
+
+# 파일 서버
+tmpUpload=C:/javaexp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/NoDoubt_Company/z99_upload/
+upload=C:/Users/ysk23/AppData/Roaming/SPB_Data/git/YSK_SIST_ECLIPSE/NoDoubt_Company/src/main/webapp/z99_upload/
+
+# 이메일 설정정보
+email=ysk2388@gmail.com
+password=dbtjdrms6761!!
