@@ -71,9 +71,9 @@
 	<!-- 8. 파일 업로드를 위한 viewResolver 선언 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	
-	<!-- 9. 다운로드 뷰어 -->
+	<!-- 9. 다운로드 뷰어 
 	<bean id="downloadViewer" class="NDC.a06_Util.DownloadViewer"/>
-	
+	-->
 	<!-- 
 		10. 웹 소켓 통신을 위한 선언
 	
