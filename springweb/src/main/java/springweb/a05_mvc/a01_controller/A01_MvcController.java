@@ -25,6 +25,8 @@ public class A01_MvcController {
 	public String studFrm() {
 		return "WEB-INF\\views\\a05_mvc\\a06_studentAjax.jsp";
 	}
+	
+	// http://localhost:7080/springweb/addStudentInfo.do	
 	@RequestMapping("addStudentInfo.do")
 	public String addStudentInfo(Student student) { 
 		// 객체는 기본 type으로 모델 attribute가 설정이 된다.
