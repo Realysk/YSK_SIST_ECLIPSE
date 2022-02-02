@@ -20,7 +20,7 @@ public class A01_0504 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//# 오늘 정리 문제.
+//# 오늘 정리 문제..
 //1. 새로운 javaexp2폴드를 만들고, eclipse의 installer 설치한 후,
 //    오늘 설치한 개발환경을 처리하고, hello java를 출력하세요
 //2. 자바의 기본 변수 선언과 할당을 통해 아래의 변수를 선언하고 출력하세요
